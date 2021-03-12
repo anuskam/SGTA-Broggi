@@ -16,7 +16,7 @@ class Recurs extends Model
     public $timestamps = false;
 
     public function incidencies(){
-        return $this->belongsToMany(Incidencia::class, 'incidencies_has_recursos', 'recursos_id', 'incidencies_id')->as('incidencies_has_recursos');
+        return $this->belongsToMany(Incidencia::class, 'incidencies_has_recursos', 'recursos_id', 'incidencies_id')->withPivot('hora_activacio', 'hora_mobilitzacio', 'hora_assistencia', 'hora_transport', 'hora_arribada_hospital', 'hora_transferencia', 'hora_finalitzacio', 'prioritat', 'desti')->as('incidencies_has_recursos');
     }
 
     public function usuaris(){
