@@ -5,12 +5,13 @@ namespace App\Models;
 use App\Models\Rol;
 use App\Models\Recurs;
 use App\Models\Incidencia;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Usuari extends Model
+class Usuari extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
 
     protected $table = 'usuaris';
     public $timestamps = false;
