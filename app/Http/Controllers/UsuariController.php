@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Usuari;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UsuariController extends Controller
 {
@@ -15,7 +17,26 @@ class UsuariController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+        if (!Auth::check()) {
+            $response = redirect('login');
+        }
+        else {
+            /* Si usuari es Administrador */
+            if ($user->rols_id == 1) {
+                $response = view('Administrador.index');
+            }
+            /* Si usuari es CECOS */
+            else if ($user->rols_id == 2) {
+                $response = view('CECOS.index');
+            }
+            /* Si usuari es Recurs */
+            else {
+                $response = view('Recurs.index');
+            }
+        }
+
+        return $response;
     }
 
     /**
@@ -25,7 +46,7 @@ class UsuariController extends Controller
      */
     public function create()
     {
-        //
+        return view('Administrador.createUsuari');
     }
 
     /**
@@ -36,7 +57,15 @@ class UsuariController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $usuari = new Usuari();
+        $usuari->username = $request->input('username');
+        $usuari->contrasenya = Hash::make($request->input('contrasenya'));
+        $usuari->email = $request->input('email');
+        $usuari->nom = $request->input('nom');
+        $usuari->cognoms = $request->input('cognoms');
+        $usuari->rols_id = $request->input('rol');
+        $usuari->save();
+        return redirect('login');
     }
 
     /**
