@@ -21,11 +21,12 @@ class Role
             $response = redirect('login');
         }
         else {
+            // $roles = array_slice(func_get_args(), 2);
             $userRole = Auth::user()->rols_id;
-            $response = redirect('login');
+            $response = redirect('home');
             foreach ($roles as $role) {
                 if ($userRole == $role){
-                    return $next($request);
+                    $response = $next($request);
                 }
             }
         }

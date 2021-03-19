@@ -20,18 +20,15 @@ class UsuariController extends Controller
         $user = Auth::user();
         if (!Auth::check()) {
             $response = redirect('login');
-        }
-        else {
+        } else {
             /* Si usuari es Administrador */
             if ($user->rols_id == 1) {
                 $response = view('Administrador.index');
             }
-            /* Si usuari es CECOS */
-            else if ($user->rols_id == 2) {
+            /* Si usuari es CECOS */ else if ($user->rols_id == 2) {
                 $response = view('CECOS.index');
             }
-            /* Si usuari es Recurs */
-            else {
+            /* Si usuari es Recurs */ else {
                 $response = view('Recurs.index');
             }
         }
@@ -65,6 +62,15 @@ class UsuariController extends Controller
         $usuari->cognoms = $request->input('cognoms');
         $usuari->rols_id = $request->input('rol');
         $usuari->save();
+        return redirect('login'); //Change redirect to home/?? for admin
+    }
+
+    public function logout()
+    {
+        if (Auth::check()) {
+            Auth::logout();
+        }
+
         return redirect('login');
     }
 
