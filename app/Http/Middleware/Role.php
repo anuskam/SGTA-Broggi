@@ -15,23 +15,20 @@ class Role
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next, $roles)
+    public function handle(Request $request, Closure $next, ...$roles)
     {
         if (!Auth::check()) {
             $response = redirect('login');
         }
         else {
-            $user = Auth::user();
+            $userRole = Auth::user()->rols_id;
+            $response = redirect('login');
             foreach ($roles as $role) {
-                if ($user->rol == $role){
-                    $response = $next($request);
-                }
-                else{
-                    $response = redirect('login');
+                if ($userRole == $role){
+                    return $next($request);
                 }
             }
         }
-
         return $response;
     }
 }
