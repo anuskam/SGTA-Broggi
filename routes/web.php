@@ -17,11 +17,12 @@ use App\Http\Controllers\UsuariController;
 
 Route::resource('/', UsuariController::class);
 
+Route::get('home', [UsuariController::class, 'index']);
+
+Route::get('logout', [UsuariController::class, 'logout']);
 
 Route::resource('login', LoginController::class);
-// Route::get('login', function () {
-//     return view('login');
-// });
+
 
 /* Routes that require the user to be logged in */
 // Route::middleware(['auth'])->group(function () {
@@ -30,22 +31,17 @@ Route::resource('login', LoginController::class);
 
 /* Routes that require the user to be admin or CECOS */
 Route::middleware(['role:1,2'])->group(function () {
-    Route::get('home', function(){
-        return view('CECOS.index');
-    });
+
 });
 
 /* Routes that require the user to be admin or Recurs */
 Route::middleware(['role:1,3'])->group(function () {
-    Route::get('home', function(){
-        return view('Recurs.index');
-    });
+
 });
 
 /* Routes that require the user to be admin */
 Route::middleware(['role:1'])->group(function () {
-    Route::get('home', function(){
-        return view('home');
-    });
+    Route::get('create', [UsuariController::class, 'create']);
 });
+
 

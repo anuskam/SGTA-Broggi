@@ -19,42 +19,42 @@
                     <div class="form-group row">
                         <label for="username" class="col-sm-2 col-form-label">Username</label>
                         <div class="col-sm-10">
-                                <input class="form-control" type="text" name="username" id="username">
+                                <input class="form-control" type="text" name="username" id="username" required>
                         </div>
                     </div>
                     {{-- Contrasenya --}}
                     <div class="form-group row">
                         <label for="contrasenya" class="col-sm-2 col-form-label">Contrasenya</label>
                         <div class="col-sm-10">
-                                <input class="form-control" type="text" name="contrasenya" id="contrasenya">
+                                <input class="form-control" type="text" name="contrasenya" id="contrasenya" required>
                         </div>
                     </div>
                     {{-- Email --}}
                     <div class="form-group row">
                         <label for="email" class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">
-                                <input class="form-control" type="text" name="email" id="email">
+                                <input class="form-control" type="text" name="email" id="email" required>
                         </div>
                     </div>
                     {{-- Nom --}}
                     <div class="form-group row">
                         <label for="nom" class="col-sm-2 col-form-label">Nom</label>
                         <div class="col-sm-10">
-                                <input class="form-control" type="text" name="nom" id="nom">
+                                <input class="form-control" type="text" name="nom" id="nom" required>
                         </div>
                     </div>
                     {{-- Cognoms --}}
                     <div class="form-group row">
                         <label for="cognoms" class="col-sm-2 col-form-label">Cognoms</label>
                         <div class="col-sm-10">
-                                <input class="form-control" type="text" name="cognoms" id="cognoms">
+                                <input class="form-control" type="text" name="cognoms" id="cognoms" required>
                         </div>
                     </div>
                     {{-- Rols_id --}}
                     <div class="form-group row">
                         <label for="rol" class="col-sm-2 col-form-label">Rols_ID</label>
                         <div class="col-sm-10">
-                                <input class="form-control" type="number" name="rol" id="rol">
+                                <input class="form-control" type="number" name="rol" id="rol" required>
                         </div>
                     </div>
                 </div>

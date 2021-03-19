@@ -1,12 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Recurs</title>
-</head>
-<body>
-    <h1>Bienvenido al panel de Administrador!</h1>
-</body>
-</html>
+@extends('template')
+
+@section('stylesheet')
+    <link rel="stylesheet" href="{{ asset('style.css') }}">
+@endsection
+
+@section('title', 'Administrador')
+
+@section('content')
+    <a href="{{ url('logout') }}">
+        <div class="btn btn-danger">Log Out</div>
+    </a>
+    <a href="{{ url('create') }}">
+        <div class="btn btn-primary">Crear Usuari</div>
+    </a>
+    <h1>Benvingut al panel d'Administrador, {{ Auth::user()->nom }} !</h1>
+@endsection
