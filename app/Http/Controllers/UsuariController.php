@@ -85,16 +85,6 @@ class UsuariController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Usuari  $usuari
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Usuari $usuari)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
