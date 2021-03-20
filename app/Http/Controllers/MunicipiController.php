@@ -18,15 +18,6 @@ class MunicipiController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -50,16 +41,6 @@ class MunicipiController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Municipi  $municipi
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Municipi $municipi)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
