@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Models\TipusIncidencia;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\TipusAlertant;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\TipusAlertantResource;
 
-class TipusIncidenciaController extends Controller
+class TipusAlertantController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +16,10 @@ class TipusIncidenciaController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $tipusAlertants = TipusAlertant::all();
 
+        return TipusAlertantResource::collection($tipusAlertants);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -33,23 +35,22 @@ class TipusIncidenciaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\TipusIncidencia  $tipusIncidencia
+     * @param  \App\Models\TipusAlertant  $tipusAlertant
      * @return \Illuminate\Http\Response
      */
-    public function show(TipusIncidencia $tipusIncidencia)
+    public function show(TipusAlertant $tipusAlertant)
     {
-        //
+        return new TipusAlertantResource($tipusAlertant);
     }
-
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\TipusIncidencia  $tipusIncidencia
+     * @param  \App\Models\TipusAlertant  $tipusAlertant
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TipusIncidencia $tipusIncidencia)
+    public function update(Request $request, TipusAlertant $tipusAlertant)
     {
         //
     }
@@ -57,10 +58,10 @@ class TipusIncidenciaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\TipusIncidencia  $tipusIncidencia
+     * @param  \App\Models\TipusAlertant  $tipusAlertant
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TipusIncidencia $tipusIncidencia)
+    public function destroy(TipusAlertant $tipusAlertant)
     {
         //
     }

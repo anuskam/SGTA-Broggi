@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Models\Rol;
-use App\Http\Controllers\Controller;
+use App\Models\TipusRecurs;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\TipusRecursResource;
 
-class RolController extends Controller
+class TipusRecursController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +16,10 @@ class RolController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $tipusRecursos = TipusRecurs::all();
 
+        return TipusRecursResource::collection($tipusRecursos);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -33,23 +35,22 @@ class RolController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Rol  $rol
+     * @param  \App\Models\TipusRecurs  $tipusRecurs
      * @return \Illuminate\Http\Response
      */
-    public function show(Rol $rol)
+    public function show(TipusRecurs $tipusRecurs)
     {
-        //
+        return new TipusRecursResource($tipusRecurs);
     }
-
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Rol  $rol
+     * @param  \App\Models\TipusRecurs  $tipusRecurs
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Rol $rol)
+    public function update(Request $request, TipusRecurs $tipusRecurs)
     {
         //
     }
@@ -57,10 +58,10 @@ class RolController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Rol  $rol
+     * @param  \App\Models\TipusRecurs  $tipusRecurs
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Rol $rol)
+    public function destroy(TipusRecurs $tipusRecurs)
     {
         //
     }

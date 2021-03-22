@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Models\Sexe;
-use App\Http\Controllers\Controller;
+use App\Models\Login;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\LoginResource;
 
-class SexeController extends Controller
+class LoginController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +16,10 @@ class SexeController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $logins = Login::all();
 
+        return LoginResource::collection($logins);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -33,23 +35,22 @@ class SexeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Sexe  $sexe
+     * @param  \App\Models\Login  $login
      * @return \Illuminate\Http\Response
      */
-    public function show(Sexe $sexe)
+    public function show(Login $login)
     {
-        //
+        return new LoginResource($login);
     }
-
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Sexe  $sexe
+     * @param  \App\Models\Login  $login
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sexe $sexe)
+    public function update(Request $request, Login $login)
     {
         //
     }
@@ -57,10 +58,10 @@ class SexeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Sexe  $sexe
+     * @param  \App\Models\Login  $login
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Sexe $sexe)
+    public function destroy(Login $login)
     {
         //
     }

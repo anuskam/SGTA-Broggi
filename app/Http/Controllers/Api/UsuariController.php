@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Models\Incidencia;
-use App\Http\Controllers\Controller;
+use App\Models\Usuari;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\UsuariResource;
 
-class IncidenciaController extends Controller
+class UsuariController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +16,10 @@ class IncidenciaController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $usuaris = Usuari::all();
 
+        return UsuariResource::collection($usuaris);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -33,23 +35,22 @@ class IncidenciaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Incidencia  $incidencia
+     * @param  \App\Models\Usuari  $usuari
      * @return \Illuminate\Http\Response
      */
-    public function show(Incidencia $incidencia)
+    public function show(Usuari $usuari)
     {
-        //
+        return new UsuariResource($usuari);
     }
-
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Incidencia  $incidencia
+     * @param  \App\Models\Usuari  $usuari
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Incidencia $incidencia)
+    public function update(Request $request, Usuari $usuari)
     {
         //
     }
@@ -57,10 +58,10 @@ class IncidenciaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Incidencia  $incidencia
+     * @param  \App\Models\Usuari  $usuari
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Incidencia $incidencia)
+    public function destroy(Usuari $usuari)
     {
         //
     }
