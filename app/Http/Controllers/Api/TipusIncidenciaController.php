@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Models\Provincia;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\TipusIncidencia;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\TipusIncidenciaResource;
 
-class ProvinciaController extends Controller
+class TipusIncidenciaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +16,10 @@ class ProvinciaController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $tipusIncidencies = TipusIncidencia::all();
 
+        return TipusIncidenciaResource::collection($tipusIncidencies);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -33,23 +35,22 @@ class ProvinciaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Provincia  $provincia
+     * @param  \App\Models\TipusIncidencia  $tipusIncidencia
      * @return \Illuminate\Http\Response
      */
-    public function show(Provincia $provincia)
+    public function show(TipusIncidencia $tipusIncidencia)
     {
-        //
+        return new TipusIncidenciaResource($tipusIncidencia);
     }
-
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Provincia  $provincia
+     * @param  \App\Models\TipusIncidencia  $tipusIncidencia
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Provincia $provincia)
+    public function update(Request $request, TipusIncidencia $tipusIncidencia)
     {
         //
     }
@@ -57,10 +58,10 @@ class ProvinciaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Provincia  $provincia
+     * @param  \App\Models\TipusIncidencia  $tipusIncidencia
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Provincia $provincia)
+    public function destroy(TipusIncidencia $tipusIncidencia)
     {
         //
     }

@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Models\Recurs;
-use App\Http\Controllers\Controller;
+use App\Models\Sexe;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\SexeResource;
 
-class RecursController extends Controller
+class SexeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +16,10 @@ class RecursController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $sexes = Sexe::all();
 
+        return SexeResource::collection($sexes);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -33,23 +35,22 @@ class RecursController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Recurs  $recurs
+     * @param  \App\Models\Sexe  $sexe
      * @return \Illuminate\Http\Response
      */
-    public function show(Recurs $recurs)
+    public function show(Sexe $sexe)
     {
-        //
+        return new SexeResource($sexe);
     }
-
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Recurs  $recurs
+     * @param  \App\Models\Sexe  $sexe
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Recurs $recurs)
+    public function update(Request $request, Sexe $sexe)
     {
         //
     }
@@ -57,10 +58,10 @@ class RecursController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Recurs  $recurs
+     * @param  \App\Models\Sexe  $sexe
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Recurs $recurs)
+    public function destroy(Sexe $sexe)
     {
         //
     }
