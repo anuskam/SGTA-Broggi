@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Sexe;
+use App\Clases\Utilitat;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SexeResource;
+use Illuminate\Database\QueryException;
 
 class SexeController extends Controller
 {
@@ -29,7 +31,20 @@ class SexeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $sexe = new Sexe();
+
+        $sexe->sexe = $request->input('sexe');
+
+        try{
+            $sexe->save();
+            $response = (new SexeResource($sexe))->response()->setStatusCode(201);
+        }
+        catch (QueryException $ex){
+            $mensaje = Utilitat::errorMessage($ex);
+            $response = \response()->json(['error' => $mensaje], 400);
+        }
+
+        return $response;
     }
 
     /**
@@ -52,7 +67,18 @@ class SexeController extends Controller
      */
     public function update(Request $request, Sexe $sexe)
     {
-        //
+        $sexe->sexe = $request->input('sexe');
+
+        try{
+            $sexe->save();
+            $response = (new SexeResource($sexe))->response()->setStatusCode(201);
+        }
+        catch (QueryException $ex){
+            $mensaje = Utilitat::errorMessage($ex);
+            $response = \response()->json(['error' => $mensaje], 400);
+        }
+
+        return $response;
     }
 
     /**
@@ -63,6 +89,15 @@ class SexeController extends Controller
      */
     public function destroy(Sexe $sexe)
     {
-        //
+        try{
+            $sexe->delete();
+            $response = \response()->json(['missatge' => 'Registre esborrat correctament'], 200);
+        }
+        catch(QueryException $ex){
+            $mensaje = Utilitat::errorMessage($ex);
+            $response = \response()->json(['error' => $mensaje], 400);
+        }
+
+        return $response;
     }
 }

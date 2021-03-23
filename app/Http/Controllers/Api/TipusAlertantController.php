@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Clases\Utilitat;
 use Illuminate\Http\Request;
 use App\Models\TipusAlertant;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\QueryException;
 use App\Http\Resources\TipusAlertantResource;
 
 class TipusAlertantController extends Controller
@@ -29,7 +31,20 @@ class TipusAlertantController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tipusAlertant = new TipusAlertant();
+
+        $tipusAlertant->tipus = $request->input('tipus');
+
+        try{
+            $tipusAlertant->save();
+            $response = (new TipusAlertantResource($tipusAlertant))->response()->setStatusCode(201);
+        }
+        catch (QueryException $ex){
+            $mensaje = Utilitat::errorMessage($ex);
+            $response = \response()->json(['error' => $mensaje], 400);
+        }
+
+        return $response;
     }
 
     /**
@@ -52,7 +67,18 @@ class TipusAlertantController extends Controller
      */
     public function update(Request $request, TipusAlertant $tipusAlertant)
     {
-        //
+        $tipusAlertant->tipus = $request->input('tipus');
+
+        try{
+            $tipusAlertant->save();
+            $response = (new TipusAlertantResource($tipusAlertant))->response()->setStatusCode(201);
+        }
+        catch (QueryException $ex){
+            $mensaje = Utilitat::errorMessage($ex);
+            $response = \response()->json(['error' => $mensaje], 400);
+        }
+
+        return $response;
     }
 
     /**
@@ -63,6 +89,15 @@ class TipusAlertantController extends Controller
      */
     public function destroy(TipusAlertant $tipusAlertant)
     {
-        //
+        try{
+            $tipusAlertant->delete();
+            $response = \response()->json(['missatge' => 'Registre esborrat correctament'], 200);
+        }
+        catch(QueryException $ex){
+            $mensaje = Utilitat::errorMessage($ex);
+            $response = \response()->json(['error' => $mensaje], 400);
+        }
+
+        return $response;
     }
 }

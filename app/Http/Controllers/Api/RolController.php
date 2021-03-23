@@ -31,7 +31,20 @@ class RolController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rol = new Rol();
+
+        $rol->nom = $request->input('nom');
+
+        try{
+            $rol->save();
+            $response = (new RolResource($rol))->response()->setStatusCode(201);
+        }
+        catch (QueryException $ex){
+            $mensaje = Utilitat::errorMessage($ex);
+            $response = \response()->json(['error' => $mensaje], 400);
+        }
+
+        return $response;
     }
 
     /**
@@ -54,7 +67,18 @@ class RolController extends Controller
      */
     public function update(Request $request, Rol $rol)
     {
-        //
+        $rol->nom = $request->input('nom');
+
+        try{
+            $rol->save();
+            $response = (new RolResource($rol))->response()->setStatusCode(201);
+        }
+        catch (QueryException $ex){
+            $mensaje = Utilitat::errorMessage($ex);
+            $response = \response()->json(['error' => $mensaje], 400);
+        }
+
+        return $response;
     }
 
     /**
