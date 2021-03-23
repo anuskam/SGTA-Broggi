@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Clases\Utilitat;
 use App\Models\TipusRecurs;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\QueryException;
 use App\Http\Resources\TipusRecursResource;
 
 class TipusRecursController extends Controller
@@ -29,7 +31,20 @@ class TipusRecursController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tipusRecurs = new TipusRecurs();
+
+        $tipusRecurs->tipus = $request->input('tipus'); //CAMBIAMOS EL NOMBRE O DA IGUAL? PORQUE SON TODAS TIPO DE NOMBRE
+
+        try{
+            $tipusRecurs->save();
+            $response = (new TipusRecursResource($tipusRecurs))->response()->setStatusCode(201);
+        }
+        catch (QueryException $ex){
+            $mensaje = Utilitat::errorMessage($ex);
+            $response = \response()->json(['error' => $mensaje], 400);
+        }
+
+        return $response;
     }
 
     /**
@@ -52,7 +67,18 @@ class TipusRecursController extends Controller
      */
     public function update(Request $request, TipusRecurs $tipusRecurs)
     {
-        //
+        $tipusRecurs->tipus = $request->input('tipus'); //CAMBIAMOS EL NOMBRE O DA IGUAL? PORQUE SON TODAS TIPO DE NOMBRE
+
+        try{
+            $tipusRecurs->save();
+            $response = (new TipusRecursResource($tipusRecurs))->response()->setStatusCode(201);
+        }
+        catch (QueryException $ex){
+            $mensaje = Utilitat::errorMessage($ex);
+            $response = \response()->json(['error' => $mensaje], 400);
+        }
+
+        return $response;
     }
 
     /**
@@ -63,6 +89,15 @@ class TipusRecursController extends Controller
      */
     public function destroy(TipusRecurs $tipusRecurs)
     {
-        //
+        try{
+            $tipusRecurs->delete();
+            $response = \response()->json(['missatge' => 'Registre esborrat correctament'], 200);
+        }
+        catch(QueryException $ex){
+            $mensaje = Utilitat::errorMessage($ex);
+            $response = \response()->json(['error' => $mensaje], 400);
+        }
+
+        return $response;
     }
 }
