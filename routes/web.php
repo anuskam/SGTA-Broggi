@@ -15,21 +15,18 @@ use App\Http\Controllers\UsuariController;
 |
 */
 
-Route::resource('/', UsuariController::class);
+Route::post('store', [UsuariController::class, 'store']);
 
 Route::get('home', [UsuariController::class, 'index']);
 
-Route::get('logout', [UsuariController::class, 'logout']);
-
 Route::resource('login', LoginController::class);
 
-
-Route::get('create', [UsuariController::class, 'create']);
+Route::get('create', [UsuariController::class, 'create']); // Debe estar en el middleware de admin
 
 /* Routes that require the user to be logged in */
-// Route::middleware(['auth'])->group(function () {
-
-// });
+Route::middleware(['auth'])->group(function () {
+    Route::get('logout', [UsuariController::class, 'logout']);
+});
 
 /* Routes that require the user to be admin or CECOS */
 Route::middleware(['role:1,2'])->group(function () {
