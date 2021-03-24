@@ -24,6 +24,8 @@ Route::get('logout', [UsuariController::class, 'logout']);
 Route::resource('login', LoginController::class);
 
 
+Route::get('create', [UsuariController::class, 'create']);
+
 /* Routes that require the user to be logged in */
 // Route::middleware(['auth'])->group(function () {
 
@@ -40,8 +42,8 @@ Route::middleware(['role:1,3'])->group(function () {
 });
 
 /* Routes that require the user to be admin */
-Route::middleware(['role:1'])->group(function () {
-    Route::get('create', [UsuariController::class, 'create']);
-});
+// Route::middleware(['role:1'])->group(function () {
+//     Route::get('create', [UsuariController::class, 'create']);
+// });
 
 
