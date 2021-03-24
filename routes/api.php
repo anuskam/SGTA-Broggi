@@ -37,7 +37,6 @@ Route::apiResource('afectat', AfectatController::class);
 Route::apiResource('alertant', AlertantController::class);
 Route::apiResource('comarca', ComarcaController::class);
 Route::apiResource('incidencia', IncidenciaController::class);
-Route::apiResource('login', LoginController::class);
 Route::apiResource('municipi', MunicipiController::class);
 Route::apiResource('provincia', ProvinciaController::class);
 Route::apiResource('recurs', RecursController::class);
