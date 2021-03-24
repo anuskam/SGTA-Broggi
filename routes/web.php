@@ -15,8 +15,6 @@ use App\Http\Controllers\UsuariController;
 |
 */
 
-Route::get('/', [UsuariController::class, 'index']);
-
 Route::post('store', [UsuariController::class, 'store']);
 
 Route::get('home', [UsuariController::class, 'index']);
