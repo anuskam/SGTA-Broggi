@@ -1,7 +1,7 @@
 @extends('template')
 
 @section('stylesheet')
-    <link rel="stylesheet" href="{{ asset('style.css') }}">
+
 @endsection
 
 @section('title', 'Autenticació')
