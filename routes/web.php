@@ -19,6 +19,8 @@ Route::post('store', [UsuariController::class, 'store']);
 
 Route::get('home', [UsuariController::class, 'index']);
 
+Route::get('/', [UsuariController::class, 'index']);
+
 Route::resource('login', LoginController::class);
 
 Route::get('create', [UsuariController::class, 'create']); // Debe estar en el middleware de admin
