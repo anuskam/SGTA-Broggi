@@ -15,11 +15,11 @@ use App\Http\Controllers\UsuariController;
 |
 */
 
-Route::get('/', [UsuariController::class, 'index']);
-
 Route::post('store', [UsuariController::class, 'store']);
 
 Route::get('home', [UsuariController::class, 'index']);
+
+Route::get('/', [UsuariController::class, 'index']);
 
 Route::resource('login', LoginController::class);
 

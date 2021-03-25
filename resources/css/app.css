@@ -67,3 +67,10 @@ textarea{
     /* background-color: rgba(211, 211, 211, 0.102); */
     background-color: white;
 }
+
+#logout{
+    float: right;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+}
