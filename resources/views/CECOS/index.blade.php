@@ -7,9 +7,7 @@
 @section('title', 'CECOS')
 
 @section('content')
-    <a href="{{ url('logout') }}">
-        <div class="btn btn-danger">Log Out</div>
-    </a>
-    <h1>Benvingut al panel de CECOS, {{ Auth::user()->nom }} !</h1>
+    {{-- <h1>Benvingut al panel de CECOS, {{ Auth::user()->nom }} !</h1> --}}
+    <cecos-component></cecos-component>
 @endsection
 

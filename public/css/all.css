@@ -78,3 +78,10 @@ textarea{
     background-color: white;
 }
 
+#logout{
+    float: right;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+}
+
