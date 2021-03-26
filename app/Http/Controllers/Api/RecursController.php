@@ -56,9 +56,9 @@ class RecursController extends Controller
      * @param  \App\Models\Recurs  $recurs
      * @return \Illuminate\Http\Response
      */
-    public function show(Recurs $recurs)
+    public function show(Recurs $recur)
     {
-        return new RecursResource($recurs);
+        return new RecursResource($recur);
     }
 
     /**

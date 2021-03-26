@@ -53,9 +53,9 @@ class ProvinciaController extends Controller
      * @param  \App\Models\Provincia  $provincia
      * @return \Illuminate\Http\Response
      */
-    public function show(Provincia $provincia)
+    public function show(Provincia $provincium)
     {
-        return new ProvinciaResource($provincia);
+        return new ProvinciaResource($provincium);
     }
 
     /**
