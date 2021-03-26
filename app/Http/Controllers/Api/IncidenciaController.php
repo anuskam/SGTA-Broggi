@@ -67,9 +67,9 @@ class IncidenciaController extends Controller
      * @param  \App\Models\Incidencia  $incidencia
      * @return \Illuminate\Http\Response
      */
-    public function show(Incidencia $incidencia)
+    public function show(Incidencia $incidencium)
     {
-        return new IncidenciaResource($incidencia);
+        return new IncidenciaResource($incidencium);
     }
 
     /**

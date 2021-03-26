@@ -53,9 +53,9 @@ class TipusRecursController extends Controller
      * @param  \App\Models\TipusRecurs  $tipusRecurs
      * @return \Illuminate\Http\Response
      */
-    public function show(TipusRecurs $tipusRecurs)
+    public function show(TipusRecurs $tipusRecur)
     {
-        return new TipusRecursResource($tipusRecurs);
+        return new TipusRecursResource($tipusRecur);
     }
 
     /**

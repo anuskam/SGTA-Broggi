@@ -54,9 +54,9 @@ class TipusIncidenciaController extends Controller
      * @param  \App\Models\TipusIncidencia  $tipusIncidencia
      * @return \Illuminate\Http\Response
      */
-    public function show(TipusIncidencia $tipusIncidencia)
+    public function show(TipusIncidencia $tipusIncidencium)
     {
-        return new TipusIncidenciaResource($tipusIncidencia);
+        return new TipusIncidenciaResource($tipusIncidencium);
     }
 
     /**
