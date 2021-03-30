@@ -8,6 +8,7 @@
 
 @section('content')
     {{-- <h1>Benvingut al panel de CECOS, {{ Auth::user()->nom }} !</h1> --}}
-    <cecos-component></cecos-component>
+    <cecosnav-component></cecosnav-component>
+
 @endsection
 
