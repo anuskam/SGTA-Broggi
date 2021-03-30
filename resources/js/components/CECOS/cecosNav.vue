@@ -12,6 +12,8 @@
             </div>
         </div>
     </div>
+
+<!-- CREAR NAVBAR CON TABS Y LLAMAR A LOS COMPONENTES -->
 </template>
 
 <script>
