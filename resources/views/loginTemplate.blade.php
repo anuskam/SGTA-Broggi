@@ -11,10 +11,7 @@
     <title>@yield('title')</title>
 </head>
 <body>
-    <div class="container-fluid p-0" id="app">
-        <a href="{{ url('logout') }}" id="logout">
-            <div class="btn btn-danger">Log Out</div>
-        </a>
+    <div class="container" id="app">
         @yield('content')
     </div>
     <script src="{{ asset('js/app.js') }}"></script>

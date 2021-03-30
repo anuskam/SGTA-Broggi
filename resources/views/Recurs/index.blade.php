@@ -8,5 +8,5 @@
 
 @section('content')
     {{-- <h1>Benvingut al panel de Recurs, {{ Auth::user()->nom }} !</h1> --}}
-    <asignados-component></asignados-component>
+    <recursos-component></recursos-component>
 @endsection

@@ -21,6 +21,7 @@ window.Vue = require('vue').default;
 
 Vue.component('administrador-component', require('./components/Administrador/administrador.vue').default);
 Vue.component('cecos-component', require('./components/CECOS/cecos.vue').default);
+Vue.component('recursos-component', require('./components/Recurs/recursosTabs.vue').default);
 Vue.component('asignados-component', require('./components/Recurs/asignados.vue').default);
 Vue.component('todos-component', require('./components/Recurs/todos.vue').default);
 
