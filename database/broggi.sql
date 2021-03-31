@@ -23,7 +23,6 @@ DROP TABLE IF EXISTS `broggi`.`tipus_incidencies` ;
 CREATE TABLE IF NOT EXISTS `broggi`.`tipus_incidencies` (
   `id` INT NOT NULL,
   `tipus` VARCHAR(45) NOT NULL,
-  `video` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `tipus_UNIQUE` (`tipus` ASC))
 ENGINE = InnoDB;
@@ -152,7 +151,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `broggi`.`recursos` ;
 
 CREATE TABLE IF NOT EXISTS `broggi`.`recursos` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `codi` VARCHAR(45) NOT NULL,
   `actiu` TINYINT NOT NULL,
   `tipus_recursos_id` INT NOT NULL,
@@ -264,7 +263,6 @@ DROP TABLE IF EXISTS `broggi`.`afectats` ;
 
 CREATE TABLE IF NOT EXISTS `broggi`.`afectats` (
   `id` INT NOT NULL,
-  `telefon` INT(10) NOT NULL,
   `cip` VARCHAR(45) NULL,
   `nom` VARCHAR(45) NULL,
   `cognoms` VARCHAR(45) NULL,
@@ -338,6 +336,36 @@ CREATE TABLE IF NOT EXISTS `broggi`.`incidencies_has_recursos` (
 ENGINE = InnoDB
 COMMENT = '	';
 
+-- -----------------------------------------------------
+-- Table `broggi`.`preguntes`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `broggi`.`preguntes` ;
+
+CREATE TABLE IF NOT EXISTS `broggi`.`preguntes` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `pregunta` VARCHAR(60) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `pregunta_UNIQUE` (`pregunta` ASC))
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `broggi`.`respostes`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `broggi`.`respostes` ;
+
+CREATE TABLE IF NOT EXISTS `broggi`.`respostes` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `resposta` VARCHAR(60) NOT NULL,
+  `preguntes_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_respostes_preguntes1_idx` (`preguntes_id` ASC),
+  CONSTRAINT `fk_respostes_preguntes1`
+    FOREIGN KEY (`preguntes_id`)
+    REFERENCES `broggi`.`preguntes` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
@@ -348,12 +376,12 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `broggi`;
-INSERT INTO `broggi`.`tipus_incidencies` (`id`, `tipus`, `video`) VALUES (1, 'Accident', DEFAULT);
-INSERT INTO `broggi`.`tipus_incidencies` (`id`, `tipus`, `video`) VALUES (2, 'Traumatisme', DEFAULT);
-INSERT INTO `broggi`.`tipus_incidencies` (`id`, `tipus`, `video`) VALUES (3, 'Malaltia lloc públic', DEFAULT);
-INSERT INTO `broggi`.`tipus_incidencies` (`id`, `tipus`, `video`) VALUES (4, 'Malaltia domicili', DEFAULT);
-INSERT INTO `broggi`.`tipus_incidencies` (`id`, `tipus`, `video`) VALUES (5, 'Consulta mèdica', DEFAULT);
-INSERT INTO `broggi`.`tipus_incidencies` (`id`, `tipus`, `video`) VALUES (6, 'Transport sanitari', DEFAULT);
+INSERT INTO `broggi`.`tipus_incidencies` (`id`, `tipus`) VALUES (1, 'Accident');
+INSERT INTO `broggi`.`tipus_incidencies` (`id`, `tipus`) VALUES (2, 'Traumatisme');
+INSERT INTO `broggi`.`tipus_incidencies` (`id`, `tipus`) VALUES (3, 'Malaltia lloc públic');
+INSERT INTO `broggi`.`tipus_incidencies` (`id`, `tipus`) VALUES (4, 'Malaltia domicili');
+INSERT INTO `broggi`.`tipus_incidencies` (`id`, `tipus`) VALUES (5, 'Consulta mèdica');
+INSERT INTO `broggi`.`tipus_incidencies` (`id`, `tipus`) VALUES (6, 'Transport sanitari');
 
 COMMIT;
 
