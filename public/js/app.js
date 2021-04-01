@@ -2369,6 +2369,256 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -7249,7 +7499,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-secondary:not(:disabled):not(.disabled).active,\r\n.btn-secondary:not(:disabled):not(.disabled):active,\r\n.show > .btn-secondary.dropdown-toggle {\r\n  background-color: #e3177d;\r\n  border-color: black;\n}\n.btn-secondary {\r\n  border-color: black;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-secondary:not(:disabled):not(.disabled).active,\n.btn-secondary:not(:disabled):not(.disabled):active,\n.show > .btn-secondary.dropdown-toggle {\n  background-color: #e3177d;\n  border-color: black;\n}\n.btn-secondary {\n  border-color: black;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -7273,7 +7523,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nmain[data-v-6504f867] {\n  margin-top: 1.4vh;\n}\n#infoCard[data-v-6504f867] {\n  height: 65vh;\n}\n#botones[data-v-6504f867] {\n  height: 28vh;\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#infoHeader[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n  font-size: 1.2em;\n  font-weight: bold;\n  margin-right: -0.5px;\n  border-bottom: 1px solid black;\n  background-color: #15acc4;\n}\nbutton[data-v-6504f867] {\n  background-color: #e3177d;\n  font-weight: bold;\n  font-size: 0.9em;\n}\n.card[data-v-6504f867] {\n  border: 1px solid black;\n}\n#transportHeader[data-v-6504f867] {\n  background-color: #15acc4;\n  font-weight: bold;\n  padding: 6px 20px;\n  text-align: center;\n}\n#leftButtons[data-v-6504f867] {\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n}\n#assistencia[data-v-6504f867]{\n    opacity: .4;\n}\n#checkTransport[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: center;\n  align-items: center;\n  opacity: .4;\n  /* margin-left: -80px; */\n}\n#checkTransport button[data-v-6504f867] {\n  padding: 10px 4px;\n  height: 100%;\n}\n#transportButton[data-v-6504f867] {\n  background-color: #e3177d;\n}\n#transportButtons[data-v-6504f867] {\n  height: 100%;\n  opacity: .4;\n}\n.visible[data-v-6504f867]{\n    opacity: 1 !important;\n}\n#transportForm[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#botonsTransport[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  width: 100%;\n  justify-content: space-between;\n}\n.button[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  /* align-items: center; */\n}\n#direccioHospital[data-v-6504f867] {\n  width: 100%;\n}\n#map[data-v-6504f867] {\n  height: 65%;\n  background-color: black;\n}\n#info[data-v-6504f867] {\n  height: 20%;\n  margin-top: 4%;\n  display: flex;\n  flex-direction: row;\n  justify-content: space-around;\n  flex-wrap: nowrap;\n  font-weight: bold;\n}\n#infoFields[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n  padding-right: 0;\n}\n.infobox[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  text-align: justify;\n}\n.infobox > div[data-v-6504f867] {\n  background-color: #15acc4;\n  border: 1px solid black;\n}\n#descripcion[data-v-6504f867],\n#direccion[data-v-6504f867] {\n  background-color: white;\n}\n#masInfo[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  vertical-align: center;\n}\n#masInfo > button[data-v-6504f867] {\n  padding: 10px 20px;\n  margin-left: -50px;\n}\n.modal-header[data-v-6504f867]{\n    font-weight: bold;\n    background-color: #15acc4;\n}\n#alta[data-v-6504f867]{\n    opacity: 1 !important;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nmain[data-v-6504f867] {\r\n  margin-top: 1.4vh;\n}\n#infoCard[data-v-6504f867] {\r\n  height: 65vh;\n}\n#botones[data-v-6504f867] {\r\n  height: 28vh;\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-around;\r\n  align-items: center;\n}\n#infoHeader[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-between;\r\n  font-size: 1.2em;\r\n  font-weight: bold;\r\n  margin-right: -0.5px;\r\n  border-bottom: 1px solid black;\r\n  background-color: #15acc4;\n}\nbutton[data-v-6504f867] {\r\n  background-color: #e3177d;\r\n  font-weight: bold;\r\n  font-size: 0.9em;\n}\n.card[data-v-6504f867] {\r\n  border: 1px solid black;\n}\n#transportHeader[data-v-6504f867] {\r\n  background-color: #15acc4;\r\n  font-weight: bold;\r\n  padding: 6px 20px;\r\n  text-align: center;\n}\n#leftButtons[data-v-6504f867] {\r\n  height: 100%;\r\n  display: flex;\r\n  flex-direction: column;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-around;\n}\n#assistencia[data-v-6504f867]{\r\n    opacity: .4;\n}\n#checkTransport[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  flex-wrap: nowrap;\r\n  justify-content: center;\r\n  align-items: center;\r\n  opacity: .4;\r\n  /* margin-left: -80px; */\n}\n#checkTransport button[data-v-6504f867] {\r\n  padding: 10px 4px;\r\n  height: 100%;\n}\n#transportButton[data-v-6504f867] {\r\n  background-color: #e3177d;\n}\n#transportButtons[data-v-6504f867] {\r\n  height: 100%;\r\n  opacity: .4;\n}\n.visible[data-v-6504f867]{\r\n    opacity: 1 !important;\n}\n#transportForm[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: wrap;\r\n  justify-content: space-around;\r\n  align-items: center;\n}\n#botonsTransport[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  width: 100%;\r\n  justify-content: space-between;\n}\n.button[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  /* align-items: center; */\n}\n#direccioHospital[data-v-6504f867] {\r\n  width: 100%;\n}\n#map[data-v-6504f867] {\r\n  height: 65%;\r\n  background-color: black;\n}\n#info[data-v-6504f867] {\r\n  height: 20%;\r\n  margin-top: 4%;\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: space-around;\r\n  flex-wrap: nowrap;\r\n  font-weight: bold;\n}\n#infoFields[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: space-around;\r\n  padding-right: 0;\n}\n.infobox[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  align-items: center;\r\n  text-align: justify;\n}\n.infobox > div[data-v-6504f867] {\r\n  background-color: #15acc4;\r\n  border: 1px solid black;\n}\n#descripcion[data-v-6504f867],\r\n#direccion[data-v-6504f867] {\r\n  background-color: white;\n}\n#masInfo[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: center;\r\n  vertical-align: center;\n}\n#masInfo > button[data-v-6504f867] {\r\n  padding: 10px 20px;\r\n  margin-left: -50px;\n}\n.modal-header[data-v-6504f867]{\r\n    font-weight: bold;\r\n    background-color: #15acc4;\n}\n#alta[data-v-6504f867]{\r\n    opacity: 1 !important;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -39310,16 +39560,13 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-<<<<<<< HEAD
     _c(
       "nav",
       { staticClass: "navbar navbar-expand-lg navbar-light bg-light" },
       [
-        _c("a", { staticClass: "navbar-brand", attrs: { href: "#" } }, [
-          _vm._v("Navbar")
-        ]),
-        _vm._v(" "),
         _vm._m(0),
+        _vm._v(" "),
+        _vm._m(1),
         _vm._v(" "),
         _c(
           "div",
@@ -39341,7 +39588,7 @@ var render = function() {
                     }
                   },
                   [
-                    _vm._v("NUevo Incidente "),
+                    _vm._v("Nuevo Incidente "),
                     _c("span", { staticClass: "sr-only" }, [
                       _vm._v("(current)")
                     ])
@@ -39383,48 +39630,6 @@ var render = function() {
         )
       ]
     ),
-=======
-    _c("div", { attrs: { id: "tabButtons" } }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-sm mr-3",
-          on: {
-            click: function($event) {
-              return _vm.selectTab(1)
-            }
-          }
-        },
-        [_vm._v("\n      NUEVO INCIDENTE\n    ")]
-      ),
-      _vm._v("\n    |\n    "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-sm mr-3 ml-3",
-          on: {
-            click: function($event) {
-              return _vm.selectTab(2)
-            }
-          }
-        },
-        [_vm._v("\n      GESTIONAR INCIDENTE\n    ")]
-      ),
-      _vm._v("\n    |\n    "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-sm ml-3",
-          on: {
-            click: function($event) {
-              return _vm.selectTab(3)
-            }
-          }
-        },
-        [_vm._v("FORMACIÓN")]
-      )
-    ]),
->>>>>>> 15732ba825d219a076ebed9c885c091cd732af6b
     _vm._v(" "),
     _vm.currentTab == 1
       ? _c("div", [_c("nuevoincidente-component")], 1)
@@ -39432,6 +39637,14 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "navbar-brand", attrs: { href: "#" } }, [
+      _c("img", { attrs: { src: "assets('media/img/logo.png')" } })
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -39569,59 +39782,7 @@ var render = function() {
     _vm._v(" "),
     _vm.currentTab == 2 ? _c("div", [_vm._m(1)]) : _vm._e(),
     _vm._v(" "),
-    _vm.currentTab == 3
-      ? _c("div", [
-          _c("div", { staticClass: "card ml-5 mr-5 mt-3" }, [
-            _c("div", { staticClass: "card-header" }, [_vm._v("RESPUESTA")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body ml-5" }, [
-              _c("form", [
-                _c("div", { staticClass: "custom-control custom-switch" }, [
-                  _c("input", {
-                    staticClass: "custom-control-input",
-                    attrs: { type: "checkbox", id: "recursoSwitch" },
-                    domProps: { checked: _vm.isActive }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    {
-                      directives: [
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value: !_vm.isActive,
-                          expression: "!isActive"
-                        }
-                      ],
-                      staticClass: "custom-control-label",
-                      attrs: { for: "recursoSwitch" }
-                    },
-                    [_vm._v("Activar recurso")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    {
-                      directives: [
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value: _vm.isActive,
-                          expression: "isActive"
-                        }
-                      ],
-                      staticClass: "custom-control-label",
-                      attrs: { for: "recursoSwitch" }
-                    },
-                    [_vm._v("Desactivar recurso")]
-                  )
-                ])
-              ])
-            ])
-          ])
-        ])
-      : _vm._e()
+    _vm.currentTab == 3 ? _c("div", [_vm._m(2)]) : _vm._e()
   ])
 }
 var staticRenderFns = [
@@ -40226,6 +40387,449 @@ var staticRenderFns = [
                   attrs: { id: "descripcionIncidente", rows: "3" }
                 })
               ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card ml-5 mr-5 mt-3" }, [
+      _c("div", { staticClass: "card-header" }, [_vm._v("RESPUESTA")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body ml-5" }, [
+        _c("form", [
+          _c("div", { staticClass: "form-group row" }, [
+            _c(
+              "label",
+              { staticClass: "col-1 mt-1", attrs: { for: "consejo" } },
+              [_vm._v("Consejos")]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-9" }, [
+              _c("div", { staticClass: "form-check" }, [
+                _c("input", {
+                  staticClass: "form-check-input",
+                  attrs: { type: "checkbox", id: "consejo1" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "form-check-label",
+                    attrs: { for: "consejo1" }
+                  },
+                  [_vm._v("Tiene conocimientos de primeros auxilios")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-check" }, [
+                _c("input", {
+                  staticClass: "form-check-input",
+                  attrs: { type: "checkbox", id: "consejo2" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "form-check-label",
+                    attrs: { for: "consejo2" }
+                  },
+                  [
+                    _vm._v(
+                      "Puede pedir ayuda a algún peatón, persona que le\n                  acompañe..."
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-check" }, [
+                _c("input", {
+                  staticClass: "form-check-input",
+                  attrs: { type: "checkbox", id: "consejo3" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "form-check-label",
+                    attrs: { for: "consejo3" }
+                  },
+                  [_vm._v("Puede señalizar la zona del accidente/incidente")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-check" }, [
+                _c("input", {
+                  staticClass: "form-check-input",
+                  attrs: { type: "checkbox", id: "consejo4" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "form-check-label",
+                    attrs: { for: "consejo4" }
+                  },
+                  [_vm._v("Aflojarse la ropa")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-check" }, [
+                _c("input", {
+                  staticClass: "form-check-input",
+                  attrs: { type: "checkbox", id: "consejo5" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "form-check-label",
+                    attrs: { for: "consejo5" }
+                  },
+                  [
+                    _vm._v(
+                      "Acercarse al coche y desconectar las llaves de\n                  contacto"
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-check" }, [
+                _c("input", {
+                  staticClass: "form-check-input",
+                  attrs: { type: "checkbox", id: "consejo6" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "form-check-label",
+                    attrs: { for: "consejo6" }
+                  },
+                  [_vm._v("Mantener el teléfono en manos libres")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-check" }, [
+                _c("input", {
+                  staticClass: "form-check-input",
+                  attrs: { type: "checkbox", id: "consejo7" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "form-check-label",
+                    attrs: { for: "consejo7" }
+                  },
+                  [_vm._v("No mover a la persona o víctimas")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-check" }, [
+                _c("input", {
+                  staticClass: "form-check-input",
+                  attrs: { type: "checkbox", id: "consejo8" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "form-check-label",
+                    attrs: { for: "consejo8" }
+                  },
+                  [_vm._v("No dejar sola a la persona")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-check" }, [
+                _c("input", {
+                  staticClass: "form-check-input",
+                  attrs: { type: "checkbox", id: "consejo9" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "form-check-label",
+                    attrs: { for: "consejo9" }
+                  },
+                  [_vm._v("No dar de comer ni de beber")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-check" }, [
+                _c("input", {
+                  staticClass: "form-check-input",
+                  attrs: { type: "checkbox", id: "consejo10" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "form-check-label",
+                    attrs: { for: "consejo10" }
+                  },
+                  [
+                    _vm._v(
+                      "Poner a la persona en posición lateral de seguridad\n                  (PLS)"
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-check" }, [
+                _c("input", {
+                  staticClass: "form-check-input",
+                  attrs: { type: "checkbox", id: "consejo11" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "form-check-label",
+                    attrs: { for: "consejo11" }
+                  },
+                  [
+                    _vm._v(
+                      "Si sangra, comprimir la herida con la mano, ropa..."
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-check" }, [
+                _c("input", {
+                  staticClass: "form-check-input",
+                  attrs: { type: "checkbox", id: "consejo12" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "form-check-label",
+                    attrs: { for: "consejo12" }
+                  },
+                  [_vm._v("Poner cómoda a la víctima")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-check" }, [
+                _c("input", {
+                  staticClass: "form-check-input",
+                  attrs: { type: "checkbox", id: "other" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  { staticClass: "form-check-label", attrs: { for: "other" } },
+                  [_vm._v("Otros")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "col-4 ml-3",
+                  attrs: { type: "text", id: "otherValue", name: "other" }
+                })
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group row mt-4" }, [
+            _c("div", { staticClass: "custom-control custom-switch" }, [
+              _c("input", {
+                staticClass: "custom-control-input",
+                attrs: { type: "checkbox", id: "recursoSwitch" }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "custom-control-label",
+                  attrs: { for: "recursoSwitch" }
+                },
+                [_vm._v("Activar recurso")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-10" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary float-right mr-0",
+                  attrs: { type: "button" }
+                },
+                [
+                  _c("i", {
+                    staticClass: "fa fa-plus-circle",
+                    attrs: { "aria-hidden": "true" }
+                  }),
+                  _vm._v(" AÑADIR\n                RECURSO\n              ")
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card mt-2" }, [
+            _c("div", { staticClass: "form-group row mt-3 ml-3" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-2 col-form-label",
+                  attrs: { for: "codigoRecurso" }
+                },
+                [_vm._v("Código del recurso")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-2 mt-1" }, [
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: { type: "text", id: "codigoRecurso" }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group row ml-3" }, [
+              _c(
+                "label",
+                { staticClass: "col-2 mt-1", attrs: { for: "tipoRecurso" } },
+                [_vm._v("Tipo de recurso")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "btn-group btn-group-toggle col-9",
+                  attrs: { "data-toggle": "buttons" }
+                },
+                [
+                  _c("label", { staticClass: "btn btn-secondary" }, [
+                    _c("input", {
+                      attrs: {
+                        type: "radio",
+                        name: "tipoRecurso",
+                        id: "mike",
+                        value: "mike",
+                        checked: ""
+                      }
+                    }),
+                    _vm._v(
+                      "\n                  Amb. Medicalizada-Mike\n                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("label", { staticClass: "btn btn-secondary" }, [
+                    _c("input", {
+                      attrs: {
+                        type: "radio",
+                        name: "tipoRecurso",
+                        id: "india",
+                        value: "india"
+                      }
+                    }),
+                    _vm._v(
+                      "\n                  Amb. Sanitarizada-India\n                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("label", { staticClass: "btn btn-secondary" }, [
+                    _c("input", {
+                      attrs: {
+                        type: "radio",
+                        name: "tipoRecurso",
+                        id: "tango",
+                        value: "tango"
+                      }
+                    }),
+                    _vm._v(
+                      "\n                  Amb. Asistencia-Tango\n                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("label", { staticClass: "btn btn-secondary" }, [
+                    _c("input", {
+                      attrs: {
+                        type: "radio",
+                        name: "tipoRecurso",
+                        id: "helicoptero",
+                        value: "helicoptero"
+                      }
+                    }),
+                    _vm._v(
+                      "\n                  Helicòptero medicalizado\n                "
+                    )
+                  ])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group row ml-3" }, [
+              _c(
+                "label",
+                { staticClass: "col-2 mt-1", attrs: { for: "prioridad" } },
+                [_vm._v("Prioridad")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "btn-group btn-group-toggle col-9",
+                  attrs: { "data-toggle": "buttons" }
+                },
+                [
+                  _c("label", { staticClass: "btn btn-secondary" }, [
+                    _c("input", {
+                      attrs: {
+                        type: "radio",
+                        name: "prioridad",
+                        id: "prioridad1",
+                        value: "prioridad1",
+                        checked: ""
+                      }
+                    }),
+                    _vm._v("\n                  1\n                ")
+                  ]),
+                  _vm._v(" "),
+                  _c("label", { staticClass: "btn btn-secondary" }, [
+                    _c("input", {
+                      attrs: {
+                        type: "radio",
+                        name: "prioridad",
+                        id: "prioridad2",
+                        value: "prioridad2"
+                      }
+                    }),
+                    _vm._v("\n                  2\n                ")
+                  ]),
+                  _vm._v(" "),
+                  _c("label", { staticClass: "btn btn-secondary" }, [
+                    _c("input", {
+                      attrs: {
+                        type: "radio",
+                        name: "prioridad",
+                        id: "prioridad3",
+                        value: "prioridad3"
+                      }
+                    }),
+                    _vm._v("\n                  3\n                ")
+                  ]),
+                  _vm._v(" "),
+                  _c("label", { staticClass: "btn btn-secondary" }, [
+                    _c("input", {
+                      attrs: {
+                        type: "radio",
+                        name: "prioridad",
+                        id: "prioridad4",
+                        value: "prioridad4"
+                      }
+                    }),
+                    _vm._v("\n                  4\n                ")
+                  ])
+                ]
+              )
             ])
           ])
         ])
