@@ -122,26 +122,27 @@
                 <div class="col-2">
                   <select class="custom-select" id="provincia" required>
                     <option selected disabled value="">Selecciona...</option>
-                    <option title="lleida">Lleida</option>
+                    <option v-for="provincia in provincies" :key="provincia.id">{{ provincia.nom }}</option>
+                    <!-- <option title="lleida">Lleida</option>
                     <option title="girona">Girona</option>
                     <option title="barcelona">Barcelona</option>
-                    <option title="tarragona">Tarragona</option>
+                    <option title="tarragona">Tarragona</option> -->
                   </select>
                 </div>
 
                 <label for="comarca" class="col-1 mt-1">Comarca</label>
                 <div class="col-2">
                   <select class="custom-select" id="comarca" required>
-                    <option selected disabled value="">Choose...</option>
-                    <option>...</option>
+                    <option selected disabled value="">Selecciona...</option>
+                    <option v-for="comarca in comarques" :key="comarca.id">{{ comarca.nom }}</option>
                   </select>
                 </div>
 
                 <label for="municipio" class="col-1 mt-1">Municipio</label>
                 <div class="col-2">
                   <select class="custom-select" id="municipio" required>
-                    <option selected disabled value="">Choose...</option>
-                    <option>...</option>
+                    <option selected disabled value="">Selecciona...</option>
+                    <option v-for="municipi in municipis" :key="municipi.id">{{ municipi.nom }}</option>
                   </select>
                 </div>
               </div>
@@ -667,6 +668,9 @@ export default {
     return {
       currentTab: 1,
       isActive: false,
+      provincies: [],
+      comarques: [],
+      municipis: []
     };
   },
   methods: {
@@ -680,7 +684,36 @@ export default {
     next() {
       this.currentTab = this.currentTab + 1;
     },
+    selectProvincies(){
+        let me = this;
+        axios.get('/provincia').then(response => {
+            me.provincies = response.data;
+        }).catch(error => {
+            console.log(error);
+        }).finally(() => this.loading = false)
+    },
+    selectComarques(){
+        let me = this;
+        axios.get('/comarca').then(response => {
+            me.comarques = response.data;
+        }).catch(error => {
+            console.log(error);
+        }).finally(() => this.loading = false)
+    },
+    selectMunicipis(){
+        let me = this;
+        axios.get('/municipi').then(response => {
+            me.municipis = response.data;
+        }).catch(error => {
+            console.log(error);
+        }).finally(() => this.loading = false)
+    },
   },
+  created(){
+      this.selectProvincies(),
+      this.selectComarques(),
+      this.selectMunicipis()
+  }
 };
 </script>
 

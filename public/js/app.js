@@ -2619,11 +2619,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       currentTab: 1,
-      isActive: false
+      isActive: false,
+      provincies: [],
+      comarques: [],
+      municipis: []
     };
   },
   methods: {
@@ -2636,7 +2640,46 @@ __webpack_require__.r(__webpack_exports__);
     },
     next: function next() {
       this.currentTab = this.currentTab + 1;
+    },
+    selectProvincies: function selectProvincies() {
+      var _this = this;
+
+      var me = this;
+      axios.get('/provincia').then(function (response) {
+        me.provincies = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      })["finally"](function () {
+        return _this.loading = false;
+      });
+    },
+    selectComarques: function selectComarques() {
+      var _this2 = this;
+
+      var me = this;
+      axios.get('/comarca').then(function (response) {
+        me.comarques = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      })["finally"](function () {
+        return _this2.loading = false;
+      });
+    },
+    selectMunicipis: function selectMunicipis() {
+      var _this3 = this;
+
+      var me = this;
+      axios.get('/municipi').then(function (response) {
+        me.municipis = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      })["finally"](function () {
+        return _this3.loading = false;
+      });
     }
+  },
+  created: function created() {
+    this.selectProvincies(), this.selectComarques(), this.selectMunicipis();
   }
 });
 
@@ -3025,6 +3068,7 @@ try {
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.baseURL = '/SGTA-Broggi/public/api/';
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -7499,7 +7543,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-secondary:not(:disabled):not(.disabled).active,\r\n.btn-secondary:not(:disabled):not(.disabled):active,\r\n.show > .btn-secondary.dropdown-toggle {\r\n  background-color: #e3177d;\r\n  border-color: black;\n}\n.btn-secondary {\r\n  border-color: black;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-secondary:not(:disabled):not(.disabled).active,\n.btn-secondary:not(:disabled):not(.disabled):active,\n.show > .btn-secondary.dropdown-toggle {\n  background-color: #e3177d;\n  border-color: black;\n}\n.btn-secondary {\n  border-color: black;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -39778,11 +39822,146 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _vm.currentTab == 1 ? _c("div", [_vm._m(0)]) : _vm._e(),
+    _vm.currentTab == 1
+      ? _c("div", [
+          _c("div", { staticClass: "container-fluid mt-5" }, [
+            _c("div", { staticClass: "card ml-5 mr-5" }, [
+              _c("div", { staticClass: "card-header" }, [
+                _vm._v("DATOS ALERTANTE")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body ml-5" }, [
+                _c("form", [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-2 mt-1",
+                        attrs: { for: "localización" }
+                      },
+                      [_vm._v("Localización")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-1 mt-1",
+                        attrs: { for: "provincia" }
+                      },
+                      [_vm._v("Provincia")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-2" }, [
+                      _c(
+                        "select",
+                        {
+                          staticClass: "custom-select",
+                          attrs: { id: "provincia", required: "" }
+                        },
+                        [
+                          _c(
+                            "option",
+                            {
+                              attrs: { selected: "", disabled: "", value: "" }
+                            },
+                            [_vm._v("Selecciona...")]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.provincies, function(provincia) {
+                            return _c("option", { key: provincia.id }, [
+                              _vm._v(_vm._s(provincia.nom))
+                            ])
+                          })
+                        ],
+                        2
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "col-1 mt-1", attrs: { for: "comarca" } },
+                      [_vm._v("Comarca")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-2" }, [
+                      _c(
+                        "select",
+                        {
+                          staticClass: "custom-select",
+                          attrs: { id: "comarca", required: "" }
+                        },
+                        [
+                          _c(
+                            "option",
+                            {
+                              attrs: { selected: "", disabled: "", value: "" }
+                            },
+                            [_vm._v("Selecciona...")]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.comarques, function(comarca) {
+                            return _c("option", { key: comarca.id }, [
+                              _vm._v(_vm._s(comarca.nom))
+                            ])
+                          })
+                        ],
+                        2
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-1 mt-1",
+                        attrs: { for: "municipio" }
+                      },
+                      [_vm._v("Municipio")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-2" }, [
+                      _c(
+                        "select",
+                        {
+                          staticClass: "custom-select",
+                          attrs: { id: "municipio", required: "" }
+                        },
+                        [
+                          _c(
+                            "option",
+                            {
+                              attrs: { selected: "", disabled: "", value: "" }
+                            },
+                            [_vm._v("Selecciona...")]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.municipis, function(municipi) {
+                            return _c("option", { key: municipi.id }, [
+                              _vm._v(_vm._s(municipi.nom))
+                            ])
+                          })
+                        ],
+                        2
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _vm._m(3)
+                ])
+              ])
+            ])
+          ])
+        ])
+      : _vm._e(),
     _vm._v(" "),
-    _vm.currentTab == 2 ? _c("div", [_vm._m(1)]) : _vm._e(),
+    _vm.currentTab == 2 ? _c("div", [_vm._m(4)]) : _vm._e(),
     _vm._v(" "),
-    _vm.currentTab == 3 ? _c("div", [_vm._m(2)]) : _vm._e()
+    _vm.currentTab == 3 ? _c("div", [_vm._m(5)]) : _vm._e()
   ])
 }
 var staticRenderFns = [
@@ -39790,284 +39969,168 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container-fluid mt-5" }, [
-      _c("div", { staticClass: "card ml-5 mr-5" }, [
-        _c("div", { staticClass: "card-header" }, [_vm._v("DATOS ALERTANTE")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body ml-5" }, [
-          _c("form", [
-            _c("div", { staticClass: "form-group row" }, [
-              _c(
-                "label",
-                { staticClass: "col-2 mt-1", attrs: { for: "tipoAlertante" } },
-                [_vm._v("Tipo Alertante")]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "btn-group btn-group-toggle col-9",
-                  attrs: { "data-toggle": "buttons" }
-                },
-                [
-                  _c("label", { staticClass: "btn btn-secondary" }, [
-                    _c("input", {
-                      attrs: {
-                        type: "radio",
-                        name: "tipoAlertante",
-                        id: "centroSanitario",
-                        value: "centroSanitario",
-                        checked: ""
-                      }
-                    }),
-                    _vm._v(
-                      "\n                  Centro Sanitario\n                "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("label", { staticClass: "btn btn-secondary" }, [
-                    _c("input", {
-                      attrs: {
-                        type: "radio",
-                        name: "tipoAlertante",
-                        id: "afectada",
-                        value: "afectada"
-                      }
-                    }),
-                    _vm._v("\n                  Afectada\n                ")
-                  ]),
-                  _vm._v(" "),
-                  _c("label", { staticClass: "btn btn-secondary" }, [
-                    _c("input", {
-                      attrs: {
-                        type: "radio",
-                        name: "tipoAlertante",
-                        id: "entornoAfectada",
-                        value: "entornoAfectada"
-                      }
-                    }),
-                    _vm._v(
-                      "\n                  Entorno Afectada\n                "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("label", { staticClass: "btn btn-secondary" }, [
-                    _c("input", {
-                      attrs: {
-                        type: "radio",
-                        name: "tipoAlertante",
-                        id: "vip",
-                        value: "vip"
-                      }
-                    }),
-                    _vm._v("\n                  VIP\n                ")
-                  ]),
-                  _vm._v(" "),
-                  _c("label", { staticClass: "btn btn-secondary" }, [
-                    _c("input", {
-                      attrs: {
-                        type: "radio",
-                        name: "tipoAlertante",
-                        id: "accidental",
-                        value: "accidental"
-                      }
-                    }),
-                    _vm._v("\n                  Accidental\n                ")
-                  ])
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group row" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-2 col-form-label",
-                  attrs: { for: "datosMedica" }
-                },
-                [_vm._v("Datos médica")]
-              ),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "col-1 col-form-label",
-                  attrs: { for: "nombreMedica" }
-                },
-                [_vm._v("Nombre")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-3" }, [
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: { type: "text", id: "nombreMedica" }
-                })
-              ]),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "col-1 col-form-label",
-                  attrs: { for: "apellidoMedica" }
-                },
-                [_vm._v("Apellidos")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-4" }, [
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: { type: "text", id: "apellidoMedica" }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group row" }, [
-              _c(
-                "label",
-                { staticClass: "col-2 mt-1", attrs: { for: "localización" } },
-                [_vm._v("Localización")]
-              ),
-              _vm._v(" "),
-              _c(
-                "label",
-                { staticClass: "col-1 mt-1", attrs: { for: "provincia" } },
-                [_vm._v("Provincia")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-2" }, [
-                _c(
-                  "select",
-                  {
-                    staticClass: "custom-select",
-                    attrs: { id: "provincia", required: "" }
-                  },
-                  [
-                    _c(
-                      "option",
-                      { attrs: { selected: "", disabled: "", value: "" } },
-                      [_vm._v("Selecciona...")]
-                    ),
-                    _vm._v(" "),
-                    _c("option", { attrs: { title: "lleida" } }, [
-                      _vm._v("Lleida")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { title: "girona" } }, [
-                      _vm._v("Girona")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { title: "barcelona" } }, [
-                      _vm._v("Barcelona")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { title: "tarragona" } }, [
-                      _vm._v("Tarragona")
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c(
-                "label",
-                { staticClass: "col-1 mt-1", attrs: { for: "comarca" } },
-                [_vm._v("Comarca")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-2" }, [
-                _c(
-                  "select",
-                  {
-                    staticClass: "custom-select",
-                    attrs: { id: "comarca", required: "" }
-                  },
-                  [
-                    _c(
-                      "option",
-                      { attrs: { selected: "", disabled: "", value: "" } },
-                      [_vm._v("Choose...")]
-                    ),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("...")])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c(
-                "label",
-                { staticClass: "col-1 mt-1", attrs: { for: "municipio" } },
-                [_vm._v("Municipio")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-2" }, [
-                _c(
-                  "select",
-                  {
-                    staticClass: "custom-select",
-                    attrs: { id: "municipio", required: "" }
-                  },
-                  [
-                    _c(
-                      "option",
-                      { attrs: { selected: "", disabled: "", value: "" } },
-                      [_vm._v("Choose...")]
-                    ),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("...")])
-                  ]
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form row" }, [
-              _c(
-                "label",
-                { staticClass: "col-2 mt-2", attrs: { for: "direccion" } },
-                [_vm._v("Dirección")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-5" }, [
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: { type: "text" }
-                })
-              ]),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "col-2 mt-2",
-                  attrs: { for: "numeroDireccion" }
-                },
-                [_vm._v("Número")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-2" }, [
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: { type: "number", min: "1" }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-row mt-3 mb-3" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-2",
-                  attrs: { for: "complementoDireccion" }
-                },
-                [_vm._v("Complemento Dirección")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-9" }, [
-                _c("textarea", {
-                  staticClass: "form-control",
-                  attrs: { id: "complementoDireccion", rows: "3" }
-                })
-              ])
-            ])
+    return _c("div", { staticClass: "form-group row" }, [
+      _c(
+        "label",
+        { staticClass: "col-2 mt-1", attrs: { for: "tipoAlertante" } },
+        [_vm._v("Tipo Alertante")]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "btn-group btn-group-toggle col-9",
+          attrs: { "data-toggle": "buttons" }
+        },
+        [
+          _c("label", { staticClass: "btn btn-secondary" }, [
+            _c("input", {
+              attrs: {
+                type: "radio",
+                name: "tipoAlertante",
+                id: "centroSanitario",
+                value: "centroSanitario",
+                checked: ""
+              }
+            }),
+            _vm._v("\n                  Centro Sanitario\n                ")
+          ]),
+          _vm._v(" "),
+          _c("label", { staticClass: "btn btn-secondary" }, [
+            _c("input", {
+              attrs: {
+                type: "radio",
+                name: "tipoAlertante",
+                id: "afectada",
+                value: "afectada"
+              }
+            }),
+            _vm._v("\n                  Afectada\n                ")
+          ]),
+          _vm._v(" "),
+          _c("label", { staticClass: "btn btn-secondary" }, [
+            _c("input", {
+              attrs: {
+                type: "radio",
+                name: "tipoAlertante",
+                id: "entornoAfectada",
+                value: "entornoAfectada"
+              }
+            }),
+            _vm._v("\n                  Entorno Afectada\n                ")
+          ]),
+          _vm._v(" "),
+          _c("label", { staticClass: "btn btn-secondary" }, [
+            _c("input", {
+              attrs: {
+                type: "radio",
+                name: "tipoAlertante",
+                id: "vip",
+                value: "vip"
+              }
+            }),
+            _vm._v("\n                  VIP\n                ")
+          ]),
+          _vm._v(" "),
+          _c("label", { staticClass: "btn btn-secondary" }, [
+            _c("input", {
+              attrs: {
+                type: "radio",
+                name: "tipoAlertante",
+                id: "accidental",
+                value: "accidental"
+              }
+            }),
+            _vm._v("\n                  Accidental\n                ")
           ])
-        ])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group row" }, [
+      _c(
+        "label",
+        { staticClass: "col-2 col-form-label", attrs: { for: "datosMedica" } },
+        [_vm._v("Datos médica")]
+      ),
+      _vm._v(" "),
+      _c(
+        "label",
+        { staticClass: "col-1 col-form-label", attrs: { for: "nombreMedica" } },
+        [_vm._v("Nombre")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-3" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", id: "nombreMedica" }
+        })
+      ]),
+      _vm._v(" "),
+      _c(
+        "label",
+        {
+          staticClass: "col-1 col-form-label",
+          attrs: { for: "apellidoMedica" }
+        },
+        [_vm._v("Apellidos")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-4" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", id: "apellidoMedica" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form row" }, [
+      _c("label", { staticClass: "col-2 mt-2", attrs: { for: "direccion" } }, [
+        _vm._v("Dirección")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-5" }, [
+        _c("input", { staticClass: "form-control", attrs: { type: "text" } })
+      ]),
+      _vm._v(" "),
+      _c(
+        "label",
+        { staticClass: "col-2 mt-2", attrs: { for: "numeroDireccion" } },
+        [_vm._v("Número")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-2" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "number", min: "1" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-row mt-3 mb-3" }, [
+      _c(
+        "label",
+        { staticClass: "col-2", attrs: { for: "complementoDireccion" } },
+        [_vm._v("Complemento Dirección")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-9" }, [
+        _c("textarea", {
+          staticClass: "form-control",
+          attrs: { id: "complementoDireccion", rows: "3" }
+        })
       ])
     ])
   },
