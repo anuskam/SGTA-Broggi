@@ -1526,6 +1526,23 @@ COMMIT;
 
 
 -- -----------------------------------------------------
+-- Data for table `broggi`.`recursos`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `broggi`;
+INSERT INTO `broggi`.`recursos` (`id`, `codi`, `actiu`, `tipus_recursos_id`) VALUES (null, 'MIKE', true, 1);
+INSERT INTO `broggi`.`recursos` (`id`, `codi`, `actiu`, `tipus_recursos_id`) VALUES (null, 'MIKE2', true, 1);
+INSERT INTO `broggi`.`recursos` (`id`, `codi`, `actiu`, `tipus_recursos_id`) VALUES (null, 'INDIA', true, 2);
+INSERT INTO `broggi`.`recursos` (`id`, `codi`, `actiu`, `tipus_recursos_id`) VALUES (null, 'INDIA2', true, 2);
+INSERT INTO `broggi`.`recursos` (`id`, `codi`, `actiu`, `tipus_recursos_id`) VALUES (null, 'TANGO', true, 3);
+INSERT INTO `broggi`.`recursos` (`id`, `codi`, `actiu`, `tipus_recursos_id`) VALUES (null, 'TANGO2', true, 3);
+INSERT INTO `broggi`.`recursos` (`id`, `codi`, `actiu`, `tipus_recursos_id`) VALUES (null, 'HELI', true, 4);
+INSERT INTO `broggi`.`recursos` (`id`, `codi`, `actiu`, `tipus_recursos_id`) VALUES (null, 'HELI2', true, 4);
+
+
+COMMIT;
+
+-- -----------------------------------------------------
 -- Data for table `broggi`.`sexes`
 -- -----------------------------------------------------
 START TRANSACTION;
