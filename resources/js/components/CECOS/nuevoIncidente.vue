@@ -120,9 +120,9 @@
                 >
                 <label for="provincia" class="col-1 mt-1">Provincia</label>
                 <div class="col-2">
-                  <select class="custom-select" id="provincia" required>
-                    <option selected disabled value="">Selecciona...</option>
-                    <option v-for="provincia in provincies" :key="provincia.id">{{ provincia.nom }}</option>
+                  <select class="custom-select" id="provincia" required v-model="provincia">
+                    <option selected disabled value="Selecciona...">Selecciona...</option>
+                    <option v-for="provincia in provincies" :key="provincia.id" :value= "provincia">{{ provincia.nom }}</option>
                     <!-- <option title="lleida">Lleida</option>
                     <option title="girona">Girona</option>
                     <option title="barcelona">Barcelona</option>
@@ -132,17 +132,17 @@
 
                 <label for="comarca" class="col-1 mt-1">Comarca</label>
                 <div class="col-2">
-                  <select class="custom-select" id="comarca" required>
-                    <option selected disabled value="">Selecciona...</option>
-                    <option v-for="comarca in comarques" :key="comarca.id">{{ comarca.nom }}</option>
+                  <select class="custom-select" id="comarca" required v-model="comarca">
+                    <option selected disabled value="Selecciona...">Selecciona...</option>
+                    <option v-for="comarca in comarquesFiltered" :key="comarca.id" :value="comarca">{{ comarca.nom }}</option>
                   </select>
                 </div>
 
                 <label for="municipio" class="col-1 mt-1">Municipio</label>
                 <div class="col-2">
-                  <select class="custom-select" id="municipio" required>
-                    <option selected disabled value="">Selecciona...</option>
-                    <option v-for="municipi in municipis" :key="municipi.id">{{ municipi.nom }}</option>
+                  <select class="custom-select" id="municipio" required v-model="municipi">
+                    <option selected disabled value="Selecciona...">Selecciona...</option>
+                    <option v-for="municipi in municipisFiltered" :key="municipi.id" :value="municipi">{{ municipi.nom }}</option>
                   </select>
                 </div>
               </div>
@@ -669,8 +669,22 @@ export default {
       currentTab: 1,
       isActive: false,
       provincies: [],
+      provincia: {
+          id: null,
+          nom: "Selecciona..."
+      },
       comarques: [],
-      municipis: []
+      comarca: {
+          id: null,
+          nom: "Selecciona...",
+          provincies_id: null
+      },
+      municipis: [],
+      municipi: {
+          id: null,
+          nom: "Selecciona...",
+          comarques_id: null
+      },
     };
   },
   methods: {
@@ -708,6 +722,43 @@ export default {
             console.log(error);
         }).finally(() => this.loading = false)
     },
+  },
+  computed: {
+      comarquesFiltered: function() {
+          this.municipi = {
+          id: null,
+          nom: "Selecciona...",
+          comarques_id: null
+        };
+          if(Object.keys(this.provincia).length){
+              let comarquesFiltered = [];
+              let comarques = this.comarques;
+              for(let i = 0; i < comarques.length; ++i){
+                  if(comarques[i].provincies_id == this.provincia.id){
+                      comarquesFiltered.push(comarques[i]);
+                  }
+              }
+              return comarquesFiltered;
+          }
+          else{
+              return this.comarques;
+          }
+      },
+      municipisFiltered: function(){
+         if(Object.keys(this.comarca).length){
+              let municipisFiltered = [];
+              let municipis = this.municipis;
+              for(let i = 0; i < municipis.length; ++i){
+                  if(municipis[i].comarques_id == this.comarca.id){
+                      municipisFiltered.push(municipis[i]);
+                  }
+              }
+              return municipisFiltered;
+          }
+          else{
+              return this.municipis;
+          }
+      }
   },
   created(){
       this.selectProvincies(),

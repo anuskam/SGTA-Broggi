@@ -2626,8 +2626,22 @@ __webpack_require__.r(__webpack_exports__);
       currentTab: 1,
       isActive: false,
       provincies: [],
+      provincia: {
+        id: null,
+        nom: "Selecciona..."
+      },
       comarques: [],
-      municipis: []
+      comarca: {
+        id: null,
+        nom: "Selecciona...",
+        provincies_id: null
+      },
+      municipis: [],
+      municipi: {
+        id: null,
+        nom: "Selecciona...",
+        comarques_id: null
+      }
     };
   },
   methods: {
@@ -2676,6 +2690,46 @@ __webpack_require__.r(__webpack_exports__);
       })["finally"](function () {
         return _this3.loading = false;
       });
+    }
+  },
+  computed: {
+    comarquesFiltered: function comarquesFiltered() {
+      this.municipi = {
+        id: null,
+        nom: "Selecciona...",
+        comarques_id: null
+      };
+
+      if (Object.keys(this.provincia).length) {
+        var comarquesFiltered = [];
+        var comarques = this.comarques;
+
+        for (var i = 0; i < comarques.length; ++i) {
+          if (comarques[i].provincies_id == this.provincia.id) {
+            comarquesFiltered.push(comarques[i]);
+          }
+        }
+
+        return comarquesFiltered;
+      } else {
+        return this.comarques;
+      }
+    },
+    municipisFiltered: function municipisFiltered() {
+      if (Object.keys(this.comarca).length) {
+        var municipisFiltered = [];
+        var municipis = this.municipis;
+
+        for (var i = 0; i < municipis.length; ++i) {
+          if (municipis[i].comarques_id == this.comarca.id) {
+            municipisFiltered.push(municipis[i]);
+          }
+        }
+
+        return municipisFiltered;
+      } else {
+        return this.municipis;
+      }
     }
   },
   created: function created() {
@@ -39859,22 +39913,54 @@ var render = function() {
                       _c(
                         "select",
                         {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.provincia,
+                              expression: "provincia"
+                            }
+                          ],
                           staticClass: "custom-select",
-                          attrs: { id: "provincia", required: "" }
+                          attrs: { id: "provincia", required: "" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.provincia = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            }
+                          }
                         },
                         [
                           _c(
                             "option",
                             {
-                              attrs: { selected: "", disabled: "", value: "" }
+                              attrs: {
+                                selected: "",
+                                disabled: "",
+                                value: "Selecciona..."
+                              }
                             },
                             [_vm._v("Selecciona...")]
                           ),
                           _vm._v(" "),
                           _vm._l(_vm.provincies, function(provincia) {
-                            return _c("option", { key: provincia.id }, [
-                              _vm._v(_vm._s(provincia.nom))
-                            ])
+                            return _c(
+                              "option",
+                              {
+                                key: provincia.id,
+                                domProps: { value: provincia }
+                              },
+                              [_vm._v(_vm._s(provincia.nom))]
+                            )
                           })
                         ],
                         2
@@ -39891,22 +39977,51 @@ var render = function() {
                       _c(
                         "select",
                         {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.comarca,
+                              expression: "comarca"
+                            }
+                          ],
                           staticClass: "custom-select",
-                          attrs: { id: "comarca", required: "" }
+                          attrs: { id: "comarca", required: "" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.comarca = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            }
+                          }
                         },
                         [
                           _c(
                             "option",
                             {
-                              attrs: { selected: "", disabled: "", value: "" }
+                              attrs: {
+                                selected: "",
+                                disabled: "",
+                                value: "Selecciona..."
+                              }
                             },
                             [_vm._v("Selecciona...")]
                           ),
                           _vm._v(" "),
-                          _vm._l(_vm.comarques, function(comarca) {
-                            return _c("option", { key: comarca.id }, [
-                              _vm._v(_vm._s(comarca.nom))
-                            ])
+                          _vm._l(_vm.comarquesFiltered, function(comarca) {
+                            return _c(
+                              "option",
+                              { key: comarca.id, domProps: { value: comarca } },
+                              [_vm._v(_vm._s(comarca.nom))]
+                            )
                           })
                         ],
                         2
@@ -39926,22 +40041,54 @@ var render = function() {
                       _c(
                         "select",
                         {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.municipi,
+                              expression: "municipi"
+                            }
+                          ],
                           staticClass: "custom-select",
-                          attrs: { id: "municipio", required: "" }
+                          attrs: { id: "municipio", required: "" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.municipi = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            }
+                          }
                         },
                         [
                           _c(
                             "option",
                             {
-                              attrs: { selected: "", disabled: "", value: "" }
+                              attrs: {
+                                selected: "",
+                                disabled: "",
+                                value: "Selecciona..."
+                              }
                             },
                             [_vm._v("Selecciona...")]
                           ),
                           _vm._v(" "),
-                          _vm._l(_vm.municipis, function(municipi) {
-                            return _c("option", { key: municipi.id }, [
-                              _vm._v(_vm._s(municipi.nom))
-                            ])
+                          _vm._l(_vm.municipisFiltered, function(municipi) {
+                            return _c(
+                              "option",
+                              {
+                                key: municipi.id,
+                                domProps: { value: municipi }
+                              },
+                              [_vm._v(_vm._s(municipi.nom))]
+                            )
                           })
                         ],
                         2
