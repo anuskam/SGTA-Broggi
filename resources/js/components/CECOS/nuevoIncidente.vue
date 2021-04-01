@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="tabButtons">
+    <div id="tabButtons" class="mt-2">
       <button
         :disabled="currentTab == 1"
         @click="prev()"
@@ -10,10 +10,7 @@
         <i class="fas fa-arrow-left fa-2x" aria-hidden="true"></i>
       </button>
 
-      <button
-        @click="selectTab(1)"
-        class="btn btn-sm mr-3"
-      >
+      <button @click="selectTab(1)" class="btn btn-sm mr-3">
         <i class="fas fa-phone-alt fa-2x mr-2 ml-2" aria-hidden="true"></i>
       </button>
       |
@@ -106,21 +103,13 @@
                   >Nombre</label
                 >
                 <div class="col-3">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="nombreMedica"
-                  />
+                  <input type="text" class="form-control" id="nombreMedica" />
                 </div>
                 <label for="apellidoMedica" class="col-1 col-form-label"
                   >Apellidos</label
                 >
                 <div class="col-4">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="apellidoMedica"
-                  />
+                  <input type="text" class="form-control" id="apellidoMedica" />
                 </div>
               </div>
 
@@ -161,19 +150,12 @@
               <div class="form row">
                 <label for="direccion" class="col-2 mt-2">Dirección</label>
                 <div class="col-5">
-                  <input
-                    type="text"
-                    class="form-control"
-                  />
+                  <input type="text" class="form-control" />
                 </div>
 
                 <label for="numeroDireccion" class="col-2 mt-2">Número</label>
                 <div class="col-2">
-                  <input
-                    type="number"
-                    class="form-control"
-                    min="1"
-                  />
+                  <input type="number" class="form-control" min="1" />
                 </div>
               </div>
 
@@ -208,11 +190,7 @@
                   >Nombre</label
                 >
                 <div class="col-4">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="nombreAfectada"
-                  />
+                  <input type="text" class="form-control" id="nombreAfectada" />
                 </div>
 
                 <!-- APELLIDOS AFECTADA -->
@@ -258,21 +236,14 @@
 
                 <label for="edadAfectada" class="col-1 mt-1 ml-4">Edad</label>
                 <div class="col-2">
-                  <input
-                    type="number"
-                    class="form-control"
-                    min="1"
-                  />
+                  <input type="number" class="form-control" min="1" />
                 </div>
 
                 <label for="telefonoAfectada" class="col-1 mt-1"
                   >Teléfono</label
                 >
                 <div class="col-2">
-                  <input
-                    type="number"
-                    class="form-control"
-                  />
+                  <input type="number" class="form-control" />
                 </div>
               </div>
 
@@ -280,10 +251,7 @@
               <div class="form row">
                 <label for="direccion" class="col-1 mt-2">CIP</label>
                 <div class="col-5">
-                  <input
-                    type="text"
-                    class="form-control"
-                  />
+                  <input type="text" class="form-control" />
                 </div>
 
                 <!-- AÑADIR AFECTADA -->
@@ -302,29 +270,28 @@
           <div class="card-header">DATOS INCIDENTE</div>
           <div class="card-body ml-5">
             <form>
-              <!-- NOMBRE AFECTADA -->
+              <!-- FECHA -->
               <div class="form-group row">
-                <label for="nombreAfectada" class="col-1 col-form-label"
-                  >Nombre</label
+                <label
+                  for="fechaIncidente"
+                  class="col-1 col-form-label"
+                  >Fecha</label
                 >
-                <div class="col-4">
+                <div class="col-2">
                   <input
-                    type="text"
                     class="form-control"
-                    id="nombreAfectada"
+                    type="date"
+                    value="2020-04-01"
+                    id="fechaIncidente"
                   />
                 </div>
 
-                <!-- APELLIDOS AFECTADA -->
-                <label for="apellidoAfectada" class="col-1 col-form-label"
-                  >Apellidos</label
+                <!-- HORA -->
+                <label for="horaIncidente" class="col-1 col-form-label ml-5"
+                  >Hora</label
                 >
-                <div class="col-5">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="apellidoAfectada"
-                  />
+                <div class="col-2">
+                  <input type="time" value="13:45:00" class="form-control" id="horaIncidente" />
                 </div>
               </div>
 

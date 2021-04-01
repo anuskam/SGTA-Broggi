@@ -1911,6 +1911,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -1937,39 +1956,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -39138,54 +39124,107 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { attrs: { id: "tabButtons" } }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-sm mr-3",
-          on: {
-            click: function($event) {
-              return _vm.selectTab(1)
-            }
-          }
-        },
-        [_vm._v("\n      NUEVO INCIDENTE\n    ")]
-      ),
-      _vm._v("\n    |\n    "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-sm mr-3 ml-3",
-          on: {
-            click: function($event) {
-              return _vm.selectTab(2)
-            }
-          }
-        },
-        [_vm._v("\n      GESTIONAR INCIDENTE\n    ")]
-      ),
-      _vm._v("\n    |\n    "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-sm ml-3",
-          on: {
-            click: function($event) {
-              return _vm.selectTab(3)
-            }
-          }
-        },
-        [_vm._v("FORMACIÓN")]
-      )
-    ]),
+  return _c("div", [
+    _c(
+      "nav",
+      { staticClass: "navbar navbar-expand-lg navbar-light bg-light" },
+      [
+        _c("a", { staticClass: "navbar-brand", attrs: { href: "#" } }, [
+          _vm._v("Navbar")
+        ]),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "collapse navbar-collapse",
+            attrs: { id: "navbarNav" }
+          },
+          [
+            _c("ul", { staticClass: "navbar-nav" }, [
+              _c("li", { staticClass: "nav-item active" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "nav-link",
+                    on: {
+                      click: function($event) {
+                        return _vm.selectTab(1)
+                      }
+                    }
+                  },
+                  [
+                    _vm._v("NUevo Incidente "),
+                    _c("span", { staticClass: "sr-only" }, [
+                      _vm._v("(current)")
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "nav-item" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "nav-link",
+                    on: {
+                      click: function($event) {
+                        return _vm.selectTab(2)
+                      }
+                    }
+                  },
+                  [_vm._v("Editar Incidentes")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "nav-item" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "nav-link",
+                    on: {
+                      click: function($event) {
+                        return _vm.selectTab(3)
+                      }
+                    }
+                  },
+                  [_vm._v("Formación")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    ),
     _vm._v(" "),
     _vm.currentTab == 1
       ? _c("div", [_c("nuevoincidente-component")], 1)
       : _vm._e()
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "navbar-toggler",
+        attrs: {
+          type: "button",
+          "data-toggle": "collapse",
+          "data-target": "#navbarNav",
+          "aria-controls": "navbarNav",
+          "aria-expanded": "false",
+          "aria-label": "Toggle navigation"
+        }
+      },
+      [_c("span", { staticClass: "navbar-toggler-icon" })]
+    )
+  }
+]
 render._withStripped = true
 
 
@@ -39209,7 +39248,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { attrs: { id: "tabButtons" } }, [
+    _c("div", { staticClass: "mt-2", attrs: { id: "tabButtons" } }, [
       _c(
         "button",
         {
@@ -39808,31 +39847,39 @@ var staticRenderFns = [
                 "label",
                 {
                   staticClass: "col-1 col-form-label",
-                  attrs: { for: "nombreAfectada" }
+                  attrs: { for: "fechaIncidente" }
                 },
-                [_vm._v("Nombre")]
+                [_vm._v("Fecha")]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "col-4" }, [
+              _c("div", { staticClass: "col-2" }, [
                 _c("input", {
                   staticClass: "form-control",
-                  attrs: { type: "text", id: "nombreAfectada" }
+                  attrs: {
+                    type: "date",
+                    value: "2020-04-01",
+                    id: "fechaIncidente"
+                  }
                 })
               ]),
               _vm._v(" "),
               _c(
                 "label",
                 {
-                  staticClass: "col-1 col-form-label",
-                  attrs: { for: "apellidoAfectada" }
+                  staticClass: "col-1 col-form-label ml-5",
+                  attrs: { for: "horaIncidente" }
                 },
-                [_vm._v("Apellidos")]
+                [_vm._v("Hora")]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "col-5" }, [
+              _c("div", { staticClass: "col-2" }, [
                 _c("input", {
                   staticClass: "form-control",
-                  attrs: { type: "text", id: "apellidoAfectada" }
+                  attrs: {
+                    type: "time",
+                    value: "13:45:00",
+                    id: "horaIncidente"
+                  }
                 })
               ])
             ]),
