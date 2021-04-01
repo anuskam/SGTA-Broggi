@@ -1,10 +1,10 @@
 <template>
   <main>
     <div id="navbar">
-      <div id="asignats" @click="selectedTab = 'assignats'">
+      <div id="asignats" @click="selectedTab = 'assignats'" :class="{ selected: !colorSelection }">
         <p>Assignats</p>
       </div>
-      <div id="tots" @click="selectedTab = 'tots'">
+      <div id="tots" @click="selectedTab = 'tots'" :class="{ selected: colorSelection }">
         <p>Tots</p>
       </div>
     </div>
@@ -22,11 +22,17 @@ export default {
     data(){
         return{
             tabs: ['assignats', 'tots'],
-            selectedTab: 'assignats'
+            selectedTab: 'assignats',
+            colorSelection: false
         }
     },
-    mounted() {
-    console.log("Component mounted.");
+    updated() {
+        if(this.selectedTab == 'assignats' && this.colorSelection == true){
+            this.colorSelection = false;
+        }
+        else if(this.selectedTab == 'tots' && this.colorSelection == false){
+            this.colorSelection = true;
+        }
     },
 }
 </script>
@@ -42,6 +48,7 @@ export default {
     top: 0;
     height: 100vh;
     width: 11%;
+    background-color: rgba(128, 128, 128, 0.503);
     }
 
     #asignats, #tots{
@@ -52,7 +59,7 @@ export default {
         align-items: center;
         font-size: 1.2em;
         font-weight: bolder;
-        background-color: rgba(128, 128, 128, 0.503);
+        /* background-color: rgba(128, 128, 128, 0.503); */
     }
 
     #asignats:hover, #tots:hover{
