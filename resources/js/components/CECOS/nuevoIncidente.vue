@@ -384,25 +384,275 @@
         <div class="card-header">RESPUESTA</div>
         <div class="card-body ml-5">
           <form>
-            <div class="custom-control custom-switch">
-              <input
-                type="checkbox"
-                class="custom-control-input"
-                id="recursoSwitch"
-                :checked="isActive"
-              />
-              <label
-                v-show="!isActive"
-                class="custom-control-label"
-                for="recursoSwitch"
-                >Activar recurso</label
-              >
-              <label
-                v-show="isActive"
-                class="custom-control-label"
-                for="recursoSwitch"
-                >Desactivar recurso</label
-              >
+            <!-- CONSEJOS -->
+            <div class="form-group row">
+              <label for="consejo" class="col-1 mt-1">Consejos</label>
+              <div class="col-9">
+                <div class="form-check">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="consejo1"
+                  />
+                  <label class="form-check-label" for="consejo1"
+                    >Tiene conocimientos de primeros auxilios</label
+                  >
+                </div>
+
+                <div class="form-check">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="consejo2"
+                  />
+                  <label class="form-check-label" for="consejo2"
+                    >Puede pedir ayuda a algún peatón, persona que le
+                    acompañe...</label
+                  >
+                </div>
+                <div class="form-check">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="consejo3"
+                  />
+                  <label class="form-check-label" for="consejo3"
+                    >Puede señalizar la zona del accidente/incidente</label
+                  >
+                </div>
+                <div class="form-check">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="consejo4"
+                  />
+                  <label class="form-check-label" for="consejo4"
+                    >Aflojarse la ropa</label
+                  >
+                </div>
+                <div class="form-check">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="consejo5"
+                  />
+                  <label class="form-check-label" for="consejo5"
+                    >Acercarse al coche y desconectar las llaves de
+                    contacto</label
+                  >
+                </div>
+                <div class="form-check">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="consejo6"
+                  />
+                  <label class="form-check-label" for="consejo6"
+                    >Mantener el teléfono en manos libres</label
+                  >
+                </div>
+                <div class="form-check">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="consejo7"
+                  />
+                  <label class="form-check-label" for="consejo7"
+                    >No mover a la persona o víctimas</label
+                  >
+                </div>
+                <div class="form-check">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="consejo8"
+                  />
+                  <label class="form-check-label" for="consejo8"
+                    >No dejar sola a la persona</label
+                  >
+                </div>
+                <div class="form-check">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="consejo9"
+                  />
+                  <label class="form-check-label" for="consejo9"
+                    >No dar de comer ni de beber</label
+                  >
+                </div>
+                <div class="form-check">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="consejo10"
+                  />
+                  <label class="form-check-label" for="consejo10"
+                    >Poner a la persona en posición lateral de seguridad
+                    (PLS)</label
+                  >
+                </div>
+                <div class="form-check">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="consejo11"
+                  />
+                  <label class="form-check-label" for="consejo11"
+                    >Si sangra, comprimir la herida con la mano, ropa...</label
+                  >
+                </div>
+                <div class="form-check">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="consejo12"
+                  />
+                  <label class="form-check-label" for="consejo12"
+                    >Poner cómoda a la víctima</label
+                  >
+                </div>
+
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="other" />
+                  <label class="form-check-label" for="other">Otros</label>
+
+                  <input
+                    type="text"
+                    class="col-4 ml-3"
+                    id="otherValue"
+                    name="other"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- TOGGLE -->
+            <div class="form-group row mt-4">
+              <div class="custom-control custom-switch">
+                <input
+                  type="checkbox"
+                  class="custom-control-input"
+                  id="recursoSwitch"
+                />
+                <label class="custom-control-label" for="recursoSwitch"
+                  >Activar recurso</label
+                >
+              </div>
+
+              <!-- AÑADIR RECURSO -->
+              <div class="col-10">
+                <button type="button" class="btn btn-primary float-right mr-0">
+                  <i class="fa fa-plus-circle" aria-hidden="true"></i> AÑADIR
+                  RECURSO
+                </button>
+              </div>
+            </div>
+            <div class="card mt-2">
+              <!-- CÓDIGO RECURSO -->
+              <div class="form-group row mt-3 ml-3">
+                <label for="codigoRecurso" class="col-2 col-form-label"
+                  >Código del recurso</label
+                >
+                <div class="col-2 mt-1">
+                  <input type="text" class="form-control" id="codigoRecurso" />
+                </div>
+              </div>
+              <!-- RECURSO -->
+              <div class="form-group row ml-3">
+                <label for="tipoRecurso" class="col-2 mt-1"
+                  >Tipo de recurso</label
+                >
+                <div
+                  class="btn-group btn-group-toggle col-9"
+                  data-toggle="buttons"
+                >
+                  <label class="btn btn-secondary">
+                    <input
+                      type="radio"
+                      name="tipoRecurso"
+                      id="mike"
+                      value="mike"
+                      checked
+                    />
+                    Amb. Medicalizada-Mike
+                  </label>
+                  <label class="btn btn-secondary">
+                    <input
+                      type="radio"
+                      name="tipoRecurso"
+                      id="india"
+                      value="india"
+                    />
+                    Amb. Sanitarizada-India
+                  </label>
+                  <label class="btn btn-secondary">
+                    <input
+                      type="radio"
+                      name="tipoRecurso"
+                      id="tango"
+                      value="tango"
+                    />
+                    Amb. Asistencia-Tango
+                  </label>
+                  <label class="btn btn-secondary">
+                    <input
+                      type="radio"
+                      name="tipoRecurso"
+                      id="helicoptero"
+                      value="helicoptero"
+                    />
+                    Helicòptero medicalizado
+                  </label>
+                </div>
+              </div>
+
+              <!-- PRIORIDAD -->
+              <div class="form-group row ml-3">
+                <label for="prioridad" class="col-2 mt-1">Prioridad</label>
+                <div
+                  class="btn-group btn-group-toggle col-9"
+                  data-toggle="buttons"
+                >
+                  <label class="btn btn-secondary">
+                    <input
+                      type="radio"
+                      name="prioridad"
+                      id="prioridad1"
+                      value="prioridad1"
+                      checked
+                    />
+                    1
+                  </label>
+                  <label class="btn btn-secondary">
+                    <input
+                      type="radio"
+                      name="prioridad"
+                      id="prioridad2"
+                      value="prioridad2"
+                    />
+                    2
+                  </label>
+                  <label class="btn btn-secondary">
+                    <input
+                      type="radio"
+                      name="prioridad"
+                      id="prioridad3"
+                      value="prioridad3"
+                    />
+                    3
+                  </label>
+                  <label class="btn btn-secondary">
+                    <input
+                      type="radio"
+                      name="prioridad"
+                      id="prioridad4"
+                      value="prioridad4"
+                    />
+                    4
+                  </label>
+                </div>
+              </div>
             </div>
           </form>
         </div>
