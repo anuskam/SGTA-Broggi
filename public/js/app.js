@@ -2431,9 +2431,143 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      movilitzacio: false,
+      assistencia: false,
+      mostrarTransport: false,
+      transport: false,
+      hospital: false,
+      transferencia: false
+    };
+  },
+  methods: {
+    showInfo: function showInfo() {
+      $('#infoModal').modal('show');
+    },
+    activarMovilitzacio: function activarMovilitzacio() {
+      this.movilitzacio = true;
+    },
+    activarAssistencia: function activarAssistencia() {
+      this.assistencia = true;
+    },
+    activarMostrarTransport: function activarMostrarTransport() {
+      this.mostrarTransport = true;
+    },
+    activarTransport: function activarTransport() {
+      this.transport = true;
+    },
+    activarHospital: function activarHospital() {
+      this.hospital = true;
+    },
+    activarTransferencia: function activarTransferencia() {
+      this.transferencia = true;
+    }
+  },
   mounted: function mounted() {
-    console.log('Component mounted.');
+    console.log("Component mounted.");
   }
 });
 
@@ -2473,11 +2607,16 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       tabs: ['assignats', 'tots'],
-      selectedTab: 'assignats'
+      selectedTab: 'assignats',
+      colorSelection: false
     };
   },
-  mounted: function mounted() {
-    console.log("Component mounted.");
+  updated: function updated() {
+    if (this.selectedTab == 'assignats' && this.colorSelection == true) {
+      this.colorSelection = false;
+    } else if (this.selectedTab == 'tots' && this.colorSelection == false) {
+      this.colorSelection = true;
+    }
   }
 });
 
@@ -2510,7 +2649,53 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      cicles: [],
+      cicle: {
+        id: '',
+        sigles: '',
+        nom: '',
+        descripcio: '',
+        actiu: false
+      },
+      insert: true
+    };
+  },
+  methods: {
+    selectCicles: function selectCicles() {
+      var _this = this;
+
+      var me = this;
+      axios.get('/cicle').then(function (response) {
+        me.cicles = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      })["finally"](function () {
+        return _this.loading = false;
+      });
+    }
+  },
+  created: function created() {
+    this.selectCicles();
+  },
   mounted: function mounted() {
     console.log('Component mounted.');
   }
@@ -7064,7 +7249,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-secondary:not(:disabled):not(.disabled).active,\n.btn-secondary:not(:disabled):not(.disabled):active,\n.show > .btn-secondary.dropdown-toggle {\n  background-color: #e3177d;\n  border-color: black;\n}\n.btn-secondary {\n  border-color: black;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-secondary:not(:disabled):not(.disabled).active,\r\n.btn-secondary:not(:disabled):not(.disabled):active,\r\n.show > .btn-secondary.dropdown-toggle {\r\n  background-color: #e3177d;\r\n  border-color: black;\n}\n.btn-secondary {\r\n  border-color: black;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -7088,7 +7273,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nmain[data-v-6504f867]{\n    margin-top: 1.4vh;\n}\n#infoCard[data-v-6504f867]{\n    height: 65vh;\n}\n#botones[data-v-6504f867]{\n    height: 25vh;\n}\n#infoHeader[data-v-6504f867]{\n    display: flex;\n    flex-direction: row;\n    flex-wrap: nowrap;\n    justify-content: space-between;\n    font-size: 1.2em;\n    font-weight: bold;\n    background-color: #15acc4;\n    margin-right: -0.5px;\n    border-bottom: 1px solid black;\n}\nbutton[data-v-6504f867]{\n    background-color: #e3177d;\n}\n.card[data-v-6504f867]{\n    border: 1px solid black\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nmain[data-v-6504f867] {\n  margin-top: 1.4vh;\n}\n#infoCard[data-v-6504f867] {\n  height: 65vh;\n}\n#botones[data-v-6504f867] {\n  height: 28vh;\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#infoHeader[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n  font-size: 1.2em;\n  font-weight: bold;\n  margin-right: -0.5px;\n  border-bottom: 1px solid black;\n  background-color: #15acc4;\n}\nbutton[data-v-6504f867] {\n  background-color: #e3177d;\n  font-weight: bold;\n  font-size: 0.9em;\n}\n.card[data-v-6504f867] {\n  border: 1px solid black;\n}\n#transportHeader[data-v-6504f867] {\n  background-color: #15acc4;\n  font-weight: bold;\n  padding: 6px 20px;\n  text-align: center;\n}\n#leftButtons[data-v-6504f867] {\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n}\n#assistencia[data-v-6504f867]{\n    opacity: .4;\n}\n#checkTransport[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: center;\n  align-items: center;\n  opacity: .4;\n  /* margin-left: -80px; */\n}\n#checkTransport button[data-v-6504f867] {\n  padding: 10px 4px;\n  height: 100%;\n}\n#transportButton[data-v-6504f867] {\n  background-color: #e3177d;\n}\n#transportButtons[data-v-6504f867] {\n  height: 100%;\n  opacity: .4;\n}\n.visible[data-v-6504f867]{\n    opacity: 1 !important;\n}\n#transportForm[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#botonsTransport[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  width: 100%;\n  justify-content: space-between;\n}\n.button[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  /* align-items: center; */\n}\n#direccioHospital[data-v-6504f867] {\n  width: 100%;\n}\n#map[data-v-6504f867] {\n  height: 65%;\n  background-color: black;\n}\n#info[data-v-6504f867] {\n  height: 20%;\n  margin-top: 4%;\n  display: flex;\n  flex-direction: row;\n  justify-content: space-around;\n  flex-wrap: nowrap;\n  font-weight: bold;\n}\n#infoFields[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n  padding-right: 0;\n}\n.infobox[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  text-align: justify;\n}\n.infobox > div[data-v-6504f867] {\n  background-color: #15acc4;\n  border: 1px solid black;\n}\n#descripcion[data-v-6504f867],\n#direccion[data-v-6504f867] {\n  background-color: white;\n}\n#masInfo[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  vertical-align: center;\n}\n#masInfo > button[data-v-6504f867] {\n  padding: 10px 20px;\n  margin-left: -50px;\n}\n.modal-header[data-v-6504f867]{\n    font-weight: bold;\n    background-color: #15acc4;\n}\n#alta[data-v-6504f867]{\n    opacity: 1 !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -7112,7 +7297,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#navbar[data-v-6f2f9854] {\n/* position: absolute; */\nfloat: left;\ndisplay: flex;\nflex-direction: column;\nflex-wrap: wrap;\nleft: 0;\ntop: 0;\nheight: 100vh;\nwidth: 11%;\n}\n#asignats[data-v-6f2f9854], #tots[data-v-6f2f9854]{\n    height: 50vh;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    font-size: 1.2em;\n    font-weight: bolder;\n    background-color: rgba(128, 128, 128, 0.503);\n}\n#asignats[data-v-6f2f9854]:hover, #tots[data-v-6f2f9854]:hover{\n    background-color: #fcc41c;\n}\n#asignats[data-v-6f2f9854]{\n    border: 1px solid black;\n    border-bottom: 0.1px solid black;\n}\n#tots[data-v-6f2f9854]{\n    border: 1px solid black;\n    border-top: 0px solid black;\n}\n.selected[data-v-6f2f9854]{\n    background-color: #fcc41c;\n}\n.recursTab[data-v-6f2f9854]{\n    float: right;\n    height: 100vh;\n    width: 89%;\n    display: flex;\n    flex-direction: row;\n    justify-content: center;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#navbar[data-v-6f2f9854] {\n/* position: absolute; */\nfloat: left;\ndisplay: flex;\nflex-direction: column;\nflex-wrap: wrap;\nleft: 0;\ntop: 0;\nheight: 100vh;\nwidth: 11%;\nbackground-color: rgba(128, 128, 128, 0.503);\n}\n#asignats[data-v-6f2f9854], #tots[data-v-6f2f9854]{\n    height: 50vh;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    font-size: 1.2em;\n    font-weight: bolder;\n    /* background-color: rgba(128, 128, 128, 0.503); */\n}\n#asignats[data-v-6f2f9854]:hover, #tots[data-v-6f2f9854]:hover{\n    background-color: #fcc41c;\n}\n#asignats[data-v-6f2f9854]{\n    border: 1px solid black;\n    border-bottom: 0.1px solid black;\n}\n#tots[data-v-6f2f9854]{\n    border: 1px solid black;\n    border-top: 0px solid black;\n}\n.selected[data-v-6f2f9854]{\n    background-color: #fcc41c;\n}\n.recursTab[data-v-6f2f9854]{\n    float: right;\n    height: 100vh;\n    width: 89%;\n    display: flex;\n    flex-direction: row;\n    justify-content: center;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -39125,6 +39310,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+<<<<<<< HEAD
     _c(
       "nav",
       { staticClass: "navbar navbar-expand-lg navbar-light bg-light" },
@@ -39197,6 +39383,48 @@ var render = function() {
         )
       ]
     ),
+=======
+    _c("div", { attrs: { id: "tabButtons" } }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-sm mr-3",
+          on: {
+            click: function($event) {
+              return _vm.selectTab(1)
+            }
+          }
+        },
+        [_vm._v("\n      NUEVO INCIDENTE\n    ")]
+      ),
+      _vm._v("\n    |\n    "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-sm mr-3 ml-3",
+          on: {
+            click: function($event) {
+              return _vm.selectTab(2)
+            }
+          }
+        },
+        [_vm._v("\n      GESTIONAR INCIDENTE\n    ")]
+      ),
+      _vm._v("\n    |\n    "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-sm ml-3",
+          on: {
+            click: function($event) {
+              return _vm.selectTab(3)
+            }
+          }
+        },
+        [_vm._v("FORMACIÓN")]
+      )
+    ]),
+>>>>>>> 15732ba825d219a076ebed9c885c091cd732af6b
     _vm._v(" "),
     _vm.currentTab == 1
       ? _c("div", [_c("nuevoincidente-component")], 1)
@@ -40027,40 +40255,328 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("main", { staticClass: "col-md-10 col-sm-12" }, [
+    _c("div", { staticClass: "card", attrs: { id: "infoCard" } }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body p-3" }, [
+        _vm._m(1),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-12 p-0", attrs: { id: "info" } }, [
+          _vm._m(2),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-1", attrs: { id: "masInfo" } }, [
+            _c(
+              "button",
+              {
+                on: {
+                  click: function($event) {
+                    return _vm.showInfo()
+                  }
+                }
+              },
+              [
+                _c("i", { staticClass: "fas fa-2x fa-plus-circle" }),
+                _c("br"),
+                _vm._v("Más Info\n          ")
+              ]
+            )
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card mt-4 p-2", attrs: { id: "botones" } }, [
+      _c("div", { staticClass: "col-2", attrs: { id: "leftButtons" } }, [
+        _c(
+          "div",
+          {
+            staticClass: "button",
+            attrs: { id: "movilitzacio" },
+            on: {
+              click: function($event) {
+                return _vm.activarMovilitzacio()
+              }
+            }
+          },
+          [_vm._m(3), _vm._v(" "), _c("input", { attrs: { type: "time" } })]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "button",
+            class: { visible: _vm.movilitzacio },
+            attrs: { id: "assistencia" },
+            on: {
+              click: function($event) {
+                return _vm.activarAssistencia()
+              }
+            }
+          },
+          [
+            _c("button", { attrs: { disabled: !_vm.movilitzacio } }, [
+              _c("i", { staticClass: "fas fa-briefcase-medical" }),
+              _vm._v(" Iniciar Assistència\n        ")
+            ]),
+            _vm._v(" "),
+            _c("input", { attrs: { type: "time" } })
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "col-1",
+          class: { visible: _vm.assistencia },
+          attrs: { id: "checkTransport" },
+          on: {
+            click: function($event) {
+              return _vm.activarMostrarTransport()
+            }
+          }
+        },
+        [_c("button", { attrs: { disabled: !_vm.assistencia } }, [_vm._m(4)])]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "card col-9 p-0",
+          class: { visible: _vm.mostrarTransport },
+          attrs: { id: "transportButtons" }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "card-header", attrs: { id: "transportHeader" } },
+            [_vm._v("Destí Hospitalari")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "card-body p-2 pl-4 pr-4",
+              attrs: { id: "transportForm" }
+            },
+            [
+              _c("input", {
+                attrs: {
+                  disabled: !_vm.mostrarTransport,
+                  type: "text",
+                  placeholder: "Introdueix direcció",
+                  id: "direccioHospital"
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { attrs: { id: "botonsTransport" } }, [
+                _c("div", { staticClass: "botoTransport button" }, [
+                  _c(
+                    "button",
+                    {
+                      attrs: { disabled: !_vm.mostrarTransport },
+                      on: {
+                        click: function($event) {
+                          return _vm.activarTransport()
+                        }
+                      }
+                    },
+                    [
+                      _c("i", { staticClass: "fas fa-ambulance" }),
+                      _vm._v(" Iniciar Transport\n            ")
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("input", { attrs: { type: "time" } })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "botoTransport button" }, [
+                  _c(
+                    "button",
+                    {
+                      attrs: { disabled: !_vm.transport },
+                      on: {
+                        click: function($event) {
+                          return _vm.activarHospital()
+                        }
+                      }
+                    },
+                    [
+                      _c("i", { staticClass: "fas fa-hospital" }),
+                      _vm._v(" Arribada Hospital")
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("input", { attrs: { type: "time" } })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "botoTransport button" }, [
+                  _c(
+                    "button",
+                    {
+                      attrs: { disabled: !_vm.hospital },
+                      on: {
+                        click: function($event) {
+                          return _vm.activarTransferencia()
+                        }
+                      }
+                    },
+                    [
+                      _c("i", { staticClass: "fas fa-user-friends" }),
+                      _vm._v(" Iniciar Transferència\n            ")
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("input", { attrs: { type: "time" } })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "botoTransport button" }, [
+                  _c("button", { attrs: { disabled: !_vm.transferencia } }, [
+                    _c("i", { staticClass: "fas fa-procedures" }),
+                    _vm._v(" Hospitalització")
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(5)
+                ])
+              ])
+            ]
+          )
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _vm._m(6)
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("main", { staticClass: "col-9" }, [
-      _c("div", { staticClass: "card", attrs: { id: "infoCard" } }, [
-        _c("div", { staticClass: "card-header", attrs: { id: "infoHeader" } }, [
-          _c("div", [_vm._v("#12")]),
-          _vm._v(" "),
-          _c("div", [_vm._v("Traumatisme")]),
-          _vm._v(" "),
-          _c("div", [_vm._v("G-003")])
+    return _c(
+      "div",
+      { staticClass: "card-header", attrs: { id: "infoHeader" } },
+      [
+        _c("div", [_vm._v("#12")]),
+        _vm._v(" "),
+        _c("div", [_vm._v("Traumatisme")]),
+        _vm._v(" "),
+        _c("div", [_vm._v("G-003")])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { attrs: { id: "map" } }, [
+      _c("img", { attrs: { src: "", alt: "" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-11", attrs: { id: "infoFields" } }, [
+      _c("div", { staticClass: "infobox", attrs: { id: "descripcionBox" } }, [
+        _c("div", { staticClass: "col-2 text-center" }, [
+          _vm._v("Descripción:")
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "card-body p-4" }, [
-          _c("div", [_c("img", { attrs: { src: "", alt: "" } })]),
-          _vm._v(" "),
-          _c("div", { attrs: { id: "info" } })
+        _c("div", { staticClass: "col-9", attrs: { id: "descripcion" } }, [
+          _vm._v(
+            "\n              Juan se ha caido de una escalera mientras rescataba al mishu de\n              la vecina de al lado...\n            "
+          )
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "card mt-4 p-4", attrs: { id: "botones" } }, [
-        _c("div", { attrs: { id: "assistencia" } }, [
-          _c("button", [_vm._v("Activar Assistencia")])
-        ]),
+      _c("div", { staticClass: "infobox", attrs: { id: "direccionBox" } }, [
+        _c("div", { staticClass: "col-2 text-center" }, [_vm._v("Dirección:")]),
         _vm._v(" "),
-        _c("div", { attrs: { id: "transport" } }, [
-          _c("button", [_vm._v("Activar Transport")])
+        _c("div", { staticClass: "col-9", attrs: { id: "direccion" } }, [
+          _vm._v(
+            "\n              C/ Inventada, 4 2º A, 08019 Barcelona\n            "
+          )
         ])
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("button", [
+      _c("i", { staticClass: "fas fa-running" }),
+      _vm._v(" Iniciar Movilització")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("i", { staticClass: "fas fa-hospital-user" }, [_c("p")])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("button", { attrs: { id: "alta" } }, [
+      _c("i", { staticClass: "fas fa-notes-medical" }),
+      _vm._v(" Alta Voluntària\n            ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "modal",
+        attrs: { tabindex: "-1", role: "dialog", id: "infoModal" }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _c("h5", { staticClass: "modal-title" }, [
+                  _vm._v("Más Información")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("p", [
+                  _vm._v(
+                    "Complemento Dirección: Esquina con una oficina de correos y tres casas feas"
+                  )
+                ]),
+                _vm._v(" "),
+                _c("p", [_vm._v("Nombre del Alertante: Juan Palomo")]),
+                _vm._v(" "),
+                _c("p", [_vm._v("Teléfono del Alertante: 686593421")]),
+                _vm._v(" "),
+                _c("p", [_vm._v("CIP: CAME2934958293")])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("\n            Cerrar\n          ")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -40090,6 +40606,7 @@ var render = function() {
       _c(
         "div",
         {
+          class: { selected: !_vm.colorSelection },
           attrs: { id: "asignats" },
           on: {
             click: function($event) {
@@ -40103,6 +40620,7 @@ var render = function() {
       _c(
         "div",
         {
+          class: { selected: _vm.colorSelection },
           attrs: { id: "tots" },
           on: {
             click: function($event) {
@@ -40174,28 +40692,66 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("main", { staticClass: "col-10" }, [
+    _c("table", { staticClass: "table" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        _vm._l(_vm.cicles, function(cicle) {
+          return _c("tr", { key: cicle.id }, [
+            _c("td", [_vm._v(_vm._s(cicle.id))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(cicle.sigles))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(cicle.nom))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(cicle.descripcio))]),
+            _vm._v(" "),
+            _c("td", [
+              _c("div", { staticClass: "custom-control custom-checkbox" }, [
+                _c("input", {
+                  staticClass: "custom-control-input",
+                  attrs: {
+                    type: "checkbox",
+                    name: "actiu[]",
+                    value: "actiu",
+                    disabled: ""
+                  },
+                  domProps: { checked: cicle.actiu }
+                }),
+                _vm._v(" "),
+                _c("label", {
+                  staticClass: "custom-control-label",
+                  attrs: { for: "actiu" }
+                })
+              ])
+            ])
+          ])
+        }),
+        0
+      )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("Example Component")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n                    I'm an example component.\n                "
-              )
-            ])
-          ])
-        ])
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Sigles")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nom")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Descripcio")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Actiu")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } })
       ])
     ])
   }
