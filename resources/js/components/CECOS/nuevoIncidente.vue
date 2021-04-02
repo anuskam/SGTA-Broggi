@@ -645,7 +645,7 @@
 
             <!-- TOGGLE -->
             <div class="form-group row mt-4">
-              <div class="custom-control custom-switch">
+              <div class="custom-control custom-switch col-2">
                 <input
                   type="checkbox"
                   class="custom-control-input"
@@ -658,9 +658,19 @@
 
               <!-- AÑADIR RECURSO -->
               <div class="col-10">
+                  <button
+                    type="button"
+                    class="btn btn-primary float-right ml-4"
+                    id="afectadasList"
+                    @click="mostrarRecursos()"
+                    :disabled="recursosCount == 0"
+                  >
+                    <i class="fa fa-list mr-1" aria-hidden="true"></i> RECURSOS
+                    ({{ recursosCount }})
+                  </button>
                 <button
                   type="button"
-                  class="btn btn-primary float-right mr-0"
+                  class="btn btn-primary float-right"
                   @click="afegirRecurs()"
                 >
                   <i class="fa fa-plus-circle" aria-hidden="true"></i> AÑADIR
@@ -692,8 +702,8 @@
                       type="radio"
                       name="tipoRecurso"
                       id="mike"
-                      value="mike"
-                      checked
+                      value="1"
+                      v-model="recurs.tipus_recursos_id"
                     />
                     Amb. Medicalizada-Mike
                   </label>
@@ -702,7 +712,8 @@
                       type="radio"
                       name="tipoRecurso"
                       id="india"
-                      value="india"
+                      value="2"
+                      v-model="recurs.tipus_recursos_id"
                     />
                     Amb. Sanitarizada-India
                   </label>
@@ -711,7 +722,8 @@
                       type="radio"
                       name="tipoRecurso"
                       id="tango"
-                      value="tango"
+                      value="3"
+                      v-model="recurs.tipus_recursos_id"
                     />
                     Amb. Asistencia-Tango
                   </label>
@@ -720,7 +732,8 @@
                       type="radio"
                       name="tipoRecurso"
                       id="helicoptero"
-                      value="helicoptero"
+                      value="4"
+                      v-model="recurs.tipus_recursos_id"
                     />
                     Helicòptero medicalizado
                   </label>
@@ -741,7 +754,6 @@
                       id="prioridad1"
                       value="1"
                       v-model="recurs.prioritat"
-                      checked
                     />
                     1
                   </label>
@@ -804,6 +816,46 @@
                     <span v-else> Mujer</span>
                     , {{ afectada.edat }}
                     <button class="btn btn-danger float-right" @click="eliminarAfectada(index)"><i class="fas fa-trash"></i> Borrar</button>
+                </li>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Lista Recursos -->
+    <div class="modal" tabindex="-1" role="dialog" id="recursModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Lista de Recursos</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <ul class="list-group">
+                <li v-for="(recurs, index) in recursos" :key="index" class="list-group-item">{{ recurs.codi }},
+                    <span v-if="recurs.tipus_recursos_id == 1"> Ambulancia Medicalitzada, </span>
+                    <span v-else-if="recurs.tipus_recursos_id == 2"> Ambulancia Sanitaritzada, </span>
+                    <span v-else-if="recurs.tipus_recursos_id == 3"> Ambulancia Assistencial, </span>
+                    <span v-else> Helicopter Medicalitzat, </span>
+                    Prioritat {{ recurs.prioritat }}
+                    <button class="btn btn-danger float-right" @click="eliminarRecurs(index)"><i class="fas fa-trash"></i> Borrar</button>
                 </li>
             </ul>
           </div>
@@ -909,8 +961,10 @@ export default {
       },
       recurs: {
         recursos_id: null,
+        codi: null,
         hora_activacio: null,
         prioritat: null,
+        tipus_recursos_id: null,
       },
       recursos: [],
       errors: [],
@@ -992,8 +1046,9 @@ export default {
       }
     },
     afegirRecurs() {
-      if (this.recurs.recursos_id > 0 && this.recurs.prioritat > 0) {
+      if (this.recurs.tipus_recursos_id > 0 && this.recurs.prioritat > 0) {
         this.recursos.push(this.recurs);
+        this.buidarRecurs();
       } else {
         this.errors.push("Cal escollir un recurs i una prioritat!");
       }
@@ -1012,8 +1067,10 @@ export default {
     buidarRecurs() {
       this.recurs = {
         recursos_id: null,
+        codi: null,
         hora_activacio: null,
         prioritat: null,
+        tipus_recursos_id: null,
       };
     },
     eliminarAfectada(index){
@@ -1021,6 +1078,12 @@ export default {
     },
     mostrarAfectades(){
         $('#afectadaModal').modal('show');
+    },
+    eliminarRecurs(index){
+        this.recursos.splice(index,1);
+    },
+    mostrarRecursos(){
+        $('#recursModal').modal('show');
     },
   },
   computed: {
@@ -1147,7 +1210,7 @@ button {
   border: 1px solid black !important;
 }
 
-#afectadasList {
+#afectadasList, #recursosList {
   background-color: #15acc4 !important;
 }
 

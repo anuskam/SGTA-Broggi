@@ -2780,6 +2780,58 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2866,8 +2918,10 @@ __webpack_require__.r(__webpack_exports__);
       },
       recurs: {
         recursos_id: null,
+        codi: null,
         hora_activacio: null,
-        prioritat: null
+        prioritat: null,
+        tipus_recursos_id: null
       },
       recursos: [],
       errors: []
@@ -2953,8 +3007,9 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     afegirRecurs: function afegirRecurs() {
-      if (this.recurs.recursos_id > 0 && this.recurs.prioritat > 0) {
+      if (this.recurs.tipus_recursos_id > 0 && this.recurs.prioritat > 0) {
         this.recursos.push(this.recurs);
+        this.buidarRecurs();
       } else {
         this.errors.push("Cal escollir un recurs i una prioritat!");
       }
@@ -2973,8 +3028,10 @@ __webpack_require__.r(__webpack_exports__);
     buidarRecurs: function buidarRecurs() {
       this.recurs = {
         recursos_id: null,
+        codi: null,
         hora_activacio: null,
-        prioritat: null
+        prioritat: null,
+        tipus_recursos_id: null
       };
     },
     eliminarAfectada: function eliminarAfectada(index) {
@@ -2982,6 +3039,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     mostrarAfectades: function mostrarAfectades() {
       $('#afectadaModal').modal('show');
+    },
+    eliminarRecurs: function eliminarRecurs(index) {
+      this.recursos.splice(index, 1);
+    },
+    mostrarRecursos: function mostrarRecursos() {
+      $('#recursModal').modal('show');
     }
   },
   computed: {
@@ -7928,7 +7991,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-secondary:not(:disabled):not(.disabled).active,\n.btn-secondary:not(:disabled):not(.disabled):active,\n.show > .btn-secondary.dropdown-toggle {\n  background-color: #e3177d;\n  border-color: black;\n}\n.btn-secondary {\n  border-color: black;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.parentGrid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n.card-header {\n  background-color: #15acc4;\n  border: 1px solid black;\n  border-left: 0;\n  border-right: 0;\n  margin-top: -1px;\n}\n.modal-header{\n    background-color: #15acc4;\n}\n.card {\n  border: 1px solid black;\n}\nbutton {\n  background-color: #e3177d !important;\n  border: 1px solid black !important;\n}\n#afectadasList {\n  background-color: #15acc4 !important;\n}\n.tabButton{\n    background-color: white !important;\n    border: 0 !important;\n}\n.selectedTab{\n    background-color: #e3177d !important;\n    border: 1px solid black !important;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-secondary:not(:disabled):not(.disabled).active,\n.btn-secondary:not(:disabled):not(.disabled):active,\n.show > .btn-secondary.dropdown-toggle {\n  background-color: #e3177d;\n  border-color: black;\n}\n.btn-secondary {\n  border-color: black;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.parentGrid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n.card-header {\n  background-color: #15acc4;\n  border: 1px solid black;\n  border-left: 0;\n  border-right: 0;\n  margin-top: -1px;\n}\n.modal-header{\n    background-color: #15acc4;\n}\n.card {\n  border: 1px solid black;\n}\nbutton {\n  background-color: #e3177d !important;\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\n  background-color: #15acc4 !important;\n}\n.tabButton{\n    background-color: white !important;\n    border: 0 !important;\n}\n.selectedTab{\n    background-color: #e3177d !important;\n    border: 1px solid black !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -41458,7 +41521,35 @@ var render = function() {
                   _c(
                     "button",
                     {
-                      staticClass: "btn btn-primary float-right mr-0",
+                      staticClass: "btn btn-primary float-right ml-4",
+                      attrs: {
+                        type: "button",
+                        id: "afectadasList",
+                        disabled: _vm.recursosCount == 0
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.mostrarRecursos()
+                        }
+                      }
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "fa fa-list mr-1",
+                        attrs: { "aria-hidden": "true" }
+                      }),
+                      _vm._v(
+                        " RECURSOS\n                  (" +
+                          _vm._s(_vm.recursosCount) +
+                          ")\n                "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary float-right",
                       attrs: { type: "button" },
                       on: {
                         click: function($event) {
@@ -41480,7 +41571,161 @@ var render = function() {
               _c("div", { staticClass: "card mt-2" }, [
                 _vm._m(2),
                 _vm._v(" "),
-                _vm._m(3),
+                _c("div", { staticClass: "form-group row ml-3" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-2 mt-1",
+                      attrs: { for: "tipoRecurso" }
+                    },
+                    [_vm._v("Tipo de recurso")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "btn-group btn-group-toggle col-9",
+                      attrs: { "data-toggle": "buttons" }
+                    },
+                    [
+                      _c("label", { staticClass: "btn btn-secondary" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.recurs.tipus_recursos_id,
+                              expression: "recurs.tipus_recursos_id"
+                            }
+                          ],
+                          attrs: {
+                            type: "radio",
+                            name: "tipoRecurso",
+                            id: "mike",
+                            value: "1"
+                          },
+                          domProps: {
+                            checked: _vm._q(_vm.recurs.tipus_recursos_id, "1")
+                          },
+                          on: {
+                            change: function($event) {
+                              return _vm.$set(
+                                _vm.recurs,
+                                "tipus_recursos_id",
+                                "1"
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(
+                          "\n                  Amb. Medicalizada-Mike\n                "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("label", { staticClass: "btn btn-secondary" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.recurs.tipus_recursos_id,
+                              expression: "recurs.tipus_recursos_id"
+                            }
+                          ],
+                          attrs: {
+                            type: "radio",
+                            name: "tipoRecurso",
+                            id: "india",
+                            value: "2"
+                          },
+                          domProps: {
+                            checked: _vm._q(_vm.recurs.tipus_recursos_id, "2")
+                          },
+                          on: {
+                            change: function($event) {
+                              return _vm.$set(
+                                _vm.recurs,
+                                "tipus_recursos_id",
+                                "2"
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(
+                          "\n                  Amb. Sanitarizada-India\n                "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("label", { staticClass: "btn btn-secondary" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.recurs.tipus_recursos_id,
+                              expression: "recurs.tipus_recursos_id"
+                            }
+                          ],
+                          attrs: {
+                            type: "radio",
+                            name: "tipoRecurso",
+                            id: "tango",
+                            value: "3"
+                          },
+                          domProps: {
+                            checked: _vm._q(_vm.recurs.tipus_recursos_id, "3")
+                          },
+                          on: {
+                            change: function($event) {
+                              return _vm.$set(
+                                _vm.recurs,
+                                "tipus_recursos_id",
+                                "3"
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(
+                          "\n                  Amb. Asistencia-Tango\n                "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("label", { staticClass: "btn btn-secondary" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.recurs.tipus_recursos_id,
+                              expression: "recurs.tipus_recursos_id"
+                            }
+                          ],
+                          attrs: {
+                            type: "radio",
+                            name: "tipoRecurso",
+                            id: "helicoptero",
+                            value: "4"
+                          },
+                          domProps: {
+                            checked: _vm._q(_vm.recurs.tipus_recursos_id, "4")
+                          },
+                          on: {
+                            change: function($event) {
+                              return _vm.$set(
+                                _vm.recurs,
+                                "tipus_recursos_id",
+                                "4"
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(
+                          "\n                  Helicòptero medicalizado\n                "
+                        )
+                      ])
+                    ]
+                  )
+                ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group row ml-3" }, [
                   _c(
@@ -41510,8 +41755,7 @@ var render = function() {
                             type: "radio",
                             name: "prioridad",
                             id: "prioridad1",
-                            value: "1",
-                            checked: ""
+                            value: "1"
                           },
                           domProps: {
                             checked: _vm._q(_vm.recurs.prioritat, "1")
@@ -41630,7 +41874,7 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(4),
+              _vm._m(3),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c(
@@ -41677,7 +41921,72 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(5)
+              _vm._m(4)
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal",
+        attrs: { tabindex: "-1", role: "dialog", id: "recursModal" }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(5),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c(
+                  "ul",
+                  { staticClass: "list-group" },
+                  _vm._l(_vm.recursos, function(recurs, index) {
+                    return _c(
+                      "li",
+                      { key: index, staticClass: "list-group-item" },
+                      [
+                        _vm._v(_vm._s(recurs.codi) + ",\n                  "),
+                        recurs.tipus_recursos_id == 1
+                          ? _c("span", [_vm._v(" Ambulancia Medicalitzada, ")])
+                          : recurs.tipus_recursos_id == 2
+                          ? _c("span", [_vm._v(" Ambulancia Sanitaritzada, ")])
+                          : recurs.tipus_recursos_id == 3
+                          ? _c("span", [_vm._v(" Ambulancia Assistencial, ")])
+                          : _c("span", [_vm._v(" Helicopter Medicalitzat, ")]),
+                        _vm._v(
+                          "\n                  Prioritat " +
+                            _vm._s(recurs.prioritat) +
+                            "\n                  "
+                        ),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger float-right",
+                            on: {
+                              click: function($event) {
+                                return _vm.eliminarRecurs(index)
+                              }
+                            }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-trash" }),
+                            _vm._v(" Borrar")
+                          ]
+                        )
+                      ]
+                    )
+                  }),
+                  0
+                )
+              ]),
+              _vm._v(" "),
+              _vm._m(6)
             ])
           ]
         )
@@ -41907,7 +42216,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "custom-control custom-switch" }, [
+    return _c("div", { staticClass: "custom-control custom-switch col-2" }, [
       _c("input", {
         staticClass: "custom-control-input",
         attrs: { type: "checkbox", id: "recursoSwitch" }
@@ -41949,77 +42258,35 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group row ml-3" }, [
-      _c(
-        "label",
-        { staticClass: "col-2 mt-1", attrs: { for: "tipoRecurso" } },
-        [_vm._v("Tipo de recurso")]
-      ),
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Lista de Afectadas")]),
       _vm._v(" "),
       _c(
-        "div",
+        "button",
         {
-          staticClass: "btn-group btn-group-toggle col-9",
-          attrs: { "data-toggle": "buttons" }
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
         },
-        [
-          _c("label", { staticClass: "btn btn-secondary" }, [
-            _c("input", {
-              attrs: {
-                type: "radio",
-                name: "tipoRecurso",
-                id: "mike",
-                value: "mike",
-                checked: ""
-              }
-            }),
-            _vm._v(
-              "\n                  Amb. Medicalizada-Mike\n                "
-            )
-          ]),
-          _vm._v(" "),
-          _c("label", { staticClass: "btn btn-secondary" }, [
-            _c("input", {
-              attrs: {
-                type: "radio",
-                name: "tipoRecurso",
-                id: "india",
-                value: "india"
-              }
-            }),
-            _vm._v(
-              "\n                  Amb. Sanitarizada-India\n                "
-            )
-          ]),
-          _vm._v(" "),
-          _c("label", { staticClass: "btn btn-secondary" }, [
-            _c("input", {
-              attrs: {
-                type: "radio",
-                name: "tipoRecurso",
-                id: "tango",
-                value: "tango"
-              }
-            }),
-            _vm._v(
-              "\n                  Amb. Asistencia-Tango\n                "
-            )
-          ]),
-          _vm._v(" "),
-          _c("label", { staticClass: "btn btn-secondary" }, [
-            _c("input", {
-              attrs: {
-                type: "radio",
-                name: "tipoRecurso",
-                id: "helicoptero",
-                value: "helicoptero"
-              }
-            }),
-            _vm._v(
-              "\n                  Helicòptero medicalizado\n                "
-            )
-          ])
-        ]
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("\n            Cerrar\n          ")]
       )
     ])
   },
@@ -42028,7 +42295,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-header" }, [
-      _c("h5", { staticClass: "modal-title" }, [_vm._v("Lista de Afectadas")]),
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Lista de Recursos")]),
       _vm._v(" "),
       _c(
         "button",
