@@ -10,7 +10,8 @@
         <i class="fas fa-arrow-left fa-2x" aria-hidden="true"></i>
       </button>
 
-      <button @click="selectTab(1)" class="btn btn-sm mr-3">
+    <div>
+       <button @click="selectTab(1)" class="btn btn-sm mr-3">
         <i class="fas fa-phone-alt fa-2x mr-2 ml-2" aria-hidden="true"></i>
       </button>
       |
@@ -21,6 +22,7 @@
       <button @click="selectTab(3)" class="btn btn-sm ml-3">
         <i class="fas fa-ambulance fa-2x mr-2 ml-2" aria-hidden="true"></i>
       </button>
+    </div>
 
       <button
         :disabled="currentTab == 3"
@@ -144,21 +146,21 @@
                 <div class="col-2">
                 <select class="custom-select" id="provincia" required v-model="provincia">
                     <option selected value="Selecciona...">Selecciona...</option>
-                    <option v-for="provincia in provincies" :key="provincia.id" :value= "provincia">{{ provincia.nom }}</option>
+                    <option v-for="provincia in provinciesFiltered" :key="provincia.id" :value= "provincia">{{ provincia.nom }}</option>
                 </select>
                 </div>
             </div>
               <!-- DIRECCIÓN -->
               <div class="form row">
                 <label for="direccion" class="col-2 mt-2">Dirección</label>
-                <div class="col-5">
-                  <input type="text" class="form-control" />
+                <div class="col-9">
+                  <input type="text" class="form-control" v-model="incidencia.adreca" />
                 </div>
 
-                <label for="numeroDireccion" class="col-2 mt-2">Número</label>
+                <!-- <label for="numeroDireccion" class="col-2 mt-2">Número</label>
                 <div class="col-2">
                   <input type="number" class="form-control" min="1" />
-                </div>
+                </div> -->
               </div>
 
               <!-- COMPLEMENTO DIRECCIÓN -->
@@ -171,6 +173,7 @@
                     class="form-control"
                     id="complementoDireccion"
                     rows="3"
+                    v-model="incidencia.adreca_complement"
                   ></textarea>
                 </div>
               </div>
@@ -192,7 +195,7 @@
                   >Nombre</label
                 >
                 <div class="col-4">
-                  <input type="text" class="form-control" id="nombreAfectada" />
+                  <input type="text" class="form-control" id="nombreAfectada" v-model="afectat.nom" />
                 </div>
 
                 <!-- APELLIDOS AFECTADA -->
@@ -204,6 +207,7 @@
                     type="text"
                     class="form-control"
                     id="apellidoAfectada"
+                    v-model="afectat.cognoms"
                   />
                 </div>
               </div>
@@ -220,7 +224,8 @@
                       type="radio"
                       name="sexoAfectada"
                       id="mujer"
-                      value="mujer"
+                      value="2"
+                      v-model="afectat.sexes_id"
                       checked
                     />
                     Mujer
@@ -230,7 +235,8 @@
                       type="radio"
                       name="sexoAfectada"
                       id="hombre"
-                      value="hombre"
+                      value="1"
+                      v-model="afectat.sexes_id"
                     />
                     Hombre
                   </label>
@@ -238,27 +244,19 @@
 
                 <label for="edadAfectada" class="col-1 mt-1 ml-4">Edad</label>
                 <div class="col-2">
-                  <input type="number" class="form-control" min="1" />
-                </div>
-
-                <label for="telefonoAfectada" class="col-1 mt-1"
-                  >Teléfono</label
-                >
-                <div class="col-2">
-                  <input type="number" class="form-control" />
+                  <input type="number" class="form-control" min="1" v-model="afectat.edat" />
                 </div>
               </div>
-
               <!-- CIP -->
               <div class="form row">
                 <label for="direccion" class="col-1 mt-2">CIP</label>
                 <div class="col-5">
-                  <input type="text" class="form-control" />
+                  <input type="text" class="form-control" v-model="afectat.cip" />
                 </div>
 
                 <!-- AÑADIR AFECTADA -->
                 <div class="col-4">
-                  <button type="button" class="btn btn-primary float-right">
+                  <button type="button" class="btn btn-primary float-right" @click="afegirAfectat()">
                     <i class="fa fa-plus-circle" aria-hidden="true"></i> AÑADIR
                     AFECTADA
                   </button>
@@ -283,8 +281,8 @@
                   <input
                     class="form-control"
                     type="date"
-                    value="2020-04-01"
                     id="fechaIncidente"
+                    v-model="incidencia.data"
                   />
                 </div>
 
@@ -293,13 +291,13 @@
                   >Hora</label
                 >
                 <div class="col-2">
-                  <input type="time" value="13:45:00" class="form-control" id="horaIncidente" />
+                  <input type="time" class="form-control" id="horaIncidente" v-model="incidencia.hora" />
                 </div>
               </div>
 
               <!-- INCIDENCIAS -->
               <div class="form-group row">
-                <label for="tipoIncidencia" class="col-1 mt-1">Sexo</label>
+                <label for="tipoIncidencia" class="col-1 mt-1">Tipo</label>
                 <div
                   class="btn-group btn-group-toggle col-9"
                   data-toggle="buttons"
@@ -309,7 +307,8 @@
                       type="radio"
                       name="tipoIncidencia"
                       id="accidente"
-                      value="accidente"
+                      value="1"
+                      v-model="incidencia.tipus_incidencies_id"
                       checked
                     />
                     Accidente
@@ -319,7 +318,8 @@
                       type="radio"
                       name="tipoIncidencia"
                       id="traumatismo"
-                      value="traumatismo"
+                      value="2"
+                      v-model="incidencia.tipus_incidencies_id"
                     />
                     Traumatismo
                   </label>
@@ -328,7 +328,8 @@
                       type="radio"
                       name="tipoIncidencia"
                       id="publico"
-                      value="publico"
+                      value="3"
+                      v-model="incidencia.tipus_incidencies_id"
                     />
                     Enfermedad en lugar público
                   </label>
@@ -337,7 +338,8 @@
                       type="radio"
                       name="tipoIncidencia"
                       id="domicilio"
-                      value="domicilio"
+                      value="4"
+                      v-model="incidencia.tipus_incidencies_id"
                     />
                     Enfermedad domiciliaria
                   </label>
@@ -346,7 +348,8 @@
                       type="radio"
                       name="tipoIncidencia"
                       id="consulta"
-                      value="domicilio"
+                      value="5"
+                      v-model="incidencia.tipus_incidencies_id"
                     />
                     Consulta médica
                   </label>
@@ -355,7 +358,8 @@
                       type="radio"
                       name="tipoAlertante"
                       id="transporte"
-                      value="transporte"
+                      value="6"
+                      v-model="incidencia.tipus_incidencies_id"
                     />
                     Transporte sanitario
                   </label>
@@ -372,6 +376,7 @@
                     class="form-control"
                     id="descripcionIncidente"
                     rows="3"
+                    v-model="incidencia.descripcio"
                   ></textarea>
                 </div>
               </div>
@@ -544,7 +549,7 @@
 
               <!-- AÑADIR RECURSO -->
               <div class="col-10">
-                <button type="button" class="btn btn-primary float-right mr-0">
+                <button type="button" class="btn btn-primary float-right mr-0" @click="afegirRecurs()">
                   <i class="fa fa-plus-circle" aria-hidden="true"></i> AÑADIR
                   RECURSO
                 </button>
@@ -621,7 +626,8 @@
                       type="radio"
                       name="prioridad"
                       id="prioridad1"
-                      value="prioridad1"
+                      value="1"
+                      v-model="recurs.prioritat"
                       checked
                     />
                     1
@@ -631,7 +637,8 @@
                       type="radio"
                       name="prioridad"
                       id="prioridad2"
-                      value="prioridad2"
+                      value="2"
+                      v-model="recurs.prioritat"
                     />
                     2
                   </label>
@@ -640,7 +647,8 @@
                       type="radio"
                       name="prioridad"
                       id="prioridad3"
-                      value="prioridad3"
+                      value="3"
+                      v-model="recurs.prioritat"
                     />
                     3
                   </label>
@@ -649,7 +657,8 @@
                       type="radio"
                       name="prioridad"
                       id="prioridad4"
-                      value="prioridad4"
+                      value="4"
+                      v-model="recurs.prioritat"
                     />
                     4
                   </label>
@@ -689,8 +698,8 @@ export default {
       incidencia: {
           id: null,
           num_incident: null,
-          data: null,
-          hora: null,
+          data: new Date().toISOString().slice(0,10),
+          hora: new Date().toLocaleTimeString('en-GB', { hour: "numeric", minute: "numeric", second: "numeric"}),
           telefon_alertant: null,
           adreca: null,
           adreca_complement: null,
@@ -739,6 +748,13 @@ export default {
           prioritat: null,
           desti: null,
       },
+      recurs: {
+          recursos_id: null,
+          hora_activacio: null,
+          prioritat: null,
+      },
+      recursos: [],
+      errors: [],
     };
   },
   methods: {
@@ -776,15 +792,31 @@ export default {
             console.log(error);
         }).finally(() => this.loading = false)
     },
+    afegirAfectat(){
+        if(this.afectat.sexes_id != null){
+           this.afectats.push(this.afectat);
+        }
+        else{
+            this.errors.push("Cal introduir el sexe de l'afectat!")
+        }
+    },
+    afegirRecurs(){
+        if(this.recurs.recursos_id > 0 && this.recurs.prioritat > 0){
+            this.recursos.push(this.recurs);
+        }
+        else{
+            this.errors.push("Cal escollir un recurs i una prioritat!");
+        }
+    }
   },
   computed: {
       comarquesFiltered: function() {
-          this.municipi = {
-          id: null,
-          nom: "Selecciona...",
-          comarques_id: null
-        };
-          if(Object.keys(this.provincia).length){
+        //   this.municipi = {
+        //   id: null,
+        //   nom: "Selecciona...",
+        //   comarques_id: null
+        // };
+          if(this.provincia.id > 0 && this.municipi.id == null){
               let comarquesFiltered = [];
               let comarques = this.comarques;
               for(let i = 0; i < comarques.length; ++i){
@@ -794,12 +826,29 @@ export default {
               }
               return comarquesFiltered;
           }
+          else if(this.municipi.id > 0){
+              let comarquesFiltered = [];
+              let comarques = this.comarques;
+              let counter = 0;
+              let found = false;
+              while(counter < comarques.length && !found){
+                  if(comarques[counter].id == this.municipi.comarques_id){
+                      this.comarca = comarques[counter];
+                      comarquesFiltered.push(comarques[counter]);
+                      found = true;
+                  }
+                  else{
+                      ++counter;
+                  }
+              }
+              return comarquesFiltered;
+          }
           else{
               return this.comarques;
           }
       },
       municipisFiltered: function(){
-         if(Object.keys(this.comarca).length){
+         if(this.comarca.id > 0){
               let municipisFiltered = [];
               let municipis = this.municipis;
               for(let i = 0; i < municipis.length; ++i){
@@ -812,7 +861,20 @@ export default {
           else{
               return this.municipis;
           }
-      }
+      },
+      provinciesFiltered: function() {
+          if(this.comarca.id > 0){
+              let provincia = this.provincies.find(o => o.id == this.comarca.provincies_id);
+              this.provincia = provincia;
+              let provinciesFiltered = [];
+              provinciesFiltered.push(provincia);
+              return provinciesFiltered;
+          }
+          else{
+              return this.provincies;
+          }
+      },
+
   },
   created(){
       this.selectProvincies(),
@@ -833,5 +895,12 @@ export default {
 
 .btn-secondary {
   border-color: black;
+}
+
+#tabButtons{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
 }
 </style>
