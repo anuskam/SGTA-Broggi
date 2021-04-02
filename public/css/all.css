@@ -86,3 +86,12 @@ textarea{
     z-index: 100;
 }
 
+#cecosNav{
+    background-color:#fcc41c !important;
+    margin-bottom: 20px;
+}
+
+#cecosLogo{
+    height: 4vh;
+}
+

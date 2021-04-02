@@ -10,19 +10,19 @@
         <i class="fas fa-arrow-left fa-2x" aria-hidden="true"></i>
       </button>
 
-    <div>
-       <button @click="selectTab(1)" class="btn btn-sm mr-3">
-        <i class="fas fa-phone-alt fa-2x mr-2 ml-2" aria-hidden="true"></i>
-      </button>
-      |
-      <button @click="selectTab(2)" class="btn btn-sm mr-3 ml-3">
-        <i class="fas fa-user-injured fa-2x mr-2 ml-2" aria-hidden="true"></i>
-      </button>
-      |
-      <button @click="selectTab(3)" class="btn btn-sm ml-3">
-        <i class="fas fa-ambulance fa-2x mr-2 ml-2" aria-hidden="true"></i>
-      </button>
-    </div>
+      <div>
+        <button @click="selectTab(1)" class="btn btn-sm mr-3 tabButton" :class="{ selectedTab: tabs.a }">
+          <i class="fas fa-phone-alt fa-2x mr-2 ml-2" aria-hidden="true"></i>
+        </button>
+        |
+        <button @click="selectTab(2)" class="btn btn-sm mr-3 ml-3 tabButton" :class="{ selectedTab: tabs.b }">
+          <i class="fas fa-user-injured fa-2x mr-2 ml-2" aria-hidden="true"></i>
+        </button>
+        |
+        <button @click="selectTab(3)" class="btn btn-sm ml-3 tabButton"  :class="{ selectedTab: tabs.c }">
+          <i class="fas fa-ambulance fa-2x mr-2 ml-2" aria-hidden="true"></i>
+        </button>
+      </div>
 
       <button
         :disabled="currentTab == 3"
@@ -110,7 +110,12 @@
                   >Nombre</label
                 >
                 <div class="col-8">
-                  <input type="text" class="form-control" id="nombreMedica" v-model="incidencia.nom_metge" />
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nombreMedica"
+                    v-model="incidencia.nom_metge"
+                  />
                 </div>
                 <!-- <label for="apellidoMedica" class="col-1 col-form-label"
                   >Apellidos</label
@@ -128,33 +133,76 @@
 
                 <label for="municipio" class="col-1 mt-1">Municipio</label>
                 <div class="col-2">
-                  <select class="custom-select" id="municipio" required v-model="municipi">
-                    <option selected value="Selecciona...">Selecciona...</option>
-                    <option v-for="municipi in municipisFiltered" :key="municipi.id" :value="municipi">{{ municipi.nom }}</option>
+                  <select
+                    class="custom-select"
+                    id="municipio"
+                    required
+                    v-model="municipi"
+                  >
+                    <option selected value="Selecciona...">
+                      Selecciona...
+                    </option>
+                    <option
+                      v-for="municipi in municipisFiltered"
+                      :key="municipi.id"
+                      :value="municipi"
+                    >
+                      {{ municipi.nom }}
+                    </option>
                   </select>
                 </div>
 
                 <label for="comarca" class="col-1 mt-1">Comarca</label>
                 <div class="col-2">
-                  <select class="custom-select" id="comarca" required v-model="comarca">
-                    <option selected value="Selecciona...">Selecciona...</option>
-                    <option v-for="comarca in comarquesFiltered" :key="comarca.id" :value="comarca">{{ comarca.nom }}</option>
+                  <select
+                    class="custom-select"
+                    id="comarca"
+                    required
+                    v-model="comarca"
+                  >
+                    <option selected value="Selecciona...">
+                      Selecciona...
+                    </option>
+                    <option
+                      v-for="comarca in comarquesFiltered"
+                      :key="comarca.id"
+                      :value="comarca"
+                    >
+                      {{ comarca.nom }}
+                    </option>
                   </select>
                 </div>
 
                 <label for="provincia" class="col-1 mt-1">Provincia</label>
                 <div class="col-2">
-                <select class="custom-select" id="provincia" required v-model="provincia">
-                    <option selected value="Selecciona...">Selecciona...</option>
-                    <option v-for="provincia in provinciesFiltered" :key="provincia.id" :value= "provincia">{{ provincia.nom }}</option>
-                </select>
+                  <select
+                    class="custom-select"
+                    id="provincia"
+                    required
+                    v-model="provincia"
+                  >
+                    <option selected value="Selecciona...">
+                      Selecciona...
+                    </option>
+                    <option
+                      v-for="provincia in provinciesFiltered"
+                      :key="provincia.id"
+                      :value="provincia"
+                    >
+                      {{ provincia.nom }}
+                    </option>
+                  </select>
                 </div>
-            </div>
+              </div>
               <!-- DIRECCIÓN -->
               <div class="form row">
                 <label for="direccion" class="col-2 mt-2">Dirección</label>
                 <div class="col-9">
-                  <input type="text" class="form-control" v-model="incidencia.adreca" />
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="incidencia.adreca"
+                  />
                 </div>
 
                 <!-- <label for="numeroDireccion" class="col-2 mt-2">Número</label>
@@ -195,7 +243,12 @@
                   >Nombre</label
                 >
                 <div class="col-4">
-                  <input type="text" class="form-control" id="nombreAfectada" v-model="afectat.nom" />
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nombreAfectada"
+                    v-model="afectat.nom"
+                  />
                 </div>
 
                 <!-- APELLIDOS AFECTADA -->
@@ -226,7 +279,6 @@
                       id="mujer"
                       value="2"
                       v-model="afectat.sexes_id"
-                      checked
                     />
                     Mujer
                   </label>
@@ -244,21 +296,45 @@
 
                 <label for="edadAfectada" class="col-1 mt-1 ml-4">Edad</label>
                 <div class="col-2">
-                  <input type="number" class="form-control" min="1" max="130" v-model="afectat.edat" />
+                  <input
+                    type="number"
+                    class="form-control"
+                    min="1"
+                    max="130"
+                    v-model="afectat.edat"
+                  />
                 </div>
               </div>
               <!-- CIP -->
               <div class="form row">
                 <label for="direccion" class="col-1 mt-2">CIP</label>
                 <div class="col-5">
-                  <input type="text" class="form-control" v-model="afectat.cip" />
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="afectat.cip"
+                  />
                 </div>
 
                 <!-- AÑADIR AFECTADA -->
-                <div class="col-4">
-                  <button type="button" class="btn btn-primary float-right" @click="afegirAfectat()">
-                    <i class="fa fa-plus-circle" aria-hidden="true"></i> AÑADIR
-                    AFECTADA
+                <div class="col-6">
+                  <button
+                    type="button"
+                    class="btn btn-primary float-right ml-4"
+                    id="afectadasList"
+                    @click="mostrarAfectades()"
+                    :disabled="afectadasCount == 0"
+                  >
+                    <i class="fa fa-list mr-1" aria-hidden="true"></i> AFECTADAS
+                    ({{ afectadasCount }})
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary float-right"
+                    @click="afegirAfectat()"
+                  >
+                    <i class="fa fa-plus-circle mr-1" aria-hidden="true"></i>
+                    AÑADIR AFECTADA
                   </button>
                 </div>
               </div>
@@ -272,9 +348,7 @@
             <form>
               <!-- FECHA -->
               <div class="form-group row">
-                <label
-                  for="fechaIncidente"
-                  class="col-1 col-form-label"
+                <label for="fechaIncidente" class="col-1 col-form-label"
                   >Fecha</label
                 >
                 <div class="col-2">
@@ -291,13 +365,20 @@
                   >Hora</label
                 >
                 <div class="col-2">
-                  <input type="time" class="form-control" id="horaIncidente" v-model="incidencia.hora" />
+                  <input
+                    type="time"
+                    class="form-control"
+                    id="horaIncidente"
+                    v-model="incidencia.hora"
+                  />
                 </div>
               </div>
 
               <!-- INCIDENCIAS -->
               <div class="form-group row">
-                <label for="tipoIncidencia" class="col-1 mt-1">Tipo de incidente</label>
+                <label for="tipoIncidencia" class="col-1 mt-1"
+                  >Tipo de incidente</label
+                >
                 <div
                   class="btn-group btn-group-toggle col-10"
                   data-toggle="buttons"
@@ -397,75 +478,166 @@
               <div class="col-9">
                 <div class="parentGrid">
                   <div class="form-check mb-2">
-                    <input type="checkbox" class="form-check-input" id="consejo1"/>
-                    <label class="form-check-label" for="consejo1">Tiene conocimientos de primeros auxilios</label>
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      id="consejo1"
+                    />
+                    <label class="form-check-label" for="consejo1"
+                      >Tiene conocimientos de primeros auxilios</label
+                    >
                   </div>
 
                   <div class="form-check mb-2">
-                    <input type="checkbox" class="form-check-input" id="consejo2"/>
-                    <label class="form-check-label" for="consejo2">Puede pedir ayuda a algún peatón, persona que le acompañe...</label>
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      id="consejo2"
+                    />
+                    <label class="form-check-label" for="consejo2"
+                      >Puede pedir ayuda a algún peatón, persona que le
+                      acompañe...</label
+                    >
                   </div>
 
                   <div class="form-check mb-2">
-                    <input type="checkbox" class="form-check-input" id="consejo3"/>
-                    <label class="form-check-label" for="consejo3">Puede señalizar la zona del accidente/incidente</label>
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      id="consejo3"
+                    />
+                    <label class="form-check-label" for="consejo3"
+                      >Puede señalizar la zona del accidente/incidente</label
+                    >
                   </div>
 
                   <div class="form-check mb-2">
-                    <input type="checkbox" class="form-check-input" id="consejo4"/>
-                    <label class="form-check-label" for="consejo4">Aflojarse la ropa</label>
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      id="consejo4"
+                    />
+                    <label class="form-check-label" for="consejo4"
+                      >Aflojarse la ropa</label
+                    >
                   </div>
 
                   <div class="form-check mb-2">
-                    <input type="checkbox" class="form-check-input" id="consejo5"/>
-                    <label class="form-check-label" for="consejo5">Acercarse al coche y desconectar las llaves de contacto</label>
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      id="consejo5"
+                    />
+                    <label class="form-check-label" for="consejo5"
+                      >Acercarse al coche y desconectar las llaves de
+                      contacto</label
+                    >
                   </div>
 
                   <div class="form-check mb-2">
-                    <input type="checkbox" class="form-check-input" id="consejo6"/>
-                    <label class="form-check-label" for="consejo6">Mantener el teléfono en manos libres</label>
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      id="consejo6"
+                    />
+                    <label class="form-check-label" for="consejo6"
+                      >Mantener el teléfono en manos libres</label
+                    >
                   </div>
 
                   <div class="form-check mb-2">
-                    <input type="checkbox" class="form-check-input" id="consejo7"/>
-                    <label class="form-check-label" for="consejo7">No mover a la persona o víctimas</label>
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      id="consejo7"
+                    />
+                    <label class="form-check-label" for="consejo7"
+                      >No mover a la persona o víctimas</label
+                    >
                   </div>
 
                   <div class="form-check mb-2">
-                    <input type="checkbox" class="form-check-input" id="consejo8"/>
-                    <label class="form-check-label" for="consejo8">No dejar sola a la persona</label>
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      id="consejo8"
+                    />
+                    <label class="form-check-label" for="consejo8"
+                      >No dejar sola a la persona</label
+                    >
                   </div>
 
                   <div class="form-check mb-2">
-                    <input type="checkbox" class="form-check-input" id="consejo9"/>
-                    <label class="form-check-label" for="consejo9">No dar de comer ni de beber</label>
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      id="consejo9"
+                    />
+                    <label class="form-check-label" for="consejo9"
+                      >No dar de comer ni de beber</label
+                    >
                   </div>
 
                   <div class="form-check mb-2">
-                    <input type="checkbox" class="form-check-input" id="consejo10"/>
-                    <label class="form-check-label" for="consejo10">Poner a la persona en posición lateral de seguridad (PLS)</label>
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      id="consejo10"
+                    />
+                    <label class="form-check-label" for="consejo10"
+                      >Poner a la persona en posición lateral de seguridad
+                      (PLS)</label
+                    >
                   </div>
 
                   <div class="form-check mb-2">
-                    <input type="checkbox" class="form-check-input" id="consejo11"/>
-                    <label class="form-check-label" for="consejo11">Si sangra, comprimir la herida con la mano, ropa...</label>
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      id="consejo11"
+                    />
+                    <label class="form-check-label" for="consejo11"
+                      >Si sangra, comprimir la herida con la mano,
+                      ropa...</label
+                    >
                   </div>
 
                   <div class="form-check mb-2">
-                    <input type="checkbox" class="form-check-input" id="consejo12"/>
-                    <label class="form-check-label" for="consejo12">Poner cómoda a la víctima</label>
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      id="consejo12"
+                    />
+                    <label class="form-check-label" for="consejo12"
+                      >Poner cómoda a la víctima</label
+                    >
                   </div>
 
                   <div class="form-check mb-2">
-                    <input type="checkbox" class="form-check-input" id="consejo13"/>
-                    <label class="form-check-label" for="consejo13">Poner cómoda a la víctima</label>
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      id="consejo13"
+                    />
+                    <label class="form-check-label" for="consejo13"
+                      >Poner cómoda a la víctima</label
+                    >
                   </div>
 
                   <div class="form-check mb-2">
-                    <input type="checkbox" class="form-check-input" id="other">
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      id="other"
+                    />
                     <label class="form-check-label" for="other">Otros</label>
 
-                    <input type="text" class="col-9 ml-3" id="otherValue" name="other">
+                    <input
+                      type="text"
+                      class="col-9 ml-3"
+                      id="otherValue"
+                      name="other"
+                    />
                   </div>
                 </div>
               </div>
@@ -486,7 +658,11 @@
 
               <!-- AÑADIR RECURSO -->
               <div class="col-10">
-                <button type="button" class="btn btn-primary float-right mr-0" @click="afegirRecurs()">
+                <button
+                  type="button"
+                  class="btn btn-primary float-right mr-0"
+                  @click="afegirRecurs()"
+                >
                   <i class="fa fa-plus-circle" aria-hidden="true"></i> AÑADIR
                   RECURSO
                 </button>
@@ -606,6 +782,43 @@
         </div>
       </div>
     </div>
+    <!-- Modal Lista Afectadas -->
+    <div class="modal" tabindex="-1" role="dialog" id="afectadaModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Lista de Afectadas</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <ul class="list-group">
+                <li v-for="(afectada, index) in afectats" :key="index" class="list-group-item">{{ afectada.nom }} {{ afectada.cognoms }},
+                    <span v-if="afectada.sexes_id == 1"> Hombre</span>
+                    <span v-else> Mujer</span>
+                    , {{ afectada.edat }}
+                    <button class="btn btn-danger float-right" @click="eliminarAfectada(index)"><i class="fas fa-trash"></i> Borrar</button>
+                </li>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -614,81 +827,90 @@ export default {
   data: function () {
     return {
       currentTab: 1,
+      tabs: {
+          a: true,
+          b: false,
+          c: false
+      },
       isActive: false,
       provincies: [],
       provincia: {
-          id: null,
-          nom: "Selecciona..."
+        id: null,
+        nom: "Selecciona...",
       },
       comarques: [],
       comarca: {
-          id: null,
-          nom: "Selecciona...",
-          provincies_id: null
+        id: null,
+        nom: "Selecciona...",
+        provincies_id: null,
       },
       municipis: [],
       municipi: {
-          id: null,
-          nom: "Selecciona...",
-          comarques_id: null
+        id: null,
+        nom: "Selecciona...",
+        comarques_id: null,
       },
       incidencia: {
-          id: null,
-          num_incident: null,
-          data: new Date().toISOString().slice(0,10),
-          hora: new Date().toLocaleTimeString('en-GB', { hour: "numeric", minute: "numeric", second: "numeric"}),
-          telefon_alertant: null,
-          adreca: null,
-          adreca_complement: null,
-          descripcio: null,
-          nom_metge: null,
-          tipus_incidencies_id: null,
-          alertants_id: null,
-          municipis_id: null,
-          usuaris_id: null,
+        id: null,
+        num_incident: null,
+        data: new Date().toISOString().slice(0, 10),
+        hora: new Date().toLocaleTimeString("en-GB", {
+          hour: "numeric",
+          minute: "numeric",
+          second: "numeric",
+        }),
+        telefon_alertant: null,
+        adreca: null,
+        adreca_complement: null,
+        descripcio: null,
+        nom_metge: null,
+        tipus_incidencies_id: null,
+        alertants_id: null,
+        municipis_id: null,
+        usuaris_id: null,
       },
       afectats: [],
       afectat: {
-          id: null,
-          cip: null,
-          nom: null,
-          cognoms: null,
-          edat: null,
-          te_cip: false,
-          sexes_id: null,
+        id: null,
+        cip: null,
+        nom: null,
+        cognoms: null,
+        edat: null,
+        te_cip: false,
+        sexes_id: null,
       },
       alertant: {
-          id: null,
-          telefon: null,
-          nom: null,
-          cognoms: null,
-          adreca: null,
-          municipis_id: null,
-          tipus_alertants_id: null,
+        id: null,
+        telefon: null,
+        nom: null,
+        cognoms: null,
+        adreca: null,
+        municipis_id: null,
+        tipus_alertants_id: null,
       },
       incidencies_has_afectats_array: [],
       incidencies_has_afectats: {
-          incidencies_id: null,
-          afectats_id: null,
+        incidencies_id: null,
+        afectats_id: null,
       },
       incidencies_has_recursos_array: [],
       incidencies_has_recursos: {
-          incidencies_id: null,
-          recursos_id: null,
-          hora_activacio: null,
-          hora_mobilitzacio: null,
-          hora_assistencia: null,
-          hora_transport: null,
-          hora_arribada_hospital: null,
-          hora_transferencia: null,
-          hora_finalitzacio: null,
-          prioritat: null,
-          desti: null,
+        incidencies_id: null,
+        recursos_id: null,
+        hora_activacio: null,
+        hora_mobilitzacio: null,
+        hora_assistencia: null,
+        hora_transport: null,
+        hora_arribada_hospital: null,
+        hora_transferencia: null,
+        hora_finalitzacio: null,
+        prioritat: null,
+        desti: null,
       },
       recurs: {
-          recursos_id: null,
-          hora_activacio: null,
-          prioritat: null,
+        recursos_id: null,
+        hora_activacio: null,
+        prioritat: null,
       },
       recursos: [],
       errors: [],
@@ -697,6 +919,23 @@ export default {
   methods: {
     selectTab(selectedTab) {
       this.currentTab = selectedTab;
+      switch(selectedTab){
+        case 1:
+            this.tabs.a = true;
+            this.tabs.b = false;
+            this.tabs.c = false;
+            break;
+        case 2:
+            this.tabs.a = false;
+            this.tabs.b = true;
+            this.tabs.c = false;
+            break;
+        case 3:
+            this.tabs.a = false;
+            this.tabs.b = false;
+            this.tabs.c = true;
+            break;
+      }
     },
     prev() {
       if (this.currentTab === 1) return;
@@ -705,119 +944,157 @@ export default {
     next() {
       this.currentTab = this.currentTab + 1;
     },
-    selectProvincies(){
-        let me = this;
-        axios.get('/provincia').then(response => {
-            me.provincies = response.data;
-        }).catch(error => {
-            console.log(error);
-        }).finally(() => this.loading = false)
+    selectProvincies() {
+      let me = this;
+      axios
+        .get("/provincia")
+        .then((response) => {
+          me.provincies = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => (this.loading = false));
     },
-    selectComarques(){
-        let me = this;
-        axios.get('/comarca').then(response => {
-            me.comarques = response.data;
-        }).catch(error => {
-            console.log(error);
-        }).finally(() => this.loading = false)
+    selectComarques() {
+      let me = this;
+      axios
+        .get("/comarca")
+        .then((response) => {
+          me.comarques = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => (this.loading = false));
     },
-    selectMunicipis(){
-        let me = this;
-        axios.get('/municipi').then(response => {
-            me.municipis = response.data;
-        }).catch(error => {
-            console.log(error);
-        }).finally(() => this.loading = false)
+    selectMunicipis() {
+      let me = this;
+      axios
+        .get("/municipi")
+        .then((response) => {
+          me.municipis = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => (this.loading = false));
     },
-    afegirAfectat(){
-        if(this.afectat.sexes_id != null){
-           this.afectats.push(this.afectat);
+    afegirAfectat() {
+      if (this.afectat.sexes_id != null) {
+        if (this.afectat.cip != null) {
+          this.afectat.te_cip = true;
         }
-        else{
-            this.errors.push("Cal introduir el sexe de l'afectat!")
-        }
+        this.afectats.push(this.afectat);
+        this.buidarAfectat();
+      } else {
+        this.errors.push("Cal introduir el sexe de l'afectat!");
+      }
     },
-    afegirRecurs(){
-        if(this.recurs.recursos_id > 0 && this.recurs.prioritat > 0){
-            this.recursos.push(this.recurs);
-        }
-        else{
-            this.errors.push("Cal escollir un recurs i una prioritat!");
-        }
-    }
+    afegirRecurs() {
+      if (this.recurs.recursos_id > 0 && this.recurs.prioritat > 0) {
+        this.recursos.push(this.recurs);
+      } else {
+        this.errors.push("Cal escollir un recurs i una prioritat!");
+      }
+    },
+    buidarAfectat() {
+      this.afectat = {
+        id: null,
+        cip: null,
+        nom: null,
+        cognoms: null,
+        edat: null,
+        te_cip: false,
+        sexes_id: null,
+      };
+    },
+    buidarRecurs() {
+      this.recurs = {
+        recursos_id: null,
+        hora_activacio: null,
+        prioritat: null,
+      };
+    },
+    eliminarAfectada(index){
+        this.afectats.splice(index,1);
+    },
+    mostrarAfectades(){
+        $('#afectadaModal').modal('show');
+    },
   },
   computed: {
-      comarquesFiltered: function() {
-        //   this.municipi = {
-        //   id: null,
-        //   nom: "Selecciona...",
-        //   comarques_id: null
-        // };
-          if(this.provincia.id > 0 && this.municipi.id == null){
-              let comarquesFiltered = [];
-              let comarques = this.comarques;
-              for(let i = 0; i < comarques.length; ++i){
-                  if(comarques[i].provincies_id == this.provincia.id){
-                      comarquesFiltered.push(comarques[i]);
-                  }
-              }
-              return comarquesFiltered;
+    comarquesFiltered: function () {
+      //   this.municipi = {
+      //   id: null,
+      //   nom: "Selecciona...",
+      //   comarques_id: null
+      // };
+      if (this.provincia.id > 0 && this.municipi.id == null) {
+        let comarquesFiltered = [];
+        let comarques = this.comarques;
+        for (let i = 0; i < comarques.length; ++i) {
+          if (comarques[i].provincies_id == this.provincia.id) {
+            comarquesFiltered.push(comarques[i]);
           }
-          else if(this.municipi.id > 0){
-              let comarquesFiltered = [];
-              let comarques = this.comarques;
-              let counter = 0;
-              let found = false;
-              while(counter < comarques.length && !found){
-                  if(comarques[counter].id == this.municipi.comarques_id){
-                      this.comarca = comarques[counter];
-                      comarquesFiltered.push(comarques[counter]);
-                      found = true;
-                  }
-                  else{
-                      ++counter;
-                  }
-              }
-              return comarquesFiltered;
+        }
+        return comarquesFiltered;
+      } else if (this.municipi.id > 0) {
+        let comarquesFiltered = [];
+        let comarques = this.comarques;
+        let counter = 0;
+        let found = false;
+        while (counter < comarques.length && !found) {
+          if (comarques[counter].id == this.municipi.comarques_id) {
+            this.comarca = comarques[counter];
+            comarquesFiltered.push(comarques[counter]);
+            found = true;
+          } else {
+            ++counter;
           }
-          else{
-              return this.comarques;
+        }
+        return comarquesFiltered;
+      } else {
+        return this.comarques;
+      }
+    },
+    municipisFiltered: function () {
+      if (this.comarca.id > 0) {
+        let municipisFiltered = [];
+        let municipis = this.municipis;
+        for (let i = 0; i < municipis.length; ++i) {
+          if (municipis[i].comarques_id == this.comarca.id) {
+            municipisFiltered.push(municipis[i]);
           }
-      },
-      municipisFiltered: function(){
-         if(this.comarca.id > 0){
-              let municipisFiltered = [];
-              let municipis = this.municipis;
-              for(let i = 0; i < municipis.length; ++i){
-                  if(municipis[i].comarques_id == this.comarca.id){
-                      municipisFiltered.push(municipis[i]);
-                  }
-              }
-              return municipisFiltered;
-          }
-          else{
-              return this.municipis;
-          }
-      },
-      provinciesFiltered: function() {
-          if(this.comarca.id > 0){
-              let provincia = this.provincies.find(o => o.id == this.comarca.provincies_id);
-              this.provincia = provincia;
-              let provinciesFiltered = [];
-              provinciesFiltered.push(provincia);
-              return provinciesFiltered;
-          }
-          else{
-              return this.provincies;
-          }
-      },
-
+        }
+        return municipisFiltered;
+      } else {
+        return this.municipis;
+      }
+    },
+    provinciesFiltered: function () {
+      if (this.comarca.id > 0) {
+        let provincia = this.provincies.find(
+          (o) => o.id == this.comarca.provincies_id
+        );
+        this.provincia = provincia;
+        let provinciesFiltered = [];
+        provinciesFiltered.push(provincia);
+        return provinciesFiltered;
+      } else {
+        return this.provincies;
+      }
+    },
+    afectadasCount: function () {
+      return this.afectats.length;
+    },
+    recursosCount: function () {
+      return this.recursos.length;
+    },
   },
-  created(){
-      this.selectProvincies(),
-      this.selectComarques(),
-      this.selectMunicipis()
-  }
+  created() {
+    this.selectProvincies(), this.selectComarques(), this.selectMunicipis();
+  },
 };
 </script>
 
@@ -842,10 +1119,45 @@ export default {
   grid-template-columns: 1fr 1fr;
 }
 
-#tabButtons{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
+#tabButtons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.card-header {
+  background-color: #15acc4;
+  border: 1px solid black;
+  border-left: 0;
+  border-right: 0;
+  margin-top: -1px;
+}
+
+.modal-header{
+    background-color: #15acc4;
+}
+
+.card {
+  border: 1px solid black;
+}
+
+button {
+  background-color: #e3177d !important;
+  border: 1px solid black !important;
+}
+
+#afectadasList {
+  background-color: #15acc4 !important;
+}
+
+.tabButton{
+    background-color: white !important;
+    border: 0 !important;
+}
+
+.selectedTab{
+    background-color: #e3177d !important;
+    border: 1px solid black !important;
 }
 </style>
