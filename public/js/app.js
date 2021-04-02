@@ -2621,6 +2621,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2646,8 +2655,12 @@ __webpack_require__.r(__webpack_exports__);
       incidencia: {
         id: null,
         num_incident: null,
-        data: null,
-        hora: null,
+        data: new Date().toISOString().slice(0, 10),
+        hora: new Date().toLocaleTimeString('en-GB', {
+          hour: "numeric",
+          minute: "numeric",
+          second: "numeric"
+        }),
         telefon_alertant: null,
         adreca: null,
         adreca_complement: null,
@@ -2695,7 +2708,14 @@ __webpack_require__.r(__webpack_exports__);
         hora_finalitzacio: null,
         prioritat: null,
         desti: null
-      }
+      },
+      recurs: {
+        recursos_id: null,
+        hora_activacio: null,
+        prioritat: null
+      },
+      recursos: [],
+      errors: []
     };
   },
   methods: {
@@ -2744,17 +2764,30 @@ __webpack_require__.r(__webpack_exports__);
       })["finally"](function () {
         return _this3.loading = false;
       });
+    },
+    afegirAfectat: function afegirAfectat() {
+      if (this.afectat.sexes_id != null) {
+        this.afectats.push(this.afectat);
+      } else {
+        this.errors.push("Cal introduir el sexe de l'afectat!");
+      }
+    },
+    afegirRecurs: function afegirRecurs() {
+      if (this.recurs.recursos_id > 0 && this.recurs.prioritat > 0) {
+        this.recursos.push(this.recurs);
+      } else {
+        this.errors.push("Cal escollir un recurs i una prioritat!");
+      }
     }
   },
   computed: {
     comarquesFiltered: function comarquesFiltered() {
-      this.municipi = {
-        id: null,
-        nom: "Selecciona...",
-        comarques_id: null
-      };
-
-      if (Object.keys(this.provincia).length) {
+      //   this.municipi = {
+      //   id: null,
+      //   nom: "Selecciona...",
+      //   comarques_id: null
+      // };
+      if (this.provincia.id > 0 && this.municipi.id == null) {
         var comarquesFiltered = [];
         var comarques = this.comarques;
 
@@ -2765,12 +2798,31 @@ __webpack_require__.r(__webpack_exports__);
         }
 
         return comarquesFiltered;
+      } else if (this.municipi.id > 0) {
+        var _comarquesFiltered = [];
+        var _comarques = this.comarques;
+        var counter = 0;
+        var found = false;
+
+        while (counter < _comarques.length && !found) {
+          if (_comarques[counter].id == this.municipi.comarques_id) {
+            this.comarca = _comarques[counter];
+
+            _comarquesFiltered.push(_comarques[counter]);
+
+            found = true;
+          } else {
+            ++counter;
+          }
+        }
+
+        return _comarquesFiltered;
       } else {
         return this.comarques;
       }
     },
     municipisFiltered: function municipisFiltered() {
-      if (Object.keys(this.comarca).length) {
+      if (this.comarca.id > 0) {
         var municipisFiltered = [];
         var municipis = this.municipis;
 
@@ -2783,6 +2835,21 @@ __webpack_require__.r(__webpack_exports__);
         return municipisFiltered;
       } else {
         return this.municipis;
+      }
+    },
+    provinciesFiltered: function provinciesFiltered() {
+      var _this4 = this;
+
+      if (this.comarca.id > 0) {
+        var provincia = this.provincies.find(function (o) {
+          return o.id == _this4.comarca.provincies_id;
+        });
+        this.provincia = provincia;
+        var provinciesFiltered = [];
+        provinciesFiltered.push(provincia);
+        return provinciesFiltered;
+      } else {
+        return this.provincies;
       }
     }
   },
@@ -7651,7 +7718,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-secondary:not(:disabled):not(.disabled).active,\n.btn-secondary:not(:disabled):not(.disabled):active,\n.show > .btn-secondary.dropdown-toggle {\n  background-color: #e3177d;\n  border-color: black;\n}\n.btn-secondary {\n  border-color: black;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-secondary:not(:disabled):not(.disabled).active,\n.btn-secondary:not(:disabled):not(.disabled):active,\n.show > .btn-secondary.dropdown-toggle {\n  background-color: #e3177d;\n  border-color: black;\n}\n.btn-secondary {\n  border-color: black;\n}\n#tabButtons{\n    display: flex;\n    flex-direction: row;\n    flex-wrap: nowrap;\n    justify-content: space-between;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -39861,59 +39928,61 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-sm mr-3",
-          on: {
-            click: function($event) {
-              return _vm.selectTab(1)
+      _c("div", [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-sm mr-3",
+            on: {
+              click: function($event) {
+                return _vm.selectTab(1)
+              }
             }
-          }
-        },
-        [
-          _c("i", {
-            staticClass: "fas fa-phone-alt fa-2x mr-2 ml-2",
-            attrs: { "aria-hidden": "true" }
-          })
-        ]
-      ),
-      _vm._v("\n    |\n    "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-sm mr-3 ml-3",
-          on: {
-            click: function($event) {
-              return _vm.selectTab(2)
+          },
+          [
+            _c("i", {
+              staticClass: "fas fa-phone-alt fa-2x mr-2 ml-2",
+              attrs: { "aria-hidden": "true" }
+            })
+          ]
+        ),
+        _vm._v("\n    |\n    "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-sm mr-3 ml-3",
+            on: {
+              click: function($event) {
+                return _vm.selectTab(2)
+              }
             }
-          }
-        },
-        [
-          _c("i", {
-            staticClass: "fas fa-user-injured fa-2x mr-2 ml-2",
-            attrs: { "aria-hidden": "true" }
-          })
-        ]
-      ),
-      _vm._v("\n    |\n    "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-sm ml-3",
-          on: {
-            click: function($event) {
-              return _vm.selectTab(3)
+          },
+          [
+            _c("i", {
+              staticClass: "fas fa-user-injured fa-2x mr-2 ml-2",
+              attrs: { "aria-hidden": "true" }
+            })
+          ]
+        ),
+        _vm._v("\n    |\n    "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-sm ml-3",
+            on: {
+              click: function($event) {
+                return _vm.selectTab(3)
+              }
             }
-          }
-        },
-        [
-          _c("i", {
-            staticClass: "fas fa-ambulance fa-2x mr-2 ml-2",
-            attrs: { "aria-hidden": "true" }
-          })
-        ]
-      ),
+          },
+          [
+            _c("i", {
+              staticClass: "fas fa-ambulance fa-2x mr-2 ml-2",
+              attrs: { "aria-hidden": "true" }
+            })
+          ]
+        )
+      ]),
       _vm._v(" "),
       _c(
         "button",
@@ -40364,7 +40433,7 @@ var render = function() {
                           [_vm._v("Selecciona...")]
                         ),
                         _vm._v(" "),
-                        _vm._l(_vm.provincies, function(provincia) {
+                        _vm._l(_vm.provinciesFiltered, function(provincia) {
                           return _c(
                             "option",
                             {
@@ -40380,9 +40449,80 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _vm._m(0),
+                _c("div", { staticClass: "form row" }, [
+                  _c(
+                    "label",
+                    { staticClass: "col-2 mt-2", attrs: { for: "direccion" } },
+                    [_vm._v("Dirección")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-9" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.incidencia.adreca,
+                          expression: "incidencia.adreca"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text" },
+                      domProps: { value: _vm.incidencia.adreca },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.incidencia,
+                            "adreca",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ])
+                ]),
                 _vm._v(" "),
-                _vm._m(1)
+                _c("div", { staticClass: "form-row mt-3 mb-3" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-2",
+                      attrs: { for: "complementoDireccion" }
+                    },
+                    [_vm._v("Complemento Dirección")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-9" }, [
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.incidencia.adreca_complement,
+                          expression: "incidencia.adreca_complement"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { id: "complementoDireccion", rows: "3" },
+                      domProps: { value: _vm.incidencia.adreca_complement },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.incidencia,
+                            "adreca_complement",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ])
+                ])
               ])
             ])
           ])
@@ -40402,7 +40542,613 @@ var render = function() {
           }
         ]
       },
-      [_vm._m(2)]
+      [
+        _c("div", { staticClass: "container-fluid mt-5" }, [
+          _c("div", { staticClass: "card ml-5 mr-5" }, [
+            _c("div", { staticClass: "card-header" }, [
+              _vm._v("DATOS AFECTADA")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body ml-5" }, [
+              _c("form", [
+                _c("div", { staticClass: "form-group row" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-1 col-form-label",
+                      attrs: { for: "nombreAfectada" }
+                    },
+                    [_vm._v("Nombre")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-4" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.afectat.nom,
+                          expression: "afectat.nom"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text", id: "nombreAfectada" },
+                      domProps: { value: _vm.afectat.nom },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.afectat, "nom", $event.target.value)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-1 col-form-label ml-4",
+                      attrs: { for: "apellidoAfectada" }
+                    },
+                    [_vm._v("Apellidos")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-5" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.afectat.cognoms,
+                          expression: "afectat.cognoms"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text", id: "apellidoAfectada" },
+                      domProps: { value: _vm.afectat.cognoms },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.afectat, "cognoms", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-1 mt-1",
+                      attrs: { for: "sexoAfectada" }
+                    },
+                    [_vm._v("Sexo")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "btn-group btn-group-toggle col-4",
+                      attrs: { "data-toggle": "buttons" }
+                    },
+                    [
+                      _c("label", { staticClass: "btn btn-secondary" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.afectat.sexes_id,
+                              expression: "afectat.sexes_id"
+                            }
+                          ],
+                          attrs: {
+                            type: "radio",
+                            name: "sexoAfectada",
+                            id: "mujer",
+                            value: "2",
+                            checked: ""
+                          },
+                          domProps: {
+                            checked: _vm._q(_vm.afectat.sexes_id, "2")
+                          },
+                          on: {
+                            change: function($event) {
+                              return _vm.$set(_vm.afectat, "sexes_id", "2")
+                            }
+                          }
+                        }),
+                        _vm._v("\n                  Mujer\n                ")
+                      ]),
+                      _vm._v(" "),
+                      _c("label", { staticClass: "btn btn-secondary" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.afectat.sexes_id,
+                              expression: "afectat.sexes_id"
+                            }
+                          ],
+                          attrs: {
+                            type: "radio",
+                            name: "sexoAfectada",
+                            id: "hombre",
+                            value: "1"
+                          },
+                          domProps: {
+                            checked: _vm._q(_vm.afectat.sexes_id, "1")
+                          },
+                          on: {
+                            change: function($event) {
+                              return _vm.$set(_vm.afectat, "sexes_id", "1")
+                            }
+                          }
+                        }),
+                        _vm._v("\n                  Hombre\n                ")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-1 mt-1 ml-4",
+                      attrs: { for: "edadAfectada" }
+                    },
+                    [_vm._v("Edad")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-2" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.afectat.edat,
+                          expression: "afectat.edat"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "number", min: "1" },
+                      domProps: { value: _vm.afectat.edat },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.afectat, "edat", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form row" }, [
+                  _c(
+                    "label",
+                    { staticClass: "col-1 mt-2", attrs: { for: "direccion" } },
+                    [_vm._v("CIP")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-5" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.afectat.cip,
+                          expression: "afectat.cip"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text" },
+                      domProps: { value: _vm.afectat.cip },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.afectat, "cip", $event.target.value)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-4" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary float-right",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.afegirAfectat()
+                          }
+                        }
+                      },
+                      [
+                        _c("i", {
+                          staticClass: "fa fa-plus-circle",
+                          attrs: { "aria-hidden": "true" }
+                        }),
+                        _vm._v(
+                          " AÑADIR\n                  AFECTADA\n                "
+                        )
+                      ]
+                    )
+                  ])
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card ml-5 mr-5 mt-3" }, [
+            _c("div", { staticClass: "card-header" }, [
+              _vm._v("DATOS INCIDENTE")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body ml-5" }, [
+              _c("form", [
+                _c("div", { staticClass: "form-group row" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-1 col-form-label",
+                      attrs: { for: "fechaIncidente" }
+                    },
+                    [_vm._v("Fecha")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-2" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.incidencia.data,
+                          expression: "incidencia.data"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "date", id: "fechaIncidente" },
+                      domProps: { value: _vm.incidencia.data },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.incidencia, "data", $event.target.value)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-1 col-form-label ml-5",
+                      attrs: { for: "horaIncidente" }
+                    },
+                    [_vm._v("Hora")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-2" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.incidencia.hora,
+                          expression: "incidencia.hora"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "time", id: "horaIncidente" },
+                      domProps: { value: _vm.incidencia.hora },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.incidencia, "hora", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-1 mt-1",
+                      attrs: { for: "tipoIncidencia" }
+                    },
+                    [_vm._v("Tipo")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "btn-group btn-group-toggle col-9",
+                      attrs: { "data-toggle": "buttons" }
+                    },
+                    [
+                      _c("label", { staticClass: "btn btn-secondary" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.incidencia.tipus_incidencies_id,
+                              expression: "incidencia.tipus_incidencies_id"
+                            }
+                          ],
+                          attrs: {
+                            type: "radio",
+                            name: "tipoIncidencia",
+                            id: "accidente",
+                            value: "1",
+                            checked: ""
+                          },
+                          domProps: {
+                            checked: _vm._q(
+                              _vm.incidencia.tipus_incidencies_id,
+                              "1"
+                            )
+                          },
+                          on: {
+                            change: function($event) {
+                              return _vm.$set(
+                                _vm.incidencia,
+                                "tipus_incidencies_id",
+                                "1"
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(
+                          "\n                  Accidente\n                "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("label", { staticClass: "btn btn-secondary" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.incidencia.tipus_incidencies_id,
+                              expression: "incidencia.tipus_incidencies_id"
+                            }
+                          ],
+                          attrs: {
+                            type: "radio",
+                            name: "tipoIncidencia",
+                            id: "traumatismo",
+                            value: "2"
+                          },
+                          domProps: {
+                            checked: _vm._q(
+                              _vm.incidencia.tipus_incidencies_id,
+                              "2"
+                            )
+                          },
+                          on: {
+                            change: function($event) {
+                              return _vm.$set(
+                                _vm.incidencia,
+                                "tipus_incidencies_id",
+                                "2"
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(
+                          "\n                  Traumatismo\n                "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("label", { staticClass: "btn btn-secondary" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.incidencia.tipus_incidencies_id,
+                              expression: "incidencia.tipus_incidencies_id"
+                            }
+                          ],
+                          attrs: {
+                            type: "radio",
+                            name: "tipoIncidencia",
+                            id: "publico",
+                            value: "3"
+                          },
+                          domProps: {
+                            checked: _vm._q(
+                              _vm.incidencia.tipus_incidencies_id,
+                              "3"
+                            )
+                          },
+                          on: {
+                            change: function($event) {
+                              return _vm.$set(
+                                _vm.incidencia,
+                                "tipus_incidencies_id",
+                                "3"
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(
+                          "\n                  Enfermedad en lugar público\n                "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("label", { staticClass: "btn btn-secondary" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.incidencia.tipus_incidencies_id,
+                              expression: "incidencia.tipus_incidencies_id"
+                            }
+                          ],
+                          attrs: {
+                            type: "radio",
+                            name: "tipoIncidencia",
+                            id: "domicilio",
+                            value: "4"
+                          },
+                          domProps: {
+                            checked: _vm._q(
+                              _vm.incidencia.tipus_incidencies_id,
+                              "4"
+                            )
+                          },
+                          on: {
+                            change: function($event) {
+                              return _vm.$set(
+                                _vm.incidencia,
+                                "tipus_incidencies_id",
+                                "4"
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(
+                          "\n                  Enfermedad domiciliaria\n                "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("label", { staticClass: "btn btn-secondary" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.incidencia.tipus_incidencies_id,
+                              expression: "incidencia.tipus_incidencies_id"
+                            }
+                          ],
+                          attrs: {
+                            type: "radio",
+                            name: "tipoIncidencia",
+                            id: "consulta",
+                            value: "5"
+                          },
+                          domProps: {
+                            checked: _vm._q(
+                              _vm.incidencia.tipus_incidencies_id,
+                              "5"
+                            )
+                          },
+                          on: {
+                            change: function($event) {
+                              return _vm.$set(
+                                _vm.incidencia,
+                                "tipus_incidencies_id",
+                                "5"
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(
+                          "\n                  Consulta médica\n                "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("label", { staticClass: "btn btn-secondary" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.incidencia.tipus_incidencies_id,
+                              expression: "incidencia.tipus_incidencies_id"
+                            }
+                          ],
+                          attrs: {
+                            type: "radio",
+                            name: "tipoAlertante",
+                            id: "transporte",
+                            value: "6"
+                          },
+                          domProps: {
+                            checked: _vm._q(
+                              _vm.incidencia.tipus_incidencies_id,
+                              "6"
+                            )
+                          },
+                          on: {
+                            change: function($event) {
+                              return _vm.$set(
+                                _vm.incidencia,
+                                "tipus_incidencies_id",
+                                "6"
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(
+                          "\n                  Transporte sanitario\n                "
+                        )
+                      ])
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-row mt-3 mb-3" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-1",
+                      attrs: { for: "descripcionIncidente" }
+                    },
+                    [_vm._v("Descripción del incidente")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-9" }, [
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.incidencia.descripcio,
+                          expression: "incidencia.descripcio"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { id: "descripcionIncidente", rows: "3" },
+                      domProps: { value: _vm.incidencia.descripcio },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.incidencia,
+                            "descripcio",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ])
+      ]
     ),
     _vm._v(" "),
     _c(
@@ -40417,7 +41163,179 @@ var render = function() {
           }
         ]
       },
-      [_vm._m(3)]
+      [
+        _c("div", { staticClass: "card ml-5 mr-5 mt-3" }, [
+          _c("div", { staticClass: "card-header" }, [_vm._v("RESPUESTA")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body ml-5" }, [
+            _c("form", [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group row mt-4" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-10" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary float-right mr-0",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          return _vm.afegirRecurs()
+                        }
+                      }
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "fa fa-plus-circle",
+                        attrs: { "aria-hidden": "true" }
+                      }),
+                      _vm._v(" AÑADIR\n                RECURSO\n              ")
+                    ]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card mt-2" }, [
+                _vm._m(2),
+                _vm._v(" "),
+                _vm._m(3),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row ml-3" }, [
+                  _c(
+                    "label",
+                    { staticClass: "col-2 mt-1", attrs: { for: "prioridad" } },
+                    [_vm._v("Prioridad")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "btn-group btn-group-toggle col-9",
+                      attrs: { "data-toggle": "buttons" }
+                    },
+                    [
+                      _c("label", { staticClass: "btn btn-secondary" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.recurs.prioritat,
+                              expression: "recurs.prioritat"
+                            }
+                          ],
+                          attrs: {
+                            type: "radio",
+                            name: "prioridad",
+                            id: "prioridad1",
+                            value: "1",
+                            checked: ""
+                          },
+                          domProps: {
+                            checked: _vm._q(_vm.recurs.prioritat, "1")
+                          },
+                          on: {
+                            change: function($event) {
+                              return _vm.$set(_vm.recurs, "prioritat", "1")
+                            }
+                          }
+                        }),
+                        _vm._v("\n                  1\n                ")
+                      ]),
+                      _vm._v(" "),
+                      _c("label", { staticClass: "btn btn-secondary" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.recurs.prioritat,
+                              expression: "recurs.prioritat"
+                            }
+                          ],
+                          attrs: {
+                            type: "radio",
+                            name: "prioridad",
+                            id: "prioridad2",
+                            value: "2"
+                          },
+                          domProps: {
+                            checked: _vm._q(_vm.recurs.prioritat, "2")
+                          },
+                          on: {
+                            change: function($event) {
+                              return _vm.$set(_vm.recurs, "prioritat", "2")
+                            }
+                          }
+                        }),
+                        _vm._v("\n                  2\n                ")
+                      ]),
+                      _vm._v(" "),
+                      _c("label", { staticClass: "btn btn-secondary" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.recurs.prioritat,
+                              expression: "recurs.prioritat"
+                            }
+                          ],
+                          attrs: {
+                            type: "radio",
+                            name: "prioridad",
+                            id: "prioridad3",
+                            value: "3"
+                          },
+                          domProps: {
+                            checked: _vm._q(_vm.recurs.prioritat, "3")
+                          },
+                          on: {
+                            change: function($event) {
+                              return _vm.$set(_vm.recurs, "prioritat", "3")
+                            }
+                          }
+                        }),
+                        _vm._v("\n                  3\n                ")
+                      ]),
+                      _vm._v(" "),
+                      _c("label", { staticClass: "btn btn-secondary" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.recurs.prioritat,
+                              expression: "recurs.prioritat"
+                            }
+                          ],
+                          attrs: {
+                            type: "radio",
+                            name: "prioridad",
+                            id: "prioridad4",
+                            value: "4"
+                          },
+                          domProps: {
+                            checked: _vm._q(_vm.recurs.prioritat, "4")
+                          },
+                          on: {
+                            change: function($event) {
+                              return _vm.$set(_vm.recurs, "prioritat", "4")
+                            }
+                          }
+                        }),
+                        _vm._v("\n                  4\n                ")
+                      ])
+                    ]
+                  )
+                ])
+              ])
+            ])
+          ])
+        ])
+      ]
     )
   ])
 }
@@ -40426,44 +41344,238 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form row" }, [
-      _c("label", { staticClass: "col-2 mt-2", attrs: { for: "direccion" } }, [
-        _vm._v("Dirección")
+    return _c("div", { staticClass: "form-group row" }, [
+      _c("label", { staticClass: "col-1 mt-1", attrs: { for: "consejo" } }, [
+        _vm._v("Consejos")
       ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-5" }, [
-        _c("input", { staticClass: "form-control", attrs: { type: "text" } })
-      ]),
-      _vm._v(" "),
-      _c(
-        "label",
-        { staticClass: "col-2 mt-2", attrs: { for: "numeroDireccion" } },
-        [_vm._v("Número")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-2" }, [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "number", min: "1" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-row mt-3 mb-3" }, [
-      _c(
-        "label",
-        { staticClass: "col-2", attrs: { for: "complementoDireccion" } },
-        [_vm._v("Complemento Dirección")]
-      ),
       _vm._v(" "),
       _c("div", { staticClass: "col-9" }, [
-        _c("textarea", {
+        _c("div", { staticClass: "form-check" }, [
+          _c("input", {
+            staticClass: "form-check-input",
+            attrs: { type: "checkbox", id: "consejo1" }
+          }),
+          _vm._v(" "),
+          _c(
+            "label",
+            { staticClass: "form-check-label", attrs: { for: "consejo1" } },
+            [_vm._v("Tiene conocimientos de primeros auxilios")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-check" }, [
+          _c("input", {
+            staticClass: "form-check-input",
+            attrs: { type: "checkbox", id: "consejo2" }
+          }),
+          _vm._v(" "),
+          _c(
+            "label",
+            { staticClass: "form-check-label", attrs: { for: "consejo2" } },
+            [
+              _vm._v(
+                "Puede pedir ayuda a algún peatón, persona que le\n                  acompañe..."
+              )
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-check" }, [
+          _c("input", {
+            staticClass: "form-check-input",
+            attrs: { type: "checkbox", id: "consejo3" }
+          }),
+          _vm._v(" "),
+          _c(
+            "label",
+            { staticClass: "form-check-label", attrs: { for: "consejo3" } },
+            [_vm._v("Puede señalizar la zona del accidente/incidente")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-check" }, [
+          _c("input", {
+            staticClass: "form-check-input",
+            attrs: { type: "checkbox", id: "consejo4" }
+          }),
+          _vm._v(" "),
+          _c(
+            "label",
+            { staticClass: "form-check-label", attrs: { for: "consejo4" } },
+            [_vm._v("Aflojarse la ropa")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-check" }, [
+          _c("input", {
+            staticClass: "form-check-input",
+            attrs: { type: "checkbox", id: "consejo5" }
+          }),
+          _vm._v(" "),
+          _c(
+            "label",
+            { staticClass: "form-check-label", attrs: { for: "consejo5" } },
+            [
+              _vm._v(
+                "Acercarse al coche y desconectar las llaves de\n                  contacto"
+              )
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-check" }, [
+          _c("input", {
+            staticClass: "form-check-input",
+            attrs: { type: "checkbox", id: "consejo6" }
+          }),
+          _vm._v(" "),
+          _c(
+            "label",
+            { staticClass: "form-check-label", attrs: { for: "consejo6" } },
+            [_vm._v("Mantener el teléfono en manos libres")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-check" }, [
+          _c("input", {
+            staticClass: "form-check-input",
+            attrs: { type: "checkbox", id: "consejo7" }
+          }),
+          _vm._v(" "),
+          _c(
+            "label",
+            { staticClass: "form-check-label", attrs: { for: "consejo7" } },
+            [_vm._v("No mover a la persona o víctimas")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-check" }, [
+          _c("input", {
+            staticClass: "form-check-input",
+            attrs: { type: "checkbox", id: "consejo8" }
+          }),
+          _vm._v(" "),
+          _c(
+            "label",
+            { staticClass: "form-check-label", attrs: { for: "consejo8" } },
+            [_vm._v("No dejar sola a la persona")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-check" }, [
+          _c("input", {
+            staticClass: "form-check-input",
+            attrs: { type: "checkbox", id: "consejo9" }
+          }),
+          _vm._v(" "),
+          _c(
+            "label",
+            { staticClass: "form-check-label", attrs: { for: "consejo9" } },
+            [_vm._v("No dar de comer ni de beber")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-check" }, [
+          _c("input", {
+            staticClass: "form-check-input",
+            attrs: { type: "checkbox", id: "consejo10" }
+          }),
+          _vm._v(" "),
+          _c(
+            "label",
+            { staticClass: "form-check-label", attrs: { for: "consejo10" } },
+            [
+              _vm._v(
+                "Poner a la persona en posición lateral de seguridad\n                  (PLS)"
+              )
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-check" }, [
+          _c("input", {
+            staticClass: "form-check-input",
+            attrs: { type: "checkbox", id: "consejo11" }
+          }),
+          _vm._v(" "),
+          _c(
+            "label",
+            { staticClass: "form-check-label", attrs: { for: "consejo11" } },
+            [_vm._v("Si sangra, comprimir la herida con la mano, ropa...")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-check" }, [
+          _c("input", {
+            staticClass: "form-check-input",
+            attrs: { type: "checkbox", id: "consejo12" }
+          }),
+          _vm._v(" "),
+          _c(
+            "label",
+            { staticClass: "form-check-label", attrs: { for: "consejo12" } },
+            [_vm._v("Poner cómoda a la víctima")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-check" }, [
+          _c("input", {
+            staticClass: "form-check-input",
+            attrs: { type: "checkbox", id: "other" }
+          }),
+          _vm._v(" "),
+          _c(
+            "label",
+            { staticClass: "form-check-label", attrs: { for: "other" } },
+            [_vm._v("Otros")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "col-4 ml-3",
+            attrs: { type: "text", id: "otherValue", name: "other" }
+          })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "custom-control custom-switch" }, [
+      _c("input", {
+        staticClass: "custom-control-input",
+        attrs: { type: "checkbox", id: "recursoSwitch" }
+      }),
+      _vm._v(" "),
+      _c(
+        "label",
+        {
+          staticClass: "custom-control-label",
+          attrs: { for: "recursoSwitch" }
+        },
+        [_vm._v("Activar recurso")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group row mt-3 ml-3" }, [
+      _c(
+        "label",
+        {
+          staticClass: "col-2 col-form-label",
+          attrs: { for: "codigoRecurso" }
+        },
+        [_vm._v("Código del recurso")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-2 mt-1" }, [
+        _c("input", {
           staticClass: "form-control",
-          attrs: { id: "complementoDireccion", rows: "3" }
+          attrs: { type: "text", id: "codigoRecurso" }
         })
       ])
     ])
@@ -40472,765 +41584,78 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container-fluid mt-5" }, [
-      _c("div", { staticClass: "card ml-5 mr-5" }, [
-        _c("div", { staticClass: "card-header" }, [_vm._v("DATOS AFECTADA")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body ml-5" }, [
-          _c("form", [
-            _c("div", { staticClass: "form-group row" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-1 col-form-label",
-                  attrs: { for: "nombreAfectada" }
-                },
-                [_vm._v("Nombre")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-4" }, [
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: { type: "text", id: "nombreAfectada" }
-                })
-              ]),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "col-1 col-form-label ml-4",
-                  attrs: { for: "apellidoAfectada" }
-                },
-                [_vm._v("Apellidos")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-5" }, [
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: { type: "text", id: "apellidoAfectada" }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group row" }, [
-              _c(
-                "label",
-                { staticClass: "col-1 mt-1", attrs: { for: "sexoAfectada" } },
-                [_vm._v("Sexo")]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "btn-group btn-group-toggle col-4",
-                  attrs: { "data-toggle": "buttons" }
-                },
-                [
-                  _c("label", { staticClass: "btn btn-secondary" }, [
-                    _c("input", {
-                      attrs: {
-                        type: "radio",
-                        name: "sexoAfectada",
-                        id: "mujer",
-                        value: "mujer",
-                        checked: ""
-                      }
-                    }),
-                    _vm._v("\n                  Mujer\n                ")
-                  ]),
-                  _vm._v(" "),
-                  _c("label", { staticClass: "btn btn-secondary" }, [
-                    _c("input", {
-                      attrs: {
-                        type: "radio",
-                        name: "sexoAfectada",
-                        id: "hombre",
-                        value: "hombre"
-                      }
-                    }),
-                    _vm._v("\n                  Hombre\n                ")
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "col-1 mt-1 ml-4",
-                  attrs: { for: "edadAfectada" }
-                },
-                [_vm._v("Edad")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-2" }, [
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: { type: "number", min: "1" }
-                })
-              ]),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "col-1 mt-1",
-                  attrs: { for: "telefonoAfectada" }
-                },
-                [_vm._v("Teléfono")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-2" }, [
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: { type: "number" }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form row" }, [
-              _c(
-                "label",
-                { staticClass: "col-1 mt-2", attrs: { for: "direccion" } },
-                [_vm._v("CIP")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-5" }, [
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: { type: "text" }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-4" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary float-right",
-                    attrs: { type: "button" }
-                  },
-                  [
-                    _c("i", {
-                      staticClass: "fa fa-plus-circle",
-                      attrs: { "aria-hidden": "true" }
-                    }),
-                    _vm._v(
-                      " AÑADIR\n                  AFECTADA\n                "
-                    )
-                  ]
-                )
-              ])
-            ])
-          ])
-        ])
-      ]),
+    return _c("div", { staticClass: "form-group row ml-3" }, [
+      _c(
+        "label",
+        { staticClass: "col-2 mt-1", attrs: { for: "tipoRecurso" } },
+        [_vm._v("Tipo de recurso")]
+      ),
       _vm._v(" "),
-      _c("div", { staticClass: "card ml-5 mr-5 mt-3" }, [
-        _c("div", { staticClass: "card-header" }, [_vm._v("DATOS INCIDENTE")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body ml-5" }, [
-          _c("form", [
-            _c("div", { staticClass: "form-group row" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-1 col-form-label",
-                  attrs: { for: "fechaIncidente" }
-                },
-                [_vm._v("Fecha")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-2" }, [
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "date",
-                    value: "2020-04-01",
-                    id: "fechaIncidente"
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "col-1 col-form-label ml-5",
-                  attrs: { for: "horaIncidente" }
-                },
-                [_vm._v("Hora")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-2" }, [
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "time",
-                    value: "13:45:00",
-                    id: "horaIncidente"
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group row" }, [
-              _c(
-                "label",
-                { staticClass: "col-1 mt-1", attrs: { for: "tipoIncidencia" } },
-                [_vm._v("Sexo")]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "btn-group btn-group-toggle col-9",
-                  attrs: { "data-toggle": "buttons" }
-                },
-                [
-                  _c("label", { staticClass: "btn btn-secondary" }, [
-                    _c("input", {
-                      attrs: {
-                        type: "radio",
-                        name: "tipoIncidencia",
-                        id: "accidente",
-                        value: "accidente",
-                        checked: ""
-                      }
-                    }),
-                    _vm._v("\n                  Accidente\n                ")
-                  ]),
-                  _vm._v(" "),
-                  _c("label", { staticClass: "btn btn-secondary" }, [
-                    _c("input", {
-                      attrs: {
-                        type: "radio",
-                        name: "tipoIncidencia",
-                        id: "traumatismo",
-                        value: "traumatismo"
-                      }
-                    }),
-                    _vm._v("\n                  Traumatismo\n                ")
-                  ]),
-                  _vm._v(" "),
-                  _c("label", { staticClass: "btn btn-secondary" }, [
-                    _c("input", {
-                      attrs: {
-                        type: "radio",
-                        name: "tipoIncidencia",
-                        id: "publico",
-                        value: "publico"
-                      }
-                    }),
-                    _vm._v(
-                      "\n                  Enfermedad en lugar público\n                "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("label", { staticClass: "btn btn-secondary" }, [
-                    _c("input", {
-                      attrs: {
-                        type: "radio",
-                        name: "tipoIncidencia",
-                        id: "domicilio",
-                        value: "domicilio"
-                      }
-                    }),
-                    _vm._v(
-                      "\n                  Enfermedad domiciliaria\n                "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("label", { staticClass: "btn btn-secondary" }, [
-                    _c("input", {
-                      attrs: {
-                        type: "radio",
-                        name: "tipoIncidencia",
-                        id: "consulta",
-                        value: "domicilio"
-                      }
-                    }),
-                    _vm._v(
-                      "\n                  Consulta médica\n                "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("label", { staticClass: "btn btn-secondary" }, [
-                    _c("input", {
-                      attrs: {
-                        type: "radio",
-                        name: "tipoAlertante",
-                        id: "transporte",
-                        value: "transporte"
-                      }
-                    }),
-                    _vm._v(
-                      "\n                  Transporte sanitario\n                "
-                    )
-                  ])
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-row mt-3 mb-3" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-1",
-                  attrs: { for: "descripcionIncidente" }
-                },
-                [_vm._v("Descripción del incidente")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-9" }, [
-                _c("textarea", {
-                  staticClass: "form-control",
-                  attrs: { id: "descripcionIncidente", rows: "3" }
-                })
-              ])
-            ])
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card ml-5 mr-5 mt-3" }, [
-      _c("div", { staticClass: "card-header" }, [_vm._v("RESPUESTA")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-body ml-5" }, [
-        _c("form", [
-          _c("div", { staticClass: "form-group row" }, [
-            _c(
-              "label",
-              { staticClass: "col-1 mt-1", attrs: { for: "consejo" } },
-              [_vm._v("Consejos")]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-9" }, [
-              _c("div", { staticClass: "form-check" }, [
-                _c("input", {
-                  staticClass: "form-check-input",
-                  attrs: { type: "checkbox", id: "consejo1" }
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "form-check-label",
-                    attrs: { for: "consejo1" }
-                  },
-                  [_vm._v("Tiene conocimientos de primeros auxilios")]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-check" }, [
-                _c("input", {
-                  staticClass: "form-check-input",
-                  attrs: { type: "checkbox", id: "consejo2" }
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "form-check-label",
-                    attrs: { for: "consejo2" }
-                  },
-                  [
-                    _vm._v(
-                      "Puede pedir ayuda a algún peatón, persona que le\n                  acompañe..."
-                    )
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-check" }, [
-                _c("input", {
-                  staticClass: "form-check-input",
-                  attrs: { type: "checkbox", id: "consejo3" }
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "form-check-label",
-                    attrs: { for: "consejo3" }
-                  },
-                  [_vm._v("Puede señalizar la zona del accidente/incidente")]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-check" }, [
-                _c("input", {
-                  staticClass: "form-check-input",
-                  attrs: { type: "checkbox", id: "consejo4" }
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "form-check-label",
-                    attrs: { for: "consejo4" }
-                  },
-                  [_vm._v("Aflojarse la ropa")]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-check" }, [
-                _c("input", {
-                  staticClass: "form-check-input",
-                  attrs: { type: "checkbox", id: "consejo5" }
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "form-check-label",
-                    attrs: { for: "consejo5" }
-                  },
-                  [
-                    _vm._v(
-                      "Acercarse al coche y desconectar las llaves de\n                  contacto"
-                    )
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-check" }, [
-                _c("input", {
-                  staticClass: "form-check-input",
-                  attrs: { type: "checkbox", id: "consejo6" }
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "form-check-label",
-                    attrs: { for: "consejo6" }
-                  },
-                  [_vm._v("Mantener el teléfono en manos libres")]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-check" }, [
-                _c("input", {
-                  staticClass: "form-check-input",
-                  attrs: { type: "checkbox", id: "consejo7" }
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "form-check-label",
-                    attrs: { for: "consejo7" }
-                  },
-                  [_vm._v("No mover a la persona o víctimas")]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-check" }, [
-                _c("input", {
-                  staticClass: "form-check-input",
-                  attrs: { type: "checkbox", id: "consejo8" }
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "form-check-label",
-                    attrs: { for: "consejo8" }
-                  },
-                  [_vm._v("No dejar sola a la persona")]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-check" }, [
-                _c("input", {
-                  staticClass: "form-check-input",
-                  attrs: { type: "checkbox", id: "consejo9" }
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "form-check-label",
-                    attrs: { for: "consejo9" }
-                  },
-                  [_vm._v("No dar de comer ni de beber")]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-check" }, [
-                _c("input", {
-                  staticClass: "form-check-input",
-                  attrs: { type: "checkbox", id: "consejo10" }
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "form-check-label",
-                    attrs: { for: "consejo10" }
-                  },
-                  [
-                    _vm._v(
-                      "Poner a la persona en posición lateral de seguridad\n                  (PLS)"
-                    )
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-check" }, [
-                _c("input", {
-                  staticClass: "form-check-input",
-                  attrs: { type: "checkbox", id: "consejo11" }
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "form-check-label",
-                    attrs: { for: "consejo11" }
-                  },
-                  [
-                    _vm._v(
-                      "Si sangra, comprimir la herida con la mano, ropa..."
-                    )
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-check" }, [
-                _c("input", {
-                  staticClass: "form-check-input",
-                  attrs: { type: "checkbox", id: "consejo12" }
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "form-check-label",
-                    attrs: { for: "consejo12" }
-                  },
-                  [_vm._v("Poner cómoda a la víctima")]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-check" }, [
-                _c("input", {
-                  staticClass: "form-check-input",
-                  attrs: { type: "checkbox", id: "other" }
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  { staticClass: "form-check-label", attrs: { for: "other" } },
-                  [_vm._v("Otros")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "col-4 ml-3",
-                  attrs: { type: "text", id: "otherValue", name: "other" }
-                })
-              ])
-            ])
+      _c(
+        "div",
+        {
+          staticClass: "btn-group btn-group-toggle col-9",
+          attrs: { "data-toggle": "buttons" }
+        },
+        [
+          _c("label", { staticClass: "btn btn-secondary" }, [
+            _c("input", {
+              attrs: {
+                type: "radio",
+                name: "tipoRecurso",
+                id: "mike",
+                value: "mike",
+                checked: ""
+              }
+            }),
+            _vm._v(
+              "\n                  Amb. Medicalizada-Mike\n                "
+            )
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "form-group row mt-4" }, [
-            _c("div", { staticClass: "custom-control custom-switch" }, [
-              _c("input", {
-                staticClass: "custom-control-input",
-                attrs: { type: "checkbox", id: "recursoSwitch" }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-control-label",
-                  attrs: { for: "recursoSwitch" }
-                },
-                [_vm._v("Activar recurso")]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-10" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-primary float-right mr-0",
-                  attrs: { type: "button" }
-                },
-                [
-                  _c("i", {
-                    staticClass: "fa fa-plus-circle",
-                    attrs: { "aria-hidden": "true" }
-                  }),
-                  _vm._v(" AÑADIR\n                RECURSO\n              ")
-                ]
-              )
-            ])
+          _c("label", { staticClass: "btn btn-secondary" }, [
+            _c("input", {
+              attrs: {
+                type: "radio",
+                name: "tipoRecurso",
+                id: "india",
+                value: "india"
+              }
+            }),
+            _vm._v(
+              "\n                  Amb. Sanitarizada-India\n                "
+            )
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "card mt-2" }, [
-            _c("div", { staticClass: "form-group row mt-3 ml-3" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-2 col-form-label",
-                  attrs: { for: "codigoRecurso" }
-                },
-                [_vm._v("Código del recurso")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-2 mt-1" }, [
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: { type: "text", id: "codigoRecurso" }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group row ml-3" }, [
-              _c(
-                "label",
-                { staticClass: "col-2 mt-1", attrs: { for: "tipoRecurso" } },
-                [_vm._v("Tipo de recurso")]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "btn-group btn-group-toggle col-9",
-                  attrs: { "data-toggle": "buttons" }
-                },
-                [
-                  _c("label", { staticClass: "btn btn-secondary" }, [
-                    _c("input", {
-                      attrs: {
-                        type: "radio",
-                        name: "tipoRecurso",
-                        id: "mike",
-                        value: "mike",
-                        checked: ""
-                      }
-                    }),
-                    _vm._v(
-                      "\n                  Amb. Medicalizada-Mike\n                "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("label", { staticClass: "btn btn-secondary" }, [
-                    _c("input", {
-                      attrs: {
-                        type: "radio",
-                        name: "tipoRecurso",
-                        id: "india",
-                        value: "india"
-                      }
-                    }),
-                    _vm._v(
-                      "\n                  Amb. Sanitarizada-India\n                "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("label", { staticClass: "btn btn-secondary" }, [
-                    _c("input", {
-                      attrs: {
-                        type: "radio",
-                        name: "tipoRecurso",
-                        id: "tango",
-                        value: "tango"
-                      }
-                    }),
-                    _vm._v(
-                      "\n                  Amb. Asistencia-Tango\n                "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("label", { staticClass: "btn btn-secondary" }, [
-                    _c("input", {
-                      attrs: {
-                        type: "radio",
-                        name: "tipoRecurso",
-                        id: "helicoptero",
-                        value: "helicoptero"
-                      }
-                    }),
-                    _vm._v(
-                      "\n                  Helicòptero medicalizado\n                "
-                    )
-                  ])
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group row ml-3" }, [
-              _c(
-                "label",
-                { staticClass: "col-2 mt-1", attrs: { for: "prioridad" } },
-                [_vm._v("Prioridad")]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "btn-group btn-group-toggle col-9",
-                  attrs: { "data-toggle": "buttons" }
-                },
-                [
-                  _c("label", { staticClass: "btn btn-secondary" }, [
-                    _c("input", {
-                      attrs: {
-                        type: "radio",
-                        name: "prioridad",
-                        id: "prioridad1",
-                        value: "prioridad1",
-                        checked: ""
-                      }
-                    }),
-                    _vm._v("\n                  1\n                ")
-                  ]),
-                  _vm._v(" "),
-                  _c("label", { staticClass: "btn btn-secondary" }, [
-                    _c("input", {
-                      attrs: {
-                        type: "radio",
-                        name: "prioridad",
-                        id: "prioridad2",
-                        value: "prioridad2"
-                      }
-                    }),
-                    _vm._v("\n                  2\n                ")
-                  ]),
-                  _vm._v(" "),
-                  _c("label", { staticClass: "btn btn-secondary" }, [
-                    _c("input", {
-                      attrs: {
-                        type: "radio",
-                        name: "prioridad",
-                        id: "prioridad3",
-                        value: "prioridad3"
-                      }
-                    }),
-                    _vm._v("\n                  3\n                ")
-                  ]),
-                  _vm._v(" "),
-                  _c("label", { staticClass: "btn btn-secondary" }, [
-                    _c("input", {
-                      attrs: {
-                        type: "radio",
-                        name: "prioridad",
-                        id: "prioridad4",
-                        value: "prioridad4"
-                      }
-                    }),
-                    _vm._v("\n                  4\n                ")
-                  ])
-                ]
-              )
-            ])
+          _c("label", { staticClass: "btn btn-secondary" }, [
+            _c("input", {
+              attrs: {
+                type: "radio",
+                name: "tipoRecurso",
+                id: "tango",
+                value: "tango"
+              }
+            }),
+            _vm._v(
+              "\n                  Amb. Asistencia-Tango\n                "
+            )
+          ]),
+          _vm._v(" "),
+          _c("label", { staticClass: "btn btn-secondary" }, [
+            _c("input", {
+              attrs: {
+                type: "radio",
+                name: "tipoRecurso",
+                id: "helicoptero",
+                value: "helicoptero"
+              }
+            }),
+            _vm._v(
+              "\n                  Helicòptero medicalizado\n                "
+            )
           ])
-        ])
-      ])
+        ]
+      )
     ])
   }
 ]
