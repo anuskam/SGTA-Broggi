@@ -36,7 +36,7 @@
     <div v-show="currentTab == 1">
       <div class="container-fluid mt-5">
         <div class="card ml-5 mr-5">
-          <div class="card-header">DATOS ALERTANTE</div>
+          <div class="card-header font-weight-bold">DATOS ALERTANTE</div>
           <div class="card-body ml-5">
             <form>
               <div class="form-group row">
@@ -186,7 +186,7 @@
     <div v-show="currentTab == 2">
       <div class="container-fluid mt-5">
         <div class="card ml-5 mr-5">
-          <div class="card-header">DATOS AFECTADA</div>
+          <div class="card-header font-weight-bold">DATOS AFECTADA</div>
           <div class="card-body ml-5">
             <form>
               <!-- NOMBRE AFECTADA -->
@@ -212,7 +212,7 @@
                 </div>
               </div>
 
-              <!-- SEXO, EDAD, TELÉFONO -->
+              <!-- SEXO, EDAD -->
               <div class="form-group row">
                 <label for="sexoAfectada" class="col-1 mt-1">Sexo</label>
                 <div
@@ -244,7 +244,7 @@
 
                 <label for="edadAfectada" class="col-1 mt-1 ml-4">Edad</label>
                 <div class="col-2">
-                  <input type="number" class="form-control" min="1" v-model="afectat.edat" />
+                  <input type="number" class="form-control" min="1" max="130" v-model="afectat.edat" />
                 </div>
               </div>
               <!-- CIP -->
@@ -267,7 +267,7 @@
         </div>
 
         <div class="card ml-5 mr-5 mt-3">
-          <div class="card-header">DATOS INCIDENTE</div>
+          <div class="card-header font-weight-bold">DATOS INCIDENTE</div>
           <div class="card-body ml-5">
             <form>
               <!-- FECHA -->
@@ -297,9 +297,9 @@
 
               <!-- INCIDENCIAS -->
               <div class="form-group row">
-                <label for="tipoIncidencia" class="col-1 mt-1">Tipo</label>
+                <label for="tipoIncidencia" class="col-1 mt-1">Tipo de incidente</label>
                 <div
-                  class="btn-group btn-group-toggle col-9"
+                  class="btn-group btn-group-toggle col-10"
                   data-toggle="buttons"
                 >
                   <label class="btn btn-secondary">
@@ -371,7 +371,7 @@
                 <label for="descripcionIncidente" class="col-1"
                   >Descripción del incidente</label
                 >
-                <div class="col-9">
+                <div class="col-10">
                   <textarea
                     class="form-control"
                     id="descripcionIncidente"
@@ -388,148 +388,85 @@
 
     <div v-show="currentTab == 3">
       <div class="card ml-5 mr-5 mt-3">
-        <div class="card-header">RESPUESTA</div>
+        <div class="card-header font-weight-bold">RESPUESTA</div>
         <div class="card-body ml-5">
           <form>
             <!-- CONSEJOS -->
             <div class="form-group row">
               <label for="consejo" class="col-1 mt-1">Consejos</label>
               <div class="col-9">
-                <div class="form-check">
-                  <input
-                    type="checkbox"
-                    class="form-check-input"
-                    id="consejo1"
-                  />
-                  <label class="form-check-label" for="consejo1"
-                    >Tiene conocimientos de primeros auxilios</label
-                  >
-                </div>
+                <div class="parentGrid">
+                  <div class="form-check mb-2">
+                    <input type="checkbox" class="form-check-input" id="consejo1"/>
+                    <label class="form-check-label" for="consejo1">Tiene conocimientos de primeros auxilios</label>
+                  </div>
 
-                <div class="form-check">
-                  <input
-                    type="checkbox"
-                    class="form-check-input"
-                    id="consejo2"
-                  />
-                  <label class="form-check-label" for="consejo2"
-                    >Puede pedir ayuda a algún peatón, persona que le
-                    acompañe...</label
-                  >
-                </div>
-                <div class="form-check">
-                  <input
-                    type="checkbox"
-                    class="form-check-input"
-                    id="consejo3"
-                  />
-                  <label class="form-check-label" for="consejo3"
-                    >Puede señalizar la zona del accidente/incidente</label
-                  >
-                </div>
-                <div class="form-check">
-                  <input
-                    type="checkbox"
-                    class="form-check-input"
-                    id="consejo4"
-                  />
-                  <label class="form-check-label" for="consejo4"
-                    >Aflojarse la ropa</label
-                  >
-                </div>
-                <div class="form-check">
-                  <input
-                    type="checkbox"
-                    class="form-check-input"
-                    id="consejo5"
-                  />
-                  <label class="form-check-label" for="consejo5"
-                    >Acercarse al coche y desconectar las llaves de
-                    contacto</label
-                  >
-                </div>
-                <div class="form-check">
-                  <input
-                    type="checkbox"
-                    class="form-check-input"
-                    id="consejo6"
-                  />
-                  <label class="form-check-label" for="consejo6"
-                    >Mantener el teléfono en manos libres</label
-                  >
-                </div>
-                <div class="form-check">
-                  <input
-                    type="checkbox"
-                    class="form-check-input"
-                    id="consejo7"
-                  />
-                  <label class="form-check-label" for="consejo7"
-                    >No mover a la persona o víctimas</label
-                  >
-                </div>
-                <div class="form-check">
-                  <input
-                    type="checkbox"
-                    class="form-check-input"
-                    id="consejo8"
-                  />
-                  <label class="form-check-label" for="consejo8"
-                    >No dejar sola a la persona</label
-                  >
-                </div>
-                <div class="form-check">
-                  <input
-                    type="checkbox"
-                    class="form-check-input"
-                    id="consejo9"
-                  />
-                  <label class="form-check-label" for="consejo9"
-                    >No dar de comer ni de beber</label
-                  >
-                </div>
-                <div class="form-check">
-                  <input
-                    type="checkbox"
-                    class="form-check-input"
-                    id="consejo10"
-                  />
-                  <label class="form-check-label" for="consejo10"
-                    >Poner a la persona en posición lateral de seguridad
-                    (PLS)</label
-                  >
-                </div>
-                <div class="form-check">
-                  <input
-                    type="checkbox"
-                    class="form-check-input"
-                    id="consejo11"
-                  />
-                  <label class="form-check-label" for="consejo11"
-                    >Si sangra, comprimir la herida con la mano, ropa...</label
-                  >
-                </div>
-                <div class="form-check">
-                  <input
-                    type="checkbox"
-                    class="form-check-input"
-                    id="consejo12"
-                  />
-                  <label class="form-check-label" for="consejo12"
-                    >Poner cómoda a la víctima</label
-                  >
-                </div>
+                  <div class="form-check mb-2">
+                    <input type="checkbox" class="form-check-input" id="consejo2"/>
+                    <label class="form-check-label" for="consejo2">Puede pedir ayuda a algún peatón, persona que le acompañe...</label>
+                  </div>
 
-                <div class="form-check">
-                  <input type="checkbox" class="form-check-input" id="other" />
-                  <label class="form-check-label" for="other">Otros</label>
+                  <div class="form-check mb-2">
+                    <input type="checkbox" class="form-check-input" id="consejo3"/>
+                    <label class="form-check-label" for="consejo3">Puede señalizar la zona del accidente/incidente</label>
+                  </div>
 
-                  <input
-                    type="text"
-                    class="col-4 ml-3"
-                    id="otherValue"
-                    name="other"
-                  />
+                  <div class="form-check mb-2">
+                    <input type="checkbox" class="form-check-input" id="consejo4"/>
+                    <label class="form-check-label" for="consejo4">Aflojarse la ropa</label>
+                  </div>
+
+                  <div class="form-check mb-2">
+                    <input type="checkbox" class="form-check-input" id="consejo5"/>
+                    <label class="form-check-label" for="consejo5">Acercarse al coche y desconectar las llaves de contacto</label>
+                  </div>
+
+                  <div class="form-check mb-2">
+                    <input type="checkbox" class="form-check-input" id="consejo6"/>
+                    <label class="form-check-label" for="consejo6">Mantener el teléfono en manos libres</label>
+                  </div>
+
+                  <div class="form-check mb-2">
+                    <input type="checkbox" class="form-check-input" id="consejo7"/>
+                    <label class="form-check-label" for="consejo7">No mover a la persona o víctimas</label>
+                  </div>
+
+                  <div class="form-check mb-2">
+                    <input type="checkbox" class="form-check-input" id="consejo8"/>
+                    <label class="form-check-label" for="consejo8">No dejar sola a la persona</label>
+                  </div>
+
+                  <div class="form-check mb-2">
+                    <input type="checkbox" class="form-check-input" id="consejo9"/>
+                    <label class="form-check-label" for="consejo9">No dar de comer ni de beber</label>
+                  </div>
+
+                  <div class="form-check mb-2">
+                    <input type="checkbox" class="form-check-input" id="consejo10"/>
+                    <label class="form-check-label" for="consejo10">Poner a la persona en posición lateral de seguridad (PLS)</label>
+                  </div>
+
+                  <div class="form-check mb-2">
+                    <input type="checkbox" class="form-check-input" id="consejo11"/>
+                    <label class="form-check-label" for="consejo11">Si sangra, comprimir la herida con la mano, ropa...</label>
+                  </div>
+
+                  <div class="form-check mb-2">
+                    <input type="checkbox" class="form-check-input" id="consejo12"/>
+                    <label class="form-check-label" for="consejo12">Poner cómoda a la víctima</label>
+                  </div>
+
+                  <div class="form-check mb-2">
+                    <input type="checkbox" class="form-check-input" id="consejo13"/>
+                    <label class="form-check-label" for="consejo13">Poner cómoda a la víctima</label>
+                  </div>
+
+                  <div class="form-check mb-2">
+                    <input type="checkbox" class="form-check-input" id="other">
+                    <label class="form-check-label" for="other">Otros</label>
+
+                    <input type="text" class="col-9 ml-3" id="otherValue" name="other">
+                  </div>
                 </div>
               </div>
             </div>
@@ -895,6 +832,14 @@ export default {
 
 .btn-secondary {
   border-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.parentGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 #tabButtons{
