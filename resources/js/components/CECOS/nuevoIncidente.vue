@@ -279,6 +279,7 @@
                       id="mujer"
                       value="2"
                       v-model="afectat.sexes_id"
+                      checked = "checked"
                     />
                     Mujer
                   </label>
@@ -1143,21 +1144,21 @@ export default {
 }
 
 button {
-  background-color: #e3177d !important;
-  border: 1px solid black !important;
+  background-color: #e3177d;
+  border: 1px solid black;
 }
 
 #afectadasList {
-  background-color: #15acc4 !important;
+  background-color: #15acc4;
 }
 
 .tabButton{
-    background-color: white !important;
-    border: 0 !important;
+    background-color: white;
+    border: 0;
 }
 
 .selectedTab{
-    background-color: #e3177d !important;
-    border: 1px solid black !important;
+    background-color: #e3177d;
+    border: 1px solid black;
 }
 </style>
