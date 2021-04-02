@@ -31,7 +31,7 @@
       </button>
     </div>
 
-    <div v-if="currentTab == 1">
+    <div v-show="currentTab == 1">
       <div class="container-fluid mt-5">
         <div class="card ml-5 mr-5">
           <div class="card-header">DATOS ALERTANTE</div>
@@ -50,7 +50,8 @@
                       type="radio"
                       name="tipoAlertante"
                       id="centroSanitario"
-                      value="centroSanitario"
+                      value="1"
+                      v-model="alertant.tipus_alertants_id"
                       checked
                     />
                     Centro Sanitario
@@ -60,7 +61,8 @@
                       type="radio"
                       name="tipoAlertante"
                       id="afectada"
-                      value="afectada"
+                      value="2"
+                      v-model="alertant.tipus_alertants_id"
                     />
                     Afectada
                   </label>
@@ -69,7 +71,8 @@
                       type="radio"
                       name="tipoAlertante"
                       id="entornoAfectada"
-                      value="entornoAfectada"
+                      value="3"
+                      v-model="alertant.tipus_alertants_id"
                     />
                     Entorno Afectada
                   </label>
@@ -78,7 +81,8 @@
                       type="radio"
                       name="tipoAlertante"
                       id="vip"
-                      value="vip"
+                      value="4"
+                      v-model="alertant.tipus_alertants_id"
                     />
                     VIP
                   </label>
@@ -87,7 +91,8 @@
                       type="radio"
                       name="tipoAlertante"
                       id="accidental"
-                      value="accidental"
+                      value="5"
+                      v-model="alertant.tipus_alertants_id"
                     />
                     Accidental
                   </label>
@@ -102,15 +107,15 @@
                 <label for="nombreMedica" class="col-1 col-form-label"
                   >Nombre</label
                 >
-                <div class="col-3">
-                  <input type="text" class="form-control" id="nombreMedica" />
+                <div class="col-8">
+                  <input type="text" class="form-control" id="nombreMedica" v-model="incidencia.nom_metge" />
                 </div>
-                <label for="apellidoMedica" class="col-1 col-form-label"
+                <!-- <label for="apellidoMedica" class="col-1 col-form-label"
                   >Apellidos</label
-                >
-                <div class="col-4">
+                > -->
+                <!-- <div class="col-4">
                   <input type="text" class="form-control" id="apellidoMedica" />
-                </div>
+                </div> -->
               </div>
 
               <!-- PROVINCIA, MUNICIPIO Y COMARCA -->
@@ -118,35 +123,31 @@
                 <label for="localización" class="col-2 mt-1"
                   >Localización</label
                 >
-                <label for="provincia" class="col-1 mt-1">Provincia</label>
+
+                <label for="municipio" class="col-1 mt-1">Municipio</label>
                 <div class="col-2">
-                  <select class="custom-select" id="provincia" required v-model="provincia">
-                    <option selected disabled value="Selecciona...">Selecciona...</option>
-                    <option v-for="provincia in provincies" :key="provincia.id" :value= "provincia">{{ provincia.nom }}</option>
-                    <!-- <option title="lleida">Lleida</option>
-                    <option title="girona">Girona</option>
-                    <option title="barcelona">Barcelona</option>
-                    <option title="tarragona">Tarragona</option> -->
+                  <select class="custom-select" id="municipio" required v-model="municipi">
+                    <option selected value="Selecciona...">Selecciona...</option>
+                    <option v-for="municipi in municipisFiltered" :key="municipi.id" :value="municipi">{{ municipi.nom }}</option>
                   </select>
                 </div>
 
                 <label for="comarca" class="col-1 mt-1">Comarca</label>
                 <div class="col-2">
                   <select class="custom-select" id="comarca" required v-model="comarca">
-                    <option selected disabled value="Selecciona...">Selecciona...</option>
+                    <option selected value="Selecciona...">Selecciona...</option>
                     <option v-for="comarca in comarquesFiltered" :key="comarca.id" :value="comarca">{{ comarca.nom }}</option>
                   </select>
                 </div>
 
-                <label for="municipio" class="col-1 mt-1">Municipio</label>
+                <label for="provincia" class="col-1 mt-1">Provincia</label>
                 <div class="col-2">
-                  <select class="custom-select" id="municipio" required v-model="municipi">
-                    <option selected disabled value="Selecciona...">Selecciona...</option>
-                    <option v-for="municipi in municipisFiltered" :key="municipi.id" :value="municipi">{{ municipi.nom }}</option>
-                  </select>
+                <select class="custom-select" id="provincia" required v-model="provincia">
+                    <option selected value="Selecciona...">Selecciona...</option>
+                    <option v-for="provincia in provincies" :key="provincia.id" :value= "provincia">{{ provincia.nom }}</option>
+                </select>
                 </div>
-              </div>
-
+            </div>
               <!-- DIRECCIÓN -->
               <div class="form row">
                 <label for="direccion" class="col-2 mt-2">Dirección</label>
@@ -179,7 +180,7 @@
       </div>
     </div>
 
-    <div v-if="currentTab == 2">
+    <div v-show="currentTab == 2">
       <div class="container-fluid mt-5">
         <div class="card ml-5 mr-5">
           <div class="card-header">DATOS AFECTADA</div>
@@ -380,7 +381,7 @@
       </div>
     </div>
 
-    <div v-if="currentTab == 3">
+    <div v-show="currentTab == 3">
       <div class="card ml-5 mr-5 mt-3">
         <div class="card-header">RESPUESTA</div>
         <div class="card-body ml-5">
@@ -684,6 +685,59 @@ export default {
           id: null,
           nom: "Selecciona...",
           comarques_id: null
+      },
+      incidencia: {
+          id: null,
+          num_incident: null,
+          data: null,
+          hora: null,
+          telefon_alertant: null,
+          adreca: null,
+          adreca_complement: null,
+          descripcio: null,
+          nom_metge: null,
+          tipus_incidencies_id: null,
+          alertants_id: null,
+          municipis_id: null,
+          usuaris_id: null,
+      },
+      afectats: [],
+      afectat: {
+          id: null,
+          cip: null,
+          nom: null,
+          cognoms: null,
+          edat: null,
+          te_cip: false,
+          sexes_id: null,
+      },
+      alertant: {
+          id: null,
+          telefon: null,
+          nom: null,
+          cognoms: null,
+          adreca: null,
+          municipis_id: null,
+          tipus_alertants_id: null,
+      },
+      incidencies_has_afectats_array: [],
+      incidencies_has_afectats: {
+          incidencies_id: null,
+          afectats_id: null,
+      },
+      incidencies_has_recursos_array: [],
+      incidencies_has_recursos: {
+          incidencies_id: null,
+          recursos_id: null,
+          hora_activacio: null,
+          hora_mobilitzacio: null,
+          hora_assistencia: null,
+          hora_transport: null,
+          hora_arribada_hospital: null,
+          hora_transferencia: null,
+          hora_finalitzacio: null,
+          prioritat: null,
+          desti: null,
       },
     };
   },

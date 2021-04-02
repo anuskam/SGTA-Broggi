@@ -2620,6 +2620,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2641,6 +2642,59 @@ __webpack_require__.r(__webpack_exports__);
         id: null,
         nom: "Selecciona...",
         comarques_id: null
+      },
+      incidencia: {
+        id: null,
+        num_incident: null,
+        data: null,
+        hora: null,
+        telefon_alertant: null,
+        adreca: null,
+        adreca_complement: null,
+        descripcio: null,
+        nom_metge: null,
+        tipus_incidencies_id: null,
+        alertants_id: null,
+        municipis_id: null,
+        usuaris_id: null
+      },
+      afectats: [],
+      afectat: {
+        id: null,
+        cip: null,
+        nom: null,
+        cognoms: null,
+        edat: null,
+        te_cip: false,
+        sexes_id: null
+      },
+      alertant: {
+        id: null,
+        telefon: null,
+        nom: null,
+        cognoms: null,
+        adreca: null,
+        municipis_id: null,
+        tipus_alertants_id: null
+      },
+      incidencies_has_afectats_array: [],
+      incidencies_has_afectats: {
+        incidencies_id: null,
+        afectats_id: null
+      },
+      incidencies_has_recursos_array: [],
+      incidencies_has_recursos: {
+        incidencies_id: null,
+        recursos_id: null,
+        hora_activacio: null,
+        hora_mobilitzacio: null,
+        hora_assistencia: null,
+        hora_transport: null,
+        hora_arribada_hospital: null,
+        hora_transferencia: null,
+        hora_finalitzacio: null,
+        prioritat: null,
+        desti: null
       }
     };
   },
@@ -39876,365 +39930,498 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _vm.currentTab == 1
-      ? _c("div", [
-          _c("div", { staticClass: "container-fluid mt-5" }, [
-            _c("div", { staticClass: "card ml-5 mr-5" }, [
-              _c("div", { staticClass: "card-header" }, [
-                _vm._v("DATOS ALERTANTE")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-body ml-5" }, [
-                _c("form", [
-                  _vm._m(0),
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.currentTab == 1,
+            expression: "currentTab == 1"
+          }
+        ]
+      },
+      [
+        _c("div", { staticClass: "container-fluid mt-5" }, [
+          _c("div", { staticClass: "card ml-5 mr-5" }, [
+            _c("div", { staticClass: "card-header" }, [
+              _vm._v("DATOS ALERTANTE")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body ml-5" }, [
+              _c("form", [
+                _c("div", { staticClass: "form-group row" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-2 mt-1",
+                      attrs: { for: "tipoAlertante" }
+                    },
+                    [_vm._v("Tipo Alertante")]
+                  ),
                   _vm._v(" "),
-                  _vm._m(1),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "btn-group btn-group-toggle col-9",
+                      attrs: { "data-toggle": "buttons" }
+                    },
+                    [
+                      _c("label", { staticClass: "btn btn-secondary" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.alertant.tipus_alertants_id,
+                              expression: "alertant.tipus_alertants_id"
+                            }
+                          ],
+                          attrs: {
+                            type: "radio",
+                            name: "tipoAlertante",
+                            id: "centroSanitario",
+                            value: "1",
+                            checked: ""
+                          },
+                          domProps: {
+                            checked: _vm._q(
+                              _vm.alertant.tipus_alertants_id,
+                              "1"
+                            )
+                          },
+                          on: {
+                            change: function($event) {
+                              return _vm.$set(
+                                _vm.alertant,
+                                "tipus_alertants_id",
+                                "1"
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(
+                          "\n                  Centro Sanitario\n                "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("label", { staticClass: "btn btn-secondary" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.alertant.tipus_alertants_id,
+                              expression: "alertant.tipus_alertants_id"
+                            }
+                          ],
+                          attrs: {
+                            type: "radio",
+                            name: "tipoAlertante",
+                            id: "afectada",
+                            value: "2"
+                          },
+                          domProps: {
+                            checked: _vm._q(
+                              _vm.alertant.tipus_alertants_id,
+                              "2"
+                            )
+                          },
+                          on: {
+                            change: function($event) {
+                              return _vm.$set(
+                                _vm.alertant,
+                                "tipus_alertants_id",
+                                "2"
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v("\n                  Afectada\n                ")
+                      ]),
+                      _vm._v(" "),
+                      _c("label", { staticClass: "btn btn-secondary" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.alertant.tipus_alertants_id,
+                              expression: "alertant.tipus_alertants_id"
+                            }
+                          ],
+                          attrs: {
+                            type: "radio",
+                            name: "tipoAlertante",
+                            id: "entornoAfectada",
+                            value: "3"
+                          },
+                          domProps: {
+                            checked: _vm._q(
+                              _vm.alertant.tipus_alertants_id,
+                              "3"
+                            )
+                          },
+                          on: {
+                            change: function($event) {
+                              return _vm.$set(
+                                _vm.alertant,
+                                "tipus_alertants_id",
+                                "3"
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(
+                          "\n                  Entorno Afectada\n                "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("label", { staticClass: "btn btn-secondary" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.alertant.tipus_alertants_id,
+                              expression: "alertant.tipus_alertants_id"
+                            }
+                          ],
+                          attrs: {
+                            type: "radio",
+                            name: "tipoAlertante",
+                            id: "vip",
+                            value: "4"
+                          },
+                          domProps: {
+                            checked: _vm._q(
+                              _vm.alertant.tipus_alertants_id,
+                              "4"
+                            )
+                          },
+                          on: {
+                            change: function($event) {
+                              return _vm.$set(
+                                _vm.alertant,
+                                "tipus_alertants_id",
+                                "4"
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v("\n                  VIP\n                ")
+                      ]),
+                      _vm._v(" "),
+                      _c("label", { staticClass: "btn btn-secondary" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.alertant.tipus_alertants_id,
+                              expression: "alertant.tipus_alertants_id"
+                            }
+                          ],
+                          attrs: {
+                            type: "radio",
+                            name: "tipoAlertante",
+                            id: "accidental",
+                            value: "5"
+                          },
+                          domProps: {
+                            checked: _vm._q(
+                              _vm.alertant.tipus_alertants_id,
+                              "5"
+                            )
+                          },
+                          on: {
+                            change: function($event) {
+                              return _vm.$set(
+                                _vm.alertant,
+                                "tipus_alertants_id",
+                                "5"
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(
+                          "\n                  Accidental\n                "
+                        )
+                      ])
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-2 col-form-label",
+                      attrs: { for: "datosMedica" }
+                    },
+                    [_vm._v("Datos médica")]
+                  ),
                   _vm._v(" "),
-                  _c("div", { staticClass: "form-group row" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-2 mt-1",
-                        attrs: { for: "localización" }
-                      },
-                      [_vm._v("Localización")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-1 mt-1",
-                        attrs: { for: "provincia" }
-                      },
-                      [_vm._v("Provincia")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-2" }, [
-                      _c(
-                        "select",
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-1 col-form-label",
+                      attrs: { for: "nombreMedica" }
+                    },
+                    [_vm._v("Nombre")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-8" }, [
+                    _c("input", {
+                      directives: [
                         {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.provincia,
-                              expression: "provincia"
-                            }
-                          ],
-                          staticClass: "custom-select",
-                          attrs: { id: "provincia", required: "" },
-                          on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.provincia = $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            }
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.incidencia.nom_metge,
+                          expression: "incidencia.nom_metge"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text", id: "nombreMedica" },
+                      domProps: { value: _vm.incidencia.nom_metge },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
                           }
-                        },
-                        [
-                          _c(
-                            "option",
-                            {
-                              attrs: {
-                                selected: "",
-                                disabled: "",
-                                value: "Selecciona..."
-                              }
-                            },
-                            [_vm._v("Selecciona...")]
-                          ),
-                          _vm._v(" "),
-                          _vm._l(_vm.provincies, function(provincia) {
-                            return _c(
-                              "option",
-                              {
-                                key: provincia.id,
-                                domProps: { value: provincia }
-                              },
-                              [_vm._v(_vm._s(provincia.nom))]
-                            )
-                          })
-                        ],
-                        2
-                      )
-                    ]),
-                    _vm._v(" "),
+                          _vm.$set(
+                            _vm.incidencia,
+                            "nom_metge",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-2 mt-1",
+                      attrs: { for: "localización" }
+                    },
+                    [_vm._v("Localización")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    { staticClass: "col-1 mt-1", attrs: { for: "municipio" } },
+                    [_vm._v("Municipio")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-2" }, [
                     _c(
-                      "label",
-                      { staticClass: "col-1 mt-1", attrs: { for: "comarca" } },
-                      [_vm._v("Comarca")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-2" }, [
-                      _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.comarca,
-                              expression: "comarca"
-                            }
-                          ],
-                          staticClass: "custom-select",
-                          attrs: { id: "comarca", required: "" },
-                          on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.comarca = $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            }
-                          }
-                        },
-                        [
-                          _c(
-                            "option",
-                            {
-                              attrs: {
-                                selected: "",
-                                disabled: "",
-                                value: "Selecciona..."
-                              }
-                            },
-                            [_vm._v("Selecciona...")]
-                          ),
-                          _vm._v(" "),
-                          _vm._l(_vm.comarquesFiltered, function(comarca) {
-                            return _c(
-                              "option",
-                              { key: comarca.id, domProps: { value: comarca } },
-                              [_vm._v(_vm._s(comarca.nom))]
-                            )
-                          })
-                        ],
-                        2
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "label",
+                      "select",
                       {
-                        staticClass: "col-1 mt-1",
-                        attrs: { for: "municipio" }
-                      },
-                      [_vm._v("Municipio")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-2" }, [
-                      _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.municipi,
-                              expression: "municipi"
-                            }
-                          ],
-                          staticClass: "custom-select",
-                          attrs: { id: "municipio", required: "" },
-                          on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.municipi = $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            }
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.municipi,
+                            expression: "municipi"
                           }
-                        },
-                        [
-                          _c(
-                            "option",
-                            {
-                              attrs: {
-                                selected: "",
-                                disabled: "",
-                                value: "Selecciona..."
-                              }
-                            },
-                            [_vm._v("Selecciona...")]
-                          ),
-                          _vm._v(" "),
-                          _vm._l(_vm.municipisFiltered, function(municipi) {
-                            return _c(
-                              "option",
-                              {
-                                key: municipi.id,
-                                domProps: { value: municipi }
-                              },
-                              [_vm._v(_vm._s(municipi.nom))]
-                            )
-                          })
                         ],
-                        2
-                      )
-                    ])
+                        staticClass: "custom-select",
+                        attrs: { id: "municipio", required: "" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.municipi = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "option",
+                          { attrs: { selected: "", value: "Selecciona..." } },
+                          [_vm._v("Selecciona...")]
+                        ),
+                        _vm._v(" "),
+                        _vm._l(_vm.municipisFiltered, function(municipi) {
+                          return _c(
+                            "option",
+                            { key: municipi.id, domProps: { value: municipi } },
+                            [_vm._v(_vm._s(municipi.nom))]
+                          )
+                        })
+                      ],
+                      2
+                    )
                   ]),
                   _vm._v(" "),
-                  _vm._m(2),
+                  _c(
+                    "label",
+                    { staticClass: "col-1 mt-1", attrs: { for: "comarca" } },
+                    [_vm._v("Comarca")]
+                  ),
                   _vm._v(" "),
-                  _vm._m(3)
-                ])
+                  _c("div", { staticClass: "col-2" }, [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.comarca,
+                            expression: "comarca"
+                          }
+                        ],
+                        staticClass: "custom-select",
+                        attrs: { id: "comarca", required: "" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.comarca = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "option",
+                          { attrs: { selected: "", value: "Selecciona..." } },
+                          [_vm._v("Selecciona...")]
+                        ),
+                        _vm._v(" "),
+                        _vm._l(_vm.comarquesFiltered, function(comarca) {
+                          return _c(
+                            "option",
+                            { key: comarca.id, domProps: { value: comarca } },
+                            [_vm._v(_vm._s(comarca.nom))]
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    { staticClass: "col-1 mt-1", attrs: { for: "provincia" } },
+                    [_vm._v("Provincia")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-2" }, [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.provincia,
+                            expression: "provincia"
+                          }
+                        ],
+                        staticClass: "custom-select",
+                        attrs: { id: "provincia", required: "" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.provincia = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "option",
+                          { attrs: { selected: "", value: "Selecciona..." } },
+                          [_vm._v("Selecciona...")]
+                        ),
+                        _vm._v(" "),
+                        _vm._l(_vm.provincies, function(provincia) {
+                          return _c(
+                            "option",
+                            {
+                              key: provincia.id,
+                              domProps: { value: provincia }
+                            },
+                            [_vm._v(_vm._s(provincia.nom))]
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm._m(0),
+                _vm._v(" "),
+                _vm._m(1)
               ])
             ])
           ])
         ])
-      : _vm._e(),
+      ]
+    ),
     _vm._v(" "),
-    _vm.currentTab == 2 ? _c("div", [_vm._m(4)]) : _vm._e(),
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.currentTab == 2,
+            expression: "currentTab == 2"
+          }
+        ]
+      },
+      [_vm._m(2)]
+    ),
     _vm._v(" "),
-    _vm.currentTab == 3 ? _c("div", [_vm._m(5)]) : _vm._e()
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.currentTab == 3,
+            expression: "currentTab == 3"
+          }
+        ]
+      },
+      [_vm._m(3)]
+    )
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group row" }, [
-      _c(
-        "label",
-        { staticClass: "col-2 mt-1", attrs: { for: "tipoAlertante" } },
-        [_vm._v("Tipo Alertante")]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "btn-group btn-group-toggle col-9",
-          attrs: { "data-toggle": "buttons" }
-        },
-        [
-          _c("label", { staticClass: "btn btn-secondary" }, [
-            _c("input", {
-              attrs: {
-                type: "radio",
-                name: "tipoAlertante",
-                id: "centroSanitario",
-                value: "centroSanitario",
-                checked: ""
-              }
-            }),
-            _vm._v("\n                  Centro Sanitario\n                ")
-          ]),
-          _vm._v(" "),
-          _c("label", { staticClass: "btn btn-secondary" }, [
-            _c("input", {
-              attrs: {
-                type: "radio",
-                name: "tipoAlertante",
-                id: "afectada",
-                value: "afectada"
-              }
-            }),
-            _vm._v("\n                  Afectada\n                ")
-          ]),
-          _vm._v(" "),
-          _c("label", { staticClass: "btn btn-secondary" }, [
-            _c("input", {
-              attrs: {
-                type: "radio",
-                name: "tipoAlertante",
-                id: "entornoAfectada",
-                value: "entornoAfectada"
-              }
-            }),
-            _vm._v("\n                  Entorno Afectada\n                ")
-          ]),
-          _vm._v(" "),
-          _c("label", { staticClass: "btn btn-secondary" }, [
-            _c("input", {
-              attrs: {
-                type: "radio",
-                name: "tipoAlertante",
-                id: "vip",
-                value: "vip"
-              }
-            }),
-            _vm._v("\n                  VIP\n                ")
-          ]),
-          _vm._v(" "),
-          _c("label", { staticClass: "btn btn-secondary" }, [
-            _c("input", {
-              attrs: {
-                type: "radio",
-                name: "tipoAlertante",
-                id: "accidental",
-                value: "accidental"
-              }
-            }),
-            _vm._v("\n                  Accidental\n                ")
-          ])
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group row" }, [
-      _c(
-        "label",
-        { staticClass: "col-2 col-form-label", attrs: { for: "datosMedica" } },
-        [_vm._v("Datos médica")]
-      ),
-      _vm._v(" "),
-      _c(
-        "label",
-        { staticClass: "col-1 col-form-label", attrs: { for: "nombreMedica" } },
-        [_vm._v("Nombre")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-3" }, [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "text", id: "nombreMedica" }
-        })
-      ]),
-      _vm._v(" "),
-      _c(
-        "label",
-        {
-          staticClass: "col-1 col-form-label",
-          attrs: { for: "apellidoMedica" }
-        },
-        [_vm._v("Apellidos")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-4" }, [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "text", id: "apellidoMedica" }
-        })
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
