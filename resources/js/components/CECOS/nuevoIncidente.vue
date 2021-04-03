@@ -54,7 +54,6 @@
                       id="centroSanitario"
                       value="1"
                       v-model="alertant.tipus_alertants_id"
-                      checked
                     />
                     Centro Sanitario
                   </label>
@@ -390,7 +389,6 @@
                       id="accidente"
                       value="1"
                       v-model="incidencia.tipus_incidencies_id"
-                      checked
                     />
                     Accidente
                   </label>
@@ -916,7 +914,7 @@ export default {
         adreca_complement: null,
         descripcio: null,
         nom_metge: null,
-        tipus_incidencies_id: null,
+        tipus_incidencies_id: 1,
         alertants_id: null,
         municipis_id: null,
         usuaris_id: null,
@@ -929,7 +927,7 @@ export default {
         cognoms: null,
         edat: null,
         te_cip: false,
-        sexes_id: null,
+        sexes_id: 2,
       },
       alertant: {
         id: null,
@@ -938,7 +936,7 @@ export default {
         cognoms: null,
         adreca: null,
         municipis_id: null,
-        tipus_alertants_id: null,
+        tipus_alertants_id: 1,
       },
       incidencies_has_afectats_array: [],
       incidencies_has_afectats: {
@@ -1198,11 +1196,11 @@ export default {
 }
 
 .modal-header{
-    background-color: #15acc4;
+    background-color: #15acc4 !important;
 }
 
 .card {
-  border: 1px solid black;
+  border: 1px solid black !important;
 }
 
 button {

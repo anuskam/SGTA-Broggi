@@ -2830,8 +2830,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2873,7 +2871,7 @@ __webpack_require__.r(__webpack_exports__);
         adreca_complement: null,
         descripcio: null,
         nom_metge: null,
-        tipus_incidencies_id: null,
+        tipus_incidencies_id: 1,
         alertants_id: null,
         municipis_id: null,
         usuaris_id: null
@@ -2886,7 +2884,7 @@ __webpack_require__.r(__webpack_exports__);
         cognoms: null,
         edat: null,
         te_cip: false,
-        sexes_id: null
+        sexes_id: 2
       },
       alertant: {
         id: null,
@@ -2895,7 +2893,7 @@ __webpack_require__.r(__webpack_exports__);
         cognoms: null,
         adreca: null,
         municipis_id: null,
-        tipus_alertants_id: null
+        tipus_alertants_id: 1
       },
       incidencies_has_afectats_array: [],
       incidencies_has_afectats: {
@@ -7991,7 +7989,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-secondary:not(:disabled):not(.disabled).active,\n.btn-secondary:not(:disabled):not(.disabled):active,\n.show > .btn-secondary.dropdown-toggle {\n  background-color: #e3177d;\n  border-color: black;\n}\n.btn-secondary {\n  border-color: black;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.parentGrid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n.card-header {\n  background-color: #15acc4;\n  border: 1px solid black;\n  border-left: 0;\n  border-right: 0;\n  margin-top: -1px;\n}\n.modal-header{\n    background-color: #15acc4;\n}\n.card {\n  border: 1px solid black;\n}\nbutton {\n  background-color: #e3177d !important;\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\n  background-color: #15acc4 !important;\n}\n.tabButton{\n    background-color: white !important;\n    border: 0 !important;\n}\n.selectedTab{\n    background-color: #e3177d !important;\n    border: 1px solid black !important;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-secondary:not(:disabled):not(.disabled).active,\n.btn-secondary:not(:disabled):not(.disabled):active,\n.show > .btn-secondary.dropdown-toggle {\n  background-color: #e3177d;\n  border-color: black;\n}\n.btn-secondary {\n  border-color: black;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.parentGrid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n.card-header {\n  background-color: #15acc4;\n  border: 1px solid black;\n  border-left: 0;\n  border-right: 0;\n  margin-top: -1px;\n}\n.modal-header{\n    background-color: #15acc4 !important;\n}\n.card {\n  border: 1px solid black !important;\n}\nbutton {\n  background-color: #e3177d !important;\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\n  background-color: #15acc4 !important;\n}\n.tabButton{\n    background-color: white !important;\n    border: 0 !important;\n}\n.selectedTab{\n    background-color: #e3177d !important;\n    border: 1px solid black !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -40335,8 +40333,7 @@ var render = function() {
                             type: "radio",
                             name: "tipoAlertante",
                             id: "centroSanitario",
-                            value: "1",
-                            checked: ""
+                            value: "1"
                           },
                           domProps: {
                             checked: _vm._q(
@@ -41235,8 +41232,7 @@ var render = function() {
                             type: "radio",
                             name: "tipoIncidencia",
                             id: "accidente",
-                            value: "1",
-                            checked: ""
+                            value: "1"
                           },
                           domProps: {
                             checked: _vm._q(
