@@ -2781,6 +2781,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2822,7 +2838,7 @@ __webpack_require__.r(__webpack_exports__);
         adreca_complement: null,
         descripcio: null,
         nom_metge: null,
-        tipus_incidencies_id: null,
+        tipus_incidencies_id: 1,
         alertants_id: null,
         municipis_id: null,
         usuaris_id: null
@@ -2835,7 +2851,7 @@ __webpack_require__.r(__webpack_exports__);
         cognoms: null,
         edat: null,
         te_cip: false,
-        sexes_id: null
+        sexes_id: 2
       },
       alertant: {
         id: null,
@@ -2844,7 +2860,7 @@ __webpack_require__.r(__webpack_exports__);
         cognoms: null,
         adreca: null,
         municipis_id: null,
-        tipus_alertants_id: null
+        tipus_alertants_id: 1
       },
       incidencies_has_afectats_array: [],
       incidencies_has_afectats: {
@@ -2862,15 +2878,17 @@ __webpack_require__.r(__webpack_exports__);
         hora_arribada_hospital: null,
         hora_transferencia: null,
         hora_finalitzacio: null,
-        prioritat: null,
-        desti: null
+        prioritat: 1,
+        desti: this.adreca
       },
       recurs: {
-        recursos_id: null,
-        hora_activacio: null,
-        prioritat: null
+        actiu: null,
+        codi: null,
+        id: null,
+        tipus_recursos_id: null
       },
       recursos: [],
+      recursos_select: [],
       errors: []
     };
   },
@@ -2941,6 +2959,18 @@ __webpack_require__.r(__webpack_exports__);
         return _this3.loading = false;
       });
     },
+    selectRecursos: function selectRecursos() {
+      var _this4 = this;
+
+      var me = this;
+      axios.get("/recurs").then(function (response) {
+        me.recursos_select = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      })["finally"](function () {
+        return _this4.loading = false;
+      });
+    },
     afegirAfectat: function afegirAfectat() {
       if (this.afectat.sexes_id != null) {
         if (this.afectat.cip != null) {
@@ -2954,8 +2984,22 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     afegirRecurs: function afegirRecurs() {
-      if (this.recurs.recursos_id > 0 && this.recurs.prioritat > 0) {
+      var _this5 = this;
+
+      if (this.recurs.tipus_recursos_id > 0 && this.incidencies_has_recursos.prioritat > 0) {
+        var pos = this.recursos_select.findIndex(function (x) {
+          return x.codi == _this5.recurs.codi;
+        });
         this.recursos.push(this.recurs);
+        this.buidarRecurs();
+        this.recursos_select[pos].actiu = false;
+        this.incidencies_has_recursos.hora_activacio = new Date().toLocaleTimeString("en-GB", {
+          hour: "numeric",
+          minute: "numeric",
+          second: "numeric"
+        });
+        this.incidencies_has_recursos_array.push(this.incidencies_has_recursos);
+        this.buidarIncidenciaHasRecurs();
       } else {
         this.errors.push("Cal escollir un recurs i una prioritat!");
       }
@@ -2973,9 +3017,25 @@ __webpack_require__.r(__webpack_exports__);
     },
     buidarRecurs: function buidarRecurs() {
       this.recurs = {
+        actiu: null,
+        codi: null,
+        id: null,
+        tipus_recursos_id: null
+      };
+    },
+    buidarIncidenciaHasRecurs: function buidarIncidenciaHasRecurs() {
+      this.incidencies_has_recursos = {
+        incidencies_id: null,
         recursos_id: null,
         hora_activacio: null,
-        prioritat: null
+        hora_mobilitzacio: null,
+        hora_assistencia: null,
+        hora_transport: null,
+        hora_arribada_hospital: null,
+        hora_transferencia: null,
+        hora_finalitzacio: null,
+        prioritat: 1,
+        desti: this.adreca
       };
     },
     eliminarAfectada: function eliminarAfectada(index) {
@@ -2983,6 +3043,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     mostrarAfectades: function mostrarAfectades() {
       $('#afectadaModal').modal('show');
+    },
+    eliminarRecurs: function eliminarRecurs(index) {
+      this.recursos.splice(index, 1);
+    },
+    mostrarRecursos: function mostrarRecursos() {
+      $('#recursModal').modal('show');
     }
   },
   computed: {
@@ -3043,11 +3109,11 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     provinciesFiltered: function provinciesFiltered() {
-      var _this4 = this;
+      var _this6 = this;
 
       if (this.comarca.id > 0) {
         var provincia = this.provincies.find(function (o) {
-          return o.id == _this4.comarca.provincies_id;
+          return o.id == _this6.comarca.provincies_id;
         });
         this.provincia = provincia;
         var provinciesFiltered = [];
@@ -3062,10 +3128,17 @@ __webpack_require__.r(__webpack_exports__);
     },
     recursosCount: function recursosCount() {
       return this.recursos.length;
+    },
+    adreca: function adreca() {
+      if (this.incidencia.adreca != null) {
+        return this.incidencia.adreca;
+      } else {
+        return null;
+      }
     }
   },
   created: function created() {
-    this.selectProvincies(), this.selectComarques(), this.selectMunicipis();
+    this.selectProvincies(), this.selectComarques(), this.selectMunicipis(), this.selectRecursos();
   }
 });
 
@@ -7929,7 +8002,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-secondary:not(:disabled):not(.disabled).active,\n.btn-secondary:not(:disabled):not(.disabled):active,\n.show > .btn-secondary.dropdown-toggle {\n  background-color: #e3177d;\n  border-color: black;\n}\n.btn-secondary {\n  border-color: black;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.parentGrid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n.card-header {\n  background-color: #15acc4;\n  border: 1px solid black;\n  border-left: 0;\n  border-right: 0;\n  margin-top: -1px;\n}\n.modal-header{\n    background-color: #15acc4;\n}\n.card {\n  border: 1px solid black;\n}\nbutton {\n  background-color: #e3177d;\n  border: 1px solid black;\n}\n#afectadasList {\n  background-color: #15acc4;\n}\n.tabButton{\n    background-color: white;\n    border: 0;\n}\n.selectedTab{\n    background-color: #e3177d;\n    border: 1px solid black;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-secondary:not(:disabled):not(.disabled).active,\n.btn-secondary:not(:disabled):not(.disabled):active,\n.show > .btn-secondary.dropdown-toggle {\n  background-color: #e3177d;\n  border-color: black;\n}\n.btn-secondary {\n  border-color: black;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.parentGrid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n.card-header {\n  background-color: #15acc4;\n  border: 1px solid black;\n  border-left: 0;\n  border-right: 0;\n  margin-top: -1px;\n}\n.modal-header{\n    background-color: #15acc4 !important;\n}\n.card {\n  border: 1px solid black !important;\n}\nbutton {\n  background-color: #e3177d !important;\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\n  background-color: #15acc4 !important;\n}\n.tabButton{\n    background-color: white !important;\n    border: 0 !important;\n}\n.selectedTab{\n    background-color: #e3177d !important;\n    border: 1px solid black !important;\n}\n.green{\n    background-color: green;\n    color: white;\n}\n.red{\n    background-color: red;\n    color: white;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -7953,7 +8026,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nmain[data-v-6504f867] {\r\n  margin-top: 1.4vh;\n}\n#infoCard[data-v-6504f867] {\r\n  height: 65vh;\n}\n#botones[data-v-6504f867] {\r\n  height: 28vh;\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-around;\r\n  align-items: center;\n}\n#infoHeader[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-between;\r\n  font-size: 1.2em;\r\n  font-weight: bold;\r\n  margin-right: -0.5px;\r\n  border-bottom: 1px solid black;\r\n  background-color: #15acc4;\n}\nbutton[data-v-6504f867] {\r\n  background-color: #e3177d;\r\n  font-weight: bold;\r\n  font-size: 0.9em;\n}\n.card[data-v-6504f867] {\r\n  border: 1px solid black;\n}\n#transportHeader[data-v-6504f867] {\r\n  background-color: #15acc4;\r\n  font-weight: bold;\r\n  padding: 6px 20px;\r\n  text-align: center;\n}\n#leftButtons[data-v-6504f867] {\r\n  height: 100%;\r\n  display: flex;\r\n  flex-direction: column;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-around;\n}\n#assistencia[data-v-6504f867]{\r\n    opacity: .4;\n}\n#checkTransport[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  flex-wrap: nowrap;\r\n  justify-content: center;\r\n  align-items: center;\r\n  opacity: .4;\r\n  /* margin-left: -80px; */\n}\n#checkTransport button[data-v-6504f867] {\r\n  padding: 10px 4px;\r\n  height: 100%;\n}\n#transportButton[data-v-6504f867] {\r\n  background-color: #e3177d;\n}\n#transportButtons[data-v-6504f867] {\r\n  height: 100%;\r\n  opacity: .4;\n}\n.visible[data-v-6504f867]{\r\n    opacity: 1 !important;\n}\n#transportForm[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: wrap;\r\n  justify-content: space-around;\r\n  align-items: center;\n}\n#botonsTransport[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  width: 100%;\r\n  justify-content: space-between;\n}\n.button[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  /* align-items: center; */\n}\n#direccioHospital[data-v-6504f867] {\r\n  width: 100%;\n}\n#map[data-v-6504f867] {\r\n  height: 65%;\r\n  background-color: black;\n}\n#info[data-v-6504f867] {\r\n  height: 20%;\r\n  margin-top: 4%;\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: space-around;\r\n  flex-wrap: nowrap;\r\n  font-weight: bold;\n}\n#infoFields[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: space-around;\r\n  padding-right: 0;\n}\n.infobox[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  align-items: center;\r\n  text-align: justify;\n}\n.infobox > div[data-v-6504f867] {\r\n  background-color: #15acc4;\r\n  border: 1px solid black;\n}\n#descripcion[data-v-6504f867],\r\n#direccion[data-v-6504f867] {\r\n  background-color: white;\n}\n#masInfo[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: center;\r\n  vertical-align: center;\n}\n#masInfo > button[data-v-6504f867] {\r\n  padding: 10px 20px;\r\n  margin-left: -50px;\n}\n.modal-header[data-v-6504f867]{\r\n    font-weight: bold;\r\n    background-color: #15acc4;\n}\n#alta[data-v-6504f867]{\r\n    opacity: 1 !important;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nmain[data-v-6504f867] {\n  margin-top: 1.4vh;\n}\n#infoCard[data-v-6504f867] {\n  height: 65vh;\n}\n#botones[data-v-6504f867] {\n  height: 28vh;\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#infoHeader[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n  font-size: 1.2em;\n  font-weight: bold;\n  margin-right: -0.5px;\n  border-bottom: 1px solid black;\n  background-color: #15acc4;\n}\nbutton[data-v-6504f867] {\n  background-color: #e3177d;\n  font-weight: bold;\n  font-size: 0.9em;\n}\n.card[data-v-6504f867] {\n  border: 1px solid black;\n}\n#transportHeader[data-v-6504f867] {\n  background-color: #15acc4;\n  font-weight: bold;\n  padding: 6px 20px;\n  text-align: center;\n}\n#leftButtons[data-v-6504f867] {\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n}\n#assistencia[data-v-6504f867]{\n    opacity: .4;\n}\n#checkTransport[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: center;\n  align-items: center;\n  opacity: .4;\n  /* margin-left: -80px; */\n}\n#checkTransport button[data-v-6504f867] {\n  padding: 10px 4px;\n  height: 100%;\n}\n#transportButton[data-v-6504f867] {\n  background-color: #e3177d;\n}\n#transportButtons[data-v-6504f867] {\n  height: 100%;\n  opacity: .4;\n}\n.visible[data-v-6504f867]{\n    opacity: 1 !important;\n}\n#transportForm[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#botonsTransport[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  width: 100%;\n  justify-content: space-between;\n}\n.button[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  /* align-items: center; */\n}\n#direccioHospital[data-v-6504f867] {\n  width: 100%;\n}\n#map[data-v-6504f867] {\n  height: 65%;\n  background-color: black;\n}\n#info[data-v-6504f867] {\n  height: 20%;\n  margin-top: 4%;\n  display: flex;\n  flex-direction: row;\n  justify-content: space-around;\n  flex-wrap: nowrap;\n  font-weight: bold;\n}\n#infoFields[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n  padding-right: 0;\n}\n.infobox[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  text-align: justify;\n}\n.infobox > div[data-v-6504f867] {\n  background-color: #15acc4;\n  border: 1px solid black;\n}\n#descripcion[data-v-6504f867],\n#direccion[data-v-6504f867] {\n  background-color: white;\n}\n#masInfo[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  vertical-align: center;\n}\n#masInfo > button[data-v-6504f867] {\n  padding: 10px 20px;\n  margin-left: -50px;\n}\n.modal-header[data-v-6504f867]{\n    font-weight: bold;\n    background-color: #15acc4;\n}\n#alta[data-v-6504f867]{\n    opacity: 1 !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -40273,8 +40346,7 @@ var render = function() {
                             type: "radio",
                             name: "tipoAlertante",
                             id: "centroSanitario",
-                            value: "1",
-                            checked: ""
+                            value: "1"
                           },
                           domProps: {
                             checked: _vm._q(
@@ -40902,8 +40974,7 @@ var render = function() {
                             type: "radio",
                             name: "sexoAfectada",
                             id: "mujer",
-                            value: "2",
-                            checked: "checked"
+                            value: "2"
                           },
                           domProps: {
                             checked: _vm._q(_vm.afectat.sexes_id, "2")
@@ -41174,8 +41245,7 @@ var render = function() {
                             type: "radio",
                             name: "tipoIncidencia",
                             id: "accidente",
-                            value: "1",
-                            checked: ""
+                            value: "1"
                           },
                           domProps: {
                             checked: _vm._q(
@@ -41460,7 +41530,35 @@ var render = function() {
                   _c(
                     "button",
                     {
-                      staticClass: "btn btn-primary float-right mr-0",
+                      staticClass: "btn btn-primary float-right ml-4",
+                      attrs: {
+                        type: "button",
+                        id: "afectadasList",
+                        disabled: _vm.recursosCount == 0
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.mostrarRecursos()
+                        }
+                      }
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "fa fa-list mr-1",
+                        attrs: { "aria-hidden": "true" }
+                      }),
+                      _vm._v(
+                        " RECURSOS\n                  (" +
+                          _vm._s(_vm.recursosCount) +
+                          ")\n                "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary float-right",
                       attrs: { type: "button" },
                       on: {
                         click: function($event) {
@@ -41480,9 +41578,77 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "card mt-2" }, [
-                _vm._m(2),
-                _vm._v(" "),
-                _vm._m(3),
+                _c("div", { staticClass: "form-group row ml-3 mt-3 pb-4" }, [
+                  _c(
+                    "label",
+                    { staticClass: "col-2 mt-1", attrs: { for: "recursos" } },
+                    [_vm._v("Recursos")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-4" }, [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.recurs,
+                            expression: "recurs"
+                          }
+                        ],
+                        staticClass: "custom-select",
+                        attrs: { id: "recurso" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.recurs = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "option",
+                          { attrs: { selected: "", value: "Selecciona..." } },
+                          [
+                            _vm._v(
+                              "\n                      Selecciona...\n                  "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm._l(_vm.recursos_select, function(recurs) {
+                          return _c(
+                            "option",
+                            {
+                              key: recurs.id,
+                              class: [recurs.actiu ? "green" : "red"],
+                              attrs: { disabled: !recurs.actiu },
+                              domProps: { value: recurs }
+                            },
+                            [
+                              _vm._v(
+                                "\n                      " +
+                                  _vm._s(recurs.codi) +
+                                  "\n                  "
+                              )
+                            ]
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  ])
+                ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group row ml-3" }, [
                   _c(
@@ -41504,8 +41670,8 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.recurs.prioritat,
-                              expression: "recurs.prioritat"
+                              value: _vm.incidencies_has_recursos.prioritat,
+                              expression: "incidencies_has_recursos.prioritat"
                             }
                           ],
                           attrs: {
@@ -41513,14 +41679,21 @@ var render = function() {
                             name: "prioridad",
                             id: "prioridad1",
                             value: "1",
-                            checked: ""
+                            disabled: !_vm.recurs.actiu
                           },
                           domProps: {
-                            checked: _vm._q(_vm.recurs.prioritat, "1")
+                            checked: _vm._q(
+                              _vm.incidencies_has_recursos.prioritat,
+                              "1"
+                            )
                           },
                           on: {
                             change: function($event) {
-                              return _vm.$set(_vm.recurs, "prioritat", "1")
+                              return _vm.$set(
+                                _vm.incidencies_has_recursos,
+                                "prioritat",
+                                "1"
+                              )
                             }
                           }
                         }),
@@ -41533,22 +41706,30 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.recurs.prioritat,
-                              expression: "recurs.prioritat"
+                              value: _vm.incidencies_has_recursos.prioritat,
+                              expression: "incidencies_has_recursos.prioritat"
                             }
                           ],
                           attrs: {
                             type: "radio",
                             name: "prioridad",
                             id: "prioridad2",
-                            value: "2"
+                            value: "2",
+                            disabled: !_vm.recurs.actiu
                           },
                           domProps: {
-                            checked: _vm._q(_vm.recurs.prioritat, "2")
+                            checked: _vm._q(
+                              _vm.incidencies_has_recursos.prioritat,
+                              "2"
+                            )
                           },
                           on: {
                             change: function($event) {
-                              return _vm.$set(_vm.recurs, "prioritat", "2")
+                              return _vm.$set(
+                                _vm.incidencies_has_recursos,
+                                "prioritat",
+                                "2"
+                              )
                             }
                           }
                         }),
@@ -41561,22 +41742,30 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.recurs.prioritat,
-                              expression: "recurs.prioritat"
+                              value: _vm.incidencies_has_recursos.prioritat,
+                              expression: "incidencies_has_recursos.prioritat"
                             }
                           ],
                           attrs: {
                             type: "radio",
                             name: "prioridad",
                             id: "prioridad3",
-                            value: "3"
+                            value: "3",
+                            disabled: !_vm.recurs.actiu
                           },
                           domProps: {
-                            checked: _vm._q(_vm.recurs.prioritat, "3")
+                            checked: _vm._q(
+                              _vm.incidencies_has_recursos.prioritat,
+                              "3"
+                            )
                           },
                           on: {
                             change: function($event) {
-                              return _vm.$set(_vm.recurs, "prioritat", "3")
+                              return _vm.$set(
+                                _vm.incidencies_has_recursos,
+                                "prioritat",
+                                "3"
+                              )
                             }
                           }
                         }),
@@ -41589,22 +41778,30 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.recurs.prioritat,
-                              expression: "recurs.prioritat"
+                              value: _vm.incidencies_has_recursos.prioritat,
+                              expression: "incidencies_has_recursos.prioritat"
                             }
                           ],
                           attrs: {
                             type: "radio",
                             name: "prioridad",
                             id: "prioridad4",
-                            value: "4"
+                            value: "4",
+                            disabled: !_vm.recurs.actiu
                           },
                           domProps: {
-                            checked: _vm._q(_vm.recurs.prioritat, "4")
+                            checked: _vm._q(
+                              _vm.incidencies_has_recursos.prioritat,
+                              "4"
+                            )
                           },
                           on: {
                             change: function($event) {
-                              return _vm.$set(_vm.recurs, "prioritat", "4")
+                              return _vm.$set(
+                                _vm.incidencies_has_recursos,
+                                "prioritat",
+                                "4"
+                              )
                             }
                           }
                         }),
@@ -41632,7 +41829,7 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(4),
+              _vm._m(2),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c(
@@ -41664,6 +41861,74 @@ var render = function() {
                             on: {
                               click: function($event) {
                                 return _vm.eliminarAfectada(index)
+                              }
+                            }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-trash" }),
+                            _vm._v(" Borrar")
+                          ]
+                        )
+                      ]
+                    )
+                  }),
+                  0
+                )
+              ]),
+              _vm._v(" "),
+              _vm._m(3)
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal",
+        attrs: { tabindex: "-1", role: "dialog", id: "recursModal" }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(4),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c(
+                  "ul",
+                  { staticClass: "list-group" },
+                  _vm._l(_vm.recursos, function(recurs, index) {
+                    return _c(
+                      "li",
+                      { key: index, staticClass: "list-group-item" },
+                      [
+                        _vm._v(_vm._s(recurs.codi) + ",\n                  "),
+                        recurs.tipus_recursos_id == 1
+                          ? _c("span", [_vm._v(" Ambulancia Medicalitzada, ")])
+                          : recurs.tipus_recursos_id == 2
+                          ? _c("span", [_vm._v(" Ambulancia Sanitaritzada, ")])
+                          : recurs.tipus_recursos_id == 3
+                          ? _c("span", [_vm._v(" Ambulancia Assistencial, ")])
+                          : _c("span", [_vm._v(" Helicopter Medicalitzat, ")]),
+                        _vm._v(
+                          "\n                  Prioritat " +
+                            _vm._s(
+                              _vm.incidencies_has_recursos_array[index]
+                                .prioritat
+                            ) +
+                            "\n                  "
+                        ),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger float-right",
+                            on: {
+                              click: function($event) {
+                                return _vm.eliminarRecurs(index)
                               }
                             }
                           },
@@ -41909,7 +42174,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "custom-control custom-switch" }, [
+    return _c("div", { staticClass: "custom-control custom-switch col-2" }, [
       _c("input", {
         staticClass: "custom-control-input",
         attrs: { type: "checkbox", id: "recursoSwitch" }
@@ -41929,99 +42194,35 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group row mt-3 ml-3" }, [
-      _c(
-        "label",
-        {
-          staticClass: "col-2 col-form-label",
-          attrs: { for: "codigoRecurso" }
-        },
-        [_vm._v("Código del recurso")]
-      ),
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Lista de Afectadas")]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-2 mt-1" }, [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "text", id: "codigoRecurso" }
-        })
-      ])
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group row ml-3" }, [
+    return _c("div", { staticClass: "modal-footer" }, [
       _c(
-        "label",
-        { staticClass: "col-2 mt-1", attrs: { for: "tipoRecurso" } },
-        [_vm._v("Tipo de recurso")]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
+        "button",
         {
-          staticClass: "btn-group btn-group-toggle col-9",
-          attrs: { "data-toggle": "buttons" }
+          staticClass: "btn btn-secondary",
+          attrs: { type: "button", "data-dismiss": "modal" }
         },
-        [
-          _c("label", { staticClass: "btn btn-secondary" }, [
-            _c("input", {
-              attrs: {
-                type: "radio",
-                name: "tipoRecurso",
-                id: "mike",
-                value: "mike",
-                checked: ""
-              }
-            }),
-            _vm._v(
-              "\n                  Amb. Medicalizada-Mike\n                "
-            )
-          ]),
-          _vm._v(" "),
-          _c("label", { staticClass: "btn btn-secondary" }, [
-            _c("input", {
-              attrs: {
-                type: "radio",
-                name: "tipoRecurso",
-                id: "india",
-                value: "india"
-              }
-            }),
-            _vm._v(
-              "\n                  Amb. Sanitarizada-India\n                "
-            )
-          ]),
-          _vm._v(" "),
-          _c("label", { staticClass: "btn btn-secondary" }, [
-            _c("input", {
-              attrs: {
-                type: "radio",
-                name: "tipoRecurso",
-                id: "tango",
-                value: "tango"
-              }
-            }),
-            _vm._v(
-              "\n                  Amb. Asistencia-Tango\n                "
-            )
-          ]),
-          _vm._v(" "),
-          _c("label", { staticClass: "btn btn-secondary" }, [
-            _c("input", {
-              attrs: {
-                type: "radio",
-                name: "tipoRecurso",
-                id: "helicoptero",
-                value: "helicoptero"
-              }
-            }),
-            _vm._v(
-              "\n                  Helicòptero medicalizado\n                "
-            )
-          ])
-        ]
+        [_vm._v("\n            Cerrar\n          ")]
       )
     ])
   },
@@ -42030,7 +42231,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-header" }, [
-      _c("h5", { staticClass: "modal-title" }, [_vm._v("Lista de Afectadas")]),
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Lista de Recursos")]),
       _vm._v(" "),
       _c(
         "button",
