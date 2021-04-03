@@ -677,67 +677,30 @@
               </div>
             </div>
             <div class="card mt-2">
-              <!-- CÓDIGO RECURSO -->
-              <div class="form-group row mt-3 ml-3">
-                <label for="codigoRecurso" class="col-2 col-form-label"
-                  >Código del recurso</label
-                >
-                <div class="col-2 mt-1">
-                  <input type="text" class="form-control" id="codigoRecurso" />
+              <!-- RECURSOS -->
+              <div class="form-group row ml-3 mt-3 pb-4">
+                  <label for="recursos" class="col-2 mt-1">Recursos</label>
+                <div class="col-4">
+                    <select
+                    class="custom-select"
+                    id="recurso"
+                    v-model="recurs"
+                    >
+                    <option selected value="Selecciona...">
+                        Selecciona...
+                    </option>
+                    <option
+                        v-for="recurs in recursos_select"
+                        :key="recurs.id"
+                        :value="recurs"
+                        :class="[ recurs.actiu ? 'green' : 'red' ]"
+                        :disabled="!recurs.actiu"
+                    >
+                        {{ recurs.codi }}
+                    </option>
+                    </select>
                 </div>
               </div>
-              <!-- RECURSO -->
-              <div class="form-group row ml-3">
-                <label for="tipoRecurso" class="col-2 mt-1"
-                  >Tipo de recurso</label
-                >
-                <div
-                  class="btn-group btn-group-toggle col-9"
-                  data-toggle="buttons"
-                >
-                  <label class="btn btn-secondary">
-                    <input
-                      type="radio"
-                      name="tipoRecurso"
-                      id="mike"
-                      value="1"
-                      v-model="recurs.tipus_recursos_id"
-                    />
-                    Amb. Medicalizada-Mike
-                  </label>
-                  <label class="btn btn-secondary">
-                    <input
-                      type="radio"
-                      name="tipoRecurso"
-                      id="india"
-                      value="2"
-                      v-model="recurs.tipus_recursos_id"
-                    />
-                    Amb. Sanitarizada-India
-                  </label>
-                  <label class="btn btn-secondary">
-                    <input
-                      type="radio"
-                      name="tipoRecurso"
-                      id="tango"
-                      value="3"
-                      v-model="recurs.tipus_recursos_id"
-                    />
-                    Amb. Asistencia-Tango
-                  </label>
-                  <label class="btn btn-secondary">
-                    <input
-                      type="radio"
-                      name="tipoRecurso"
-                      id="helicoptero"
-                      value="4"
-                      v-model="recurs.tipus_recursos_id"
-                    />
-                    Helicòptero medicalizado
-                  </label>
-                </div>
-              </div>
-
               <!-- PRIORIDAD -->
               <div class="form-group row ml-3">
                 <label for="prioridad" class="col-2 mt-1">Prioridad</label>
@@ -751,7 +714,8 @@
                       name="prioridad"
                       id="prioridad1"
                       value="1"
-                      v-model="recurs.prioritat"
+                      v-model="incidencies_has_recursos.prioritat"
+                      :disabled="!recurs.actiu"
                     />
                     1
                   </label>
@@ -761,7 +725,8 @@
                       name="prioridad"
                       id="prioridad2"
                       value="2"
-                      v-model="recurs.prioritat"
+                      v-model="incidencies_has_recursos.prioritat"
+                      :disabled="!recurs.actiu"
                     />
                     2
                   </label>
@@ -771,7 +736,8 @@
                       name="prioridad"
                       id="prioridad3"
                       value="3"
-                      v-model="recurs.prioritat"
+                      v-model="incidencies_has_recursos.prioritat"
+                      :disabled="!recurs.actiu"
                     />
                     3
                   </label>
@@ -781,7 +747,8 @@
                       name="prioridad"
                       id="prioridad4"
                       value="4"
-                      v-model="recurs.prioritat"
+                      v-model="incidencies_has_recursos.prioritat"
+                      :disabled="!recurs.actiu"
                     />
                     4
                   </label>
@@ -852,7 +819,7 @@
                     <span v-else-if="recurs.tipus_recursos_id == 2"> Ambulancia Sanitaritzada, </span>
                     <span v-else-if="recurs.tipus_recursos_id == 3"> Ambulancia Assistencial, </span>
                     <span v-else> Helicopter Medicalitzat, </span>
-                    Prioritat {{ recurs.prioritat }}
+                    Prioritat {{ incidencies_has_recursos_array[index].prioritat }}
                     <button class="btn btn-danger float-right" @click="eliminarRecurs(index)"><i class="fas fa-trash"></i> Borrar</button>
                 </li>
             </ul>
@@ -954,17 +921,17 @@ export default {
         hora_arribada_hospital: null,
         hora_transferencia: null,
         hora_finalitzacio: null,
-        prioritat: null,
-        desti: null,
+        prioritat: 1,
+        desti: this.adreca,
       },
       recurs: {
-        recursos_id: null,
+        actiu: null,
         codi: null,
-        hora_activacio: null,
-        prioritat: null,
+        id: null,
         tipus_recursos_id: null,
       },
       recursos: [],
+      recursos_select: [],
       errors: [],
     };
   },
@@ -1032,6 +999,18 @@ export default {
         })
         .finally(() => (this.loading = false));
     },
+    selectRecursos(){
+        let me = this;
+      axios
+        .get("/recurs")
+        .then((response) => {
+          me.recursos_select = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => (this.loading = false));
+    },
     afegirAfectat() {
       if (this.afectat.sexes_id != null) {
         if (this.afectat.cip != null) {
@@ -1044,9 +1023,18 @@ export default {
       }
     },
     afegirRecurs() {
-      if (this.recurs.tipus_recursos_id > 0 && this.recurs.prioritat > 0) {
+      if (this.recurs.tipus_recursos_id > 0 && this.incidencies_has_recursos.prioritat > 0) {
+        let pos = this.recursos_select.findIndex(x => x.codi == this.recurs.codi);
         this.recursos.push(this.recurs);
         this.buidarRecurs();
+        this.recursos_select[pos].actiu = false;
+        this.incidencies_has_recursos.hora_activacio = new Date().toLocaleTimeString("en-GB", {
+          hour: "numeric",
+          minute: "numeric",
+          second: "numeric",
+        });
+        this.incidencies_has_recursos_array.push(this.incidencies_has_recursos);
+        this.buidarIncidenciaHasRecurs();
       } else {
         this.errors.push("Cal escollir un recurs i una prioritat!");
       }
@@ -1064,11 +1052,25 @@ export default {
     },
     buidarRecurs() {
       this.recurs = {
-        recursos_id: null,
+        actiu: null,
         codi: null,
-        hora_activacio: null,
-        prioritat: null,
+        id: null,
         tipus_recursos_id: null,
+      };
+    },
+    buidarIncidenciaHasRecurs(){
+        this.incidencies_has_recursos = {
+        incidencies_id: null,
+        recursos_id: null,
+        hora_activacio: null,
+        hora_mobilitzacio: null,
+        hora_assistencia: null,
+        hora_transport: null,
+        hora_arribada_hospital: null,
+        hora_transferencia: null,
+        hora_finalitzacio: null,
+        prioritat: 1,
+        desti: this.adreca,
       };
     },
     eliminarAfectada(index){
@@ -1152,9 +1154,17 @@ export default {
     recursosCount: function () {
       return this.recursos.length;
     },
+    adreca: function (){
+        if(this.incidencia.adreca != null){
+            return this.incidencia.adreca;
+        }
+        else{
+            return null;
+        }
+    }
   },
   created() {
-    this.selectProvincies(), this.selectComarques(), this.selectMunicipis();
+    this.selectProvincies(), this.selectComarques(), this.selectMunicipis(), this.selectRecursos();
   },
 };
 </script>
@@ -1220,5 +1230,15 @@ button {
 .selectedTab{
     background-color: #e3177d !important;
     border: 1px solid black !important;
+}
+
+.green{
+    background-color: green;
+    color: white;
+}
+
+.red{
+    background-color: red;
+    color: white;
 }
 </style>

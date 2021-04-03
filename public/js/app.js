@@ -2797,39 +2797,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2911,17 +2878,17 @@ __webpack_require__.r(__webpack_exports__);
         hora_arribada_hospital: null,
         hora_transferencia: null,
         hora_finalitzacio: null,
-        prioritat: null,
-        desti: null
+        prioritat: 1,
+        desti: this.adreca
       },
       recurs: {
-        recursos_id: null,
+        actiu: null,
         codi: null,
-        hora_activacio: null,
-        prioritat: null,
+        id: null,
         tipus_recursos_id: null
       },
       recursos: [],
+      recursos_select: [],
       errors: []
     };
   },
@@ -2992,6 +2959,18 @@ __webpack_require__.r(__webpack_exports__);
         return _this3.loading = false;
       });
     },
+    selectRecursos: function selectRecursos() {
+      var _this4 = this;
+
+      var me = this;
+      axios.get("/recurs").then(function (response) {
+        me.recursos_select = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      })["finally"](function () {
+        return _this4.loading = false;
+      });
+    },
     afegirAfectat: function afegirAfectat() {
       if (this.afectat.sexes_id != null) {
         if (this.afectat.cip != null) {
@@ -3005,9 +2984,22 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     afegirRecurs: function afegirRecurs() {
-      if (this.recurs.tipus_recursos_id > 0 && this.recurs.prioritat > 0) {
+      var _this5 = this;
+
+      if (this.recurs.tipus_recursos_id > 0 && this.incidencies_has_recursos.prioritat > 0) {
+        var pos = this.recursos_select.findIndex(function (x) {
+          return x.codi == _this5.recurs.codi;
+        });
         this.recursos.push(this.recurs);
         this.buidarRecurs();
+        this.recursos_select[pos].actiu = false;
+        this.incidencies_has_recursos.hora_activacio = new Date().toLocaleTimeString("en-GB", {
+          hour: "numeric",
+          minute: "numeric",
+          second: "numeric"
+        });
+        this.incidencies_has_recursos_array.push(this.incidencies_has_recursos);
+        this.buidarIncidenciaHasRecurs();
       } else {
         this.errors.push("Cal escollir un recurs i una prioritat!");
       }
@@ -3025,11 +3017,25 @@ __webpack_require__.r(__webpack_exports__);
     },
     buidarRecurs: function buidarRecurs() {
       this.recurs = {
-        recursos_id: null,
+        actiu: null,
         codi: null,
-        hora_activacio: null,
-        prioritat: null,
+        id: null,
         tipus_recursos_id: null
+      };
+    },
+    buidarIncidenciaHasRecurs: function buidarIncidenciaHasRecurs() {
+      this.incidencies_has_recursos = {
+        incidencies_id: null,
+        recursos_id: null,
+        hora_activacio: null,
+        hora_mobilitzacio: null,
+        hora_assistencia: null,
+        hora_transport: null,
+        hora_arribada_hospital: null,
+        hora_transferencia: null,
+        hora_finalitzacio: null,
+        prioritat: 1,
+        desti: this.adreca
       };
     },
     eliminarAfectada: function eliminarAfectada(index) {
@@ -3103,11 +3109,11 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     provinciesFiltered: function provinciesFiltered() {
-      var _this4 = this;
+      var _this6 = this;
 
       if (this.comarca.id > 0) {
         var provincia = this.provincies.find(function (o) {
-          return o.id == _this4.comarca.provincies_id;
+          return o.id == _this6.comarca.provincies_id;
         });
         this.provincia = provincia;
         var provinciesFiltered = [];
@@ -3122,10 +3128,17 @@ __webpack_require__.r(__webpack_exports__);
     },
     recursosCount: function recursosCount() {
       return this.recursos.length;
+    },
+    adreca: function adreca() {
+      if (this.incidencia.adreca != null) {
+        return this.incidencia.adreca;
+      } else {
+        return null;
+      }
     }
   },
   created: function created() {
-    this.selectProvincies(), this.selectComarques(), this.selectMunicipis();
+    this.selectProvincies(), this.selectComarques(), this.selectMunicipis(), this.selectRecursos();
   }
 });
 
@@ -7989,7 +8002,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-secondary:not(:disabled):not(.disabled).active,\n.btn-secondary:not(:disabled):not(.disabled):active,\n.show > .btn-secondary.dropdown-toggle {\n  background-color: #e3177d;\n  border-color: black;\n}\n.btn-secondary {\n  border-color: black;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.parentGrid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n.card-header {\n  background-color: #15acc4;\n  border: 1px solid black;\n  border-left: 0;\n  border-right: 0;\n  margin-top: -1px;\n}\n.modal-header{\n    background-color: #15acc4 !important;\n}\n.card {\n  border: 1px solid black !important;\n}\nbutton {\n  background-color: #e3177d !important;\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\n  background-color: #15acc4 !important;\n}\n.tabButton{\n    background-color: white !important;\n    border: 0 !important;\n}\n.selectedTab{\n    background-color: #e3177d !important;\n    border: 1px solid black !important;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-secondary:not(:disabled):not(.disabled).active,\n.btn-secondary:not(:disabled):not(.disabled):active,\n.show > .btn-secondary.dropdown-toggle {\n  background-color: #e3177d;\n  border-color: black;\n}\n.btn-secondary {\n  border-color: black;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.parentGrid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n.card-header {\n  background-color: #15acc4;\n  border: 1px solid black;\n  border-left: 0;\n  border-right: 0;\n  margin-top: -1px;\n}\n.modal-header{\n    background-color: #15acc4 !important;\n}\n.card {\n  border: 1px solid black !important;\n}\nbutton {\n  background-color: #e3177d !important;\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\n  background-color: #15acc4 !important;\n}\n.tabButton{\n    background-color: white !important;\n    border: 0 !important;\n}\n.selectedTab{\n    background-color: #e3177d !important;\n    border: 1px solid black !important;\n}\n.green{\n    background-color: green;\n    color: white;\n}\n.red{\n    background-color: red;\n    color: white;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -41565,162 +41578,76 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "card mt-2" }, [
-                _vm._m(2),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group row ml-3" }, [
+                _c("div", { staticClass: "form-group row ml-3 mt-3 pb-4" }, [
                   _c(
                     "label",
-                    {
-                      staticClass: "col-2 mt-1",
-                      attrs: { for: "tipoRecurso" }
-                    },
-                    [_vm._v("Tipo de recurso")]
+                    { staticClass: "col-2 mt-1", attrs: { for: "recursos" } },
+                    [_vm._v("Recursos")]
                   ),
                   _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "btn-group btn-group-toggle col-9",
-                      attrs: { "data-toggle": "buttons" }
-                    },
-                    [
-                      _c("label", { staticClass: "btn btn-secondary" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.recurs.tipus_recursos_id,
-                              expression: "recurs.tipus_recursos_id"
-                            }
-                          ],
-                          attrs: {
-                            type: "radio",
-                            name: "tipoRecurso",
-                            id: "mike",
-                            value: "1"
-                          },
-                          domProps: {
-                            checked: _vm._q(_vm.recurs.tipus_recursos_id, "1")
-                          },
-                          on: {
-                            change: function($event) {
-                              return _vm.$set(
-                                _vm.recurs,
-                                "tipus_recursos_id",
-                                "1"
-                              )
-                            }
+                  _c("div", { staticClass: "col-4" }, [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.recurs,
+                            expression: "recurs"
                           }
-                        }),
-                        _vm._v(
-                          "\n                  Amb. Medicalizada-Mike\n                "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("label", { staticClass: "btn btn-secondary" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.recurs.tipus_recursos_id,
-                              expression: "recurs.tipus_recursos_id"
-                            }
-                          ],
-                          attrs: {
-                            type: "radio",
-                            name: "tipoRecurso",
-                            id: "india",
-                            value: "2"
-                          },
-                          domProps: {
-                            checked: _vm._q(_vm.recurs.tipus_recursos_id, "2")
-                          },
-                          on: {
-                            change: function($event) {
-                              return _vm.$set(
-                                _vm.recurs,
-                                "tipus_recursos_id",
-                                "2"
-                              )
-                            }
+                        ],
+                        staticClass: "custom-select",
+                        attrs: { id: "recurso" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.recurs = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
                           }
-                        }),
-                        _vm._v(
-                          "\n                  Amb. Sanitarizada-India\n                "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("label", { staticClass: "btn btn-secondary" }, [
-                        _c("input", {
-                          directives: [
+                        }
+                      },
+                      [
+                        _c(
+                          "option",
+                          { attrs: { selected: "", value: "Selecciona..." } },
+                          [
+                            _vm._v(
+                              "\n                      Selecciona...\n                  "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm._l(_vm.recursos_select, function(recurs) {
+                          return _c(
+                            "option",
                             {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.recurs.tipus_recursos_id,
-                              expression: "recurs.tipus_recursos_id"
-                            }
-                          ],
-                          attrs: {
-                            type: "radio",
-                            name: "tipoRecurso",
-                            id: "tango",
-                            value: "3"
-                          },
-                          domProps: {
-                            checked: _vm._q(_vm.recurs.tipus_recursos_id, "3")
-                          },
-                          on: {
-                            change: function($event) {
-                              return _vm.$set(
-                                _vm.recurs,
-                                "tipus_recursos_id",
-                                "3"
+                              key: recurs.id,
+                              class: [recurs.actiu ? "green" : "red"],
+                              attrs: { disabled: !recurs.actiu },
+                              domProps: { value: recurs }
+                            },
+                            [
+                              _vm._v(
+                                "\n                      " +
+                                  _vm._s(recurs.codi) +
+                                  "\n                  "
                               )
-                            }
-                          }
-                        }),
-                        _vm._v(
-                          "\n                  Amb. Asistencia-Tango\n                "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("label", { staticClass: "btn btn-secondary" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.recurs.tipus_recursos_id,
-                              expression: "recurs.tipus_recursos_id"
-                            }
-                          ],
-                          attrs: {
-                            type: "radio",
-                            name: "tipoRecurso",
-                            id: "helicoptero",
-                            value: "4"
-                          },
-                          domProps: {
-                            checked: _vm._q(_vm.recurs.tipus_recursos_id, "4")
-                          },
-                          on: {
-                            change: function($event) {
-                              return _vm.$set(
-                                _vm.recurs,
-                                "tipus_recursos_id",
-                                "4"
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(
-                          "\n                  Helicòptero medicalizado\n                "
-                        )
-                      ])
-                    ]
-                  )
+                            ]
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  ])
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group row ml-3" }, [
@@ -41743,22 +41670,30 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.recurs.prioritat,
-                              expression: "recurs.prioritat"
+                              value: _vm.incidencies_has_recursos.prioritat,
+                              expression: "incidencies_has_recursos.prioritat"
                             }
                           ],
                           attrs: {
                             type: "radio",
                             name: "prioridad",
                             id: "prioridad1",
-                            value: "1"
+                            value: "1",
+                            disabled: !_vm.recurs.actiu
                           },
                           domProps: {
-                            checked: _vm._q(_vm.recurs.prioritat, "1")
+                            checked: _vm._q(
+                              _vm.incidencies_has_recursos.prioritat,
+                              "1"
+                            )
                           },
                           on: {
                             change: function($event) {
-                              return _vm.$set(_vm.recurs, "prioritat", "1")
+                              return _vm.$set(
+                                _vm.incidencies_has_recursos,
+                                "prioritat",
+                                "1"
+                              )
                             }
                           }
                         }),
@@ -41771,22 +41706,30 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.recurs.prioritat,
-                              expression: "recurs.prioritat"
+                              value: _vm.incidencies_has_recursos.prioritat,
+                              expression: "incidencies_has_recursos.prioritat"
                             }
                           ],
                           attrs: {
                             type: "radio",
                             name: "prioridad",
                             id: "prioridad2",
-                            value: "2"
+                            value: "2",
+                            disabled: !_vm.recurs.actiu
                           },
                           domProps: {
-                            checked: _vm._q(_vm.recurs.prioritat, "2")
+                            checked: _vm._q(
+                              _vm.incidencies_has_recursos.prioritat,
+                              "2"
+                            )
                           },
                           on: {
                             change: function($event) {
-                              return _vm.$set(_vm.recurs, "prioritat", "2")
+                              return _vm.$set(
+                                _vm.incidencies_has_recursos,
+                                "prioritat",
+                                "2"
+                              )
                             }
                           }
                         }),
@@ -41799,22 +41742,30 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.recurs.prioritat,
-                              expression: "recurs.prioritat"
+                              value: _vm.incidencies_has_recursos.prioritat,
+                              expression: "incidencies_has_recursos.prioritat"
                             }
                           ],
                           attrs: {
                             type: "radio",
                             name: "prioridad",
                             id: "prioridad3",
-                            value: "3"
+                            value: "3",
+                            disabled: !_vm.recurs.actiu
                           },
                           domProps: {
-                            checked: _vm._q(_vm.recurs.prioritat, "3")
+                            checked: _vm._q(
+                              _vm.incidencies_has_recursos.prioritat,
+                              "3"
+                            )
                           },
                           on: {
                             change: function($event) {
-                              return _vm.$set(_vm.recurs, "prioritat", "3")
+                              return _vm.$set(
+                                _vm.incidencies_has_recursos,
+                                "prioritat",
+                                "3"
+                              )
                             }
                           }
                         }),
@@ -41827,22 +41778,30 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.recurs.prioritat,
-                              expression: "recurs.prioritat"
+                              value: _vm.incidencies_has_recursos.prioritat,
+                              expression: "incidencies_has_recursos.prioritat"
                             }
                           ],
                           attrs: {
                             type: "radio",
                             name: "prioridad",
                             id: "prioridad4",
-                            value: "4"
+                            value: "4",
+                            disabled: !_vm.recurs.actiu
                           },
                           domProps: {
-                            checked: _vm._q(_vm.recurs.prioritat, "4")
+                            checked: _vm._q(
+                              _vm.incidencies_has_recursos.prioritat,
+                              "4"
+                            )
                           },
                           on: {
                             change: function($event) {
-                              return _vm.$set(_vm.recurs, "prioritat", "4")
+                              return _vm.$set(
+                                _vm.incidencies_has_recursos,
+                                "prioritat",
+                                "4"
+                              )
                             }
                           }
                         }),
@@ -41870,7 +41829,7 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(3),
+              _vm._m(2),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c(
@@ -41917,7 +41876,7 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(4)
+              _vm._m(3)
             ])
           ]
         )
@@ -41936,7 +41895,7 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(5),
+              _vm._m(4),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c(
@@ -41957,7 +41916,10 @@ var render = function() {
                           : _c("span", [_vm._v(" Helicopter Medicalitzat, ")]),
                         _vm._v(
                           "\n                  Prioritat " +
-                            _vm._s(recurs.prioritat) +
+                            _vm._s(
+                              _vm.incidencies_has_recursos_array[index]
+                                .prioritat
+                            ) +
                             "\n                  "
                         ),
                         _c(
@@ -41982,7 +41944,7 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(6)
+              _vm._m(5)
             ])
           ]
         )
@@ -42226,28 +42188,6 @@ var staticRenderFns = [
         },
         [_vm._v("Activar recurso")]
       )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group row mt-3 ml-3" }, [
-      _c(
-        "label",
-        {
-          staticClass: "col-2 col-form-label",
-          attrs: { for: "codigoRecurso" }
-        },
-        [_vm._v("Código del recurso")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-2 mt-1" }, [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "text", id: "codigoRecurso" }
-        })
-      ])
     ])
   },
   function() {
