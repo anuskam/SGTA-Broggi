@@ -1062,7 +1062,7 @@ export default {
         cognoms: null,
         edat: null,
         te_cip: false,
-        sexes_id: null,
+        sexes_id: 2,
       };
     },
     buidarRecurs() {
@@ -1070,7 +1070,7 @@ export default {
         actiu: null,
         codi: null,
         id: null,
-        tipus_recursos_id: null,
+        tipus_recursos_id: 1,
       };
     },
     buidarIncidenciaHasRecurs(){
