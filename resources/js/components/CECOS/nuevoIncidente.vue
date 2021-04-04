@@ -35,10 +35,22 @@
 
     <div v-show="currentTab == 1">
       <div class="container-fluid mt-5">
+              <!-- BUSCADOR -->
+              <div class="input-group">
+                  <input type="number" class="form-control col-2 ml-5 mb-4" placeholder="Teléfono">
+                  <div class="input-group-append">
+                  <button class="btn btn-secondary mb-4" type="button">
+                      <i class="fa fa-search"></i>
+                  </button>
+                  </div>
+              </div>
+
         <div class="card ml-5 mr-5">
           <div class="card-header font-weight-bold">DATOS ALERTANTE</div>
           <div class="card-body ml-5">
             <form>
+
+
               <div class="form-group row">
                 <label for="tipoAlertante" class="col-2 mt-1"
                   >Tipo Alertante</label
@@ -959,9 +971,12 @@ export default {
     prev() {
       if (this.currentTab === 1) return;
       this.currentTab = this.currentTab - 1;
+      //selectedTab(this.currentTab);
     },
     next() {
       this.currentTab = this.currentTab + 1;
+      //selectedTab(this.currentTab);
+
     },
     selectProvincies() {
       let me = this;
