@@ -3071,7 +3071,52 @@ __webpack_require__.r(__webpack_exports__);
     mostrarRecursos: function mostrarRecursos() {
       $('#recursModal').modal('show');
     },
-    insertarIncidencia: function insertarIncidencia() {}
+    checkInsertarIncidencia: function checkInsertarIncidencia() {},
+    insertarIncidencia: function insertarIncidencia() {
+      var me = this;
+      axios.post('/incidencia', me.incidencia).then(function (response) {
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error.response.status);
+        console.log(error.response.data.error);
+      });
+    },
+    insertarIncidenciesHasAfectats: function insertarIncidenciesHasAfectats(afectat) {
+      var me = this;
+      axios.post('/incidencia_has_recursos', afectat).then(function (response) {
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error.response.status);
+        console.log(error.response.data.error);
+      });
+    },
+    insertarIncidenciesHasRecursos: function insertarIncidenciesHasRecursos(recurs) {
+      var me = this;
+      axios.post('/incidencia_has_recursos', recurs).then(function (response) {
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error.response.status);
+        console.log(error.response.data.error);
+      });
+    },
+    insertarAfectat: function insertarAfectat() {
+      var me = this;
+      axios.post('/afectat', me.cicle).then(function (response) {
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error.response.status);
+        console.log(error.response.data.error);
+      });
+    },
+    insertarAlertant: function insertarAlertant() {
+      var me = this;
+      axios.post('/alertant', me.cicle).then(function (response) {
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error.response.status);
+        console.log(error.response.data.error);
+      });
+    }
   },
   computed: {
     comarquesFiltered: function comarquesFiltered() {

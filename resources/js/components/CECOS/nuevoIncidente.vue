@@ -1107,9 +1107,54 @@ export default {
     mostrarRecursos(){
         $('#recursModal').modal('show');
     },
-    insertarIncidencia(){
+    checkInsertarIncidencia(){
 
-    }
+    },
+    insertarIncidencia(){
+      let me = this;
+      axios.post('/incidencia', me.incidencia).then((response) => {
+          console.log(response);
+      }).catch( (error) => {
+          console.log(error.response.status);
+          console.log(error.response.data.error);
+      })
+    },
+    insertarIncidenciesHasAfectats(afectat){
+      let me = this;
+      axios.post('/incidencia_has_recursos', afectat).then((response) => {
+          console.log(response);
+      }).catch( (error) => {
+          console.log(error.response.status);
+          console.log(error.response.data.error);
+      })
+    },
+    insertarIncidenciesHasRecursos(recurs){
+      let me = this;
+      axios.post('/incidencia_has_recursos', recurs).then((response) => {
+          console.log(response);
+      }).catch( (error) => {
+          console.log(error.response.status);
+          console.log(error.response.data.error);
+      })
+    },
+    insertarAfectat(){
+      let me = this;
+      axios.post('/afectat', me.cicle).then((response) => {
+          console.log(response);
+      }).catch( (error) => {
+          console.log(error.response.status);
+          console.log(error.response.data.error);
+      })
+    },
+    insertarAlertant(){
+      let me = this;
+      axios.post('/alertant', me.cicle).then((response) => {
+          console.log(response);
+      }).catch( (error) => {
+          console.log(error.response.status);
+          console.log(error.response.data.error);
+      })
+    },
   },
   computed: {
     comarquesFiltered: function () {
