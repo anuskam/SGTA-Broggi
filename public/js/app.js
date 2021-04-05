@@ -2809,6 +2809,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2929,11 +2937,12 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     prev: function prev() {
-      if (this.currentTab === 1) return;
-      this.currentTab = this.currentTab - 1; //selectedTab(this.currentTab);
+      --this.currentTab;
+      this.selectTab(this.currentTab);
     },
     next: function next() {
-      this.currentTab = this.currentTab + 1; //selectedTab(this.currentTab);
+      ++this.currentTab;
+      this.selectTab(this.currentTab);
     },
     selectProvincies: function selectProvincies() {
       var _this = this;
@@ -3024,7 +3033,7 @@ __webpack_require__.r(__webpack_exports__);
         cognoms: null,
         edat: null,
         te_cip: false,
-        sexes_id: null
+        sexes_id: 2
       };
     },
     buidarRecurs: function buidarRecurs() {
@@ -3032,7 +3041,7 @@ __webpack_require__.r(__webpack_exports__);
         actiu: null,
         codi: null,
         id: null,
-        tipus_recursos_id: null
+        tipus_recursos_id: 1
       };
     },
     buidarIncidenciaHasRecurs: function buidarIncidenciaHasRecurs() {
@@ -3061,7 +3070,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     mostrarRecursos: function mostrarRecursos() {
       $('#recursModal').modal('show');
-    }
+    },
+    insertarIncidencia: function insertarIncidencia() {}
   },
   computed: {
     comarquesFiltered: function comarquesFiltered() {
@@ -8014,7 +8024,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-secondary:not(:disabled):not(.disabled).active,\n.btn-secondary:not(:disabled):not(.disabled):active,\n.show > .btn-secondary.dropdown-toggle {\n  background-color: #e3177d;\n  border-color: black;\n}\n.btn-secondary {\n  border-color: black;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.parentGrid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n.card-header {\n  background-color: #15acc4;\n  border: 1px solid black;\n  border-left: 0;\n  border-right: 0;\n  margin-top: -1px;\n}\n.modal-header{\n    background-color: #15acc4 !important;\n}\n.card {\n  border: 1px solid black !important;\n}\nbutton {\n  background-color: #e3177d !important;\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\n  background-color: #15acc4 !important;\n}\n.tabButton{\n    background-color: white !important;\n    border: 0 !important;\n}\n.selectedTab{\n    background-color: #e3177d !important;\n    border: 1px solid black !important;\n}\n.green{\n    background-color: green;\n    color: white;\n}\n.red{\n    background-color: red;\n    color: white;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-secondary:not(:disabled):not(.disabled).active,\n.btn-secondary:not(:disabled):not(.disabled):active,\n.show > .btn-secondary.dropdown-toggle {\n  background-color: #e3177d;\n  border-color: black;\n}\n.btn-secondary {\n  border-color: black;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.parentGrid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n.card-header {\n  background-color: #15acc4;\n  border: 1px solid black;\n  border-left: 0;\n  border-right: 0;\n  margin-top: -1px;\n}\n.modal-header{\n    background-color: #15acc4 !important;\n}\n.card {\n  border: 1px solid black !important;\n}\nbutton {\n  background-color: #e3177d !important;\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\n  background-color: #15acc4 !important;\n}\n.tabButton{\n    background-color: white !important;\n    border: 0 !important;\n}\n.selectedTab{\n    background-color: #e3177d !important;\n    border: 1px solid black !important;\n}\n.green{\n    background-color: green;\n    color: white;\n}\n.red{\n    background-color: red;\n    color: white;\n}\n#entregar{\n  border: 1px solid black;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8038,7 +8048,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nmain[data-v-6504f867] {\r\n  margin-top: 1.4vh;\n}\n#infoCard[data-v-6504f867] {\r\n  height: 65vh;\n}\n#botones[data-v-6504f867] {\r\n  height: 28vh;\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-around;\r\n  align-items: center;\n}\n#infoHeader[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-between;\r\n  font-size: 1.2em;\r\n  font-weight: bold;\r\n  margin-right: -0.5px;\r\n  border-bottom: 1px solid black;\r\n  background-color: #15acc4;\n}\nbutton[data-v-6504f867] {\r\n  background-color: #e3177d;\r\n  font-weight: bold;\r\n  font-size: 0.9em;\n}\n.card[data-v-6504f867] {\r\n  border: 1px solid black;\n}\n#transportHeader[data-v-6504f867] {\r\n  background-color: #15acc4;\r\n  font-weight: bold;\r\n  padding: 6px 20px;\r\n  text-align: center;\n}\n#leftButtons[data-v-6504f867] {\r\n  height: 100%;\r\n  display: flex;\r\n  flex-direction: column;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-around;\n}\n#assistencia[data-v-6504f867]{\r\n    opacity: .4;\n}\n#checkTransport[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  flex-wrap: nowrap;\r\n  justify-content: center;\r\n  align-items: center;\r\n  opacity: .4;\r\n  /* margin-left: -80px; */\n}\n#checkTransport button[data-v-6504f867] {\r\n  padding: 10px 4px;\r\n  height: 100%;\n}\n#transportButton[data-v-6504f867] {\r\n  background-color: #e3177d;\n}\n#transportButtons[data-v-6504f867] {\r\n  height: 100%;\r\n  opacity: .4;\n}\n.visible[data-v-6504f867]{\r\n    opacity: 1 !important;\n}\n#transportForm[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: wrap;\r\n  justify-content: space-around;\r\n  align-items: center;\n}\n#botonsTransport[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  width: 100%;\r\n  justify-content: space-between;\n}\n.button[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  /* align-items: center; */\n}\n#direccioHospital[data-v-6504f867] {\r\n  width: 100%;\n}\n#map[data-v-6504f867] {\r\n  height: 65%;\r\n  background-color: black;\n}\n#info[data-v-6504f867] {\r\n  height: 20%;\r\n  margin-top: 4%;\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: space-around;\r\n  flex-wrap: nowrap;\r\n  font-weight: bold;\n}\n#infoFields[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: space-around;\r\n  padding-right: 0;\n}\n.infobox[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  align-items: center;\r\n  text-align: justify;\n}\n.infobox > div[data-v-6504f867] {\r\n  background-color: #15acc4;\r\n  border: 1px solid black;\n}\n#descripcion[data-v-6504f867],\r\n#direccion[data-v-6504f867] {\r\n  background-color: white;\n}\n#masInfo[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: center;\r\n  vertical-align: center;\n}\n#masInfo > button[data-v-6504f867] {\r\n  padding: 10px 20px;\r\n  margin-left: -50px;\n}\n.modal-header[data-v-6504f867]{\r\n    font-weight: bold;\r\n    background-color: #15acc4;\n}\n#alta[data-v-6504f867]{\r\n    opacity: 1 !important;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nmain[data-v-6504f867] {\n  margin-top: 1.4vh;\n}\n#infoCard[data-v-6504f867] {\n  height: 65vh;\n}\n#botones[data-v-6504f867] {\n  height: 28vh;\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#infoHeader[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n  font-size: 1.2em;\n  font-weight: bold;\n  margin-right: -0.5px;\n  border-bottom: 1px solid black;\n  background-color: #15acc4;\n}\nbutton[data-v-6504f867] {\n  background-color: #e3177d;\n  font-weight: bold;\n  font-size: 0.9em;\n}\n.card[data-v-6504f867] {\n  border: 1px solid black;\n}\n#transportHeader[data-v-6504f867] {\n  background-color: #15acc4;\n  font-weight: bold;\n  padding: 6px 20px;\n  text-align: center;\n}\n#leftButtons[data-v-6504f867] {\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n}\n#assistencia[data-v-6504f867]{\n    opacity: .4;\n}\n#checkTransport[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: center;\n  align-items: center;\n  opacity: .4;\n  /* margin-left: -80px; */\n}\n#checkTransport button[data-v-6504f867] {\n  padding: 10px 4px;\n  height: 100%;\n}\n#transportButton[data-v-6504f867] {\n  background-color: #e3177d;\n}\n#transportButtons[data-v-6504f867] {\n  height: 100%;\n  opacity: .4;\n}\n.visible[data-v-6504f867]{\n    opacity: 1 !important;\n}\n#transportForm[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#botonsTransport[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  width: 100%;\n  justify-content: space-between;\n}\n.button[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  /* align-items: center; */\n}\n#direccioHospital[data-v-6504f867] {\n  width: 100%;\n}\n#map[data-v-6504f867] {\n  height: 65%;\n  background-color: black;\n}\n#info[data-v-6504f867] {\n  height: 20%;\n  margin-top: 4%;\n  display: flex;\n  flex-direction: row;\n  justify-content: space-around;\n  flex-wrap: nowrap;\n  font-weight: bold;\n}\n#infoFields[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n  padding-right: 0;\n}\n.infobox[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  text-align: justify;\n}\n.infobox > div[data-v-6504f867] {\n  background-color: #15acc4;\n  border: 1px solid black;\n}\n#descripcion[data-v-6504f867],\n#direccion[data-v-6504f867] {\n  background-color: white;\n}\n#masInfo[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  vertical-align: center;\n}\n#masInfo > button[data-v-6504f867] {\n  padding: 10px 20px;\n  margin-left: -50px;\n}\n.modal-header[data-v-6504f867]{\n    font-weight: bold;\n    background-color: #15acc4;\n}\n#alta[data-v-6504f867]{\n    opacity: 1 !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -41547,7 +41557,7 @@ var render = function() {
                       staticClass: "btn btn-primary float-right ml-4",
                       attrs: {
                         type: "button",
-                        id: "afectadasList",
+                        id: "recursosList",
                         disabled: _vm.recursosCount == 0
                       },
                       on: {
@@ -41827,7 +41837,27 @@ var render = function() {
               ])
             ])
           ])
-        ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "btn btn-success float-right mr-5 mt-4",
+            attrs: { type: "button", id: "entregar" },
+            on: {
+              click: function($event) {
+                return _vm.insertarIncidencia()
+              }
+            }
+          },
+          [
+            _c("i", {
+              staticClass: "fa fa-check",
+              attrs: { "aria-hidden": "true" }
+            }),
+            _vm._v(" INSERTAR INCIDENCIA\n    ")
+          ]
+        )
       ]
     ),
     _vm._v(" "),

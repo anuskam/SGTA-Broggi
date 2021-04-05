@@ -671,7 +671,7 @@
                   <button
                     type="button"
                     class="btn btn-primary float-right ml-4"
-                    id="afectadasList"
+                    id="recursosList"
                     @click="mostrarRecursos()"
                     :disabled="recursosCount == 0"
                   >
@@ -769,6 +769,14 @@
             </div>
           </form>
         </div>
+      </div>
+      <div
+        type="button"
+        id="entregar"
+        class="btn btn-success float-right mr-5 mt-4"
+        @click="insertarIncidencia()"
+      >
+        <i class="fa fa-check" aria-hidden="true"></i> INSERTAR INCIDENCIA
       </div>
     </div>
     <!-- Modal Lista Afectadas -->
@@ -969,13 +977,12 @@ export default {
       }
     },
     prev() {
-      if (this.currentTab === 1) return;
-      this.currentTab = this.currentTab - 1;
-      //selectedTab(this.currentTab);
+      --this.currentTab;
+      this.selectTab(this.currentTab);
     },
     next() {
-      this.currentTab = this.currentTab + 1;
-      //selectedTab(this.currentTab);
+      ++this.currentTab;
+      this.selectTab(this.currentTab);
 
     },
     selectProvincies() {
@@ -1100,6 +1107,9 @@ export default {
     mostrarRecursos(){
         $('#recursModal').modal('show');
     },
+    insertarIncidencia(){
+
+    }
   },
   computed: {
     comarquesFiltered: function () {
@@ -1255,5 +1265,9 @@ button {
 .red{
     background-color: red;
     color: white;
+}
+
+#entregar{
+  border: 1px solid black;
 }
 </style>
