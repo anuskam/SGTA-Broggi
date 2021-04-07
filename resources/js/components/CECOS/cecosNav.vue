@@ -19,35 +19,15 @@
             </ul>
         </div>
       </nav>
-    <!-- <div id="tabButtons">
-      <button @click="selectTab(1)" class="btn btn-sm mr-3">
-        NUEVO INCIDENTE
-      </button>
-      |
-      <button @click="selectTab(2)" class="btn btn-sm mr-3 ml-3">
-        GESTIONAR INCIDENTE
-      </button>
-      |
-      <button @click="selectTab(3)" class="btn btn-sm ml-3">FORMACIÓN</button>
-    </div> -->
 
-    <div v-if="currentTab == 1">
-      <nuevoincidente-component></nuevoincidente-component>
+
+    <div v-show="currentTab == 1">
+        <button class="btn btn-danger col-12" id="generarLlamada" v-show="!incidencia" @click="startIncidencia()"><i class="fas fa-phone-alt"></i>  Generar Llamada</button>
+      <nuevoincidente-component v-show="incidencia"></nuevoincidente-component>
     </div>
-    <!-- <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Pagina cecos</div>
 
-                    <div class="card-body">
-                        <nuevoIncidente></nuevoIncidente>
-                    </div>
-                </div>
-            </div>
-        </div> -->
   </div>
 
-  <!-- CREAR NAVBAR CON TABS Y LLAMAR A LOS COMPONENTES -->
 </template>
 
 <script>
@@ -55,13 +35,70 @@ export default {
   data: function () {
     return {
       currentTab: 1,
+      incidencia: false,
+      alertants: [],
+      telefons: [],
     };
   },
   methods: {
     selectTab(selectedTab) {
       this.currentTab = selectedTab;
     },
+    startIncidencia(){
+        this.incidencia = true;
+    },
+    getAlertants(){
+        let me = this;
+        axios
+        .get("/alertant")
+        .then((response) => {
+          me.alertants = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+            this.loading = false;
+            this.getTelefons();
+        });
+
+    },
+    getTelefons(){
+        let me = this;
+        this.alertants.forEach(function(alertant){
+            me.telefons.push(alertant.telefon);
+        });
+    }
   },
+  computed: {
+      pickedNumber: function () {
+          let randomArray = [];
+          let random;
+          do{
+              random = Math.floor(Math.random() * 399999999 + 600000000);
+          }while(random%100000000 >= 8 || random%100000000 < 9);
+            randomArray.push(random);
+
+          let random2 = Math.floor(Math.random() * 69);
+          let randomDB = this.telefons[random2];
+          randomArray.push(randomDB);
+
+          let randomChoiceNumber = Math.floor(Math.random() * 2);
+          let randomChoice = randomArray[randomChoiceNumber];
+
+          return randomChoice;
+      }
+  },
+  created() {
+     this.getAlertants();
+  }
 };
 </script>
 
+<style scoped>
+    #generarLlamada{
+        font-size: 2em;
+        margin-top: 33vh;
+        background-color: red !important;
+    }
+</style>
