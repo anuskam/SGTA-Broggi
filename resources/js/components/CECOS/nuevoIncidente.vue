@@ -37,7 +37,7 @@
       <div class="container-fluid mt-5">
               <!-- BUSCADOR -->
               <div class="input-group">
-                  <input type="number" class="form-control col-2 ml-5 mb-4" placeholder="Teléfono">
+                  <input type="number" class="form-control col-2 ml-5 mb-4" placeholder="Teléfono" :value = alertantNumber>
                   <div class="input-group-append">
                   <button class="btn btn-secondary mb-4" type="button">
                       <i class="fa fa-search"></i>
@@ -861,6 +861,9 @@
 
 <script>
 export default {
+    props: {
+        alertantNumber: Number
+    },
   data: function () {
     return {
       currentTab: 1,

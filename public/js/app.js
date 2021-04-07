@@ -1954,7 +1954,7 @@ __webpack_require__.r(__webpack_exports__);
 
       do {
         random = Math.floor(Math.random() * 399999999 + 600000000);
-      } while (random % 100000000 >= 8 || random % 100000000 < 9);
+      } while (random / 100000000 >= 8 && random / 100000000 < 9);
 
       randomArray.push(random);
       var random2 = Math.floor(Math.random() * 69);
@@ -2845,6 +2845,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    alertantNumber: Number
+  },
   data: function data() {
     return {
       currentTab: 1,
@@ -40346,7 +40349,8 @@ var render = function() {
               value: _vm.incidencia,
               expression: "incidencia"
             }
-          ]
+          ],
+          attrs: { alertantNumber: _vm.pickedNumber }
         })
       ],
       1
@@ -40519,7 +40523,15 @@ var render = function() {
       },
       [
         _c("div", { staticClass: "container-fluid mt-5" }, [
-          _vm._m(0),
+          _c("div", { staticClass: "input-group" }, [
+            _c("input", {
+              staticClass: "form-control col-2 ml-5 mb-4",
+              attrs: { type: "number", placeholder: "Teléfono" },
+              domProps: { value: _vm.alertantNumber }
+            }),
+            _vm._v(" "),
+            _vm._m(0)
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "card ml-5 mr-5" }, [
             _c("div", { staticClass: "card-header font-weight-bold" }, [
@@ -42190,19 +42202,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-group" }, [
-      _c("input", {
-        staticClass: "form-control col-2 ml-5 mb-4",
-        attrs: { type: "number", placeholder: "Teléfono" }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "input-group-append" }, [
-        _c(
-          "button",
-          { staticClass: "btn btn-secondary mb-4", attrs: { type: "button" } },
-          [_c("i", { staticClass: "fa fa-search" })]
-        )
-      ])
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-secondary mb-4", attrs: { type: "button" } },
+        [_c("i", { staticClass: "fa fa-search" })]
+      )
     ])
   },
   function() {
