@@ -23,7 +23,7 @@
 
     <div v-show="currentTab == 1">
         <button class="btn btn-danger col-12" id="generarLlamada" v-show="!incidencia" @click="startIncidencia()"><i class="fas fa-phone-alt"></i>  Generar Llamada</button>
-      <nuevoincidente-component v-show="incidencia"></nuevoincidente-component>
+      <nuevoincidente-component v-show="incidencia" :alertantNumber = pickedNumber></nuevoincidente-component>
     </div>
 
   </div>
@@ -76,8 +76,8 @@ export default {
           let random;
           do{
               random = Math.floor(Math.random() * 399999999 + 600000000);
-          }while(random%100000000 >= 8 || random%100000000 < 9);
-            randomArray.push(random);
+          }while(random/100000000 >= 8 && random/100000000 < 9);
+          randomArray.push(random);
 
           let random2 = Math.floor(Math.random() * 69);
           let randomDB = this.telefons[random2];
