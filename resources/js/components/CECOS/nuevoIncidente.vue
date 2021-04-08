@@ -39,7 +39,7 @@
               <div class="input-group">
                   <input type="number" class="form-control col-2 ml-5 mb-4" placeholder="Teléfono" :value = alertantNumber>
                   <div class="input-group-append">
-                  <button class="btn btn-secondary mb-4" type="button">
+                  <button class="btn btn-secondary mb-4" type="button" @click="getAlertantData()">
                       <i class="fa fa-search"></i>
                   </button>
                   </div>
@@ -928,6 +928,7 @@ export default {
         municipis_id: null,
         tipus_alertants_id: 1,
       },
+      alertants: [],
       incidencies_has_afectats_array: [],
       incidencies_has_afectats: {
         incidencies_id: null,
@@ -1035,6 +1036,22 @@ export default {
           console.log(error);
         })
         .finally(() => (this.loading = false));
+    },
+    selectAlertants(){
+        let me = this;
+        axios
+        .get("/alertant")
+        .then((response) => {
+          me.alertants = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+            this.loading = false;
+            this.getTelefons();
+        });
+
     },
     afegirAfectat() {
       if (this.afectat.sexes_id != null) {
@@ -1158,6 +1175,17 @@ export default {
           console.log(error.response.data.error);
       })
     },
+    getAlertantData(){
+        let me = this;
+        this.alertants.forEach(function(alertant){
+            if(alertant.telefon == me.alertantNumber){
+                me.incidencia.adreca = alertant.adreca;
+                me.alertant.tipus_alertants_id = alertant.tipus_alertants_id;
+                let municipi = me.municipis.find(obj => obj.id == alertant.municipis_id);
+                me.municipi = municipi;
+            }
+        });
+    }
   },
   computed: {
     comarquesFiltered: function () {
@@ -1237,7 +1265,7 @@ export default {
     }
   },
   created() {
-    this.selectProvincies(), this.selectComarques(), this.selectMunicipis(), this.selectRecursos();
+    this.selectAlertants(),this.selectProvincies(), this.selectComarques(), this.selectMunicipis(), this.selectRecursos();
   },
 };
 </script>
