@@ -39,14 +39,14 @@
       <div id="leftButtons" class="col-2">
         <div id="movilitzacio" class="button" @click="activarMovilitzacio()">
           <button><i class="fas fa-running"></i> Iniciar Movilització</button>
-          <input type="time" />
+          <input type="time" v-model="horaMovilitzacio" />
         </div>
 
         <div id="assistencia" class="button" @click="activarAssistencia()" :class="{ visible: movilitzacio }">
           <button :disabled="!movilitzacio">
             <i class="fas fa-briefcase-medical"></i> Iniciar Assistència
           </button>
-          <input type="time" />
+          <input type="time" v-model="horaAssistencia" />
         </div>
       </div>
       <div id="checkTransport" class="col-1" @click="activarMostrarTransport()"  :class="{ visible: assistencia }">
@@ -70,17 +70,17 @@
               <button :disabled="!mostrarTransport" @click="activarTransport()">
                 <i class="fas fa-ambulance"></i> Iniciar Transport
               </button>
-              <input type="time" />
+              <input type="time" v-model="horaTransport" />
             </div>
             <div class="botoTransport button">
               <button :disabled="!transport" @click="activarHospital()"><i class="fas fa-hospital"></i> Arribada Hospital</button>
-              <input type="time" />
+              <input type="time" v-model="horaHospital" />
             </div>
             <div class="botoTransport button">
               <button :disabled="!hospital" @click="activarTransferencia()">
                 <i class="fas fa-user-friends"></i> Iniciar Transferència
               </button>
-              <input type="time" />
+              <input type="time" v-model="horaTransferencia" />
             </div>
             <div class="botoTransport button">
               <button :disabled="!transferencia"><i class="fas fa-procedures"></i> Hospitalització</button>
@@ -137,6 +137,11 @@ export default {
             transport: false,
             hospital: false,
             transferencia: false,
+            horaMovilitzacio: null,
+            horaAssistencia: null,
+            horaTransport: null,
+            horaHospital: null,
+            horaTransferencia: null,
         }
     },
     methods: {
@@ -145,21 +150,46 @@ export default {
         },
         activarMovilitzacio(){
             this.movilitzacio = true;
+            this.horaMovilitzacio = new Date().toLocaleTimeString("en-GB", {
+            hour: "numeric",
+            minute: "numeric",
+            second: "numeric",
+            });
         },
         activarAssistencia(){
             this.assistencia = true;
+            this.horaAssistencia = new Date().toLocaleTimeString("en-GB", {
+            hour: "numeric",
+            minute: "numeric",
+            second: "numeric",
+            });
         },
         activarMostrarTransport(){
             this.mostrarTransport = true;
         },
         activarTransport(){
-            this.transport = true
+            this.transport = true;
+            this.horaTransport = new Date().toLocaleTimeString("en-GB", {
+            hour: "numeric",
+            minute: "numeric",
+            second: "numeric",
+            });
         },
         activarHospital(){
-            this.hospital = true
+            this.hospital = true;
+            this.horaHospital = new Date().toLocaleTimeString("en-GB", {
+            hour: "numeric",
+            minute: "numeric",
+            second: "numeric",
+            });
         },
         activarTransferencia(){
             this.transferencia = true;
+            this.horaTransferencia = new Date().toLocaleTimeString("en-GB", {
+            hour: "numeric",
+            minute: "numeric",
+            second: "numeric",
+            });
         },
     },
   mounted() {

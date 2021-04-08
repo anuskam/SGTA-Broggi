@@ -2912,6 +2912,7 @@ __webpack_require__.r(__webpack_exports__);
         municipis_id: null,
         tipus_alertants_id: 1
       },
+      alertants: [],
       incidencies_has_afectats_array: [],
       incidencies_has_afectats: {
         incidencies_id: null,
@@ -3022,6 +3023,20 @@ __webpack_require__.r(__webpack_exports__);
         return _this4.loading = false;
       });
     },
+    selectAlertants: function selectAlertants() {
+      var _this5 = this;
+
+      var me = this;
+      axios.get("/alertant").then(function (response) {
+        me.alertants = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      })["finally"](function () {
+        _this5.loading = false;
+
+        _this5.getTelefons();
+      });
+    },
     afegirAfectat: function afegirAfectat() {
       if (this.afectat.sexes_id != null) {
         if (this.afectat.cip != null) {
@@ -3035,11 +3050,11 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     afegirRecurs: function afegirRecurs() {
-      var _this5 = this;
+      var _this6 = this;
 
       if (this.recurs.tipus_recursos_id > 0 && this.incidencies_has_recursos.prioritat > 0) {
         var pos = this.recursos_select.findIndex(function (x) {
-          return x.codi == _this5.recurs.codi;
+          return x.codi == _this6.recurs.codi;
         });
         this.recursos.push(this.recurs);
         this.buidarRecurs();
@@ -3146,6 +3161,19 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error.response.status);
         console.log(error.response.data.error);
       });
+    },
+    getAlertantData: function getAlertantData() {
+      var me = this;
+      this.alertants.forEach(function (alertant) {
+        if (alertant.telefon == me.alertantNumber) {
+          me.incidencia.adreca = alertant.adreca;
+          me.alertant.tipus_alertants_id = alertant.tipus_alertants_id;
+          var municipi = me.municipis.find(function (obj) {
+            return obj.id == alertant.municipis_id;
+          });
+          me.municipi = municipi;
+        }
+      });
     }
   },
   computed: {
@@ -3206,11 +3234,11 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     provinciesFiltered: function provinciesFiltered() {
-      var _this6 = this;
+      var _this7 = this;
 
       if (this.comarca.id > 0) {
         var provincia = this.provincies.find(function (o) {
-          return o.id == _this6.comarca.provincies_id;
+          return o.id == _this7.comarca.provincies_id;
         });
         this.provincia = provincia;
         var provinciesFiltered = [];
@@ -3235,7 +3263,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    this.selectProvincies(), this.selectComarques(), this.selectMunicipis(), this.selectRecursos();
+    this.selectAlertants(), this.selectProvincies(), this.selectComarques(), this.selectMunicipis(), this.selectRecursos();
   }
 });
 
@@ -3389,7 +3417,12 @@ __webpack_require__.r(__webpack_exports__);
       mostrarTransport: false,
       transport: false,
       hospital: false,
-      transferencia: false
+      transferencia: false,
+      horaMovilitzacio: null,
+      horaAssistencia: null,
+      horaTransport: null,
+      horaHospital: null,
+      horaTransferencia: null
     };
   },
   methods: {
@@ -3398,21 +3431,46 @@ __webpack_require__.r(__webpack_exports__);
     },
     activarMovilitzacio: function activarMovilitzacio() {
       this.movilitzacio = true;
+      this.horaMovilitzacio = new Date().toLocaleTimeString("en-GB", {
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric"
+      });
     },
     activarAssistencia: function activarAssistencia() {
       this.assistencia = true;
+      this.horaAssistencia = new Date().toLocaleTimeString("en-GB", {
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric"
+      });
     },
     activarMostrarTransport: function activarMostrarTransport() {
       this.mostrarTransport = true;
     },
     activarTransport: function activarTransport() {
       this.transport = true;
+      this.horaTransport = new Date().toLocaleTimeString("en-GB", {
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric"
+      });
     },
     activarHospital: function activarHospital() {
       this.hospital = true;
+      this.horaHospital = new Date().toLocaleTimeString("en-GB", {
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric"
+      });
     },
     activarTransferencia: function activarTransferencia() {
       this.transferencia = true;
+      this.horaTransferencia = new Date().toLocaleTimeString("en-GB", {
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric"
+      });
     }
   },
   mounted: function mounted() {
@@ -40530,7 +40588,21 @@ var render = function() {
               domProps: { value: _vm.alertantNumber }
             }),
             _vm._v(" "),
-            _vm._m(0)
+            _c("div", { staticClass: "input-group-append" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-secondary mb-4",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.getAlertantData()
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fa fa-search" })]
+              )
+            ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "card ml-5 mr-5" }, [
@@ -41746,10 +41818,10 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "card-body ml-5" }, [
             _c("form", [
-              _vm._m(1),
+              _vm._m(0),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row mt-4" }, [
-                _vm._m(2),
+                _vm._m(1),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-10" }, [
                   _c(
@@ -42074,7 +42146,7 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(3),
+              _vm._m(2),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c(
@@ -42121,7 +42193,7 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(4)
+              _vm._m(3)
             ])
           ]
         )
@@ -42140,7 +42212,7 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(5),
+              _vm._m(4),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c(
@@ -42189,7 +42261,7 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(6)
+              _vm._m(5)
             ])
           ]
         )
@@ -42198,18 +42270,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-group-append" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-secondary mb-4", attrs: { type: "button" } },
-        [_c("i", { staticClass: "fa fa-search" })]
-      )
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -42586,7 +42646,30 @@ var render = function() {
               }
             }
           },
-          [_vm._m(3), _vm._v(" "), _c("input", { attrs: { type: "time" } })]
+          [
+            _vm._m(3),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.horaMovilitzacio,
+                  expression: "horaMovilitzacio"
+                }
+              ],
+              attrs: { type: "time" },
+              domProps: { value: _vm.horaMovilitzacio },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.horaMovilitzacio = $event.target.value
+                }
+              }
+            })
+          ]
         ),
         _vm._v(" "),
         _c(
@@ -42607,7 +42690,26 @@ var render = function() {
               _vm._v(" Iniciar Assistència\n        ")
             ]),
             _vm._v(" "),
-            _c("input", { attrs: { type: "time" } })
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.horaAssistencia,
+                  expression: "horaAssistencia"
+                }
+              ],
+              attrs: { type: "time" },
+              domProps: { value: _vm.horaAssistencia },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.horaAssistencia = $event.target.value
+                }
+              }
+            })
           ]
         )
       ]),
@@ -42675,7 +42777,26 @@ var render = function() {
                     ]
                   ),
                   _vm._v(" "),
-                  _c("input", { attrs: { type: "time" } })
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.horaTransport,
+                        expression: "horaTransport"
+                      }
+                    ],
+                    attrs: { type: "time" },
+                    domProps: { value: _vm.horaTransport },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.horaTransport = $event.target.value
+                      }
+                    }
+                  })
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "botoTransport button" }, [
@@ -42695,7 +42816,26 @@ var render = function() {
                     ]
                   ),
                   _vm._v(" "),
-                  _c("input", { attrs: { type: "time" } })
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.horaHospital,
+                        expression: "horaHospital"
+                      }
+                    ],
+                    attrs: { type: "time" },
+                    domProps: { value: _vm.horaHospital },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.horaHospital = $event.target.value
+                      }
+                    }
+                  })
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "botoTransport button" }, [
@@ -42715,7 +42855,26 @@ var render = function() {
                     ]
                   ),
                   _vm._v(" "),
-                  _c("input", { attrs: { type: "time" } })
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.horaTransferencia,
+                        expression: "horaTransferencia"
+                      }
+                    ],
+                    attrs: { type: "time" },
+                    domProps: { value: _vm.horaTransferencia },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.horaTransferencia = $event.target.value
+                      }
+                    }
+                  })
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "botoTransport button" }, [
