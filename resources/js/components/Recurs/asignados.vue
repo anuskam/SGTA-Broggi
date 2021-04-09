@@ -8,7 +8,7 @@
       </div>
       <div class="card-body p-3">
         <div id="map">
-          <img src="" alt="" />
+
         </div>
         <div id="info" class="col-12 p-0">
           <div class="col-11" id="infoFields">

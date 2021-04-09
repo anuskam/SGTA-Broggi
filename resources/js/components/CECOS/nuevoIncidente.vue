@@ -692,7 +692,7 @@
               <!-- RECURSOS -->
               <div class="form-group row ml-3 mt-3 pb-4">
                   <label for="recursos" class="col-2 mt-1">Recursos</label>
-                <div class="col-4">
+                <div class="col-3 ">
                     <select
                     class="custom-select"
                     id="recurso"
@@ -709,6 +709,31 @@
                         :disabled="!recurs.actiu"
                     >
                         {{ recurs.codi }}
+                    </option>
+                    </select>
+                </div>
+              <!-- </div> -->
+              <!-- AFECTADOS -->
+              <!-- <div class="form-group row ml-3 mt-3 pb-4"> -->
+                  <label for="afectadoSelect" class="col-2 mt-1">Afectados</label>
+                <div class="col-4">
+                    <select
+                    class="custom-select"
+                    id="afectadoSelect"
+                    v-model="afectatSelect"
+                    >
+                    <option selected value="Selecciona...">
+                        Selecciona...
+                    </option>
+                    <option
+                        v-for="(afectat, index) in afectats"
+                        :key="index"
+                        :value="afectat"
+                    >
+                        {{ afectat.nom }} {{ afectat.cognoms }},
+                        <span v-if="afectat.sexes_id == 1"> Hombre</span>
+                        <span v-else> Mujer</span>
+                         ({{ afectat.edat }})
                     </option>
                     </select>
                 </div>
@@ -799,7 +824,7 @@
                 <li v-for="(afectada, index) in afectats" :key="index" class="list-group-item">{{ afectada.nom }} {{ afectada.cognoms }},
                     <span v-if="afectada.sexes_id == 1"> Hombre</span>
                     <span v-else> Mujer</span>
-                    , {{ afectada.edat }}
+                     ({{ afectada.edat }})
                     <button class="btn btn-danger float-right" @click="eliminarAfectada(index)"><i class="fas fa-trash"></i> Borrar</button>
                 </li>
             </ul>
@@ -834,12 +859,21 @@
           </div>
           <div class="modal-body">
             <ul class="list-group">
-                <li v-for="(recurs, index) in recursos" :key="index" class="list-group-item">{{ recurs.codi }},
-                    <span v-if="recurs.tipus_recursos_id == 1"> Ambulancia Medicalitzada, </span>
-                    <span v-else-if="recurs.tipus_recursos_id == 2"> Ambulancia Sanitaritzada, </span>
-                    <span v-else-if="recurs.tipus_recursos_id == 3"> Ambulancia Assistencial, </span>
+                <li v-for="(recursProba, recurs_index) in recursos" :key="recursProba.id" class="list-group-item">{{ recursProba.codi }},
+                    <span v-if="recursProba.tipus_recursos_id == 1"> Ambulancia Medicalitzada, </span>
+                    <span v-else-if="recursProba.tipus_recursos_id == 2"> Ambulancia Sanitaritzada, </span>
+                    <span v-else-if="recursProba.tipus_recursos_id == 3"> Ambulancia Assistencial, </span>
                     <span v-else> Helicopter Medicalitzat, </span>
-                    Prioritat {{ incidencies_has_recursos_array[index].prioritat }}
+                    Prioritat {{ incidencies_has_recursos_array[recurs_index].prioritat }}
+                    <!-- Probar posar el loop d'afectats abans del loop de recursos (variable per controlar no repeticio de recurs_id) -->
+                    <li v-for="(afectat, index) in afectatSelected" :key="index">
+                        <div v-show="afectat.recurs_id == recursos[recurs_index].id">
+                            {{ afectat.nom }} {{ afectat.cognoms }},
+                            <span v-if="afectat.sexes_id == 1"> Hombre</span>
+                            <span v-else> Mujer</span>
+                            ({{ afectat.edat }})
+                         </div>
+                    </li>
                     <button class="btn btn-danger float-right" @click="eliminarRecurs(index)"><i class="fas fa-trash"></i> Borrar</button>
                 </li>
             </ul>
@@ -918,7 +952,19 @@ export default {
         edat: null,
         te_cip: false,
         sexes_id: 2,
+        recurs_id: null,
       },
+      afectatSelect: {
+        id: null,
+        cip: null,
+        nom: null,
+        cognoms: null,
+        edat: null,
+        te_cip: false,
+        sexes_id: 2,
+        recurs_id: null,
+      },
+      afectatSelected: [],
       alertant: {
         id: null,
         telefon: null,
@@ -1065,8 +1111,10 @@ export default {
       }
     },
     afegirRecurs() {
-      if (this.recurs.tipus_recursos_id > 0 && this.incidencies_has_recursos.prioritat > 0) {
+      if (this.recurs.tipus_recursos_id > 0 && this.incidencies_has_recursos.prioritat > 0 && this.afectatSelect.edat != null) {
         let pos = this.recursos_select.findIndex(x => x.codi == this.recurs.codi);
+        this.afectatSelect.recurs_id = this.recurs.id;
+        this.afectatSelected.push(this.afectatSelect);
         this.recursos.push(this.recurs);
         this.buidarRecurs();
         this.recursos_select[pos].actiu = false;
@@ -1078,7 +1126,7 @@ export default {
         this.incidencies_has_recursos_array.push(this.incidencies_has_recursos);
         this.buidarIncidenciaHasRecurs();
       } else {
-        this.errors.push("Cal escollir un recurs i una prioritat!");
+        this.errors.push("Cal escollir un recurs, almenys un afectat i una prioritat!");
       }
     },
     buidarAfectat() {
@@ -1090,6 +1138,19 @@ export default {
         edat: null,
         te_cip: false,
         sexes_id: 2,
+        recurs_id: null,
+      };
+    },
+    buidarAfectatSelect() {
+      this.afectatSelect = {
+        id: null,
+        cip: null,
+        nom: null,
+        cognoms: null,
+        edat: null,
+        te_cip: false,
+        sexes_id: 2,
+        recurs_id: null,
       };
     },
     buidarRecurs() {
