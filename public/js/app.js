@@ -2844,6 +2844,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     alertantNumber: Number
@@ -2901,8 +2935,20 @@ __webpack_require__.r(__webpack_exports__);
         cognoms: null,
         edat: null,
         te_cip: false,
-        sexes_id: 2
+        sexes_id: 2,
+        recurs_id: null
       },
+      afectatSelect: {
+        id: null,
+        cip: null,
+        nom: null,
+        cognoms: null,
+        edat: null,
+        te_cip: false,
+        sexes_id: 2,
+        recurs_id: null
+      },
+      afectatSelected: [],
       alertant: {
         id: null,
         telefon: null,
@@ -3052,10 +3098,12 @@ __webpack_require__.r(__webpack_exports__);
     afegirRecurs: function afegirRecurs() {
       var _this6 = this;
 
-      if (this.recurs.tipus_recursos_id > 0 && this.incidencies_has_recursos.prioritat > 0) {
+      if (this.recurs.tipus_recursos_id > 0 && this.incidencies_has_recursos.prioritat > 0 && this.afectatSelect.edat != null) {
         var pos = this.recursos_select.findIndex(function (x) {
           return x.codi == _this6.recurs.codi;
         });
+        this.afectatSelect.recurs_id = this.recurs.id;
+        this.afectatSelected.push(this.afectatSelect);
         this.recursos.push(this.recurs);
         this.buidarRecurs();
         this.recursos_select[pos].actiu = false;
@@ -3067,7 +3115,7 @@ __webpack_require__.r(__webpack_exports__);
         this.incidencies_has_recursos_array.push(this.incidencies_has_recursos);
         this.buidarIncidenciaHasRecurs();
       } else {
-        this.errors.push("Cal escollir un recurs i una prioritat!");
+        this.errors.push("Cal escollir un recurs, almenys un afectat i una prioritat!");
       }
     },
     buidarAfectat: function buidarAfectat() {
@@ -3078,7 +3126,20 @@ __webpack_require__.r(__webpack_exports__);
         cognoms: null,
         edat: null,
         te_cip: false,
-        sexes_id: 2
+        sexes_id: 2,
+        recurs_id: null
+      };
+    },
+    buidarAfectatSelect: function buidarAfectatSelect() {
+      this.afectatSelect = {
+        id: null,
+        cip: null,
+        nom: null,
+        cognoms: null,
+        edat: null,
+        te_cip: false,
+        sexes_id: 2,
+        recurs_id: null
       };
     },
     buidarRecurs: function buidarRecurs() {
@@ -41882,7 +41943,7 @@ var render = function() {
                     [_vm._v("Recursos")]
                   ),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-4" }, [
+                  _c("div", { staticClass: "col-3 " }, [
                     _c(
                       "select",
                       {
@@ -41937,6 +41998,84 @@ var render = function() {
                                 "\n                      " +
                                   _vm._s(recurs.codi) +
                                   "\n                  "
+                              )
+                            ]
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-2 mt-1",
+                      attrs: { for: "afectadoSelect" }
+                    },
+                    [_vm._v("Afectados")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-4" }, [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.afectatSelect,
+                            expression: "afectatSelect"
+                          }
+                        ],
+                        staticClass: "custom-select",
+                        attrs: { id: "afectadoSelect" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.afectatSelect = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "option",
+                          { attrs: { selected: "", value: "Selecciona..." } },
+                          [
+                            _vm._v(
+                              "\n                      Selecciona...\n                  "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm._l(_vm.afectats, function(afectat, index) {
+                          return _c(
+                            "option",
+                            { key: index, domProps: { value: afectat } },
+                            [
+                              _vm._v(
+                                "\n                      " +
+                                  _vm._s(afectat.nom) +
+                                  " " +
+                                  _vm._s(afectat.cognoms) +
+                                  ",\n                      "
+                              ),
+                              afectat.sexes_id == 1
+                                ? _c("span", [_vm._v(" Hombre")])
+                                : _c("span", [_vm._v(" Mujer")]),
+                              _vm._v(
+                                "\n                       (" +
+                                  _vm._s(afectat.edat) +
+                                  ")\n                  "
                               )
                             ]
                           )
@@ -42167,9 +42306,9 @@ var render = function() {
                           ? _c("span", [_vm._v(" Hombre")])
                           : _c("span", [_vm._v(" Mujer")]),
                         _vm._v(
-                          "\n                  , " +
+                          "\n                   (" +
                             _vm._s(afectada.edat) +
-                            "\n                  "
+                            ")\n                  "
                         ),
                         _c(
                           "button",
@@ -42218,46 +42357,94 @@ var render = function() {
                 _c(
                   "ul",
                   { staticClass: "list-group" },
-                  _vm._l(_vm.recursos, function(recurs, index) {
-                    return _c(
-                      "li",
-                      { key: index, staticClass: "list-group-item" },
-                      [
-                        _vm._v(_vm._s(recurs.codi) + ",\n                  "),
-                        recurs.tipus_recursos_id == 1
-                          ? _c("span", [_vm._v(" Ambulancia Medicalitzada, ")])
-                          : recurs.tipus_recursos_id == 2
-                          ? _c("span", [_vm._v(" Ambulancia Sanitaritzada, ")])
-                          : recurs.tipus_recursos_id == 3
-                          ? _c("span", [_vm._v(" Ambulancia Assistencial, ")])
-                          : _c("span", [_vm._v(" Helicopter Medicalitzat, ")]),
-                        _vm._v(
-                          "\n                  Prioritat " +
-                            _vm._s(
-                              _vm.incidencies_has_recursos_array[index]
-                                .prioritat
-                            ) +
-                            "\n                  "
-                        ),
+                  [
+                    _vm._l(_vm.recursos, function(recursProba, recurs_index) {
+                      return _c(
+                        "li",
+                        { key: recursProba.id, staticClass: "list-group-item" },
+                        [
+                          _vm._v(
+                            _vm._s(recursProba.codi) + ",\n                  "
+                          ),
+                          recursProba.tipus_recursos_id == 1
+                            ? _c("span", [
+                                _vm._v(" Ambulancia Medicalitzada, ")
+                              ])
+                            : recursProba.tipus_recursos_id == 2
+                            ? _c("span", [
+                                _vm._v(" Ambulancia Sanitaritzada, ")
+                              ])
+                            : recursProba.tipus_recursos_id == 3
+                            ? _c("span", [_vm._v(" Ambulancia Assistencial, ")])
+                            : _c("span", [
+                                _vm._v(" Helicopter Medicalitzat, ")
+                              ]),
+                          _vm._v(
+                            "\n                  Prioritat " +
+                              _vm._s(
+                                _vm.incidencies_has_recursos_array[recurs_index]
+                                  .prioritat
+                              ) +
+                              "\n                  "
+                          )
+                        ]
+                      )
+                    }),
+                    _vm._l(_vm.afectatSelected, function(afectat, index) {
+                      return _c("li", { key: index }, [
                         _c(
-                          "button",
+                          "div",
                           {
-                            staticClass: "btn btn-danger float-right",
-                            on: {
-                              click: function($event) {
-                                return _vm.eliminarRecurs(index)
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value:
+                                  afectat.recurs_id ==
+                                  _vm.recursos[_vm.recurs_index].id,
+                                expression:
+                                  "afectat.recurs_id == recursos[recurs_index].id"
                               }
-                            }
+                            ]
                           },
                           [
-                            _c("i", { staticClass: "fas fa-trash" }),
-                            _vm._v(" Borrar")
+                            _vm._v(
+                              "\n                          " +
+                                _vm._s(afectat.nom) +
+                                " " +
+                                _vm._s(afectat.cognoms) +
+                                ",\n                          "
+                            ),
+                            afectat.sexes_id == 1
+                              ? _c("span", [_vm._v(" Hombre")])
+                              : _c("span", [_vm._v(" Mujer")]),
+                            _vm._v(
+                              "\n                          (" +
+                                _vm._s(afectat.edat) +
+                                ")\n                       "
+                            )
                           ]
                         )
+                      ])
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger float-right",
+                        on: {
+                          click: function($event) {
+                            return _vm.eliminarRecurs(_vm.index)
+                          }
+                        }
+                      },
+                      [
+                        _c("i", { staticClass: "fas fa-trash" }),
+                        _vm._v(" Borrar")
                       ]
                     )
-                  }),
-                  0
+                  ],
+                  2
                 )
               ]),
               _vm._v(" "),
@@ -42607,10 +42794,10 @@ var render = function() {
       _vm._m(0),
       _vm._v(" "),
       _c("div", { staticClass: "card-body p-3" }, [
-        _vm._m(1),
+        _c("div", { attrs: { id: "map" } }),
         _vm._v(" "),
         _c("div", { staticClass: "col-12 p-0", attrs: { id: "info" } }, [
-          _vm._m(2),
+          _vm._m(1),
           _vm._v(" "),
           _c("div", { staticClass: "col-1", attrs: { id: "masInfo" } }, [
             _c(
@@ -42647,7 +42834,7 @@ var render = function() {
             }
           },
           [
-            _vm._m(3),
+            _vm._m(2),
             _vm._v(" "),
             _c("input", {
               directives: [
@@ -42726,7 +42913,7 @@ var render = function() {
             }
           }
         },
-        [_c("button", { attrs: { disabled: !_vm.assistencia } }, [_vm._m(4)])]
+        [_c("button", { attrs: { disabled: !_vm.assistencia } }, [_vm._m(3)])]
       ),
       _vm._v(" "),
       _c(
@@ -42883,7 +43070,7 @@ var render = function() {
                     _vm._v(" Hospitalització")
                   ]),
                   _vm._v(" "),
-                  _vm._m(5)
+                  _vm._m(4)
                 ])
               ])
             ]
@@ -42892,7 +43079,7 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _vm._m(6)
+    _vm._m(5)
   ])
 }
 var staticRenderFns = [
@@ -42911,14 +43098,6 @@ var staticRenderFns = [
         _c("div", [_vm._v("G-003")])
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "map" } }, [
-      _c("img", { attrs: { src: "", alt: "" } })
-    ])
   },
   function() {
     var _vm = this
