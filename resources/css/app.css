@@ -76,6 +76,11 @@ textarea{
     z-index: 100;
 }
 
+.modifColorLogout {
+    background-color: #E2211D;
+    color: white;
+}
+
 #cecosNav{
     background-color:#fcc41c !important;
     margin-bottom: 20px;

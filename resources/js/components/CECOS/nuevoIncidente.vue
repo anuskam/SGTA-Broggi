@@ -22,6 +22,11 @@
         <button @click="selectTab(3)" class="btn btn-sm ml-3 tabButton"  :class="{ selectedTab: tabs.c }">
           <i class="fas fa-ambulance fa-2x mr-2 ml-2" aria-hidden="true"></i>
         </button>
+        <div id="titulitosTabs">
+            <p>Alertante</p>
+            <p>Afectada</p>
+            <p>Respuesta</p>
+        </div>
       </div>
 
       <button
@@ -1407,4 +1412,11 @@ button {
 #entregar{
   border: 1px solid black;
 }
+
+#titulitosTabs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 </style>
