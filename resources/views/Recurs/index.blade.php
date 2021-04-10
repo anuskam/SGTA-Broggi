@@ -2,7 +2,7 @@
 
 @section('stylesheet')
     <link rel="stylesheet" href="{{ asset('style.css') }}">
-    <link href='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css' rel='stylesheet' />
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
 @endsection
 
 @section('title', 'Recurs')
@@ -12,4 +12,4 @@
     <recursos-component></recursos-component>
 @endsection
 
-<script src='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script>
+{{-- <script src='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script> --}}

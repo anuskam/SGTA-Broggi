@@ -128,7 +128,8 @@
 </template>
 
 <script>
-import mapboxgl from "mapbox-gl"
+import mapboxgl from 'mapbox-gl'
+import 'mapbox-gl/dist/mapbox-gl.css'
 
 
 export default {
@@ -145,9 +146,9 @@ export default {
             horaTransport: null,
             horaHospital: null,
             horaTransferencia: null,
-            mapboxKey: "pk.eyJ1IjoiZnJvaWxhbmVucmlxdWV6MyIsImEiOiJja21xNjU3bWQxZ202MnBsd3lqaXZjOHpmIn0.qKVFhoneRnyPf5fAlM_rzQ",
+            mapboxKey: "pk.eyJ1IjoiYWx4bXJjZCIsImEiOiJja25ieXJqOGExMmdvMndtdWU1bXVsb3kwIn0.zN5ubwh81_aR_xFX1w0Aqg",
             map: null,
-            address: "calle bruc, barcelona",
+            address: "avinguda diagonal, barcelona",
         }
     },
     methods: {
@@ -165,15 +166,16 @@ export default {
         addAddress(){
             this.drawMarkFromAddress(this.address);
         },
-        drawMarkFormAddress(address){
-            let url = createURLApiCall(address);
+        drawMarkFromAddress(address){
+            let url = this.createURLApiCall(address);
             let me = this;
+            console.log(url);
             axios
             .get(url)
             .then(response => {
                 let coordinates = response.data.features[0].center;
-                addMark(coordinates[0], coordinates[1]);
-
+                me.addMark(coordinates[0], coordinates[1]);
+                console.log(coordinates);
                 me.map.flyTo({
                     center: [
                         coordinates[0],
@@ -183,9 +185,9 @@ export default {
                     });
 
             })
-            .catch( errorThrown =>{
-                console.log(errorThrown);
-            })
+            .catch(error => {
+                console.log(error);
+            });
         },
         addMark(lat, lng){
             let mark = new mapboxgl.Marker().setLngLat([lat, lng]).addTo(this.map);
@@ -259,7 +261,8 @@ export default {
     },
   mounted() {
     mapboxgl.accessToken = this.mapboxKey;
-    this.map = this.initMap('map');
+    this.map = this.initMap("map");
+    this.addAddress();
   },
 };
 </script>
