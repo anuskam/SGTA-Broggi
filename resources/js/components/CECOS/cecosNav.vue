@@ -1,19 +1,19 @@
 <template>
   <div class="contenido">
       <nav class="navbar navbar-expand-lg navbar-light" id="cecosNav">
-        <a class="navbar-brand"><img src="/SGTA-Broggi/public/media/img/prototipoLogo.png" id="cecosLogo" alt="Broggi"></a>
+        <a class="navbar-brand"><img src="/SGTA-Broggi/public/media/img/prototipoLogo.png" id="cecosLogo" alt="logoBroggi"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item active" id="nuevoIncidenteItem">
+                <li class="nav-item active borderLeftRight" id="nuevoIncidenteItem">
                     <a class="nav-link" @click="selectTab(1)">Nuevo Incidente <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item" id="editarIncidenteItem">
+                <li class="nav-item borderLeftRight" id="editarIncidenteItem">
                     <a class="nav-link" @click="selectTab(2)">Editar Incidentes</a>
                 </li>
-                <li class="nav-item" id="formacionItem">
+                <li class="nav-item borderLeftRight" id="formacionItem">
                     <a class="nav-link" @click="selectTab(3)">Formación</a>
                 </li>
             </ul>
@@ -113,8 +113,34 @@ export default {
         color: #0A0A0A;
     }
 
+    /* MOVIMIENTO BARRA DEBAJO DE ELEMENTOS DE NAVBAR */
+    .borderLeftRight {
+        display: inline-block;
+        position: relative;
+        color: hsl(222, 25%, 14%);
+    }
+
+    .borderLeftRight::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        transform: scaleX(0);
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: black;
+        transform-origin: bottom right;
+        transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+    }
+
+    .borderLeftRight:hover::after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+    }
+    /* FIN DE LO QUE HE COPIADO POR SI NO CONVENCE */
+
     #cecosNav {
-        cursor: default;
+        cursor: pointer;
         border: 1px solid black;
     }
 
