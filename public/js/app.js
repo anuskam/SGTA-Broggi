@@ -3225,8 +3225,6 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       })["finally"](function () {
         _this5.loading = false;
-
-        _this5.getTelefons();
       });
     },
     afegirAfectat: function afegirAfectat() {
@@ -3619,6 +3617,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3637,10 +3654,35 @@ __webpack_require__.r(__webpack_exports__);
       horaTransferencia: null,
       mapboxKey: "pk.eyJ1IjoiYWx4bXJjZCIsImEiOiJja25ieXJqOGExMmdvMndtdWU1bXVsb3kwIn0.zN5ubwh81_aR_xFX1w0Aqg",
       map: null,
-      address: "avinguda diagonal, barcelona"
+      address: "Antoni Gaudí, 26, Reus",
+      hospitalAddress: null,
+      hospitals: [],
+      alertants: []
     };
   },
   methods: {
+    selectAlertants: function selectAlertants() {
+      var _this = this;
+
+      var me = this;
+      axios.get("/SGTA-Broggi/public/api/alertant").then(function (response) {
+        me.alertants = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      })["finally"](function () {
+        _this.loading = false;
+
+        _this.getHospitals();
+      });
+    },
+    getHospitals: function getHospitals() {
+      var me = this;
+      this.alertants.forEach(function (alertant) {
+        if (alertant.tipus_alertants_id == 1) {
+          me.hospitals.push(alertant);
+        }
+      });
+    },
     initMap: function initMap(idDiv) {
       var map = new (mapbox_gl__WEBPACK_IMPORTED_MODULE_0___default().Map)({
         //Create new mapbox object
@@ -3655,8 +3697,8 @@ __webpack_require__.r(__webpack_exports__);
       console.log("Map initialized");
       return map;
     },
-    addAddress: function addAddress() {
-      this.drawMarkFromAddress(this.address);
+    addAddress: function addAddress(address) {
+      this.drawMarkFromAddress(address);
     },
     drawMarkFromAddress: function drawMarkFromAddress(address) {
       var url = this.createURLApiCall(address);
@@ -3740,7 +3782,19 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     (mapbox_gl__WEBPACK_IMPORTED_MODULE_0___default().accessToken) = this.mapboxKey;
     this.map = this.initMap("map");
-    this.addAddress();
+    this.addAddress(this.address);
+  },
+  created: function created() {
+    this.selectAlertants();
+  },
+  updated: function updated() {
+    if (this.hospitalAddress != null) {
+      if (this.map.markers.length > 1) {
+        this.map.markers[this.map.markers.length - 1].remove();
+      }
+
+      this.addAddress(this.hospitalAddress);
+    }
   }
 });
 
@@ -43428,7 +43482,31 @@ var render = function() {
         _c("div", { attrs: { id: "map" } }),
         _vm._v(" "),
         _c("div", { staticClass: "col-12 p-0", attrs: { id: "info" } }, [
-          _vm._m(1),
+          _c("div", { staticClass: "col-11", attrs: { id: "infoFields" } }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "infobox", attrs: { id: "direccionBox" } },
+              [
+                _c("div", { staticClass: "col-2 text-center" }, [
+                  _vm._v("Dirección:")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-9", attrs: { id: "direccion" } },
+                  [
+                    _vm._v(
+                      "\n              " +
+                        _vm._s(_vm.address) +
+                        "\n            "
+                    )
+                  ]
+                )
+              ]
+            )
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "col-1", attrs: { id: "masInfo" } }, [
             _c(
@@ -43573,14 +43651,61 @@ var render = function() {
               attrs: { id: "transportForm" }
             },
             [
-              _c("input", {
-                attrs: {
-                  disabled: !_vm.mostrarTransport,
-                  type: "text",
-                  placeholder: "Introdueix direcció",
-                  id: "direccioHospital"
-                }
-              }),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.hospitalAddress,
+                      expression: "hospitalAddress"
+                    }
+                  ],
+                  staticClass: "custom-select",
+                  attrs: {
+                    disabled: !_vm.mostrarTransport,
+                    id: "direccioHospital"
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.hospitalAddress = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "option",
+                    { attrs: { selected: "", value: "Selecciona..." } },
+                    [_vm._v("\n              Selecciona...\n          ")]
+                  ),
+                  _vm._v(" "),
+                  _vm._l(_vm.hospitals, function(hospital, index) {
+                    return _c(
+                      "option",
+                      { key: index, domProps: { value: hospital.adreca } },
+                      [
+                        _vm._v(
+                          "\n              " +
+                            _vm._s(hospital.nom) +
+                            "\n          "
+                        )
+                      ]
+                    )
+                  })
+                ],
+                2
+              ),
               _vm._v(" "),
               _c("div", { attrs: { id: "botonsTransport" } }, [
                 _c("div", { staticClass: "botoTransport button" }, [
@@ -43739,8 +43864,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-11", attrs: { id: "infoFields" } }, [
-      _c("div", { staticClass: "infobox", attrs: { id: "descripcionBox" } }, [
+    return _c(
+      "div",
+      { staticClass: "infobox", attrs: { id: "descripcionBox" } },
+      [
         _c("div", { staticClass: "col-2 text-center" }, [
           _vm._v("Descripción:")
         ]),
@@ -43750,18 +43877,8 @@ var staticRenderFns = [
             "\n              Juan se ha caido de una escalera mientras rescataba al mishu de\n              la vecina de al lado...\n            "
           )
         ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "infobox", attrs: { id: "direccionBox" } }, [
-        _c("div", { staticClass: "col-2 text-center" }, [_vm._v("Dirección:")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-9", attrs: { id: "direccion" } }, [
-          _vm._v(
-            "\n              C/ Inventada, 4 2º A, 08019 Barcelona\n            "
-          )
-        ])
-      ])
-    ])
+      ]
+    )
   },
   function() {
     var _vm = this
