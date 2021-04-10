@@ -25,6 +25,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "mapbox-gl": "^2.2.0",
         "vue-mapbox-map": "^0.13.0"
     }
 }

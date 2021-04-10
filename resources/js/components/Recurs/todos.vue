@@ -48,7 +48,7 @@
         methods:{
             selectCicles(){
                 let me = this;
-            axios.get('/cicle').then(response => {
+            axios.get('/SGTA-Broggi/public/api/cicle').then(response => {
                 me.cicles = response.data;
             }).catch(error => {
                 console.log(error);

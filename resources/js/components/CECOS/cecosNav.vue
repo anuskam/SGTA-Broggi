@@ -55,7 +55,7 @@ export default {
     getAlertants(){
         let me = this;
         axios
-        .get("/alertant")
+        .get("/SGTA-Broggi/public/api/alertant")
         .then((response) => {
           me.alertants = response.data;
         })
