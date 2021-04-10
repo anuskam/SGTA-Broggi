@@ -3,6 +3,7 @@
     font-family: 'Rubik', sans-serif;
 }
 
+
 .container{
     height: 100%;
 }
@@ -12,15 +13,18 @@
 }
 
 #logo{
-    max-width: 80%;
+    max-width: 40%;
+    display: block;
+    /* margin-left: auto;
+    margin-right: auto; */
+    margin-bottom: 0px;
 }
 
 #login{
     background-color: #e3177d;
     border: 1.5px solid black;
     font-weight: bold;
-    font-size: 15px;
-    color: black;
+    font-size: 1em;
 }
 
 #loginContainer{
@@ -40,7 +44,6 @@
     background-color: #15acc4;
     font-weight: bold;
     font-size: 1.2em;
-    color: black;
 }
 
 #login-card{
@@ -87,12 +90,12 @@ textarea{
     top: 10px;
     right: 10px;
     z-index: 100;
-    font-size: 15px;
 }
 
 .modifColorLogout {
     background-color: #E2211D;
     color: white;
+    font-size: 15px;
 }
 
 #cecosNav{
