@@ -4,7 +4,7 @@
       <button
         :disabled="currentTab == 1"
         @click="prev()"
-        class="btn btn-sm mr-3 float-left ml-3"
+        class="btn btn-sm mr-3 float-left ml-3 iconNavPrincipal"
         id="btn"
       >
         <i class="fas fa-arrow-left fa-2x" aria-hidden="true"></i>
@@ -12,15 +12,15 @@
 
       <div>
         <button @click="selectTab(1)" class="btn btn-sm mr-3 tabButton" :class="{ selectedTab: tabs.a }">
-          <i class="fas fa-phone-alt fa-2x mr-2 ml-2" aria-hidden="true"></i>
+          <i class="fas fa-phone-alt fa-2x mr-2 ml-2 iconNavPrincipal" aria-hidden="true"></i>
         </button>
         |
         <button @click="selectTab(2)" class="btn btn-sm mr-3 ml-3 tabButton" :class="{ selectedTab: tabs.b }">
-          <i class="fas fa-user-injured fa-2x mr-2 ml-2" aria-hidden="true"></i>
+          <i class="fas fa-user-injured fa-2x mr-2 ml-2 iconNavPrincipal" aria-hidden="true"></i>
         </button>
         |
         <button @click="selectTab(3)" class="btn btn-sm ml-3 tabButton"  :class="{ selectedTab: tabs.c }">
-          <i class="fas fa-ambulance fa-2x mr-2 ml-2" aria-hidden="true"></i>
+          <i class="fas fa-ambulance fa-2x mr-2 ml-2 iconNavPrincipal" aria-hidden="true"></i>
         </button>
         <div id="titulitosTabs">
             <p>Alertante</p>
@@ -32,7 +32,7 @@
       <button
         :disabled="currentTab == 3"
         @click="next()"
-        class="btn btn-sm mr-3 float-right mr-3"
+        class="btn btn-sm mr-3 float-right mr-3 iconNavPrincipal"
       >
         <i class="fas fa-arrow-right fa-2x"></i>
       </button>
@@ -1418,5 +1418,10 @@ button {
     flex-direction: row;
     justify-content: space-between;
 }
+
+.iconNavPrincipal{
+    color: black;
+}
+
 
 </style>

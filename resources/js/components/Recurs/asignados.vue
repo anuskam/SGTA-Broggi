@@ -86,25 +86,30 @@
             </select>
           <div id="botonsTransport">
             <div class="botoTransport button">
-              <button :disabled="!mostrarTransport" @click="activarTransport()">
-                <i class="fas fa-ambulance"></i> Iniciar Transport
+              <button :disabled="!mostrarTransport" id="iniciarTransport" @click="activarTransport()">
+                <label for="iniciarTransport"><i class="fas fa-ambulance"></i> Iniciar Transport</label>
               </button>
               <input type="time" v-model="horaTransport" />
             </div>
             <div class="botoTransport button">
-              <button :disabled="!transport" @click="activarHospital()"><i class="fas fa-hospital"></i> Arribada Hospital</button>
+              <button :disabled="!transport" id="arribadaHospital" @click="activarHospital()">
+                  <label for="arribadaHospital"><i class="fas fa-hospital"></i> Arribada Hospital</label>
+              </button>
               <input type="time" v-model="horaHospital" />
             </div>
             <div class="botoTransport button">
               <button :disabled="!hospital" @click="activarTransferencia()">
-                <i class="fas fa-user-friends"></i> Iniciar Transferència
+                <label for="ininciarTransferencia"><i class="fas fa-user-friends"></i> Iniciar Transferència</label>
               </button>
               <input type="time" v-model="horaTransferencia" />
             </div>
             <div class="botoTransport button">
-              <button :disabled="!transferencia"><i class="fas fa-procedures"></i> Hospitalització</button>
+              <button :disabled="!transferencia" id="hospitalitzacio">
+                  <label for="hospitalitzacio"><i class="fas fa-procedures"></i> Hospitalització</label>
+              </button>
+
               <button id="alta">
-                <i class="fas fa-notes-medical"></i> Alta Voluntària
+                <label for="alta"><i class="fas fa-notes-medical"></i> Alta Voluntària</label>
               </button>
             </div>
           </div>
@@ -327,9 +332,11 @@ export default {
 <style scoped>
 main {
   margin-top: 1.4vh;
+  color: black;
 }
 #infoCard {
   height: 65vh;
+  color: black;
 }
 #botones {
   height: 28vh;
@@ -338,6 +345,7 @@ main {
   flex-wrap: nowrap;
   justify-content: space-around;
   align-items: center;
+
 }
 #infoHeader {
   display: flex;
@@ -354,6 +362,7 @@ button {
   background-color: #e3177d;
   font-weight: bold;
   font-size: 0.9em;
+  color: black;
 }
 .card {
   border: 1px solid black;
@@ -370,6 +379,7 @@ button {
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: space-around;
+
 }
 #assistencia{
     opacity: .4;

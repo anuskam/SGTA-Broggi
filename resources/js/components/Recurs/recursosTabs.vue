@@ -60,6 +60,7 @@ export default {
         font-size: 1.2em;
         font-weight: bolder;
         /* background-color: rgba(128, 128, 128, 0.503); */
+        color: black;
     }
 
     #asignats:hover, #tots:hover{
