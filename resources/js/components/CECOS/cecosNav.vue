@@ -110,4 +110,8 @@ export default {
     #navbarNav a{
         color: #0A0A0A;
     }
+
+    #cecosNav {
+        cursor: default;
+    }
 </style>

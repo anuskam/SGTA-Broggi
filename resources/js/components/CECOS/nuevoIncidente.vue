@@ -45,7 +45,7 @@
                   <input type="number" class="form-control col-2 ml-5 mb-4" placeholder="Teléfono" :value = alertantNumber>
                   <div class="input-group-append">
                   <button class="btn btn-secondary mb-4" type="button" @click="getAlertantData()">
-                      <i class="fa fa-search"></i>
+                      <i class="fa fa-search "></i> Buscar
                   </button>
                   </div>
               </div>
@@ -215,6 +215,7 @@
                 <label for="direccion" class="col-2 mt-2">Dirección</label>
                 <div class="col-9">
                   <input
+                    id="direccion"
                     type="text"
                     class="form-control"
                     v-model="incidencia.adreca"

@@ -1,5 +1,6 @@
 *{
-    font-family:Arial, Helvetica, sans-serif;
+    /* font-family:Arial, Helvetica, sans-serif; */
+    font-family: 'Rubik', sans-serif;
 }
 
 .container{
@@ -18,7 +19,8 @@
     background-color: #e3177d;
     border: 1.5px solid black;
     font-weight: bold;
-    font-size: 1em;
+    font-size: 15px;
+    color: black;
 }
 
 #loginContainer{
@@ -38,6 +40,7 @@
     background-color: #15acc4;
     font-weight: bold;
     font-size: 1.2em;
+    color: black;
 }
 
 #login-card{
@@ -84,6 +87,7 @@ textarea{
     top: 10px;
     right: 10px;
     z-index: 100;
+    font-size: 15px;
 }
 
 .modifColorLogout {
