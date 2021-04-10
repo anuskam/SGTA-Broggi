@@ -128,6 +128,9 @@
 </template>
 
 <script>
+import mapboxgl from "mapbox-gl"
+
+
 export default {
     data(){
         return{
@@ -142,9 +145,71 @@ export default {
             horaTransport: null,
             horaHospital: null,
             horaTransferencia: null,
+            mapboxKey: "pk.eyJ1IjoiZnJvaWxhbmVucmlxdWV6MyIsImEiOiJja21xNjU3bWQxZ202MnBsd3lqaXZjOHpmIn0.qKVFhoneRnyPf5fAlM_rzQ",
+            map: null,
+            address: "calle bruc, barcelona",
         }
     },
     methods: {
+        initMap(idDiv) {
+            let map = new mapboxgl.Map({ //Create new mapbox object
+            container: idDiv,
+            style: "mapbox://styles/mapbox/streets-v11",
+            center: [-3, 40], // starting position [lng, lat]
+            zoom: 7, // starting zoom
+            });
+            map.markers = [];
+            console.log("Map initialized");
+            return map;
+        },
+        addAddress(){
+            this.drawMarkFromAddress(this.address);
+        },
+        drawMarkFormAddress(address){
+            let url = createURLApiCall(address);
+            let me = this;
+            axios
+            .get(url)
+            .then(response => {
+                let coordinates = response.data.features[0].center;
+                addMark(coordinates[0], coordinates[1]);
+
+                me.map.flyTo({
+                    center: [
+                        coordinates[0],
+                        coordinates[1]
+                    ],
+                    essential: true // this animation is considered essential with respect to prefers-reduced-motion
+                    });
+
+            })
+            .catch( errorThrown =>{
+                console.log(errorThrown);
+            })
+        },
+        addMark(lat, lng){
+            let mark = new mapboxgl.Marker().setLngLat([lat, lng]).addTo(this.map);
+
+            this.map.markers.push(mark);
+
+            return mark;
+        },
+        createURLApiCall(address) {
+            var route = "https://api.mapbox.com/geocoding/v5/mapbox.places/";
+            var addressUrl = address.replaceAll(" ", "%20").toLowerCase() + ".json";
+
+            let autocomplete = "true";
+            //let country = "es";
+            let language = "es";
+
+            let params =
+            "?access_token=" + mapboxgl.accessToken +
+            "&autocomplete=" + autocomplete +
+            //"&country=" + country +
+            "&language=" + language;
+
+            return route + addressUrl + params;
+        },
         showInfo(){
             $('#infoModal').modal('show')
         },
@@ -193,7 +258,8 @@ export default {
         },
     },
   mounted() {
-    console.log("Component mounted.");
+    mapboxgl.accessToken = this.mapboxKey;
+    this.map = this.initMap('map');
   },
 };
 </script>
