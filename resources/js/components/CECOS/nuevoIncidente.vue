@@ -1043,7 +1043,7 @@ export default {
     selectProvincies() {
       let me = this;
       axios
-        .get("/provincia")
+        .get("/SGTA-Broggi/public/api/provincia")
         .then((response) => {
           me.provincies = response.data;
         })
@@ -1055,7 +1055,7 @@ export default {
     selectComarques() {
       let me = this;
       axios
-        .get("/comarca")
+        .get("/SGTA-Broggi/public/api/comarca")
         .then((response) => {
           me.comarques = response.data;
         })
@@ -1067,7 +1067,7 @@ export default {
     selectMunicipis() {
       let me = this;
       axios
-        .get("/municipi")
+        .get("/SGTA-Broggi/public/api/municipi")
         .then((response) => {
           me.municipis = response.data;
         })
@@ -1079,7 +1079,7 @@ export default {
     selectRecursos(){
         let me = this;
       axios
-        .get("/recurs")
+        .get("/SGTA-Broggi/public/api/recurs")
         .then((response) => {
           me.recursos_select = response.data;
         })
@@ -1091,7 +1091,7 @@ export default {
     selectAlertants(){
         let me = this;
         axios
-        .get("/alertant")
+        .get("/SGTA-Broggi/public/api/alertant")
         .then((response) => {
           me.alertants = response.data;
         })
@@ -1198,7 +1198,7 @@ export default {
     },
     insertarIncidencia(){
       let me = this;
-      axios.post('/incidencia', me.incidencia).then((response) => {
+      axios.post('/SGTA-Broggi/public/api/incidencia', me.incidencia).then((response) => {
           console.log(response);
       }).catch( (error) => {
           console.log(error.response.status);
@@ -1207,7 +1207,7 @@ export default {
     },
     insertarIncidenciesHasAfectats(afectat){
       let me = this;
-      axios.post('/incidencia_has_recursos', afectat).then((response) => {
+      axios.post('/SGTA-Broggi/public/api/incidencia_has_recursos', afectat).then((response) => {
           console.log(response);
       }).catch( (error) => {
           console.log(error.response.status);
@@ -1216,7 +1216,7 @@ export default {
     },
     insertarIncidenciesHasRecursos(recurs){
       let me = this;
-      axios.post('/incidencia_has_recursos', recurs).then((response) => {
+      axios.post('/SGTA-Broggi/public/api/incidencia_has_recursos', recurs).then((response) => {
           console.log(response);
       }).catch( (error) => {
           console.log(error.response.status);
@@ -1225,7 +1225,7 @@ export default {
     },
     insertarAfectat(){
       let me = this;
-      axios.post('/afectat', me.cicle).then((response) => {
+      axios.post('/SGTA-Broggi/public/api/afectat', me.cicle).then((response) => {
           console.log(response);
       }).catch( (error) => {
           console.log(error.response.status);
@@ -1234,7 +1234,7 @@ export default {
     },
     insertarAlertant(){
       let me = this;
-      axios.post('/alertant', me.cicle).then((response) => {
+      axios.post('/SGTA-Broggi/public/api/alertant', me.cicle).then((response) => {
           console.log(response);
       }).catch( (error) => {
           console.log(error.response.status);
