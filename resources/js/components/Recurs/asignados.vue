@@ -22,7 +22,7 @@
             <div class="infobox" id="direccionBox">
               <div class="col-2 text-center">Dirección:</div>
               <div id="direccion" class="col-9">
-                C/ Inventada, 4 2º A, 08019 Barcelona
+                {{ address }}
               </div>
             </div>
           </div>
@@ -59,12 +59,31 @@
       <div id="transportButtons" class="card col-9 p-0"  :class="{ visible: mostrarTransport }">
         <div class="card-header" id="transportHeader">Destí Hospitalari</div>
         <div class="card-body p-2 pl-4 pr-4" id="transportForm">
-          <input
+          <!-- <input
             :disabled="!mostrarTransport"
             type="text"
             placeholder="Introdueix direcció"
             id="direccioHospital"
-          />
+            :v-model="hospitalAddress"
+          /> -->
+          <select
+            :disabled="!mostrarTransport"
+            class="custom-select"
+            id="direccioHospital"
+
+            v-model="hospitalAddress"
+            >
+            <option selected value="Selecciona...">
+                Selecciona...
+            </option>
+            <option
+                v-for="(hospital, index) in hospitals"
+                :key="index"
+                :value="hospital.adreca"
+            >
+                {{ hospital.nom }}
+            </option>
+            </select>
           <div id="botonsTransport">
             <div class="botoTransport button">
               <button :disabled="!mostrarTransport" @click="activarTransport()">
@@ -148,10 +167,37 @@ export default {
             horaTransferencia: null,
             mapboxKey: "pk.eyJ1IjoiYWx4bXJjZCIsImEiOiJja25ieXJqOGExMmdvMndtdWU1bXVsb3kwIn0.zN5ubwh81_aR_xFX1w0Aqg",
             map: null,
-            address: "avinguda diagonal, barcelona",
+            address: "Antoni Gaudí, 26, Reus",
+            hospitalAddress: null,
+            hospitals: [],
+            alertants: [],
         }
     },
     methods: {
+        selectAlertants(){
+        let me = this;
+        axios
+        .get("/SGTA-Broggi/public/api/alertant")
+        .then((response) => {
+          me.alertants = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+            this.loading = false;
+            this.getHospitals();
+        });
+
+        },
+        getHospitals(){
+        let me = this;
+        this.alertants.forEach(function(alertant){
+            if(alertant.tipus_alertants_id == 1){
+               me.hospitals.push(alertant);
+            }
+        });
+        },
         initMap(idDiv) {
             let map = new mapboxgl.Map({ //Create new mapbox object
             container: idDiv,
@@ -163,8 +209,8 @@ export default {
             console.log("Map initialized");
             return map;
         },
-        addAddress(){
-            this.drawMarkFromAddress(this.address);
+        addAddress(address){
+            this.drawMarkFromAddress(address);
         },
         drawMarkFromAddress(address){
             let url = this.createURLApiCall(address);
@@ -262,8 +308,19 @@ export default {
   mounted() {
     mapboxgl.accessToken = this.mapboxKey;
     this.map = this.initMap("map");
-    this.addAddress();
+    this.addAddress(this.address);
   },
+  created(){
+      this.selectAlertants();
+  },
+  updated(){
+      if(this.hospitalAddress != null){
+          if(this.map.markers.length > 1){
+              this.map.markers[this.map.markers.length-1].remove();
+          }
+          this.addAddress(this.hospitalAddress);
+      }
+  }
 };
 </script>
 
