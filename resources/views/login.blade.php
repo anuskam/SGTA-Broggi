@@ -9,10 +9,10 @@
 @section('content')
     <div class="row" id="header">
         <div class="col-12">
-            <img src="{{ asset('media/img/logo.png') }}" alt="" id="logo">
+            <img src="{{ asset('media/img/prototipoLogo.png') }}" alt="" id="logo">
         </div>
     </div>
-    <div class="row" id="loginContainer">
+    <div class="row mt-5" id="loginContainer">
         <div class="card col-10 col-sm-6 col-md-6 col-lg-4 p-0" id="login-card">
             <div class="card-header text-center" id="login-card-header">Inicia Sessió</div>
             <div class="card-body" id="login-body">

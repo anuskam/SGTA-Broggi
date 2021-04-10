@@ -1,19 +1,19 @@
 <template>
-  <div>
+  <div class="contenido">
       <nav class="navbar navbar-expand-lg navbar-light" id="cecosNav">
-        <a class="navbar-brand" href="#"><img src="/SGTA-Broggi/public/media/img/prototipoLogo.png" id="cecosLogo" alt="Broggi"></a>
+        <a class="navbar-brand"><img src="/SGTA-Broggi/public/media/img/prototipoLogo.png" id="cecosLogo" alt="Broggi"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item active">
+                <li class="nav-item active" id="nuevoIncidenteItem">
                     <a class="nav-link" @click="selectTab(1)">Nuevo Incidente <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" id="editarIncidenteItem">
                     <a class="nav-link" @click="selectTab(2)">Editar Incidentes</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" id="formacionItem">
                     <a class="nav-link" @click="selectTab(3)">Formación</a>
                 </li>
             </ul>
@@ -107,11 +107,25 @@ export default {
         background-color: red !important;
     }
 
+
+
     #navbarNav a{
         color: #0A0A0A;
     }
 
     #cecosNav {
         cursor: default;
+        border: 1px solid black;
+    }
+
+    .contenido {
+        font-size: 15px;
+    }
+
+    #cecosLogo {
+        cursor: default;
+        background-color: white;
+        width: 100px;
+        height: 39.63px;
     }
 </style>
