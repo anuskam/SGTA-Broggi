@@ -1,7 +1,7 @@
 <template>
   <div>
       <nav class="navbar navbar-expand-lg navbar-light" id="cecosNav">
-        <a class="navbar-brand" href="#"><img src="/SGTA-Broggi/public/media/img/logoprototipo.png" id="cecosLogo"></a>
+        <a class="navbar-brand" href="#"><img src="/SGTA-Broggi/public/media/img/prototipoLogo.png" id="cecosLogo" alt="Broggi"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -105,5 +105,9 @@ export default {
         font-size: 2em;
         margin-top: 33vh;
         background-color: red !important;
+    }
+
+    #navbarNav a{
+        color: #0A0A0A;
     }
 </style>
