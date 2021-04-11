@@ -104,14 +104,14 @@ export default {
     #generarLlamada{
       font-size: 2em;
       margin-top: 33vh;
-      background-color: red !important;
+      background-color: #E2211D !important;
     }
 
 
 
-    #navbarNav a{
+    /* #navbarNav a{
       color: #0A0A0A;
-    }
+    } */
 
     /* MOVIMIENTO BARRA DEBAJO DE ELEMENTOS DE NAVBAR */
     .borderLeftRight {
@@ -139,19 +139,20 @@ export default {
     }
     /* FIN DE LO QUE HE COPIADO POR SI NO CONVENCE */
 
-    #cecosNav {
+    /* #cecosNav {
       cursor: pointer;
       border: 1px solid black;
-    }
+    } */
 
     .contenido {
       font-size: 15px;
+      font-family: 'Rubik', sans-serif;
     }
 
-    #cecosLogo {
+    /* #cecosLogo {
       cursor: default;
       background-color: white;
       width: 100px;
       height: 39.63px;
-    }
+    } */
 </style>
