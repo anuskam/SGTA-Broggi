@@ -3022,12 +3022,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     alertantNumber: Number
@@ -8510,7 +8504,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#generarLlamada[data-v-bfb0cdda]{\n    font-size: 2em;\n    margin-top: 33vh;\n    background-color: red !important;\n}\n#navbarNav a[data-v-bfb0cdda]{\n    color: #0A0A0A;\n}\n\n/* MOVIMIENTO BARRA DEBAJO DE ELEMENTOS DE NAVBAR */\n.borderLeftRight[data-v-bfb0cdda] {\n    display: inline-block;\n    position: relative;\n    color: hsl(222, 25%, 14%);\n}\n.borderLeftRight[data-v-bfb0cdda]::after {\n    content: '';\n    position: absolute;\n    width: 100%;\n    transform: scaleX(0);\n    height: 2px;\n    bottom: 0;\n    left: 0;\n    background-color: black;\n    transform-origin: bottom right;\n    transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);\n}\n.borderLeftRight[data-v-bfb0cdda]:hover::after {\n    transform: scaleX(1);\n    transform-origin: bottom left;\n}\n/* FIN DE LO QUE HE COPIADO POR SI NO CONVENCE */\n#cecosNav[data-v-bfb0cdda] {\n    cursor: pointer;\n    border: 1px solid black;\n}\n.contenido[data-v-bfb0cdda] {\n    font-size: 15px;\n}\n#cecosLogo[data-v-bfb0cdda] {\n    cursor: default;\n    background-color: white;\n    width: 100px;\n    height: 39.63px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#generarLlamada[data-v-bfb0cdda]{\n  font-size: 2em;\n  margin-top: 33vh;\n  background-color: #E2211D !important;\n}\n\n\n\n/* #navbarNav a{\n  color: #0A0A0A;\n} */\n\n/* MOVIMIENTO BARRA DEBAJO DE ELEMENTOS DE NAVBAR */\n.borderLeftRight[data-v-bfb0cdda] {\n  display: inline-block;\n  position: relative;\n  color: hsl(222, 25%, 14%);\n}\n.borderLeftRight[data-v-bfb0cdda]::after {\n  content: '';\n  position: absolute;\n  width: 100%;\n  transform: scaleX(0);\n  height: 2px;\n  bottom: 0;\n  left: 0;\n  background-color: black;\n  transform-origin: bottom right;\n  transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);\n}\n.borderLeftRight[data-v-bfb0cdda]:hover::after {\n  transform: scaleX(1);\n  transform-origin: bottom left;\n}\n/* FIN DE LO QUE HE COPIADO POR SI NO CONVENCE */\n\n/* #cecosNav {\n  cursor: pointer;\n  border: 1px solid black;\n} */\n.contenido[data-v-bfb0cdda] {\n  font-size: 15px;\n  font-family: 'Rubik', sans-serif;\n}\n\n/* #cecosLogo {\n  cursor: default;\n  background-color: white;\n  width: 100px;\n  height: 39.63px;\n} */\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8558,7 +8552,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-secondary:not(:disabled):not(.disabled).active,\r\n.btn-secondary:not(:disabled):not(.disabled):active,\r\n.show > .btn-secondary.dropdown-toggle {\r\n  background-color: #e3177d;\r\n  border-color: black;\n}\n.btn-secondary {\r\n  border-color: black;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\n}\n.parentGrid {\r\n  display: grid;\r\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-between;\n}\n.card-header {\r\n  background-color: #15acc4;\r\n  border: 1px solid black;\r\n  border-left: 0;\r\n  border-right: 0;\r\n  margin-top: -1px;\n}\n.modal-header{\r\n    background-color: #15acc4 !important;\n}\n.card {\r\n  border: 1px solid black !important;\n}\nbutton {\r\n  background-color: #e3177d !important;\r\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\r\n  background-color: #15acc4 !important;\n}\n.tabButton{\r\n    background-color: white !important;\r\n    border: 0 !important;\n}\n.selectedTab{\r\n    background-color: #e3177d !important;\r\n    border: 1px solid black !important;\n}\n.green{\r\n    background-color: green;\r\n    color: white;\n}\n.red{\r\n    background-color: red;\r\n    color: white;\n}\n#entregar{\r\n  border: 1px solid black;\n}\n#titulitosTabs {\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\n}\n.iconNavPrincipal{\r\n    color: black;\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn {\r\n    font-size: 15px;\n}\n.btn-secondary:not(:disabled):not(.disabled).active,\r\n.btn-secondary:not(:disabled):not(.disabled):active,\r\n.show > .btn-secondary.dropdown-toggle {\r\n  background-color: #e3177d;\r\n  border-color: black;\n}\n.btn-secondary {\r\n  border-color: black;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\n}\n.parentGrid {\r\n  display: grid;\r\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-between;\n}\n.card-header {\r\n  background-color: #15acc4;\r\n  border: 1px solid black;\r\n  border-left: 0;\r\n  border-right: 0;\r\n  margin-top: -1px;\n}\n.modal-header{\r\n    background-color: #15acc4 !important;\n}\n.card {\r\n  border: 1px solid black !important;\n}\nbutton {\r\n  background-color: #e3177d !important;\r\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\r\n  color: black;\r\n  font-weight: bold;\r\n  background-color: #15acc4 !important;\n}\n.tabButton{\r\n    background-color: white !important;\r\n    border: 0 !important;\n}\n.selectedTab{\r\n    background-color: #e3177d !important;\r\n    border: 1px solid black !important;\n}\n.green{\r\n    background-color: green;\r\n    color: white;\n}\n.red{\r\n    background-color: red;\r\n    color: white;\n}\n#entregar{\r\n  border: 1px solid black;\n}\n#titulitosTabs {\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\n}\n.iconNavPrincipal{\r\n    color: black;\n}\n.btn.disabled, .btn:disabled {\r\n  opacity: 0.85;\n}\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -41347,7 +41341,11 @@ var render = function() {
           _c("div", { staticClass: "input-group" }, [
             _c("input", {
               staticClass: "form-control col-2 ml-5 mb-4",
-              attrs: { type: "number", placeholder: "Teléfono" },
+              attrs: {
+                type: "number",
+                placeholder: "Teléfono",
+                "aria-label": "Teléfono"
+              },
               domProps: { value: _vm.alertantNumber }
             }),
             _vm._v(" "),

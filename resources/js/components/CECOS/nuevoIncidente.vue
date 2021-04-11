@@ -42,7 +42,7 @@
       <div class="container-fluid mt-5">
               <!-- BUSCADOR -->
               <div class="input-group">
-                  <input type="number" class="form-control col-2 ml-5 mb-4" placeholder="Teléfono" :value = alertantNumber>
+                  <input type="number" class="form-control col-2 ml-5 mb-4" placeholder="Teléfono" aria-label="Teléfono" :value = alertantNumber>
                   <div class="input-group-append">
                   <button class="btn btn-secondary mb-4" type="button" @click="getAlertantData()">
                       <i class="fa fa-search "></i> Buscar
@@ -133,12 +133,6 @@
                     v-model="incidencia.nom_metge"
                   />
                 </div>
-                <!-- <label for="apellidoMedica" class="col-1 col-form-label"
-                  >Apellidos</label
-                > -->
-                <!-- <div class="col-4">
-                  <input type="text" class="form-control" id="apellidoMedica" />
-                </div> -->
               </div>
 
               <!-- PROVINCIA, MUNICIPIO Y COMARCA -->
@@ -1338,6 +1332,10 @@ export default {
 
 
 <style>
+.btn {
+    font-size: 15px;
+}
+
 .btn-secondary:not(:disabled):not(.disabled).active,
 .btn-secondary:not(:disabled):not(.disabled):active,
 .show > .btn-secondary.dropdown-toggle {
@@ -1386,6 +1384,8 @@ button {
 }
 
 #afectadasList, #recursosList {
+  color: black;
+  font-weight: bold;
   background-color: #15acc4 !important;
 }
 
@@ -1422,6 +1422,11 @@ button {
 .iconNavPrincipal{
     color: black;
 }
+
+.btn.disabled, .btn:disabled {
+  opacity: 0.85;
+}
+
 
 
 </style>

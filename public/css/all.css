@@ -1,6 +1,6 @@
-*{
+/* *{
     font-family:Arial, Helvetica, sans-serif;
-}
+} */
 
 .container{
     height: 100%;
@@ -11,7 +11,7 @@
 }
 
 #logo{
-    max-width: 80%;
+    max-width: 40%;
 }
 
 #login{
@@ -81,7 +81,7 @@ textarea{
 #logout{
     float: right;
     position: fixed;
-    top: 10px;
+    top: 15px;
     right: 10px;
     z-index: 100;
 }
@@ -89,14 +89,26 @@ textarea{
 .modifColorLogout {
     background-color: #E2211D;
     color: white;
+    font-size: 15px;
 }
 
-#cecosNav{
+#cecosNav, #adminNav{
     background-color:#fcc41c !important;
     margin-bottom: 20px;
+    cursor: pointer;
+    border: 1px solid black;
 }
 
-#cecosLogo{
+#navbarNav a{
+    color: #0A0A0A;
+    font-size: 15px;
+}
+
+#cecosLogo, #adminLogo{
     height: 4vh;
+    cursor: default;
+    background-color: white;
+    width: 100px;
+    height: 39.63px;
 }
 

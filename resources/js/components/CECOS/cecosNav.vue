@@ -76,23 +76,23 @@ export default {
     }
   },
   computed: {
-      pickedNumber: function () {
-          let randomArray = [];
-          let random;
-          do{
-              random = Math.floor(Math.random() * 399999999 + 600000000);
-          }while(random/100000000 >= 8 && random/100000000 < 9);
-          randomArray.push(random);
+    pickedNumber: function () {
+        let randomArray = [];
+        let random;
+        do{
+            random = Math.floor(Math.random() * 399999999 + 600000000);
+        }while(random/100000000 >= 8 && random/100000000 < 9);
+        randomArray.push(random);
 
-          let random2 = Math.floor(Math.random() * 69);
-          let randomDB = this.telefons[random2];
-          randomArray.push(randomDB);
+        let random2 = Math.floor(Math.random() * 69);
+        let randomDB = this.telefons[random2];
+        randomArray.push(randomDB);
 
-          let randomChoiceNumber = Math.floor(Math.random() * 2);
-          let randomChoice = randomArray[randomChoiceNumber];
+        let randomChoiceNumber = Math.floor(Math.random() * 2);
+        let randomChoice = randomArray[randomChoiceNumber];
 
-          return randomChoice;
-      }
+        return randomChoice;
+    }
   },
   created() {
      this.getAlertants();
@@ -102,56 +102,57 @@ export default {
 
 <style scoped>
     #generarLlamada{
-        font-size: 2em;
-        margin-top: 33vh;
-        background-color: red !important;
+      font-size: 2em;
+      margin-top: 33vh;
+      background-color: #E2211D !important;
     }
 
 
 
-    #navbarNav a{
-        color: #0A0A0A;
-    }
+    /* #navbarNav a{
+      color: #0A0A0A;
+    } */
 
     /* MOVIMIENTO BARRA DEBAJO DE ELEMENTOS DE NAVBAR */
     .borderLeftRight {
-        display: inline-block;
-        position: relative;
-        color: hsl(222, 25%, 14%);
+      display: inline-block;
+      position: relative;
+      color: hsl(222, 25%, 14%);
     }
 
     .borderLeftRight::after {
-        content: '';
-        position: absolute;
-        width: 100%;
-        transform: scaleX(0);
-        height: 2px;
-        bottom: 0;
-        left: 0;
-        background-color: black;
-        transform-origin: bottom right;
-        transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+      content: '';
+      position: absolute;
+      width: 100%;
+      transform: scaleX(0);
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: black;
+      transform-origin: bottom right;
+      transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
     }
 
     .borderLeftRight:hover::after {
-        transform: scaleX(1);
-        transform-origin: bottom left;
+      transform: scaleX(1);
+      transform-origin: bottom left;
     }
     /* FIN DE LO QUE HE COPIADO POR SI NO CONVENCE */
 
-    #cecosNav {
-        cursor: pointer;
-        border: 1px solid black;
-    }
+    /* #cecosNav {
+      cursor: pointer;
+      border: 1px solid black;
+    } */
 
     .contenido {
-        font-size: 15px;
+      font-size: 15px;
+      font-family: 'Rubik', sans-serif;
     }
 
-    #cecosLogo {
-        cursor: default;
-        background-color: white;
-        width: 100px;
-        height: 39.63px;
-    }
+    /* #cecosLogo {
+      cursor: default;
+      background-color: white;
+      width: 100px;
+      height: 39.63px;
+    } */
 </style>
