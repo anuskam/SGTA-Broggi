@@ -2024,8 +2024,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['question', 'index'],
   data: function data() {
@@ -2033,26 +2031,31 @@ __webpack_require__.r(__webpack_exports__);
       currentQuestion: 0,
       picked: '',
       questions: [{
+        id: 1,
         question: "Para abrir la vía aérea es necesario: ",
         options: [' Colocar la víctima en PLS', ' Realizar una hipertensión del cuello', ' Levantar la cabeza a la víctima', ' Ninguna es correcta'],
         correctAnswer: 1,
         aparecePregunta: [7, 10]
       }, {
+        id: 2,
         question: "En el masaje carídaco, la presión se aplica: ",
         options: [' En el centro del esternón', ' En el extremo inferior del apéndice xifoides', ' En el centro del pecho o línea que une los pezones', ' Todas son correctas'],
         correctAnswer: 2,
         aparecePregunta: [0.17, 0.20]
       }, {
+        id: 3,
         question: "No es una zona de aplicación de electrodos DESA... ",
         options: [' Debajo de la clavícula izquierda', ' A unos 10cm debajo de la axila izquierda', ' En el costado izquierdo', ' Ninguna es correcta'],
         correctAnswer: 0,
         aparecePregunta: [0.27, 0.30]
       }, {
+        id: 4,
         question: "Los ciclos RCP para personas adultas son de:  ",
         options: [' 30 compresiones torácicas + 5 ventilaciones de rescate', ' 15 compresiones torácicas + 2 ventilaciones de rescate', ' 2 ventilaciones de rescate + 15 compresiones torácicas + 5 ventilaciones', ' 30 compresiones torácicas + 2 ventilaciones de rescate'],
         correctAnswer: 3,
         aparecePregunta: [0.46, 0.50]
       }, {
+        id: 5,
         question: "En los niños, la RCP empieza siempre... ",
         options: ['Aplicando masaje cardíaco', ' Con 5 insuflaciones de aire', ' Efectuando 2 o 3 percusiones con el puño', ' Ninguna es correcta'],
         correctAnswer: 1,
@@ -2124,6 +2127,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
 //
 //
 //
@@ -3488,6 +3492,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var mapbox_gl__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! mapbox-gl */ "./node_modules/mapbox-gl/dist/mapbox-gl.js");
 /* harmony import */ var mapbox_gl__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mapbox_gl__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var mapbox_gl_dist_mapbox_gl_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! mapbox-gl/dist/mapbox-gl.css */ "./node_modules/mapbox-gl/dist/mapbox-gl.css");
+//
+//
+//
+//
+//
 //
 //
 //
@@ -8501,7 +8510,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#generarLlamada[data-v-bfb0cdda]{\n    font-size: 2em;\n    margin-top: 33vh;\n    background-color: red !important;\n}\n#navbarNav a[data-v-bfb0cdda]{\n    color: #0A0A0A;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#generarLlamada[data-v-bfb0cdda]{\n    font-size: 2em;\n    margin-top: 33vh;\n    background-color: red !important;\n}\n#navbarNav a[data-v-bfb0cdda]{\n    color: #0A0A0A;\n}\n\n/* MOVIMIENTO BARRA DEBAJO DE ELEMENTOS DE NAVBAR */\n.borderLeftRight[data-v-bfb0cdda] {\n    display: inline-block;\n    position: relative;\n    color: hsl(222, 25%, 14%);\n}\n.borderLeftRight[data-v-bfb0cdda]::after {\n    content: '';\n    position: absolute;\n    width: 100%;\n    transform: scaleX(0);\n    height: 2px;\n    bottom: 0;\n    left: 0;\n    background-color: black;\n    transform-origin: bottom right;\n    transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);\n}\n.borderLeftRight[data-v-bfb0cdda]:hover::after {\n    transform: scaleX(1);\n    transform-origin: bottom left;\n}\n/* FIN DE LO QUE HE COPIADO POR SI NO CONVENCE */\n#cecosNav[data-v-bfb0cdda] {\n    cursor: pointer;\n    border: 1px solid black;\n}\n.contenido[data-v-bfb0cdda] {\n    font-size: 15px;\n}\n#cecosLogo[data-v-bfb0cdda] {\n    cursor: default;\n    background-color: white;\n    width: 100px;\n    height: 39.63px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8549,7 +8558,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-secondary:not(:disabled):not(.disabled).active,\n.btn-secondary:not(:disabled):not(.disabled):active,\n.show > .btn-secondary.dropdown-toggle {\n  background-color: #e3177d;\n  border-color: black;\n}\n.btn-secondary {\n  border-color: black;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.parentGrid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n.card-header {\n  background-color: #15acc4;\n  border: 1px solid black;\n  border-left: 0;\n  border-right: 0;\n  margin-top: -1px;\n}\n.modal-header{\n    background-color: #15acc4 !important;\n}\n.card {\n  border: 1px solid black !important;\n}\nbutton {\n  background-color: #e3177d !important;\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\n  background-color: #15acc4 !important;\n}\n.tabButton{\n    background-color: white !important;\n    border: 0 !important;\n}\n.selectedTab{\n    background-color: #e3177d !important;\n    border: 1px solid black !important;\n}\n.green{\n    background-color: green;\n    color: white;\n}\n.red{\n    background-color: red;\n    color: white;\n}\n#entregar{\n  border: 1px solid black;\n}\n#titulitosTabs {\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-secondary:not(:disabled):not(.disabled).active,\r\n.btn-secondary:not(:disabled):not(.disabled):active,\r\n.show > .btn-secondary.dropdown-toggle {\r\n  background-color: #e3177d;\r\n  border-color: black;\n}\n.btn-secondary {\r\n  border-color: black;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\n}\n.parentGrid {\r\n  display: grid;\r\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-between;\n}\n.card-header {\r\n  background-color: #15acc4;\r\n  border: 1px solid black;\r\n  border-left: 0;\r\n  border-right: 0;\r\n  margin-top: -1px;\n}\n.modal-header{\r\n    background-color: #15acc4 !important;\n}\n.card {\r\n  border: 1px solid black !important;\n}\nbutton {\r\n  background-color: #e3177d !important;\r\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\r\n  background-color: #15acc4 !important;\n}\n.tabButton{\r\n    background-color: white !important;\r\n    border: 0 !important;\n}\n.selectedTab{\r\n    background-color: #e3177d !important;\r\n    border: 1px solid black !important;\n}\n.green{\r\n    background-color: green;\r\n    color: white;\n}\n.red{\r\n    background-color: red;\r\n    color: white;\n}\n#entregar{\r\n  border: 1px solid black;\n}\n#titulitosTabs {\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\n}\n.iconNavPrincipal{\r\n    color: black;\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8573,7 +8582,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nmain[data-v-6504f867] {\n  margin-top: 1.4vh;\n}\n#infoCard[data-v-6504f867] {\n  height: 65vh;\n}\n#botones[data-v-6504f867] {\n  height: 28vh;\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#infoHeader[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n  font-size: 1.2em;\n  font-weight: bold;\n  margin-right: -0.5px;\n  border-bottom: 1px solid black;\n  background-color: #15acc4;\n}\nbutton[data-v-6504f867] {\n  background-color: #e3177d;\n  font-weight: bold;\n  font-size: 0.9em;\n}\n.card[data-v-6504f867] {\n  border: 1px solid black;\n}\n#transportHeader[data-v-6504f867] {\n  background-color: #15acc4;\n  font-weight: bold;\n  padding: 6px 20px;\n  text-align: center;\n}\n#leftButtons[data-v-6504f867] {\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n}\n#assistencia[data-v-6504f867]{\n    opacity: .4;\n}\n#checkTransport[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: center;\n  align-items: center;\n  opacity: .4;\n  /* margin-left: -80px; */\n}\n#checkTransport button[data-v-6504f867] {\n  padding: 10px 4px;\n  height: 100%;\n}\n#transportButton[data-v-6504f867] {\n  background-color: #e3177d;\n}\n#transportButtons[data-v-6504f867] {\n  height: 100%;\n  opacity: .4;\n}\n.visible[data-v-6504f867]{\n    opacity: 1 !important;\n}\n#transportForm[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#botonsTransport[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  width: 100%;\n  justify-content: space-between;\n}\n.button[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  /* align-items: center; */\n}\n#direccioHospital[data-v-6504f867] {\n  width: 100%;\n}\n#map[data-v-6504f867] {\n  height: 65%;\n  background-color: black;\n}\n#info[data-v-6504f867] {\n  height: 20%;\n  margin-top: 4%;\n  display: flex;\n  flex-direction: row;\n  justify-content: space-around;\n  flex-wrap: nowrap;\n  font-weight: bold;\n}\n#infoFields[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n  padding-right: 0;\n}\n.infobox[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  text-align: justify;\n}\n.infobox > div[data-v-6504f867] {\n  background-color: #15acc4;\n  border: 1px solid black;\n}\n#descripcion[data-v-6504f867],\n#direccion[data-v-6504f867] {\n  background-color: white;\n}\n#masInfo[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  vertical-align: center;\n}\n#masInfo > button[data-v-6504f867] {\n  padding: 10px 20px;\n  margin-left: -50px;\n}\n.modal-header[data-v-6504f867]{\n    font-weight: bold;\n    background-color: #15acc4;\n}\n#alta[data-v-6504f867]{\n    opacity: 1 !important;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nmain[data-v-6504f867] {\r\n  margin-top: 1.4vh;\r\n  color: black;\n}\n#infoCard[data-v-6504f867] {\r\n  height: 65vh;\r\n  color: black;\n}\n#botones[data-v-6504f867] {\r\n  height: 28vh;\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-around;\r\n  align-items: center;\n}\n#infoHeader[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-between;\r\n  font-size: 1.2em;\r\n  font-weight: bold;\r\n  margin-right: -0.5px;\r\n  border-bottom: 1px solid black;\r\n  background-color: #15acc4;\n}\nbutton[data-v-6504f867] {\r\n  background-color: #e3177d;\r\n  font-weight: bold;\r\n  font-size: 0.9em;\r\n  color: black;\n}\n.card[data-v-6504f867] {\r\n  border: 1px solid black;\n}\n#transportHeader[data-v-6504f867] {\r\n  background-color: #15acc4;\r\n  font-weight: bold;\r\n  padding: 6px 20px;\r\n  text-align: center;\n}\n#leftButtons[data-v-6504f867] {\r\n  height: 100%;\r\n  display: flex;\r\n  flex-direction: column;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-around;\n}\n#assistencia[data-v-6504f867]{\r\n    opacity: .4;\n}\n#checkTransport[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  flex-wrap: nowrap;\r\n  justify-content: center;\r\n  align-items: center;\r\n  opacity: .4;\r\n  /* margin-left: -80px; */\n}\n#checkTransport button[data-v-6504f867] {\r\n  padding: 10px 4px;\r\n  height: 100%;\n}\n#transportButton[data-v-6504f867] {\r\n  background-color: #e3177d;\n}\n#transportButtons[data-v-6504f867] {\r\n  height: 100%;\r\n  opacity: .4;\n}\n.visible[data-v-6504f867]{\r\n    opacity: 1 !important;\n}\n#transportForm[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: wrap;\r\n  justify-content: space-around;\r\n  align-items: center;\n}\n#botonsTransport[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  width: 100%;\r\n  justify-content: space-between;\n}\n.button[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  /* align-items: center; */\n}\n#direccioHospital[data-v-6504f867] {\r\n  width: 100%;\n}\n#map[data-v-6504f867] {\r\n  height: 65%;\r\n  background-color: black;\n}\n#info[data-v-6504f867] {\r\n  height: 20%;\r\n  margin-top: 4%;\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: space-around;\r\n  flex-wrap: nowrap;\r\n  font-weight: bold;\n}\n#infoFields[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: space-around;\r\n  padding-right: 0;\n}\n.infobox[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  align-items: center;\r\n  text-align: justify;\n}\n.infobox > div[data-v-6504f867] {\r\n  background-color: #15acc4;\r\n  border: 1px solid black;\n}\n#descripcion[data-v-6504f867],\r\n#direccion[data-v-6504f867] {\r\n  background-color: white;\n}\n#masInfo[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: center;\r\n  vertical-align: center;\n}\n#masInfo > button[data-v-6504f867] {\r\n  padding: 10px 20px;\r\n  margin-left: -50px;\n}\n.modal-header[data-v-6504f867]{\r\n    font-weight: bold;\r\n    background-color: #15acc4;\n}\n#alta[data-v-6504f867]{\r\n    opacity: 1 !important;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8597,7 +8606,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#navbar[data-v-6f2f9854] {\n/* position: absolute; */\nfloat: left;\ndisplay: flex;\nflex-direction: column;\nflex-wrap: wrap;\nleft: 0;\ntop: 0;\nheight: 100vh;\nwidth: 11%;\nbackground-color: rgba(128, 128, 128, 0.503);\n}\n#asignats[data-v-6f2f9854], #tots[data-v-6f2f9854]{\n    height: 50vh;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    font-size: 1.2em;\n    font-weight: bolder;\n    /* background-color: rgba(128, 128, 128, 0.503); */\n}\n#asignats[data-v-6f2f9854]:hover, #tots[data-v-6f2f9854]:hover{\n    background-color: #fcc41c;\n}\n#asignats[data-v-6f2f9854]{\n    border: 1px solid black;\n    border-bottom: 0.1px solid black;\n}\n#tots[data-v-6f2f9854]{\n    border: 1px solid black;\n    border-top: 0px solid black;\n}\n.selected[data-v-6f2f9854]{\n    background-color: #fcc41c;\n}\n.recursTab[data-v-6f2f9854]{\n    float: right;\n    height: 100vh;\n    width: 89%;\n    display: flex;\n    flex-direction: row;\n    justify-content: center;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#navbar[data-v-6f2f9854] {\n/* position: absolute; */\nfloat: left;\ndisplay: flex;\nflex-direction: column;\nflex-wrap: wrap;\nleft: 0;\ntop: 0;\nheight: 100vh;\nwidth: 11%;\nbackground-color: rgba(128, 128, 128, 0.503);\n}\n#asignats[data-v-6f2f9854], #tots[data-v-6f2f9854]{\n    height: 50vh;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    font-size: 1.2em;\n    font-weight: bolder;\n    /* background-color: rgba(128, 128, 128, 0.503); */\n    color: black;\n}\n#asignats[data-v-6f2f9854]:hover, #tots[data-v-6f2f9854]:hover{\n    background-color: #fcc41c;\n}\n#asignats[data-v-6f2f9854]{\n    border: 1px solid black;\n    border-bottom: 0.1px solid black;\n}\n#tots[data-v-6f2f9854]{\n    border: 1px solid black;\n    border-top: 0px solid black;\n}\n.selected[data-v-6f2f9854]{\n    background-color: #fcc41c;\n}\n.recursTab[data-v-6f2f9854]{\n    float: right;\n    height: 100vh;\n    width: 89%;\n    display: flex;\n    flex-direction: row;\n    justify-content: center;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -40821,7 +40830,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "contenido" }, [
     _c(
       "nav",
       {
@@ -40841,55 +40850,76 @@ var render = function() {
           },
           [
             _c("ul", { staticClass: "navbar-nav" }, [
-              _c("li", { staticClass: "nav-item active" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "nav-link",
-                    on: {
-                      click: function($event) {
-                        return _vm.selectTab(1)
+              _c(
+                "li",
+                {
+                  staticClass: "nav-item active borderLeftRight ml-2",
+                  attrs: { id: "nuevoIncidenteItem" }
+                },
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "nav-link",
+                      on: {
+                        click: function($event) {
+                          return _vm.selectTab(1)
+                        }
                       }
-                    }
-                  },
-                  [
-                    _vm._v("Nuevo Incidente "),
-                    _c("span", { staticClass: "sr-only" }, [
-                      _vm._v("(current)")
-                    ])
-                  ]
-                )
-              ]),
+                    },
+                    [
+                      _vm._v("Nuevo Incidente "),
+                      _c("span", { staticClass: "sr-only" }, [
+                        _vm._v("(current)")
+                      ])
+                    ]
+                  )
+                ]
+              ),
               _vm._v(" "),
-              _c("li", { staticClass: "nav-item" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "nav-link",
-                    on: {
-                      click: function($event) {
-                        return _vm.selectTab(2)
+              _c(
+                "li",
+                {
+                  staticClass: "nav-item borderLeftRight ml-4",
+                  attrs: { id: "editarIncidenteItem" }
+                },
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "nav-link",
+                      on: {
+                        click: function($event) {
+                          return _vm.selectTab(2)
+                        }
                       }
-                    }
-                  },
-                  [_vm._v("Editar Incidentes")]
-                )
-              ]),
+                    },
+                    [_vm._v("Editar Incidentes")]
+                  )
+                ]
+              ),
               _vm._v(" "),
-              _c("li", { staticClass: "nav-item" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "nav-link",
-                    on: {
-                      click: function($event) {
-                        return _vm.selectTab(3)
+              _c(
+                "li",
+                {
+                  staticClass: "nav-item borderLeftRight ml-4",
+                  attrs: { id: "formacionItem" }
+                },
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "nav-link",
+                      on: {
+                        click: function($event) {
+                          return _vm.selectTab(3)
+                        }
                       }
-                    }
-                  },
-                  [_vm._v("Formación")]
-                )
-              ])
+                    },
+                    [_vm._v("Formación")]
+                  )
+                ]
+              )
             ])
           ]
         )
@@ -40971,12 +41001,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "navbar-brand", attrs: { href: "#" } }, [
+    return _c("a", { staticClass: "navbar-brand" }, [
       _c("img", {
         attrs: {
           src: "/SGTA-Broggi/public/media/img/prototipoLogo.png",
           id: "cecosLogo",
-          alt: "Broggi"
+          alt: "logoBroggi"
         }
       })
     ])
@@ -41087,80 +41117,78 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _c("div", { staticClass: "test col-5 ml-5" }, [
-      _c(
-        "form",
-        { staticClass: "test-form" },
-        _vm._l(_vm.questions, function(question, index) {
-          return _c(
-            "div",
-            {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.activa,
-                  expression: "activa"
-                }
-              ],
-              key: index,
-              attrs: { id: "questions" }
-            },
-            [
-              _c(
-                "div",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: index === _vm.currentQuestion,
-                      expression: "index === currentQuestion"
-                    }
-                  ]
-                },
-                [
-                  _c("p", [_vm._v(_vm._s(question.question))]),
-                  _vm._v(" "),
-                  _c(
-                    "ul",
-                    _vm._l(question.options, function(option, index) {
-                      return _c("li", { key: index }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-secondary col-7 mb-2",
-                            class: { correcta: _vm.correcta[index] },
-                            attrs: { id: index },
-                            on: {
-                              click: function($event) {
-                                return _vm.evaluarRespuesta(index)
-                              }
-                            }
-                          },
-                          [_vm._v(_vm._s(option))]
-                        ),
-                        _vm._v(
-                          "\n              " +
-                            _vm._s(_vm.correcta[index]) +
-                            "\n              "
-                        ),
-                        _vm._v(" "),
-                        _c("br")
-                      ])
-                    }),
-                    0
-                  ),
-                  _vm._v(" "),
-                  _c("br")
+    _c(
+      "div",
+      { staticClass: "test col-5 ml-5" },
+      _vm._l(_vm.questions, function(question, index) {
+        return _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.activa,
+                expression: "activa"
+              }
+            ],
+            key: question.id,
+            attrs: { id: "questions" }
+          },
+          [
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: index === _vm.currentQuestion,
+                    expression: "index === currentQuestion"
+                  }
                 ]
-              )
-            ]
-          )
-        }),
-        0
-      )
-    ])
+              },
+              [
+                _c("p", [_vm._v(_vm._s(question.question))]),
+                _vm._v(" "),
+                _c(
+                  "ul",
+                  _vm._l(question.options, function(option, index) {
+                    return _c("li", { key: index }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-secondary col-7 mb-2",
+                          class: { correcta: _vm.correcta[index] },
+                          attrs: { id: index },
+                          on: {
+                            click: function($event) {
+                              return _vm.evaluarRespuesta(index)
+                            }
+                          }
+                        },
+                        [_vm._v(_vm._s(option))]
+                      ),
+                      _vm._v(
+                        "\n              " +
+                          _vm._s(_vm.correcta[index]) +
+                          "\n              "
+                      ),
+                      _vm._v(" "),
+                      _c("br")
+                    ])
+                  }),
+                  0
+                ),
+                _vm._v(" "),
+                _c("br")
+              ]
+            )
+          ]
+        )
+      }),
+      0
+    )
   ])
 }
 var staticRenderFns = [
@@ -41209,7 +41237,7 @@ var render = function() {
       _c(
         "button",
         {
-          staticClass: "btn btn-sm mr-3 float-left ml-3",
+          staticClass: "btn btn-sm mr-3 float-left ml-3 iconNavPrincipal",
           attrs: { disabled: _vm.currentTab == 1, id: "btn" },
           on: {
             click: function($event) {
@@ -41239,7 +41267,7 @@ var render = function() {
           },
           [
             _c("i", {
-              staticClass: "fas fa-phone-alt fa-2x mr-2 ml-2",
+              staticClass: "fas fa-phone-alt fa-2x mr-2 ml-2 iconNavPrincipal",
               attrs: { "aria-hidden": "true" }
             })
           ]
@@ -41258,7 +41286,8 @@ var render = function() {
           },
           [
             _c("i", {
-              staticClass: "fas fa-user-injured fa-2x mr-2 ml-2",
+              staticClass:
+                "fas fa-user-injured fa-2x mr-2 ml-2 iconNavPrincipal",
               attrs: { "aria-hidden": "true" }
             })
           ]
@@ -41277,7 +41306,7 @@ var render = function() {
           },
           [
             _c("i", {
-              staticClass: "fas fa-ambulance fa-2x mr-2 ml-2",
+              staticClass: "fas fa-ambulance fa-2x mr-2 ml-2 iconNavPrincipal",
               attrs: { "aria-hidden": "true" }
             })
           ]
@@ -41289,7 +41318,7 @@ var render = function() {
       _c(
         "button",
         {
-          staticClass: "btn btn-sm mr-3 float-right mr-3",
+          staticClass: "btn btn-sm mr-3 float-right mr-3 iconNavPrincipal",
           attrs: { disabled: _vm.currentTab == 3 },
           on: {
             click: function($event) {
@@ -41334,7 +41363,10 @@ var render = function() {
                     }
                   }
                 },
-                [_c("i", { staticClass: "fa fa-search" })]
+                [
+                  _c("i", { staticClass: "fa fa-search " }),
+                  _vm._v(" Buscar\n                ")
+                ]
               )
             ])
           ]),
@@ -41822,7 +41854,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { type: "text" },
+                      attrs: { id: "direccion", type: "text" },
                       domProps: { value: _vm.incidencia.adreca },
                       on: {
                         input: function($event) {
@@ -43712,17 +43744,17 @@ var render = function() {
                   _c(
                     "button",
                     {
-                      attrs: { disabled: !_vm.mostrarTransport },
+                      attrs: {
+                        disabled: !_vm.mostrarTransport,
+                        id: "iniciarTransport"
+                      },
                       on: {
                         click: function($event) {
                           return _vm.activarTransport()
                         }
                       }
                     },
-                    [
-                      _c("i", { staticClass: "fas fa-ambulance" }),
-                      _vm._v(" Iniciar Transport\n            ")
-                    ]
+                    [_vm._m(4)]
                   ),
                   _vm._v(" "),
                   _c("input", {
@@ -43751,17 +43783,17 @@ var render = function() {
                   _c(
                     "button",
                     {
-                      attrs: { disabled: !_vm.transport },
+                      attrs: {
+                        disabled: !_vm.transport,
+                        id: "arribadaHospital"
+                      },
                       on: {
                         click: function($event) {
                           return _vm.activarHospital()
                         }
                       }
                     },
-                    [
-                      _c("i", { staticClass: "fas fa-hospital" }),
-                      _vm._v(" Arribada Hospital")
-                    ]
+                    [_vm._m(5)]
                   ),
                   _vm._v(" "),
                   _c("input", {
@@ -43797,10 +43829,7 @@ var render = function() {
                         }
                       }
                     },
-                    [
-                      _c("i", { staticClass: "fas fa-user-friends" }),
-                      _vm._v(" Iniciar Transferència\n            ")
-                    ]
+                    [_vm._m(6)]
                   ),
                   _vm._v(" "),
                   _c("input", {
@@ -43826,12 +43855,18 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "botoTransport button" }, [
-                  _c("button", { attrs: { disabled: !_vm.transferencia } }, [
-                    _c("i", { staticClass: "fas fa-procedures" }),
-                    _vm._v(" Hospitalització")
-                  ]),
+                  _c(
+                    "button",
+                    {
+                      attrs: {
+                        disabled: !_vm.transferencia,
+                        id: "hospitalitzacio"
+                      }
+                    },
+                    [_vm._m(7)]
+                  ),
                   _vm._v(" "),
-                  _vm._m(4)
+                  _vm._m(8)
                 ])
               ])
             ]
@@ -43840,7 +43875,7 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _vm._m(5)
+    _vm._m(9)
   ])
 }
 var staticRenderFns = [
@@ -43899,9 +43934,47 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "iniciarTransport" } }, [
+      _c("i", { staticClass: "fas fa-ambulance" }),
+      _vm._v(" Iniciar Transport")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "arribadaHospital" } }, [
+      _c("i", { staticClass: "fas fa-hospital" }),
+      _vm._v(" Arribada Hospital")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "ininciarTransferencia" } }, [
+      _c("i", { staticClass: "fas fa-user-friends" }),
+      _vm._v(" Iniciar Transferència")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "hospitalitzacio" } }, [
+      _c("i", { staticClass: "fas fa-procedures" }),
+      _vm._v(" Hospitalització")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("button", { attrs: { id: "alta" } }, [
-      _c("i", { staticClass: "fas fa-notes-medical" }),
-      _vm._v(" Alta Voluntària\n            ")
+      _c("label", { attrs: { for: "alta" } }, [
+        _c("i", { staticClass: "fas fa-notes-medical" }),
+        _vm._v(" Alta Voluntària")
+      ])
     ])
   },
   function() {
