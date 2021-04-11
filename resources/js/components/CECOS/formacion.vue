@@ -12,8 +12,7 @@
 
 
     <div class="test col-5 ml-5">
-      <form class="test-form">
-        <div id="questions" v-for="(question, index) in questions" :key="index" v-show="activa">
+        <div id="questions" v-for="(question, index) in questions" :key="question.id" v-show="activa">
           <div v-show="index === currentQuestion">
             <p>{{ question.question }}</p>
             <ul>
@@ -30,7 +29,6 @@
             <!-- <button type="button" @click="getCorrectAnswer()">Submit</button> -->
           </div>
         </div>
-      </form>
     </div>
   </div>
 
@@ -45,30 +43,35 @@ export default {
       picked: '',
       questions: [
         {
+          id: 1,
           question: "Para abrir la vía aérea es necesario: ",
           options: [' Colocar la víctima en PLS', ' Realizar una hipertensión del cuello', ' Levantar la cabeza a la víctima', ' Ninguna es correcta'],
           correctAnswer: 1,
           aparecePregunta: [7, 10],
         },
         {
+          id: 2,
           question: "En el masaje carídaco, la presión se aplica: ",
           options: [' En el centro del esternón', ' En el extremo inferior del apéndice xifoides', ' En el centro del pecho o línea que une los pezones', ' Todas son correctas'],
           correctAnswer: 2,
           aparecePregunta: [0.17, 0.20],
         },
         {
+          id: 3,
           question: "No es una zona de aplicación de electrodos DESA... ",
           options: [' Debajo de la clavícula izquierda', ' A unos 10cm debajo de la axila izquierda', ' En el costado izquierdo', ' Ninguna es correcta'],
           correctAnswer: 0,
           aparecePregunta: [0.27, 0.30],
         },
         {
+          id: 4,
           question: "Los ciclos RCP para personas adultas son de:  ",
           options: [' 30 compresiones torácicas + 5 ventilaciones de rescate', ' 15 compresiones torácicas + 2 ventilaciones de rescate', ' 2 ventilaciones de rescate + 15 compresiones torácicas + 5 ventilaciones', ' 30 compresiones torácicas + 2 ventilaciones de rescate'],
           correctAnswer: 3,
           aparecePregunta: [0.46, 0.50],
         },
         {
+          id: 5,
           question: "En los niños, la RCP empieza siempre... ",
           options: ['Aplicando masaje cardíaco', ' Con 5 insuflaciones de aire', ' Efectuando 2 o 3 percusiones con el puño', ' Ninguna es correcta'],
           correctAnswer: 1,

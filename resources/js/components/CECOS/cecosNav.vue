@@ -7,13 +7,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item active borderLeftRight" id="nuevoIncidenteItem">
+                <li class="nav-item active borderLeftRight ml-2" id="nuevoIncidenteItem">
                     <a class="nav-link" @click="selectTab(1)">Nuevo Incidente <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item borderLeftRight" id="editarIncidenteItem">
+                <li class="nav-item borderLeftRight ml-4" id="editarIncidenteItem">
                     <a class="nav-link" @click="selectTab(2)">Editar Incidentes</a>
                 </li>
-                <li class="nav-item borderLeftRight" id="formacionItem">
+                <li class="nav-item borderLeftRight ml-4" id="formacionItem">
                     <a class="nav-link" @click="selectTab(3)">Formación</a>
                 </li>
             </ul>
