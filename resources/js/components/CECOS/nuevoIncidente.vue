@@ -45,7 +45,7 @@
                   <input type="number" class="form-control col-2 ml-5 mb-4" placeholder="Teléfono" aria-label="Teléfono" :value = alertantNumber>
                   <div class="input-group-append">
                   <button class="btn btn-secondary mb-4" type="button" @click="getAlertantData()">
-                      <i class="fa fa-search "></i> Buscar
+                      <i class="fa fa-search "></i>&nbsp;&nbsp;Buscar
                   </button>
                   </div>
               </div>

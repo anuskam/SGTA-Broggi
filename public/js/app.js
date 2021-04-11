@@ -2024,57 +2024,69 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['question', 'index'],
   data: function data() {
     return {
-      currentQuestion: 0,
+      currentQuestion: -1,
       picked: '',
       questions: [{
         id: 1,
         question: "Para abrir la vía aérea es necesario: ",
         options: [' Colocar la víctima en PLS', ' Realizar una hipertensión del cuello', ' Levantar la cabeza a la víctima', ' Ninguna es correcta'],
         correctAnswer: 1,
-        aparecePregunta: [7, 10]
+        aparecePregunta: [7, 7.3]
       }, {
         id: 2,
         question: "En el masaje carídaco, la presión se aplica: ",
         options: [' En el centro del esternón', ' En el extremo inferior del apéndice xifoides', ' En el centro del pecho o línea que une los pezones', ' Todas son correctas'],
         correctAnswer: 2,
-        aparecePregunta: [0.17, 0.20]
+        aparecePregunta: [17, 17.3]
       }, {
         id: 3,
         question: "No es una zona de aplicación de electrodos DESA... ",
         options: [' Debajo de la clavícula izquierda', ' A unos 10cm debajo de la axila izquierda', ' En el costado izquierdo', ' Ninguna es correcta'],
         correctAnswer: 0,
-        aparecePregunta: [0.27, 0.30]
+        aparecePregunta: [27, 27.3]
       }, {
         id: 4,
         question: "Los ciclos RCP para personas adultas son de:  ",
         options: [' 30 compresiones torácicas + 5 ventilaciones de rescate', ' 15 compresiones torácicas + 2 ventilaciones de rescate', ' 2 ventilaciones de rescate + 15 compresiones torácicas + 5 ventilaciones', ' 30 compresiones torácicas + 2 ventilaciones de rescate'],
         correctAnswer: 3,
-        aparecePregunta: [0.46, 0.50]
+        aparecePregunta: [46, 46.3]
       }, {
         id: 5,
         question: "En los niños, la RCP empieza siempre... ",
         options: ['Aplicando masaje cardíaco', ' Con 5 insuflaciones de aire', ' Efectuando 2 o 3 percusiones con el puño', ' Ninguna es correcta'],
         correctAnswer: 1,
-        aparecePregunta: [1.12, 1.15]
+        aparecePregunta: [72, 72.3]
       }],
       //mas cosas
       activa: false,
-      correcta: [false, false, false, false]
+      correcta: [false, false, false, false],
+      incorrecta: [false, false, false, false],
+      enableButtons: true,
+      aciertos: 0
     };
   },
   methods: {
     evaluarRespuesta: function evaluarRespuesta(index) {
-      if (this.questions[this.currentQuestion].correctAnswer == index) {
+      this.enableButtons = false;
+      var correcta = this.questions[this.currentQuestion].correctAnswer;
+
+      if (correcta == index) {
         console.log("acierto");
-        this.correcta[index] = true;
+        ++this.aciertos;
       } else {
         console.log("fallo");
-      } //++this.currentQuestion;
+      }
 
+      this.correcta[correcta] = true;
+      this.incorrecta = [true, true, true, true];
+      this.incorrecta[correcta] = false;
+      this.$forceUpdate();
+      this.play();
     },
     play: function play() {
       var video = document.querySelector("#videoDesa");
@@ -2099,9 +2111,12 @@ __webpack_require__.r(__webpack_exports__);
     controlTiempo: function controlTiempo() {
       var video = document.querySelector("#videoDesa");
 
-      if (video.currentTime >= this.questions[this.currentQuestion].aparecePregunta[0] && video.currentTime <= this.questions[this.currentQuestion].aparecePregunta[1]) {
+      if (video.currentTime >= this.questions[this.currentQuestion + 1].aparecePregunta[0] && video.currentTime <= this.questions[this.currentQuestion + 1].aparecePregunta[1]) {
         video.pause();
+        this.enableButtons = true;
         this.correcta = [false, false, false, false];
+        this.incorrecta = [false, false, false, false];
+        ++this.currentQuestion;
         this.activa = true;
       }
     }
@@ -8528,7 +8543,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nul li{\n  list-style: none;\n}\n#contenedor{\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: center;\n}\n#questions{\n  color: black;\n}\n#backward {\n  background-color: #fcc41c;\n}\n#reproducir {\n  background-color: #e3177d;\n}\n#forward {\n  background-color: #15acc4;\n}\n.correcta{\n  background-color: green;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nul li{\n  list-style: none;\n}\n#contenedor{\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: center;\n}\n#questions{\n  color: black;\n}\n#backward {\n  background-color: #fcc41c;\n}\n#reproducir {\n  background-color: #e3177d;\n}\n#forward {\n  background-color: #15acc4;\n}\n.correcta{\n  background-color: green !important;\n}\n.incorrecta{\n  background-color: red !important;\n}\n#contador{\n    float: right;\n    position: absolute;\n    background-color: green !important;\n    bottom: 0;\n    right: 0;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8552,7 +8567,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn {\r\n    font-size: 15px;\n}\n.btn-secondary:not(:disabled):not(.disabled).active,\r\n.btn-secondary:not(:disabled):not(.disabled):active,\r\n.show > .btn-secondary.dropdown-toggle {\r\n  background-color: #e3177d;\r\n  border-color: black;\n}\n.btn-secondary {\r\n  border-color: black;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\n}\n.parentGrid {\r\n  display: grid;\r\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-between;\n}\n.card-header {\r\n  background-color: #15acc4;\r\n  border: 1px solid black;\r\n  border-left: 0;\r\n  border-right: 0;\r\n  margin-top: -1px;\n}\n.modal-header{\r\n    background-color: #15acc4 !important;\n}\n.card {\r\n  border: 1px solid black !important;\n}\nbutton {\r\n  background-color: #e3177d !important;\r\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\r\n  color: black;\r\n  font-weight: bold;\r\n  background-color: #15acc4 !important;\n}\n.tabButton{\r\n    background-color: white !important;\r\n    border: 0 !important;\n}\n.selectedTab{\r\n    background-color: #e3177d !important;\r\n    border: 1px solid black !important;\n}\n.green{\r\n    background-color: green;\r\n    color: white;\n}\n.red{\r\n    background-color: red;\r\n    color: white;\n}\n#entregar{\r\n  border: 1px solid black;\n}\n#titulitosTabs {\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\n}\n.iconNavPrincipal{\r\n    color: black;\n}\n.btn.disabled, .btn:disabled {\r\n  opacity: 0.85;\n}\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn {\n    font-size: 15px;\n}\n.btn-secondary:not(:disabled):not(.disabled).active,\n.btn-secondary:not(:disabled):not(.disabled):active,\n.show > .btn-secondary.dropdown-toggle {\n  background-color: #e3177d;\n  border-color: black;\n}\n.btn-secondary {\n  border-color: black;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.parentGrid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n.card-header {\n  background-color: #15acc4;\n  border: 1px solid black;\n  border-left: 0;\n  border-right: 0;\n  margin-top: -1px;\n}\n.modal-header{\n    background-color: #15acc4 !important;\n}\n.card {\n  border: 1px solid black !important;\n}\nbutton {\n  background-color: #e3177d !important;\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\n  color: black;\n  font-weight: bold;\n  background-color: #15acc4 !important;\n}\n.tabButton{\n    background-color: white !important;\n    border: 0 !important;\n}\n.selectedTab{\n    background-color: #e3177d !important;\n    border: 1px solid black !important;\n}\n.green{\n    background-color: green;\n    color: white;\n}\n.red{\n    background-color: red;\n    color: white;\n}\n#entregar{\n  border: 1px solid black;\n}\n#titulitosTabs {\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n.iconNavPrincipal{\n    color: black;\n}\n.btn.disabled, .btn:disabled {\n  opacity: 0.85;\n}\n\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -41153,8 +41168,11 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-secondary col-7 mb-2",
-                          class: { correcta: _vm.correcta[index] },
-                          attrs: { id: index },
+                          class: {
+                            correcta: _vm.correcta[index],
+                            incorrecta: _vm.incorrecta[index]
+                          },
+                          attrs: { id: index, disabled: !_vm.enableButtons },
                           on: {
                             click: function($event) {
                               return _vm.evaluarRespuesta(index)
@@ -41162,11 +41180,6 @@ var render = function() {
                           }
                         },
                         [_vm._v(_vm._s(option))]
-                      ),
-                      _vm._v(
-                        "\n              " +
-                          _vm._s(_vm.correcta[index]) +
-                          "\n              "
                       ),
                       _vm._v(" "),
                       _c("br")
@@ -41182,6 +41195,18 @@ var render = function() {
         )
       }),
       0
+    ),
+    _vm._v(" "),
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-success",
+        attrs: { id: "contador", disabled: "" }
+      },
+      [
+        _c("i", { staticClass: "fas fa-check" }),
+        _vm._v(" " + _vm._s(_vm.aciertos) + " de 5\n  ")
+      ]
     )
   ])
 }
@@ -41363,7 +41388,7 @@ var render = function() {
                 },
                 [
                   _c("i", { staticClass: "fa fa-search " }),
-                  _vm._v(" Buscar\n                ")
+                  _vm._v("  Buscar\n                ")
                 ]
               )
             ])

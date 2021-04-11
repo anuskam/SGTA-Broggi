@@ -17,20 +17,21 @@
             <p>{{ question.question }}</p>
             <ul>
               <li v-for="(option, index) in question.options" :key="index">
-                <button class="btn btn-secondary col-7 mb-2" @click="evaluarRespuesta(index)" :class="{correcta : correcta[index]}" :id="index">{{ option }}</button>
-                {{ correcta[index] }}
-                <!-- <label>
-                  <input type="radio" :id="option.answer" v-model="picked" :value="index" name="option">{{ option }}
-                </label> -->
+                <button class="btn btn-secondary col-7 mb-2" @click="evaluarRespuesta(index)"
+                :class="{correcta : correcta[index], incorrecta: incorrecta[index]}" :id="index" :disabled="!enableButtons">{{ option }}</button>
                 <br>
               </li>
             </ul>
             <br>
-            <!-- <button type="button" @click="getCorrectAnswer()">Submit</button> -->
           </div>
         </div>
     </div>
+
+    <button id="contador" class="btn btn-success" disabled>
+        <i class="fas fa-check"></i> {{ aciertos }} de 5
+    </button>
   </div>
+
 
 </template>
 
@@ -39,7 +40,7 @@ export default {
   props: ['question', 'index'],
   data() {
     return {
-      currentQuestion: 0,
+      currentQuestion: -1,
       picked: '',
       questions: [
         {
@@ -47,52 +48,61 @@ export default {
           question: "Para abrir la vía aérea es necesario: ",
           options: [' Colocar la víctima en PLS', ' Realizar una hipertensión del cuello', ' Levantar la cabeza a la víctima', ' Ninguna es correcta'],
           correctAnswer: 1,
-          aparecePregunta: [7, 10],
+          aparecePregunta: [7, 7.3],
         },
         {
           id: 2,
           question: "En el masaje carídaco, la presión se aplica: ",
           options: [' En el centro del esternón', ' En el extremo inferior del apéndice xifoides', ' En el centro del pecho o línea que une los pezones', ' Todas son correctas'],
           correctAnswer: 2,
-          aparecePregunta: [0.17, 0.20],
+          aparecePregunta: [17, 17.3],
         },
         {
           id: 3,
           question: "No es una zona de aplicación de electrodos DESA... ",
           options: [' Debajo de la clavícula izquierda', ' A unos 10cm debajo de la axila izquierda', ' En el costado izquierdo', ' Ninguna es correcta'],
           correctAnswer: 0,
-          aparecePregunta: [0.27, 0.30],
+          aparecePregunta: [27, 27.3],
         },
         {
           id: 4,
           question: "Los ciclos RCP para personas adultas son de:  ",
           options: [' 30 compresiones torácicas + 5 ventilaciones de rescate', ' 15 compresiones torácicas + 2 ventilaciones de rescate', ' 2 ventilaciones de rescate + 15 compresiones torácicas + 5 ventilaciones', ' 30 compresiones torácicas + 2 ventilaciones de rescate'],
           correctAnswer: 3,
-          aparecePregunta: [0.46, 0.50],
+          aparecePregunta: [46, 46.3],
         },
         {
           id: 5,
           question: "En los niños, la RCP empieza siempre... ",
           options: ['Aplicando masaje cardíaco', ' Con 5 insuflaciones de aire', ' Efectuando 2 o 3 percusiones con el puño', ' Ninguna es correcta'],
           correctAnswer: 1,
-          aparecePregunta: [1.12, 1.15],
+          aparecePregunta: [72, 72.3],
         },
       ],
       //mas cosas
       activa: false,
       correcta: [false, false, false, false],
+      incorrecta: [false, false, false, false],
+      enableButtons: true,
+      aciertos: 0,
     };
   },
   methods: {
     evaluarRespuesta(index){
-      if(this.questions[this.currentQuestion].correctAnswer == index){
+        this.enableButtons = false;
+        let correcta = this.questions[this.currentQuestion].correctAnswer;
+      if(correcta == index){
         console.log("acierto");
-        this.correcta[index] = true;
+        ++this.aciertos;
       }
       else{
         console.log("fallo");
       }
-      //++this.currentQuestion;
+        this.correcta[correcta] = true;
+        this.incorrecta = [true, true, true, true];
+        this.incorrecta[correcta] = false;
+        this.$forceUpdate();
+        this.play();
     },
     play(){
       let video = document.querySelector("#videoDesa");
@@ -118,13 +128,15 @@ export default {
     controlTiempo() {
       let video = document.querySelector("#videoDesa");
       if (
-        ((video.currentTime >= this.questions[this.currentQuestion].aparecePregunta[0])
-        && (video.currentTime <= this.questions[this.currentQuestion].aparecePregunta[1]))
+        ((video.currentTime >= this.questions[this.currentQuestion+1].aparecePregunta[0])
+        && (video.currentTime <= this.questions[this.currentQuestion+1].aparecePregunta[1]))
       ) {
         video.pause();
+        this.enableButtons = true;
         this.correcta = [false, false, false, false];
+        this.incorrecta = [false, false, false, false];
+        ++this.currentQuestion;
         this.activa = true;
-
       }
     }
   },
@@ -170,7 +182,18 @@ export default {
   }
 
   .correcta{
-    background-color: green;
+    background-color: green !important;
   }
 
+  .incorrecta{
+    background-color: red !important;
+  }
+
+  #contador{
+      float: right;
+      position: absolute;
+      background-color: green !important;
+      bottom: 0;
+      right: 0;
+  }
 </style>
