@@ -7,5 +7,5 @@
         <div class="btn btn-primary">Crear Usuari</div>
     </a>
     <h1>Benvingut al panel d'Administrador, {{ Auth::user()->nom }} !</h1> --}}
-    <administrador-component></administrador-component>
+    <adminnav-component></adminnav-component>
 @endsection

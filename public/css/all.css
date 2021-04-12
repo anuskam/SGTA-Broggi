@@ -1,6 +1,6 @@
-*{
-    font-family:'Rubik', sans-serif;
-}
+/* *{
+    font-family:Arial, Helvetica, sans-serif;
+} */
 
 .container{
     height: 100%;
@@ -19,7 +19,6 @@
     border: 1.5px solid black;
     font-weight: bold;
     font-size: 1em;
-    color: black;
 }
 
 #loginContainer{

@@ -53,7 +53,7 @@
               </div>
 
         <div class="card ml-5 mr-5">
-          <div class="card-header font-weight-bold">DATOS ALERTANTE</div>
+          <div class="card-header font-weight-bold" id="titulito">DATOS ALERTANTE</div>
           <div class="card-body ml-5">
             <form>
 
@@ -247,7 +247,7 @@
     <div v-show="currentTab == 2">
       <div class="container-fluid mt-5">
         <div class="card ml-5 mr-5">
-          <div class="card-header font-weight-bold">DATOS AFECTADA</div>
+          <div class="card-header font-weight-bold" id="titulito">DATOS AFECTADA</div>
           <div class="card-body ml-5">
             <form>
               <!-- NOMBRE AFECTADA -->
@@ -356,7 +356,7 @@
         </div>
 
         <div class="card ml-5 mr-5 mt-3">
-          <div class="card-header font-weight-bold">DATOS INCIDENTE</div>
+          <div class="card-header font-weight-bold" id="titulito">DATOS INCIDENTE</div>
           <div class="card-body ml-5">
             <form>
               <!-- FECHA -->
@@ -481,7 +481,7 @@
 
     <div v-show="currentTab == 3">
       <div class="card ml-5 mr-5 mt-3">
-        <div class="card-header font-weight-bold">RESPUESTA</div>
+        <div class="card-header font-weight-bold" id="titulito">RESPUESTA</div>
         <div class="card-body ml-5">
           <form>
             <!-- CONSEJOS -->
@@ -1434,6 +1434,11 @@ button {
 
 .btn.disabled, .btn:disabled {
   opacity: 0.85;
+}
+
+#titulito {
+    font-family: 'Signika', sans-serif;
+    font-size: 18px;
 }
 
 .hidden{
