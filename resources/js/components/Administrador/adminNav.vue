@@ -8,13 +8,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item active borderLeftRight ml-2" id="nuevoIncidenteItem">
-                    <a class="nav-link" @click="selectTab(1)">Nuevo Incidente <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" @click="selectTab(1)">Usuarias <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item borderLeftRight ml-4" id="editarIncidenteItem">
-                    <a class="nav-link" @click="selectTab(2)">Editar Incidentes</a>
+                    <a class="nav-link" @click="selectTab(2)"> Alertantes</a>
                 </li>
                 <li class="nav-item borderLeftRight ml-4" id="formacionItem">
-                    <a class="nav-link" @click="selectTab(3)">Formación</a>
+                    <a class="nav-link" @click="selectTab(3)">Recursos</a>
                 </li>
             </ul>
         </div>
@@ -22,12 +22,15 @@
 
 
     <div v-show="currentTab == 1">
-        <button class="btn btn-danger col-12" id="generarLlamada" v-show="!incidencia" @click="startIncidencia()"><i class="fas fa-phone-alt"></i>  Generar Llamada</button>
-      <nuevoincidente-component v-show="incidencia" :alertantNumber = pickedNumber></nuevoincidente-component>
+      <gestionarusuarias-component></gestionarusuarias-component>
+    </div>
+
+    <div v-show="currentTab == 2">
+      <gestionaralertantes-component></gestionaralertantes-component>
     </div>
 
     <div v-show="currentTab == 3">
-      <formacion-component></formacion-component>
+      <gestionarrecursos-component></gestionarrecursos-component>
     </div>
 
 
