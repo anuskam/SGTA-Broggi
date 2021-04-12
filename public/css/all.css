@@ -19,7 +19,6 @@
     border: 1.5px solid black;
     font-weight: bold;
     font-size: 1em;
-    color: black;
 }
 
 #loginContainer{
@@ -35,16 +34,10 @@
     color: #fbbd00;
 }
 
-@font-face {
-    font-family: myFamily;
-    src: url(../media/fonts/Signika-Medium.ttf);
-}
-
 #login-card-header{
     background-color: #15acc4;
     font-weight: bold;
     font-size: 1.2em;
-    font-family: myFamily;
 }
 
 #login-card{
@@ -91,6 +84,7 @@ textarea{
     top: 15px;
     right: 10px;
     z-index: 100;
+    font-family: 'Rubik', sans-serif;
 }
 
 .modifColorLogout {
