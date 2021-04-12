@@ -77,9 +77,9 @@
                 Selecciona...
             </option>
             <option
-                v-for="(hospital, index) in hospitals"
+                v-for="(address, index) in addresses"
                 :key="index"
-                :value="hospital.adreca"
+                :value="address"
             >
                 {{ hospital.nom }}
             </option>
@@ -175,10 +175,24 @@ export default {
             address: "Antoni Gaudí, 26, Reus",
             hospitalAddress: null,
             hospitals: [],
+            addresses: [],
             alertants: [],
+            municipis:[],
         }
     },
     methods: {
+        selectMunicipis() {
+            let me = this;
+            axios
+            .get("/SGTA-Broggi/public/api/municipi")
+            .then((response) => {
+            me.municipis = response.data;
+            })
+            .catch((error) => {
+            console.log(error);
+            })
+            .finally(() => (this.loading = false));
+        },
         selectAlertants(){
         let me = this;
         axios
@@ -191,15 +205,18 @@ export default {
         })
         .finally(() => {
             this.loading = false;
-            this.getHospitals();
+            this.getHospitalsAddresses();
         });
 
         },
-        getHospitals(){
+        getHospitalsAddresses(){
         let me = this;
         this.alertants.forEach(function(alertant){
             if(alertant.tipus_alertants_id == 1){
-               me.hospitals.push(alertant);
+                let municipi = me.municipis.find(obj => obj.id == alertant.municipis_id);
+                let nomMunicipi = municipi.nom;
+                let adreca = alertant.adreca + ", "+nomMunicipi;
+               me.addresses.push(adreca);
             }
         });
         },
@@ -316,7 +333,7 @@ export default {
     this.addAddress(this.address);
   },
   created(){
-      this.selectAlertants();
+      this.selectMunicipis(), this.selectAlertants();
   },
   updated(){
       if(this.hospitalAddress != null){
