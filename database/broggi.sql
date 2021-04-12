@@ -311,6 +311,7 @@ DROP TABLE IF EXISTS `broggi`.`incidencies_has_recursos` ;
 CREATE TABLE IF NOT EXISTS `broggi`.`incidencies_has_recursos` (
   `incidencies_id` INT NOT NULL,
   `recursos_id` INT NOT NULL,
+  `afectats_id` INT NOT NULL,
   `hora_activacio` DATETIME NULL,
   `hora_mobilitzacio` DATETIME NULL,
   `hora_assistencia` DATETIME NULL,
@@ -320,7 +321,7 @@ CREATE TABLE IF NOT EXISTS `broggi`.`incidencies_has_recursos` (
   `hora_finalitzacio` DATETIME NULL,
   `prioritat` INT NULL,
   `desti` VARCHAR(100) NULL,
-  PRIMARY KEY (`incidencies_id`, `recursos_id`),
+  PRIMARY KEY (`incidencies_id`, `recursos_id`, `afectats_id`),
   INDEX `fk_incidencies_has_recursos_recursos1_idx` (`recursos_id` ASC),
   INDEX `fk_incidencies_has_recursos_incidencies1_idx` (`incidencies_id` ASC),
   CONSTRAINT `fk_incidencies_has_recursos_incidencies1`
@@ -331,6 +332,11 @@ CREATE TABLE IF NOT EXISTS `broggi`.`incidencies_has_recursos` (
   CONSTRAINT `fk_incidencies_has_recursos_recursos1`
     FOREIGN KEY (`recursos_id`)
     REFERENCES `broggi`.`recursos` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+CONSTRAINT `fk_incidencies_has_recursos_afectats1`
+    FOREIGN KEY (`afectats_id`)
+    REFERENCES `broggi`.`afectats` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
