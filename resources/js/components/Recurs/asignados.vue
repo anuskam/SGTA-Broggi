@@ -38,12 +38,12 @@
     <div id="botones" class="card mt-4 p-2">
       <div id="leftButtons" class="col-2">
         <div id="movilitzacio" class="button" @click="activarMovilitzacio()">
-          <button class="btn"><i class="fas fa-running"></i> Iniciar Movilització</button>
+          <button><i class="fas fa-running"></i> Iniciar Movilització</button>
           <input type="time" v-model="horaMovilitzacio" />
         </div>
 
         <div id="assistencia" class="button" @click="activarAssistencia()" :class="{ visible: movilitzacio }">
-          <button class="btn" :disabled="!movilitzacio">
+          <button :disabled="!movilitzacio">
             <i class="fas fa-briefcase-medical"></i> Iniciar Assistència
           </button>
           <input type="time" v-model="horaAssistencia" />

@@ -19,7 +19,7 @@ window.Vue = require('vue').default;
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('administrador-component', require('./components/Administrador/administrador.vue').default);
+Vue.component('administrador-component', require('./components/Administrador/administradora.vue').default);
 Vue.component('cecosnav-component', require('./components/CECOS/cecosNav.vue').default);
 Vue.component('recursos-component', require('./components/Recurs/recursosTabs.vue').default);
 Vue.component('asignados-component', require('./components/Recurs/asignados.vue').default);
@@ -27,6 +27,11 @@ Vue.component('todos-component', require('./components/Recurs/todos.vue').defaul
 Vue.component('nuevoincidente-component', require('./components/CECOS/nuevoIncidente.vue').default);
 Vue.component('gestionarincidente-component', require('./components/CECOS/gestionarIncidente.vue').default);
 Vue.component('formacion-component', require('./components/CECOS/formacion.vue').default);
+Vue.component('gestionarusuarias-component', require('./components/Administrador/gestionarUsuarias.vue').default);
+Vue.component('gestionaralertantes-component', require('./components/Administrador/gestionarAlertantes.vue').default);
+Vue.component('gestionarrecursos-component', require('./components/Administrador/gestionarRecursos.vue').default);
+Vue.component('adminnav-component', require('./components/Administrador/adminNav.vue').default);
+
 
 
 /**
