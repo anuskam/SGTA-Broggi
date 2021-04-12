@@ -41,7 +41,6 @@ export default {
   data() {
     return {
       currentQuestion: -1,
-      picked: '',
       questions: [
         {
           id: 1,
@@ -190,10 +189,10 @@ export default {
   }
 
   #contador{
-      float: right;
-      position: absolute;
-      background-color: green !important;
-      bottom: 0;
-      right: 0;
+    float: right;
+    position: absolute;
+    background-color: green !important;
+    bottom: 10px;
+    right: 10px;
   }
 </style>

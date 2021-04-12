@@ -13,14 +13,14 @@
         <div id="info" class="col-12 p-0">
           <div class="col-11" id="infoFields">
             <div class="infobox" id="descripcionBox">
-              <div class="col-2 text-center">Descripción:</div>
+              <div class="col-2 text-center boldInfo">Descripción:</div>
               <div id="descripcion" class="col-9">
                 Juan se ha caido de una escalera mientras rescataba al mishu de
                 la vecina de al lado...
               </div>
             </div>
             <div class="infobox" id="direccionBox">
-              <div class="col-2 text-center">Dirección:</div>
+              <div class="col-2 text-center boldInfo">Dirección:</div>
               <div id="direccion" class="col-9">
                 {{ address }}
               </div>
@@ -333,6 +333,8 @@ export default {
 main {
   margin-top: 1.4vh;
   color: black;
+  font-family: 'Rubik', sans-serif;
+  font-size: 15px;
 }
 #infoCard {
   height: 65vh;
@@ -440,7 +442,11 @@ button {
   flex-direction: row;
   justify-content: space-around;
   flex-wrap: nowrap;
-  font-weight: bold;
+  /* font-weight: bold; */
+}
+
+.boldInfo{
+    font-weight: bold;
 }
 
 #infoFields {

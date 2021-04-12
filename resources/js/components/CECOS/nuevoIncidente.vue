@@ -1341,6 +1341,7 @@ export default {
 .show > .btn-secondary.dropdown-toggle {
   background-color: #e3177d;
   border-color: black;
+  color: black;
 }
 
 .btn-secondary {
@@ -1426,7 +1427,6 @@ button {
 .btn.disabled, .btn:disabled {
   opacity: 0.85;
 }
-
 
 
 </style>
