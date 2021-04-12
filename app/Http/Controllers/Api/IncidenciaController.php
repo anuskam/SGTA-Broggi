@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Clases\Utilitat;
+use Illuminate\Support\Facades\DB;
 use App\Models\Incidencia;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\QueryException;
 use App\Http\Resources\IncidenciaResource;
+use App\Models\IncidenciaHasRecursos;
 
 class IncidenciaController extends Controller
 {
@@ -18,7 +20,7 @@ class IncidenciaController extends Controller
      */
     public function index()
     {
-        $incidencies = Incidencia::all();
+        $incidencies = Incidencia::with(['incidencies_has_recursos.recurs', 'incidencies_has_recursos.afectat'])->get();
 
         return IncidenciaResource::collection($incidencies);
     }
@@ -31,6 +33,7 @@ class IncidenciaController extends Controller
      */
     public function store(Request $request)
     {
+        DB::beginTransaction();
         $incidencia = new Incidencia();
 
         $incidencia->num_incident = $request->input('num_incident');
@@ -42,17 +45,32 @@ class IncidenciaController extends Controller
         $incidencia->descripcio = $request->input('descripcio');
         $incidencia->nom_metge = $request->input('nom_metge');
 
-        $incidencia->tipus_incidencies = $request->input('tipus_incidenciesFK');
-        $incidencia->tipus_alertants_id = $request->input('tipus_alertants_idFK');
-        $incidencia->municipis_id = $request->input('municipis_idFK');
-        $incidencia->usuaris_id = $request->input('usuaris_idFK');
+        $incidencia->tipus_incidencies_id = $request->input('tipus_incidencies_id');
+        $incidencia->alertants_id = $request->input('alertants_id');
+        $incidencia->municipis_id = $request->input('municipis_id');
+        $incidencia->usuaris_id = $request->input('usuaris_id');
+
+        $afectats = $request->input('afectats');
 
 
         try{
             $incidencia->save();
+
+            foreach($afectats as $afectat){
+                $ihr = new IncidenciaHasRecursos();
+                $ihr->recursos_id = $afectat['recursos_id'];
+                $ihr->afectats_id = $afectat['afectats_id'];
+                $ihr->prioritat = $afectat['prioritat'];
+                $ihr->hora_activacio = $afectat['hora_activacio'];
+
+                $incidencia->incidencies_has_recursos()->save($ihr);
+            }
+            DB::commit();
+            $incidencia->refresh();
             $response = (new IncidenciaResource($incidencia))->response()->setStatusCode(201);
         }
         catch (QueryException $ex){
+            DB::rollBack();
             $mensaje = Utilitat::errorMessage($ex);
             $response = \response()->json(['error' => $mensaje], 400);
         }
@@ -69,7 +87,8 @@ class IncidenciaController extends Controller
      */
     public function show(Incidencia $incidencium)
     {
-        return new IncidenciaResource($incidencium);
+        $incidencia = Incidencia::with(['incidencies_has_recursos.recurs', 'incidencies_has_recursos.afectat'])->find($incidencium->id);
+        return new IncidenciaResource($incidencia);
     }
 
     /**
@@ -81,6 +100,8 @@ class IncidenciaController extends Controller
      */
     public function update(Request $request, Incidencia $incidencia)
     {
+        DB::beginTransaction();
+
         $incidencia->num_incident = $request->input('num_incident');
         $incidencia->data = $request->input('data');
         $incidencia->hora = $request->input('hora');
@@ -90,17 +111,36 @@ class IncidenciaController extends Controller
         $incidencia->descripcio = $request->input('descripcio');
         $incidencia->nom_metge = $request->input('nom_metge');
 
-        $incidencia->tipus_incidencies = $request->input('tipus_incidenciesFK');
-        $incidencia->tipus_alertants_id = $request->input('tipus_alertants_idFK');
-        $incidencia->municipis_id = $request->input('municipis_idFK');
-        $incidencia->usuaris_id = $request->input('usuaris_idFK');
+        $incidencia->tipus_incidencies_id = $request->input('tipus_incidencies_id');
+        $incidencia->alertants_id = $request->input('alertants_id');
+        $incidencia->municipis_id = $request->input('municipis_id');
+        $incidencia->usuaris_id = $request->input('usuaris_id');
+
+        $hora_activacio =  $request->input('hora_activacio');
+        $prioritat = $request->input('prioritat');
+        $afectats = $request->input('afectats');
 
 
         try{
             $incidencia->save();
+
+            $incidencia->incidencies_has_recursos()->delete();
+
+            foreach($afectats as $afectat){
+                $ihr = new IncidenciaHasRecursos();
+                $ihr->recursos_id = $afectat['recursos_id'];
+                $ihr->afectats_id = $afectat['afectats_id'];
+                $ihr->prioritat = $prioritat;
+                $ihr->hora_activacio = $hora_activacio;
+
+                $incidencia->incidencies_has_recursos()->save($ihr);
+            }
+            DB::commit();
+            $incidencia->refresh();
             $response = (new IncidenciaResource($incidencia))->response()->setStatusCode(201);
         }
         catch (QueryException $ex){
+            DB::rollBack();
             $mensaje = Utilitat::errorMessage($ex);
             $response = \response()->json(['error' => $mensaje], 400);
         }
@@ -118,6 +158,7 @@ class IncidenciaController extends Controller
     {
         try{
             $incidencia->delete();
+            $incidencia->incidencies_has_recursos()->delete(); // Hace falta ?
             $response = \response()->json(['missatge' => 'Registre esborrat correctament'], 200);
         }
         catch(QueryException $ex){

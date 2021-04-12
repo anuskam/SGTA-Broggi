@@ -262,7 +262,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `broggi`.`afectats` ;
 
 CREATE TABLE IF NOT EXISTS `broggi`.`afectats` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `cip` VARCHAR(45) NULL,
   `nom` VARCHAR(45) NULL,
   `cognoms` VARCHAR(45) NULL,
@@ -1558,3 +1558,15 @@ INSERT INTO `broggi`.`sexes` (`id`, `sexe`) VALUES (2, 'Dona');
 
 COMMIT;
 
+
+-- -----------------------------------------------------
+-- Data for table `broggi`.`afectats`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `broggi`;
+
+INSERT INTO `afectats` VALUES (NULL, 'CITE9510263558', 'Citra', 'Terranova', 23, 1, 2);
+INSERT INTO `afectats` VALUES (NULL, NULL, 'Belen', 'Esteban', 60, 0, 2);
+INSERT INTO `afectats` VALUES (NULL, 'ROMA1102586558', 'Felix', 'Bonito', 5, 1, 1);
+
+COMMIT;
