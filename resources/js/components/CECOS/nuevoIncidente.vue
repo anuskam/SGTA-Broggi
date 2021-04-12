@@ -5,6 +5,7 @@
         :disabled="currentTab == 1"
         @click="prev()"
         class="btn btn-sm mr-3 float-left ml-3 iconNavPrincipal"
+        :class="{ hidden: tabs.a }"
         id="btn"
       >
         <i class="fas fa-arrow-left fa-2x" aria-hidden="true"></i>
@@ -33,6 +34,7 @@
         :disabled="currentTab == 3"
         @click="next()"
         class="btn btn-sm mr-3 float-right mr-3 iconNavPrincipal"
+        :class="{ hidden: tabs.c }"
       >
         <i class="fas fa-arrow-right fa-2x"></i>
       </button>
@@ -660,6 +662,7 @@
                   type="checkbox"
                   class="custom-control-input"
                   id="recursoSwitch"
+                  v-model="activaRecurs"
                 />
                 <label class="custom-control-label" for="recursoSwitch"
                   >Activar recurso</label
@@ -667,7 +670,7 @@
               </div>
 
               <!-- AÑADIR RECURSO -->
-              <div class="col-10">
+              <div class="col-10" :class="{ hidden: !activaRecurs }">
                   <button
                     type="button"
                     class="btn btn-primary float-right ml-4"
@@ -688,7 +691,7 @@
                 </button>
               </div>
             </div>
-            <div class="card mt-2">
+            <div class="card mt-2" :class="{ hidden: !activaRecurs }">
               <!-- RECURSOS -->
               <div class="form-group row ml-3 mt-3 pb-4">
                   <label for="recursos" class="col-2 mt-1">Recursos</label>
@@ -1003,6 +1006,7 @@ export default {
       recursos: [],
       recursos_select: [],
       errors: [],
+      activaRecurs: false,
     };
   },
   methods: {
@@ -1209,6 +1213,7 @@ export default {
       })
     },
     insertarIncidenciesHasRecursos(recurs){
+        // IF THIS.ACTIVARRECURS == TRUE
       let me = this;
       axios.post('/SGTA-Broggi/public/api/incidencia_has_recursos', recurs).then((response) => {
           console.log(response);
@@ -1243,6 +1248,9 @@ export default {
                 me.alertant.tipus_alertants_id = alertant.tipus_alertants_id;
                 let municipi = me.municipis.find(obj => obj.id == alertant.municipis_id);
                 me.municipi = municipi;
+                if(alertant.tipus_alertants_id == 1){
+                    me.incidencia.adreca_complement = alertant.nom;
+                }
             }
         });
     }
@@ -1426,6 +1434,10 @@ button {
 
 .btn.disabled, .btn:disabled {
   opacity: 0.85;
+}
+
+.hidden{
+    visibility: hidden;
 }
 
 
