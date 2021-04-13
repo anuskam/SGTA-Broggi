@@ -35,16 +35,10 @@
     color: #fbbd00;
 }
 
-@font-face {
-    font-family: titlesFont;
-    src: url(../media/fonts/Signika-Medium.ttf);
-}
-
 #login-card-header{
     background-color: #15acc4;
     font-weight: bold;
-    font-size: 18px;
-    font-family: titlesFont;
+    font-size: 1.2em;
 }
 
 #login-card{
@@ -95,9 +89,16 @@ textarea{
 }
 
 .modifColorLogout {
-    background-color: #E2211D;
-    color: white;
-    font-size: 15px;
+    /*background-color: #E2211D;
+    color: white;*/
+    color: black;
+    font-size: 1em;
+}
+
+.modifColorLogout:hover {
+    /*background-color: #E2211D;
+    color: white;*/
+    color: black;
 }
 
 #cecosNav{
@@ -109,7 +110,7 @@ textarea{
 
 #navbarNav a{
     color: #0A0A0A;
-    font-size: 15px;
+    font-size: 1em;
 }
 
 #cecosLogo{

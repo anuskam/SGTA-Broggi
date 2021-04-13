@@ -30,7 +30,7 @@
 <body>
     <div class="container-fluid p-0" id="app">
         <a href="{{ url('logout') }}" id="logout">
-            <div class="btn modifColorLogout">Log Out</div>
+            <div class="btn btn-danger modifColorLogout">Log Out</div>
         </a>
         @yield('content')
     </div>

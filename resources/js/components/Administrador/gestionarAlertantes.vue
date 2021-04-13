@@ -11,29 +11,34 @@
   </div>
 
   <div class="card mt-2 mb-1 ml-5 mr-5">
+    <div class="card-header">Alertantes</div>
     <div class="card-body">
-      <h5 class="card-title">Alertantes</h5>
       <table class="table mt-2">
           <thead>
             <tr>
+              <th scope="col" class="sizeNom">Nom</th>
+              <th scope="col" class="sizeCognom">Cognoms</th>
               <th scope="col">Telèfon</th>
-              <th scope="col">Nom</th>
-              <th scope="col">Cognoms</th>
               <th scope="col">Adreça</th>
+              <th scope="col">Municipi</th>
+              <th scope="col" class="sizeBotones"></th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="alertant in alertants" :key="alertant.id">
-              <td>{{ alertant.telefon }}</td>
+            <tr v-for="(alertant, index) in alertants" :key="alertant.id">
               <td>{{ alertant.nom }}</td>
               <td>{{ alertant.cognom }}</td>
+              <td>{{ alertant.telefon }}</td>
               <td>{{ alertant.adreca }}</td>
               <td>
-                <button type="submit" class="btn btn-sm btn-danger" @click="confirmDeleteAlertant(alertant)"><i class="fa fa-trash"
-                    aria-hidden="true"></i> Esborrar</button>
+                {{ getMunicipi(index) }}
+              </td>
+              <td>
+                <button type="submit" class="btn btn-sm float-right ml-2 esborrarAlertantBtn" @click="confirmDeleteAlertant(alertant)"><i class="fa fa-trash"
+                    aria-hidden="true"></i>&nbsp;&nbsp;Esborrar</button>
 
-                <button type="submit" class="btn btn-sm btn-secondary" @click="editAlertant(alertant)"><i class="fa fa-edit"
-                    aria-hidden="true"></i> Editar</button>
+                <button type="submit" class="btn btn-sm float-right editarAlertantBtn"  @click="editAlertant(alertant)"><i class="fa fa-edit"
+                    aria-hidden="true"></i>&nbsp;&nbsp;Editar</button>
               </td>
             </tr>
           </tbody>
@@ -127,18 +132,17 @@
             cognoms: '',
             adreca: ''
           },
+          municipis: [],
           insert: true,
           errorMessage: '',
           infoMessage: '',
-          page: 1,
-          pages: 1
         }
       },
       methods: {
         selectAlertants() {
             let me = this;
             axios
-                .get('/alertant')
+                .get('/SGTA-Broggi/public/api/alertant')
                 .then(response => {
                     me.alertants = response.data;
                 })
@@ -153,7 +157,7 @@
         deleteAlertant() {
           let me = this;
           axios
-              .delete('/alertant/' + me.alertant.id)
+              .delete('/SGTA-Broggi/public/api/alertant/' + me.alertant.id)
               .then(function(response) {
                 console.log(response);
                 me.infoMessage = response.data.missatge;
@@ -171,7 +175,7 @@
         insertAlertant() {
           let me = this;
           axios
-              .post('/alertant', me.alertant)
+              .post('/SGTA-Broggi/public/api/alertant', me.alertant)
               .then(function(response) {
                 console.log(repsonse);
                 me.selectAlertants();
@@ -190,7 +194,7 @@
         updateAlertant() {
           let me = this;
           axios
-              .put('/alertant/' + me.alertant.id, me.alertant)
+              .put('/SGTA-Broggi/public/api/alertant/' + me.alertant.id, me.alertant)
               .then(function(response) {
                 console.log(response);
                 me.selectAlertants();
@@ -200,13 +204,64 @@
                 console.log(error.response.data);
                 me.errorMessage = error.response.data.error;
               })
-        }
+        },
+        selectMunicipis() {
+          let me = this;
+          axios
+              .get("/SGTA-Broggi/public/api/municipi")
+              .then((response) => {
+                me.municipis = response.data;
+              }).catch((error) => {
+                console.log(error);
+              })
+              .finally(() => (this.loading = false));
+        },
+        getMunicipi(index) {
+          let municipi = this.municipis.find(obj => obj.id == this.alertants[index].municipis_id);
+          let municipi_nom;
+          if (municipi != null){
+            municipi_nom = municipi.nom;
+          }
+          else{
+            municipi_nom = this.municipis.find(obj => obj.id == 1);
+          }
+
+
+          return municipi_nom;
+        },
       },
       created() {
-        this.selectAlertants();
+        this.selectAlertants(), this.selectMunicipis();
       },
       mounted() {
         console.log('Component mounted.')
       }
     }
 </script>
+
+<style>
+.sizeNom {
+    width: 20vw;
+}
+
+.sizeCognom {
+    width: 20vw;
+}
+
+.sizeBotones {
+    width: 14vw;
+}
+
+.esborrarAlertantBtn {
+  background-color: #E3342F !important;
+  color: black;
+}
+
+.editarAlertantBtn {
+  background-color: #15acc4 !important;
+  color: black;
+}
+
+
+</style>
+
