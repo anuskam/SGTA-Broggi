@@ -1570,3 +1570,15 @@ INSERT INTO `afectats` VALUES (NULL, NULL, 'Belen', 'Esteban', 60, 0, 2);
 INSERT INTO `afectats` VALUES (NULL, 'ROMA1102586558', 'Felix', 'Bonito', 5, 1, 1);
 
 COMMIT;
+
+-- -----------------------------------------------------
+-- Data for table `broggi`.`usuaris`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `broggi`;
+
+INSERT INTO `usuaris` VALUES (NULL, 'cecos', '$2y$12$qRswuhbVkXbOHC53k8K7BOwNfK3nsHABcFADoyl3dVajM5iBdcGIm', 'cecos@cecos', 'cecos', 'cecos', 2, NULL);
+INSERT INTO `usuaris` VALUES (NULL, 'admin', '$2y$12$YaJjNgg/0413mPPXwAXvz..LJAF4KeNhcS8/LGZFtWdFag7fPMe7y', 'admin@admin', 'admin', 'admin', 1, NULL);
+INSERT INTO `usuaris` VALUES (NULL, 'recurs', '$2y$12$4scYk..mFzX2oDUAvqMnt.WriqmX32QHzLfCH0Vm94Jd5vJ9WhHIO', 'recurs@recurs', 'recurs', 'recurs', 3, 1);
+
+COMMIT;
