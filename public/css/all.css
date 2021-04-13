@@ -14,11 +14,17 @@
     max-width: 40%;
 }
 
+@font-face {
+    font-family: myFont;
+    src: url(../media/fonts/Signika-Medium.ttf);
+}
+
 #login{
     background-color: #e3177d;
     border: 1.5px solid black;
     font-weight: bold;
     font-size: 1em;
+    color: black;
 }
 
 #loginContainer{
@@ -38,6 +44,7 @@
     background-color: #15acc4;
     font-weight: bold;
     font-size: 1.2em;
+    font-family: myFont;
 }
 
 #login-card{
@@ -80,19 +87,22 @@ textarea{
 
 #logout{
     float: right;
-    position: fixed;
+    position: absolute;
     top: 15px;
-    right: 10px;
+    right: 15px;
     z-index: 100;
+    font-family: 'Rubik', sans-serif;
 }
 
 .modifColorLogout {
     background-color: #E2211D;
     color: white;
     font-size: 15px;
+    font-family: 'Rubik', sans-serif;
+
 }
 
-#cecosNav, #adminNav{
+#cecosNav{
     background-color:#fcc41c !important;
     margin-bottom: 20px;
     cursor: pointer;
@@ -104,7 +114,7 @@ textarea{
     font-size: 15px;
 }
 
-#cecosLogo, #adminLogo{
+#cecosLogo{
     height: 4vh;
     cursor: default;
     background-color: white;
