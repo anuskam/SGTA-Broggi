@@ -202,7 +202,6 @@ DROP TABLE IF EXISTS `broggi`.`incidencies` ;
 
 CREATE TABLE IF NOT EXISTS `broggi`.`incidencies` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `num_incident` INT NOT NULL,
   `data` DATE NOT NULL,
   `hora` TIME NOT NULL,
   `telefon_alertant` INT(10) NOT NULL,
@@ -215,7 +214,6 @@ CREATE TABLE IF NOT EXISTS `broggi`.`incidencies` (
   `municipis_id` INT NOT NULL,
   `usuaris_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `num_incident_UNIQUE` (`num_incident` ASC),
   INDEX `fk_incidencies_tipus_incidents1_idx` (`tipus_incidencies_id` ASC),
   INDEX `fk_incidencies_alertants1_idx` (`alertants_id` ASC),
   INDEX `fk_incidencies_municipis1_idx` (`municipis_id` ASC),

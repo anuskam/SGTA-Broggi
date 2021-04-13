@@ -898,7 +898,8 @@
 <script>
 export default {
     props: {
-        alertantNumber: Number
+        alertantNumber: Number,
+        userid: Number,
     },
   data: function () {
     return {
@@ -1006,6 +1007,26 @@ export default {
       recursos_select: [],
       errors: [],
       activaRecurs: false,
+      insertIncidencia: {
+            "data": null,
+            "hora": null,
+            "telefon_alertant": null,
+            "adreca": null,
+            "adreca_complement": null,
+            "descripcio": null,
+            "tipus_incidencies_id": null,
+            "alertants_id": null,
+            "municipis_id": null,
+            // "usuaris_id": null,
+            "afectats": [
+                // {
+                //     "recursos_id": 1,
+                //     "afectats_id": 1,
+                //     "prioritat": 1,
+                //     "hora_activacio": "15:06:51"
+                // },
+            ]
+      }
     };
   },
   methods: {
@@ -1032,6 +1053,7 @@ export default {
     prev() {
       --this.currentTab;
       this.selectTab(this.currentTab);
+      console.log(this.userid);
     },
     next() {
       ++this.currentTab;
@@ -1047,8 +1069,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-        })
-        .finally(() => (this.loading = false));
+        });
     },
     selectComarques() {
       let me = this;
@@ -1059,8 +1080,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-        })
-        .finally(() => (this.loading = false));
+        });
     },
     selectMunicipis() {
       let me = this;
@@ -1071,8 +1091,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-        })
-        .finally(() => (this.loading = false));
+        });
     },
     selectRecursos(){
         let me = this;
@@ -1083,8 +1102,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-        })
-        .finally(() => (this.loading = false));
+        });
     },
     selectAlertants(){
         let me = this;
@@ -1095,9 +1113,6 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-        })
-        .finally(() => {
-            this.loading = false;
         });
 
     },
