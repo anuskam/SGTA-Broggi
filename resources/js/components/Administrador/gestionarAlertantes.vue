@@ -60,8 +60,8 @@
           <p>¿Estás seguro de querer eliminar al alertante {{ alertant.nom }}?</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-danger" @click="deleteAlertant()">Eliminar</button>
+          <button type="button" class="btn cerrarBtn" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn" @click="deleteAlertant()">Eliminar</button>
         </div>
       </div>
     </div>
@@ -110,9 +110,9 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Tancar</button>
-          <button v-if="insert" type="button" class="btn btn-primary" @click="insertAlertant()">Afegir</button>
-          <button v-else type="button" class="btn btn-primary" @click="updateAlertant()">Modificar</button>
+          <button type="button" class="btn cerrarBtn" data-dismiss="modal">Tancar</button>
+          <button v-if="insert" type="button" class="btn" @click="insertAlertant()">Afegir</button>
+          <button v-else type="button" class="btn editarAlertantBtn" @click="updateAlertant()">Modificar</button>
         </div>
       </div>
     </div>
@@ -253,13 +253,26 @@
 }
 
 .esborrarAlertantBtn {
-  background-color: #E3342F !important;
-  color: black;
+  background-color: #e3177d !important;
 }
 
 .editarAlertantBtn {
   background-color: #15acc4 !important;
-  color: black;
+  color: black !important;
+}
+
+.editarAlertantBtn:hover {
+  color: black !important;
+}
+
+
+.cerrarBtn {
+  background-color: #6c757d !important;
+  color: white;
+}
+
+.cerrarBtn:hover {
+  color: white;
 }
 
 

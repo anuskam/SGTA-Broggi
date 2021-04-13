@@ -1348,7 +1348,7 @@ export default {
 .show > .btn-secondary.dropdown-toggle {
   background-color: #e3177d;
   border-color: black;
-  color: black;
+
 }
 
 .btn-secondary {
@@ -1431,9 +1431,6 @@ button {
     color: black;
 }
 
-.btn.disabled, .btn:disabled {
-  opacity: 0.85;
-}
 
 #titulito {
     font-family: 'Signika', sans-serif;

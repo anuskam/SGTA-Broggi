@@ -9025,7 +9025,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn {\n    font-size: 15px;\n}\n.btn-secondary:not(:disabled):not(.disabled).active,\n.btn-secondary:not(:disabled):not(.disabled):active,\n.show > .btn-secondary.dropdown-toggle {\n  background-color: #e3177d;\n  border-color: black;\n  color: black;\n}\n.btn-secondary {\n  border-color: black;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.parentGrid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n.card-header {\n  background-color: #15acc4;\n  border: 1px solid black;\n  border-left: 0;\n  border-right: 0;\n  margin-top: -1px;\n}\n.modal-header{\n    background-color: #15acc4 !important;\n}\n.card {\n  border: 1px solid black !important;\n}\nbutton {\n  background-color: #e3177d !important;\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\n  color: black;\n  font-weight: bold;\n  background-color: #15acc4 !important;\n}\n.tabButton{\n    background-color: white !important;\n    border: 0 !important;\n}\n.selectedTab{\n    background-color: #e3177d !important;\n    border: 1px solid black !important;\n}\n.green{\n    background-color: green;\n    color: white;\n}\n.red{\n    background-color: red;\n    color: white;\n}\n#entregar{\n  border: 1px solid black;\n}\n#titulitosTabs {\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n.iconNavPrincipal{\n    color: black;\n}\n.btn.disabled, .btn:disabled {\n  opacity: 0.85;\n}\n#titulito {\n    font-family: 'Signika', sans-serif;\n    font-size: 18px;\n}\n.hidden{\n    visibility: hidden;\n}\n#buscadorTelefono > input{\n    border: 1px solid black;\n}\n.arrowNav{\n    height: 8vh;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn {\n    font-size: 15px;\n}\n.btn-secondary:not(:disabled):not(.disabled).active,\n.btn-secondary:not(:disabled):not(.disabled):active,\n.show > .btn-secondary.dropdown-toggle {\n  background-color: #e3177d;\n  border-color: black;\n}\n.btn-secondary {\n  border-color: black;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.parentGrid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n.card-header {\n  background-color: #15acc4;\n  border: 1px solid black;\n  border-left: 0;\n  border-right: 0;\n  margin-top: -1px;\n}\n.modal-header{\n    background-color: #15acc4 !important;\n}\n.card {\n  border: 1px solid black !important;\n}\nbutton {\n  background-color: #e3177d !important;\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\n  color: black;\n  font-weight: bold;\n  background-color: #15acc4 !important;\n}\n.tabButton{\n    background-color: white !important;\n    border: 0 !important;\n}\n.selectedTab{\n    background-color: #e3177d !important;\n    border: 1px solid black !important;\n}\n.green{\n    background-color: green;\n    color: white;\n}\n.red{\n    background-color: red;\n    color: white;\n}\n#entregar{\n  border: 1px solid black;\n}\n#titulitosTabs {\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n.iconNavPrincipal{\n    color: black;\n}\n#titulito {\n    font-family: 'Signika', sans-serif;\n    font-size: 18px;\n}\n.hidden{\n    visibility: hidden;\n}\n#buscadorTelefono > input{\n    border: 1px solid black;\n}\n.arrowNav{\n    height: 8vh;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -9121,7 +9121,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeNom {\n    width: 20vw;\n}\n.sizeCognom {\n    width: 20vw;\n}\n.sizeBotones {\n    width: 14vw;\n}\n.esborrarAlertantBtn {\n  background-color: #E3342F !important;\n  color: black;\n}\n.editarAlertantBtn {\n  background-color: #15acc4 !important;\n  color: black;\n}\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeNom {\n    width: 20vw;\n}\n.sizeCognom {\n    width: 20vw;\n}\n.sizeBotones {\n    width: 14vw;\n}\n.esborrarAlertantBtn {\n  background-color: #e3177d !important;\n}\n.editarAlertantBtn {\n  background-color: #15acc4 !important;\n  color: black !important;\n}\n.editarAlertantBtn:hover {\n  color: black !important;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n.cerrarBtn:hover {\n  color: white;\n}\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -45499,7 +45499,7 @@ var render = function() {
               },
               [_vm._v("×")]
             ),
-            _vm._v("\r\n    " + _vm._s(_vm.errorMessage) + "\r\n  ")
+            _vm._v("\n    " + _vm._s(_vm.errorMessage) + "\n  ")
           ]
         )
       : _vm._e(),
@@ -45519,7 +45519,7 @@ var render = function() {
               },
               [_vm._v("×")]
             ),
-            _vm._v("\r\n    " + _vm._s(_vm.infoMessage) + "\r\n  ")
+            _vm._v("\n    " + _vm._s(_vm.infoMessage) + "\n  ")
           ]
         )
       : _vm._e(),
@@ -45626,7 +45626,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-secondary",
+                  staticClass: "btn cerrarBtn",
                   attrs: { type: "button", "data-dismiss": "modal" }
                 },
                 [_vm._v("Cerrar")]
@@ -45635,7 +45635,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-danger",
+                  staticClass: "btn",
                   attrs: { type: "button" },
                   on: {
                     click: function($event) {
@@ -45812,7 +45812,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-secondary",
+                  staticClass: "btn cerrarBtn",
                   attrs: { type: "button", "data-dismiss": "modal" }
                 },
                 [_vm._v("Tancar")]
@@ -45822,7 +45822,7 @@ var render = function() {
                 ? _c(
                     "button",
                     {
-                      staticClass: "btn btn-primary",
+                      staticClass: "btn",
                       attrs: { type: "button" },
                       on: {
                         click: function($event) {
@@ -45835,7 +45835,7 @@ var render = function() {
                 : _c(
                     "button",
                     {
-                      staticClass: "btn btn-primary",
+                      staticClass: "btn editarAlertantBtn",
                       attrs: { type: "button" },
                       on: {
                         click: function($event) {
