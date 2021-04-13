@@ -80,7 +80,7 @@ class AlertantController extends Controller
         $alertant->adreca = $request->input('adreca');
 
         $alertant->municipis_id = $request->input('municipis_idFK');
-        $alertant->tipus_alertants_id = $request->input('tipus_alertants_idFK');
+        $alertant->tipus_alertants_id = $alertant->tipus_alertants_id;
 
 
         try{
