@@ -254,6 +254,7 @@
 
 .esborrarAlertantBtn {
   background-color: #e3177d !important;
+  color: black !important;
 }
 
 .editarAlertantBtn {

@@ -87,7 +87,7 @@ textarea{
 
 #logout{
     float: right;
-    position: fixed;
+    position: absolute;
     top: 15px;
     right: 10px;
     z-index: 100;
