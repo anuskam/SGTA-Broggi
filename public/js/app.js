@@ -3005,7 +3005,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     alertantNumber: Number
@@ -9026,7 +9025,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn {\n    font-size: 15px;\n}\n.btn-secondary:not(:disabled):not(.disabled).active,\n.btn-secondary:not(:disabled):not(.disabled):active,\n.show > .btn-secondary.dropdown-toggle {\n  background-color: #e3177d;\n  border-color: black;\n  color: black;\n}\n.btn-secondary {\n  border-color: black;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.parentGrid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n.card-header {\n  background-color: #15acc4;\n  border: 1px solid black;\n  border-left: 0;\n  border-right: 0;\n  margin-top: -1px;\n}\n.modal-header{\n    background-color: #15acc4 !important;\n}\n.card {\n  border: 1px solid black !important;\n}\nbutton {\n  background-color: #e3177d !important;\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\n  color: black;\n  font-weight: bold;\n  background-color: #15acc4 !important;\n}\n.tabButton{\n    background-color: white !important;\n    border: 0 !important;\n}\n.selectedTab{\n    background-color: #e3177d !important;\n    border: 1px solid black !important;\n}\n.green{\n    background-color: green;\n    color: white;\n}\n.red{\n    background-color: red;\n    color: white;\n}\n#entregar{\n  border: 1px solid black;\n}\n#titulitosTabs {\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n.iconNavPrincipal{\n    color: black;\n}\n.btn.disabled, .btn:disabled {\n  opacity: 0.85;\n}\n#titulito {\n    font-family: 'Signika', sans-serif;\n    font-size: 18px;\n}\n.hidden{\n    visibility: hidden;\n}\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn {\n    font-size: 15px;\n}\n.btn-secondary:not(:disabled):not(.disabled).active,\n.btn-secondary:not(:disabled):not(.disabled):active,\n.show > .btn-secondary.dropdown-toggle {\n  background-color: #e3177d;\n  border-color: black;\n  color: black;\n}\n.btn-secondary {\n  border-color: black;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.parentGrid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n.card-header {\n  background-color: #15acc4;\n  border: 1px solid black;\n  border-left: 0;\n  border-right: 0;\n  margin-top: -1px;\n}\n.modal-header{\n    background-color: #15acc4 !important;\n}\n.card {\n  border: 1px solid black !important;\n}\nbutton {\n  background-color: #e3177d !important;\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\n  color: black;\n  font-weight: bold;\n  background-color: #15acc4 !important;\n}\n.tabButton{\n    background-color: white !important;\n    border: 0 !important;\n}\n.selectedTab{\n    background-color: #e3177d !important;\n    border: 1px solid black !important;\n}\n.green{\n    background-color: green;\n    color: white;\n}\n.red{\n    background-color: red;\n    color: white;\n}\n#entregar{\n  border: 1px solid black;\n}\n#titulitosTabs {\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n.iconNavPrincipal{\n    color: black;\n}\n.btn.disabled, .btn:disabled {\n  opacity: 0.85;\n}\n#titulito {\n    font-family: 'Signika', sans-serif;\n    font-size: 18px;\n}\n.hidden{\n    visibility: hidden;\n}\n#buscadorTelefono > input{\n    border: 1px solid black;\n}\n.arrowNav{\n    height: 8vh;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -42166,9 +42165,10 @@ var render = function() {
       _c(
         "button",
         {
-          staticClass: "btn btn-sm mr-3 float-left ml-3 iconNavPrincipal",
+          staticClass:
+            "btn btn-sm mr-3 float-left ml-3 iconNavPrincipal arrowNav",
           class: { hidden: _vm.tabs.a },
-          attrs: { disabled: _vm.currentTab == 1, id: "btn" },
+          attrs: { disabled: _vm.currentTab == 1 },
           on: {
             click: function($event) {
               return _vm.prev()
@@ -42248,7 +42248,8 @@ var render = function() {
       _c(
         "button",
         {
-          staticClass: "btn btn-sm mr-3 float-right mr-3 iconNavPrincipal",
+          staticClass:
+            "btn btn-sm mr-3 float-right mr-3 iconNavPrincipal arrowNav",
           class: { hidden: _vm.tabs.c },
           attrs: { disabled: _vm.currentTab == 3 },
           on: {
@@ -42275,36 +42276,40 @@ var render = function() {
       },
       [
         _c("div", { staticClass: "container-fluid mt-5" }, [
-          _c("div", { staticClass: "input-group" }, [
-            _c("input", {
-              staticClass: "form-control col-2 ml-5 mb-4",
-              attrs: {
-                type: "number",
-                placeholder: "Teléfono",
-                "aria-label": "Teléfono"
-              },
-              domProps: { value: _vm.alertantNumber }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group-append" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-secondary mb-4",
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      return _vm.getAlertantData()
-                    }
-                  }
+          _c(
+            "div",
+            { staticClass: "input-group", attrs: { id: "buscadorTelefono" } },
+            [
+              _c("input", {
+                staticClass: "form-control col-2 ml-5 mb-4",
+                attrs: {
+                  type: "number",
+                  placeholder: "Teléfono",
+                  "aria-label": "Teléfono"
                 },
-                [
-                  _c("i", { staticClass: "fa fa-search " }),
-                  _vm._v("  Buscar\n                ")
-                ]
-              )
-            ])
-          ]),
+                domProps: { value: _vm.alertantNumber }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group-append" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary mb-4",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.getAlertantData()
+                      }
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "fa fa-search " }),
+                    _vm._v("  Buscar\n                ")
+                  ]
+                )
+              ])
+            ]
+          ),
           _vm._v(" "),
           _c("div", { staticClass: "card ml-5 mr-5" }, [
             _c(
@@ -45494,7 +45499,7 @@ var render = function() {
               },
               [_vm._v("×")]
             ),
-            _vm._v("\n    " + _vm._s(_vm.errorMessage) + "\n  ")
+            _vm._v("\r\n    " + _vm._s(_vm.errorMessage) + "\r\n  ")
           ]
         )
       : _vm._e(),
@@ -45514,7 +45519,7 @@ var render = function() {
               },
               [_vm._v("×")]
             ),
-            _vm._v("\n    " + _vm._s(_vm.infoMessage) + "\n  ")
+            _vm._v("\r\n    " + _vm._s(_vm.infoMessage) + "\r\n  ")
           ]
         )
       : _vm._e(),

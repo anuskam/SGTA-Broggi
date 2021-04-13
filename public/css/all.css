@@ -19,7 +19,6 @@
     border: 1.5px solid black;
     font-weight: bold;
     font-size: 1em;
-    color: black;
 }
 
 #loginContainer{
@@ -85,7 +84,6 @@ textarea{
     top: 15px;
     right: 10px;
     z-index: 100;
-    font-family: 'Rubik', sans-serif;
 }
 
 .modifColorLogout {
@@ -101,7 +99,7 @@ textarea{
     color: black;
 }
 
-#cecosNav{
+#cecosNav, #adminNav{
     background-color:#fcc41c !important;
     margin-bottom: 20px;
     cursor: pointer;
@@ -113,7 +111,7 @@ textarea{
     font-size: 1em;
 }
 
-#cecosLogo{
+#cecosLogo, #adminLogo{
     height: 4vh;
     cursor: default;
     background-color: white;

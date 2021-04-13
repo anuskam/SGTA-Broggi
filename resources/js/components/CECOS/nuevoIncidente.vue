@@ -4,9 +4,8 @@
       <button
         :disabled="currentTab == 1"
         @click="prev()"
-        class="btn btn-sm mr-3 float-left ml-3 iconNavPrincipal"
+        class="btn btn-sm mr-3 float-left ml-3 iconNavPrincipal arrowNav"
         :class="{ hidden: tabs.a }"
-        id="btn"
       >
         <i class="fas fa-arrow-left fa-2x" aria-hidden="true"></i>
       </button>
@@ -33,7 +32,7 @@
       <button
         :disabled="currentTab == 3"
         @click="next()"
-        class="btn btn-sm mr-3 float-right mr-3 iconNavPrincipal"
+        class="btn btn-sm mr-3 float-right mr-3 iconNavPrincipal arrowNav"
         :class="{ hidden: tabs.c }"
       >
         <i class="fas fa-arrow-right fa-2x"></i>
@@ -43,7 +42,7 @@
     <div v-show="currentTab == 1">
       <div class="container-fluid mt-5">
               <!-- BUSCADOR -->
-              <div class="input-group">
+              <div class="input-group" id="buscadorTelefono">
                   <input type="number" class="form-control col-2 ml-5 mb-4" placeholder="Teléfono" aria-label="Teléfono" :value = alertantNumber>
                   <div class="input-group-append">
                   <button class="btn btn-secondary mb-4" type="button" @click="getAlertantData()">
@@ -1445,5 +1444,12 @@ button {
     visibility: hidden;
 }
 
+#buscadorTelefono > input{
+    border: 1px solid black;
+}
+
+.arrowNav{
+    height: 8vh;
+}
 
 </style>
