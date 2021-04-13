@@ -101,11 +101,14 @@ export default {
 </script>
 
 <style scoped>
+
+
     #generarLlamada{
       font-family: 'Signika', sans-serif;
       font-size: 35px;
       margin-top: 33vh;
       background-color: #E2211D !important;
+
     }
 
 
