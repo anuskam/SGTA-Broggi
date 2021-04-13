@@ -1883,6 +1883,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    userid: Number
+  },
   data: function data() {
     return {
       currentTab: 1,
@@ -1894,6 +1897,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     selectTab: function selectTab(selectedTab) {
       this.currentTab = selectedTab;
+      console.log(this.userid);
     },
     startIncidencia: function startIncidencia() {
       this.incidencia = true;
@@ -3007,7 +3011,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    alertantNumber: Number
+    alertantNumber: Number,
+    userid: Number
   },
   data: function data() {
     return {
@@ -3114,7 +3119,26 @@ __webpack_require__.r(__webpack_exports__);
       recursos: [],
       recursos_select: [],
       errors: [],
-      activaRecurs: false
+      activaRecurs: false,
+      insertIncidencia: {
+        "data": null,
+        "hora": null,
+        "telefon_alertant": null,
+        "adreca": null,
+        "adreca_complement": null,
+        "descripcio": null,
+        "tipus_incidencies_id": null,
+        "alertants_id": null,
+        "municipis_id": null,
+        // "usuaris_id": null,
+        "afectats": [// {
+          //     "recursos_id": 1,
+          //     "afectats_id": 1,
+          //     "prioritat": 1,
+          //     "hora_activacio": "15:06:51"
+          // },
+        ]
+      }
     };
   },
   methods: {
@@ -3144,33 +3168,26 @@ __webpack_require__.r(__webpack_exports__);
     prev: function prev() {
       --this.currentTab;
       this.selectTab(this.currentTab);
+      console.log(this.userid);
     },
     next: function next() {
       ++this.currentTab;
       this.selectTab(this.currentTab);
     },
     selectProvincies: function selectProvincies() {
-      var _this = this;
-
       var me = this;
       axios.get("/SGTA-Broggi/public/api/provincia").then(function (response) {
         me.provincies = response.data;
       })["catch"](function (error) {
         console.log(error);
-      })["finally"](function () {
-        return _this.loading = false;
       });
     },
     selectComarques: function selectComarques() {
-      var _this2 = this;
-
       var me = this;
       axios.get("/SGTA-Broggi/public/api/comarca").then(function (response) {
         me.comarques = response.data;
       })["catch"](function (error) {
         console.log(error);
-      })["finally"](function () {
-        return _this2.loading = false;
       });
     },
     selectMunicipis: function selectMunicipis() {
@@ -3182,27 +3199,19 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     selectRecursos: function selectRecursos() {
-      var _this3 = this;
-
       var me = this;
       axios.get("/SGTA-Broggi/public/api/recurs").then(function (response) {
         me.recursos_select = response.data;
       })["catch"](function (error) {
         console.log(error);
-      })["finally"](function () {
-        return _this3.loading = false;
       });
     },
     selectAlertants: function selectAlertants() {
-      var _this4 = this;
-
       var me = this;
       axios.get("/SGTA-Broggi/public/api/alertant").then(function (response) {
         me.alertants = response.data;
       })["catch"](function (error) {
         console.log(error);
-      })["finally"](function () {
-        _this4.loading = false;
       });
     },
     afegirAfectat: function afegirAfectat() {
@@ -3218,11 +3227,11 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     afegirRecurs: function afegirRecurs() {
-      var _this5 = this;
+      var _this = this;
 
       if (this.recurs.tipus_recursos_id > 0 && this.incidencies_has_recursos.prioritat > 0 && this.afectatSelect.edat != null) {
         var pos = this.recursos_select.findIndex(function (x) {
-          return x.codi == _this5.recurs.codi;
+          return x.codi == _this.recurs.codi;
         });
         this.afectatSelect.recurs_id = this.recurs.id;
         this.afectatSelected.push(this.afectatSelect);
@@ -3422,11 +3431,11 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     provinciesFiltered: function provinciesFiltered() {
-      var _this6 = this;
+      var _this2 = this;
 
       if (this.comarca.id > 0) {
         var provincia = this.provincies.find(function (o) {
-          return o.id == _this6.comarca.provincies_id;
+          return o.id == _this2.comarca.provincies_id;
         });
         this.provincia = provincia;
         var provinciesFiltered = [];
@@ -41881,7 +41890,7 @@ var render = function() {
               expression: "incidencia"
             }
           ],
-          attrs: { alertantNumber: _vm.pickedNumber }
+          attrs: { alertantNumber: _vm.pickedNumber, userid: _vm.userid }
         })
       ],
       1
