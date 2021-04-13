@@ -23,7 +23,7 @@
 
     <div v-show="currentTab == 1">
         <button class="btn btn-danger col-12" id="generarLlamada" v-show="!incidencia" @click="startIncidencia()"><i class="fas fa-phone-alt"></i>  Generar Llamada</button>
-      <nuevoincidente-component v-show="incidencia" :alertantNumber = pickedNumber></nuevoincidente-component>
+      <nuevoincidente-component v-show="incidencia" :alertantNumber = pickedNumber :userid = userid></nuevoincidente-component>
     </div>
 
     <div v-show="currentTab == 3">
@@ -37,6 +37,9 @@
 
 <script>
 export default {
+    props: {
+        userid: Number,
+    },
   data: function () {
     return {
       currentTab: 1,
@@ -48,6 +51,7 @@ export default {
   methods: {
     selectTab(selectedTab) {
       this.currentTab = selectedTab;
+      console.log(this.userid);
     },
     startIncidencia(){
         this.incidencia = true;
