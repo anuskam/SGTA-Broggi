@@ -154,11 +154,13 @@ class IncidenciaController extends Controller
      * @param  \App\Models\Incidencia  $incidencia
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Incidencia $incidencia)
+    public function destroy(Incidencia $incidencium)
     {
         try{
-            $incidencia->delete();
-            $incidencia->incidencies_has_recursos()->delete(); // Hace falta ?
+            $incidencium->afectats()->delete();
+            $incidencium->incidencies_has_recursos()->delete();
+            $incidencium->delete();
+
             $response = \response()->json(['missatge' => 'Registre esborrat correctament'], 200);
         }
         catch(QueryException $ex){
