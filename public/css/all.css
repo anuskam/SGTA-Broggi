@@ -87,16 +87,9 @@ textarea{
 }
 
 .modifColorLogout {
-    /*background-color: #E2211D;
-    color: white;*/
-    color: black;
-    font-size: 1em;
-}
-
-.modifColorLogout:hover {
-    /*background-color: #E2211D;
-    color: white;*/
-    color: black;
+    background-color: #E2211D;
+    color: white;
+    font-size: 15px;
 }
 
 #cecosNav, #adminNav{
@@ -108,7 +101,7 @@ textarea{
 
 #navbarNav a{
     color: #0A0A0A;
-    font-size: 1em;
+    font-size: 15px;
 }
 
 #cecosLogo, #adminLogo{

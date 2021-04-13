@@ -1071,8 +1071,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-        })
-        .finally(() => (this.loading = false));
+        });
     },
     selectRecursos(){
         let me = this;

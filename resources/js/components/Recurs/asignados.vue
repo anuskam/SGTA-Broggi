@@ -79,9 +79,9 @@
             <option
                 v-for="(address, index) in addresses"
                 :key="index"
-                :value="address"
+                :value="address.adreca"
             >
-                {{ hospital.nom }}
+                {{ address.nom }}
             </option>
             </select>
           <div id="botonsTransport">
@@ -190,35 +190,32 @@ export default {
             })
             .catch((error) => {
             console.log(error);
-            })
-            .finally(() => (this.loading = false));
+            });
         },
         selectAlertants(){
-        let me = this;
-        axios
-        .get("/SGTA-Broggi/public/api/alertant")
-        .then((response) => {
-          me.alertants = response.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        })
-        .finally(() => {
-            this.loading = false;
-            this.getHospitalsAddresses();
-        });
-
+            let me = this;
+            axios
+            .get("/SGTA-Broggi/public/api/alertant")
+            .then((response) => {
+            me.alertants = response.data;
+            })
+            .catch((error) => {
+            console.log(error);
+            });
         },
         getHospitalsAddresses(){
-        let me = this;
-        this.alertants.forEach(function(alertant){
-            if(alertant.tipus_alertants_id == 1){
-                let municipi = me.municipis.find(obj => obj.id == alertant.municipis_id);
-                let nomMunicipi = municipi.nom;
-                let adreca = alertant.adreca + ", "+nomMunicipi;
-               me.addresses.push(adreca);
-            }
-        });
+            let me = this;
+            this.alertants.forEach(function (alertant, index){
+                if(alertant.tipus_alertants_id == 1){
+                    let municipi = me.municipis.find(obj => obj.id == alertant.municipis_id);
+                    let nomMunicipi = municipi.nom;
+                    let adreca = {
+                        "adreca": alertant.adreca + ", "+nomMunicipi,
+                        "nom": alertant.nom
+                    }
+                    me.addresses.push(adreca);
+                }
+            });
         },
         initMap(idDiv) {
             let map = new mapboxgl.Map({ //Create new mapbox object
@@ -301,6 +298,7 @@ export default {
         },
         activarMostrarTransport(){
             this.mostrarTransport = true;
+            this.getHospitalsAddresses();
         },
         activarTransport(){
             this.transport = true;
@@ -334,6 +332,7 @@ export default {
   },
   created(){
       this.selectMunicipis(), this.selectAlertants();
+
   },
   updated(){
       if(this.hospitalAddress != null){
