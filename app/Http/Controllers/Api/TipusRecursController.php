@@ -35,6 +35,7 @@ class TipusRecursController extends Controller
 
         $tipusRecurs->tipus = $request->input('tipus'); //CAMBIAMOS EL NOMBRE O DA IGUAL? PORQUE SON TODAS TIPO DE NOMBRE
 
+
         try{
             $tipusRecurs->save();
             $response = (new TipusRecursResource($tipusRecurs))->response()->setStatusCode(201);
@@ -65,13 +66,13 @@ class TipusRecursController extends Controller
      * @param  \App\Models\TipusRecurs  $tipusRecurs
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TipusRecurs $tipusRecurs)
+    public function update(Request $request, TipusRecurs $tipusRecur)
     {
-        $tipusRecurs->tipus = $request->input('tipus'); //CAMBIAMOS EL NOMBRE O DA IGUAL? PORQUE SON TODAS TIPO DE NOMBRE
+        $tipusRecur->tipus = $request->input('tipus'); //CAMBIAMOS EL NOMBRE O DA IGUAL? PORQUE SON TODAS TIPO DE NOMBRE
 
         try{
-            $tipusRecurs->save();
-            $response = (new TipusRecursResource($tipusRecurs))->response()->setStatusCode(201);
+            $tipusRecur->save();
+            $response = (new TipusRecursResource($tipusRecur))->response()->setStatusCode(201);
         }
         catch (QueryException $ex){
             $mensaje = Utilitat::errorMessage($ex);
@@ -87,10 +88,10 @@ class TipusRecursController extends Controller
      * @param  \App\Models\TipusRecurs  $tipusRecurs
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TipusRecurs $tipusRecurs)
+    public function destroy(TipusRecurs $tipusRecur)
     {
         try{
-            $tipusRecurs->delete();
+            $tipusRecur->delete();
             $response = \response()->json(['missatge' => 'Registre esborrat correctament'], 200);
         }
         catch(QueryException $ex){

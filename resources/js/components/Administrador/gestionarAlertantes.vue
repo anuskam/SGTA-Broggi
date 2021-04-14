@@ -11,7 +11,7 @@
   </div>
 
   <div class="card mt-2 mb-1 ml-5 mr-5">
-    <div class="card-header">Alertantes</div>
+    <h2 class="card-header font-weight-bold">Alertants</h2>
     <div class="card-body">
       <table class="table mt-2">
           <thead>
@@ -35,7 +35,7 @@
               </td>
               <td>
                 <button type="submit" class="btn btn-sm float-right ml-2 esborrarAlertantBtn" @click="confirmDeleteAlertant(alertant)"><i class="fa fa-trash"
-                    aria-hidden="true"></i>&nbsp;&nbsp;Esborrar</button>
+                    aria-hidden="true"></i>&nbsp;&nbsp;Eliminar</button>
 
                 <button type="submit" class="btn btn-sm float-right editarAlertantBtn"  @click="editAlertant(alertant)"><i class="fa fa-edit"
                     aria-hidden="true"></i>&nbsp;&nbsp;Editar</button>
@@ -51,17 +51,17 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Borrar Alertante</h5>
+          <h5 class="modal-title">Eliminar Alertant</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <p>¿Estás seguro de querer eliminar al alertante {{ alertant.nom }}?</p>
+          <p>Estàs segura d'eliminar l'alertant {{ alertant.nom }}?</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn cerrarBtn" data-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn" @click="deleteAlertant()">Eliminar</button>
+          <button type="button" class="btn cerrarBtn" data-dismiss="modal">Tancar</button>
+          <button type="button" class="btn esborrarAlertantBtn" @click="deleteAlertant()">Eliminar</button>
         </div>
       </div>
     </div>
@@ -72,7 +72,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Alertante</h5>
+          <h5 class="modal-title">Alertant</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
           </button>
@@ -80,7 +80,7 @@
         <div class="modal-body">
           <form>
             <div class="form-group row">
-              <label for="sigles" class="col-sm-2 col-form-label">Telèfon</label>
+              <label for="telefon" class="col-sm-2 col-form-label">Telèfon</label>
               <div class="col-sm-10">
                 <input type="number" class="form-control" id="telefon" name="telefon" autofocus
                   v-model="alertant.telefon">
@@ -95,18 +95,31 @@
             </div>
 
             <div class="form-group row">
-              <label for="nom" class="col-sm-2 col-form-label">Cognoms</label>
+              <label for="cognoms" class="col-sm-2 col-form-label">Cognoms</label>
                 <div class="col-sm-10">
                   <input type="text" class="form-control" id="cognoms" name="cognoms" v-model="alertant.cognoms">
                 </div>
             </div>
 
             <div class="form-group row">
-              <label for="descripcio" class="col-sm-2 col-form-label">Adreça</label>
+              <label for="adreca" class="col-sm-2 col-form-label">Adreça</label>
               <div class="col-sm-10">
                 <input type="text" class="form-control" id="adreca" name="adreca" v-model="alertant.adreca">
               </div>
             </div>
+
+            <div class="form-group row">
+              <label for="municipio" class="col-sm-2 col-form-label">Municipi</label>
+              <div class="col-sm-10">
+                  <select class="custom-select" id="municipio" required v-model="alertant.municipis_id">
+                    <option selected value="Selecciona...">Selecciona...</option>
+                    <option v-for="municipi in municipis" :key="municipi.id" :value="municipi.id">
+                      {{ municipi.nom }}
+                    </option>
+                  </select>
+              </div>
+            </div>
+
           </form>
         </div>
         <div class="modal-footer">
@@ -130,7 +143,8 @@
             telefon: '',
             nom: '',
             cognoms: '',
-            adreca: ''
+            adreca: '',
+            municipis_id: null
           },
           municipis: [],
           insert: true,
@@ -214,7 +228,6 @@
               }).catch((error) => {
                 console.log(error);
               })
-              .finally(() => (this.loading = false));
         },
         getMunicipi(index) {
           let municipi = this.municipis.find(obj => obj.id == this.alertants[index].municipis_id);
@@ -225,7 +238,6 @@
           else{
             municipi_nom = this.municipis.find(obj => obj.id == 1);
           }
-
 
           return municipi_nom;
         },
@@ -254,7 +266,7 @@
 
 .esborrarAlertantBtn {
   background-color: #e3177d !important;
-  color: black !important;
+  color: white !important;
 }
 
 .editarAlertantBtn {
@@ -275,6 +287,17 @@
 .cerrarBtn:hover {
   color: white;
 }
+
+@font-face {
+  font-family: myFont;
+  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);
+}
+
+h2{
+  font-family: myFont;
+  font-size: 1.5em;
+}
+
 
 
 </style>

@@ -65,13 +65,13 @@ class ProvinciaController extends Controller
      * @param  \App\Models\Provincia  $provincia
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Provincia $provincia)
+    public function update(Request $request, Provincia $provincium)
     {
-        $provincia->nom = $request->input('nom');
+        $provincium->nom = $request->input('nom');
 
         try{
-            $provincia->save();
-            $response = (new ProvinciaResource($provincia))->response()->setStatusCode(201);
+            $provincium->save();
+            $response = (new ProvinciaResource($provincium))->response()->setStatusCode(201);
         }
         catch (QueryException $ex){
             $mensaje = Utilitat::errorMessage($ex);

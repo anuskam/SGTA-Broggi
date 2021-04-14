@@ -66,14 +66,14 @@ class TipusIncidenciaController extends Controller
      * @param  \App\Models\TipusIncidencia  $tipusIncidencia
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TipusIncidencia $tipusIncidencia)
+    public function update(Request $request, TipusIncidencia $tipusIncidencium)
     {
-        $tipusIncidencia->tipus = $request->input('tipus');
-        $tipusIncidencia->video = $request->input('video');
+        $tipusIncidencium->tipus = $request->input('tipus');
+        $tipusIncidencium->video = $request->input('video');
 
         try{
-            $tipusIncidencia->save();
-            $response = (new TipusIncidenciaResource($tipusIncidencia))->response()->setStatusCode(201);
+            $tipusIncidencium->save();
+            $response = (new TipusIncidenciaResource($tipusIncidencium))->response()->setStatusCode(201);
         }
         catch (QueryException $ex){
             $mensaje = Utilitat::errorMessage($ex);
@@ -89,10 +89,10 @@ class TipusIncidenciaController extends Controller
      * @param  \App\Models\TipusIncidencia  $tipusIncidencia
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TipusIncidencia $tipusIncidencia)
+    public function destroy(TipusIncidencia $tipusIncidencium)
     {
         try{
-            $tipusIncidencia->delete();
+            $tipusIncidencium->delete();
             $response = \response()->json(['missatge' => 'Registre esborrat correctament'], 200);
         }
         catch(QueryException $ex){
