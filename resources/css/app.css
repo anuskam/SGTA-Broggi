@@ -81,6 +81,7 @@ textarea{
     top: 15px;
     right: 10px;
     z-index: 100;
+    font-family: 'Rubik', sans-serif;
 }
 
 .modifColorLogout {

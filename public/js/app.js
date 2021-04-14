@@ -1996,6 +1996,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['question', 'index'],
   data: function data() {
@@ -2037,7 +2044,10 @@ __webpack_require__.r(__webpack_exports__);
       correcta: [false, false, false, false],
       incorrecta: [false, false, false, false],
       enableButtons: true,
-      aciertos: 0
+      aciertos: 0,
+      maximo: 0,
+      bucle: 0,
+      disablePlay: false
     };
   },
   methods: {
@@ -2067,27 +2077,37 @@ __webpack_require__.r(__webpack_exports__);
         reproducir.innerHTML = "<i class=\"fas fa-play\" aria-hidden=\"true\"></i> Reproducir";
       } else {
         video.play();
+        this.disablePlay = false;
         reproducir.innerHTML = "<i class=\"fas fa-pause\" aria-hidden=\"true\"></i> Pausa";
+        this.bucle = setInterval(this.estado, 500);
       }
-    },
-    retroceder: function retroceder() {
-      var video = document.querySelector("#videoDesa");
-      video.currentTime -= 5;
-    },
-    avanzar: function avanzar() {
-      var video = document.querySelector("#videoDesa");
-      video.currentTime += 5;
     },
     controlTiempo: function controlTiempo() {
       var video = document.querySelector("#videoDesa");
 
       if (video.currentTime >= this.questions[this.currentQuestion + 1].aparecePregunta[0] && video.currentTime <= this.questions[this.currentQuestion + 1].aparecePregunta[1]) {
         video.pause();
+        this.disablePlay = true;
         this.enableButtons = true;
         this.correcta = [false, false, false, false];
         this.incorrecta = [false, false, false, false];
         ++this.currentQuestion;
         this.activa = true;
+      }
+    },
+    estado: function estado() {
+      var maximo = 485;
+      var video = document.querySelector("#videoDesa");
+      var barra = document.querySelector("#barra");
+      var progreso = document.querySelector("#progreso");
+
+      if (!video.ended) {
+        var total = parseInt(video.currentTime * maximo / video.duration);
+        progreso.style.width = total + 'px';
+        progreso.style.backgroundColor = '#6c757d';
+      } else {
+        progreso.style.width = '0px';
+        window.clearInterval(this.bucle);
       }
     }
   },
@@ -9000,7 +9020,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nul li{\n  list-style: none;\n}\n#contenedor{\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: center;\n}\n#questions{\n  color: black;\n}\n#backward {\n  background-color: #fcc41c;\n}\n#reproducir {\n  background-color: #e3177d;\n}\n#forward {\n  background-color: #15acc4;\n}\n.correcta{\n  background-color: green !important;\n}\n.incorrecta{\n  background-color: red !important;\n}\n#contador{\n  float: right;\n  position: absolute;\n  background-color: green !important;\n  bottom: 10px;\n  right: 10px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nul li {\n  list-style: none;\n}\n#contenedor {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: center;\n}\n#questions {\n  color: black;\n}\n.correcta {\n  background-color: green !important;\n}\n.incorrecta {\n  background-color: red !important;\n}\n#contador {\n  float: right;\n  position: absolute;\n  background-color: green !important;\n  bottom: 10px;\n  right: 10px;\n}\n.todoFormacion {\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: center;\n}\n.controlVideo {\n  display: flex;\n  flex-direction: row;\n}\n#reproducir {\n  width: 110px;\n  height: 35px;\n  color: black;\n  padding: 0;\n}\n#barra {\n  position: relative;\n  float: left;\n  width: 485px;\n  height: 17px;\n  border: 1px solid #CCCCCC;\n  background: #EEEEEE;\n  margin-top: 17px;\n  margin-left: 5px;\n}\n#progreso {\n  position: absolute;\n  width: 0px;\n  top: 0;\n  height: 16px;\n  background: rgba(0,0,150,.2);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -41971,68 +41991,38 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "contenedor" } }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn mt-2",
-        attrs: { type: "button", id: "backward" },
-        on: {
-          click: function($event) {
-            return _vm.retroceder()
-          }
-        }
-      },
-      [
-        _c("i", {
-          staticClass: "fas fa-backward",
-          attrs: { "aria-hidden": "true" }
-        }),
-        _vm._v(" Retroceder 5 segundos")
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn mt-2",
-        attrs: { id: "reproducir" },
-        on: {
-          click: function($event) {
-            return _vm.play()
-          }
-        }
-      },
-      [
-        _c("i", {
-          staticClass: "fas fa-play",
-          attrs: { "aria-hidden": "true" }
-        }),
-        _vm._v(" Reproducir")
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn mt-2",
-        attrs: { type: "button", id: "forward" },
-        on: {
-          click: function($event) {
-            return _vm.avanzar()
-          }
-        }
-      },
-      [
-        _vm._v("Avanzar 5 segundos  "),
-        _c("i", {
-          staticClass: "fas fa-forward",
-          attrs: { "aria-hidden": "true" }
-        })
-      ]
-    ),
+  return _c("div", { staticClass: "mt-5", attrs: { id: "contenedor" } }, [
+    _c("div", { staticClass: "todoFormacion" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "controlVideo" }, [
+        _c("div", { staticClass: "buttonPlay" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn mt-2",
+              attrs: { id: "reproducir", disabled: _vm.disablePlay },
+              on: {
+                click: function($event) {
+                  return _vm.play()
+                }
+              }
+            },
+            [
+              _c("i", {
+                staticClass: "fas fa-play",
+                attrs: { "aria-hidden": "true" }
+              }),
+              _vm._v(" Reproducir")
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _vm._m(1),
+        _vm._v(" "),
+        _c("div", { staticStyle: { clear: "both" } })
+      ])
+    ]),
     _vm._v(" "),
     _c(
       "div",
@@ -42127,13 +42117,20 @@ var staticRenderFns = [
       _c("video", {
         attrs: {
           id: "videoDesa",
-          width: "500",
-          height: "300",
+          width: "600",
+          height: "340",
           src: "/SGTA-Broggi/public/media/video/desa.mp4",
-          type: "video/mp4",
-          controls: ""
+          type: "video/mp4"
         }
       })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { attrs: { id: "barra" } }, [
+      _c("div", { attrs: { id: "progreso" } })
     ])
   }
 ]
