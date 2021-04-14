@@ -1996,6 +1996,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['question', 'index'],
   data: function data() {
@@ -2038,6 +2045,8 @@ __webpack_require__.r(__webpack_exports__);
       incorrecta: [false, false, false, false],
       enableButtons: true,
       aciertos: 0,
+      maximo: 0,
+      bucle: 0,
       disablePlay: false
     };
   },
@@ -2070,15 +2079,8 @@ __webpack_require__.r(__webpack_exports__);
         video.play();
         this.disablePlay = false;
         reproducir.innerHTML = "<i class=\"fas fa-pause\" aria-hidden=\"true\"></i> Pausa";
+        this.bucle = setInterval(this.estado, 500);
       }
-    },
-    retroceder: function retroceder() {
-      var video = document.querySelector("#videoDesa");
-      video.currentTime -= 5;
-    },
-    avanzar: function avanzar() {
-      var video = document.querySelector("#videoDesa");
-      video.currentTime += 5;
     },
     controlTiempo: function controlTiempo() {
       var video = document.querySelector("#videoDesa");
@@ -2091,6 +2093,21 @@ __webpack_require__.r(__webpack_exports__);
         this.incorrecta = [false, false, false, false];
         ++this.currentQuestion;
         this.activa = true;
+      }
+    },
+    estado: function estado() {
+      var maximo = 485;
+      var video = document.querySelector("#videoDesa");
+      var barra = document.querySelector("#barra");
+      var progreso = document.querySelector("#progreso");
+
+      if (!video.ended) {
+        var total = parseInt(video.currentTime * maximo / video.duration);
+        progreso.style.width = total + 'px';
+        progreso.style.backgroundColor = '#6c757d';
+      } else {
+        progreso.style.width = '0px';
+        window.clearInterval(this.bucle);
       }
     }
   },
@@ -9026,7 +9043,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nul li{\n  list-style: none;\n}\n#contenedor{\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: center;\n}\n#questions{\n  color: black;\n}\n#backward {\n  background-color: #fcc41c;\n}\n#reproducir {\n  background-color: #e3177d;\n}\n#forward {\n  background-color: #15acc4;\n}\n.correcta{\n  background-color: green !important;\n}\n.incorrecta{\n  background-color: red !important;\n}\n#contador{\n  float: right;\n  position: absolute;\n  background-color: green !important;\n  bottom: 10px;\n  right: 10px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nul li {\n  list-style: none;\n}\n#contenedor {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: center;\n}\n#questions {\n  color: black;\n}\n.correcta {\n  background-color: green !important;\n}\n.incorrecta {\n  background-color: red !important;\n}\n#contador {\n  float: right;\n  position: absolute;\n  background-color: green !important;\n  bottom: 10px;\n  right: 10px;\n}\n.todoFormacion {\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: center;\n}\n.controlVideo {\n  display: flex;\n  flex-direction: row;\n}\n#reproducir {\n  width: 110px;\n  height: 35px;\n  color: black;\n  padding: 0;\n}\n#barra {\n  position: relative;\n  float: left;\n  width: 485px;\n  height: 17px;\n  border: 1px solid #CCCCCC;\n  background: #EEEEEE;\n  margin-top: 17px;\n  margin-left: 5px;\n}\n#progreso {\n  position: absolute;\n  width: 0px;\n  top: 0;\n  height: 16px;\n  background: rgba(0,0,150,.2);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -9050,7 +9067,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn {\n    font-size: 15px;\n}\n.btn-secondary:not(:disabled):not(.disabled).active,\n.btn-secondary:not(:disabled):not(.disabled):active,\n.show > .btn-secondary.dropdown-toggle {\n  background-color: #e3177d;\n  border-color: black;\n  color: black;\n}\n.btn-secondary {\n  border-color: black;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.parentGrid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n.card-header {\n  background-color: #15acc4;\n  border: 1px solid black;\n  border-left: 0;\n  border-right: 0;\n  margin-top: -1px;\n}\n.modal-header{\n    background-color: #15acc4 !important;\n}\n.card {\n  border: 1px solid black !important;\n}\nbutton {\n  background-color: #e3177d !important;\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\n  color: black;\n  font-weight: bold;\n  background-color: #15acc4 !important;\n}\n.tabButton{\n    background-color: white !important;\n    border: 0 !important;\n}\n.selectedTab{\n    background-color: #e3177d !important;\n    border: 1px solid black !important;\n}\n.green{\n    background-color: green;\n    color: white;\n}\n.red{\n    background-color: red;\n    color: white;\n}\n#entregar{\n  border: 1px solid black;\n}\n#titulitosTabs {\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n.iconNavPrincipal{\n    color: black;\n}\n.btn.disabled, .btn:disabled {\n  opacity: 0.85;\n}\n#titulito {\n    font-family: 'Signika', sans-serif;\n    font-size: 18px;\n}\n.hidden{\n    visibility: hidden;\n}\n#buscadorTelefono > input{\n    border: 1px solid black;\n}\n.arrowNav{\n    height: 8vh;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn {\r\n    font-size: 15px;\n}\n.btn-secondary:not(:disabled):not(.disabled).active,\r\n.btn-secondary:not(:disabled):not(.disabled):active,\r\n.show > .btn-secondary.dropdown-toggle {\r\n  background-color: #e3177d;\r\n  border-color: black;\n}\n.btn-secondary {\r\n  border-color: black;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\n}\n.parentGrid {\r\n  display: grid;\r\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-between;\n}\n.card-header {\r\n  background-color: #15acc4;\r\n  border: 1px solid black;\r\n  border-left: 0;\r\n  border-right: 0;\r\n  margin-top: -1px;\n}\n.modal-header{\r\n    background-color: #15acc4 !important;\n}\n.card {\r\n  border: 1px solid black !important;\n}\nbutton {\r\n  background-color: #e3177d !important;\r\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\r\n  color: black;\r\n  font-weight: bold;\r\n  background-color: #15acc4 !important;\n}\n.tabButton{\r\n    background-color: white !important;\r\n    border: 0 !important;\n}\n.selectedTab{\r\n    background-color: #e3177d !important;\r\n    border: 1px solid black !important;\n}\n.green{\r\n    background-color: green;\r\n    color: white;\n}\n.red{\r\n    background-color: red;\r\n    color: white;\n}\n#entregar{\r\n  border: 1px solid black;\n}\n#titulitosTabs {\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\n}\n.iconNavPrincipal{\r\n    color: black;\n}\n#titulito {\r\n    font-family: 'Signika', sans-serif;\r\n    font-size: 18px;\n}\n.hidden{\r\n    visibility: hidden;\n}\n#buscadorTelefono > input{\r\n    border: 1px solid black;\n}\n.arrowNav{\r\n    height: 8vh;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -9146,7 +9163,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeNom {\r\n    width: 20vw;\n}\n.sizeCognom {\r\n    width: 20vw;\n}\n.sizeBotones {\r\n    width: 14vw;\n}\n.esborrarAlertantBtn {\r\n  background-color: #E3342F !important;\r\n  color: black;\n}\n.editarAlertantBtn {\r\n  background-color: #15acc4 !important;\r\n  color: black;\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeNom {\r\n    width: 20vw;\n}\n.sizeCognom {\r\n    width: 20vw;\n}\n.sizeBotones {\r\n    width: 14vw;\n}\n.esborrarAlertantBtn {\r\n  background-color: #e3177d !important;\r\n  color: black !important;\n}\n.editarAlertantBtn {\r\n  background-color: #15acc4 !important;\r\n  color: black !important;\n}\n.editarAlertantBtn:hover {\r\n  color: black !important;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\n.cerrarBtn:hover {\r\n  color: white;\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -41997,68 +42014,38 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "contenedor" } }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn mt-2",
-        attrs: { type: "button", id: "backward" },
-        on: {
-          click: function($event) {
-            return _vm.retroceder()
-          }
-        }
-      },
-      [
-        _c("i", {
-          staticClass: "fas fa-backward",
-          attrs: { "aria-hidden": "true" }
-        }),
-        _vm._v(" Retroceder 5 segundos")
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn mt-2",
-        attrs: { id: "reproducir", disabled: _vm.disablePlay },
-        on: {
-          click: function($event) {
-            return _vm.play()
-          }
-        }
-      },
-      [
-        _c("i", {
-          staticClass: "fas fa-play",
-          attrs: { "aria-hidden": "true" }
-        }),
-        _vm._v(" Reproducir")
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn mt-2",
-        attrs: { type: "button", id: "forward" },
-        on: {
-          click: function($event) {
-            return _vm.avanzar()
-          }
-        }
-      },
-      [
-        _vm._v("Avanzar 5 segundos  "),
-        _c("i", {
-          staticClass: "fas fa-forward",
-          attrs: { "aria-hidden": "true" }
-        })
-      ]
-    ),
+  return _c("div", { staticClass: "mt-5", attrs: { id: "contenedor" } }, [
+    _c("div", { staticClass: "todoFormacion" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "controlVideo" }, [
+        _c("div", { staticClass: "buttonPlay" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn mt-2",
+              attrs: { id: "reproducir", disabled: _vm.disablePlay },
+              on: {
+                click: function($event) {
+                  return _vm.play()
+                }
+              }
+            },
+            [
+              _c("i", {
+                staticClass: "fas fa-play",
+                attrs: { "aria-hidden": "true" }
+              }),
+              _vm._v(" Reproducir")
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _vm._m(1),
+        _vm._v(" "),
+        _c("div", { staticStyle: { clear: "both" } })
+      ])
+    ]),
     _vm._v(" "),
     _c(
       "div",
@@ -42153,13 +42140,20 @@ var staticRenderFns = [
       _c("video", {
         attrs: {
           id: "videoDesa",
-          width: "500",
-          height: "300",
+          width: "600",
+          height: "340",
           src: "/SGTA-Broggi/public/media/video/desa.mp4",
-          type: "video/mp4",
-          controls: ""
+          type: "video/mp4"
         }
       })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { attrs: { id: "barra" } }, [
+      _c("div", { attrs: { id: "progreso" } })
     ])
   }
 ]
@@ -45650,7 +45644,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-secondary",
+                  staticClass: "btn cerrarBtn",
                   attrs: { type: "button", "data-dismiss": "modal" }
                 },
                 [_vm._v("Cerrar")]
@@ -45659,7 +45653,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-danger",
+                  staticClass: "btn",
                   attrs: { type: "button" },
                   on: {
                     click: function($event) {
@@ -45836,7 +45830,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-secondary",
+                  staticClass: "btn cerrarBtn",
                   attrs: { type: "button", "data-dismiss": "modal" }
                 },
                 [_vm._v("Tancar")]
@@ -45846,7 +45840,7 @@ var render = function() {
                 ? _c(
                     "button",
                     {
-                      staticClass: "btn btn-primary",
+                      staticClass: "btn",
                       attrs: { type: "button" },
                       on: {
                         click: function($event) {
@@ -45859,7 +45853,7 @@ var render = function() {
                 : _c(
                     "button",
                     {
-                      staticClass: "btn btn-primary",
+                      staticClass: "btn editarAlertantBtn",
                       attrs: { type: "button" },
                       on: {
                         click: function($event) {

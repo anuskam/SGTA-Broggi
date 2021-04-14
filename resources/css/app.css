@@ -19,6 +19,7 @@
     border: 1.5px solid black;
     font-weight: bold;
     font-size: 1em;
+    color: black;
 }
 
 #loginContainer{
@@ -34,10 +35,16 @@
     color: #fbbd00;
 }
 
+@font-face {
+    font-family: myFuckingFont;
+    src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);
+}
+
 #login-card-header{
     background-color: #15acc4;
     font-weight: bold;
     font-size: 1.2em;
+    font-family: myFuckingFont;
 }
 
 #login-card{
@@ -70,10 +77,11 @@ textarea{
 
 #logout{
     float: right;
-    position: fixed;
+    position: absolute;
     top: 15px;
     right: 10px;
     z-index: 100;
+    font-family: 'Rubik', sans-serif;
 }
 
 .modifColorLogout {
@@ -82,7 +90,7 @@ textarea{
     font-size: 15px;
 }
 
-#cecosNav, #adminNav{
+#cecosNav{
     background-color:#fcc41c !important;
     margin-bottom: 20px;
     cursor: pointer;
@@ -94,7 +102,7 @@ textarea{
     font-size: 15px;
 }
 
-#cecosLogo, #adminLogo{
+#cecosLogo{
     height: 4vh;
     cursor: default;
     background-color: white;

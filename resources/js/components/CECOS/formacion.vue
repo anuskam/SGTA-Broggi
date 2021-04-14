@@ -1,15 +1,22 @@
 <template>
 
-  <div id="contenedor">
-    <div id="contenedorVideo">
-      <video id="videoDesa" width="500" height="300" src="/SGTA-Broggi/public/media/video/desa.mp4" type="video/mp4" controls>
-      </video>
+  <div id="contenedor" class="mt-5">
+    <div class="todoFormacion">
+        <div id="contenedorVideo">
+            <video id="videoDesa" width="600" height="340" src="/SGTA-Broggi/public/media/video/desa.mp4" type="video/mp4"></video>
+        </div>
+
+        <div class="controlVideo">
+            <div class="buttonPlay">
+                <button class="btn mt-2" id="reproducir" @click="play()" :disabled = disablePlay><i class="fas fa-play" aria-hidden="true"></i> Reproducir</button>
+            </div>
+
+            <div id="barra">
+                <div id="progreso"></div>
+            </div>
+            <div style="clear: both"></div>
+        </div>
     </div>
-
-    <button type="button" class="btn mt-2" id="backward" @click="retroceder()"><i class="fas fa-backward" aria-hidden="true"></i> Retroceder 5 segundos</button>
-    <button class="btn mt-2" id="reproducir" @click="play()" :disabled="disablePlay"><i class="fas fa-play" aria-hidden="true"></i> Reproducir</button>
-    <button type="button" class="btn mt-2" id="forward" @click="avanzar()">Avanzar 5 segundos  <i class="fas fa-forward" aria-hidden="true"></i></button>
-
 
     <div class="test col-5 ml-5">
         <div id="questions" v-for="(question, index) in questions" :key="question.id" v-show="activa">
@@ -84,6 +91,8 @@ export default {
       incorrecta: [false, false, false, false],
       enableButtons: true,
       aciertos: 0,
+      maximo: 0,
+      bucle: 0,
       disablePlay: false,
     };
   },
@@ -116,15 +125,8 @@ export default {
         video.play();
         this.disablePlay = false;
         reproducir.innerHTML = `<i class="fas fa-pause" aria-hidden="true"></i> Pausa`;
+        this.bucle = setInterval(this.estado, 500);
       }
-    },
-    retroceder() {
-      let video = document.querySelector("#videoDesa");
-      video.currentTime -= 5;
-    },
-    avanzar() {
-      let video = document.querySelector("#videoDesa");
-      video.currentTime += 5;
     },
     controlTiempo() {
       let video = document.querySelector("#videoDesa");
@@ -139,6 +141,21 @@ export default {
         this.incorrecta = [false, false, false, false];
         ++this.currentQuestion;
         this.activa = true;
+      }
+    },
+    estado() {
+      let maximo = 485;
+      let video = document.querySelector("#videoDesa");
+      let barra = document.querySelector("#barra");
+      let progreso = document.querySelector("#progreso");
+      if(!video.ended) {
+        let total = parseInt(video.currentTime * maximo / video.duration);
+        progreso.style.width = total + 'px';
+        progreso.style.backgroundColor = '#6c757d';
+      }
+      else {
+        progreso.style.width = '0px';
+        window.clearInterval(this.bucle);
       }
     }
   },
@@ -156,46 +173,73 @@ export default {
 </script>
 
 <style>
-  ul li{
+  ul li {
     list-style: none;
   }
 
-  #contenedor{
+  #contenedor {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
   }
 
-  #questions{
+  #questions {
     color: black;
   }
 
-  #backward {
-    background-color: #fcc41c;
-  }
-
-  #reproducir {
-    background-color: #e3177d;
-  }
-
-  #forward {
-    background-color: #15acc4;
-  }
-
-  .correcta{
+  .correcta {
     background-color: green !important;
   }
 
-  .incorrecta{
+  .incorrecta {
     background-color: red !important;
   }
 
-  #contador{
+  #contador {
     float: right;
     position: absolute;
     background-color: green !important;
     bottom: 10px;
     right: 10px;
+  }
+
+  .todoFormacion {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+  }
+
+  .controlVideo {
+    display: flex;
+    flex-direction: row;
+  }
+
+  #reproducir {
+    width: 110px;
+    height: 35px;
+    color: black;
+    padding: 0;
+  }
+
+  #barra {
+    position: relative;
+    float: left;
+    width: 485px;
+    height: 17px;
+    border: 1px solid #CCCCCC;
+    background: #EEEEEE;
+    margin-top: 17px;
+    margin-left: 5px;
+
+  }
+
+  #progreso {
+    position: absolute;
+    width: 0px;
+    top: 0;
+    height: 16px;
+    background: rgba(0,0,150,.2);
   }
 </style>
