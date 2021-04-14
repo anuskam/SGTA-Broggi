@@ -3150,15 +3150,16 @@ __webpack_require__.r(__webpack_exports__);
         "tipus_incidencies_id": null,
         "alertants_id": null,
         "municipis_id": null,
-        // "usuaris_id": null,
-        "afectats": [// {
+        "usuaris_id": this.userid,
+        "recursos": [// {
           //     "recursos_id": 1,
           //     "afectats_id": 1,
           //     "prioritat": 1,
           //     "hora_activacio": "15:06:51"
           // },
         ]
-      }
+      },
+      recursAfectats: []
     };
   },
   methods: {
@@ -3241,6 +3242,7 @@ __webpack_require__.r(__webpack_exports__);
         }
 
         this.afectats.push(this.afectat);
+        this.recursAfectats.push(this.afectat);
         this.buidarAfectat();
       } else {
         this.errors.push("Cal introduir el sexe de l'afectat!");
@@ -3255,8 +3257,18 @@ __webpack_require__.r(__webpack_exports__);
         });
         this.afectatSelect.recurs_id = this.recurs.id;
         this.afectatSelected.push(this.afectatSelect);
-        this.recursos.push(this.recurs);
+        var recurs = {
+          "recurs": this.recurs,
+          "afectats": []
+        };
+        recurs.afectats.push(this.afectatSelect);
+        var borrarAfectatIndex = this.recursAfectats.findIndex(function (obj) {
+          return obj.sexes_id == _this.afectatSelect.sexes_id && obj.edat == _this.afectatSelect.edat;
+        });
+        this.recursAfectats.splice(borrarAfectatIndex, 1);
+        this.recursos.push(recurs);
         this.buidarRecurs();
+        this.buidarAfectatSelect();
         this.recursos_select[pos].actiu = false;
         this.incidencies_has_recursos.hora_activacio = new Date().toLocaleTimeString("en-GB", {
           hour: "numeric",
@@ -3323,6 +3335,17 @@ __webpack_require__.r(__webpack_exports__);
       $('#afectadaModal').modal('show');
     },
     eliminarRecurs: function eliminarRecurs(index) {
+      var _this2 = this;
+
+      var me = this;
+      var afectatsArray = this.recursos[index].afectats;
+      afectatsArray.forEach(function (afectat) {
+        me.recursAfectats.push(afectat);
+      });
+      var recursSelectIndex = this.recursos_select.findIndex(function (obj) {
+        return obj.id == _this2.recursos[index].recurs.id;
+      });
+      this.recursos_select[recursSelectIndex].actiu = true;
       this.recursos.splice(index, 1);
     },
     mostrarRecursos: function mostrarRecursos() {
@@ -3451,11 +3474,11 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     provinciesFiltered: function provinciesFiltered() {
-      var _this2 = this;
+      var _this3 = this;
 
       if (this.comarca.id > 0) {
         var provincia = this.provincies.find(function (o) {
-          return o.id == _this2.comarca.provincies_id;
+          return o.id == _this3.comarca.provincies_id;
         });
         this.provincia = provincia;
         var provinciesFiltered = [];
@@ -9068,7 +9091,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nmain[data-v-6504f867] {\r\n  margin-top: 1.4vh;\r\n  color: black;\r\n  font-family: 'Rubik', sans-serif;\r\n  font-size: 15px;\n}\n#infoCard[data-v-6504f867] {\r\n  height: 65vh;\r\n  color: black;\n}\n#botones[data-v-6504f867] {\r\n  height: 28vh;\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-around;\r\n  align-items: center;\n}\n#infoHeader[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-between;\r\n  font-size: 1.2em;\r\n  font-weight: bold;\r\n  margin-right: -0.5px;\r\n  border-bottom: 1px solid black;\r\n  background-color: #15acc4;\n}\nbutton[data-v-6504f867] {\r\n  background-color: #e3177d;\r\n  font-weight: bold;\r\n  font-size: 0.9em;\r\n  color: black;\n}\n.card[data-v-6504f867] {\r\n  border: 1px solid black;\n}\n#transportHeader[data-v-6504f867] {\r\n  background-color: #15acc4;\r\n  font-weight: bold;\r\n  padding: 6px 20px;\r\n  text-align: center;\n}\n#leftButtons[data-v-6504f867] {\r\n  height: 100%;\r\n  display: flex;\r\n  flex-direction: column;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-around;\n}\n#assistencia[data-v-6504f867]{\r\n    opacity: .4;\n}\n#checkTransport[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  flex-wrap: nowrap;\r\n  justify-content: center;\r\n  align-items: center;\r\n  opacity: .4;\r\n  /* margin-left: -80px; */\n}\n#checkTransport button[data-v-6504f867] {\r\n  padding: 10px 4px;\r\n  height: 100%;\n}\n#transportButton[data-v-6504f867] {\r\n  background-color: #e3177d;\n}\n#transportButtons[data-v-6504f867] {\r\n  height: 100%;\r\n  opacity: .4;\n}\n.visible[data-v-6504f867]{\r\n    opacity: 1 !important;\n}\n#transportForm[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: wrap;\r\n  justify-content: space-around;\r\n  align-items: center;\n}\n#botonsTransport[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  width: 100%;\r\n  justify-content: space-between;\n}\n.button[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  /* align-items: center; */\n}\n#direccioHospital[data-v-6504f867] {\r\n  width: 100%;\n}\n#map[data-v-6504f867] {\r\n  height: 65%;\r\n  background-color: black;\n}\n#info[data-v-6504f867] {\r\n  height: 20%;\r\n  margin-top: 4%;\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: space-around;\r\n  flex-wrap: nowrap;\r\n  /* font-weight: bold; */\n}\n.boldInfo[data-v-6504f867]{\r\n    font-weight: bold;\n}\n#infoFields[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: space-around;\r\n  padding-right: 0;\n}\n.infobox[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  align-items: center;\r\n  text-align: justify;\n}\n.infobox > div[data-v-6504f867] {\r\n  background-color: #15acc4;\r\n  border: 1px solid black;\n}\n#descripcion[data-v-6504f867],\r\n#direccion[data-v-6504f867] {\r\n  background-color: white;\n}\n#masInfo[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: center;\r\n  vertical-align: center;\n}\n#masInfo > button[data-v-6504f867] {\r\n  padding: 10px 20px;\r\n  margin-left: -50px;\n}\n.modal-header[data-v-6504f867]{\r\n    font-weight: bold;\r\n    background-color: #15acc4;\n}\n#alta[data-v-6504f867]{\r\n    opacity: 1 !important;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nmain[data-v-6504f867] {\n  margin-top: 1.4vh;\n  color: black;\n  font-family: 'Rubik', sans-serif;\n  font-size: 15px;\n}\n#infoCard[data-v-6504f867] {\n  height: 65vh;\n  color: black;\n}\n#botones[data-v-6504f867] {\n  height: 28vh;\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#infoHeader[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n  font-size: 1.2em;\n  font-weight: bold;\n  margin-right: -0.5px;\n  border-bottom: 1px solid black;\n  background-color: #15acc4;\n}\nbutton[data-v-6504f867] {\n  background-color: #e3177d;\n  font-weight: bold;\n  font-size: 0.9em;\n  color: black;\n}\n.card[data-v-6504f867] {\n  border: 1px solid black;\n}\n#transportHeader[data-v-6504f867] {\n  background-color: #15acc4;\n  font-weight: bold;\n  padding: 6px 20px;\n  text-align: center;\n}\n#leftButtons[data-v-6504f867] {\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n}\n#assistencia[data-v-6504f867]{\n    opacity: .4;\n}\n#checkTransport[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: center;\n  align-items: center;\n  opacity: .4;\n  /* margin-left: -80px; */\n}\n#checkTransport button[data-v-6504f867] {\n  padding: 10px 4px;\n  height: 100%;\n}\n#transportButton[data-v-6504f867] {\n  background-color: #e3177d;\n}\n#transportButtons[data-v-6504f867] {\n  height: 100%;\n  opacity: .4;\n}\n.visible[data-v-6504f867]{\n    opacity: 1 !important;\n}\n#transportForm[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#botonsTransport[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  width: 100%;\n  justify-content: space-between;\n}\n.button[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  /* align-items: center; */\n}\n#direccioHospital[data-v-6504f867] {\n  width: 100%;\n}\n#map[data-v-6504f867] {\n  height: 65%;\n  background-color: black;\n}\n#info[data-v-6504f867] {\n  height: 20%;\n  margin-top: 4%;\n  display: flex;\n  flex-direction: row;\n  justify-content: space-around;\n  flex-wrap: nowrap;\n  /* font-weight: bold; */\n}\n.boldInfo[data-v-6504f867]{\n    font-weight: bold;\n}\n#infoFields[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n  padding-right: 0;\n}\n.infobox[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  text-align: justify;\n}\n.infobox > div[data-v-6504f867] {\n  background-color: #15acc4;\n  border: 1px solid black;\n}\n#descripcion[data-v-6504f867],\n#direccion[data-v-6504f867] {\n  background-color: white;\n}\n#masInfo[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  vertical-align: center;\n}\n#masInfo > button[data-v-6504f867] {\n  padding: 10px 20px;\n  margin-left: -50px;\n}\n.modal-header[data-v-6504f867]{\n    font-weight: bold;\n    background-color: #15acc4;\n}\n#alta[data-v-6504f867]{\n    opacity: 1 !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -9140,7 +9163,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeNom {\n    width: 20vw;\n}\n.sizeCognom {\n    width: 20vw;\n}\n.sizeBotones {\n    width: 14vw;\n}\n.esborrarAlertantBtn {\n  background-color: #e3177d !important;\n  color: black !important;\n}\n.editarAlertantBtn {\n  background-color: #15acc4 !important;\n  color: black !important;\n}\n.editarAlertantBtn:hover {\n  color: black !important;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n.cerrarBtn:hover {\n  color: white;\n}\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeNom {\r\n    width: 20vw;\n}\n.sizeCognom {\r\n    width: 20vw;\n}\n.sizeBotones {\r\n    width: 14vw;\n}\n.esborrarAlertantBtn {\r\n  background-color: #e3177d !important;\r\n  color: black !important;\n}\n.editarAlertantBtn {\r\n  background-color: #15acc4 !important;\r\n  color: black !important;\n}\n.editarAlertantBtn:hover {\r\n  color: black !important;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\n.cerrarBtn:hover {\r\n  color: white;\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -9164,7 +9187,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeNom {\n  width: 20vw;\n}\n.sizeCognom {\n  width: 20vw;\n}\n.sizeBotones {\n  width: 14vw;\n}\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeNom {\r\n  width: 20vw;\n}\n.sizeCognom {\r\n  width: 20vw;\n}\n.sizeBotones {\r\n  width: 14vw;\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -43785,7 +43808,7 @@ var render = function() {
                             ]
                           ),
                           _vm._v(" "),
-                          _vm._l(_vm.afectats, function(afectat, index) {
+                          _vm._l(_vm.recursAfectats, function(afectat, index) {
                             return _c(
                               "option",
                               { key: index, domProps: { value: afectat } },
@@ -44086,98 +44109,97 @@ var render = function() {
               _vm._m(4),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
-                _c(
-                  "ul",
-                  { staticClass: "list-group" },
-                  [
-                    _vm._l(_vm.recursos, function(recursProba, recurs_index) {
-                      return _c(
-                        "li",
-                        { key: recursProba.id, staticClass: "list-group-item" },
-                        [
-                          _vm._v(
-                            _vm._s(recursProba.codi) + ",\n                  "
-                          ),
-                          recursProba.tipus_recursos_id == 1
-                            ? _c("span", [
-                                _vm._v(" Ambulancia Medicalitzada, ")
-                              ])
-                            : recursProba.tipus_recursos_id == 2
-                            ? _c("span", [
-                                _vm._v(" Ambulancia Sanitaritzada, ")
-                              ])
-                            : recursProba.tipus_recursos_id == 3
-                            ? _c("span", [_vm._v(" Ambulancia Assistencial, ")])
-                            : _c("span", [
-                                _vm._v(" Helicopter Medicalitzat, ")
-                              ]),
-                          _vm._v(
-                            "\n                  Prioritat " +
-                              _vm._s(
-                                _vm.incidencies_has_recursos_array[recurs_index]
-                                  .prioritat
-                              ) +
-                              "\n                  "
-                          )
-                        ]
-                      )
-                    }),
-                    _vm._l(_vm.afectatSelected, function(afectat, index) {
-                      return _c("li", { key: index }, [
-                        _c(
-                          "div",
+                this.recursos.length > 0
+                  ? _c(
+                      "ul",
+                      { staticClass: "list-group" },
+                      _vm._l(_vm.recursos, function(recursProba, recurs_index) {
+                        return _c(
+                          "li",
                           {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value:
-                                  afectat.recurs_id ==
-                                  _vm.recursos[_vm.recurs_index].id,
-                                expression:
-                                  "afectat.recurs_id == recursos[recurs_index].id"
-                              }
-                            ]
+                            key: recursProba.recurs.id,
+                            staticClass: "list-group-item"
                           },
                           [
                             _vm._v(
-                              "\n                          " +
-                                _vm._s(afectat.nom) +
-                                " " +
-                                _vm._s(afectat.cognoms) +
-                                ",\n                          "
+                              _vm._s(recursProba.recurs.codi) +
+                                ",\n                  "
                             ),
-                            afectat.sexes_id == 1
-                              ? _c("span", [_vm._v(" Hombre")])
-                              : _c("span", [_vm._v(" Mujer")]),
+                            recursProba.recurs.tipus_recursos_id == 1
+                              ? _c("span", [
+                                  _vm._v(" Ambulancia Medicalitzada, ")
+                                ])
+                              : recursProba.recurs.tipus_recursos_id == 2
+                              ? _c("span", [
+                                  _vm._v(" Ambulancia Sanitaritzada, ")
+                                ])
+                              : recursProba.recurs.tipus_recursos_id == 3
+                              ? _c("span", [
+                                  _vm._v(" Ambulancia Assistencial, ")
+                                ])
+                              : _c("span", [
+                                  _vm._v(" Helicopter Medicalitzat, ")
+                                ]),
                             _vm._v(
-                              "\n                          (" +
-                                _vm._s(afectat.edat) +
-                                ")\n                       "
+                              "\n                  Prioritat " +
+                                _vm._s(
+                                  _vm.incidencies_has_recursos_array[
+                                    recurs_index
+                                  ].prioritat
+                                ) +
+                                "\n                  "
+                            ),
+                            _vm._v(" "),
+                            recursProba.afectats.length > 0
+                              ? _c(
+                                  "ul",
+                                  _vm._l(recursProba.afectats, function(
+                                    afectat,
+                                    index
+                                  ) {
+                                    return _c("li", { key: index }, [
+                                      _vm._v(
+                                        "\n                          " +
+                                          _vm._s(afectat.nom) +
+                                          " " +
+                                          _vm._s(afectat.cognoms) +
+                                          ",\n                          "
+                                      ),
+                                      afectat.sexes_id == 1
+                                        ? _c("span", [_vm._v(" Hombre")])
+                                        : _c("span", [_vm._v(" Mujer")]),
+                                      _vm._v(
+                                        "\n                          (" +
+                                          _vm._s(afectat.edat) +
+                                          ")\n                      "
+                                      )
+                                    ])
+                                  }),
+                                  0
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger float-right",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.eliminarRecurs(recurs_index)
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", { staticClass: "fas fa-trash" }),
+                                _vm._v(" Borrar")
+                              ]
                             )
                           ]
                         )
-                      ])
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-danger float-right",
-                        on: {
-                          click: function($event) {
-                            return _vm.eliminarRecurs(_vm.index)
-                          }
-                        }
-                      },
-                      [
-                        _c("i", { staticClass: "fas fa-trash" }),
-                        _vm._v(" Borrar")
-                      ]
+                      }),
+                      0
                     )
-                  ],
-                  2
-                )
+                  : _vm._e()
               ]),
               _vm._v(" "),
               _vm._m(5)
@@ -45495,7 +45517,7 @@ var render = function() {
               },
               [_vm._v("×")]
             ),
-            _vm._v("\n    " + _vm._s(_vm.errorMessage) + "\n  ")
+            _vm._v("\r\n    " + _vm._s(_vm.errorMessage) + "\r\n  ")
           ]
         )
       : _vm._e(),
@@ -45515,7 +45537,7 @@ var render = function() {
               },
               [_vm._v("×")]
             ),
-            _vm._v("\n    " + _vm._s(_vm.infoMessage) + "\n  ")
+            _vm._v("\r\n    " + _vm._s(_vm.infoMessage) + "\r\n  ")
           ]
         )
       : _vm._e(),
@@ -45541,9 +45563,9 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [
                   _vm._v(
-                    "\n                " +
+                    "\r\n                " +
                       _vm._s(_vm.getMunicipi(index)) +
-                      "\n              "
+                      "\r\n              "
                   )
                 ]),
                 _vm._v(" "),
