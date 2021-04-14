@@ -36,7 +36,7 @@ class RecursController extends Controller
         $recurs->codi = $request->input('codi');
         $recurs->actiu = ($request->input('actiu') == 'actiu');
 
-        $recurs->tipus_recursos_id = $request->input('tipus_recursos_idFK');
+        $recurs->tipus_recursos_id = $request->input('tipus_recursos_id');
 
         try{
             $recurs->save();
@@ -68,16 +68,16 @@ class RecursController extends Controller
      * @param  \App\Models\Recurs  $recurs
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Recurs $recurs)
+    public function update(Request $request, Recurs $recur)
     {
-        $recurs->codi = $request->input('codi');
-        $recurs->actiu = ($request->input('actiu') == 'actiu');
+        $recur->codi = $request->input('codi');
+        $recur->actiu = ($request->input('actiu') == 'actiu');
 
-        $recurs->tipus_recursos_id = $request->input('tipus_recursos_idFK');
+        $recur->tipus_recursos_id = $request->input('tipus_recursos_id');
 
         try{
-            $recurs->save();
-            $response = (new RecursResource($recurs))->response()->setStatusCode(201);
+            $recur->save();
+            $response = (new RecursResource($recur))->response()->setStatusCode(201);
         }
         catch (QueryException $ex){
             $mensaje = Utilitat::errorMessage($ex);
@@ -93,10 +93,10 @@ class RecursController extends Controller
      * @param  \App\Models\Recurs  $recurs
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Recurs $recurs)
+    public function destroy(Recurs $recur)
     {
         try{
-            $recurs->delete();
+            $recur->delete();
             $response = \response()->json(['missatge' => 'Registre esborrat correctament'], 200);
         }
         catch(QueryException $ex){
