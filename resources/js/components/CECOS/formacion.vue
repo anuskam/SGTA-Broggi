@@ -7,7 +7,7 @@
     </div>
 
     <button type="button" class="btn mt-2" id="backward" @click="retroceder()"><i class="fas fa-backward" aria-hidden="true"></i> Retroceder 5 segundos</button>
-    <button class="btn mt-2" id="reproducir" @click="play()"><i class="fas fa-play" aria-hidden="true"></i> Reproducir</button>
+    <button class="btn mt-2" id="reproducir" @click="play()" :disabled="disablePlay"><i class="fas fa-play" aria-hidden="true"></i> Reproducir</button>
     <button type="button" class="btn mt-2" id="forward" @click="avanzar()">Avanzar 5 segundos  <i class="fas fa-forward" aria-hidden="true"></i></button>
 
 
@@ -84,6 +84,7 @@ export default {
       incorrecta: [false, false, false, false],
       enableButtons: true,
       aciertos: 0,
+      disablePlay: false,
     };
   },
   methods: {
@@ -113,6 +114,7 @@ export default {
       }
       else {
         video.play();
+        this.disablePlay = false;
         reproducir.innerHTML = `<i class="fas fa-pause" aria-hidden="true"></i> Pausa`;
       }
     },
@@ -131,6 +133,7 @@ export default {
         && (video.currentTime <= this.questions[this.currentQuestion+1].aparecePregunta[1]))
       ) {
         video.pause();
+        this.disablePlay = true;
         this.enableButtons = true;
         this.correcta = [false, false, false, false];
         this.incorrecta = [false, false, false, false];

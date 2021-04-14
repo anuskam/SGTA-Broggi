@@ -728,7 +728,7 @@
                         Selecciona...
                     </option>
                     <option
-                        v-for="(afectat, index) in afectats"
+                        v-for="(afectat, index) in recursAfectats"
                         :key="index"
                         :value="afectat"
                     >
@@ -860,23 +860,23 @@
             </button>
           </div>
           <div class="modal-body">
-            <ul class="list-group">
-                <li v-for="(recursProba, recurs_index) in recursos" :key="recursProba.id" class="list-group-item">{{ recursProba.codi }},
-                    <span v-if="recursProba.tipus_recursos_id == 1"> Ambulancia Medicalitzada, </span>
-                    <span v-else-if="recursProba.tipus_recursos_id == 2"> Ambulancia Sanitaritzada, </span>
-                    <span v-else-if="recursProba.tipus_recursos_id == 3"> Ambulancia Assistencial, </span>
+            <ul class="list-group" v-if="this.recursos.length > 0">
+                <li v-for="(recursProba, recurs_index) in recursos" :key="recursProba.recurs.id" class="list-group-item">{{ recursProba.recurs.codi }},
+                    <span v-if="recursProba.recurs.tipus_recursos_id == 1"> Ambulancia Medicalitzada, </span>
+                    <span v-else-if="recursProba.recurs.tipus_recursos_id == 2"> Ambulancia Sanitaritzada, </span>
+                    <span v-else-if="recursProba.recurs.tipus_recursos_id == 3"> Ambulancia Assistencial, </span>
                     <span v-else> Helicopter Medicalitzat, </span>
                     Prioritat {{ incidencies_has_recursos_array[recurs_index].prioritat }}
                     <!-- Probar posar el loop d'afectats abans del loop de recursos (variable per controlar no repeticio de recurs_id) -->
-                    <li v-for="(afectat, index) in afectatSelected" :key="index">
-                        <div v-show="afectat.recurs_id == recursos[recurs_index].id">
+                    <ul v-if="recursProba.afectats.length > 0">
+                        <li v-for="(afectat, index) in recursProba.afectats" :key="index">
                             {{ afectat.nom }} {{ afectat.cognoms }},
                             <span v-if="afectat.sexes_id == 1"> Hombre</span>
                             <span v-else> Mujer</span>
                             ({{ afectat.edat }})
-                         </div>
-                    </li>
-                    <button class="btn btn-danger float-right" @click="eliminarRecurs(index)"><i class="fas fa-trash"></i> Borrar</button>
+                        </li>
+                    </ul>
+                    <button class="btn btn-danger float-right" @click="eliminarRecurs(recurs_index)"><i class="fas fa-trash"></i> Borrar</button>
                 </li>
             </ul>
           </div>
@@ -1017,8 +1017,8 @@ export default {
             "tipus_incidencies_id": null,
             "alertants_id": null,
             "municipis_id": null,
-            // "usuaris_id": null,
-            "afectats": [
+            "usuaris_id": this.userid,
+            "recursos": [
                 // {
                 //     "recursos_id": 1,
                 //     "afectats_id": 1,
@@ -1026,7 +1026,9 @@ export default {
                 //     "hora_activacio": "15:06:51"
                 // },
             ]
-      }
+      },
+      recursAfectats: [],
+
     };
   },
   methods: {
@@ -1122,6 +1124,7 @@ export default {
           this.afectat.te_cip = true;
         }
         this.afectats.push(this.afectat);
+        this.recursAfectats.push(this.afectat);
         this.buidarAfectat();
       } else {
         this.errors.push("Cal introduir el sexe de l'afectat!");
@@ -1132,8 +1135,16 @@ export default {
         let pos = this.recursos_select.findIndex(x => x.codi == this.recurs.codi);
         this.afectatSelect.recurs_id = this.recurs.id;
         this.afectatSelected.push(this.afectatSelect);
-        this.recursos.push(this.recurs);
+        let recurs = {
+            "recurs": this.recurs,
+            "afectats": [],
+        }
+        recurs.afectats.push(this.afectatSelect);
+        let borrarAfectatIndex = this.recursAfectats.findIndex(obj => (obj.sexes_id == this.afectatSelect.sexes_id) && (obj.edat == this.afectatSelect.edat));
+        this.recursAfectats.splice(borrarAfectatIndex, 1);
+        this.recursos.push(recurs);
         this.buidarRecurs();
+        this.buidarAfectatSelect();
         this.recursos_select[pos].actiu = false;
         this.incidencies_has_recursos.hora_activacio = new Date().toLocaleTimeString("en-GB", {
           hour: "numeric",
@@ -1200,6 +1211,13 @@ export default {
         $('#afectadaModal').modal('show');
     },
     eliminarRecurs(index){
+        let me = this;
+        let afectatsArray = this.recursos[index].afectats;
+        afectatsArray.forEach(function (afectat){
+            me.recursAfectats.push(afectat);
+        });
+        let recursSelectIndex = this.recursos_select.findIndex(obj => obj.id == this.recursos[index].recurs.id);
+        this.recursos_select[recursSelectIndex].actiu = true;
         this.recursos.splice(index,1);
     },
     mostrarRecursos(){
