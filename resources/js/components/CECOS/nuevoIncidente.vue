@@ -1464,10 +1464,9 @@ button {
     color: black;
 }
 
-
 #titulito {
     font-family: 'Signika', sans-serif;
-    font-size: 18px;
+    font-size: 1.3em;
 }
 
 .hidden{

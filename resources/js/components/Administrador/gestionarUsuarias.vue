@@ -51,7 +51,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Esborrar Usuària</h5>
+          <div class="modal-title">Esborrar Usuària</div>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -61,7 +61,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn cerrarBtn" data-dismiss="modal">Tancar</button>
-          <button type="button" class="btn" @click="deleteUsuari()">Eliminar</button>
+          <button type="button" class="btn esborrarUsuariBtn" @click="deleteUsuari()">Eliminar</button>
         </div>
       </div>
     </div>
@@ -72,7 +72,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Usuària</h5>
+          <div class="modal-title">Usuària</div>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
           </button>
@@ -280,7 +280,7 @@
 .cerrarBtn:hover {
   color: white;
 }
-/*
+
 @font-face {
   font-family: myFont;
   src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);
@@ -288,8 +288,8 @@
 
 h2{
   font-family: myFont;
-  font-size: 1.5em;
-} */
+  font-size: 1.3em;
+}
 
 
 
