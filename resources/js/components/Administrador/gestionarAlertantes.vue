@@ -51,7 +51,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Eliminar Alertant</h5>
+          <div class="modal-title">Eliminar Alertant</div>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -72,7 +72,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Alertant</h5>
+          <div class="modal-title">Alertant</div>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
           </button>
@@ -295,7 +295,7 @@
 
 h2{
   font-family: myFont;
-  font-size: 1.5em;
+  font-size: 1.3em;
 }
 
 

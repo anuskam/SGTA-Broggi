@@ -27,7 +27,7 @@
               <td>{{ recurs.codi }}</td>
               <td>
                 <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" name="actius[]" value="actiu" :checked="recurs.actiu">
+                  <input type="checkbox" class="custom-control-input" name="actius[]" value="actiu" :checked="recurs.actiu" disabled>
                   <label class="custom-control-label" for="actiu"></label>
                 </div>
               </td>
@@ -52,7 +52,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Eliminar Recurs</h5>
+          <div class="modal-title">Eliminar Recurs</div>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -62,7 +62,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn cerrarBtn" data-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn" @click="deleteRecurs()">Eliminar</button>
+          <button type="button" class="btn esborrarRecursBtn" @click="deleteRecurs()">Eliminar</button>
         </div>
       </div>
     </div>
@@ -73,7 +73,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Recurs</h5>
+          <idv class="modal-title">Recurs</idv>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
           </button>
@@ -280,6 +280,6 @@ h2{
   font-size: 1.3em;
 }
 
-
+/*NO SE BORRAN LOS MENSAJES Y AL CAMBIAR EL NOMBRE DE UN CÓDIGO, SE QUITA EL CHECKED*/
 </style>
 
