@@ -97,7 +97,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `broggi`.`alertants` ;
 
 CREATE TABLE IF NOT EXISTS `broggi`.`alertants` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `telefon` INT(10) NOT NULL,
   `nom` VARCHAR(150) NULL,
   `cognoms` VARCHAR(150) NULL,

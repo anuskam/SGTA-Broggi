@@ -8,6 +8,7 @@ use App\Models\Afectat;
 use App\Models\Alertant;
 use App\Models\Municipi;
 use App\Models\TipusIncidencia;
+use App\Models\IncidenciaHasAfectats;
 use App\Models\IncidenciaHasRecursos;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,8 +20,12 @@ class Incidencia extends Model
     protected $table = 'incidencies';
     public $timestamps = false;
 
-    public function afectats(){
-        return $this->belongsToMany(Afectat::class, 'incidencies_has_afectats', 'incidencies_id', 'afectats_id')->as('incidencies_has_afectats');
+    // public function afectats(){
+    //     return $this->belongsToMany(Afectat::class, 'incidencies_has_afectats', 'incidencies_id', 'afectats_id')->as('incidencies_has_afectats');
+    // }
+
+    public function incidencies_has_afectats(){
+        return $this->hasMany(IncidenciaHasAfectats::class, 'incidencies_id');
     }
 
     public function tipusIncidencia(){

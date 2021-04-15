@@ -1,5 +1,11 @@
 <template>
   <div>
+    <div v-show="errors.length > 0" v-for="(error, index) in errors" :key="index" class="alert alert-danger alert-dismissable fade show" role="alert" style="color: black;">
+        {{ error }}
+        <button class="close" type="button" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
     <div id="tabButtons" class="mt-2">
       <button
         :disabled="currentTab == 1"
@@ -480,7 +486,16 @@
 
     <div v-show="currentTab == 3">
       <div class="card ml-5 mr-5 mt-3">
-        <div class="card-header font-weight-bold" id="titulito">RESPUESTA</div>
+        <div class="card-header font-weight-bold" id="titulito">RESPUESTA
+            <div
+                type="button"
+                id="entregar"
+                class="btn btn-success float-right"
+                @click="evaluarIncidencia()"
+            >
+                <i class="fa fa-check" aria-hidden="true"></i> INSERTAR INCIDENCIA
+         </div>
+        </div>
         <div class="card-body ml-5">
           <form>
             <!-- CONSEJOS -->
@@ -797,14 +812,6 @@
           </form>
         </div>
       </div>
-      <div
-        type="button"
-        id="entregar"
-        class="btn btn-success float-right mr-5 mt-4"
-        @click="insertarIncidencia()"
-      >
-        <i class="fa fa-check" aria-hidden="true"></i> INSERTAR INCIDENCIA
-      </div>
     </div>
     <!-- Modal Lista Afectadas -->
     <div class="modal" tabindex="-1" role="dialog" id="afectadaModal">
@@ -1028,7 +1035,9 @@ export default {
             ]
       },
       recursAfectats: [],
-
+      alertanteConocido: false,
+      alertantDB: null,
+      afectatsDB: null,
     };
   },
   methods: {
@@ -1106,12 +1115,24 @@ export default {
           console.log(error);
         });
     },
-    selectAlertants(){
+    async selectAlertants(){
         let me = this;
-        axios
+        return axios
         .get("/SGTA-Broggi/public/api/alertant")
         .then((response) => {
           me.alertants = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+    },
+    async selectAfectats(){
+        let me = this;
+        return axios
+        .get("/SGTA-Broggi/public/api/afectat")
+        .then((response) => {
+          me.afectatsDB = response.data;
         })
         .catch((error) => {
           console.log(error);
@@ -1143,6 +1164,7 @@ export default {
         let borrarAfectatIndex = this.recursAfectats.findIndex(obj => (obj.sexes_id == this.afectatSelect.sexes_id) && (obj.edat == this.afectatSelect.edat));
         this.recursAfectats.splice(borrarAfectatIndex, 1);
         this.recursos.push(recurs);
+        this.incidencies_has_recursos.recursos_id = this.recurs.id;
         this.buidarRecurs();
         this.buidarAfectatSelect();
         this.recursos_select[pos].actiu = false;
@@ -1223,12 +1245,137 @@ export default {
     mostrarRecursos(){
         $('#recursModal').modal('show');
     },
-    checkInsertarIncidencia(){
+    async evaluaInsertAlertantes(){
+        /* Insert en alertants? o es conocido */
+        if(this.alertanteConocido == false){
+            this.alertant.adreca = this.incidencia.adreca;
+            this.alertant.nom = this.incidencia.nom_metge;
+            this.alertant.municipis_id = this.municipi.id;
+            this.alertant.telefon = this.alertantNumber;
+            this.alertant.tipus_alertants_id = Number(this.alertant.tipus_alertants_id);
+            await this.insertarAlertant();
+            await this.selectAlertants();
+            await this.getAlertantData();
+        }
+        return null;
+    },
+    evaluaInsertIncidencia(){
+        let respuesta = false;
+        /* Control insert incidencia */
+        if(this.incidencia.adreca == null || this.incidencia.descripcio == null || this.municipi.id == null){
+            if(this.incidencia.adreca == null){
+                this.errors.push("Cal introduir l'adreça de l'incident");
+            }
+            if(this.incidencia.descripcio == null){
+                this.errors.push("Cal introduir la descripció de l'incident");
+            }
+            if(this.municipi.id == null){
+                this.errors.push("Cal introduir el municipi de l'incident");
+            }
+        }
+        else{
+            respuesta = true;
+            this.insertIncidencia = {
+                "data": this.incidencia.data,
+                "hora": this.incidencia.hora,
+                "telefon_alertant": this.alertantNumber,
+                "adreca": this.incidencia.adreca,
+                "adreca_complement": this.incidencia.adreca_complement,
+                "descripcio": this.incidencia.descripcio,
+                "nom_metge": this.incidencia.nom_metge,
+                "tipus_incidencies_id": Number(this.incidencia.tipus_incidencies_id),
+                "alertants_id": this.alertantDB.id,
+                "municipis_id": this.municipi.id,
+                "usuaris_id": this.userid,
+                "recursos": []
+            }
+        }
+        return respuesta;
+    },
+    // Control de Insert de la Incidencia
+    async evaluarIncidencia(){
+        this.errors = [];
+        /* Control insert afectats */
+        if(this.activaRecurs == true){ // Si se ha activado asignacion de recursos
+            if(this.afectatSelected.length > 0){ // Si realmente hay recursos asignados
+                let me = this;
+                this.afectatSelected.forEach(async function(afectat){
+                    await me.insertarAfectat(afectat);
+                });
+                await this.selectAfectats();
+                console.log(this.afectatsDB);
+                this.recursos.forEach(function(recurs, indexRecurs){ // Asignando id de la bd a los afectados
+                    recurs.afectats.forEach(function(afectat, indexAfectat){
+                        let indexAfectatDB = me.afectatsDB.findIndex(obj => (obj.nom == afectat.nom && obj.cognoms == afectat.cognoms && obj.sexes_id == afectat.sexes_id && obj.edat == afectat.edat));
+                        if(indexAfectatDB >= 0){
+                            me.recursos[indexRecurs].afectats[indexAfectat].id = me.afectatsDB[indexAfectatDB].id;
+                        }
+                        else{
+                            me.recursos[indexRecurs].afectats[indexAfectat].id = me.afectatsDB.length-(me.recursos[indexRecurs].afectats.length - indexAfectat);
+                        }
+                    });
+               });
+            //     this.afectatSelected.forEach(function(afectat, index){ // Asignando id de la bd a los afectados
+            //         let indexAfectatDB = me.afectatsDB.findIndex(obj => (obj.nom == afectat.nom && obj.cognoms == afectat.cognoms && obj.sexes_id == afectat.sexes_id && obj.edat == afectat.edat));
+            //         if(indexAfectatDB >= 0){
+            //             me.afectatSelected[index].id = me.afectatsDB[indexAfectatDB].id;
+            //         }
+            //         else{
+            //             me.afectatSelected[index].id = me.afectatsDB.length-(me.afectatSelected.length - index);
+            //         }
+            //    });
+               /* Insert de la incidencia con recursos */
+                await this.evaluaInsertAlertantes();
+               if(this.evaluaInsertIncidencia()){
+                   let afectatsInsert = [];
+                   let me = this;
+                   this.recursos.forEach(function (recurso){ // Recopilando objetos de recursos con afectados en un array
+                       recurso.afectats.forEach(function (afectat){
+                           let afectatInsert = {
+                            "recursos_id": null,
+                            "afectats_id": null,
+                            "prioritat": null,
+                            "hora_activacio": null
+                           };
+                           afectatInsert.recursos_id = afectat.recurs_id;
+                           afectatInsert.afectats_id = afectat.id;
+                           let indexRecurs = me.incidencies_has_recursos_array.findIndex(obj => obj.recursos_id == afectat.recurs_id);
+                           afectatInsert.prioritat = me.incidencies_has_recursos_array[indexRecurs].prioritat;
+                           afectatInsert.hora_activacio = me.incidencies_has_recursos_array[indexRecurs].hora_activacio;
+                           afectatsInsert.push(afectatInsert);
+                       });
+                   });
+                   this.insertIncidencia.recursos = afectatsInsert;
+                   this.insertarIncidencia();
+                   this.updateRecursos();
+               }
 
+            }
+            else{
+                this.errors.push("Cal despatxar algun recurs o desactivar l'opcio d'assignar recurs")
+            }
+        }
+        else{ // Insert de la incidencia sin recursos
+            await this.evaluaInsertAlertantes();
+            this.evaluaInsertIncidencia();
+            await this.insertAfectatsSinRecurso();
+            this.insertarIncidencia();
+            this.updateRecursos();
+        }
+
+    },
+    async insertAfectatsSinRecurso(){
+        let me = this;
+        this.insertIncidencia.afectats = [];
+        return this.afectats.forEach(function (afectat) {
+            if(afectat.recurs_id == null){
+                me.insertIncidencia.afectats.push(afectat);
+            }
+        });
     },
     insertarIncidencia(){
       let me = this;
-      axios.post('/SGTA-Broggi/public/api/incidencia', me.incidencia).then((response) => {
+      axios.post('/SGTA-Broggi/public/api/incidencia', me.insertIncidencia).then((response) => {
           console.log(response);
       }).catch( (error) => {
           console.log(error.response.status);
@@ -1244,38 +1391,30 @@ export default {
           console.log(error.response.data.error);
       })
     },
-    insertarIncidenciesHasRecursos(recurs){
-        // IF THIS.ACTIVARRECURS == TRUE
+    async insertarAfectat(afectat){
       let me = this;
-      axios.post('/SGTA-Broggi/public/api/incidencia_has_recursos', recurs).then((response) => {
+      return axios.post('/SGTA-Broggi/public/api/afectat', afectat).then((response) => {
           console.log(response);
       }).catch( (error) => {
           console.log(error.response.status);
           console.log(error.response.data.error);
       })
     },
-    insertarAfectat(){
+    async insertarAlertant(){
       let me = this;
-      axios.post('/SGTA-Broggi/public/api/afectat', me.cicle).then((response) => {
+      return axios.post('/SGTA-Broggi/public/api/alertant', me.alertant).then((response) => {
           console.log(response);
       }).catch( (error) => {
           console.log(error.response.status);
           console.log(error.response.data.error);
-      })
+      });
     },
-    insertarAlertant(){
-      let me = this;
-      axios.post('/SGTA-Broggi/public/api/alertant', me.cicle).then((response) => {
-          console.log(response);
-      }).catch( (error) => {
-          console.log(error.response.status);
-          console.log(error.response.data.error);
-      })
-    },
-    getAlertantData(){
+    async getAlertantData(){
         let me = this;
-        this.alertants.forEach(function(alertant){
+        return this.alertants.forEach(function(alertant){
             if(alertant.telefon == me.alertantNumber){
+                me.alertantDB = alertant;
+                me.alertanteConocido = true;
                 me.incidencia.adreca = alertant.adreca;
                 me.alertant.tipus_alertants_id = alertant.tipus_alertants_id;
                 let municipi = me.municipis.find(obj => obj.id == alertant.municipis_id);
@@ -1284,6 +1423,18 @@ export default {
                     me.incidencia.adreca_complement = alertant.nom;
                 }
             }
+        });
+    },
+    updateRecursos(){
+        let me = this;
+        this.recursos.forEach(function (recurs){
+            let recursToUpdate = recurs.recurs;
+            axios.put('/SGTA-Broggi/public/api/recurs/'+recursToUpdate.id, recursToUpdate).then((response) => {
+                console.log(response);
+            }).catch( (error) => {
+                console.log(error.response.status);
+                console.log(error.response.data.error);
+            });
         });
     }
   },

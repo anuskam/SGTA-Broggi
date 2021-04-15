@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Afectat;
 use App\Clases\Utilitat;
-use Illuminate\Support\Facades\DB;
 use App\Models\Incidencia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\IncidenciaHasAfectats;
+use App\Models\IncidenciaHasRecursos;
 use Illuminate\Database\QueryException;
 use App\Http\Resources\IncidenciaResource;
-use App\Models\IncidenciaHasRecursos;
 
 class IncidenciaController extends Controller
 {
@@ -36,7 +38,6 @@ class IncidenciaController extends Controller
         DB::beginTransaction();
         $incidencia = new Incidencia();
 
-        $incidencia->num_incident = $request->input('num_incident');
         $incidencia->data = $request->input('data');
         $incidencia->hora = $request->input('hora');
         $incidencia->telefon_alertant = $request->input('telefon_alertant');
@@ -50,21 +51,44 @@ class IncidenciaController extends Controller
         $incidencia->municipis_id = $request->input('municipis_id');
         $incidencia->usuaris_id = $request->input('usuaris_id');
 
-        $afectats = $request->input('afectats');
+        $recursos = $request->input('recursos');
 
 
         try{
             $incidencia->save();
+            $incidencia_id = $incidencia->id;
 
-            foreach($afectats as $afectat){
+            foreach($recursos as $recurs){ // Incidencias con recurso asignado
                 $ihr = new IncidenciaHasRecursos();
-                $ihr->recursos_id = $afectat['recursos_id'];
-                $ihr->afectats_id = $afectat['afectats_id'];
-                $ihr->prioritat = $afectat['prioritat'];
-                $ihr->hora_activacio = $afectat['hora_activacio'];
+                $ihr->recursos_id = $recurs['recursos_id'];
+                $ihr->afectats_id = $recurs['afectats_id'];
+                $ihr->prioritat = $recurs['prioritat'];
+                $ihr->hora_activacio = $recurs['hora_activacio'];
 
                 $incidencia->incidencies_has_recursos()->save($ihr);
+
+                $iha = new IncidenciaHasAfectats();
+                $iha->afectats_id = $recurs['afectats_id']; // afectats id = 5,6 enlloc de 6,7
+                $incidencia->incidencies_has_afectats()->save($iha);
             }
+            if(array_key_exists("afectats", $request->input())){
+                $afectats = $request->input('afectats');
+                foreach($afectats as $afectat){
+                    $afectatsInsert = new Afectat();
+                    $afectatsInsert->cip = $afectat['cip'];
+                    $afectatsInsert->nom = $afectat['nom'];
+                    $afectatsInsert->cognoms = $afectat['cognoms'];
+                    $afectatsInsert->edat = $afectat['edat'];
+                    $afectatsInsert->te_cip = $afectat['te_cip'];
+                    $afectatsInsert->sexes_id = $afectat['sexes_id'];
+                    $afectatsInsert->save();
+
+                    $iha2 = new IncidenciaHasAfectats();
+                    $iha2->incidencies_id = $incidencia_id;
+                    $afectatsInsert->incidencies_has_afectats()->save($iha2);
+                }
+            }
+
             DB::commit();
             $incidencia->refresh();
             $response = (new IncidenciaResource($incidencia))->response()->setStatusCode(201);
@@ -118,7 +142,7 @@ class IncidenciaController extends Controller
 
         $hora_activacio =  $request->input('hora_activacio');
         $prioritat = $request->input('prioritat');
-        $afectats = $request->input('afectats');
+        $recursos = $request->input('recursos');
 
 
         try{
@@ -126,10 +150,10 @@ class IncidenciaController extends Controller
 
             $incidencium->incidencies_has_recursos()->delete();
 
-            foreach($afectats as $afectat){
+            foreach($recursos as $recurs){
                 $ihr = new IncidenciaHasRecursos();
-                $ihr->recursos_id = $afectat['recursos_id'];
-                $ihr->afectats_id = $afectat['afectats_id'];
+                $ihr->recursos_id = $recurs['recursos_id'];
+                $ihr->afectats_id = $recurs['afectats_id'];
                 $ihr->prioritat = $prioritat;
                 $ihr->hora_activacio = $hora_activacio;
 
