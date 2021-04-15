@@ -46,7 +46,6 @@
           alertants: [],
           tipusIncidencies: [],
           tipusAlertants: [],
-          Alertants: []
         }
       },
       methods:{
@@ -55,7 +54,7 @@
           axios
               .get('/SGTA-Broggi/public/api/incidencia')
               .then(response => {
-                me.incidencies = resposne.data;
+                me.incidencies = response.data;
               })
               .catch(error => {
                 console.log(error);
@@ -127,18 +126,21 @@
         },
         getTipusAlertant(index) {
           let alertant_id = this.incidencies[index].alertants_id;
+          console.log(alertant_id);
           let indexAlertant = this.alertants.findIndex(obj => obj.id == alertant_id);
+          console.log(indexAlertant);
           let alertantTipus = this.alertants[indexAlertant].tipus_alertants_id;
+          console.log(alertantTipus);
           let tipusAlertant_index = this.tipusAlertants.findIndex(obj => obj.id == alertantTipus);
-
+            console.log(tipusAlertant_index);
           let tipusAlertant_nom = this.tipusAlertants[tipusAlertant_index].tipus;
-
+            console.log(tipusAlertant_nom);
           return tipusAlertant_nom;
 
         }
       },
       created(){
-        this.selectIncidencies(), this.selectMunicipis();
+        this.selectIncidencies(), this.selectMunicipis(), this.selectAlertant(), this.selectTipusAlertant(), this.selectTipusIncidencia();
       },
       mounted() {
           console.log('Component mounted.')

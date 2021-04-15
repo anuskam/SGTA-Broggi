@@ -3461,67 +3461,77 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee3);
       }))();
     },
-    evaluaInsertIncidencia: function evaluaInsertIncidencia() {
-      var respuesta = false;
-      /* Control insert incidencia */
+    evaluaErrores: function evaluaErrores() {
+      var hasErrors = false;
 
-      if (this.incidencia.adreca == null || this.incidencia.descripcio == null || this.municipi.id == null) {
-        if (this.incidencia.adreca == null) {
-          this.errors.push("Cal introduir l'adreça de l'incident");
-        }
-
-        if (this.incidencia.descripcio == null) {
-          this.errors.push("Cal introduir la descripció de l'incident");
-        }
-
+      if (this.alertanteConocido == false) {
         if (this.municipi.id == null) {
+          hasErrors = true;
           this.errors.push("Cal introduir el municipi de l'incident");
         }
-      } else {
-        respuesta = true;
-        this.insertIncidencia = {
-          "data": this.incidencia.data,
-          "hora": this.incidencia.hora,
-          "telefon_alertant": this.alertantNumber,
-          "adreca": this.incidencia.adreca,
-          "adreca_complement": this.incidencia.adreca_complement,
-          "descripcio": this.incidencia.descripcio,
-          "nom_metge": this.incidencia.nom_metge,
-          "tipus_incidencies_id": Number(this.incidencia.tipus_incidencies_id),
-          "alertants_id": this.alertantDB.id,
-          "municipis_id": this.municipi.id,
-          "usuaris_id": this.userid,
-          "recursos": []
-        };
       }
 
-      return respuesta;
+      if (this.activaRecurs == true && !this.afectatSelected.length > 0) {
+        hasErrors = true;
+        this.errors.push("Cal despatxar algun recurs o desactivar l'opcio d'assignar recurs");
+      }
+
+      if (this.incidencia.adreca == null) {
+        hasErrors = true;
+        this.errors.push("Cal introduir l'adreça de l'incident");
+      }
+
+      if (this.incidencia.descripcio == null) {
+        hasErrors = true;
+        this.errors.push("Cal introduir la descripció de l'incident");
+      }
+
+      return hasErrors;
+    },
+    evaluaInsertIncidencia: function evaluaInsertIncidencia() {
+      this.insertIncidencia = {
+        "data": this.incidencia.data,
+        "hora": this.incidencia.hora,
+        "telefon_alertant": this.alertantNumber,
+        "adreca": this.incidencia.adreca,
+        "adreca_complement": this.incidencia.adreca_complement,
+        "descripcio": this.incidencia.descripcio,
+        "nom_metge": this.incidencia.nom_metge,
+        "tipus_incidencies_id": Number(this.incidencia.tipus_incidencies_id),
+        "alertants_id": this.alertantDB.id,
+        "municipis_id": this.municipi.id,
+        "usuaris_id": this.userid,
+        "recursos": []
+      };
     },
     // Control de Insert de la Incidencia
     evaluarIncidencia: function evaluarIncidencia() {
       var _this6 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
-        var me, afectatsInsert, _me;
-
+        var me, afectatsInsert;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
                 _this6.errors = [];
-                /* Control insert afectats */
+
+                if (_this6.evaluaErrores()) {
+                  _context5.next = 28;
+                  break;
+                }
 
                 if (!(_this6.activaRecurs == true)) {
-                  _context5.next = 17;
+                  _context5.next = 20;
                   break;
                 }
 
                 if (!(_this6.afectatSelected.length > 0)) {
-                  _context5.next = 14;
+                  _context5.next = 18;
                   break;
                 }
 
-                // Si realmente hay recursos asignados
+                // Si realmente hay recursos asignados (NO CAL!)
                 me = _this6;
 
                 _this6.afectatSelected.forEach( /*#__PURE__*/function () {
@@ -3546,10 +3556,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   };
                 }());
 
-                _context5.next = 7;
+                _context5.next = 8;
                 return _this6.selectAfectats();
 
-              case 7:
+              case 8:
                 console.log(_this6.afectatsDB);
 
                 _this6.recursos.forEach(function (recurs, indexRecurs) {
@@ -3565,82 +3575,67 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                       me.recursos[indexRecurs].afectats[indexAfectat].id = me.afectatsDB.length - (me.recursos[indexRecurs].afectats.length - indexAfectat);
                     }
                   });
-                }); //     this.afectatSelected.forEach(function(afectat, index){ // Asignando id de la bd a los afectados
-                //         let indexAfectatDB = me.afectatsDB.findIndex(obj => (obj.nom == afectat.nom && obj.cognoms == afectat.cognoms && obj.sexes_id == afectat.sexes_id && obj.edat == afectat.edat));
-                //         if(indexAfectatDB >= 0){
-                //             me.afectatSelected[index].id = me.afectatsDB[indexAfectatDB].id;
-                //         }
-                //         else{
-                //             me.afectatSelected[index].id = me.afectatsDB.length-(me.afectatSelected.length - index);
-                //         }
-                //    });
-
+                });
                 /* Insert de la incidencia con recursos */
 
 
-                _context5.next = 11;
+                _context5.next = 12;
                 return _this6.evaluaInsertAlertantes();
 
-              case 11:
-                if (_this6.evaluaInsertIncidencia()) {
-                  afectatsInsert = [];
-                  _me = _this6;
-
-                  _this6.recursos.forEach(function (recurso) {
-                    // Recopilando objetos de recursos con afectados en un array
-                    recurso.afectats.forEach(function (afectat) {
-                      var afectatInsert = {
-                        "recursos_id": null,
-                        "afectats_id": null,
-                        "prioritat": null,
-                        "hora_activacio": null
-                      };
-                      afectatInsert.recursos_id = afectat.recurs_id;
-                      afectatInsert.afectats_id = afectat.id;
-
-                      var indexRecurs = _me.incidencies_has_recursos_array.findIndex(function (obj) {
-                        return obj.recursos_id == afectat.recurs_id;
-                      });
-
-                      afectatInsert.prioritat = _me.incidencies_has_recursos_array[indexRecurs].prioritat;
-                      afectatInsert.hora_activacio = _me.incidencies_has_recursos_array[indexRecurs].hora_activacio;
-                      afectatsInsert.push(afectatInsert);
-                    });
-                  });
-
-                  _this6.insertIncidencia.recursos = afectatsInsert;
-
-                  _this6.insertarIncidencia();
-
-                  _this6.updateRecursos();
-                }
-
-                _context5.next = 15;
-                break;
-
-              case 14:
-                _this6.errors.push("Cal despatxar algun recurs o desactivar l'opcio d'assignar recurs");
-
-              case 15:
-                _context5.next = 24;
-                break;
-
-              case 17:
-                _context5.next = 19;
-                return _this6.evaluaInsertAlertantes();
-
-              case 19:
+              case 12:
                 _this6.evaluaInsertIncidencia();
 
-                _context5.next = 22;
-                return _this6.insertAfectatsSinRecurso();
+                afectatsInsert = [];
 
-              case 22:
+                _this6.recursos.forEach(function (recurso) {
+                  // Recopilando objetos de recursos con afectados en un array
+                  recurso.afectats.forEach(function (afectat) {
+                    var afectatInsert = {
+                      "recursos_id": null,
+                      "afectats_id": null,
+                      "prioritat": null,
+                      "hora_activacio": null
+                    };
+                    afectatInsert.recursos_id = afectat.recurs_id;
+                    afectatInsert.afectats_id = afectat.id;
+                    var indexRecurs = me.incidencies_has_recursos_array.findIndex(function (obj) {
+                      return obj.recursos_id == afectat.recurs_id;
+                    });
+                    afectatInsert.prioritat = me.incidencies_has_recursos_array[indexRecurs].prioritat;
+                    afectatInsert.hora_activacio = me.incidencies_has_recursos_array[indexRecurs].hora_activacio;
+                    afectatsInsert.push(afectatInsert);
+                  });
+                });
+
+                _this6.insertIncidencia.recursos = afectatsInsert;
+
                 _this6.insertarIncidencia();
 
                 _this6.updateRecursos();
 
-              case 24:
+              case 18:
+                _context5.next = 27;
+                break;
+
+              case 20:
+                _context5.next = 22;
+                return _this6.evaluaInsertAlertantes();
+
+              case 22:
+                _this6.evaluaInsertIncidencia();
+
+                _context5.next = 25;
+                return _this6.insertAfectatsSinRecurso();
+
+              case 25:
+                _this6.insertarIncidencia();
+
+                _this6.updateRecursos();
+
+              case 27:
+                location.reload();
+
+              case 28:
               case "end":
                 return _context5.stop();
             }
@@ -3753,6 +3748,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 me = _this10;
                 return _context9.abrupt("return", _this10.alertants.forEach(function (alertant) {
                   if (alertant.telefon == me.alertantNumber) {
+                    // Se supone que el telefono es unico pero se puede confundir con un alertante registrado
                     me.alertantDB = alertant;
                     me.alertanteConocido = true;
                     me.incidencia.adreca = alertant.adreca;
@@ -4332,15 +4328,14 @@ __webpack_require__.r(__webpack_exports__);
       municipis: [],
       alertants: [],
       tipusIncidencies: [],
-      tipusAlertants: [],
-      Alertants: []
+      tipusAlertants: []
     };
   },
   methods: {
     selectIncidencies: function selectIncidencies() {
       var me = this;
       axios.get('/SGTA-Broggi/public/api/incidencia').then(function (response) {
-        me.incidencies = resposne.data;
+        me.incidencies = response.data;
       })["catch"](function (error) {
         console.log(error);
       });
@@ -4415,19 +4410,24 @@ __webpack_require__.r(__webpack_exports__);
     },
     getTipusAlertant: function getTipusAlertant(index) {
       var alertant_id = this.incidencies[index].alertants_id;
+      console.log(alertant_id);
       var indexAlertant = this.alertants.findIndex(function (obj) {
         return obj.id == alertant_id;
       });
+      console.log(indexAlertant);
       var alertantTipus = this.alertants[indexAlertant].tipus_alertants_id;
+      console.log(alertantTipus);
       var tipusAlertant_index = this.tipusAlertants.findIndex(function (obj) {
         return obj.id == alertantTipus;
       });
+      console.log(tipusAlertant_index);
       var tipusAlertant_nom = this.tipusAlertants[tipusAlertant_index].tipus;
+      console.log(tipusAlertant_nom);
       return tipusAlertant_nom;
     }
   },
   created: function created() {
-    this.selectIncidencies(), this.selectMunicipis();
+    this.selectIncidencies(), this.selectMunicipis(), this.selectAlertant(), this.selectTipusAlertant(), this.selectTipusIncidencia();
   },
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -10048,7 +10048,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nmain[data-v-6504f867] {\n  margin-top: 1.4vh;\n  color: black;\n  font-family: 'Rubik', sans-serif;\n  font-size: 15px;\n}\n#infoCard[data-v-6504f867] {\n  height: 65vh;\n  color: black;\n}\n#botones[data-v-6504f867] {\n  height: 28vh;\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#infoHeader[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n  font-size: 1.2em;\n  font-weight: bold;\n  margin-right: -0.5px;\n  border-bottom: 1px solid black;\n  background-color: #15acc4;\n}\nbutton[data-v-6504f867] {\n  background-color: #e3177d;\n  font-size: 0.9em;\n  color: white;\n  border-radius: 4px;\n}\n.card[data-v-6504f867] {\n  border: 1px solid black;\n}\n#transportHeader[data-v-6504f867] {\n  background-color: #15acc4;\n  font-weight: bold;\n  padding: 6px 20px;\n  text-align: center;\n}\n#leftButtons[data-v-6504f867] {\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n}\n#assistencia[data-v-6504f867]{\n    opacity: .4;\n}\n#checkTransport[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: center;\n  align-items: center;\n  opacity: .4;\n  /* margin-left: -80px; */\n}\n#checkTransport button[data-v-6504f867] {\n  padding: 10px 4px;\n  height: 100%;\n}\n#transportButton[data-v-6504f867] {\n  background-color: #e3177d;\n}\n#transportButtons[data-v-6504f867] {\n  height: 100%;\n  opacity: .4;\n}\n.visible[data-v-6504f867]{\n    opacity: 1 !important;\n}\n#transportForm[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#botonsTransport[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  width: 100%;\n  justify-content: space-between;\n}\n.button[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  /* align-items: center; */\n}\n#direccioHospital[data-v-6504f867] {\n  width: 100%;\n}\n#map[data-v-6504f867] {\n  height: 65%;\n  background-color: black;\n}\n#info[data-v-6504f867] {\n  height: 20%;\n  margin-top: 4%;\n  display: flex;\n  flex-direction: row;\n  justify-content: space-around;\n  flex-wrap: nowrap;\n  /* font-weight: bold; */\n}\n.boldInfo[data-v-6504f867]{\n    font-weight: bold;\n}\n#infoFields[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n  padding-right: 0;\n}\n.infobox[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  text-align: justify;\n}\n.infobox > div[data-v-6504f867] {\n  background-color: #15acc4;\n  border: 1px solid black;\n}\n#descripcion[data-v-6504f867],\n#direccion[data-v-6504f867] {\n  background-color: white;\n}\n#masInfo[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  vertical-align: center;\n}\n#masInfo > button[data-v-6504f867] {\n  padding: 10px 20px;\n  margin-left: -50px;\n  color: black;\n}\n.modal-header[data-v-6504f867]{\n    font-weight: bold;\n    background-color: #15acc4;\n}\n#alta[data-v-6504f867]{\n    opacity: 1 !important;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nmain[data-v-6504f867] {\r\n  margin-top: 1.4vh;\r\n  color: black;\r\n  font-family: 'Rubik', sans-serif;\r\n  font-size: 15px;\n}\n#infoCard[data-v-6504f867] {\r\n  height: 65vh;\r\n  color: black;\n}\n#botones[data-v-6504f867] {\r\n  height: 28vh;\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-around;\r\n  align-items: center;\n}\n#infoHeader[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-between;\r\n  font-size: 1.2em;\r\n  font-weight: bold;\r\n  margin-right: -0.5px;\r\n  border-bottom: 1px solid black;\r\n  background-color: #15acc4;\n}\nbutton[data-v-6504f867] {\r\n  background-color: #e3177d;\r\n  font-size: 0.9em;\r\n  color: white;\r\n  border-radius: 4px;\n}\n.card[data-v-6504f867] {\r\n  border: 1px solid black;\n}\n#transportHeader[data-v-6504f867] {\r\n  background-color: #15acc4;\r\n  font-weight: bold;\r\n  padding: 6px 20px;\r\n  text-align: center;\n}\n#leftButtons[data-v-6504f867] {\r\n  height: 100%;\r\n  display: flex;\r\n  flex-direction: column;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-around;\n}\n#assistencia[data-v-6504f867]{\r\n    opacity: .4;\n}\n#checkTransport[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  flex-wrap: nowrap;\r\n  justify-content: center;\r\n  align-items: center;\r\n  opacity: .4;\r\n  /* margin-left: -80px; */\n}\n#checkTransport button[data-v-6504f867] {\r\n  padding: 10px 4px;\r\n  height: 100%;\n}\n#transportButton[data-v-6504f867] {\r\n  background-color: #e3177d;\n}\n#transportButtons[data-v-6504f867] {\r\n  height: 100%;\r\n  opacity: .4;\n}\n.visible[data-v-6504f867]{\r\n    opacity: 1 !important;\n}\n#transportForm[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: wrap;\r\n  justify-content: space-around;\r\n  align-items: center;\n}\n#botonsTransport[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  width: 100%;\r\n  justify-content: space-between;\n}\n.button[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  /* align-items: center; */\n}\n#direccioHospital[data-v-6504f867] {\r\n  width: 100%;\n}\n#map[data-v-6504f867] {\r\n  height: 65%;\r\n  background-color: black;\n}\n#info[data-v-6504f867] {\r\n  height: 20%;\r\n  margin-top: 4%;\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: space-around;\r\n  flex-wrap: nowrap;\r\n  /* font-weight: bold; */\n}\n.boldInfo[data-v-6504f867]{\r\n    font-weight: bold;\n}\n#infoFields[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: space-around;\r\n  padding-right: 0;\n}\n.infobox[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  align-items: center;\r\n  text-align: justify;\n}\n.infobox > div[data-v-6504f867] {\r\n  background-color: #15acc4;\r\n  border: 1px solid black;\n}\n#descripcion[data-v-6504f867],\r\n#direccion[data-v-6504f867] {\r\n  background-color: white;\n}\n#masInfo[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: center;\r\n  vertical-align: center;\n}\n#masInfo > button[data-v-6504f867] {\r\n  padding: 10px 20px;\r\n  margin-left: -50px;\r\n  color: black;\n}\n.modal-header[data-v-6504f867]{\r\n    font-weight: bold;\r\n    background-color: #15acc4;\n}\n#alta[data-v-6504f867]{\r\n    opacity: 1 !important;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10120,7 +10120,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeNom {\n    width: 20vw;\n}\n.sizeCognom {\n    width: 20vw;\n}\n.sizeBotones {\n    width: 14vw;\n}\n.esborrarAlertantBtn {\n  background-color: #e3177d !important;\n  color: white !important;\n}\n.editarAlertantBtn {\n  background-color: #15acc4 !important;\n  color: black !important;\n}\n.editarAlertantBtn:hover {\n  color: black !important;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n.cerrarBtn:hover {\n  color: white;\n}\n@font-face {\n  font-family: myFont;\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\nh2{\n  font-family: myFont;\n  font-size: 1.3em;\n}\n\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeNom {\r\n    width: 20vw;\n}\n.sizeCognom {\r\n    width: 20vw;\n}\n.sizeBotones {\r\n    width: 14vw;\n}\n.esborrarAlertantBtn {\r\n  background-color: #e3177d !important;\r\n  color: white !important;\n}\n.editarAlertantBtn {\r\n  background-color: #15acc4 !important;\r\n  color: black !important;\n}\n.editarAlertantBtn:hover {\r\n  color: black !important;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\n.cerrarBtn:hover {\r\n  color: white;\n}\n@font-face {\r\n  font-family: myFont;\r\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\nh2{\r\n  font-family: myFont;\r\n  font-size: 1.3em;\n}\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10144,7 +10144,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeBotones {\n    width: 14vw;\n}\n.esborrarRecursBtn {\n  background-color: #e3177d !important;\n  color: white !important;\n}\n.editarRecursBtn {\n  background-color: #15acc4 !important;\n  color: black !important;\n}\n.editarRecursBtn:hover {\n  color: black !important;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n.cerrarBtn:hover {\n  color: white;\n}\n@font-face {\n  font-family: myFont;\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\nh2{\n  font-family: myFont;\n  font-size: 1.3em;\n}\n\n/*NO SE BORRAN LOS MENSAJES Y AL CAMBIAR EL NOMBRE DE UN CÓDIGO, SE QUITA EL CHECKED*/\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeBotones {\r\n    width: 14vw;\n}\n.esborrarRecursBtn {\r\n  background-color: #e3177d !important;\r\n  color: white !important;\n}\n.editarRecursBtn {\r\n  background-color: #15acc4 !important;\r\n  color: black !important;\n}\n.editarRecursBtn:hover {\r\n  color: black !important;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\n.cerrarBtn:hover {\r\n  color: white;\n}\n@font-face {\r\n  font-family: myFont;\r\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\nh2{\r\n  font-family: myFont;\r\n  font-size: 1.3em;\n}\r\n\r\n/*NO SE BORRAN LOS MENSAJES Y AL CAMBIAR EL NOMBRE DE UN CÓDIGO, SE QUITA EL CHECKED*/\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10168,7 +10168,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeBotones {\n    width: 14vw;\n}\n.esborrarUsuariBtn {\n  background-color: #e3177d !important;\n  color: white !important;\n}\n.editarUsuariBtn {\n  background-color: #15acc4 !important;\n  color: black !important;\n}\n.editarUsuariBtn:hover {\n  color: black !important;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n.cerrarBtn:hover {\n  color: white;\n}\n@font-face {\n  font-family: myFont;\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\nh2{\n  font-family: myFont;\n  font-size: 1.3em;\n}\n\n\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeBotones {\r\n    width: 14vw;\n}\n.esborrarUsuariBtn {\r\n  background-color: #e3177d !important;\r\n  color: white !important;\n}\n.editarUsuariBtn {\r\n  background-color: #15acc4 !important;\r\n  color: black !important;\n}\n.editarUsuariBtn:hover {\r\n  color: black !important;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\n.cerrarBtn:hover {\r\n  color: white;\n}\n@font-face {\r\n  font-family: myFont;\r\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\nh2{\r\n  font-family: myFont;\r\n  font-size: 1.3em;\n}\r\n\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -47401,7 +47401,7 @@ var render = function() {
               },
               [_vm._v("×")]
             ),
-            _vm._v("\n    " + _vm._s(_vm.errorMessage) + "\n  ")
+            _vm._v("\r\n    " + _vm._s(_vm.errorMessage) + "\r\n  ")
           ]
         )
       : _vm._e(),
@@ -47421,7 +47421,7 @@ var render = function() {
               },
               [_vm._v("×")]
             ),
-            _vm._v("\n    " + _vm._s(_vm.infoMessage) + "\n  ")
+            _vm._v("\r\n    " + _vm._s(_vm.infoMessage) + "\r\n  ")
           ]
         )
       : _vm._e(),
@@ -47449,9 +47449,9 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [
                   _vm._v(
-                    "\n                " +
+                    "\r\n                " +
                       _vm._s(_vm.getMunicipi(index)) +
-                      "\n              "
+                      "\r\n              "
                   )
                 ]),
                 _vm._v(" "),
@@ -47770,9 +47770,9 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\n                      " +
+                                "\r\n                      " +
                                   _vm._s(municipi.nom) +
-                                  "\n                    "
+                                  "\r\n                    "
                               )
                             ]
                           )
@@ -47996,9 +47996,9 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [
                   _vm._v(
-                    "\n                " +
+                    "\r\n                " +
                       _vm._s(_vm.getTipusRecurs(index)) +
-                      "\n              "
+                      "\r\n              "
                   )
                 ]),
                 _vm._v(" "),
@@ -48288,9 +48288,9 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\n                      " +
+                                "\r\n                      " +
                                   _vm._s(tipusRecurs.tipus) +
-                                  "\n                    "
+                                  "\r\n                    "
                               )
                             ]
                           )
@@ -48477,7 +48477,7 @@ var render = function() {
               },
               [_vm._v("×")]
             ),
-            _vm._v("\n    " + _vm._s(_vm.errorMessage) + "\n  ")
+            _vm._v("\r\n    " + _vm._s(_vm.errorMessage) + "\r\n  ")
           ]
         )
       : _vm._e(),
@@ -48497,7 +48497,7 @@ var render = function() {
               },
               [_vm._v("×")]
             ),
-            _vm._v("\n    " + _vm._s(_vm.infoMessage) + "\n  ")
+            _vm._v("\r\n    " + _vm._s(_vm.infoMessage) + "\r\n  ")
           ]
         )
       : _vm._e(),
@@ -48525,9 +48525,9 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [
                   _vm._v(
-                    "\n                " +
+                    "\r\n                " +
                       _vm._s(_vm.getRol(index)) +
-                      "\n              "
+                      "\r\n              "
                   )
                 ]),
                 _vm._v(" "),
@@ -48851,9 +48851,9 @@ var render = function() {
                             { key: rol.id, domProps: { value: rol.id } },
                             [
                               _vm._v(
-                                "\n                    " +
+                                "\r\n                    " +
                                   _vm._s(rol.nom) +
-                                  "\n                  "
+                                  "\r\n                  "
                               )
                             ]
                           )

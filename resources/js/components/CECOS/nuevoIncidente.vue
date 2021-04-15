@@ -1259,110 +1259,102 @@ export default {
         }
         return null;
     },
+    evaluaErrores(){
+      let hasErrors = false;
+      if(this.alertanteConocido == false){
+        if(this.municipi.id == null){
+          hasErrors = true;
+          this.errors.push("Cal introduir el municipi de l'incident");
+        }
+      }
+      if(this.activaRecurs == true && !this.afectatSelected.length > 0){
+        hasErrors = true;
+        this.errors.push("Cal despatxar algun recurs o desactivar l'opcio d'assignar recurs");
+      }
+      if(this.incidencia.adreca == null){
+        hasErrors = true;
+        this.errors.push("Cal introduir l'adreça de l'incident");
+      }
+      if(this.incidencia.descripcio == null){
+        hasErrors = true;
+        this.errors.push("Cal introduir la descripció de l'incident");
+      }
+      return hasErrors;
+    },
     evaluaInsertIncidencia(){
-        let respuesta = false;
-        /* Control insert incidencia */
-        if(this.incidencia.adreca == null || this.incidencia.descripcio == null || this.municipi.id == null){
-            if(this.incidencia.adreca == null){
-                this.errors.push("Cal introduir l'adreça de l'incident");
-            }
-            if(this.incidencia.descripcio == null){
-                this.errors.push("Cal introduir la descripció de l'incident");
-            }
-            if(this.municipi.id == null){
-                this.errors.push("Cal introduir el municipi de l'incident");
-            }
-        }
-        else{
-            respuesta = true;
-            this.insertIncidencia = {
-                "data": this.incidencia.data,
-                "hora": this.incidencia.hora,
-                "telefon_alertant": this.alertantNumber,
-                "adreca": this.incidencia.adreca,
-                "adreca_complement": this.incidencia.adreca_complement,
-                "descripcio": this.incidencia.descripcio,
-                "nom_metge": this.incidencia.nom_metge,
-                "tipus_incidencies_id": Number(this.incidencia.tipus_incidencies_id),
-                "alertants_id": this.alertantDB.id,
-                "municipis_id": this.municipi.id,
-                "usuaris_id": this.userid,
-                "recursos": []
-            }
-        }
-        return respuesta;
+      this.insertIncidencia = {
+          "data": this.incidencia.data,
+          "hora": this.incidencia.hora,
+          "telefon_alertant": this.alertantNumber,
+          "adreca": this.incidencia.adreca,
+          "adreca_complement": this.incidencia.adreca_complement,
+          "descripcio": this.incidencia.descripcio,
+          "nom_metge": this.incidencia.nom_metge,
+          "tipus_incidencies_id": Number(this.incidencia.tipus_incidencies_id),
+          "alertants_id": this.alertantDB.id,
+          "municipis_id": this.municipi.id,
+          "usuaris_id": this.userid,
+          "recursos": []
+      };
     },
     // Control de Insert de la Incidencia
     async evaluarIncidencia(){
         this.errors = [];
-        /* Control insert afectats */
-        if(this.activaRecurs == true){ // Si se ha activado asignacion de recursos
-            if(this.afectatSelected.length > 0){ // Si realmente hay recursos asignados
-                let me = this;
-                this.afectatSelected.forEach(async function(afectat){
-                    await me.insertarAfectat(afectat);
+        if(!this.evaluaErrores()){
+          /* Control insert afectats */
+          if(this.activaRecurs == true){ // Si se ha activado asignacion de recursos
+              if(this.afectatSelected.length > 0){ // Si realmente hay recursos asignados (NO CAL!)
+                  let me = this;
+                  this.afectatSelected.forEach(async function(afectat){
+                      await me.insertarAfectat(afectat);
+                  });
+                  await this.selectAfectats();
+                  console.log(this.afectatsDB);
+                  this.recursos.forEach(function(recurs, indexRecurs){ // Asignando id de la bd a los afectados
+                      recurs.afectats.forEach(function(afectat, indexAfectat){
+                          let indexAfectatDB = me.afectatsDB.findIndex(obj => (obj.nom == afectat.nom && obj.cognoms == afectat.cognoms && obj.sexes_id == afectat.sexes_id && obj.edat == afectat.edat));
+                          if(indexAfectatDB >= 0){
+                              me.recursos[indexRecurs].afectats[indexAfectat].id = me.afectatsDB[indexAfectatDB].id;
+                          }
+                          else{
+                              me.recursos[indexRecurs].afectats[indexAfectat].id = me.afectatsDB.length-(me.recursos[indexRecurs].afectats.length - indexAfectat);
+                          }
+                      });
                 });
-                await this.selectAfectats();
-                console.log(this.afectatsDB);
-                this.recursos.forEach(function(recurs, indexRecurs){ // Asignando id de la bd a los afectados
-                    recurs.afectats.forEach(function(afectat, indexAfectat){
-                        let indexAfectatDB = me.afectatsDB.findIndex(obj => (obj.nom == afectat.nom && obj.cognoms == afectat.cognoms && obj.sexes_id == afectat.sexes_id && obj.edat == afectat.edat));
-                        if(indexAfectatDB >= 0){
-                            me.recursos[indexRecurs].afectats[indexAfectat].id = me.afectatsDB[indexAfectatDB].id;
-                        }
-                        else{
-                            me.recursos[indexRecurs].afectats[indexAfectat].id = me.afectatsDB.length-(me.recursos[indexRecurs].afectats.length - indexAfectat);
-                        }
+                /* Insert de la incidencia con recursos */
+                  await this.evaluaInsertAlertantes();
+                  this.evaluaInsertIncidencia()
+                    let afectatsInsert = [];
+                    this.recursos.forEach(function (recurso){ // Recopilando objetos de recursos con afectados en un array
+                        recurso.afectats.forEach(function (afectat){
+                            let afectatInsert = {
+                              "recursos_id": null,
+                              "afectats_id": null,
+                              "prioritat": null,
+                              "hora_activacio": null
+                            };
+                            afectatInsert.recursos_id = afectat.recurs_id;
+                            afectatInsert.afectats_id = afectat.id;
+                            let indexRecurs = me.incidencies_has_recursos_array.findIndex(obj => obj.recursos_id == afectat.recurs_id);
+                            afectatInsert.prioritat = me.incidencies_has_recursos_array[indexRecurs].prioritat;
+                            afectatInsert.hora_activacio = me.incidencies_has_recursos_array[indexRecurs].hora_activacio;
+                            afectatsInsert.push(afectatInsert);
+                        });
                     });
-               });
-            //     this.afectatSelected.forEach(function(afectat, index){ // Asignando id de la bd a los afectados
-            //         let indexAfectatDB = me.afectatsDB.findIndex(obj => (obj.nom == afectat.nom && obj.cognoms == afectat.cognoms && obj.sexes_id == afectat.sexes_id && obj.edat == afectat.edat));
-            //         if(indexAfectatDB >= 0){
-            //             me.afectatSelected[index].id = me.afectatsDB[indexAfectatDB].id;
-            //         }
-            //         else{
-            //             me.afectatSelected[index].id = me.afectatsDB.length-(me.afectatSelected.length - index);
-            //         }
-            //    });
-               /* Insert de la incidencia con recursos */
-                await this.evaluaInsertAlertantes();
-               if(this.evaluaInsertIncidencia()){
-                   let afectatsInsert = [];
-                   let me = this;
-                   this.recursos.forEach(function (recurso){ // Recopilando objetos de recursos con afectados en un array
-                       recurso.afectats.forEach(function (afectat){
-                           let afectatInsert = {
-                            "recursos_id": null,
-                            "afectats_id": null,
-                            "prioritat": null,
-                            "hora_activacio": null
-                           };
-                           afectatInsert.recursos_id = afectat.recurs_id;
-                           afectatInsert.afectats_id = afectat.id;
-                           let indexRecurs = me.incidencies_has_recursos_array.findIndex(obj => obj.recursos_id == afectat.recurs_id);
-                           afectatInsert.prioritat = me.incidencies_has_recursos_array[indexRecurs].prioritat;
-                           afectatInsert.hora_activacio = me.incidencies_has_recursos_array[indexRecurs].hora_activacio;
-                           afectatsInsert.push(afectatInsert);
-                       });
-                   });
-                   this.insertIncidencia.recursos = afectatsInsert;
-                   this.insertarIncidencia();
-                   this.updateRecursos();
-               }
-
-            }
-            else{
-                this.errors.push("Cal despatxar algun recurs o desactivar l'opcio d'assignar recurs")
-            }
+                    this.insertIncidencia.recursos = afectatsInsert;
+                    this.insertarIncidencia();
+                    this.updateRecursos();
+              }
+          }
+          else{ // Insert de la incidencia sin recursos
+              await this.evaluaInsertAlertantes();
+              this.evaluaInsertIncidencia();
+              await this.insertAfectatsSinRecurso();
+              this.insertarIncidencia();
+              this.updateRecursos();
+          }
+          location.reload();
         }
-        else{ // Insert de la incidencia sin recursos
-            await this.evaluaInsertAlertantes();
-            this.evaluaInsertIncidencia();
-            await this.insertAfectatsSinRecurso();
-            this.insertarIncidencia();
-            this.updateRecursos();
-        }
-
     },
     async insertAfectatsSinRecurso(){
         let me = this;
@@ -1412,7 +1404,7 @@ export default {
     async getAlertantData(){
         let me = this;
         return this.alertants.forEach(function(alertant){
-            if(alertant.telefon == me.alertantNumber){
+            if(alertant.telefon == me.alertantNumber){ // Se supone que el telefono es unico pero se puede confundir con un alertante registrado
                 me.alertantDB = alertant;
                 me.alertanteConocido = true;
                 me.incidencia.adreca = alertant.adreca;
