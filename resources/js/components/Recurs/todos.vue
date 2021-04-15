@@ -19,9 +19,10 @@
         <td>
           {{ getTipusIncidencia(index) }}
         </td>
-        <td></td>
+        <td>
+          {{ getTipusAlertant(index) }}
+        </td>
         <td>{{ incidencia.telefon_alertant }}</td>
-        <td></td>
       </tr>
     </tbody>
 </table>
@@ -44,6 +45,8 @@
           municipis: [],
           alertants: [],
           tipusIncidencies: [],
+          tipusAlertants: [],
+          Alertants: []
         }
       },
       methods:{
@@ -101,6 +104,37 @@
           }
 
           return tipusIncidencia_nom;
+        },
+        selectTipusAlertant() {
+          let me = this;
+          axios
+              .get("/SGTA-Broggi/public/api/tipusAlertant")
+              .then((response) => {
+                me.tipusAlertants = response.data;
+              }).catch((error) => {
+                console.log(error);
+              })
+        },
+        selectAlertant() {
+          let me = this;
+          axios
+              .get("/SGTA-Broggi/public/api/alertant")
+              .then((response) => {
+                me.alertants = response.data;
+              }).catch((error) => {
+                console.log(error);
+              })
+        },
+        getTipusAlertant(index) {
+          let alertant_id = this.incidencies[index].alertants_id;
+          let indexAlertant = this.alertants.findIndex(obj => obj.id == alertant_id);
+          let alertantTipus = this.alertants[indexAlertant].tipus_alertants_id;
+          let tipusAlertant_index = this.tipusAlertants.findIndex(obj => obj.id == alertantTipus);
+
+          let tipusAlertant_nom = this.tipusAlertants[tipusAlertant_index].tipus;
+
+          return tipusAlertant_nom;
+
         }
       },
       created(){
