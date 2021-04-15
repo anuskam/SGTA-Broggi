@@ -200,8 +200,8 @@ export default {
     float: right;
     position: absolute;
     background-color: green !important;
-    bottom: 10px;
-    right: 10px;
+    top: 90px;
+    right: 20px;
   }
 
   .todoFormacion {

@@ -4321,33 +4321,113 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      cicles: [],
-      cicle: {
-        id: '',
-        sigles: '',
-        nom: '',
-        descripcio: '',
-        actiu: false
+      incidencies: [],
+      incidencia: {
+        data: '',
+        municipis_id: null,
+        tipus_incidencies_id: null,
+        alertants_id: null,
+        telefon_alertant: ''
       },
-      insert: true
+      municipis: [],
+      alertants: [],
+      tipusIncidencies: [],
+      tipusAlertants: [],
+      Alertants: []
     };
   },
   methods: {
-    selectCicles: function selectCicles() {
-      var _this = this;
-
+    selectIncidencies: function selectIncidencies() {
       var me = this;
-      axios.get('/SGTA-Broggi/public/api/cicle').then(function (response) {
-        me.cicles = response.data;
+      axios.get('/SGTA-Broggi/public/api/incidencia').then(function (response) {
+        me.incidencies = resposne.data;
       })["catch"](function (error) {
         console.log(error);
-      })["finally"](function () {
-        return _this.loading = false;
       });
+    },
+    selectMunicipis: function selectMunicipis() {
+      var me = this;
+      axios.get("/SGTA-Broggi/public/api/municipi").then(function (response) {
+        me.municipis = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    getMunicipi: function getMunicipi(index) {
+      var _this = this;
+
+      var municipi = this.municipis.find(function (obj) {
+        return obj.id == _this.incidencies[index].municipis_id;
+      });
+      var municipi_nom;
+
+      if (municipi != null) {
+        municipi_nom = municipi.nom;
+      } else {
+        municipi_nom = this.municipis.find(function (obj) {
+          return obj.id == 1;
+        });
+      }
+
+      return municipi_nom;
+    },
+    selectTipusIncidencia: function selectTipusIncidencia() {
+      var me = this;
+      axios.get("/SGTA-Broggi/public/api/tipusIncidencia").then(function (response) {
+        me.tipusIncidencies = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    getTipusIncidencia: function getTipusIncidencia(index) {
+      var _this2 = this;
+
+      var tipusIncidencia = this.tipusIncidencies.find(function (obj) {
+        return obj.id == _this2.incidencies[index].tipus_incidencies_id;
+      });
+      var tipusIncidencia_nom;
+
+      if (tipusIncidencia != null) {
+        tipusIncidencia_nom = tipusIncidencia.tipus;
+      } else {
+        tipusIncidencia_nom = this.incidencies.find(function (obj) {
+          return obj.id == 1;
+        });
+      }
+
+      return tipusIncidencia_nom;
+    },
+    selectTipusAlertant: function selectTipusAlertant() {
+      var me = this;
+      axios.get("/SGTA-Broggi/public/api/tipusAlertant").then(function (response) {
+        me.tipusAlertants = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    selectAlertant: function selectAlertant() {
+      var me = this;
+      axios.get("/SGTA-Broggi/public/api/alertant").then(function (response) {
+        me.alertants = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    getTipusAlertant: function getTipusAlertant(index) {
+      var alertant_id = this.incidencies[index].alertants_id;
+      var indexAlertant = this.alertants.findIndex(function (obj) {
+        return obj.id == alertant_id;
+      });
+      var alertantTipus = this.alertants[indexAlertant].tipus_alertants_id;
+      var tipusAlertant_index = this.tipusAlertants.findIndex(function (obj) {
+        return obj.id == alertantTipus;
+      });
+      var tipusAlertant_nom = this.tipusAlertants[tipusAlertant_index].tipus;
+      return tipusAlertant_nom;
     }
   },
   created: function created() {
-    this.selectCicles();
+    this.selectIncidencies(), this.selectMunicipis();
   },
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -4636,6 +4716,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -4644,7 +4737,8 @@ __webpack_require__.r(__webpack_exports__);
         telefon: '',
         nom: '',
         cognoms: '',
-        adreca: ''
+        adreca: '',
+        municipis_id: null
       },
       municipis: [],
       insert: true,
@@ -4711,22 +4805,18 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     selectMunicipis: function selectMunicipis() {
-      var _this = this;
-
       var me = this;
       axios.get("/SGTA-Broggi/public/api/municipi").then(function (response) {
         me.municipis = response.data;
       })["catch"](function (error) {
         console.log(error);
-      })["finally"](function () {
-        return _this.loading = false;
       });
     },
     getMunicipi: function getMunicipi(index) {
-      var _this2 = this;
+      var _this = this;
 
       var municipi = this.municipis.find(function (obj) {
-        return obj.id == _this2.alertants[index].municipis_id;
+        return obj.id == _this.alertants[index].municipis_id;
       });
       var municipi_nom;
 
@@ -4776,7 +4866,252 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      recursos: [],
+      recurs: {
+        codi: '',
+        actiu: true,
+        tipus_recursos_id: ''
+      },
+      tipusRecursos: [],
+      insert: true,
+      errorMessage: '',
+      infoMessage: ''
+    };
+  },
+  methods: {
+    selectRecursos: function selectRecursos() {
+      var me = this;
+      axios.get('/SGTA-Broggi/public/api/recurs').then(function (response) {
+        me.recursos = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    confirmDeleteRecurs: function confirmDeleteRecurs(recurs) {
+      this.recurs = recurs;
+      $('#deleteModalRecurs').modal('show');
+    },
+    deleteRecurs: function deleteRecurs() {
+      var me = this;
+      axios["delete"]('/SGTA-Broggi/public/api/recurs/' + me.recurs.id).then(function (response) {
+        console.log(response);
+        me.infoMessage = response.data.missatge;
+        me.selectRecursos();
+        $('#deleteModalRecurs').modal('hide');
+      })["catch"](function (error) {
+        me.errorMessage = error.response.data.error;
+        $('#deleteModalRecurs').modal('hide');
+      });
+    },
+    createRecurs: function createRecurs() {
+      this.insert = true;
+      $('#recursModal').modal('show');
+    },
+    insertRecurs: function insertRecurs() {
+      var me = this;
+      axios.post('/SGTA-Broggi/public/api/recurs', me.recurs).then(function (response) {
+        console.log(repsonse);
+        me.selectRecursos();
+        $('#recursModal').modal('hide');
+      })["catch"](function (error) {
+        console.log(error.response.status);
+        console.log(error.response.data);
+        me.errorMessage = error.response.data.error;
+      });
+    },
+    editRecurs: function editRecurs(recurs) {
+      this.insert = false;
+      this.recurs = recurs;
+      $('#recursModal').modal('show');
+    },
+    updateRecurs: function updateRecurs() {
+      var me = this;
+      axios.put('/SGTA-Broggi/public/api/recurs/' + me.recurs.id, me.recurs).then(function (response) {
+        console.log(response);
+        me.selectRecursos();
+        $('#recursModal').modal('hide');
+      })["catch"](function (error) {
+        console.log(error.response.status);
+        console.log(error.response.data);
+        me.errorMessage = error.response.data.error;
+      });
+    },
+    selectTipusRecursos: function selectTipusRecursos() {
+      var _this = this;
+
+      var me = this;
+      axios.get("/SGTA-Broggi/public/api/tipusRecurs").then(function (response) {
+        me.tipusRecursos = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      })["finally"](function () {
+        return _this.loading = false;
+      });
+    },
+    getTipusRecurs: function getTipusRecurs(index) {
+      var _this2 = this;
+
+      var tipusRecurs = this.tipusRecursos.find(function (obj) {
+        return obj.id == _this2.recursos[index].tipus_recursos_id;
+      });
+      var tipusRecursos_tipus;
+
+      if (tipusRecurs != null) {
+        tipusRecursos_tipus = tipusRecurs.tipus;
+      } else {
+        tipusRecursos_tipus = this.tipusRecursos.find(function (obj) {
+          return obj.id == 1;
+        });
+      }
+
+      return tipusRecursos_tipus;
+    }
+  },
+  created: function created() {
+    this.selectRecursos(), this.selectTipusRecursos();
+  },
   mounted: function mounted() {
     console.log('Component mounted.');
   }
@@ -4809,7 +5144,236 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      usuaris: [],
+      usuari: {
+        username: '',
+        email: '',
+        nom: '',
+        cognoms: '',
+        rols_id: null
+      },
+      rols: [],
+      insert: true,
+      errorMessage: '',
+      infoMessage: ''
+    };
+  },
+  methods: {
+    selectUsuaris: function selectUsuaris() {
+      var me = this;
+      axios.get('/SGTA-Broggi/public/api/usuari').then(function (response) {
+        me.usuaris = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    confirmDeleteUsuari: function confirmDeleteUsuari(usuari) {
+      this.usuari = usuari;
+      $('#deleteModalUsuari').modal('show');
+    },
+    deleteUsuari: function deleteUsuari() {
+      var me = this;
+      axios["delete"]('/SGTA-Broggi/public/api/usuari/' + me.usuari.id).then(function (response) {
+        console.log(response);
+        me.infoMessage = response.data.missatge;
+        me.selectUsuaris();
+        $('#deleteModalUsuari').modal('hide');
+      })["catch"](function (error) {
+        me.errorMessage = error.response.data.error;
+        $('#deleteModalUsuari').modal('hide');
+      });
+    },
+    createUsuari: function createUsuari() {
+      this.insert = true;
+      $('#usuariModal').modal('show');
+    },
+    insertUsuari: function insertUsuari() {
+      var me = this;
+      axios.post('/SGTA-Broggi/public/api/usuari', me.usuari).then(function (response) {
+        console.log(repsonse);
+        me.selectUsuaris();
+        $('#usuariModal').modal('hide');
+      })["catch"](function (error) {
+        console.log(error.response.status);
+        console.log(error.response.data);
+        me.errorMessage = error.response.data.error;
+      });
+    },
+    editUsuari: function editUsuari(usuari) {
+      this.insert = false;
+      this.usuari = usuari;
+      $('#usuariModal').modal('show');
+    },
+    updateUsuari: function updateUsuari() {
+      var me = this;
+      axios.put('/SGTA-Broggi/public/api/usuari/' + me.usuari.id, me.usuari).then(function (response) {
+        console.log(response);
+        me.selectUsuaris();
+        $('#usuariModal').modal('hide');
+      })["catch"](function (error) {
+        console.log(error.response.status);
+        console.log(error.response.data);
+        me.errorMessage = error.response.data.error;
+      });
+    },
+    selectRols: function selectRols() {
+      var _this = this;
+
+      var me = this;
+      axios.get("/SGTA-Broggi/public/api/rol").then(function (response) {
+        me.rols = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      })["finally"](function () {
+        return _this.loading = false;
+      });
+    },
+    getRol: function getRol(index) {
+      var _this2 = this;
+
+      var rol = this.rols.find(function (obj) {
+        return obj.id == _this2.usuaris[index].rols_id;
+      });
+      var rol_nom;
+
+      if (rol != null) {
+        rol_nom = rol.nom;
+      } else {
+        rol_nom = this.rols.find(function (obj) {
+          return obj.id == 1;
+        });
+      }
+
+      return rol_nom;
+    }
+  },
+  created: function created() {
+    this.selectUsuaris(), this.selectRols();
+  },
   mounted: function mounted() {
     console.log('Component mounted.');
   }
@@ -9416,7 +9980,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nul li {\n  list-style: none;\n}\n#contenedor {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: center;\n}\n#questions {\n  color: black;\n}\n.correcta {\n  background-color: green !important;\n}\n.incorrecta {\n  background-color: red !important;\n}\n#contador {\n  float: right;\n  position: absolute;\n  background-color: green !important;\n  bottom: 10px;\n  right: 10px;\n}\n.todoFormacion {\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: center;\n}\n.controlVideo {\n  display: flex;\n  flex-direction: row;\n}\n#reproducir {\n  width: 110px;\n  height: 35px;\n  color: black;\n  padding: 0;\n}\n#barra {\n  position: relative;\n  float: left;\n  width: 485px;\n  height: 17px;\n  border: 1px solid #CCCCCC;\n  background: #EEEEEE;\n  margin-top: 17px;\n  margin-left: 5px;\n}\n#progreso {\n  position: absolute;\n  width: 0px;\n  top: 0;\n  height: 16px;\n  background: rgba(0,0,150,.2);\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nul li {\n  list-style: none;\n}\n#contenedor {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: center;\n}\n#questions {\n  color: black;\n}\n.correcta {\n  background-color: green !important;\n}\n.incorrecta {\n  background-color: red !important;\n}\n#contador {\n  float: right;\n  position: absolute;\n  background-color: green !important;\n  top: 90px;\n  right: 20px;\n}\n.todoFormacion {\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: center;\n}\n.controlVideo {\n  display: flex;\n  flex-direction: row;\n}\n#reproducir {\n  width: 110px;\n  height: 35px;\n  color: black;\n  padding: 0;\n}\n#barra {\n  position: relative;\n  float: left;\n  width: 485px;\n  height: 17px;\n  border: 1px solid #CCCCCC;\n  background: #EEEEEE;\n  margin-top: 17px;\n  margin-left: 5px;\n}\n#progreso {\n  position: absolute;\n  width: 0px;\n  top: 0;\n  height: 16px;\n  background: rgba(0,0,150,.2);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -9440,7 +10004,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
+<<<<<<< HEAD
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.btn {\n    font-size: 15px;\n}\n.btn-secondary:not(:disabled):not(.disabled).active,\n.btn-secondary:not(:disabled):not(.disabled):active,\n.show > .btn-secondary.dropdown-toggle {\n  background-color: #e3177d;\n  border-color: black;\n}\n.btn-secondary {\n  border-color: black;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.parentGrid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n.card-header {\n  background-color: #15acc4;\n  border: 1px solid black;\n  border-left: 0;\n  border-right: 0;\n  margin-top: -1px;\n}\n.modal-header{\n    background-color: #15acc4 !important;\n}\n.card {\n  border: 1px solid black !important;\n}\nbutton {\n  background-color: #e3177d !important;\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\n  color: black;\n  font-weight: bold;\n  background-color: #15acc4 !important;\n}\n.tabButton{\n    background-color: white !important;\n    border: 0 !important;\n}\n.selectedTab{\n    background-color: #e3177d !important;\n    border: 1px solid black !important;\n}\n.green{\n    background-color: green;\n    color: white;\n}\n.red{\n    background-color: red;\n    color: white;\n}\n#entregar{\n  border: 1px solid black;\n}\n#titulitosTabs {\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n.iconNavPrincipal{\n    color: black;\n}\n#titulito {\n    font-family: 'Signika', sans-serif;\n    font-size: 18px;\n}\n.hidden{\n    visibility: hidden;\n}\n#buscadorTelefono > input{\n    border: 1px solid black;\n}\n.arrowNav{\n    height: 8vh;\n}\n\n", ""]);
+=======
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn {\n    font-size: 15px;\n}\n.btn-secondary:not(:disabled):not(.disabled).active,\n.btn-secondary:not(:disabled):not(.disabled):active,\n.show > .btn-secondary.dropdown-toggle {\n  background-color: #e3177d;\n  border-color: black;\n}\n.btn-secondary {\n  border-color: black;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.parentGrid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n.card-header {\n  background-color: #15acc4;\n  border: 1px solid black;\n  border-left: 0;\n  border-right: 0;\n  margin-top: -1px;\n}\n.modal-header{\n    background-color: #15acc4 !important;\n}\n.card {\n  border: 1px solid black !important;\n}\nbutton {\n  background-color: #e3177d !important;\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\n  color: black;\n  font-weight: bold;\n  background-color: #15acc4 !important;\n}\n.tabButton{\n    background-color: white !important;\n    border: 0 !important;\n}\n.selectedTab{\n    background-color: #e3177d !important;\n    border: 1px solid black !important;\n}\n.green{\n    background-color: green;\n    color: white;\n}\n.red{\n    background-color: red;\n    color: white;\n}\n#entregar{\n  border: 1px solid black;\n}\n#titulitosTabs {\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n.iconNavPrincipal{\n    color: black;\n}\n#titulito {\n    font-family: 'Signika', sans-serif;\n    font-size: 1.3em;\n}\n.hidden{\n    visibility: hidden;\n}\n#buscadorTelefono > input{\n    border: 1px solid black;\n}\n.arrowNav{\n    height: 8vh;\n}\n\n", ""]);
+>>>>>>> 87f03d5fb668f103fd0f6f65b27da196b6bcf0f7
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -9464,7 +10032,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nmain[data-v-6504f867] {\n  margin-top: 1.4vh;\n  color: black;\n  font-family: 'Rubik', sans-serif;\n  font-size: 15px;\n}\n#infoCard[data-v-6504f867] {\n  height: 65vh;\n  color: black;\n}\n#botones[data-v-6504f867] {\n  height: 28vh;\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#infoHeader[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n  font-size: 1.2em;\n  font-weight: bold;\n  margin-right: -0.5px;\n  border-bottom: 1px solid black;\n  background-color: #15acc4;\n}\nbutton[data-v-6504f867] {\n  background-color: #e3177d;\n  font-weight: bold;\n  font-size: 0.9em;\n  color: black;\n}\n.card[data-v-6504f867] {\n  border: 1px solid black;\n}\n#transportHeader[data-v-6504f867] {\n  background-color: #15acc4;\n  font-weight: bold;\n  padding: 6px 20px;\n  text-align: center;\n}\n#leftButtons[data-v-6504f867] {\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n}\n#assistencia[data-v-6504f867]{\n    opacity: .4;\n}\n#checkTransport[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: center;\n  align-items: center;\n  opacity: .4;\n  /* margin-left: -80px; */\n}\n#checkTransport button[data-v-6504f867] {\n  padding: 10px 4px;\n  height: 100%;\n}\n#transportButton[data-v-6504f867] {\n  background-color: #e3177d;\n}\n#transportButtons[data-v-6504f867] {\n  height: 100%;\n  opacity: .4;\n}\n.visible[data-v-6504f867]{\n    opacity: 1 !important;\n}\n#transportForm[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#botonsTransport[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  width: 100%;\n  justify-content: space-between;\n}\n.button[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  /* align-items: center; */\n}\n#direccioHospital[data-v-6504f867] {\n  width: 100%;\n}\n#map[data-v-6504f867] {\n  height: 65%;\n  background-color: black;\n}\n#info[data-v-6504f867] {\n  height: 20%;\n  margin-top: 4%;\n  display: flex;\n  flex-direction: row;\n  justify-content: space-around;\n  flex-wrap: nowrap;\n  /* font-weight: bold; */\n}\n.boldInfo[data-v-6504f867]{\n    font-weight: bold;\n}\n#infoFields[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n  padding-right: 0;\n}\n.infobox[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  text-align: justify;\n}\n.infobox > div[data-v-6504f867] {\n  background-color: #15acc4;\n  border: 1px solid black;\n}\n#descripcion[data-v-6504f867],\n#direccion[data-v-6504f867] {\n  background-color: white;\n}\n#masInfo[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  vertical-align: center;\n}\n#masInfo > button[data-v-6504f867] {\n  padding: 10px 20px;\n  margin-left: -50px;\n}\n.modal-header[data-v-6504f867]{\n    font-weight: bold;\n    background-color: #15acc4;\n}\n#alta[data-v-6504f867]{\n    opacity: 1 !important;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nmain[data-v-6504f867] {\n  margin-top: 1.4vh;\n  color: black;\n  font-family: 'Rubik', sans-serif;\n  font-size: 15px;\n}\n#infoCard[data-v-6504f867] {\n  height: 65vh;\n  color: black;\n}\n#botones[data-v-6504f867] {\n  height: 28vh;\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#infoHeader[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n  font-size: 1.2em;\n  font-weight: bold;\n  margin-right: -0.5px;\n  border-bottom: 1px solid black;\n  background-color: #15acc4;\n}\nbutton[data-v-6504f867] {\n  background-color: #e3177d;\n  font-size: 0.9em;\n  color: white;\n  border-radius: 4px;\n}\n.card[data-v-6504f867] {\n  border: 1px solid black;\n}\n#transportHeader[data-v-6504f867] {\n  background-color: #15acc4;\n  font-weight: bold;\n  padding: 6px 20px;\n  text-align: center;\n}\n#leftButtons[data-v-6504f867] {\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n}\n#assistencia[data-v-6504f867]{\n    opacity: .4;\n}\n#checkTransport[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: center;\n  align-items: center;\n  opacity: .4;\n  /* margin-left: -80px; */\n}\n#checkTransport button[data-v-6504f867] {\n  padding: 10px 4px;\n  height: 100%;\n}\n#transportButton[data-v-6504f867] {\n  background-color: #e3177d;\n}\n#transportButtons[data-v-6504f867] {\n  height: 100%;\n  opacity: .4;\n}\n.visible[data-v-6504f867]{\n    opacity: 1 !important;\n}\n#transportForm[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#botonsTransport[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  width: 100%;\n  justify-content: space-between;\n}\n.button[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  /* align-items: center; */\n}\n#direccioHospital[data-v-6504f867] {\n  width: 100%;\n}\n#map[data-v-6504f867] {\n  height: 65%;\n  background-color: black;\n}\n#info[data-v-6504f867] {\n  height: 20%;\n  margin-top: 4%;\n  display: flex;\n  flex-direction: row;\n  justify-content: space-around;\n  flex-wrap: nowrap;\n  /* font-weight: bold; */\n}\n.boldInfo[data-v-6504f867]{\n    font-weight: bold;\n}\n#infoFields[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n  padding-right: 0;\n}\n.infobox[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  text-align: justify;\n}\n.infobox > div[data-v-6504f867] {\n  background-color: #15acc4;\n  border: 1px solid black;\n}\n#descripcion[data-v-6504f867],\n#direccion[data-v-6504f867] {\n  background-color: white;\n}\n#masInfo[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  vertical-align: center;\n}\n#masInfo > button[data-v-6504f867] {\n  padding: 10px 20px;\n  margin-left: -50px;\n  color: black;\n}\n.modal-header[data-v-6504f867]{\n    font-weight: bold;\n    background-color: #15acc4;\n}\n#alta[data-v-6504f867]{\n    opacity: 1 !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -9512,7 +10080,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#generarLlamada[data-v-c8f5811e]{\n  font-family: 'Signika', sans-serif;\n  font-size: 35px;\n  margin-top: 33vh;\n  background-color: #E2211D !important;\n}\n\n\n/* MOVIMIENTO BARRA DEBAJO DE ELEMENTOS DE NAVBAR */\n.borderLeftRight[data-v-c8f5811e] {\n  display: inline-block;\n  position: relative;\n  color: hsl(222, 25%, 14%);\n}\n.borderLeftRight[data-v-c8f5811e]::after {\n  content: '';\n  position: absolute;\n  width: 100%;\n  transform: scaleX(0);\n  height: 2px;\n  bottom: 0;\n  left: 0;\n  background-color: black;\n  transform-origin: bottom right;\n  transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);\n}\n.borderLeftRight[data-v-c8f5811e]:hover::after {\n  transform: scaleX(1);\n  transform-origin: bottom left;\n}\n/* FIN DE LO QUE HE COPIADO POR SI NO CONVENCE */\n.contenido[data-v-c8f5811e] {\n  font-size: 15px;\n  font-family: 'Rubik', sans-serif;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#generarLlamada[data-v-c8f5811e]{\n  font-family: 'Signika', sans-serif;\n  font-size: 35px;\n  margin-top: 33vh;\n  background-color: #E2211D !important;\n}\n\n\n/* MOVIMIENTO BARRA DEBAJO DE ELEMENTOS DE NAVBAR */\n.borderLeftRight[data-v-c8f5811e] {\n  display: inline-block;\n  position: relative;\n  color: hsl(222, 25%, 14%);\n}\n.borderLeftRight[data-v-c8f5811e]::after {\n  content: '';\n  position: absolute;\n  width: 100%;\n  transform: scaleX(0);\n  height: 2px;\n  bottom: 0;\n  left: 0;\n  background-color: black;\n  transform-origin: bottom right;\n  transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);\n}\n.borderLeftRight[data-v-c8f5811e]:hover::after {\n  transform: scaleX(1);\n  transform-origin: bottom left;\n}\n/* FIN DE LO QUE HE COPIADO POR SI NO CONVENCE */\n.contenido[data-v-c8f5811e] {\n  font-size: 15px;\n  font-family: 'Rubik', sans-serif;\n}\n\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -9536,7 +10104,31 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeNom {\r\n    width: 20vw;\n}\n.sizeCognom {\r\n    width: 20vw;\n}\n.sizeBotones {\r\n    width: 14vw;\n}\n.esborrarAlertantBtn {\r\n  background-color: #e3177d !important;\r\n  color: black !important;\n}\n.editarAlertantBtn {\r\n  background-color: #15acc4 !important;\r\n  color: black !important;\n}\n.editarAlertantBtn:hover {\r\n  color: black !important;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\n.cerrarBtn:hover {\r\n  color: white;\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeNom {\n    width: 20vw;\n}\n.sizeCognom {\n    width: 20vw;\n}\n.sizeBotones {\n    width: 14vw;\n}\n.esborrarAlertantBtn {\n  background-color: #e3177d !important;\n  color: white !important;\n}\n.editarAlertantBtn {\n  background-color: #15acc4 !important;\n  color: black !important;\n}\n.editarAlertantBtn:hover {\n  color: black !important;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n.cerrarBtn:hover {\n  color: white;\n}\n@font-face {\n  font-family: myFont;\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\nh2{\n  font-family: myFont;\n  font-size: 1.3em;\n}\n\n\n\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/administrador/gestionarRecursos.vue?vue&type=style&index=0&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/administrador/gestionarRecursos.vue?vue&type=style&index=0&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeBotones {\n    width: 14vw;\n}\n.esborrarRecursBtn {\n  background-color: #e3177d !important;\n  color: white !important;\n}\n.editarRecursBtn {\n  background-color: #15acc4 !important;\n  color: black !important;\n}\n.editarRecursBtn:hover {\n  color: black !important;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n.cerrarBtn:hover {\n  color: white;\n}\n@font-face {\n  font-family: myFont;\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\nh2{\n  font-family: myFont;\n  font-size: 1.3em;\n}\n\n/*NO SE BORRAN LOS MENSAJES Y AL CAMBIAR EL NOMBRE DE UN CÓDIGO, SE QUITA EL CHECKED*/\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -9560,7 +10152,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeNom {\r\n  width: 20vw;\n}\n.sizeCognom {\r\n  width: 20vw;\n}\n.sizeBotones {\r\n  width: 14vw;\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeBotones {\n    width: 14vw;\n}\n.esborrarUsuariBtn {\n  background-color: #e3177d !important;\n  color: white !important;\n}\n.editarUsuariBtn {\n  background-color: #15acc4 !important;\n  color: black !important;\n}\n.editarUsuariBtn:hover {\n  color: black !important;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n.cerrarBtn:hover {\n  color: white;\n}\n@font-face {\n  font-family: myFont;\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\nh2{\n  font-family: myFont;\n  font-size: 1.3em;\n}\n\n\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -41650,6 +42242,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/administrador/gestionarRecursos.vue?vue&type=style&index=0&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/administrador/gestionarRecursos.vue?vue&type=style&index=0&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_gestionarRecursos_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./gestionarRecursos.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/administrador/gestionarRecursos.vue?vue&type=style&index=0&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_gestionarRecursos_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_gestionarRecursos_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/administrador/gestionarUsuarias.vue?vue&type=style&index=0&lang=css&":
 /*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/administrador/gestionarUsuarias.vue?vue&type=style&index=0&lang=css& ***!
@@ -42371,15 +42993,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _gestionarRecursos_vue_vue_type_template_id_0e0935f7___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./gestionarRecursos.vue?vue&type=template&id=0e0935f7& */ "./resources/js/components/administrador/gestionarRecursos.vue?vue&type=template&id=0e0935f7&");
 /* harmony import */ var _gestionarRecursos_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gestionarRecursos.vue?vue&type=script&lang=js& */ "./resources/js/components/administrador/gestionarRecursos.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _gestionarRecursos_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./gestionarRecursos.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/administrador/gestionarRecursos.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
+;
 
 
 /* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
   _gestionarRecursos_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
   _gestionarRecursos_vue_vue_type_template_id_0e0935f7___WEBPACK_IMPORTED_MODULE_0__.render,
   _gestionarRecursos_vue_vue_type_template_id_0e0935f7___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
@@ -42701,6 +43325,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_gestionarAlertantes_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./gestionarAlertantes.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/administrador/gestionarAlertantes.vue?vue&type=style&index=0&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/administrador/gestionarRecursos.vue?vue&type=style&index=0&lang=css&":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/components/administrador/gestionarRecursos.vue?vue&type=style&index=0&lang=css& ***!
+  \******************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_gestionarRecursos_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./gestionarRecursos.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/administrador/gestionarRecursos.vue?vue&type=style&index=0&lang=css&");
 
 
 /***/ }),
@@ -46254,7 +46891,7 @@ var staticRenderFns = [
           [
             _c("div", { staticClass: "modal-content" }, [
               _c("div", { staticClass: "modal-header" }, [
-                _c("h5", { staticClass: "modal-title" }, [
+                _c("div", { staticClass: "modal-title" }, [
                   _vm._v("Más Información")
                 ])
               ]),
@@ -46404,40 +47041,38 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("main", { staticClass: "col-10" }, [
-    _c("table", { staticClass: "table" }, [
+    _c("table", { staticClass: "table mt-5" }, [
       _vm._m(0),
       _vm._v(" "),
       _c(
         "tbody",
-        _vm._l(_vm.cicles, function(cicle) {
-          return _c("tr", { key: cicle.id }, [
-            _c("td", [_vm._v(_vm._s(cicle.id))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(cicle.sigles))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(cicle.nom))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(cicle.descripcio))]),
+        _vm._l(_vm.incidencies, function(incidencia, index) {
+          return _c("tr", { key: incidencia.id }, [
+            _c("td", [_vm._v(_vm._s(incidencia.data))]),
             _vm._v(" "),
             _c("td", [
-              _c("div", { staticClass: "custom-control custom-checkbox" }, [
-                _c("input", {
-                  staticClass: "custom-control-input",
-                  attrs: {
-                    type: "checkbox",
-                    name: "actiu[]",
-                    value: "actiu",
-                    disabled: ""
-                  },
-                  domProps: { checked: cicle.actiu }
-                }),
-                _vm._v(" "),
-                _c("label", {
-                  staticClass: "custom-control-label",
-                  attrs: { for: "actiu" }
-                })
-              ])
-            ])
+              _vm._v(
+                "\n          " + _vm._s(_vm.getMunicipi(index)) + "\n        "
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "\n          " +
+                  _vm._s(_vm.getTipusIncidencia(index)) +
+                  "\n        "
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "\n          " +
+                  _vm._s(_vm.getTipusAlertant(index)) +
+                  "\n        "
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(incidencia.telefon_alertant))])
           ])
         }),
         0
@@ -46452,17 +47087,15 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Data")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Sigles")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Municipi")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nom")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipus d'incident")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Descripcio")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipus d'alertant")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Actiu")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } })
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Telèfon")])
       ])
     ])
   }
@@ -46527,7 +47160,7 @@ var render = function() {
                       }
                     },
                     [
-                      _vm._v("Usuarias "),
+                      _vm._v("Usuàries "),
                       _c("span", { staticClass: "sr-only" }, [
                         _vm._v("(current)")
                       ])
@@ -46553,7 +47186,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v(" Alertantes")]
+                    [_vm._v(" Alertants")]
                   )
                 ]
               ),
@@ -46752,7 +47385,7 @@ var render = function() {
               },
               [_vm._v("×")]
             ),
-            _vm._v("\r\n    " + _vm._s(_vm.errorMessage) + "\r\n  ")
+            _vm._v("\n    " + _vm._s(_vm.errorMessage) + "\n  ")
           ]
         )
       : _vm._e(),
@@ -46772,13 +47405,15 @@ var render = function() {
               },
               [_vm._v("×")]
             ),
-            _vm._v("\r\n    " + _vm._s(_vm.infoMessage) + "\r\n  ")
+            _vm._v("\n    " + _vm._s(_vm.infoMessage) + "\n  ")
           ]
         )
       : _vm._e(),
     _vm._v(" "),
     _c("div", { staticClass: "card mt-2 mb-1 ml-5 mr-5" }, [
-      _c("div", { staticClass: "card-header" }, [_vm._v("Alertantes")]),
+      _c("h2", { staticClass: "card-header font-weight-bold" }, [
+        _vm._v("Alertants")
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
         _c("table", { staticClass: "table mt-2" }, [
@@ -46798,9 +47433,9 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [
                   _vm._v(
-                    "\r\n                " +
+                    "\n                " +
                       _vm._s(_vm.getMunicipi(index)) +
-                      "\r\n              "
+                      "\n              "
                   )
                 ]),
                 _vm._v(" "),
@@ -46822,7 +47457,7 @@ var render = function() {
                         staticClass: "fa fa-trash",
                         attrs: { "aria-hidden": "true" }
                       }),
-                      _vm._v("  Esborrar")
+                      _vm._v("  Eliminar")
                     ]
                   ),
                   _vm._v(" "),
@@ -46868,7 +47503,7 @@ var render = function() {
             _c("div", { staticClass: "modal-body" }, [
               _c("p", [
                 _vm._v(
-                  "¿Estás seguro de querer eliminar al alertante " +
+                  "Estàs segura d'eliminar l'alertant " +
                     _vm._s(_vm.alertant.nom) +
                     "?"
                 )
@@ -46882,13 +47517,13 @@ var render = function() {
                   staticClass: "btn cerrarBtn",
                   attrs: { type: "button", "data-dismiss": "modal" }
                 },
-                [_vm._v("Cerrar")]
+                [_vm._v("Tancar")]
               ),
               _vm._v(" "),
               _c(
                 "button",
                 {
-                  staticClass: "btn",
+                  staticClass: "btn esborrarAlertantBtn",
                   attrs: { type: "button" },
                   on: {
                     click: function($event) {
@@ -46919,7 +47554,7 @@ var render = function() {
                     "label",
                     {
                       staticClass: "col-sm-2 col-form-label",
-                      attrs: { for: "sigles" }
+                      attrs: { for: "telefon" }
                     },
                     [_vm._v("Telèfon")]
                   ),
@@ -46994,7 +47629,7 @@ var render = function() {
                     "label",
                     {
                       staticClass: "col-sm-2 col-form-label",
-                      attrs: { for: "nom" }
+                      attrs: { for: "cognoms" }
                     },
                     [_vm._v("Cognoms")]
                   ),
@@ -47029,7 +47664,7 @@ var render = function() {
                     "label",
                     {
                       staticClass: "col-sm-2 col-form-label",
-                      attrs: { for: "descripcio" }
+                      attrs: { for: "adreca" }
                     },
                     [_vm._v("Adreça")]
                   ),
@@ -47056,6 +47691,79 @@ var render = function() {
                         }
                       }
                     })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-sm-2 col-form-label",
+                      attrs: { for: "municipio" }
+                    },
+                    [_vm._v("Municipi")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-10" }, [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.alertant.municipis_id,
+                            expression: "alertant.municipis_id"
+                          }
+                        ],
+                        staticClass: "custom-select",
+                        attrs: { id: "municipio", required: "" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.alertant,
+                              "municipis_id",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "option",
+                          { attrs: { selected: "", value: "Selecciona..." } },
+                          [_vm._v("Selecciona...")]
+                        ),
+                        _vm._v(" "),
+                        _vm._l(_vm.municipis, function(municipi) {
+                          return _c(
+                            "option",
+                            {
+                              key: municipi.id,
+                              domProps: { value: municipi.id }
+                            },
+                            [
+                              _vm._v(
+                                "\n                      " +
+                                  _vm._s(municipi.nom) +
+                                  "\n                    "
+                              )
+                            ]
+                          )
+                        })
+                      ],
+                      2
+                    )
                   ])
                 ])
               ])
@@ -47135,7 +47843,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-header" }, [
-      _c("h5", { staticClass: "modal-title" }, [_vm._v("Borrar Alertante")]),
+      _c("div", { staticClass: "modal-title" }, [_vm._v("Eliminar Alertant")]),
       _vm._v(" "),
       _c(
         "button",
@@ -47156,7 +47864,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-header" }, [
-      _c("h5", { staticClass: "modal-title" }, [_vm._v("Alertante")]),
+      _c("div", { staticClass: "modal-title" }, [_vm._v("Alertant")]),
       _vm._v(" "),
       _c(
         "button",
@@ -47195,25 +47903,554 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("main", [
+    _vm.errorMessage != ""
+      ? _c(
+          "div",
+          {
+            staticClass: "position-fixed top-0 p-2 mt-5",
+            staticStyle: { "z-index": "5", right: "0", bottom: "0" }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "toast hide",
+                attrs: {
+                  id: "liveToast",
+                  role: "alert",
+                  "aria-live": "assertive",
+                  "aria-atomic": "true",
+                  "data-delay": "2000"
+                }
+              },
+              [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("div", { staticClass: "toast-body" }, [
+                  _vm._v("\n        " + _vm._s(_vm.errorMessage) + "\n      ")
+                ])
+              ]
+            )
+          ]
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.infoMessage != ""
+      ? _c(
+          "div",
+          {
+            staticClass: "position-fixed top-0 p-2 mt-5",
+            staticStyle: { "z-index": "5", right: "0", bottom: "0" }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "toast hide",
+                attrs: {
+                  id: "liveToast",
+                  role: "alert",
+                  "aria-live": "assertive",
+                  "aria-atomic": "true",
+                  "data-delay": "2000"
+                }
+              },
+              [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("div", { staticClass: "toast-body" }, [
+                  _vm._v("\n        " + _vm._s(_vm.infoMessage) + "\n      ")
+                ])
+              ]
+            )
+          ]
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _c("div", { staticClass: "card mt-2 mb-1 ml-5 mr-5" }, [
+      _c("h2", { staticClass: "card-header font-weight-bold" }, [
+        _vm._v("Recursos")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _c("table", { staticClass: "table mt-2" }, [
+          _vm._m(2),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.recursos, function(recurs, index) {
+              return _c("tr", { key: recurs.id }, [
+                _c("td", [_vm._v(_vm._s(recurs.codi))]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("div", { staticClass: "custom-control custom-checkbox" }, [
+                    _c("input", {
+                      staticClass: "custom-control-input",
+                      attrs: {
+                        type: "checkbox",
+                        name: "actius[]",
+                        value: "actiu",
+                        disabled: ""
+                      },
+                      domProps: { checked: recurs.actiu }
+                    }),
+                    _vm._v(" "),
+                    _c("label", {
+                      staticClass: "custom-control-label",
+                      attrs: { for: "actiu" }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(_vm.getTipusRecurs(index)) +
+                      "\n              "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "btn btn-sm float-right ml-2 esborrarRecursBtn",
+                      attrs: { type: "submit" },
+                      on: {
+                        click: function($event) {
+                          return _vm.confirmDeleteRecurs(recurs)
+                        }
+                      }
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "fa fa-trash",
+                        attrs: { "aria-hidden": "true" }
+                      }),
+                      _vm._v("  Esborrar")
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-sm float-right editarRecursBtn",
+                      attrs: { type: "submit" },
+                      on: {
+                        click: function($event) {
+                          return _vm.editRecurs(recurs)
+                        }
+                      }
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "fa fa-edit",
+                        attrs: { "aria-hidden": "true" }
+                      }),
+                      _vm._v("  Editar")
+                    ]
+                  )
+                ])
+              ])
+            }),
+            0
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal",
+        attrs: { tabindex: "-1", id: "deleteModalRecurs" }
+      },
+      [
+        _c("div", { staticClass: "modal-dialog" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _vm._m(3),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c("p", [
+                _vm._v(
+                  "Estàs segura d'eliminar el recurs " +
+                    _vm._s(_vm.recurs.codi) +
+                    "?"
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-footer" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn cerrarBtn",
+                  attrs: { type: "button", "data-dismiss": "modal" }
+                },
+                [_vm._v("Cerrar")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn esborrarRecursBtn",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.deleteRecurs()
+                    }
+                  }
+                },
+                [_vm._v("Eliminar")]
+              )
+            ])
+          ])
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "modal", attrs: { tabindex: "-1", id: "recursModal" } },
+      [
+        _c("div", { staticClass: "modal-dialog modal-lg" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _vm._m(4),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c("form", [
+                _c("div", { staticClass: "form-group row" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-sm-2 col-form-label",
+                      attrs: { for: "codi" }
+                    },
+                    [_vm._v("Codi")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-10" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.recurs.codi,
+                          expression: "recurs.codi"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "codi",
+                        name: "codi",
+                        autofocus: ""
+                      },
+                      domProps: { value: _vm.recurs.codi },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.recurs, "codi", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-sm-2 col-form-label",
+                      attrs: { for: "actiu" }
+                    },
+                    [_vm._v("Actiu")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-10" }, [
+                    _c(
+                      "div",
+                      { staticClass: "custom-control custom-checkbox" },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.recurs.actiu,
+                              expression: "recurs.actiu"
+                            }
+                          ],
+                          staticClass: "custom-control-input",
+                          attrs: {
+                            type: "checkbox",
+                            id: "actiu",
+                            name: "actiu"
+                          },
+                          domProps: {
+                            checked: Array.isArray(_vm.recurs.actiu)
+                              ? _vm._i(_vm.recurs.actiu, null) > -1
+                              : _vm.recurs.actiu
+                          },
+                          on: {
+                            change: function($event) {
+                              var $$a = _vm.recurs.actiu,
+                                $$el = $event.target,
+                                $$c = $$el.checked ? true : false
+                              if (Array.isArray($$a)) {
+                                var $$v = null,
+                                  $$i = _vm._i($$a, $$v)
+                                if ($$el.checked) {
+                                  $$i < 0 &&
+                                    _vm.$set(
+                                      _vm.recurs,
+                                      "actiu",
+                                      $$a.concat([$$v])
+                                    )
+                                } else {
+                                  $$i > -1 &&
+                                    _vm.$set(
+                                      _vm.recurs,
+                                      "actiu",
+                                      $$a
+                                        .slice(0, $$i)
+                                        .concat($$a.slice($$i + 1))
+                                    )
+                                }
+                              } else {
+                                _vm.$set(_vm.recurs, "actiu", $$c)
+                              }
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("label", {
+                          staticClass: "custom-control-label",
+                          attrs: { for: "actiu" }
+                        })
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-sm-2 col-form-label",
+                      attrs: { for: "tipusRecurs" }
+                    },
+                    [_vm._v("Municipi")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-10" }, [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.recurs.tipus_recursos_id,
+                            expression: "recurs.tipus_recursos_id"
+                          }
+                        ],
+                        staticClass: "custom-select",
+                        attrs: { id: "tipusRecurs", required: "" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.recurs,
+                              "tipus_recursos_id",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "option",
+                          { attrs: { selected: "", value: "Selecciona..." } },
+                          [_vm._v("Selecciona...")]
+                        ),
+                        _vm._v(" "),
+                        _vm._l(_vm.tipusRecursos, function(tipusRecurs) {
+                          return _c(
+                            "option",
+                            {
+                              key: tipusRecurs.id,
+                              domProps: { value: tipusRecurs.id }
+                            },
+                            [
+                              _vm._v(
+                                "\n                      " +
+                                  _vm._s(tipusRecurs.tipus) +
+                                  "\n                    "
+                              )
+                            ]
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-footer" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn cerrarBtn",
+                  attrs: { type: "button", "data-dismiss": "modal" }
+                },
+                [_vm._v("Tancar")]
+              ),
+              _vm._v(" "),
+              _vm.insert
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "btn",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          return _vm.insertRecurs()
+                        }
+                      }
+                    },
+                    [_vm._v("Afegir")]
+                  )
+                : _c(
+                    "button",
+                    {
+                      staticClass: "btn editarRecursBtn",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          return _vm.updateRecurs()
+                        }
+                      }
+                    },
+                    [_vm._v("Modificar")]
+                  )
+            ])
+          ])
+        ])
+      ]
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-md-8" }, [
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _vm._v("Pagina GESTIÓN RECURSOS")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _vm._v("\n                BienvenidA AdministradorA\n            ")
-          ])
-        ])
+    return _c("div", { staticClass: "toast-header" }, [
+      _c(
+        "button",
+        {
+          staticClass: "ml-2 mb-1 close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "toast",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "toast-header" }, [
+      _c(
+        "button",
+        {
+          staticClass: "ml-2 mb-1 close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "toast",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Codi")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Actiu")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipus de Recurs")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "sizeBotones", attrs: { scope: "col" } })
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("div", { staticClass: "modal-title" }, [_vm._v("Eliminar Recurs")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("div", { staticClass: "modal-title" }, [_vm._v("Recurs")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
     ])
   }
 ]
@@ -47239,25 +48476,516 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("main", [
+    _vm.errorMessage != ""
+      ? _c(
+          "div",
+          {
+            staticClass: "alert alert-danger alert-dismissible fade show mt-2"
+          },
+          [
+            _c(
+              "button",
+              {
+                staticClass: "close",
+                attrs: { type: "button", "data-dismiss": "alert" }
+              },
+              [_vm._v("×")]
+            ),
+            _vm._v("\n    " + _vm._s(_vm.errorMessage) + "\n  ")
+          ]
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.infoMessage != ""
+      ? _c(
+          "div",
+          {
+            staticClass: "alert alert-success alert-dismissible fade show mt-2"
+          },
+          [
+            _c(
+              "button",
+              {
+                staticClass: "close",
+                attrs: { type: "button", "data-dismiss": "alert" }
+              },
+              [_vm._v("×")]
+            ),
+            _vm._v("\n    " + _vm._s(_vm.infoMessage) + "\n  ")
+          ]
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _c("div", { staticClass: "card mt-2 mb-1 ml-5 mr-5" }, [
+      _c("h2", { staticClass: "card-header font-weight-bold" }, [
+        _vm._v("Usuàries")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _c("table", { staticClass: "table mt-2" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.usuaris, function(usuari, index) {
+              return _c("tr", { key: usuari.id }, [
+                _c("td", [_vm._v(_vm._s(usuari.username))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(usuari.email))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(usuari.nom))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(usuari.cognoms))]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(_vm.getRol(index)) +
+                      "\n              "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "btn btn-sm float-right ml-2 esborrarUsuariBtn",
+                      attrs: { type: "submit" },
+                      on: {
+                        click: function($event) {
+                          return _vm.confirmDeleteUsuari(usuari)
+                        }
+                      }
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "fa fa-trash",
+                        attrs: { "aria-hidden": "true" }
+                      }),
+                      _vm._v("  Esborrar")
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-sm float-right editarUsuariBtn",
+                      attrs: { type: "submit" },
+                      on: {
+                        click: function($event) {
+                          return _vm.editUsuari(usuari)
+                        }
+                      }
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "fa fa-edit",
+                        attrs: { "aria-hidden": "true" }
+                      }),
+                      _vm._v("  Editar")
+                    ]
+                  )
+                ])
+              ])
+            }),
+            0
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal",
+        attrs: { tabindex: "-1", id: "deleteModalUsuari" }
+      },
+      [
+        _c("div", { staticClass: "modal-dialog" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c("p", [
+                _vm._v(
+                  "Estàs segura d'eliminar la usuària " +
+                    _vm._s(_vm.usuari.username) +
+                    "?"
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-footer" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn cerrarBtn",
+                  attrs: { type: "button", "data-dismiss": "modal" }
+                },
+                [_vm._v("Tancar")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn esborrarUsuariBtn",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.deleteUsuari()
+                    }
+                  }
+                },
+                [_vm._v("Eliminar")]
+              )
+            ])
+          ])
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "modal", attrs: { tabindex: "-1", id: "usuariModal" } },
+      [
+        _c("div", { staticClass: "modal-dialog modal-lg" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _vm._m(2),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c("form", [
+                _c("div", { staticClass: "form-group row" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-sm-2 col-form-label",
+                      attrs: { for: "username" }
+                    },
+                    [_vm._v("Nom Usuària")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-10" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.usuari.username,
+                          expression: "usuari.username"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "username",
+                        name: "username",
+                        autofocus: ""
+                      },
+                      domProps: { value: _vm.usuari.username },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.usuari, "username", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-sm-2 col-form-label",
+                      attrs: { for: "email" }
+                    },
+                    [_vm._v("Email")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-10" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.usuari.email,
+                          expression: "usuari.email"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "email", id: "email", name: "email" },
+                      domProps: { value: _vm.usuari.email },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.usuari, "email", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-sm-2 col-form-label",
+                      attrs: { for: "nomUsuari" }
+                    },
+                    [_vm._v("Nom")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-10" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.usuari.nom,
+                          expression: "usuari.nom"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "nomUsuari",
+                        name: "nomUsuari"
+                      },
+                      domProps: { value: _vm.usuari.nom },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.usuari, "nom", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-sm-2 col-form-label",
+                      attrs: { for: "cognomsUsuari" }
+                    },
+                    [_vm._v("Cognoms")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-10" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.usuari.cognoms,
+                          expression: "usuari.cognoms"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "cognomsUsuari",
+                        name: "cognomsUsuari"
+                      },
+                      domProps: { value: _vm.usuari.cognoms },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.usuari, "cognoms", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-sm-2 col-form-label",
+                      attrs: { for: "rol" }
+                    },
+                    [_vm._v("Rol")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-10" }, [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.usuari.rols_id,
+                            expression: "usuari.rols_id"
+                          }
+                        ],
+                        staticClass: "custom-select",
+                        attrs: { id: "rol", required: "" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.usuari,
+                              "rols_id",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "option",
+                          { attrs: { selected: "", value: "Selecciona..." } },
+                          [_vm._v("Selecciona...")]
+                        ),
+                        _vm._v(" "),
+                        _vm._l(_vm.rols, function(rol) {
+                          return _c(
+                            "option",
+                            { key: rol.id, domProps: { value: rol.id } },
+                            [
+                              _vm._v(
+                                "\n                    " +
+                                  _vm._s(rol.nom) +
+                                  "\n                  "
+                              )
+                            ]
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-footer" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn cerrarBtn",
+                  attrs: { type: "button", "data-dismiss": "modal" }
+                },
+                [_vm._v("Tancar")]
+              ),
+              _vm._v(" "),
+              _vm.insert
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "btn",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          return _vm.insertUsuari()
+                        }
+                      }
+                    },
+                    [_vm._v("Afegir")]
+                  )
+                : _c(
+                    "button",
+                    {
+                      staticClass: "btn editarUsuariBtn",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          return _vm.updateUsuari()
+                        }
+                      }
+                    },
+                    [_vm._v("Modificar")]
+                  )
+            ])
+          ])
+        ])
+      ]
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-md-8" }, [
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _vm._v("Pagina GESTIÓN USUARIAS")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _vm._v("\n          BienvenidA AdministradorA\n      ")
-          ])
-        ])
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nom Usuària")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Email")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nom")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Cognoms")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Rol")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "sizeBotones", attrs: { scope: "col" } })
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("div", { staticClass: "modal-title" }, [_vm._v("Esborrar Usuària")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("div", { staticClass: "modal-title" }, [_vm._v("Usuària")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
     ])
   }
 ]

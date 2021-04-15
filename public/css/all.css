@@ -36,15 +36,15 @@
 }
 
 @font-face {
-    font-family: myFuckingFont;
+    font-family: myFont;
     src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);
 }
 
 #login-card-header{
     background-color: #15acc4;
     font-weight: bold;
-    font-size: 1.2em;
-    font-family: myFuckingFont;
+    font-size: 1.3em;
+    font-family: myFont;
 }
 
 #login-card{
@@ -119,4 +119,29 @@ textarea{
     width: 100px;
     height: 39.63px;
 }
+
+.esborrarBtn {
+    background-color: #e3177d !important;
+    color: black !important;
+}
+
+.editarBtn {
+  background-color: #15acc4 !important;
+  color: black !important;
+}
+
+.editarBtn:hover {
+  color: black !important;
+}
+
+
+.cerrarBtn {
+  background-color: #6c757d !important;
+  color: white;
+}
+
+.cerrarBtn:hover {
+  color: white;
+}
+
 

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Usuari;
+use App\Clases\Utilitat;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UsuariResource;
+use Illuminate\Database\QueryException;
 
 class UsuariController extends Controller
 {
@@ -29,7 +31,27 @@ class UsuariController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $usuari = new Usuari();
+
+        $usuari->username = $request->input('username');
+        $usuari->email = $request->input('email');
+        $usuari->nom = $request->input('nom');
+        $usuari->cognoms = $request->input('cognoms');
+
+
+        $usuari->rols_id = $request->input('rols_id');
+        $usuari->recursos_id = $request->input('recursos_id');
+
+        try{
+            $usuari->save();
+            $response = (new UsuariResource($usuari))->response()->setStatusCode(201);
+        }
+        catch (QueryException $ex){
+            $mensaje = Utilitat::errorMessage($ex);
+            $response = \response()->json(['error' => $mensaje], 400);
+        }
+
+        return $response;
     }
 
     /**
@@ -52,7 +74,25 @@ class UsuariController extends Controller
      */
     public function update(Request $request, Usuari $usuari)
     {
-        //
+        $usuari->username = $request->input('username');
+        $usuari->email = $request->input('email');
+        $usuari->nom = $request->input('nom');
+        $usuari->cognoms = $request->input('cognoms');
+
+
+        $usuari->rols_id = $request->input('rols_id');
+        $usuari->recursos_id = $request->input('recursos_id');
+
+        try{
+            $usuari->save();
+            $response = (new UsuariResource($usuari))->response()->setStatusCode(201);
+        }
+        catch (QueryException $ex){
+            $mensaje = Utilitat::errorMessage($ex);
+            $response = \response()->json(['error' => $mensaje], 400);
+        }
+
+        return $response;
     }
 
     /**
@@ -63,6 +103,15 @@ class UsuariController extends Controller
      */
     public function destroy(Usuari $usuari)
     {
-        //
+        try{
+            $usuari->delete();
+            $response = \response()->json(['missatge' => 'Registre esborrat correctament'], 200);
+        }
+        catch(QueryException $ex){
+            $mensaje = Utilitat::errorMessage($ex);
+            $response = \response()->json(['error' => $mensaje], 400);
+        }
+
+        return $response;
     }
 }

@@ -36,7 +36,7 @@ class RecursController extends Controller
         $recurs->codi = $request->input('codi');
         $recurs->actiu = ($request->input('actiu') == 'actiu');
 
-        $recurs->tipus_recursos_id = $request->input('tipus_recursos_idFK');
+        $recurs->tipus_recursos_id = $request->input('tipus_recursos_id');
 
         try{
             $recurs->save();
@@ -93,10 +93,10 @@ class RecursController extends Controller
      * @param  \App\Models\Recurs  $recurs
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Recurs $recurs)
+    public function destroy(Recurs $recur)
     {
         try{
-            $recurs->delete();
+            $recur->delete();
             $response = \response()->json(['missatge' => 'Registre esborrat correctament'], 200);
         }
         catch(QueryException $ex){
