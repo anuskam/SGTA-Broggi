@@ -33,7 +33,6 @@ class AfectatController extends Controller
     {
         $afectat = new Afectat();
 
-        $afectat->telefon = $request->input('telefon');
         $afectat->cip = $request->input('cip');
         $afectat->nom = $request->input('nom');
         $afectat->cognoms = $request->input('cognoms');
@@ -41,7 +40,7 @@ class AfectatController extends Controller
 
         $afectat->te_cip = ($request->input('te_cip') == 'te_cip');
 
-        $afectat->sexes_id = $request->input('sexes_idFK');
+        $afectat->sexes_id = $request->input('sexes_id');
 
         try{
             $afectat->save();

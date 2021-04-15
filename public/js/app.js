@@ -1,6 +1,17 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./node_modules/@babel/runtime/regenerator/index.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
+  \**********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__(/*! regenerator-runtime */ "./node_modules/regenerator-runtime/runtime.js");
+
+
+/***/ }),
+
 /***/ "./node_modules/axios/index.js":
 /*!*************************************!*\
   !*** ./node_modules/axios/index.js ***!
@@ -2132,6 +2143,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3159,7 +3185,10 @@ __webpack_require__.r(__webpack_exports__);
           // },
         ]
       },
-      recursAfectats: []
+      recursAfectats: [],
+      alertanteConocido: false,
+      alertantDB: null,
+      afectatsDB: null
     };
   },
   methods: {
@@ -3228,12 +3257,52 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     selectAlertants: function selectAlertants() {
-      var me = this;
-      axios.get("/SGTA-Broggi/public/api/alertant").then(function (response) {
-        me.alertants = response.data;
-      })["catch"](function (error) {
-        console.log(error);
-      });
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var me;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                me = _this;
+                return _context.abrupt("return", axios.get("/SGTA-Broggi/public/api/alertant").then(function (response) {
+                  me.alertants = response.data;
+                })["catch"](function (error) {
+                  console.log(error);
+                }));
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    selectAfectats: function selectAfectats() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var me;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                me = _this2;
+                return _context2.abrupt("return", axios.get("/SGTA-Broggi/public/api/afectat").then(function (response) {
+                  me.afectatsDB = response.data;
+                })["catch"](function (error) {
+                  console.log(error);
+                }));
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
     },
     afegirAfectat: function afegirAfectat() {
       if (this.afectat.sexes_id != null) {
@@ -3249,11 +3318,11 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     afegirRecurs: function afegirRecurs() {
-      var _this = this;
+      var _this3 = this;
 
       if (this.recurs.tipus_recursos_id > 0 && this.incidencies_has_recursos.prioritat > 0 && this.afectatSelect.edat != null) {
         var pos = this.recursos_select.findIndex(function (x) {
-          return x.codi == _this.recurs.codi;
+          return x.codi == _this3.recurs.codi;
         });
         this.afectatSelect.recurs_id = this.recurs.id;
         this.afectatSelected.push(this.afectatSelect);
@@ -3263,10 +3332,11 @@ __webpack_require__.r(__webpack_exports__);
         };
         recurs.afectats.push(this.afectatSelect);
         var borrarAfectatIndex = this.recursAfectats.findIndex(function (obj) {
-          return obj.sexes_id == _this.afectatSelect.sexes_id && obj.edat == _this.afectatSelect.edat;
+          return obj.sexes_id == _this3.afectatSelect.sexes_id && obj.edat == _this3.afectatSelect.edat;
         });
         this.recursAfectats.splice(borrarAfectatIndex, 1);
         this.recursos.push(recurs);
+        this.incidencies_has_recursos.recursos_id = this.recurs.id;
         this.buidarRecurs();
         this.buidarAfectatSelect();
         this.recursos_select[pos].actiu = false;
@@ -3335,7 +3405,7 @@ __webpack_require__.r(__webpack_exports__);
       $('#afectadaModal').modal('show');
     },
     eliminarRecurs: function eliminarRecurs(index) {
-      var _this2 = this;
+      var _this4 = this;
 
       var me = this;
       var afectatsArray = this.recursos[index].afectats;
@@ -3343,7 +3413,7 @@ __webpack_require__.r(__webpack_exports__);
         me.recursAfectats.push(afectat);
       });
       var recursSelectIndex = this.recursos_select.findIndex(function (obj) {
-        return obj.id == _this2.recursos[index].recurs.id;
+        return obj.id == _this4.recursos[index].recurs.id;
       });
       this.recursos_select[recursSelectIndex].actiu = true;
       this.recursos.splice(index, 1);
@@ -3351,10 +3421,261 @@ __webpack_require__.r(__webpack_exports__);
     mostrarRecursos: function mostrarRecursos() {
       $('#recursModal').modal('show');
     },
-    checkInsertarIncidencia: function checkInsertarIncidencia() {},
+    evaluaInsertAlertantes: function evaluaInsertAlertantes() {
+      var _this5 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                if (!(_this5.alertanteConocido == false)) {
+                  _context3.next = 12;
+                  break;
+                }
+
+                _this5.alertant.adreca = _this5.incidencia.adreca;
+                _this5.alertant.nom = _this5.incidencia.nom_metge;
+                _this5.alertant.municipis_id = _this5.municipi.id;
+                _this5.alertant.telefon = _this5.alertantNumber;
+                _this5.alertant.tipus_alertants_id = Number(_this5.alertant.tipus_alertants_id);
+                _context3.next = 8;
+                return _this5.insertarAlertant();
+
+              case 8:
+                _context3.next = 10;
+                return _this5.selectAlertants();
+
+              case 10:
+                _context3.next = 12;
+                return _this5.getAlertantData();
+
+              case 12:
+                return _context3.abrupt("return", null);
+
+              case 13:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    evaluaInsertIncidencia: function evaluaInsertIncidencia() {
+      var respuesta = false;
+      /* Control insert incidencia */
+
+      if (this.incidencia.adreca == null || this.incidencia.descripcio == null || this.municipi.id == null) {
+        if (this.incidencia.adreca == null) {
+          this.errors.push("Cal introduir l'adreça de l'incident");
+        }
+
+        if (this.incidencia.descripcio == null) {
+          this.errors.push("Cal introduir la descripció de l'incident");
+        }
+
+        if (this.municipi.id == null) {
+          this.errors.push("Cal introduir el municipi de l'incident");
+        }
+      } else {
+        respuesta = true;
+        this.insertIncidencia = {
+          "data": this.incidencia.data,
+          "hora": this.incidencia.hora,
+          "telefon_alertant": this.alertantNumber,
+          "adreca": this.incidencia.adreca,
+          "adreca_complement": this.incidencia.adreca_complement,
+          "descripcio": this.incidencia.descripcio,
+          "nom_metge": this.incidencia.nom_metge,
+          "tipus_incidencies_id": Number(this.incidencia.tipus_incidencies_id),
+          "alertants_id": this.alertantDB.id,
+          "municipis_id": this.municipi.id,
+          "usuaris_id": this.userid,
+          "recursos": []
+        };
+      }
+
+      return respuesta;
+    },
+    // Control de Insert de la Incidencia
+    evaluarIncidencia: function evaluarIncidencia() {
+      var _this6 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+        var me, afectatsInsert, _me;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _this6.errors = [];
+                /* Control insert afectats */
+
+                if (!(_this6.activaRecurs == true)) {
+                  _context5.next = 17;
+                  break;
+                }
+
+                if (!(_this6.afectatSelected.length > 0)) {
+                  _context5.next = 14;
+                  break;
+                }
+
+                // Si realmente hay recursos asignados
+                me = _this6;
+
+                _this6.afectatSelected.forEach( /*#__PURE__*/function () {
+                  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(afectat) {
+                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+                      while (1) {
+                        switch (_context4.prev = _context4.next) {
+                          case 0:
+                            _context4.next = 2;
+                            return me.insertarAfectat(afectat);
+
+                          case 2:
+                          case "end":
+                            return _context4.stop();
+                        }
+                      }
+                    }, _callee4);
+                  }));
+
+                  return function (_x) {
+                    return _ref.apply(this, arguments);
+                  };
+                }());
+
+                _context5.next = 7;
+                return _this6.selectAfectats();
+
+              case 7:
+                console.log(_this6.afectatsDB);
+
+                _this6.recursos.forEach(function (recurs, indexRecurs) {
+                  // Asignando id de la bd a los afectados
+                  recurs.afectats.forEach(function (afectat, indexAfectat) {
+                    var indexAfectatDB = me.afectatsDB.findIndex(function (obj) {
+                      return obj.nom == afectat.nom && obj.cognoms == afectat.cognoms && obj.sexes_id == afectat.sexes_id && obj.edat == afectat.edat;
+                    });
+
+                    if (indexAfectatDB >= 0) {
+                      me.recursos[indexRecurs].afectats[indexAfectat].id = me.afectatsDB[indexAfectatDB].id;
+                    } else {
+                      me.recursos[indexRecurs].afectats[indexAfectat].id = me.afectatsDB.length - (me.recursos[indexRecurs].afectats.length - indexAfectat);
+                    }
+                  });
+                }); //     this.afectatSelected.forEach(function(afectat, index){ // Asignando id de la bd a los afectados
+                //         let indexAfectatDB = me.afectatsDB.findIndex(obj => (obj.nom == afectat.nom && obj.cognoms == afectat.cognoms && obj.sexes_id == afectat.sexes_id && obj.edat == afectat.edat));
+                //         if(indexAfectatDB >= 0){
+                //             me.afectatSelected[index].id = me.afectatsDB[indexAfectatDB].id;
+                //         }
+                //         else{
+                //             me.afectatSelected[index].id = me.afectatsDB.length-(me.afectatSelected.length - index);
+                //         }
+                //    });
+
+                /* Insert de la incidencia con recursos */
+
+
+                _context5.next = 11;
+                return _this6.evaluaInsertAlertantes();
+
+              case 11:
+                if (_this6.evaluaInsertIncidencia()) {
+                  afectatsInsert = [];
+                  _me = _this6;
+
+                  _this6.recursos.forEach(function (recurso) {
+                    // Recopilando objetos de recursos con afectados en un array
+                    recurso.afectats.forEach(function (afectat) {
+                      var afectatInsert = {
+                        "recursos_id": null,
+                        "afectats_id": null,
+                        "prioritat": null,
+                        "hora_activacio": null
+                      };
+                      afectatInsert.recursos_id = afectat.recurs_id;
+                      afectatInsert.afectats_id = afectat.id;
+
+                      var indexRecurs = _me.incidencies_has_recursos_array.findIndex(function (obj) {
+                        return obj.recursos_id == afectat.recurs_id;
+                      });
+
+                      afectatInsert.prioritat = _me.incidencies_has_recursos_array[indexRecurs].prioritat;
+                      afectatInsert.hora_activacio = _me.incidencies_has_recursos_array[indexRecurs].hora_activacio;
+                      afectatsInsert.push(afectatInsert);
+                    });
+                  });
+
+                  _this6.insertIncidencia.recursos = afectatsInsert;
+
+                  _this6.insertarIncidencia();
+
+                  _this6.updateRecursos();
+                }
+
+                _context5.next = 15;
+                break;
+
+              case 14:
+                _this6.errors.push("Cal despatxar algun recurs o desactivar l'opcio d'assignar recurs");
+
+              case 15:
+                _context5.next = 24;
+                break;
+
+              case 17:
+                _context5.next = 19;
+                return _this6.evaluaInsertAlertantes();
+
+              case 19:
+                _this6.evaluaInsertIncidencia();
+
+                _context5.next = 22;
+                return _this6.insertAfectatsSinRecurso();
+
+              case 22:
+                _this6.insertarIncidencia();
+
+                _this6.updateRecursos();
+
+              case 24:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5);
+      }))();
+    },
+    insertAfectatsSinRecurso: function insertAfectatsSinRecurso() {
+      var _this7 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
+        var me;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                me = _this7;
+                _this7.insertIncidencia.afectats = [];
+                return _context6.abrupt("return", _this7.afectats.forEach(function (afectat) {
+                  if (afectat.recurs_id == null) {
+                    me.insertIncidencia.afectats.push(afectat);
+                  }
+                }));
+
+              case 3:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6);
+      }))();
+    },
     insertarIncidencia: function insertarIncidencia() {
       var me = this;
-      axios.post('/SGTA-Broggi/public/api/incidencia', me.incidencia).then(function (response) {
+      axios.post('/SGTA-Broggi/public/api/incidencia', me.insertIncidencia).then(function (response) {
         console.log(response);
       })["catch"](function (error) {
         console.log(error.response.status);
@@ -3370,49 +3691,101 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error.response.data.error);
       });
     },
-    insertarIncidenciesHasRecursos: function insertarIncidenciesHasRecursos(recurs) {
-      // IF THIS.ACTIVARRECURS == TRUE
-      var me = this;
-      axios.post('/SGTA-Broggi/public/api/incidencia_has_recursos', recurs).then(function (response) {
-        console.log(response);
-      })["catch"](function (error) {
-        console.log(error.response.status);
-        console.log(error.response.data.error);
-      });
-    },
-    insertarAfectat: function insertarAfectat() {
-      var me = this;
-      axios.post('/SGTA-Broggi/public/api/afectat', me.cicle).then(function (response) {
-        console.log(response);
-      })["catch"](function (error) {
-        console.log(error.response.status);
-        console.log(error.response.data.error);
-      });
+    insertarAfectat: function insertarAfectat(afectat) {
+      var _this8 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
+        var me;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                me = _this8;
+                return _context7.abrupt("return", axios.post('/SGTA-Broggi/public/api/afectat', afectat).then(function (response) {
+                  console.log(response);
+                })["catch"](function (error) {
+                  console.log(error.response.status);
+                  console.log(error.response.data.error);
+                }));
+
+              case 2:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7);
+      }))();
     },
     insertarAlertant: function insertarAlertant() {
-      var me = this;
-      axios.post('/SGTA-Broggi/public/api/alertant', me.cicle).then(function (response) {
-        console.log(response);
-      })["catch"](function (error) {
-        console.log(error.response.status);
-        console.log(error.response.data.error);
-      });
+      var _this9 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
+        var me;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                me = _this9;
+                return _context8.abrupt("return", axios.post('/SGTA-Broggi/public/api/alertant', me.alertant).then(function (response) {
+                  console.log(response);
+                })["catch"](function (error) {
+                  console.log(error.response.status);
+                  console.log(error.response.data.error);
+                }));
+
+              case 2:
+              case "end":
+                return _context8.stop();
+            }
+          }
+        }, _callee8);
+      }))();
     },
     getAlertantData: function getAlertantData() {
-      var me = this;
-      this.alertants.forEach(function (alertant) {
-        if (alertant.telefon == me.alertantNumber) {
-          me.incidencia.adreca = alertant.adreca;
-          me.alertant.tipus_alertants_id = alertant.tipus_alertants_id;
-          var municipi = me.municipis.find(function (obj) {
-            return obj.id == alertant.municipis_id;
-          });
-          me.municipi = municipi;
+      var _this10 = this;
 
-          if (alertant.tipus_alertants_id == 1) {
-            me.incidencia.adreca_complement = alertant.nom;
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
+        var me;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
+          while (1) {
+            switch (_context9.prev = _context9.next) {
+              case 0:
+                me = _this10;
+                return _context9.abrupt("return", _this10.alertants.forEach(function (alertant) {
+                  if (alertant.telefon == me.alertantNumber) {
+                    me.alertantDB = alertant;
+                    me.alertanteConocido = true;
+                    me.incidencia.adreca = alertant.adreca;
+                    me.alertant.tipus_alertants_id = alertant.tipus_alertants_id;
+                    var municipi = me.municipis.find(function (obj) {
+                      return obj.id == alertant.municipis_id;
+                    });
+                    me.municipi = municipi;
+
+                    if (alertant.tipus_alertants_id == 1) {
+                      me.incidencia.adreca_complement = alertant.nom;
+                    }
+                  }
+                }));
+
+              case 2:
+              case "end":
+                return _context9.stop();
+            }
           }
-        }
+        }, _callee9);
+      }))();
+    },
+    updateRecursos: function updateRecursos() {
+      var me = this;
+      this.recursos.forEach(function (recurs) {
+        var recursToUpdate = recurs.recurs;
+        axios.put('/SGTA-Broggi/public/api/recurs/' + recursToUpdate.id, recursToUpdate).then(function (response) {
+          console.log(response);
+        })["catch"](function (error) {
+          console.log(error.response.status);
+          console.log(error.response.data.error);
+        });
       });
     }
   },
@@ -3474,11 +3847,11 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     provinciesFiltered: function provinciesFiltered() {
-      var _this3 = this;
+      var _this11 = this;
 
       if (this.comarca.id > 0) {
         var provincia = this.provincies.find(function (o) {
-          return o.id == _this3.comarca.provincies_id;
+          return o.id == _this11.comarca.provincies_id;
         });
         this.provincia = provincia;
         var provinciesFiltered = [];
@@ -9067,7 +9440,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn {\r\n    font-size: 15px;\n}\n.btn-secondary:not(:disabled):not(.disabled).active,\r\n.btn-secondary:not(:disabled):not(.disabled):active,\r\n.show > .btn-secondary.dropdown-toggle {\r\n  background-color: #e3177d;\r\n  border-color: black;\n}\n.btn-secondary {\r\n  border-color: black;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\n}\n.parentGrid {\r\n  display: grid;\r\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-between;\n}\n.card-header {\r\n  background-color: #15acc4;\r\n  border: 1px solid black;\r\n  border-left: 0;\r\n  border-right: 0;\r\n  margin-top: -1px;\n}\n.modal-header{\r\n    background-color: #15acc4 !important;\n}\n.card {\r\n  border: 1px solid black !important;\n}\nbutton {\r\n  background-color: #e3177d !important;\r\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\r\n  color: black;\r\n  font-weight: bold;\r\n  background-color: #15acc4 !important;\n}\n.tabButton{\r\n    background-color: white !important;\r\n    border: 0 !important;\n}\n.selectedTab{\r\n    background-color: #e3177d !important;\r\n    border: 1px solid black !important;\n}\n.green{\r\n    background-color: green;\r\n    color: white;\n}\n.red{\r\n    background-color: red;\r\n    color: white;\n}\n#entregar{\r\n  border: 1px solid black;\n}\n#titulitosTabs {\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\n}\n.iconNavPrincipal{\r\n    color: black;\n}\n#titulito {\r\n    font-family: 'Signika', sans-serif;\r\n    font-size: 18px;\n}\n.hidden{\r\n    visibility: hidden;\n}\n#buscadorTelefono > input{\r\n    border: 1px solid black;\n}\n.arrowNav{\r\n    height: 8vh;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn {\n    font-size: 15px;\n}\n.btn-secondary:not(:disabled):not(.disabled).active,\n.btn-secondary:not(:disabled):not(.disabled):active,\n.show > .btn-secondary.dropdown-toggle {\n  background-color: #e3177d;\n  border-color: black;\n}\n.btn-secondary {\n  border-color: black;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.parentGrid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n.card-header {\n  background-color: #15acc4;\n  border: 1px solid black;\n  border-left: 0;\n  border-right: 0;\n  margin-top: -1px;\n}\n.modal-header{\n    background-color: #15acc4 !important;\n}\n.card {\n  border: 1px solid black !important;\n}\nbutton {\n  background-color: #e3177d !important;\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\n  color: black;\n  font-weight: bold;\n  background-color: #15acc4 !important;\n}\n.tabButton{\n    background-color: white !important;\n    border: 0 !important;\n}\n.selectedTab{\n    background-color: #e3177d !important;\n    border: 1px solid black !important;\n}\n.green{\n    background-color: green;\n    color: white;\n}\n.red{\n    background-color: red;\n    color: white;\n}\n#entregar{\n  border: 1px solid black;\n}\n#titulitosTabs {\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n.iconNavPrincipal{\n    color: black;\n}\n#titulito {\n    font-family: 'Signika', sans-serif;\n    font-size: 18px;\n}\n.hidden{\n    visibility: hidden;\n}\n#buscadorTelefono > input{\n    border: 1px solid black;\n}\n.arrowNav{\n    height: 8vh;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -40279,6 +40652,764 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
+/***/ "./node_modules/regenerator-runtime/runtime.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/regenerator-runtime/runtime.js ***!
+  \*****************************************************/
+/***/ ((module) => {
+
+/**
+ * Copyright (c) 2014-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+var runtime = (function (exports) {
+  "use strict";
+
+  var Op = Object.prototype;
+  var hasOwn = Op.hasOwnProperty;
+  var undefined; // More compressible than void 0.
+  var $Symbol = typeof Symbol === "function" ? Symbol : {};
+  var iteratorSymbol = $Symbol.iterator || "@@iterator";
+  var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
+  var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
+
+  function define(obj, key, value) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+    return obj[key];
+  }
+  try {
+    // IE 8 has a broken Object.defineProperty that only works on DOM objects.
+    define({}, "");
+  } catch (err) {
+    define = function(obj, key, value) {
+      return obj[key] = value;
+    };
+  }
+
+  function wrap(innerFn, outerFn, self, tryLocsList) {
+    // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
+    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
+    var generator = Object.create(protoGenerator.prototype);
+    var context = new Context(tryLocsList || []);
+
+    // The ._invoke method unifies the implementations of the .next,
+    // .throw, and .return methods.
+    generator._invoke = makeInvokeMethod(innerFn, self, context);
+
+    return generator;
+  }
+  exports.wrap = wrap;
+
+  // Try/catch helper to minimize deoptimizations. Returns a completion
+  // record like context.tryEntries[i].completion. This interface could
+  // have been (and was previously) designed to take a closure to be
+  // invoked without arguments, but in all the cases we care about we
+  // already have an existing method we want to call, so there's no need
+  // to create a new function object. We can even get away with assuming
+  // the method takes exactly one argument, since that happens to be true
+  // in every case, so we don't have to touch the arguments object. The
+  // only additional allocation required is the completion record, which
+  // has a stable shape and so hopefully should be cheap to allocate.
+  function tryCatch(fn, obj, arg) {
+    try {
+      return { type: "normal", arg: fn.call(obj, arg) };
+    } catch (err) {
+      return { type: "throw", arg: err };
+    }
+  }
+
+  var GenStateSuspendedStart = "suspendedStart";
+  var GenStateSuspendedYield = "suspendedYield";
+  var GenStateExecuting = "executing";
+  var GenStateCompleted = "completed";
+
+  // Returning this object from the innerFn has the same effect as
+  // breaking out of the dispatch switch statement.
+  var ContinueSentinel = {};
+
+  // Dummy constructor functions that we use as the .constructor and
+  // .constructor.prototype properties for functions that return Generator
+  // objects. For full spec compliance, you may wish to configure your
+  // minifier not to mangle the names of these two functions.
+  function Generator() {}
+  function GeneratorFunction() {}
+  function GeneratorFunctionPrototype() {}
+
+  // This is a polyfill for %IteratorPrototype% for environments that
+  // don't natively support it.
+  var IteratorPrototype = {};
+  IteratorPrototype[iteratorSymbol] = function () {
+    return this;
+  };
+
+  var getProto = Object.getPrototypeOf;
+  var NativeIteratorPrototype = getProto && getProto(getProto(values([])));
+  if (NativeIteratorPrototype &&
+      NativeIteratorPrototype !== Op &&
+      hasOwn.call(NativeIteratorPrototype, iteratorSymbol)) {
+    // This environment has a native %IteratorPrototype%; use it instead
+    // of the polyfill.
+    IteratorPrototype = NativeIteratorPrototype;
+  }
+
+  var Gp = GeneratorFunctionPrototype.prototype =
+    Generator.prototype = Object.create(IteratorPrototype);
+  GeneratorFunction.prototype = Gp.constructor = GeneratorFunctionPrototype;
+  GeneratorFunctionPrototype.constructor = GeneratorFunction;
+  GeneratorFunction.displayName = define(
+    GeneratorFunctionPrototype,
+    toStringTagSymbol,
+    "GeneratorFunction"
+  );
+
+  // Helper for defining the .next, .throw, and .return methods of the
+  // Iterator interface in terms of a single ._invoke method.
+  function defineIteratorMethods(prototype) {
+    ["next", "throw", "return"].forEach(function(method) {
+      define(prototype, method, function(arg) {
+        return this._invoke(method, arg);
+      });
+    });
+  }
+
+  exports.isGeneratorFunction = function(genFun) {
+    var ctor = typeof genFun === "function" && genFun.constructor;
+    return ctor
+      ? ctor === GeneratorFunction ||
+        // For the native GeneratorFunction constructor, the best we can
+        // do is to check its .name property.
+        (ctor.displayName || ctor.name) === "GeneratorFunction"
+      : false;
+  };
+
+  exports.mark = function(genFun) {
+    if (Object.setPrototypeOf) {
+      Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
+    } else {
+      genFun.__proto__ = GeneratorFunctionPrototype;
+      define(genFun, toStringTagSymbol, "GeneratorFunction");
+    }
+    genFun.prototype = Object.create(Gp);
+    return genFun;
+  };
+
+  // Within the body of any async function, `await x` is transformed to
+  // `yield regeneratorRuntime.awrap(x)`, so that the runtime can test
+  // `hasOwn.call(value, "__await")` to determine if the yielded value is
+  // meant to be awaited.
+  exports.awrap = function(arg) {
+    return { __await: arg };
+  };
+
+  function AsyncIterator(generator, PromiseImpl) {
+    function invoke(method, arg, resolve, reject) {
+      var record = tryCatch(generator[method], generator, arg);
+      if (record.type === "throw") {
+        reject(record.arg);
+      } else {
+        var result = record.arg;
+        var value = result.value;
+        if (value &&
+            typeof value === "object" &&
+            hasOwn.call(value, "__await")) {
+          return PromiseImpl.resolve(value.__await).then(function(value) {
+            invoke("next", value, resolve, reject);
+          }, function(err) {
+            invoke("throw", err, resolve, reject);
+          });
+        }
+
+        return PromiseImpl.resolve(value).then(function(unwrapped) {
+          // When a yielded Promise is resolved, its final value becomes
+          // the .value of the Promise<{value,done}> result for the
+          // current iteration.
+          result.value = unwrapped;
+          resolve(result);
+        }, function(error) {
+          // If a rejected Promise was yielded, throw the rejection back
+          // into the async generator function so it can be handled there.
+          return invoke("throw", error, resolve, reject);
+        });
+      }
+    }
+
+    var previousPromise;
+
+    function enqueue(method, arg) {
+      function callInvokeWithMethodAndArg() {
+        return new PromiseImpl(function(resolve, reject) {
+          invoke(method, arg, resolve, reject);
+        });
+      }
+
+      return previousPromise =
+        // If enqueue has been called before, then we want to wait until
+        // all previous Promises have been resolved before calling invoke,
+        // so that results are always delivered in the correct order. If
+        // enqueue has not been called before, then it is important to
+        // call invoke immediately, without waiting on a callback to fire,
+        // so that the async generator function has the opportunity to do
+        // any necessary setup in a predictable way. This predictability
+        // is why the Promise constructor synchronously invokes its
+        // executor callback, and why async functions synchronously
+        // execute code before the first await. Since we implement simple
+        // async functions in terms of async generators, it is especially
+        // important to get this right, even though it requires care.
+        previousPromise ? previousPromise.then(
+          callInvokeWithMethodAndArg,
+          // Avoid propagating failures to Promises returned by later
+          // invocations of the iterator.
+          callInvokeWithMethodAndArg
+        ) : callInvokeWithMethodAndArg();
+    }
+
+    // Define the unified helper method that is used to implement .next,
+    // .throw, and .return (see defineIteratorMethods).
+    this._invoke = enqueue;
+  }
+
+  defineIteratorMethods(AsyncIterator.prototype);
+  AsyncIterator.prototype[asyncIteratorSymbol] = function () {
+    return this;
+  };
+  exports.AsyncIterator = AsyncIterator;
+
+  // Note that simple async functions are implemented on top of
+  // AsyncIterator objects; they just return a Promise for the value of
+  // the final result produced by the iterator.
+  exports.async = function(innerFn, outerFn, self, tryLocsList, PromiseImpl) {
+    if (PromiseImpl === void 0) PromiseImpl = Promise;
+
+    var iter = new AsyncIterator(
+      wrap(innerFn, outerFn, self, tryLocsList),
+      PromiseImpl
+    );
+
+    return exports.isGeneratorFunction(outerFn)
+      ? iter // If outerFn is a generator, return the full iterator.
+      : iter.next().then(function(result) {
+          return result.done ? result.value : iter.next();
+        });
+  };
+
+  function makeInvokeMethod(innerFn, self, context) {
+    var state = GenStateSuspendedStart;
+
+    return function invoke(method, arg) {
+      if (state === GenStateExecuting) {
+        throw new Error("Generator is already running");
+      }
+
+      if (state === GenStateCompleted) {
+        if (method === "throw") {
+          throw arg;
+        }
+
+        // Be forgiving, per 25.3.3.3.3 of the spec:
+        // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
+        return doneResult();
+      }
+
+      context.method = method;
+      context.arg = arg;
+
+      while (true) {
+        var delegate = context.delegate;
+        if (delegate) {
+          var delegateResult = maybeInvokeDelegate(delegate, context);
+          if (delegateResult) {
+            if (delegateResult === ContinueSentinel) continue;
+            return delegateResult;
+          }
+        }
+
+        if (context.method === "next") {
+          // Setting context._sent for legacy support of Babel's
+          // function.sent implementation.
+          context.sent = context._sent = context.arg;
+
+        } else if (context.method === "throw") {
+          if (state === GenStateSuspendedStart) {
+            state = GenStateCompleted;
+            throw context.arg;
+          }
+
+          context.dispatchException(context.arg);
+
+        } else if (context.method === "return") {
+          context.abrupt("return", context.arg);
+        }
+
+        state = GenStateExecuting;
+
+        var record = tryCatch(innerFn, self, context);
+        if (record.type === "normal") {
+          // If an exception is thrown from innerFn, we leave state ===
+          // GenStateExecuting and loop back for another invocation.
+          state = context.done
+            ? GenStateCompleted
+            : GenStateSuspendedYield;
+
+          if (record.arg === ContinueSentinel) {
+            continue;
+          }
+
+          return {
+            value: record.arg,
+            done: context.done
+          };
+
+        } else if (record.type === "throw") {
+          state = GenStateCompleted;
+          // Dispatch the exception by looping back around to the
+          // context.dispatchException(context.arg) call above.
+          context.method = "throw";
+          context.arg = record.arg;
+        }
+      }
+    };
+  }
+
+  // Call delegate.iterator[context.method](context.arg) and handle the
+  // result, either by returning a { value, done } result from the
+  // delegate iterator, or by modifying context.method and context.arg,
+  // setting context.delegate to null, and returning the ContinueSentinel.
+  function maybeInvokeDelegate(delegate, context) {
+    var method = delegate.iterator[context.method];
+    if (method === undefined) {
+      // A .throw or .return when the delegate iterator has no .throw
+      // method always terminates the yield* loop.
+      context.delegate = null;
+
+      if (context.method === "throw") {
+        // Note: ["return"] must be used for ES3 parsing compatibility.
+        if (delegate.iterator["return"]) {
+          // If the delegate iterator has a return method, give it a
+          // chance to clean up.
+          context.method = "return";
+          context.arg = undefined;
+          maybeInvokeDelegate(delegate, context);
+
+          if (context.method === "throw") {
+            // If maybeInvokeDelegate(context) changed context.method from
+            // "return" to "throw", let that override the TypeError below.
+            return ContinueSentinel;
+          }
+        }
+
+        context.method = "throw";
+        context.arg = new TypeError(
+          "The iterator does not provide a 'throw' method");
+      }
+
+      return ContinueSentinel;
+    }
+
+    var record = tryCatch(method, delegate.iterator, context.arg);
+
+    if (record.type === "throw") {
+      context.method = "throw";
+      context.arg = record.arg;
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    var info = record.arg;
+
+    if (! info) {
+      context.method = "throw";
+      context.arg = new TypeError("iterator result is not an object");
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    if (info.done) {
+      // Assign the result of the finished delegate to the temporary
+      // variable specified by delegate.resultName (see delegateYield).
+      context[delegate.resultName] = info.value;
+
+      // Resume execution at the desired location (see delegateYield).
+      context.next = delegate.nextLoc;
+
+      // If context.method was "throw" but the delegate handled the
+      // exception, let the outer generator proceed normally. If
+      // context.method was "next", forget context.arg since it has been
+      // "consumed" by the delegate iterator. If context.method was
+      // "return", allow the original .return call to continue in the
+      // outer generator.
+      if (context.method !== "return") {
+        context.method = "next";
+        context.arg = undefined;
+      }
+
+    } else {
+      // Re-yield the result returned by the delegate method.
+      return info;
+    }
+
+    // The delegate iterator is finished, so forget it and continue with
+    // the outer generator.
+    context.delegate = null;
+    return ContinueSentinel;
+  }
+
+  // Define Generator.prototype.{next,throw,return} in terms of the
+  // unified ._invoke helper method.
+  defineIteratorMethods(Gp);
+
+  define(Gp, toStringTagSymbol, "Generator");
+
+  // A Generator should always return itself as the iterator object when the
+  // @@iterator function is called on it. Some browsers' implementations of the
+  // iterator prototype chain incorrectly implement this, causing the Generator
+  // object to not be returned from this call. This ensures that doesn't happen.
+  // See https://github.com/facebook/regenerator/issues/274 for more details.
+  Gp[iteratorSymbol] = function() {
+    return this;
+  };
+
+  Gp.toString = function() {
+    return "[object Generator]";
+  };
+
+  function pushTryEntry(locs) {
+    var entry = { tryLoc: locs[0] };
+
+    if (1 in locs) {
+      entry.catchLoc = locs[1];
+    }
+
+    if (2 in locs) {
+      entry.finallyLoc = locs[2];
+      entry.afterLoc = locs[3];
+    }
+
+    this.tryEntries.push(entry);
+  }
+
+  function resetTryEntry(entry) {
+    var record = entry.completion || {};
+    record.type = "normal";
+    delete record.arg;
+    entry.completion = record;
+  }
+
+  function Context(tryLocsList) {
+    // The root entry object (effectively a try statement without a catch
+    // or a finally block) gives us a place to store values thrown from
+    // locations where there is no enclosing try statement.
+    this.tryEntries = [{ tryLoc: "root" }];
+    tryLocsList.forEach(pushTryEntry, this);
+    this.reset(true);
+  }
+
+  exports.keys = function(object) {
+    var keys = [];
+    for (var key in object) {
+      keys.push(key);
+    }
+    keys.reverse();
+
+    // Rather than returning an object with a next method, we keep
+    // things simple and return the next function itself.
+    return function next() {
+      while (keys.length) {
+        var key = keys.pop();
+        if (key in object) {
+          next.value = key;
+          next.done = false;
+          return next;
+        }
+      }
+
+      // To avoid creating an additional object, we just hang the .value
+      // and .done properties off the next function object itself. This
+      // also ensures that the minifier will not anonymize the function.
+      next.done = true;
+      return next;
+    };
+  };
+
+  function values(iterable) {
+    if (iterable) {
+      var iteratorMethod = iterable[iteratorSymbol];
+      if (iteratorMethod) {
+        return iteratorMethod.call(iterable);
+      }
+
+      if (typeof iterable.next === "function") {
+        return iterable;
+      }
+
+      if (!isNaN(iterable.length)) {
+        var i = -1, next = function next() {
+          while (++i < iterable.length) {
+            if (hasOwn.call(iterable, i)) {
+              next.value = iterable[i];
+              next.done = false;
+              return next;
+            }
+          }
+
+          next.value = undefined;
+          next.done = true;
+
+          return next;
+        };
+
+        return next.next = next;
+      }
+    }
+
+    // Return an iterator with no values.
+    return { next: doneResult };
+  }
+  exports.values = values;
+
+  function doneResult() {
+    return { value: undefined, done: true };
+  }
+
+  Context.prototype = {
+    constructor: Context,
+
+    reset: function(skipTempReset) {
+      this.prev = 0;
+      this.next = 0;
+      // Resetting context._sent for legacy support of Babel's
+      // function.sent implementation.
+      this.sent = this._sent = undefined;
+      this.done = false;
+      this.delegate = null;
+
+      this.method = "next";
+      this.arg = undefined;
+
+      this.tryEntries.forEach(resetTryEntry);
+
+      if (!skipTempReset) {
+        for (var name in this) {
+          // Not sure about the optimal order of these conditions:
+          if (name.charAt(0) === "t" &&
+              hasOwn.call(this, name) &&
+              !isNaN(+name.slice(1))) {
+            this[name] = undefined;
+          }
+        }
+      }
+    },
+
+    stop: function() {
+      this.done = true;
+
+      var rootEntry = this.tryEntries[0];
+      var rootRecord = rootEntry.completion;
+      if (rootRecord.type === "throw") {
+        throw rootRecord.arg;
+      }
+
+      return this.rval;
+    },
+
+    dispatchException: function(exception) {
+      if (this.done) {
+        throw exception;
+      }
+
+      var context = this;
+      function handle(loc, caught) {
+        record.type = "throw";
+        record.arg = exception;
+        context.next = loc;
+
+        if (caught) {
+          // If the dispatched exception was caught by a catch block,
+          // then let that catch block handle the exception normally.
+          context.method = "next";
+          context.arg = undefined;
+        }
+
+        return !! caught;
+      }
+
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        var record = entry.completion;
+
+        if (entry.tryLoc === "root") {
+          // Exception thrown outside of any try block that could handle
+          // it, so set the completion value of the entire function to
+          // throw the exception.
+          return handle("end");
+        }
+
+        if (entry.tryLoc <= this.prev) {
+          var hasCatch = hasOwn.call(entry, "catchLoc");
+          var hasFinally = hasOwn.call(entry, "finallyLoc");
+
+          if (hasCatch && hasFinally) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            } else if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+
+          } else if (hasCatch) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            }
+
+          } else if (hasFinally) {
+            if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+
+          } else {
+            throw new Error("try statement without catch or finally");
+          }
+        }
+      }
+    },
+
+    abrupt: function(type, arg) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc <= this.prev &&
+            hasOwn.call(entry, "finallyLoc") &&
+            this.prev < entry.finallyLoc) {
+          var finallyEntry = entry;
+          break;
+        }
+      }
+
+      if (finallyEntry &&
+          (type === "break" ||
+           type === "continue") &&
+          finallyEntry.tryLoc <= arg &&
+          arg <= finallyEntry.finallyLoc) {
+        // Ignore the finally entry if control is not jumping to a
+        // location outside the try/catch block.
+        finallyEntry = null;
+      }
+
+      var record = finallyEntry ? finallyEntry.completion : {};
+      record.type = type;
+      record.arg = arg;
+
+      if (finallyEntry) {
+        this.method = "next";
+        this.next = finallyEntry.finallyLoc;
+        return ContinueSentinel;
+      }
+
+      return this.complete(record);
+    },
+
+    complete: function(record, afterLoc) {
+      if (record.type === "throw") {
+        throw record.arg;
+      }
+
+      if (record.type === "break" ||
+          record.type === "continue") {
+        this.next = record.arg;
+      } else if (record.type === "return") {
+        this.rval = this.arg = record.arg;
+        this.method = "return";
+        this.next = "end";
+      } else if (record.type === "normal" && afterLoc) {
+        this.next = afterLoc;
+      }
+
+      return ContinueSentinel;
+    },
+
+    finish: function(finallyLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.finallyLoc === finallyLoc) {
+          this.complete(entry.completion, entry.afterLoc);
+          resetTryEntry(entry);
+          return ContinueSentinel;
+        }
+      }
+    },
+
+    "catch": function(tryLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc === tryLoc) {
+          var record = entry.completion;
+          if (record.type === "throw") {
+            var thrown = record.arg;
+            resetTryEntry(entry);
+          }
+          return thrown;
+        }
+      }
+
+      // The context.catch method must only be called with a location
+      // argument that corresponds to a known catch block.
+      throw new Error("illegal catch attempt");
+    },
+
+    delegateYield: function(iterable, resultName, nextLoc) {
+      this.delegate = {
+        iterator: values(iterable),
+        resultName: resultName,
+        nextLoc: nextLoc
+      };
+
+      if (this.method === "next") {
+        // Deliberately forget the last sent value so that we don't
+        // accidentally pass it on to the delegate.
+        this.arg = undefined;
+      }
+
+      return ContinueSentinel;
+    }
+  };
+
+  // Regardless of whether this script is executing as a CommonJS module
+  // or not, return the runtime object so that we can declare the variable
+  // regeneratorRuntime in the outer scope, which allows this module to be
+  // injected easily by `bin/regenerator --include-runtime script.js`.
+  return exports;
+
+}(
+  // If this script is executing as a CommonJS module, use module.exports
+  // as the regeneratorRuntime namespace. Otherwise create a new empty
+  // object. Either way, the resulting object will be used to initialize
+  // the regeneratorRuntime variable at the top of this file.
+   true ? module.exports : 0
+));
+
+try {
+  regeneratorRuntime = runtime;
+} catch (accidentalStrictMode) {
+  // This module should not be running in strict mode, so the above
+  // assignment should always work unless something is misconfigured. Just
+  // in case runtime.js accidentally runs in strict mode, we can escape
+  // strict mode using a global Function call. This could conceivably fail
+  // if a Content Security Policy forbids using Function, but in that case
+  // the proper solution is to fix the accidental strict mode problem. If
+  // you've misconfigured your bundler to force strict mode and applied a
+  // CSP to forbid Function, and you're not willing to fix either of those
+  // problems, please detail your unique predicament in a GitHub issue.
+  Function("r", "regeneratorRuntime = r")(runtime);
+}
+
+
+/***/ }),
+
 /***/ "./node_modules/mapbox-gl/dist/mapbox-gl.css":
 /*!***************************************************!*\
   !*** ./node_modules/mapbox-gl/dist/mapbox-gl.css ***!
@@ -42179,1672 +43310,202 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "mt-2", attrs: { id: "tabButtons" } }, [
-      _c(
-        "button",
-        {
-          staticClass:
-            "btn btn-sm mr-3 float-left ml-3 iconNavPrincipal arrowNav",
-          class: { hidden: _vm.tabs.a },
-          attrs: { disabled: _vm.currentTab == 1 },
-          on: {
-            click: function($event) {
-              return _vm.prev()
-            }
-          }
-        },
-        [
-          _c("i", {
-            staticClass: "fas fa-arrow-left fa-2x",
-            attrs: { "aria-hidden": "true" }
-          })
-        ]
-      ),
+  return _c(
+    "div",
+    [
+      _vm._l(_vm.errors, function(error, index) {
+        return _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.errors.length > 0,
+                expression: "errors.length > 0"
+              }
+            ],
+            key: index,
+            staticClass: "alert alert-danger alert-dismissable fade show",
+            staticStyle: { color: "black" },
+            attrs: { role: "alert" }
+          },
+          [_vm._v("\n      " + _vm._s(error) + "\n      "), _vm._m(0, true)]
+        )
+      }),
       _vm._v(" "),
-      _c("div", [
+      _c("div", { staticClass: "mt-2", attrs: { id: "tabButtons" } }, [
         _c(
           "button",
           {
-            staticClass: "btn btn-sm mr-3 tabButton",
-            class: { selectedTab: _vm.tabs.a },
+            staticClass:
+              "btn btn-sm mr-3 float-left ml-3 iconNavPrincipal arrowNav",
+            class: { hidden: _vm.tabs.a },
+            attrs: { disabled: _vm.currentTab == 1 },
             on: {
               click: function($event) {
-                return _vm.selectTab(1)
+                return _vm.prev()
               }
             }
           },
           [
             _c("i", {
-              staticClass: "fas fa-phone-alt fa-2x mr-2 ml-2 iconNavPrincipal",
-              attrs: { "aria-hidden": "true" }
-            })
-          ]
-        ),
-        _vm._v("\n      |\n      "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-sm mr-3 ml-3 tabButton",
-            class: { selectedTab: _vm.tabs.b },
-            on: {
-              click: function($event) {
-                return _vm.selectTab(2)
-              }
-            }
-          },
-          [
-            _c("i", {
-              staticClass:
-                "fas fa-user-injured fa-2x mr-2 ml-2 iconNavPrincipal",
-              attrs: { "aria-hidden": "true" }
-            })
-          ]
-        ),
-        _vm._v("\n      |\n      "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-sm ml-3 tabButton",
-            class: { selectedTab: _vm.tabs.c },
-            on: {
-              click: function($event) {
-                return _vm.selectTab(3)
-              }
-            }
-          },
-          [
-            _c("i", {
-              staticClass: "fas fa-ambulance fa-2x mr-2 ml-2 iconNavPrincipal",
+              staticClass: "fas fa-arrow-left fa-2x",
               attrs: { "aria-hidden": "true" }
             })
           ]
         ),
         _vm._v(" "),
-        _vm._m(0)
-      ]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass:
-            "btn btn-sm mr-3 float-right mr-3 iconNavPrincipal arrowNav",
-          class: { hidden: _vm.tabs.c },
-          attrs: { disabled: _vm.currentTab == 3 },
-          on: {
-            click: function($event) {
-              return _vm.next()
-            }
-          }
-        },
-        [_c("i", { staticClass: "fas fa-arrow-right fa-2x" })]
-      )
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.currentTab == 1,
-            expression: "currentTab == 1"
-          }
-        ]
-      },
-      [
-        _c("div", { staticClass: "container-fluid mt-5" }, [
+        _c("div", [
           _c(
-            "div",
-            { staticClass: "input-group", attrs: { id: "buscadorTelefono" } },
+            "button",
+            {
+              staticClass: "btn btn-sm mr-3 tabButton",
+              class: { selectedTab: _vm.tabs.a },
+              on: {
+                click: function($event) {
+                  return _vm.selectTab(1)
+                }
+              }
+            },
             [
-              _c("input", {
-                staticClass: "form-control col-2 ml-5 mb-4",
-                attrs: {
-                  type: "number",
-                  placeholder: "Teléfono",
-                  "aria-label": "Teléfono"
-                },
-                domProps: { value: _vm.alertantNumber }
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-group-append" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-secondary mb-4",
-                    attrs: { type: "button" },
-                    on: {
-                      click: function($event) {
-                        return _vm.getAlertantData()
-                      }
-                    }
-                  },
-                  [
-                    _c("i", { staticClass: "fa fa-search " }),
-                    _vm._v("  Buscar\n                ")
-                  ]
-                )
-              ])
+              _c("i", {
+                staticClass:
+                  "fas fa-phone-alt fa-2x mr-2 ml-2 iconNavPrincipal",
+                attrs: { "aria-hidden": "true" }
+              })
+            ]
+          ),
+          _vm._v("\n      |\n      "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-sm mr-3 ml-3 tabButton",
+              class: { selectedTab: _vm.tabs.b },
+              on: {
+                click: function($event) {
+                  return _vm.selectTab(2)
+                }
+              }
+            },
+            [
+              _c("i", {
+                staticClass:
+                  "fas fa-user-injured fa-2x mr-2 ml-2 iconNavPrincipal",
+                attrs: { "aria-hidden": "true" }
+              })
+            ]
+          ),
+          _vm._v("\n      |\n      "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-sm ml-3 tabButton",
+              class: { selectedTab: _vm.tabs.c },
+              on: {
+                click: function($event) {
+                  return _vm.selectTab(3)
+                }
+              }
+            },
+            [
+              _c("i", {
+                staticClass:
+                  "fas fa-ambulance fa-2x mr-2 ml-2 iconNavPrincipal",
+                attrs: { "aria-hidden": "true" }
+              })
             ]
           ),
           _vm._v(" "),
-          _c("div", { staticClass: "card ml-5 mr-5" }, [
-            _c(
-              "div",
-              {
-                staticClass: "card-header font-weight-bold",
-                attrs: { id: "titulito" }
-              },
-              [_vm._v("DATOS ALERTANTE")]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body ml-5" }, [
-              _c("form", [
-                _c("div", { staticClass: "form-group row" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "col-2 mt-1",
-                      attrs: { for: "tipoAlertante" }
-                    },
-                    [_vm._v("Tipo Alertante")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "btn-group btn-group-toggle col-9",
-                      attrs: { "data-toggle": "buttons" }
-                    },
-                    [
-                      _c("label", { staticClass: "btn btn-secondary" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.alertant.tipus_alertants_id,
-                              expression: "alertant.tipus_alertants_id"
-                            }
-                          ],
-                          attrs: {
-                            type: "radio",
-                            name: "tipoAlertante",
-                            id: "centroSanitario",
-                            value: "1"
-                          },
-                          domProps: {
-                            checked: _vm._q(
-                              _vm.alertant.tipus_alertants_id,
-                              "1"
-                            )
-                          },
-                          on: {
-                            change: function($event) {
-                              return _vm.$set(
-                                _vm.alertant,
-                                "tipus_alertants_id",
-                                "1"
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(
-                          "\n                  Centro Sanitario\n                "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("label", { staticClass: "btn btn-secondary" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.alertant.tipus_alertants_id,
-                              expression: "alertant.tipus_alertants_id"
-                            }
-                          ],
-                          attrs: {
-                            type: "radio",
-                            name: "tipoAlertante",
-                            id: "afectada",
-                            value: "2"
-                          },
-                          domProps: {
-                            checked: _vm._q(
-                              _vm.alertant.tipus_alertants_id,
-                              "2"
-                            )
-                          },
-                          on: {
-                            change: function($event) {
-                              return _vm.$set(
-                                _vm.alertant,
-                                "tipus_alertants_id",
-                                "2"
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v("\n                  Afectada\n                ")
-                      ]),
-                      _vm._v(" "),
-                      _c("label", { staticClass: "btn btn-secondary" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.alertant.tipus_alertants_id,
-                              expression: "alertant.tipus_alertants_id"
-                            }
-                          ],
-                          attrs: {
-                            type: "radio",
-                            name: "tipoAlertante",
-                            id: "entornoAfectada",
-                            value: "3"
-                          },
-                          domProps: {
-                            checked: _vm._q(
-                              _vm.alertant.tipus_alertants_id,
-                              "3"
-                            )
-                          },
-                          on: {
-                            change: function($event) {
-                              return _vm.$set(
-                                _vm.alertant,
-                                "tipus_alertants_id",
-                                "3"
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(
-                          "\n                  Entorno Afectada\n                "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("label", { staticClass: "btn btn-secondary" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.alertant.tipus_alertants_id,
-                              expression: "alertant.tipus_alertants_id"
-                            }
-                          ],
-                          attrs: {
-                            type: "radio",
-                            name: "tipoAlertante",
-                            id: "vip",
-                            value: "4"
-                          },
-                          domProps: {
-                            checked: _vm._q(
-                              _vm.alertant.tipus_alertants_id,
-                              "4"
-                            )
-                          },
-                          on: {
-                            change: function($event) {
-                              return _vm.$set(
-                                _vm.alertant,
-                                "tipus_alertants_id",
-                                "4"
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v("\n                  VIP\n                ")
-                      ]),
-                      _vm._v(" "),
-                      _c("label", { staticClass: "btn btn-secondary" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.alertant.tipus_alertants_id,
-                              expression: "alertant.tipus_alertants_id"
-                            }
-                          ],
-                          attrs: {
-                            type: "radio",
-                            name: "tipoAlertante",
-                            id: "accidental",
-                            value: "5"
-                          },
-                          domProps: {
-                            checked: _vm._q(
-                              _vm.alertant.tipus_alertants_id,
-                              "5"
-                            )
-                          },
-                          on: {
-                            change: function($event) {
-                              return _vm.$set(
-                                _vm.alertant,
-                                "tipus_alertants_id",
-                                "5"
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(
-                          "\n                  Accidental\n                "
-                        )
-                      ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group row" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "col-2 col-form-label",
-                      attrs: { for: "datosMedica" }
-                    },
-                    [_vm._v("Datos médica")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    {
-                      staticClass: "col-1 col-form-label",
-                      attrs: { for: "nombreMedica" }
-                    },
-                    [_vm._v("Nombre")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-8" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.incidencia.nom_metge,
-                          expression: "incidencia.nom_metge"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { type: "text", id: "nombreMedica" },
-                      domProps: { value: _vm.incidencia.nom_metge },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.incidencia,
-                            "nom_metge",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group row" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "col-2 mt-1",
-                      attrs: { for: "localización" }
-                    },
-                    [_vm._v("Localización")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    { staticClass: "col-1 mt-1", attrs: { for: "municipio" } },
-                    [_vm._v("Municipio")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-2" }, [
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.municipi,
-                            expression: "municipi"
-                          }
-                        ],
-                        staticClass: "custom-select",
-                        attrs: { id: "municipio", required: "" },
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.municipi = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          }
-                        }
-                      },
-                      [
-                        _c(
-                          "option",
-                          { attrs: { selected: "", value: "Selecciona..." } },
-                          [
-                            _vm._v(
-                              "\n                    Selecciona...\n                  "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _vm._l(_vm.municipisFiltered, function(municipi) {
-                          return _c(
-                            "option",
-                            { key: municipi.id, domProps: { value: municipi } },
-                            [
-                              _vm._v(
-                                "\n                    " +
-                                  _vm._s(municipi.nom) +
-                                  "\n                  "
-                              )
-                            ]
-                          )
-                        })
-                      ],
-                      2
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    { staticClass: "col-1 mt-1", attrs: { for: "comarca" } },
-                    [_vm._v("Comarca")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-2" }, [
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.comarca,
-                            expression: "comarca"
-                          }
-                        ],
-                        staticClass: "custom-select",
-                        attrs: { id: "comarca", required: "" },
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.comarca = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          }
-                        }
-                      },
-                      [
-                        _c(
-                          "option",
-                          { attrs: { selected: "", value: "Selecciona..." } },
-                          [
-                            _vm._v(
-                              "\n                    Selecciona...\n                  "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _vm._l(_vm.comarquesFiltered, function(comarca) {
-                          return _c(
-                            "option",
-                            { key: comarca.id, domProps: { value: comarca } },
-                            [
-                              _vm._v(
-                                "\n                    " +
-                                  _vm._s(comarca.nom) +
-                                  "\n                  "
-                              )
-                            ]
-                          )
-                        })
-                      ],
-                      2
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    { staticClass: "col-1 mt-1", attrs: { for: "provincia" } },
-                    [_vm._v("Provincia")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-2" }, [
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.provincia,
-                            expression: "provincia"
-                          }
-                        ],
-                        staticClass: "custom-select",
-                        attrs: { id: "provincia", required: "" },
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.provincia = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          }
-                        }
-                      },
-                      [
-                        _c(
-                          "option",
-                          { attrs: { selected: "", value: "Selecciona..." } },
-                          [
-                            _vm._v(
-                              "\n                    Selecciona...\n                  "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _vm._l(_vm.provinciesFiltered, function(provincia) {
-                          return _c(
-                            "option",
-                            {
-                              key: provincia.id,
-                              domProps: { value: provincia }
-                            },
-                            [
-                              _vm._v(
-                                "\n                    " +
-                                  _vm._s(provincia.nom) +
-                                  "\n                  "
-                              )
-                            ]
-                          )
-                        })
-                      ],
-                      2
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form row" }, [
-                  _c(
-                    "label",
-                    { staticClass: "col-2 mt-2", attrs: { for: "direccion" } },
-                    [_vm._v("Dirección")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-9" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.incidencia.adreca,
-                          expression: "incidencia.adreca"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { id: "direccion", type: "text" },
-                      domProps: { value: _vm.incidencia.adreca },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.incidencia,
-                            "adreca",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-row mt-3 mb-3" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "col-2",
-                      attrs: { for: "complementoDireccion" }
-                    },
-                    [_vm._v("Complemento Dirección")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-9" }, [
-                    _c("textarea", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.incidencia.adreca_complement,
-                          expression: "incidencia.adreca_complement"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { id: "complementoDireccion", rows: "3" },
-                      domProps: { value: _vm.incidencia.adreca_complement },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.incidencia,
-                            "adreca_complement",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    })
-                  ])
-                ])
-              ])
-            ])
-          ])
-        ])
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        directives: [
+          _vm._m(1)
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
           {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.currentTab == 2,
-            expression: "currentTab == 2"
-          }
-        ]
-      },
-      [
-        _c("div", { staticClass: "container-fluid mt-5" }, [
-          _c("div", { staticClass: "card ml-5 mr-5" }, [
-            _c(
-              "div",
-              {
-                staticClass: "card-header font-weight-bold",
-                attrs: { id: "titulito" }
-              },
-              [_vm._v("DATOS AFECTADA")]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body ml-5" }, [
-              _c("form", [
-                _c("div", { staticClass: "form-group row" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "col-1 col-form-label",
-                      attrs: { for: "nombreAfectada" }
-                    },
-                    [_vm._v("Nombre")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-4" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.afectat.nom,
-                          expression: "afectat.nom"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { type: "text", id: "nombreAfectada" },
-                      domProps: { value: _vm.afectat.nom },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.afectat, "nom", $event.target.value)
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    {
-                      staticClass: "col-1 col-form-label ml-4",
-                      attrs: { for: "apellidoAfectada" }
-                    },
-                    [_vm._v("Apellidos")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-5" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.afectat.cognoms,
-                          expression: "afectat.cognoms"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { type: "text", id: "apellidoAfectada" },
-                      domProps: { value: _vm.afectat.cognoms },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.afectat, "cognoms", $event.target.value)
-                        }
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group row" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "col-1 mt-1",
-                      attrs: { for: "sexoAfectada" }
-                    },
-                    [_vm._v("Sexo")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "btn-group btn-group-toggle col-4",
-                      attrs: { "data-toggle": "buttons" }
-                    },
-                    [
-                      _c("label", { staticClass: "btn btn-secondary" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.afectat.sexes_id,
-                              expression: "afectat.sexes_id"
-                            }
-                          ],
-                          attrs: {
-                            type: "radio",
-                            name: "sexoAfectada",
-                            id: "mujer",
-                            value: "2"
-                          },
-                          domProps: {
-                            checked: _vm._q(_vm.afectat.sexes_id, "2")
-                          },
-                          on: {
-                            change: function($event) {
-                              return _vm.$set(_vm.afectat, "sexes_id", "2")
-                            }
-                          }
-                        }),
-                        _vm._v("\n                  Mujer\n                ")
-                      ]),
-                      _vm._v(" "),
-                      _c("label", { staticClass: "btn btn-secondary" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.afectat.sexes_id,
-                              expression: "afectat.sexes_id"
-                            }
-                          ],
-                          attrs: {
-                            type: "radio",
-                            name: "sexoAfectada",
-                            id: "hombre",
-                            value: "1"
-                          },
-                          domProps: {
-                            checked: _vm._q(_vm.afectat.sexes_id, "1")
-                          },
-                          on: {
-                            change: function($event) {
-                              return _vm.$set(_vm.afectat, "sexes_id", "1")
-                            }
-                          }
-                        }),
-                        _vm._v("\n                  Hombre\n                ")
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    {
-                      staticClass: "col-1 mt-1 ml-4",
-                      attrs: { for: "edadAfectada" }
-                    },
-                    [_vm._v("Edad")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-2" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.afectat.edat,
-                          expression: "afectat.edat"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { type: "number", min: "1", max: "130" },
-                      domProps: { value: _vm.afectat.edat },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.afectat, "edat", $event.target.value)
-                        }
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form row" }, [
-                  _c(
-                    "label",
-                    { staticClass: "col-1 mt-2", attrs: { for: "direccion" } },
-                    [_vm._v("CIP")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-5" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.afectat.cip,
-                          expression: "afectat.cip"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { type: "text" },
-                      domProps: { value: _vm.afectat.cip },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.afectat, "cip", $event.target.value)
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-6" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary float-right ml-4",
-                        attrs: {
-                          type: "button",
-                          id: "afectadasList",
-                          disabled: _vm.afectadasCount == 0
-                        },
-                        on: {
-                          click: function($event) {
-                            return _vm.mostrarAfectades()
-                          }
-                        }
-                      },
-                      [
-                        _c("i", {
-                          staticClass: "fa fa-list mr-1",
-                          attrs: { "aria-hidden": "true" }
-                        }),
-                        _vm._v(
-                          " AFECTADAS\n                  (" +
-                            _vm._s(_vm.afectadasCount) +
-                            ")\n                "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary float-right",
-                        attrs: { type: "button" },
-                        on: {
-                          click: function($event) {
-                            return _vm.afegirAfectat()
-                          }
-                        }
-                      },
-                      [
-                        _c("i", {
-                          staticClass: "fa fa-plus-circle mr-1",
-                          attrs: { "aria-hidden": "true" }
-                        }),
-                        _vm._v(
-                          "\n                  AÑADIR AFECTADA\n                "
-                        )
-                      ]
-                    )
-                  ])
-                ])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card ml-5 mr-5 mt-3" }, [
-            _c(
-              "div",
-              {
-                staticClass: "card-header font-weight-bold",
-                attrs: { id: "titulito" }
-              },
-              [_vm._v("DATOS INCIDENTE")]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body ml-5" }, [
-              _c("form", [
-                _c("div", { staticClass: "form-group row" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "col-1 col-form-label",
-                      attrs: { for: "fechaIncidente" }
-                    },
-                    [_vm._v("Fecha")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-2" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.incidencia.data,
-                          expression: "incidencia.data"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { type: "date", id: "fechaIncidente" },
-                      domProps: { value: _vm.incidencia.data },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.incidencia, "data", $event.target.value)
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    {
-                      staticClass: "col-1 col-form-label ml-5",
-                      attrs: { for: "horaIncidente" }
-                    },
-                    [_vm._v("Hora")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-2" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.incidencia.hora,
-                          expression: "incidencia.hora"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { type: "time", id: "horaIncidente" },
-                      domProps: { value: _vm.incidencia.hora },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.incidencia, "hora", $event.target.value)
-                        }
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group row" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "col-1 mt-1",
-                      attrs: { for: "tipoIncidencia" }
-                    },
-                    [_vm._v("Tipo de incidente")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "btn-group btn-group-toggle col-10",
-                      attrs: { "data-toggle": "buttons" }
-                    },
-                    [
-                      _c("label", { staticClass: "btn btn-secondary" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.incidencia.tipus_incidencies_id,
-                              expression: "incidencia.tipus_incidencies_id"
-                            }
-                          ],
-                          attrs: {
-                            type: "radio",
-                            name: "tipoIncidencia",
-                            id: "accidente",
-                            value: "1"
-                          },
-                          domProps: {
-                            checked: _vm._q(
-                              _vm.incidencia.tipus_incidencies_id,
-                              "1"
-                            )
-                          },
-                          on: {
-                            change: function($event) {
-                              return _vm.$set(
-                                _vm.incidencia,
-                                "tipus_incidencies_id",
-                                "1"
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(
-                          "\n                  Accidente\n                "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("label", { staticClass: "btn btn-secondary" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.incidencia.tipus_incidencies_id,
-                              expression: "incidencia.tipus_incidencies_id"
-                            }
-                          ],
-                          attrs: {
-                            type: "radio",
-                            name: "tipoIncidencia",
-                            id: "traumatismo",
-                            value: "2"
-                          },
-                          domProps: {
-                            checked: _vm._q(
-                              _vm.incidencia.tipus_incidencies_id,
-                              "2"
-                            )
-                          },
-                          on: {
-                            change: function($event) {
-                              return _vm.$set(
-                                _vm.incidencia,
-                                "tipus_incidencies_id",
-                                "2"
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(
-                          "\n                  Traumatismo\n                "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("label", { staticClass: "btn btn-secondary" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.incidencia.tipus_incidencies_id,
-                              expression: "incidencia.tipus_incidencies_id"
-                            }
-                          ],
-                          attrs: {
-                            type: "radio",
-                            name: "tipoIncidencia",
-                            id: "publico",
-                            value: "3"
-                          },
-                          domProps: {
-                            checked: _vm._q(
-                              _vm.incidencia.tipus_incidencies_id,
-                              "3"
-                            )
-                          },
-                          on: {
-                            change: function($event) {
-                              return _vm.$set(
-                                _vm.incidencia,
-                                "tipus_incidencies_id",
-                                "3"
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(
-                          "\n                  Enfermedad en lugar público\n                "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("label", { staticClass: "btn btn-secondary" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.incidencia.tipus_incidencies_id,
-                              expression: "incidencia.tipus_incidencies_id"
-                            }
-                          ],
-                          attrs: {
-                            type: "radio",
-                            name: "tipoIncidencia",
-                            id: "domicilio",
-                            value: "4"
-                          },
-                          domProps: {
-                            checked: _vm._q(
-                              _vm.incidencia.tipus_incidencies_id,
-                              "4"
-                            )
-                          },
-                          on: {
-                            change: function($event) {
-                              return _vm.$set(
-                                _vm.incidencia,
-                                "tipus_incidencies_id",
-                                "4"
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(
-                          "\n                  Enfermedad domiciliaria\n                "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("label", { staticClass: "btn btn-secondary" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.incidencia.tipus_incidencies_id,
-                              expression: "incidencia.tipus_incidencies_id"
-                            }
-                          ],
-                          attrs: {
-                            type: "radio",
-                            name: "tipoIncidencia",
-                            id: "consulta",
-                            value: "5"
-                          },
-                          domProps: {
-                            checked: _vm._q(
-                              _vm.incidencia.tipus_incidencies_id,
-                              "5"
-                            )
-                          },
-                          on: {
-                            change: function($event) {
-                              return _vm.$set(
-                                _vm.incidencia,
-                                "tipus_incidencies_id",
-                                "5"
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(
-                          "\n                  Consulta médica\n                "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("label", { staticClass: "btn btn-secondary" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.incidencia.tipus_incidencies_id,
-                              expression: "incidencia.tipus_incidencies_id"
-                            }
-                          ],
-                          attrs: {
-                            type: "radio",
-                            name: "tipoAlertante",
-                            id: "transporte",
-                            value: "6"
-                          },
-                          domProps: {
-                            checked: _vm._q(
-                              _vm.incidencia.tipus_incidencies_id,
-                              "6"
-                            )
-                          },
-                          on: {
-                            change: function($event) {
-                              return _vm.$set(
-                                _vm.incidencia,
-                                "tipus_incidencies_id",
-                                "6"
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(
-                          "\n                  Transporte sanitario\n                "
-                        )
-                      ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-row mt-3 mb-3" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "col-1",
-                      attrs: { for: "descripcionIncidente" }
-                    },
-                    [_vm._v("Descripción del incidente")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-10" }, [
-                    _c("textarea", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.incidencia.descripcio,
-                          expression: "incidencia.descripcio"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { id: "descripcionIncidente", rows: "3" },
-                      domProps: { value: _vm.incidencia.descripcio },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.incidencia,
-                            "descripcio",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    })
-                  ])
-                ])
-              ])
-            ])
-          ])
-        ])
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.currentTab == 3,
-            expression: "currentTab == 3"
-          }
-        ]
-      },
-      [
-        _c("div", { staticClass: "card ml-5 mr-5 mt-3" }, [
-          _c(
-            "div",
+            staticClass:
+              "btn btn-sm mr-3 float-right mr-3 iconNavPrincipal arrowNav",
+            class: { hidden: _vm.tabs.c },
+            attrs: { disabled: _vm.currentTab == 3 },
+            on: {
+              click: function($event) {
+                return _vm.next()
+              }
+            }
+          },
+          [_c("i", { staticClass: "fas fa-arrow-right fa-2x" })]
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
             {
-              staticClass: "card-header font-weight-bold",
-              attrs: { id: "titulito" }
-            },
-            [_vm._v("RESPUESTA")]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body ml-5" }, [
-            _c("form", [
-              _vm._m(1),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group row mt-4" }, [
-                _c(
-                  "div",
-                  { staticClass: "custom-control custom-switch col-2" },
-                  [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.activaRecurs,
-                          expression: "activaRecurs"
-                        }
-                      ],
-                      staticClass: "custom-control-input",
-                      attrs: { type: "checkbox", id: "recursoSwitch" },
-                      domProps: {
-                        checked: Array.isArray(_vm.activaRecurs)
-                          ? _vm._i(_vm.activaRecurs, null) > -1
-                          : _vm.activaRecurs
-                      },
+              name: "show",
+              rawName: "v-show",
+              value: _vm.currentTab == 1,
+              expression: "currentTab == 1"
+            }
+          ]
+        },
+        [
+          _c("div", { staticClass: "container-fluid mt-5" }, [
+            _c(
+              "div",
+              { staticClass: "input-group", attrs: { id: "buscadorTelefono" } },
+              [
+                _c("input", {
+                  staticClass: "form-control col-2 ml-5 mb-4",
+                  attrs: {
+                    type: "number",
+                    placeholder: "Teléfono",
+                    "aria-label": "Teléfono"
+                  },
+                  domProps: { value: _vm.alertantNumber }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group-append" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-secondary mb-4",
+                      attrs: { type: "button" },
                       on: {
-                        change: function($event) {
-                          var $$a = _vm.activaRecurs,
-                            $$el = $event.target,
-                            $$c = $$el.checked ? true : false
-                          if (Array.isArray($$a)) {
-                            var $$v = null,
-                              $$i = _vm._i($$a, $$v)
-                            if ($$el.checked) {
-                              $$i < 0 && (_vm.activaRecurs = $$a.concat([$$v]))
-                            } else {
-                              $$i > -1 &&
-                                (_vm.activaRecurs = $$a
-                                  .slice(0, $$i)
-                                  .concat($$a.slice($$i + 1)))
-                            }
-                          } else {
-                            _vm.activaRecurs = $$c
-                          }
+                        click: function($event) {
+                          return _vm.getAlertantData()
                         }
                       }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticClass: "custom-control-label",
-                        attrs: { for: "recursoSwitch" }
-                      },
-                      [_vm._v("Activar recurso")]
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "col-10",
-                    class: { hidden: !_vm.activaRecurs }
-                  },
-                  [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary float-right ml-4",
-                        attrs: {
-                          type: "button",
-                          id: "recursosList",
-                          disabled: _vm.recursosCount == 0
-                        },
-                        on: {
-                          click: function($event) {
-                            return _vm.mostrarRecursos()
-                          }
-                        }
-                      },
-                      [
-                        _c("i", {
-                          staticClass: "fa fa-list mr-1",
-                          attrs: { "aria-hidden": "true" }
-                        }),
-                        _vm._v(
-                          " RECURSOS\n                  (" +
-                            _vm._s(_vm.recursosCount) +
-                            ")\n                "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary float-right",
-                        attrs: { type: "button" },
-                        on: {
-                          click: function($event) {
-                            return _vm.afegirRecurs()
-                          }
-                        }
-                      },
-                      [
-                        _c("i", {
-                          staticClass: "fa fa-plus-circle",
-                          attrs: { "aria-hidden": "true" }
-                        }),
-                        _vm._v(
-                          " AÑADIR\n                RECURSO\n              "
-                        )
-                      ]
-                    )
-                  ]
-                )
-              ]),
-              _vm._v(" "),
+                    },
+                    [
+                      _c("i", { staticClass: "fa fa-search " }),
+                      _vm._v("  Buscar\n                ")
+                    ]
+                  )
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "card ml-5 mr-5" }, [
               _c(
                 "div",
                 {
-                  staticClass: "card mt-2",
-                  class: { hidden: !_vm.activaRecurs }
+                  staticClass: "card-header font-weight-bold",
+                  attrs: { id: "titulito" }
                 },
-                [
-                  _c("div", { staticClass: "form-group row ml-3 mt-3 pb-4" }, [
-                    _c(
-                      "label",
-                      { staticClass: "col-2 mt-1", attrs: { for: "recursos" } },
-                      [_vm._v("Recursos")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-3 " }, [
-                      _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.recurs,
-                              expression: "recurs"
-                            }
-                          ],
-                          staticClass: "custom-select",
-                          attrs: { id: "recurso" },
-                          on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.recurs = $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            }
-                          }
-                        },
-                        [
-                          _c(
-                            "option",
-                            { attrs: { selected: "", value: "Selecciona..." } },
-                            [
-                              _vm._v(
-                                "\n                      Selecciona...\n                  "
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _vm._l(_vm.recursos_select, function(recurs) {
-                            return _c(
-                              "option",
-                              {
-                                key: recurs.id,
-                                class: [recurs.actiu ? "green" : "red"],
-                                attrs: { disabled: !recurs.actiu },
-                                domProps: { value: recurs }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                      " +
-                                    _vm._s(recurs.codi) +
-                                    "\n                  "
-                                )
-                              ]
-                            )
-                          })
-                        ],
-                        2
-                      )
-                    ]),
-                    _vm._v(" "),
+                [_vm._v("DATOS ALERTANTE")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body ml-5" }, [
+                _c("form", [
+                  _c("div", { staticClass: "form-group row" }, [
                     _c(
                       "label",
                       {
                         staticClass: "col-2 mt-1",
-                        attrs: { for: "afectadoSelect" }
+                        attrs: { for: "tipoAlertante" }
                       },
-                      [_vm._v("Afectados")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-4" }, [
-                      _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.afectatSelect,
-                              expression: "afectatSelect"
-                            }
-                          ],
-                          staticClass: "custom-select",
-                          attrs: { id: "afectadoSelect" },
-                          on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.afectatSelect = $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            }
-                          }
-                        },
-                        [
-                          _c(
-                            "option",
-                            { attrs: { selected: "", value: "Selecciona..." } },
-                            [
-                              _vm._v(
-                                "\n                      Selecciona...\n                  "
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _vm._l(_vm.recursAfectats, function(afectat, index) {
-                            return _c(
-                              "option",
-                              { key: index, domProps: { value: afectat } },
-                              [
-                                _vm._v(
-                                  "\n                      " +
-                                    _vm._s(afectat.nom) +
-                                    " " +
-                                    _vm._s(afectat.cognoms) +
-                                    ",\n                      "
-                                ),
-                                afectat.sexes_id == 1
-                                  ? _c("span", [_vm._v(" Hombre")])
-                                  : _c("span", [_vm._v(" Mujer")]),
-                                _vm._v(
-                                  "\n                       (" +
-                                    _vm._s(afectat.edat) +
-                                    ")\n                  "
-                                )
-                              ]
-                            )
-                          })
-                        ],
-                        2
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group row ml-3" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-2 mt-1",
-                        attrs: { for: "prioridad" }
-                      },
-                      [_vm._v("Prioridad")]
+                      [_vm._v("Tipo Alertante")]
                     ),
                     _vm._v(" "),
                     _c(
@@ -43860,34 +43521,35 @@ var render = function() {
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.incidencies_has_recursos.prioritat,
-                                expression: "incidencies_has_recursos.prioritat"
+                                value: _vm.alertant.tipus_alertants_id,
+                                expression: "alertant.tipus_alertants_id"
                               }
                             ],
                             attrs: {
                               type: "radio",
-                              name: "prioridad",
-                              id: "prioridad1",
-                              value: "1",
-                              disabled: !_vm.recurs.actiu
+                              name: "tipoAlertante",
+                              id: "centroSanitario",
+                              value: "1"
                             },
                             domProps: {
                               checked: _vm._q(
-                                _vm.incidencies_has_recursos.prioritat,
+                                _vm.alertant.tipus_alertants_id,
                                 "1"
                               )
                             },
                             on: {
                               change: function($event) {
                                 return _vm.$set(
-                                  _vm.incidencies_has_recursos,
-                                  "prioritat",
+                                  _vm.alertant,
+                                  "tipus_alertants_id",
                                   "1"
                                 )
                               }
                             }
                           }),
-                          _vm._v("\n                  1\n                ")
+                          _vm._v(
+                            "\n                  Centro Sanitario\n                "
+                          )
                         ]),
                         _vm._v(" "),
                         _c("label", { staticClass: "btn btn-secondary" }, [
@@ -43896,34 +43558,35 @@ var render = function() {
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.incidencies_has_recursos.prioritat,
-                                expression: "incidencies_has_recursos.prioritat"
+                                value: _vm.alertant.tipus_alertants_id,
+                                expression: "alertant.tipus_alertants_id"
                               }
                             ],
                             attrs: {
                               type: "radio",
-                              name: "prioridad",
-                              id: "prioridad2",
-                              value: "2",
-                              disabled: !_vm.recurs.actiu
+                              name: "tipoAlertante",
+                              id: "afectada",
+                              value: "2"
                             },
                             domProps: {
                               checked: _vm._q(
-                                _vm.incidencies_has_recursos.prioritat,
+                                _vm.alertant.tipus_alertants_id,
                                 "2"
                               )
                             },
                             on: {
                               change: function($event) {
                                 return _vm.$set(
-                                  _vm.incidencies_has_recursos,
-                                  "prioritat",
+                                  _vm.alertant,
+                                  "tipus_alertants_id",
                                   "2"
                                 )
                               }
                             }
                           }),
-                          _vm._v("\n                  2\n                ")
+                          _vm._v(
+                            "\n                  Afectada\n                "
+                          )
                         ]),
                         _vm._v(" "),
                         _c("label", { staticClass: "btn btn-secondary" }, [
@@ -43932,34 +43595,35 @@ var render = function() {
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.incidencies_has_recursos.prioritat,
-                                expression: "incidencies_has_recursos.prioritat"
+                                value: _vm.alertant.tipus_alertants_id,
+                                expression: "alertant.tipus_alertants_id"
                               }
                             ],
                             attrs: {
                               type: "radio",
-                              name: "prioridad",
-                              id: "prioridad3",
-                              value: "3",
-                              disabled: !_vm.recurs.actiu
+                              name: "tipoAlertante",
+                              id: "entornoAfectada",
+                              value: "3"
                             },
                             domProps: {
                               checked: _vm._q(
-                                _vm.incidencies_has_recursos.prioritat,
+                                _vm.alertant.tipus_alertants_id,
                                 "3"
                               )
                             },
                             on: {
                               change: function($event) {
                                 return _vm.$set(
-                                  _vm.incidencies_has_recursos,
-                                  "prioritat",
+                                  _vm.alertant,
+                                  "tipus_alertants_id",
                                   "3"
                                 )
                               }
                             }
                           }),
-                          _vm._v("\n                  3\n                ")
+                          _vm._v(
+                            "\n                  Entorno Afectada\n                "
+                          )
                         ]),
                         _vm._v(" "),
                         _c("label", { staticClass: "btn btn-secondary" }, [
@@ -43968,249 +43632,1820 @@ var render = function() {
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.incidencies_has_recursos.prioritat,
-                                expression: "incidencies_has_recursos.prioritat"
+                                value: _vm.alertant.tipus_alertants_id,
+                                expression: "alertant.tipus_alertants_id"
                               }
                             ],
                             attrs: {
                               type: "radio",
-                              name: "prioridad",
-                              id: "prioridad4",
-                              value: "4",
-                              disabled: !_vm.recurs.actiu
+                              name: "tipoAlertante",
+                              id: "vip",
+                              value: "4"
                             },
                             domProps: {
                               checked: _vm._q(
-                                _vm.incidencies_has_recursos.prioritat,
+                                _vm.alertant.tipus_alertants_id,
                                 "4"
                               )
                             },
                             on: {
                               change: function($event) {
                                 return _vm.$set(
-                                  _vm.incidencies_has_recursos,
-                                  "prioritat",
+                                  _vm.alertant,
+                                  "tipus_alertants_id",
                                   "4"
                                 )
                               }
                             }
                           }),
-                          _vm._v("\n                  4\n                ")
+                          _vm._v("\n                  VIP\n                ")
+                        ]),
+                        _vm._v(" "),
+                        _c("label", { staticClass: "btn btn-secondary" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.alertant.tipus_alertants_id,
+                                expression: "alertant.tipus_alertants_id"
+                              }
+                            ],
+                            attrs: {
+                              type: "radio",
+                              name: "tipoAlertante",
+                              id: "accidental",
+                              value: "5"
+                            },
+                            domProps: {
+                              checked: _vm._q(
+                                _vm.alertant.tipus_alertants_id,
+                                "5"
+                              )
+                            },
+                            on: {
+                              change: function($event) {
+                                return _vm.$set(
+                                  _vm.alertant,
+                                  "tipus_alertants_id",
+                                  "5"
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(
+                            "\n                  Accidental\n                "
+                          )
                         ])
                       ]
                     )
-                  ])
-                ]
-              )
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "btn btn-success float-right mr-5 mt-4",
-            attrs: { type: "button", id: "entregar" },
-            on: {
-              click: function($event) {
-                return _vm.insertarIncidencia()
-              }
-            }
-          },
-          [
-            _c("i", {
-              staticClass: "fa fa-check",
-              attrs: { "aria-hidden": "true" }
-            }),
-            _vm._v(" INSERTAR INCIDENCIA\n    ")
-          ]
-        )
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal",
-        attrs: { tabindex: "-1", role: "dialog", id: "afectadaModal" }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(2),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c(
-                  "ul",
-                  { staticClass: "list-group" },
-                  _vm._l(_vm.afectats, function(afectada, index) {
-                    return _c(
-                      "li",
-                      { key: index, staticClass: "list-group-item" },
-                      [
-                        _vm._v(
-                          _vm._s(afectada.nom) +
-                            " " +
-                            _vm._s(afectada.cognoms) +
-                            ",\n                  "
-                        ),
-                        afectada.sexes_id == 1
-                          ? _c("span", [_vm._v(" Hombre")])
-                          : _c("span", [_vm._v(" Mujer")]),
-                        _vm._v(
-                          "\n                   (" +
-                            _vm._s(afectada.edat) +
-                            ")\n                  "
-                        ),
-                        _c(
-                          "button",
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-2 col-form-label",
+                        attrs: { for: "datosMedica" }
+                      },
+                      [_vm._v("Datos médica")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-1 col-form-label",
+                        attrs: { for: "nombreMedica" }
+                      },
+                      [_vm._v("Nombre")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-8" }, [
+                      _c("input", {
+                        directives: [
                           {
-                            staticClass: "btn btn-danger float-right",
-                            on: {
-                              click: function($event) {
-                                return _vm.eliminarAfectada(index)
-                              }
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.incidencia.nom_metge,
+                            expression: "incidencia.nom_metge"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "nombreMedica" },
+                        domProps: { value: _vm.incidencia.nom_metge },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
                             }
-                          },
-                          [
-                            _c("i", { staticClass: "fas fa-trash" }),
-                            _vm._v(" Borrar")
-                          ]
-                        )
-                      ]
-                    )
-                  }),
-                  0
-                )
-              ]),
-              _vm._v(" "),
-              _vm._m(3)
-            ])
-          ]
-        )
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal",
-        attrs: { tabindex: "-1", role: "dialog", id: "recursModal" }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(4),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                this.recursos.length > 0
-                  ? _c(
-                      "ul",
-                      { staticClass: "list-group" },
-                      _vm._l(_vm.recursos, function(recursProba, recurs_index) {
-                        return _c(
-                          "li",
-                          {
-                            key: recursProba.recurs.id,
-                            staticClass: "list-group-item"
-                          },
-                          [
-                            _vm._v(
-                              _vm._s(recursProba.recurs.codi) +
-                                ",\n                  "
-                            ),
-                            recursProba.recurs.tipus_recursos_id == 1
-                              ? _c("span", [
-                                  _vm._v(" Ambulancia Medicalitzada, ")
-                                ])
-                              : recursProba.recurs.tipus_recursos_id == 2
-                              ? _c("span", [
-                                  _vm._v(" Ambulancia Sanitaritzada, ")
-                                ])
-                              : recursProba.recurs.tipus_recursos_id == 3
-                              ? _c("span", [
-                                  _vm._v(" Ambulancia Assistencial, ")
-                                ])
-                              : _c("span", [
-                                  _vm._v(" Helicopter Medicalitzat, ")
-                                ]),
-                            _vm._v(
-                              "\n                  Prioritat " +
-                                _vm._s(
-                                  _vm.incidencies_has_recursos_array[
-                                    recurs_index
-                                  ].prioritat
-                                ) +
-                                "\n                  "
-                            ),
-                            _vm._v(" "),
-                            recursProba.afectats.length > 0
-                              ? _c(
-                                  "ul",
-                                  _vm._l(recursProba.afectats, function(
-                                    afectat,
-                                    index
-                                  ) {
-                                    return _c("li", { key: index }, [
-                                      _vm._v(
-                                        "\n                          " +
-                                          _vm._s(afectat.nom) +
-                                          " " +
-                                          _vm._s(afectat.cognoms) +
-                                          ",\n                          "
-                                      ),
-                                      afectat.sexes_id == 1
-                                        ? _c("span", [_vm._v(" Hombre")])
-                                        : _c("span", [_vm._v(" Mujer")]),
-                                      _vm._v(
-                                        "\n                          (" +
-                                          _vm._s(afectat.edat) +
-                                          ")\n                      "
-                                      )
-                                    ])
-                                  }),
-                                  0
-                                )
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _c(
-                              "button",
+                            _vm.$set(
+                              _vm.incidencia,
+                              "nom_metge",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-2 mt-1",
+                        attrs: { for: "localización" }
+                      },
+                      [_vm._v("Localización")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-1 mt-1",
+                        attrs: { for: "municipio" }
+                      },
+                      [_vm._v("Municipio")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-2" }, [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.municipi,
+                              expression: "municipi"
+                            }
+                          ],
+                          staticClass: "custom-select",
+                          attrs: { id: "municipio", required: "" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.municipi = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "option",
+                            { attrs: { selected: "", value: "Selecciona..." } },
+                            [
+                              _vm._v(
+                                "\n                    Selecciona...\n                  "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.municipisFiltered, function(municipi) {
+                            return _c(
+                              "option",
                               {
-                                staticClass: "btn btn-danger float-right",
-                                on: {
-                                  click: function($event) {
-                                    return _vm.eliminarRecurs(recurs_index)
-                                  }
-                                }
+                                key: municipi.id,
+                                domProps: { value: municipi }
                               },
                               [
-                                _c("i", { staticClass: "fas fa-trash" }),
-                                _vm._v(" Borrar")
+                                _vm._v(
+                                  "\n                    " +
+                                    _vm._s(municipi.nom) +
+                                    "\n                  "
+                                )
                               ]
                             )
-                          ]
-                        )
-                      }),
-                      0
-                    )
-                  : _vm._e()
-              ]),
-              _vm._v(" "),
-              _vm._m(5)
+                          })
+                        ],
+                        2
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      { staticClass: "col-1 mt-1", attrs: { for: "comarca" } },
+                      [_vm._v("Comarca")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-2" }, [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.comarca,
+                              expression: "comarca"
+                            }
+                          ],
+                          staticClass: "custom-select",
+                          attrs: { id: "comarca", required: "" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.comarca = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "option",
+                            { attrs: { selected: "", value: "Selecciona..." } },
+                            [
+                              _vm._v(
+                                "\n                    Selecciona...\n                  "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.comarquesFiltered, function(comarca) {
+                            return _c(
+                              "option",
+                              { key: comarca.id, domProps: { value: comarca } },
+                              [
+                                _vm._v(
+                                  "\n                    " +
+                                    _vm._s(comarca.nom) +
+                                    "\n                  "
+                                )
+                              ]
+                            )
+                          })
+                        ],
+                        2
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-1 mt-1",
+                        attrs: { for: "provincia" }
+                      },
+                      [_vm._v("Provincia")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-2" }, [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.provincia,
+                              expression: "provincia"
+                            }
+                          ],
+                          staticClass: "custom-select",
+                          attrs: { id: "provincia", required: "" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.provincia = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "option",
+                            { attrs: { selected: "", value: "Selecciona..." } },
+                            [
+                              _vm._v(
+                                "\n                    Selecciona...\n                  "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.provinciesFiltered, function(provincia) {
+                            return _c(
+                              "option",
+                              {
+                                key: provincia.id,
+                                domProps: { value: provincia }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                    " +
+                                    _vm._s(provincia.nom) +
+                                    "\n                  "
+                                )
+                              ]
+                            )
+                          })
+                        ],
+                        2
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form row" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-2 mt-2",
+                        attrs: { for: "direccion" }
+                      },
+                      [_vm._v("Dirección")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-9" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.incidencia.adreca,
+                            expression: "incidencia.adreca"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { id: "direccion", type: "text" },
+                        domProps: { value: _vm.incidencia.adreca },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.incidencia,
+                              "adreca",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-row mt-3 mb-3" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-2",
+                        attrs: { for: "complementoDireccion" }
+                      },
+                      [_vm._v("Complemento Dirección")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-9" }, [
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.incidencia.adreca_complement,
+                            expression: "incidencia.adreca_complement"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { id: "complementoDireccion", rows: "3" },
+                        domProps: { value: _vm.incidencia.adreca_complement },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.incidencia,
+                              "adreca_complement",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ])
+                ])
+              ])
             ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.currentTab == 2,
+              expression: "currentTab == 2"
+            }
           ]
-        )
-      ]
-    )
-  ])
+        },
+        [
+          _c("div", { staticClass: "container-fluid mt-5" }, [
+            _c("div", { staticClass: "card ml-5 mr-5" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "card-header font-weight-bold",
+                  attrs: { id: "titulito" }
+                },
+                [_vm._v("DATOS AFECTADA")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body ml-5" }, [
+                _c("form", [
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-1 col-form-label",
+                        attrs: { for: "nombreAfectada" }
+                      },
+                      [_vm._v("Nombre")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-4" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.afectat.nom,
+                            expression: "afectat.nom"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "nombreAfectada" },
+                        domProps: { value: _vm.afectat.nom },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.afectat, "nom", $event.target.value)
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-1 col-form-label ml-4",
+                        attrs: { for: "apellidoAfectada" }
+                      },
+                      [_vm._v("Apellidos")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-5" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.afectat.cognoms,
+                            expression: "afectat.cognoms"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "apellidoAfectada" },
+                        domProps: { value: _vm.afectat.cognoms },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.afectat,
+                              "cognoms",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-1 mt-1",
+                        attrs: { for: "sexoAfectada" }
+                      },
+                      [_vm._v("Sexo")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "btn-group btn-group-toggle col-4",
+                        attrs: { "data-toggle": "buttons" }
+                      },
+                      [
+                        _c("label", { staticClass: "btn btn-secondary" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.afectat.sexes_id,
+                                expression: "afectat.sexes_id"
+                              }
+                            ],
+                            attrs: {
+                              type: "radio",
+                              name: "sexoAfectada",
+                              id: "mujer",
+                              value: "2"
+                            },
+                            domProps: {
+                              checked: _vm._q(_vm.afectat.sexes_id, "2")
+                            },
+                            on: {
+                              change: function($event) {
+                                return _vm.$set(_vm.afectat, "sexes_id", "2")
+                              }
+                            }
+                          }),
+                          _vm._v("\n                  Mujer\n                ")
+                        ]),
+                        _vm._v(" "),
+                        _c("label", { staticClass: "btn btn-secondary" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.afectat.sexes_id,
+                                expression: "afectat.sexes_id"
+                              }
+                            ],
+                            attrs: {
+                              type: "radio",
+                              name: "sexoAfectada",
+                              id: "hombre",
+                              value: "1"
+                            },
+                            domProps: {
+                              checked: _vm._q(_vm.afectat.sexes_id, "1")
+                            },
+                            on: {
+                              change: function($event) {
+                                return _vm.$set(_vm.afectat, "sexes_id", "1")
+                              }
+                            }
+                          }),
+                          _vm._v("\n                  Hombre\n                ")
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-1 mt-1 ml-4",
+                        attrs: { for: "edadAfectada" }
+                      },
+                      [_vm._v("Edad")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-2" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.afectat.edat,
+                            expression: "afectat.edat"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "number", min: "1", max: "130" },
+                        domProps: { value: _vm.afectat.edat },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.afectat, "edat", $event.target.value)
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form row" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-1 mt-2",
+                        attrs: { for: "direccion" }
+                      },
+                      [_vm._v("CIP")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-5" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.afectat.cip,
+                            expression: "afectat.cip"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text" },
+                        domProps: { value: _vm.afectat.cip },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.afectat, "cip", $event.target.value)
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-6" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary float-right ml-4",
+                          attrs: {
+                            type: "button",
+                            id: "afectadasList",
+                            disabled: _vm.afectadasCount == 0
+                          },
+                          on: {
+                            click: function($event) {
+                              return _vm.mostrarAfectades()
+                            }
+                          }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fa fa-list mr-1",
+                            attrs: { "aria-hidden": "true" }
+                          }),
+                          _vm._v(
+                            " AFECTADAS\n                  (" +
+                              _vm._s(_vm.afectadasCount) +
+                              ")\n                "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary float-right",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.afegirAfectat()
+                            }
+                          }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fa fa-plus-circle mr-1",
+                            attrs: { "aria-hidden": "true" }
+                          }),
+                          _vm._v(
+                            "\n                  AÑADIR AFECTADA\n                "
+                          )
+                        ]
+                      )
+                    ])
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card ml-5 mr-5 mt-3" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "card-header font-weight-bold",
+                  attrs: { id: "titulito" }
+                },
+                [_vm._v("DATOS INCIDENTE")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body ml-5" }, [
+                _c("form", [
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-1 col-form-label",
+                        attrs: { for: "fechaIncidente" }
+                      },
+                      [_vm._v("Fecha")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-2" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.incidencia.data,
+                            expression: "incidencia.data"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "date", id: "fechaIncidente" },
+                        domProps: { value: _vm.incidencia.data },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.incidencia,
+                              "data",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-1 col-form-label ml-5",
+                        attrs: { for: "horaIncidente" }
+                      },
+                      [_vm._v("Hora")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-2" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.incidencia.hora,
+                            expression: "incidencia.hora"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "time", id: "horaIncidente" },
+                        domProps: { value: _vm.incidencia.hora },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.incidencia,
+                              "hora",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-1 mt-1",
+                        attrs: { for: "tipoIncidencia" }
+                      },
+                      [_vm._v("Tipo de incidente")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "btn-group btn-group-toggle col-10",
+                        attrs: { "data-toggle": "buttons" }
+                      },
+                      [
+                        _c("label", { staticClass: "btn btn-secondary" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.incidencia.tipus_incidencies_id,
+                                expression: "incidencia.tipus_incidencies_id"
+                              }
+                            ],
+                            attrs: {
+                              type: "radio",
+                              name: "tipoIncidencia",
+                              id: "accidente",
+                              value: "1"
+                            },
+                            domProps: {
+                              checked: _vm._q(
+                                _vm.incidencia.tipus_incidencies_id,
+                                "1"
+                              )
+                            },
+                            on: {
+                              change: function($event) {
+                                return _vm.$set(
+                                  _vm.incidencia,
+                                  "tipus_incidencies_id",
+                                  "1"
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(
+                            "\n                  Accidente\n                "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("label", { staticClass: "btn btn-secondary" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.incidencia.tipus_incidencies_id,
+                                expression: "incidencia.tipus_incidencies_id"
+                              }
+                            ],
+                            attrs: {
+                              type: "radio",
+                              name: "tipoIncidencia",
+                              id: "traumatismo",
+                              value: "2"
+                            },
+                            domProps: {
+                              checked: _vm._q(
+                                _vm.incidencia.tipus_incidencies_id,
+                                "2"
+                              )
+                            },
+                            on: {
+                              change: function($event) {
+                                return _vm.$set(
+                                  _vm.incidencia,
+                                  "tipus_incidencies_id",
+                                  "2"
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(
+                            "\n                  Traumatismo\n                "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("label", { staticClass: "btn btn-secondary" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.incidencia.tipus_incidencies_id,
+                                expression: "incidencia.tipus_incidencies_id"
+                              }
+                            ],
+                            attrs: {
+                              type: "radio",
+                              name: "tipoIncidencia",
+                              id: "publico",
+                              value: "3"
+                            },
+                            domProps: {
+                              checked: _vm._q(
+                                _vm.incidencia.tipus_incidencies_id,
+                                "3"
+                              )
+                            },
+                            on: {
+                              change: function($event) {
+                                return _vm.$set(
+                                  _vm.incidencia,
+                                  "tipus_incidencies_id",
+                                  "3"
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(
+                            "\n                  Enfermedad en lugar público\n                "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("label", { staticClass: "btn btn-secondary" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.incidencia.tipus_incidencies_id,
+                                expression: "incidencia.tipus_incidencies_id"
+                              }
+                            ],
+                            attrs: {
+                              type: "radio",
+                              name: "tipoIncidencia",
+                              id: "domicilio",
+                              value: "4"
+                            },
+                            domProps: {
+                              checked: _vm._q(
+                                _vm.incidencia.tipus_incidencies_id,
+                                "4"
+                              )
+                            },
+                            on: {
+                              change: function($event) {
+                                return _vm.$set(
+                                  _vm.incidencia,
+                                  "tipus_incidencies_id",
+                                  "4"
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(
+                            "\n                  Enfermedad domiciliaria\n                "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("label", { staticClass: "btn btn-secondary" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.incidencia.tipus_incidencies_id,
+                                expression: "incidencia.tipus_incidencies_id"
+                              }
+                            ],
+                            attrs: {
+                              type: "radio",
+                              name: "tipoIncidencia",
+                              id: "consulta",
+                              value: "5"
+                            },
+                            domProps: {
+                              checked: _vm._q(
+                                _vm.incidencia.tipus_incidencies_id,
+                                "5"
+                              )
+                            },
+                            on: {
+                              change: function($event) {
+                                return _vm.$set(
+                                  _vm.incidencia,
+                                  "tipus_incidencies_id",
+                                  "5"
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(
+                            "\n                  Consulta médica\n                "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("label", { staticClass: "btn btn-secondary" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.incidencia.tipus_incidencies_id,
+                                expression: "incidencia.tipus_incidencies_id"
+                              }
+                            ],
+                            attrs: {
+                              type: "radio",
+                              name: "tipoAlertante",
+                              id: "transporte",
+                              value: "6"
+                            },
+                            domProps: {
+                              checked: _vm._q(
+                                _vm.incidencia.tipus_incidencies_id,
+                                "6"
+                              )
+                            },
+                            on: {
+                              change: function($event) {
+                                return _vm.$set(
+                                  _vm.incidencia,
+                                  "tipus_incidencies_id",
+                                  "6"
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(
+                            "\n                  Transporte sanitario\n                "
+                          )
+                        ])
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-row mt-3 mb-3" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-1",
+                        attrs: { for: "descripcionIncidente" }
+                      },
+                      [_vm._v("Descripción del incidente")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-10" }, [
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.incidencia.descripcio,
+                            expression: "incidencia.descripcio"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { id: "descripcionIncidente", rows: "3" },
+                        domProps: { value: _vm.incidencia.descripcio },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.incidencia,
+                              "descripcio",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.currentTab == 3,
+              expression: "currentTab == 3"
+            }
+          ]
+        },
+        [
+          _c("div", { staticClass: "card ml-5 mr-5 mt-3" }, [
+            _c(
+              "div",
+              {
+                staticClass: "card-header font-weight-bold",
+                attrs: { id: "titulito" }
+              },
+              [
+                _vm._v("RESPUESTA\n          "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "btn btn-success float-right",
+                    attrs: { type: "button", id: "entregar" },
+                    on: {
+                      click: function($event) {
+                        return _vm.evaluarIncidencia()
+                      }
+                    }
+                  },
+                  [
+                    _c("i", {
+                      staticClass: "fa fa-check",
+                      attrs: { "aria-hidden": "true" }
+                    }),
+                    _vm._v(" INSERTAR INCIDENCIA\n       ")
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body ml-5" }, [
+              _c("form", [
+                _vm._m(2),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row mt-4" }, [
+                  _c(
+                    "div",
+                    { staticClass: "custom-control custom-switch col-2" },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.activaRecurs,
+                            expression: "activaRecurs"
+                          }
+                        ],
+                        staticClass: "custom-control-input",
+                        attrs: { type: "checkbox", id: "recursoSwitch" },
+                        domProps: {
+                          checked: Array.isArray(_vm.activaRecurs)
+                            ? _vm._i(_vm.activaRecurs, null) > -1
+                            : _vm.activaRecurs
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.activaRecurs,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = null,
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  (_vm.activaRecurs = $$a.concat([$$v]))
+                              } else {
+                                $$i > -1 &&
+                                  (_vm.activaRecurs = $$a
+                                    .slice(0, $$i)
+                                    .concat($$a.slice($$i + 1)))
+                              }
+                            } else {
+                              _vm.activaRecurs = $$c
+                            }
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-control-label",
+                          attrs: { for: "recursoSwitch" }
+                        },
+                        [_vm._v("Activar recurso")]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "col-10",
+                      class: { hidden: !_vm.activaRecurs }
+                    },
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary float-right ml-4",
+                          attrs: {
+                            type: "button",
+                            id: "recursosList",
+                            disabled: _vm.recursosCount == 0
+                          },
+                          on: {
+                            click: function($event) {
+                              return _vm.mostrarRecursos()
+                            }
+                          }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fa fa-list mr-1",
+                            attrs: { "aria-hidden": "true" }
+                          }),
+                          _vm._v(
+                            " RECURSOS\n                  (" +
+                              _vm._s(_vm.recursosCount) +
+                              ")\n                "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary float-right",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.afegirRecurs()
+                            }
+                          }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fa fa-plus-circle",
+                            attrs: { "aria-hidden": "true" }
+                          }),
+                          _vm._v(
+                            " AÑADIR\n                RECURSO\n              "
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "card mt-2",
+                    class: { hidden: !_vm.activaRecurs }
+                  },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "form-group row ml-3 mt-3 pb-4" },
+                      [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "col-2 mt-1",
+                            attrs: { for: "recursos" }
+                          },
+                          [_vm._v("Recursos")]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-3 " }, [
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.recurs,
+                                  expression: "recurs"
+                                }
+                              ],
+                              staticClass: "custom-select",
+                              attrs: { id: "recurso" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.recurs = $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                }
+                              }
+                            },
+                            [
+                              _c(
+                                "option",
+                                {
+                                  attrs: {
+                                    selected: "",
+                                    value: "Selecciona..."
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                      Selecciona...\n                  "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _vm._l(_vm.recursos_select, function(recurs) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: recurs.id,
+                                    class: [recurs.actiu ? "green" : "red"],
+                                    attrs: { disabled: !recurs.actiu },
+                                    domProps: { value: recurs }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                      " +
+                                        _vm._s(recurs.codi) +
+                                        "\n                  "
+                                    )
+                                  ]
+                                )
+                              })
+                            ],
+                            2
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          {
+                            staticClass: "col-2 mt-1",
+                            attrs: { for: "afectadoSelect" }
+                          },
+                          [_vm._v("Afectados")]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-4" }, [
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.afectatSelect,
+                                  expression: "afectatSelect"
+                                }
+                              ],
+                              staticClass: "custom-select",
+                              attrs: { id: "afectadoSelect" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.afectatSelect = $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                }
+                              }
+                            },
+                            [
+                              _c(
+                                "option",
+                                {
+                                  attrs: {
+                                    selected: "",
+                                    value: "Selecciona..."
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                      Selecciona...\n                  "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _vm._l(_vm.recursAfectats, function(
+                                afectat,
+                                index
+                              ) {
+                                return _c(
+                                  "option",
+                                  { key: index, domProps: { value: afectat } },
+                                  [
+                                    _vm._v(
+                                      "\n                      " +
+                                        _vm._s(afectat.nom) +
+                                        " " +
+                                        _vm._s(afectat.cognoms) +
+                                        ",\n                      "
+                                    ),
+                                    afectat.sexes_id == 1
+                                      ? _c("span", [_vm._v(" Hombre")])
+                                      : _c("span", [_vm._v(" Mujer")]),
+                                    _vm._v(
+                                      "\n                       (" +
+                                        _vm._s(afectat.edat) +
+                                        ")\n                  "
+                                    )
+                                  ]
+                                )
+                              })
+                            ],
+                            2
+                          )
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row ml-3" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-2 mt-1",
+                          attrs: { for: "prioridad" }
+                        },
+                        [_vm._v("Prioridad")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "btn-group btn-group-toggle col-9",
+                          attrs: { "data-toggle": "buttons" }
+                        },
+                        [
+                          _c("label", { staticClass: "btn btn-secondary" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.incidencies_has_recursos.prioritat,
+                                  expression:
+                                    "incidencies_has_recursos.prioritat"
+                                }
+                              ],
+                              attrs: {
+                                type: "radio",
+                                name: "prioridad",
+                                id: "prioridad1",
+                                value: "1",
+                                disabled: !_vm.recurs.actiu
+                              },
+                              domProps: {
+                                checked: _vm._q(
+                                  _vm.incidencies_has_recursos.prioritat,
+                                  "1"
+                                )
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.$set(
+                                    _vm.incidencies_has_recursos,
+                                    "prioritat",
+                                    "1"
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v("\n                  1\n                ")
+                          ]),
+                          _vm._v(" "),
+                          _c("label", { staticClass: "btn btn-secondary" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.incidencies_has_recursos.prioritat,
+                                  expression:
+                                    "incidencies_has_recursos.prioritat"
+                                }
+                              ],
+                              attrs: {
+                                type: "radio",
+                                name: "prioridad",
+                                id: "prioridad2",
+                                value: "2",
+                                disabled: !_vm.recurs.actiu
+                              },
+                              domProps: {
+                                checked: _vm._q(
+                                  _vm.incidencies_has_recursos.prioritat,
+                                  "2"
+                                )
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.$set(
+                                    _vm.incidencies_has_recursos,
+                                    "prioritat",
+                                    "2"
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v("\n                  2\n                ")
+                          ]),
+                          _vm._v(" "),
+                          _c("label", { staticClass: "btn btn-secondary" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.incidencies_has_recursos.prioritat,
+                                  expression:
+                                    "incidencies_has_recursos.prioritat"
+                                }
+                              ],
+                              attrs: {
+                                type: "radio",
+                                name: "prioridad",
+                                id: "prioridad3",
+                                value: "3",
+                                disabled: !_vm.recurs.actiu
+                              },
+                              domProps: {
+                                checked: _vm._q(
+                                  _vm.incidencies_has_recursos.prioritat,
+                                  "3"
+                                )
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.$set(
+                                    _vm.incidencies_has_recursos,
+                                    "prioritat",
+                                    "3"
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v("\n                  3\n                ")
+                          ]),
+                          _vm._v(" "),
+                          _c("label", { staticClass: "btn btn-secondary" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.incidencies_has_recursos.prioritat,
+                                  expression:
+                                    "incidencies_has_recursos.prioritat"
+                                }
+                              ],
+                              attrs: {
+                                type: "radio",
+                                name: "prioridad",
+                                id: "prioridad4",
+                                value: "4",
+                                disabled: !_vm.recurs.actiu
+                              },
+                              domProps: {
+                                checked: _vm._q(
+                                  _vm.incidencies_has_recursos.prioritat,
+                                  "4"
+                                )
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.$set(
+                                    _vm.incidencies_has_recursos,
+                                    "prioritat",
+                                    "4"
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v("\n                  4\n                ")
+                          ])
+                        ]
+                      )
+                    ])
+                  ]
+                )
+              ])
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal",
+          attrs: { tabindex: "-1", role: "dialog", id: "afectadaModal" }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(3),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c(
+                    "ul",
+                    { staticClass: "list-group" },
+                    _vm._l(_vm.afectats, function(afectada, index) {
+                      return _c(
+                        "li",
+                        { key: index, staticClass: "list-group-item" },
+                        [
+                          _vm._v(
+                            _vm._s(afectada.nom) +
+                              " " +
+                              _vm._s(afectada.cognoms) +
+                              ",\n                  "
+                          ),
+                          afectada.sexes_id == 1
+                            ? _c("span", [_vm._v(" Hombre")])
+                            : _c("span", [_vm._v(" Mujer")]),
+                          _vm._v(
+                            "\n                   (" +
+                              _vm._s(afectada.edat) +
+                              ")\n                  "
+                          ),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-danger float-right",
+                              on: {
+                                click: function($event) {
+                                  return _vm.eliminarAfectada(index)
+                                }
+                              }
+                            },
+                            [
+                              _c("i", { staticClass: "fas fa-trash" }),
+                              _vm._v(" Borrar")
+                            ]
+                          )
+                        ]
+                      )
+                    }),
+                    0
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._m(4)
+              ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal",
+          attrs: { tabindex: "-1", role: "dialog", id: "recursModal" }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(5),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  this.recursos.length > 0
+                    ? _c(
+                        "ul",
+                        { staticClass: "list-group" },
+                        _vm._l(_vm.recursos, function(
+                          recursProba,
+                          recurs_index
+                        ) {
+                          return _c(
+                            "li",
+                            {
+                              key: recursProba.recurs.id,
+                              staticClass: "list-group-item"
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(recursProba.recurs.codi) +
+                                  ",\n                  "
+                              ),
+                              recursProba.recurs.tipus_recursos_id == 1
+                                ? _c("span", [
+                                    _vm._v(" Ambulancia Medicalitzada, ")
+                                  ])
+                                : recursProba.recurs.tipus_recursos_id == 2
+                                ? _c("span", [
+                                    _vm._v(" Ambulancia Sanitaritzada, ")
+                                  ])
+                                : recursProba.recurs.tipus_recursos_id == 3
+                                ? _c("span", [
+                                    _vm._v(" Ambulancia Assistencial, ")
+                                  ])
+                                : _c("span", [
+                                    _vm._v(" Helicopter Medicalitzat, ")
+                                  ]),
+                              _vm._v(
+                                "\n                  Prioritat " +
+                                  _vm._s(
+                                    _vm.incidencies_has_recursos_array[
+                                      recurs_index
+                                    ].prioritat
+                                  ) +
+                                  "\n                  "
+                              ),
+                              _vm._v(" "),
+                              recursProba.afectats.length > 0
+                                ? _c(
+                                    "ul",
+                                    _vm._l(recursProba.afectats, function(
+                                      afectat,
+                                      index
+                                    ) {
+                                      return _c("li", { key: index }, [
+                                        _vm._v(
+                                          "\n                          " +
+                                            _vm._s(afectat.nom) +
+                                            " " +
+                                            _vm._s(afectat.cognoms) +
+                                            ",\n                          "
+                                        ),
+                                        afectat.sexes_id == 1
+                                          ? _c("span", [_vm._v(" Hombre")])
+                                          : _c("span", [_vm._v(" Mujer")]),
+                                        _vm._v(
+                                          "\n                          (" +
+                                            _vm._s(afectat.edat) +
+                                            ")\n                      "
+                                        )
+                                      ])
+                                    }),
+                                    0
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-danger float-right",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.eliminarRecurs(recurs_index)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("i", { staticClass: "fas fa-trash" }),
+                                  _vm._v(" Borrar")
+                                ]
+                              )
+                            ]
+                          )
+                        }),
+                        0
+                      )
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _vm._m(6)
+              ])
+            ]
+          )
+        ]
+      )
+    ],
+    2
+  )
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "alert",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
