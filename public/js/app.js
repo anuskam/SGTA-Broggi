@@ -3944,6 +3944,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -3957,7 +3958,9 @@ __webpack_require__.r(__webpack_exports__);
       },
       municipis: [],
       alertants: [],
-      tipusIncidencies: []
+      tipusIncidencies: [],
+      tipusAlertants: [],
+      Alertants: []
     };
   },
   methods: {
@@ -4020,6 +4023,34 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return tipusIncidencia_nom;
+    },
+    selectTipusAlertant: function selectTipusAlertant() {
+      var me = this;
+      axios.get("/SGTA-Broggi/public/api/tipusAlertant").then(function (response) {
+        me.tipusAlertants = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    selectAlertant: function selectAlertant() {
+      var me = this;
+      axios.get("/SGTA-Broggi/public/api/alertant").then(function (response) {
+        me.alertants = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    getTipusAlertant: function getTipusAlertant(index) {
+      var alertant_id = this.incidencies[index].alertants_id;
+      var indexAlertant = this.alertants.findIndex(function (obj) {
+        return obj.id == alertant_id;
+      });
+      var alertantTipus = this.alertants[indexAlertant].tipus_alertants_id;
+      var tipusAlertant_index = this.tipusAlertants.findIndex(function (obj) {
+        return obj.id == alertantTipus;
+      });
+      var tipusAlertant_nom = this.tipusAlertants[tipusAlertant_index].tipus;
+      return tipusAlertant_nom;
     }
   },
   created: function created() {
@@ -4448,6 +4479,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -45767,11 +45825,15 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c("td"),
+            _c("td", [
+              _vm._v(
+                "\n          " +
+                  _vm._s(_vm.getTipusAlertant(index)) +
+                  "\n        "
+              )
+            ]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(incidencia.telefon_alertant))]),
-            _vm._v(" "),
-            _c("td")
+            _c("td", [_vm._v(_vm._s(incidencia.telefon_alertant))])
           ])
         }),
         0
@@ -46607,18 +46669,30 @@ var render = function() {
       ? _c(
           "div",
           {
-            staticClass: "alert alert-danger alert-dismissible fade show mt-2"
+            staticClass: "position-fixed top-0 p-2 mt-5",
+            staticStyle: { "z-index": "5", right: "0", bottom: "0" }
           },
           [
             _c(
-              "button",
+              "div",
               {
-                staticClass: "close",
-                attrs: { type: "button", "data-dismiss": "alert" }
+                staticClass: "toast hide",
+                attrs: {
+                  id: "liveToast",
+                  role: "alert",
+                  "aria-live": "assertive",
+                  "aria-atomic": "true",
+                  "data-delay": "2000"
+                }
               },
-              [_vm._v("×")]
-            ),
-            _vm._v("\n    " + _vm._s(_vm.errorMessage) + "\n  ")
+              [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("div", { staticClass: "toast-body" }, [
+                  _vm._v("\n        " + _vm._s(_vm.errorMessage) + "\n      ")
+                ])
+              ]
+            )
           ]
         )
       : _vm._e(),
@@ -46627,18 +46701,30 @@ var render = function() {
       ? _c(
           "div",
           {
-            staticClass: "alert alert-success alert-dismissible fade show mt-2"
+            staticClass: "position-fixed top-0 p-2 mt-5",
+            staticStyle: { "z-index": "5", right: "0", bottom: "0" }
           },
           [
             _c(
-              "button",
+              "div",
               {
-                staticClass: "close",
-                attrs: { type: "button", "data-dismiss": "alert" }
+                staticClass: "toast hide",
+                attrs: {
+                  id: "liveToast",
+                  role: "alert",
+                  "aria-live": "assertive",
+                  "aria-atomic": "true",
+                  "data-delay": "2000"
+                }
               },
-              [_vm._v("×")]
-            ),
-            _vm._v("\n    " + _vm._s(_vm.infoMessage) + "\n  ")
+              [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("div", { staticClass: "toast-body" }, [
+                  _vm._v("\n        " + _vm._s(_vm.infoMessage) + "\n      ")
+                ])
+              ]
+            )
           ]
         )
       : _vm._e(),
@@ -46650,7 +46736,7 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
         _c("table", { staticClass: "table mt-2" }, [
-          _vm._m(0),
+          _vm._m(2),
           _vm._v(" "),
           _c(
             "tbody",
@@ -46745,7 +46831,7 @@ var render = function() {
       [
         _c("div", { staticClass: "modal-dialog" }, [
           _c("div", { staticClass: "modal-content" }, [
-            _vm._m(1),
+            _vm._m(3),
             _vm._v(" "),
             _c("div", { staticClass: "modal-body" }, [
               _c("p", [
@@ -46792,16 +46878,7 @@ var render = function() {
       [
         _c("div", { staticClass: "modal-dialog modal-lg" }, [
           _c("div", { staticClass: "modal-content" }, [
-            _c(
-              "div",
-              { staticClass: "modal-header" },
-              [
-                _c("idv", { staticClass: "modal-title" }, [_vm._v("Recurs")]),
-                _vm._v(" "),
-                _vm._m(2)
-              ],
-              1
-            ),
+            _vm._m(4),
             _vm._v(" "),
             _c("div", { staticClass: "modal-body" }, [
               _c("form", [
@@ -47045,6 +47122,44 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "toast-header" }, [
+      _c(
+        "button",
+        {
+          staticClass: "ml-2 mb-1 close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "toast",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "toast-header" }, [
+      _c(
+        "button",
+        {
+          staticClass: "ml-2 mb-1 close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "toast",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Codi")]),
@@ -47082,18 +47197,22 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "close",
-        attrs: {
-          type: "button",
-          "data-dismiss": "modal",
-          "aria-label": "Close"
-        }
-      },
-      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-    )
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("div", { staticClass: "modal-title" }, [_vm._v("Recurs")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
   }
 ]
 render._withStripped = true

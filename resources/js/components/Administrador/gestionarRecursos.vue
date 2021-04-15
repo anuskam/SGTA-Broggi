@@ -1,6 +1,33 @@
 <template>
 <main>
-  <div class="alert alert-danger alert-dismissible fade show mt-2" v-if="errorMessage != ''">
+  <div class="position-fixed top-0 p-2 mt-5" style="z-index: 5; right: 0; bottom: 0;" v-if="errorMessage!= ''">
+    <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+      <div class="toast-header">
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="toast-body">
+        {{ errorMessage }}
+      </div>
+    </div>
+  </div>
+
+  <div class="position-fixed top-0 p-2 mt-5" style="z-index: 5; right: 0; bottom: 0;" v-if="infoMessage!= ''">
+    <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+      <div class="toast-header">
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="toast-body">
+        {{ infoMessage }}
+      </div>
+    </div>
+  </div>
+
+
+  <!-- <div class="alert alert-danger alert-dismissible fade show mt-2" v-if="errorMessage != ''">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
     {{ errorMessage }}
   </div>
@@ -8,7 +35,7 @@
   <div class="alert alert-success alert-dismissible fade show mt-2" v-if="infoMessage != ''">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
     {{ infoMessage }}
-  </div>
+  </div> -->
 
   <div class="card mt-2 mb-1 ml-5 mr-5">
     <h2 class="card-header font-weight-bold">Recursos</h2>
@@ -73,7 +100,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <idv class="modal-title">Recurs</idv>
+          <div class="modal-title">Recurs</div>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
           </button>
