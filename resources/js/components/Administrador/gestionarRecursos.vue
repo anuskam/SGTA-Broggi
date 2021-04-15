@@ -1,6 +1,6 @@
 <template>
 <main>
-  <div class="position-fixed top-0 p-2 mt-5" style="z-index: 5; right: 0; bottom: 0;" v-if="errorMessage!= ''">
+  <!-- <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;">
     <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
       <div class="toast-header">
         <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
@@ -24,10 +24,10 @@
         {{ infoMessage }}
       </div>
     </div>
-  </div>
+  </div> -->
 
 
-  <!-- <div class="alert alert-danger alert-dismissible fade show mt-2" v-if="errorMessage != ''">
+  <!-- <div class="alert alert-danger alert-dismissible fade show mt-2" v-if="errorMessage != 'v'">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
     {{ errorMessage }}
   </div>
@@ -36,6 +36,25 @@
     <button type="button" class="close" data-dismiss="alert">&times;</button>
     {{ infoMessage }}
   </div> -->
+
+  <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
+
+<div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;">
+  <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="4000">
+    <div class="toast-header">
+      <strong class="mr-auto">Bootstrap</strong>
+      <small>11 mins ago</small>
+      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="toast-body">
+     {{ infoMessage }}
+    </div>
+  </div>
+</div>
+
+
 
   <div class="card mt-2 mb-1 ml-5 mr-5">
     <h2 class="card-header font-weight-bold">Recursos</h2>
@@ -46,7 +65,7 @@
               <th scope="col">Codi</th>
               <th scope="col">Actiu</th>
               <th scope="col">Tipus de Recurs</th>
-              <th scope="col" class="sizeBotones"></th>
+              <th scope="col" class="sizeBotones"><button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button></th>
             </tr>
           </thead>
           <tbody>
@@ -184,6 +203,7 @@
           $('#deleteModalRecurs').modal('show');
         },
         deleteRecurs() {
+          $('.toast').toast('show')
           let me = this;
           axios
               .delete('/SGTA-Broggi/public/api/recurs/' + me.recurs.id)

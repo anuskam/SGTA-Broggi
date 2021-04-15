@@ -5005,6 +5005,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -5034,6 +5053,7 @@ __webpack_require__.r(__webpack_exports__);
       $('#deleteModalRecurs').modal('show');
     },
     deleteRecurs: function deleteRecurs() {
+      $('.toast').toast('show');
       var me = this;
       axios["delete"]('/SGTA-Broggi/public/api/recurs/' + me.recurs.id).then(function (response) {
         console.log(response);
@@ -10004,11 +10024,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-<<<<<<< HEAD
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn {\n    font-size: 15px;\n}\n.btn-secondary:not(:disabled):not(.disabled).active,\n.btn-secondary:not(:disabled):not(.disabled):active,\n.show > .btn-secondary.dropdown-toggle {\n  background-color: #e3177d;\n  border-color: black;\n}\n.btn-secondary {\n  border-color: black;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.parentGrid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n.card-header {\n  background-color: #15acc4;\n  border: 1px solid black;\n  border-left: 0;\n  border-right: 0;\n  margin-top: -1px;\n}\n.modal-header{\n    background-color: #15acc4 !important;\n}\n.card {\n  border: 1px solid black !important;\n}\nbutton {\n  background-color: #e3177d !important;\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\n  color: black;\n  font-weight: bold;\n  background-color: #15acc4 !important;\n}\n.tabButton{\n    background-color: white !important;\n    border: 0 !important;\n}\n.selectedTab{\n    background-color: #e3177d !important;\n    border: 1px solid black !important;\n}\n.green{\n    background-color: green;\n    color: white;\n}\n.red{\n    background-color: red;\n    color: white;\n}\n#entregar{\n  border: 1px solid black;\n}\n#titulitosTabs {\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n.iconNavPrincipal{\n    color: black;\n}\n#titulito {\n    font-family: 'Signika', sans-serif;\n    font-size: 18px;\n}\n.hidden{\n    visibility: hidden;\n}\n#buscadorTelefono > input{\n    border: 1px solid black;\n}\n.arrowNav{\n    height: 8vh;\n}\n\n", ""]);
-=======
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.btn {\n    font-size: 15px;\n}\n.btn-secondary:not(:disabled):not(.disabled).active,\n.btn-secondary:not(:disabled):not(.disabled):active,\n.show > .btn-secondary.dropdown-toggle {\n  background-color: #e3177d;\n  border-color: black;\n}\n.btn-secondary {\n  border-color: black;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.parentGrid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n.card-header {\n  background-color: #15acc4;\n  border: 1px solid black;\n  border-left: 0;\n  border-right: 0;\n  margin-top: -1px;\n}\n.modal-header{\n    background-color: #15acc4 !important;\n}\n.card {\n  border: 1px solid black !important;\n}\nbutton {\n  background-color: #e3177d !important;\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\n  color: black;\n  font-weight: bold;\n  background-color: #15acc4 !important;\n}\n.tabButton{\n    background-color: white !important;\n    border: 0 !important;\n}\n.selectedTab{\n    background-color: #e3177d !important;\n    border: 1px solid black !important;\n}\n.green{\n    background-color: green;\n    color: white;\n}\n.red{\n    background-color: red;\n    color: white;\n}\n#entregar{\n  border: 1px solid black;\n}\n#titulitosTabs {\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n.iconNavPrincipal{\n    color: black;\n}\n#titulito {\n    font-family: 'Signika', sans-serif;\n    font-size: 1.3em;\n}\n.hidden{\n    visibility: hidden;\n}\n#buscadorTelefono > input{\n    border: 1px solid black;\n}\n.arrowNav{\n    height: 8vh;\n}\n\n", ""]);
->>>>>>> 87f03d5fb668f103fd0f6f65b27da196b6bcf0f7
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -47275,7 +47291,7 @@ var staticRenderFns = [
     return _c("a", { staticClass: "navbar-brand" }, [
       _c("img", {
         attrs: {
-          src: "/SGTA-Broggi/public/media/img/prototipoLogo.png",
+          src: "/SGTA-Broggi/public/media/img/broggi2.png",
           id: "cecosLogo",
           alt: "logoBroggi"
         }
@@ -47904,69 +47920,44 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("main", [
-    _vm.errorMessage != ""
-      ? _c(
-          "div",
-          {
-            staticClass: "position-fixed top-0 p-2 mt-5",
-            staticStyle: { "z-index": "5", right: "0", bottom: "0" }
-          },
-          [
-            _c(
-              "div",
-              {
-                staticClass: "toast hide",
-                attrs: {
-                  id: "liveToast",
-                  role: "alert",
-                  "aria-live": "assertive",
-                  "aria-atomic": "true",
-                  "data-delay": "2000"
-                }
-              },
-              [
-                _vm._m(0),
-                _vm._v(" "),
-                _c("div", { staticClass: "toast-body" }, [
-                  _vm._v("\n        " + _vm._s(_vm.errorMessage) + "\n      ")
-                ])
-              ]
-            )
-          ]
-        )
-      : _vm._e(),
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-primary",
+        attrs: { type: "button", id: "liveToastBtn" }
+      },
+      [_vm._v("Show live toast")]
+    ),
     _vm._v(" "),
-    _vm.infoMessage != ""
-      ? _c(
+    _c(
+      "div",
+      {
+        staticClass: "position-fixed bottom-0 right-0 p-3",
+        staticStyle: { "z-index": "5", right: "0", bottom: "0" }
+      },
+      [
+        _c(
           "div",
           {
-            staticClass: "position-fixed top-0 p-2 mt-5",
-            staticStyle: { "z-index": "5", right: "0", bottom: "0" }
+            staticClass: "toast hide",
+            attrs: {
+              id: "liveToast",
+              role: "alert",
+              "aria-live": "assertive",
+              "aria-atomic": "true",
+              "data-delay": "4000"
+            }
           },
           [
-            _c(
-              "div",
-              {
-                staticClass: "toast hide",
-                attrs: {
-                  id: "liveToast",
-                  role: "alert",
-                  "aria-live": "assertive",
-                  "aria-atomic": "true",
-                  "data-delay": "2000"
-                }
-              },
-              [
-                _vm._m(1),
-                _vm._v(" "),
-                _c("div", { staticClass: "toast-body" }, [
-                  _vm._v("\n        " + _vm._s(_vm.infoMessage) + "\n      ")
-                ])
-              ]
-            )
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "toast-body" }, [
+              _vm._v("\n     " + _vm._s(_vm.infoMessage) + "\n    ")
+            ])
           ]
         )
-      : _vm._e(),
+      ]
+    ),
     _vm._v(" "),
     _c("div", { staticClass: "card mt-2 mb-1 ml-5 mr-5" }, [
       _c("h2", { staticClass: "card-header font-weight-bold" }, [
@@ -47975,7 +47966,7 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
         _c("table", { staticClass: "table mt-2" }, [
-          _vm._m(2),
+          _vm._m(1),
           _vm._v(" "),
           _c(
             "tbody",
@@ -48070,7 +48061,7 @@ var render = function() {
       [
         _c("div", { staticClass: "modal-dialog" }, [
           _c("div", { staticClass: "modal-content" }, [
-            _vm._m(3),
+            _vm._m(2),
             _vm._v(" "),
             _c("div", { staticClass: "modal-body" }, [
               _c("p", [
@@ -48117,7 +48108,7 @@ var render = function() {
       [
         _c("div", { staticClass: "modal-dialog modal-lg" }, [
           _c("div", { staticClass: "modal-content" }, [
-            _vm._m(4),
+            _vm._m(3),
             _vm._v(" "),
             _c("div", { staticClass: "modal-body" }, [
               _c("form", [
@@ -48362,25 +48353,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "toast-header" }, [
-      _c(
-        "button",
-        {
-          staticClass: "ml-2 mb-1 close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "toast",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "toast-header" }, [
+      _c("strong", { staticClass: "mr-auto" }, [_vm._v("Bootstrap")]),
+      _vm._v(" "),
+      _c("small", [_vm._v("11 mins ago")]),
+      _vm._v(" "),
       _c(
         "button",
         {
@@ -48407,7 +48383,16 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipus de Recurs")]),
         _vm._v(" "),
-        _c("th", { staticClass: "sizeBotones", attrs: { scope: "col" } })
+        _c("th", { staticClass: "sizeBotones", attrs: { scope: "col" } }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary",
+              attrs: { type: "button", id: "liveToastBtn" }
+            },
+            [_vm._v("Show live toast")]
+          )
+        ])
       ])
     ])
   },

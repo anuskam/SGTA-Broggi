@@ -1,7 +1,7 @@
 <template>
   <div class="contenido">
       <nav class="navbar navbar-expand-lg navbar-light" id="cecosNav">
-        <a class="navbar-brand"><img src="/SGTA-Broggi/public/media/img/prototipoLogo.png" id="cecosLogo" alt="logoBroggi"></a>
+        <a class="navbar-brand"><img src="/SGTA-Broggi/public/media/img/broggi2.png" id="cecosLogo" alt="logoBroggi"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
