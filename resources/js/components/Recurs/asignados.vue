@@ -120,7 +120,7 @@
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Más Información</h5>
+            <div class="modal-title">Más Información</div>
             <!-- <button
               type="button"
               class="close"
@@ -378,10 +378,13 @@ main {
 }
 button {
   background-color: #e3177d;
-  font-weight: bold;
   font-size: 0.9em;
-  color: black;
+  color: white;
+  border-radius: 4px;
+
 }
+
+
 .card {
   border: 1px solid black;
 }
@@ -443,6 +446,7 @@ button {
   display: flex;
   flex-direction: column;
   /* align-items: center; */
+
 }
 #direccioHospital {
   width: 100%;
@@ -495,6 +499,7 @@ button {
 #masInfo > button {
   padding: 10px 20px;
   margin-left: -50px;
+  color: black;
 }
 .modal-header{
     font-weight: bold;

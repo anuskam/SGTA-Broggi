@@ -3944,37 +3944,86 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      cicles: [],
-      cicle: {
-        id: '',
-        sigles: '',
-        nom: '',
-        descripcio: '',
-        actiu: false
+      incidencies: [],
+      incidencia: {
+        data: '',
+        municipis_id: null,
+        tipus_incidencies_id: null,
+        alertants_id: null,
+        telefon_alertant: ''
       },
-      insert: true
+      municipis: [],
+      alertants: [],
+      tipusIncidencies: []
     };
   },
   methods: {
-    selectCicles: function selectCicles() {
-      var _this = this;
-
+    selectIncidencies: function selectIncidencies() {
       var me = this;
-      axios.get('/SGTA-Broggi/public/api/cicle').then(function (response) {
-        me.cicles = response.data;
+      axios.get('/SGTA-Broggi/public/api/incidencia').then(function (response) {
+        me.incidencies = resposne.data;
       })["catch"](function (error) {
         console.log(error);
-      })["finally"](function () {
-        return _this.loading = false;
       });
+    },
+    selectMunicipis: function selectMunicipis() {
+      var me = this;
+      axios.get("/SGTA-Broggi/public/api/municipi").then(function (response) {
+        me.municipis = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    getMunicipi: function getMunicipi(index) {
+      var _this = this;
+
+      var municipi = this.municipis.find(function (obj) {
+        return obj.id == _this.incidencies[index].municipis_id;
+      });
+      var municipi_nom;
+
+      if (municipi != null) {
+        municipi_nom = municipi.nom;
+      } else {
+        municipi_nom = this.municipis.find(function (obj) {
+          return obj.id == 1;
+        });
+      }
+
+      return municipi_nom;
+    },
+    selectTipusIncidencia: function selectTipusIncidencia() {
+      var me = this;
+      axios.get("/SGTA-Broggi/public/api/tipusIncidencia").then(function (response) {
+        me.tipusIncidencies = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    getTipusIncidencia: function getTipusIncidencia(index) {
+      var _this2 = this;
+
+      var tipusIncidencia = this.tipusIncidencies.find(function (obj) {
+        return obj.id == _this2.incidencies[index].tipus_incidencies_id;
+      });
+      var tipusIncidencia_nom;
+
+      if (tipusIncidencia != null) {
+        tipusIncidencia_nom = tipusIncidencia.tipus;
+      } else {
+        tipusIncidencia_nom = this.incidencies.find(function (obj) {
+          return obj.id == 1;
+        });
+      }
+
+      return tipusIncidencia_nom;
     }
   },
   created: function created() {
-    this.selectCicles();
+    this.selectIncidencies(), this.selectMunicipis();
   },
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -9548,7 +9597,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nmain[data-v-6504f867] {\r\n  margin-top: 1.4vh;\r\n  color: black;\r\n  font-family: 'Rubik', sans-serif;\r\n  font-size: 15px;\n}\n#infoCard[data-v-6504f867] {\r\n  height: 65vh;\r\n  color: black;\n}\n#botones[data-v-6504f867] {\r\n  height: 28vh;\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-around;\r\n  align-items: center;\n}\n#infoHeader[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-between;\r\n  font-size: 1.2em;\r\n  font-weight: bold;\r\n  margin-right: -0.5px;\r\n  border-bottom: 1px solid black;\r\n  background-color: #15acc4;\n}\nbutton[data-v-6504f867] {\r\n  background-color: #e3177d;\r\n  font-weight: bold;\r\n  font-size: 0.9em;\r\n  color: black;\n}\n.card[data-v-6504f867] {\r\n  border: 1px solid black;\n}\n#transportHeader[data-v-6504f867] {\r\n  background-color: #15acc4;\r\n  font-weight: bold;\r\n  padding: 6px 20px;\r\n  text-align: center;\n}\n#leftButtons[data-v-6504f867] {\r\n  height: 100%;\r\n  display: flex;\r\n  flex-direction: column;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-around;\n}\n#assistencia[data-v-6504f867]{\r\n    opacity: .4;\n}\n#checkTransport[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  flex-wrap: nowrap;\r\n  justify-content: center;\r\n  align-items: center;\r\n  opacity: .4;\r\n  /* margin-left: -80px; */\n}\n#checkTransport button[data-v-6504f867] {\r\n  padding: 10px 4px;\r\n  height: 100%;\n}\n#transportButton[data-v-6504f867] {\r\n  background-color: #e3177d;\n}\n#transportButtons[data-v-6504f867] {\r\n  height: 100%;\r\n  opacity: .4;\n}\n.visible[data-v-6504f867]{\r\n    opacity: 1 !important;\n}\n#transportForm[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: wrap;\r\n  justify-content: space-around;\r\n  align-items: center;\n}\n#botonsTransport[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  width: 100%;\r\n  justify-content: space-between;\n}\n.button[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  /* align-items: center; */\n}\n#direccioHospital[data-v-6504f867] {\r\n  width: 100%;\n}\n#map[data-v-6504f867] {\r\n  height: 65%;\r\n  background-color: black;\n}\n#info[data-v-6504f867] {\r\n  height: 20%;\r\n  margin-top: 4%;\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: space-around;\r\n  flex-wrap: nowrap;\r\n  /* font-weight: bold; */\n}\n.boldInfo[data-v-6504f867]{\r\n    font-weight: bold;\n}\n#infoFields[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: space-around;\r\n  padding-right: 0;\n}\n.infobox[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  align-items: center;\r\n  text-align: justify;\n}\n.infobox > div[data-v-6504f867] {\r\n  background-color: #15acc4;\r\n  border: 1px solid black;\n}\n#descripcion[data-v-6504f867],\r\n#direccion[data-v-6504f867] {\r\n  background-color: white;\n}\n#masInfo[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: center;\r\n  vertical-align: center;\n}\n#masInfo > button[data-v-6504f867] {\r\n  padding: 10px 20px;\r\n  margin-left: -50px;\n}\n.modal-header[data-v-6504f867]{\r\n    font-weight: bold;\r\n    background-color: #15acc4;\n}\n#alta[data-v-6504f867]{\r\n    opacity: 1 !important;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nmain[data-v-6504f867] {\n  margin-top: 1.4vh;\n  color: black;\n  font-family: 'Rubik', sans-serif;\n  font-size: 15px;\n}\n#infoCard[data-v-6504f867] {\n  height: 65vh;\n  color: black;\n}\n#botones[data-v-6504f867] {\n  height: 28vh;\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#infoHeader[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n  font-size: 1.2em;\n  font-weight: bold;\n  margin-right: -0.5px;\n  border-bottom: 1px solid black;\n  background-color: #15acc4;\n}\nbutton[data-v-6504f867] {\n  background-color: #e3177d;\n  font-size: 0.9em;\n  color: white;\n  border-radius: 4px;\n}\n.card[data-v-6504f867] {\n  border: 1px solid black;\n}\n#transportHeader[data-v-6504f867] {\n  background-color: #15acc4;\n  font-weight: bold;\n  padding: 6px 20px;\n  text-align: center;\n}\n#leftButtons[data-v-6504f867] {\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n}\n#assistencia[data-v-6504f867]{\n    opacity: .4;\n}\n#checkTransport[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: center;\n  align-items: center;\n  opacity: .4;\n  /* margin-left: -80px; */\n}\n#checkTransport button[data-v-6504f867] {\n  padding: 10px 4px;\n  height: 100%;\n}\n#transportButton[data-v-6504f867] {\n  background-color: #e3177d;\n}\n#transportButtons[data-v-6504f867] {\n  height: 100%;\n  opacity: .4;\n}\n.visible[data-v-6504f867]{\n    opacity: 1 !important;\n}\n#transportForm[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#botonsTransport[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  width: 100%;\n  justify-content: space-between;\n}\n.button[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  /* align-items: center; */\n}\n#direccioHospital[data-v-6504f867] {\n  width: 100%;\n}\n#map[data-v-6504f867] {\n  height: 65%;\n  background-color: black;\n}\n#info[data-v-6504f867] {\n  height: 20%;\n  margin-top: 4%;\n  display: flex;\n  flex-direction: row;\n  justify-content: space-around;\n  flex-wrap: nowrap;\n  /* font-weight: bold; */\n}\n.boldInfo[data-v-6504f867]{\n    font-weight: bold;\n}\n#infoFields[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n  padding-right: 0;\n}\n.infobox[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  text-align: justify;\n}\n.infobox > div[data-v-6504f867] {\n  background-color: #15acc4;\n  border: 1px solid black;\n}\n#descripcion[data-v-6504f867],\n#direccion[data-v-6504f867] {\n  background-color: white;\n}\n#masInfo[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  vertical-align: center;\n}\n#masInfo > button[data-v-6504f867] {\n  padding: 10px 20px;\n  margin-left: -50px;\n  color: black;\n}\n.modal-header[data-v-6504f867]{\n    font-weight: bold;\n    background-color: #15acc4;\n}\n#alta[data-v-6504f867]{\n    opacity: 1 !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -45545,7 +45594,7 @@ var staticRenderFns = [
           [
             _c("div", { staticClass: "modal-content" }, [
               _c("div", { staticClass: "modal-header" }, [
-                _c("h5", { staticClass: "modal-title" }, [
+                _c("div", { staticClass: "modal-title" }, [
                   _vm._v("Más Información")
                 ])
               ]),
@@ -45695,40 +45744,34 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("main", { staticClass: "col-10" }, [
-    _c("table", { staticClass: "table" }, [
+    _c("table", { staticClass: "table mt-5" }, [
       _vm._m(0),
       _vm._v(" "),
       _c(
         "tbody",
-        _vm._l(_vm.cicles, function(cicle) {
-          return _c("tr", { key: cicle.id }, [
-            _c("td", [_vm._v(_vm._s(cicle.id))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(cicle.sigles))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(cicle.nom))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(cicle.descripcio))]),
+        _vm._l(_vm.incidencies, function(incidencia, index) {
+          return _c("tr", { key: incidencia.id }, [
+            _c("td", [_vm._v(_vm._s(incidencia.data))]),
             _vm._v(" "),
             _c("td", [
-              _c("div", { staticClass: "custom-control custom-checkbox" }, [
-                _c("input", {
-                  staticClass: "custom-control-input",
-                  attrs: {
-                    type: "checkbox",
-                    name: "actiu[]",
-                    value: "actiu",
-                    disabled: ""
-                  },
-                  domProps: { checked: cicle.actiu }
-                }),
-                _vm._v(" "),
-                _c("label", {
-                  staticClass: "custom-control-label",
-                  attrs: { for: "actiu" }
-                })
-              ])
-            ])
+              _vm._v(
+                "\n          " + _vm._s(_vm.getMunicipi(index)) + "\n        "
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "\n          " +
+                  _vm._s(_vm.getTipusIncidencia(index)) +
+                  "\n        "
+              )
+            ]),
+            _vm._v(" "),
+            _c("td"),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(incidencia.telefon_alertant))]),
+            _vm._v(" "),
+            _c("td")
           ])
         }),
         0
@@ -45743,17 +45786,15 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Data")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Sigles")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Municipi")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nom")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipus d'incident")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Descripcio")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipus d'alertant")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Actiu")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } })
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Telèfon")])
       ])
     ])
   }
