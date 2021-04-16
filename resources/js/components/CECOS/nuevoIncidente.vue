@@ -1038,6 +1038,7 @@ export default {
       alertanteConocido: false,
       alertantDB: null,
       afectatsDB: null,
+      recursosInsert: [],
     };
   },
   methods: {
@@ -1297,6 +1298,12 @@ export default {
           "recursos": []
       };
     },
+    insertarAfectados(){
+        let me = this;
+        return this.afectatSelected.forEach(async function(afectat){
+                     await me.insertarAfectat(afectat);
+        });
+    },
     // Control de Insert de la Incidencia
     async evaluarIncidencia(){
         this.errors = [];
@@ -1305,27 +1312,25 @@ export default {
           if(this.activaRecurs == true){ // Si se ha activado asignacion de recursos
               if(this.afectatSelected.length > 0){ // Si realmente hay recursos asignados (NO CAL!)
                   let me = this;
-                  this.afectatSelected.forEach(async function(afectat){
-                      await me.insertarAfectat(afectat);
-                  });
-                  await this.selectAfectats();
-                  console.log(this.afectatsDB);
-                  this.recursos.forEach(function(recurs, indexRecurs){ // Asignando id de la bd a los afectados
-                      recurs.afectats.forEach(function(afectat, indexAfectat){
-                          let indexAfectatDB = me.afectatsDB.findIndex(obj => (obj.nom == afectat.nom && obj.cognoms == afectat.cognoms && obj.sexes_id == afectat.sexes_id && obj.edat == afectat.edat));
-                          if(indexAfectatDB >= 0){
-                              me.recursos[indexRecurs].afectats[indexAfectat].id = me.afectatsDB[indexAfectatDB].id;
-                          }
-                          else{
-                              me.recursos[indexRecurs].afectats[indexAfectat].id = me.afectatsDB.length-(me.recursos[indexRecurs].afectats.length - indexAfectat);
-                          }
-                      });
-                });
+                  await this.insertarAfectados();
+                //   await this.selectAfectats();
+                //   console.log(this.afectatsDB);
+                //   this.recursos.forEach(function(recurs, indexRecurs){ // Asignando id de la bd a los afectados
+                //       recurs.afectats.forEach(function(afectat, indexAfectat){
+                //           let indexAfectatDB = me.afectatsDB.findIndex(obj => (obj.nom == afectat.nom && obj.cognoms == afectat.cognoms && obj.sexes_id == afectat.sexes_id && obj.edat == afectat.edat));
+                //           if(indexAfectatDB >= 0){
+                //               me.recursos[indexRecurs].afectats[indexAfectat].id = me.afectatsDB[indexAfectatDB].id;
+                //           }
+                //           else{
+                //               me.recursos[indexRecurs].afectats[indexAfectat].id = me.afectatsDB.length-(me.recursos[indexRecurs].afectats.length - indexAfectat);
+                //           }
+                //       });
+                // });
                 /* Insert de la incidencia con recursos */
                   await this.evaluaInsertAlertantes();
                   this.evaluaInsertIncidencia()
                     let afectatsInsert = [];
-                    this.recursos.forEach(function (recurso){ // Recopilando objetos de recursos con afectados en un array
+                    this.recursos.forEach(function (recurso, indexRecurso){ // Recopilando objetos de recursos con afectados en un array
                         recurso.afectats.forEach(function (afectat){
                             let afectatInsert = {
                               "recursos_id": null,
@@ -1334,7 +1339,8 @@ export default {
                               "hora_activacio": null
                             };
                             afectatInsert.recursos_id = afectat.recurs_id;
-                            afectatInsert.afectats_id = afectat.id;
+                            // afectatInsert.afectats_id = afectat.id;
+                            afectatInsert.afectats_id = me.recursosInsert[indexRecurso].id;
                             let indexRecurs = me.incidencies_has_recursos_array.findIndex(obj => obj.recursos_id == afectat.recurs_id);
                             afectatInsert.prioritat = me.incidencies_has_recursos_array[indexRecurs].prioritat;
                             afectatInsert.hora_activacio = me.incidencies_has_recursos_array[indexRecurs].hora_activacio;
@@ -1353,7 +1359,7 @@ export default {
               this.insertarIncidencia();
               this.updateRecursos();
           }
-          location.reload();
+        //   location.reload();
         }
     },
     async insertAfectatsSinRecurso(){
@@ -1387,6 +1393,7 @@ export default {
       let me = this;
       return axios.post('/SGTA-Broggi/public/api/afectat', afectat).then((response) => {
           console.log(response);
+          me.recursosInsert.push(response.data);
       }).catch( (error) => {
           console.log(error.response.status);
           console.log(error.response.data.error);

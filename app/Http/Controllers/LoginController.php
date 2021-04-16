@@ -17,24 +17,6 @@ class LoginController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    // public static function redirectHome()
-    // {
-    //     $role = Auth::user()->rols_id;
-    //     switch ($role) {
-    //         case '1':
-    //             $response = view('Administrador/index');
-    //             break;
-    //         case '2':
-    //             $response = view('CECOS/index');
-    //             break;
-    //         case '3':
-    //             $response = view('Recurs/index');
-    //             break;
-    //         default:
-    //             $response = view('login');
-    //     }
-    //     return $response;
-    // }
 
     public function index()
     {
@@ -63,7 +45,7 @@ class LoginController extends Controller
             $username = $request->input('username');
             $password = $request->input('password');
 
-            $usuari = Usuari::where('email', $username)->get()->first();
+            $usuari = Usuari::where('username', $username)->get()->first();
             if (!empty($usuari)) {
                 $userPassword = $usuari->contrasenya;
                 $passwordMatch = Hash::check($password, $userPassword);
@@ -72,9 +54,11 @@ class LoginController extends Controller
                     $response = redirect('home');
                 } else {
                     $response = redirect('login');
+                    // Control Error contraseña incorrecta (try catches con clase Utilitat)!
                 }
             } else {
                 $response = redirect('login');
+                // Control Error no Existe usuario
             }
         }
 

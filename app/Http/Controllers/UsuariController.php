@@ -56,12 +56,19 @@ class UsuariController extends Controller
     {
         $usuari = new Usuari();
         $usuari->username = $request->input('username');
-        $usuari->contrasenya = Hash::make($request->input('contrasenya'));
-        $usuari->email = $request->input('email');
-        $usuari->nom = $request->input('nom');
-        $usuari->cognoms = $request->input('cognoms');
-        $usuari->rols_id = $request->input('rol');
-        $usuari->save();
+        $findUsuari =  Usuari::where('username', $usuari->username)->get()->first();
+        if(empty($findUsuari)){
+            $usuari->contrasenya = Hash::make($request->input('contrasenya'));
+            $usuari->email = $request->input('email');
+            $usuari->nom = $request->input('nom');
+            $usuari->cognoms = $request->input('cognoms');
+            $usuari->rols_id = $request->input('rol');
+            $usuari->save();
+        }
+        else{
+            // Control errores
+        }
+
         return redirect('login'); //Change redirect to home/?? for admin
     }
 

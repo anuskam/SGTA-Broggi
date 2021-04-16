@@ -3188,7 +3188,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       recursAfectats: [],
       alertanteConocido: false,
       alertantDB: null,
-      afectatsDB: null
+      afectatsDB: null,
+      recursosInsert: []
     };
   },
   methods: {
@@ -3504,6 +3505,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         "recursos": []
       };
     },
+    insertarAfectados: function insertarAfectados() {
+      var me = this;
+      return this.afectatSelected.forEach( /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(afectat) {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+            while (1) {
+              switch (_context4.prev = _context4.next) {
+                case 0:
+                  _context4.next = 2;
+                  return me.insertarAfectat(afectat);
+
+                case 2:
+                case "end":
+                  return _context4.stop();
+              }
+            }
+          }, _callee4);
+        }));
+
+        return function (_x) {
+          return _ref.apply(this, arguments);
+        };
+      }());
+    },
     // Control de Insert de la Incidencia
     evaluarIncidencia: function evaluarIncidencia() {
       var _this6 = this;
@@ -3517,77 +3542,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this6.errors = [];
 
                 if (_this6.evaluaErrores()) {
-                  _context5.next = 28;
+                  _context5.next = 24;
                   break;
                 }
 
                 if (!(_this6.activaRecurs == true)) {
-                  _context5.next = 20;
+                  _context5.next = 17;
                   break;
                 }
 
                 if (!(_this6.afectatSelected.length > 0)) {
-                  _context5.next = 18;
+                  _context5.next = 15;
                   break;
                 }
 
                 // Si realmente hay recursos asignados (NO CAL!)
                 me = _this6;
+                _context5.next = 7;
+                return _this6.insertarAfectados();
 
-                _this6.afectatSelected.forEach( /*#__PURE__*/function () {
-                  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(afectat) {
-                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
-                      while (1) {
-                        switch (_context4.prev = _context4.next) {
-                          case 0:
-                            _context4.next = 2;
-                            return me.insertarAfectat(afectat);
-
-                          case 2:
-                          case "end":
-                            return _context4.stop();
-                        }
-                      }
-                    }, _callee4);
-                  }));
-
-                  return function (_x) {
-                    return _ref.apply(this, arguments);
-                  };
-                }());
-
-                _context5.next = 8;
-                return _this6.selectAfectats();
-
-              case 8:
-                console.log(_this6.afectatsDB);
-
-                _this6.recursos.forEach(function (recurs, indexRecurs) {
-                  // Asignando id de la bd a los afectados
-                  recurs.afectats.forEach(function (afectat, indexAfectat) {
-                    var indexAfectatDB = me.afectatsDB.findIndex(function (obj) {
-                      return obj.nom == afectat.nom && obj.cognoms == afectat.cognoms && obj.sexes_id == afectat.sexes_id && obj.edat == afectat.edat;
-                    });
-
-                    if (indexAfectatDB >= 0) {
-                      me.recursos[indexRecurs].afectats[indexAfectat].id = me.afectatsDB[indexAfectatDB].id;
-                    } else {
-                      me.recursos[indexRecurs].afectats[indexAfectat].id = me.afectatsDB.length - (me.recursos[indexRecurs].afectats.length - indexAfectat);
-                    }
-                  });
-                });
-                /* Insert de la incidencia con recursos */
-
-
-                _context5.next = 12;
+              case 7:
+                _context5.next = 9;
                 return _this6.evaluaInsertAlertantes();
 
-              case 12:
+              case 9:
                 _this6.evaluaInsertIncidencia();
 
                 afectatsInsert = [];
 
-                _this6.recursos.forEach(function (recurso) {
+                _this6.recursos.forEach(function (recurso, indexRecurso) {
                   // Recopilando objetos de recursos con afectados en un array
                   recurso.afectats.forEach(function (afectat) {
                     var afectatInsert = {
@@ -3596,8 +3579,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                       "prioritat": null,
                       "hora_activacio": null
                     };
-                    afectatInsert.recursos_id = afectat.recurs_id;
-                    afectatInsert.afectats_id = afectat.id;
+                    afectatInsert.recursos_id = afectat.recurs_id; // afectatInsert.afectats_id = afectat.id;
+
+                    afectatInsert.afectats_id = me.recursosInsert[indexRecurso].id;
                     var indexRecurs = me.incidencies_has_recursos_array.findIndex(function (obj) {
                       return obj.recursos_id == afectat.recurs_id;
                     });
@@ -3613,29 +3597,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this6.updateRecursos();
 
-              case 18:
-                _context5.next = 27;
+              case 15:
+                _context5.next = 24;
                 break;
 
-              case 20:
-                _context5.next = 22;
+              case 17:
+                _context5.next = 19;
                 return _this6.evaluaInsertAlertantes();
 
-              case 22:
+              case 19:
                 _this6.evaluaInsertIncidencia();
 
-                _context5.next = 25;
+                _context5.next = 22;
                 return _this6.insertAfectatsSinRecurso();
 
-              case 25:
+              case 22:
                 _this6.insertarIncidencia();
 
                 _this6.updateRecursos();
 
-              case 27:
-                location.reload();
-
-              case 28:
+              case 24:
               case "end":
                 return _context5.stop();
             }
@@ -3698,6 +3679,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 me = _this8;
                 return _context7.abrupt("return", axios.post('/SGTA-Broggi/public/api/afectat', afectat).then(function (response) {
                   console.log(response);
+                  me.recursosInsert.push(response.data);
                 })["catch"](function (error) {
                   console.log(error.response.status);
                   console.log(error.response.data.error);
