@@ -32,34 +32,71 @@
 
 <script>
     export default {
+        props:{
+            recursos_id: Number,
+        },
       data(){
         return{
           incidencies: [],
-          incidencia: {
-            data: '',
-            municipis_id: null,
-            tipus_incidencies_id: null,
-            alertants_id: null,
-            telefon_alertant: ''
-          },
           municipis: [],
           alertants: [],
           tipusIncidencies: [],
           tipusAlertants: [],
+          incidenciesHasRecursos: [],
+          incidenciaHasRecursos: [],
         }
       },
       methods:{
-        selectIncidencies() {
-          let me = this;
-          axios
-              .get('/SGTA-Broggi/public/api/incidencia')
+        async getIncidenciaData(){
+            await this.selectIncidenciesHasRecursos();
+            await this.selectIncidenciaHasRecursos();
+            await this.getIncidenciesRecursos();
+        },
+        getIncidenciesRecursos(){
+            let me = this;
+            return this.incidenciaHasRecursos.forEach((incidencia) => {
+                me.selectIncidencia(incidencia.incidencies_id);
+            });
+        },
+        selectIncidencia(id){
+             let me = this;
+             axios
+              .get('/SGTA-Broggi/public/api/incidencia/'+id)
               .then(response => {
-                me.incidencies = response.data;
+                me.incidencies.push(response.data);
               })
               .catch(error => {
                 console.log(error);
-              })
+              });
         },
+        selectIncidenciesHasRecursos(){
+            let me = this;
+            return axios
+            .get("/SGTA-Broggi/public/api/incidenciaHasRecursos")
+            .then((response) => {
+            me.incidenciesHasRecursos = response.data;
+            })
+            .catch((error) => {
+            console.log(error);
+            });
+        },
+        selectIncidenciaHasRecursos(){
+            let me = this;
+            this.incidenciaHasRecursos = this.incidenciesHasRecursos.filter(obj => obj.recursos_id == me.recursos_id);
+            // this.incidenciaID = this.incidenciaHasRecursos[this.incidenciaHasRecursos.length-1].incidencies_id;
+            return true;
+        },
+        // selectIncidencies() {
+        //   let me = this;
+        //   axios
+        //       .get('/SGTA-Broggi/public/api/incidencia')
+        //       .then(response => {
+        //         me.incidencies = response.data;
+        //       })
+        //       .catch(error => {
+        //         console.log(error);
+        //       })
+        // },
         selectMunicipis() {
           let me = this;
           axios
@@ -135,10 +172,10 @@
         }
       },
       created(){
-        this.selectIncidencies(), this.selectMunicipis(), this.selectAlertant(), this.selectTipusAlertant(), this.selectTipusIncidencia();
+        this.selectMunicipis(), this.selectAlertant(), this.selectTipusAlertant(), this.selectTipusIncidencia(), this.getIncidenciaData();
       },
       mounted() {
-          console.log('Component mounted.')
+
       }
     }
 </script>

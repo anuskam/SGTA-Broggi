@@ -126,7 +126,6 @@ class IncidenciaController extends Controller
     {
         DB::beginTransaction();
 
-        $incidencium->num_incident = $request->input('num_incident');
         $incidencium->data = $request->input('data');
         $incidencium->hora = $request->input('hora');
         $incidencium->telefon_alertant = $request->input('telefon_alertant');
@@ -140,9 +139,7 @@ class IncidenciaController extends Controller
         $incidencium->municipis_id = $request->input('municipis_id');
         $incidencium->usuaris_id = $request->input('usuaris_id');
 
-        $hora_activacio =  $request->input('hora_activacio');
-        $prioritat = $request->input('prioritat');
-        $recursos = $request->input('recursos');
+        $recursos = $request->input('incidencies_has_recursos');
 
 
         try{
@@ -150,14 +147,25 @@ class IncidenciaController extends Controller
 
             $incidencium->incidencies_has_recursos()->delete();
 
-            foreach($recursos as $recurs){
+            foreach($recursos as $recurs){ // Incidencias con recurso asignado
                 $ihr = new IncidenciaHasRecursos();
                 $ihr->recursos_id = $recurs['recursos_id'];
                 $ihr->afectats_id = $recurs['afectats_id'];
-                $ihr->prioritat = $prioritat;
-                $ihr->hora_activacio = $hora_activacio;
+                $ihr->desti = $recurs['desti'];
+                $ihr->hora_mobilitzacio = $recurs['hora_mobilitzacio'];
+                $ihr->hora_arribada_hospital = $recurs['hora_arribada_hospital'];
+                $ihr->hora_assistencia = $recurs['hora_assistencia'];
+                $ihr->hora_finalitzacio = $recurs['hora_finalitzacio'];
+                $ihr->hora_transferencia = $recurs['hora_transferencia'];
+                $ihr->hora_transport = $recurs['hora_transport'];
+                $ihr->prioritat = $recurs['prioritat'];
+                $ihr->hora_activacio = $recurs['hora_activacio'];
 
                 $incidencium->incidencies_has_recursos()->save($ihr);
+
+                // $iha = new IncidenciaHasAfectats();
+                // $iha->afectats_id = $recurs['afectats_id']; // afectats id = 5,6 enlloc de 6,7
+                // $incidencium->incidencies_has_afectats()->save($iha);
             }
             DB::commit();
             $incidencium->refresh();

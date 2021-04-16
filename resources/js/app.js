@@ -23,6 +23,7 @@ Vue.component('administrador-component', require('./components/administrador/adm
 Vue.component('cecosnav-component', require('./components/CECOS/cecosNav.vue').default);
 Vue.component('recursos-component', require('./components/Recurs/recursosTabs.vue').default);
 Vue.component('asignados-component', require('./components/Recurs/asignados.vue').default);
+Vue.component('editarasignados-component', require('./components/Recurs/editarAsignados.vue').default);
 Vue.component('todos-component', require('./components/Recurs/todos.vue').default);
 Vue.component('nuevoincidente-component', require('./components/CECOS/nuevoIncidente.vue').default);
 Vue.component('gestionarincidente-component', require('./components/CECOS/gestionarIncidente.vue').default);
