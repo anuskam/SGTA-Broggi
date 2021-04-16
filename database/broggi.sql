@@ -172,7 +172,7 @@ DROP TABLE IF EXISTS `broggi`.`usuaris` ;
 
 CREATE TABLE IF NOT EXISTS `broggi`.`usuaris` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(45) NOT NULL,
+  `username` VARCHAR(45) NOT NULL UNIQUE,
   `contrasenya` VARCHAR(256) NOT NULL,
   `email` VARCHAR(100) NOT NULL,
   `nom` VARCHAR(45) NOT NULL,
