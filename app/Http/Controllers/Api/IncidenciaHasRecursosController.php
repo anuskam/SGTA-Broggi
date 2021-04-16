@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\IncidenciaHasRecursos;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\IncidenciaHasRecursosResource;
 use Illuminate\Http\Request;
 
 class IncidenciaHasRecursosController extends Controller
@@ -15,7 +16,9 @@ class IncidenciaHasRecursosController extends Controller
      */
     public function index()
     {
+        $recursos = IncidenciaHasRecursos::all();
 
+        return IncidenciaHasRecursosResource::collection($recursos);
     }
 
     /**
@@ -35,9 +38,9 @@ class IncidenciaHasRecursosController extends Controller
      * @param  \App\Models\IncidenciaHasRecursos  $incidenciaHasRecursos
      * @return \Illuminate\Http\Response
      */
-    public function show(IncidenciaHasRecursos $incidenciaHasRecursos)
+    public function show(IncidenciaHasRecursos $incidenciaHasRecurso)
     {
-        //
+        return new IncidenciaHasRecursosResource($incidenciaHasRecurso);
     }
 
 
@@ -48,9 +51,9 @@ class IncidenciaHasRecursosController extends Controller
      * @param  \App\Models\IncidenciaHasRecursos  $incidenciaHasRecursos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, IncidenciaHasRecursos $incidenciaHasRecursos)
+    public function update(Request $request, IncidenciaHasRecursos $incidenciaHasRecurso)
     {
-        //
+
     }
 
     /**
@@ -59,7 +62,7 @@ class IncidenciaHasRecursosController extends Controller
      * @param  \App\Models\IncidenciaHasRecursos  $incidenciaHasRecursos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(IncidenciaHasRecursos $incidenciaHasRecursos)
+    public function destroy(IncidenciaHasRecursos $incidenciaHasRecurso)
     {
         //
     }
