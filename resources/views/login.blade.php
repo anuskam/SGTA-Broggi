@@ -9,7 +9,7 @@
 @section('content')
     <div class="row" id="header">
         <div class="col-12">
-            <img src="{{ asset('media/img/broggi.png') }}" alt="logoBroggi" id="logo">
+            <img src="{{ asset('media/img/prototipoLogo.png') }}" alt="logoBroggi" id="logo">
         </div>
     </div>
     <div class="row mt-5" id="loginContainer">
