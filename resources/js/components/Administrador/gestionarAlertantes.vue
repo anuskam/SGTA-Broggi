@@ -10,6 +10,38 @@
     {{ infoMessage }}
   </div>
 
+  <!-- <div class="position: absolute; top: 0; right: auto;" style="z-index: 5; right: 0; bottom: 0;">
+  <div id="toastError" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="4000">
+    <div class="toast-header">
+      <strong class="mr-auto">Bootstrap</strong>
+      <small>11 mins ago</small>
+      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="toast-body">
+     {{ errorMessage }}
+    </div>
+  </div>
+</div>
+
+
+<div class="position: absolute; top: 0; right: auto;" style="z-index: 5; right: 0; bottom: 0;">
+  <div id="toastInfo" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="4000">
+    <div class="toast-header">
+      <strong class="mr-auto">Bootstrap</strong>
+      <small>11 mins ago</small>
+      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="toast-body">
+     {{ infoMessage }}
+    </div>
+  </div>
+</div> -->
+
+
   <div class="card mt-2 mb-1 ml-5 mr-5">
     <h2 class="card-header font-weight-bold">Alertants</h2>
     <div class="card-body">
@@ -169,6 +201,8 @@
           $('#deleteModalAlertant').modal('show');
         },
         deleteAlertant() {
+        //   $('#toastInfo').toast('show')
+        //   $('#toastError').toast('show')
           let me = this;
           axios
               .delete('/SGTA-Broggi/public/api/alertant/' + me.alertant.id)
@@ -206,6 +240,8 @@
           $('#alertantModal').modal('show');
         },
         updateAlertant() {
+        //   $('#toastInfo').toast('show')
+        //   $('#toastError').toast('show')
           let me = this;
           axios
               .put('/SGTA-Broggi/public/api/alertant/' + me.alertant.id, me.alertant)
