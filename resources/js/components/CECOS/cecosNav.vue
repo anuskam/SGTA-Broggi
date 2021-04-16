@@ -1,5 +1,5 @@
 <template>
-  <div class="contenido">
+  <div class="contenido" :class="{ dislexiaFont: activaDislexia }">
       <nav class="navbar navbar-expand-lg navbar-light" id="cecosNav">
         <a class="navbar-brand"><img src="/SGTA-Broggi/public/media/img/prototipoLogo.png" id="cecosLogo" alt="logoBroggi"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,12 +18,20 @@
                 </li>
             </ul>
         </div>
+        <div class="custom-control custom-switch dislexia">
+            <input type="checkbox" class="custom-control-input" id="dislexiaSwitch" v-model="activaDislexia">
+            <label class="custom-control-label" for="dislexiaSwitch">Dislexia</label>
+        </div>
       </nav>
 
 
     <div v-show="currentTab == 1">
         <button class="btn btn-danger col-12" id="generarLlamada" v-show="!incidencia" @click="startIncidencia()"><i class="fas fa-phone-alt"></i>  Generar Llamada</button>
       <nuevoincidente-component v-show="incidencia" :alertantNumber = pickedNumber :userid = userid></nuevoincidente-component>
+    </div>
+
+    <div v-show="currentTab == 2">
+        <gestionarIncidente-component></gestionarIncidente-component>
     </div>
 
     <div v-show="currentTab == 3">
@@ -46,6 +54,7 @@ export default {
       incidencia: false,
       alertants: [],
       telefons: [],
+      activaDislexia: false
     };
   },
   methods: {
@@ -145,6 +154,15 @@ export default {
     .contenido {
       font-size: 15px;
       font-family: 'Rubik', sans-serif;
+    }
+
+    .dislexia {
+      margin-right: 90px;
+    }
+
+    .dislexiaFont{
+        font-family: Arial, Helvetica, sans-serif !important;
+        letter-spacing: 2px !important;
     }
 
 </style>
