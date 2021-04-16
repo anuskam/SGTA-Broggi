@@ -1893,6 +1893,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     userid: Number
@@ -1902,7 +1910,8 @@ __webpack_require__.r(__webpack_exports__);
       currentTab: 1,
       incidencia: false,
       alertants: [],
-      telefons: []
+      telefons: [],
+      activaDislexia: false
     };
   },
   methods: {
@@ -10546,7 +10555,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#generarLlamada[data-v-bfb0cdda]{\n  font-family: 'Signika', sans-serif;\n  font-size: 35px;\n  margin-top: 33vh;\n  background-color: #E2211D !important;\n}\n\n\n/* MOVIMIENTO BARRA DEBAJO DE ELEMENTOS DE NAVBAR */\n.borderLeftRight[data-v-bfb0cdda] {\n  display: inline-block;\n  position: relative;\n  color: hsl(222, 25%, 14%);\n}\n.borderLeftRight[data-v-bfb0cdda]::after {\n  content: '';\n  position: absolute;\n  width: 100%;\n  transform: scaleX(0);\n  height: 2px;\n  bottom: 0;\n  left: 0;\n  background-color: black;\n  transform-origin: bottom right;\n  transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);\n}\n.borderLeftRight[data-v-bfb0cdda]:hover::after {\n  transform: scaleX(1);\n  transform-origin: bottom left;\n}\n/* FIN DE LO QUE HE COPIADO POR SI NO CONVENCE */\n.contenido[data-v-bfb0cdda] {\n  font-size: 15px;\n  font-family: 'Rubik', sans-serif;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#generarLlamada[data-v-bfb0cdda]{\n  font-family: 'Signika', sans-serif;\n  font-size: 35px;\n  margin-top: 33vh;\n  background-color: #E2211D !important;\n}\n\n\n/* MOVIMIENTO BARRA DEBAJO DE ELEMENTOS DE NAVBAR */\n.borderLeftRight[data-v-bfb0cdda] {\n  display: inline-block;\n  position: relative;\n  color: hsl(222, 25%, 14%);\n}\n.borderLeftRight[data-v-bfb0cdda]::after {\n  content: '';\n  position: absolute;\n  width: 100%;\n  transform: scaleX(0);\n  height: 2px;\n  bottom: 0;\n  left: 0;\n  background-color: black;\n  transform-origin: bottom right;\n  transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);\n}\n.borderLeftRight[data-v-bfb0cdda]:hover::after {\n  transform: scaleX(1);\n  transform-origin: bottom left;\n}\n/* FIN DE LO QUE HE COPIADO POR SI NO CONVENCE */\n.contenido[data-v-bfb0cdda] {\n  font-size: 15px;\n  font-family: 'Rubik', sans-serif;\n}\n.dislexia[data-v-bfb0cdda] {\n  margin-right: 90px;\n}\n.dislexiaFont[data-v-bfb0cdda]{\n    font-family: Arial, Helvetica, sans-serif !important;\n    letter-spacing: 2px !important;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -44216,171 +44225,241 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "contenido" }, [
-    _c(
-      "nav",
-      {
-        staticClass: "navbar navbar-expand-lg navbar-light",
-        attrs: { id: "cecosNav" }
-      },
-      [
-        _vm._m(0),
-        _vm._v(" "),
-        _vm._m(1),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "collapse navbar-collapse",
-            attrs: { id: "navbarNav" }
-          },
-          [
-            _c("ul", { staticClass: "navbar-nav" }, [
-              _c(
-                "li",
-                {
-                  staticClass: "nav-item active borderLeftRight ml-2",
-                  attrs: { id: "nuevoIncidenteItem" }
-                },
-                [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "nav-link",
-                      on: {
-                        click: function($event) {
-                          return _vm.selectTab(1)
+  return _c(
+    "div",
+    { staticClass: "contenido", class: { dislexiaFont: _vm.activaDislexia } },
+    [
+      _c(
+        "nav",
+        {
+          staticClass: "navbar navbar-expand-lg navbar-light",
+          attrs: { id: "cecosNav" }
+        },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _vm._m(1),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "collapse navbar-collapse",
+              attrs: { id: "navbarNav" }
+            },
+            [
+              _c("ul", { staticClass: "navbar-nav" }, [
+                _c(
+                  "li",
+                  {
+                    staticClass: "nav-item active borderLeftRight ml-2",
+                    attrs: { id: "nuevoIncidenteItem" }
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link",
+                        on: {
+                          click: function($event) {
+                            return _vm.selectTab(1)
+                          }
                         }
-                      }
-                    },
-                    [
-                      _vm._v("Nuevo Incidente "),
-                      _c("span", { staticClass: "sr-only" }, [
-                        _vm._v("(current)")
-                      ])
-                    ]
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  staticClass: "nav-item borderLeftRight ml-4",
-                  attrs: { id: "editarIncidenteItem" }
-                },
-                [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "nav-link",
-                      on: {
-                        click: function($event) {
-                          return _vm.selectTab(2)
+                      },
+                      [
+                        _vm._v("Nuevo Incidente "),
+                        _c("span", { staticClass: "sr-only" }, [
+                          _vm._v("(current)")
+                        ])
+                      ]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  {
+                    staticClass: "nav-item borderLeftRight ml-4",
+                    attrs: { id: "editarIncidenteItem" }
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link",
+                        on: {
+                          click: function($event) {
+                            return _vm.selectTab(2)
+                          }
                         }
-                      }
-                    },
-                    [_vm._v("Editar Incidentes")]
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  staticClass: "nav-item borderLeftRight ml-4",
-                  attrs: { id: "formacionItem" }
-                },
-                [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "nav-link",
-                      on: {
-                        click: function($event) {
-                          return _vm.selectTab(3)
+                      },
+                      [_vm._v("Editar Incidentes")]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  {
+                    staticClass: "nav-item borderLeftRight ml-4",
+                    attrs: { id: "formacionItem" }
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link",
+                        on: {
+                          click: function($event) {
+                            return _vm.selectTab(3)
+                          }
                         }
-                      }
-                    },
-                    [_vm._v("Formación")]
-                  )
-                ]
-              )
-            ])
-          ]
-        )
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.currentTab == 1,
-            expression: "currentTab == 1"
-          }
-        ]
-      },
-      [
-        _c(
-          "button",
-          {
-            directives: [
+                      },
+                      [_vm._v("Formación")]
+                    )
+                  ]
+                )
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "custom-control custom-switch dislexia" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.activaDislexia,
+                  expression: "activaDislexia"
+                }
+              ],
+              staticClass: "custom-control-input",
+              attrs: { type: "checkbox", id: "dislexiaSwitch" },
+              domProps: {
+                checked: Array.isArray(_vm.activaDislexia)
+                  ? _vm._i(_vm.activaDislexia, null) > -1
+                  : _vm.activaDislexia
+              },
+              on: {
+                change: function($event) {
+                  var $$a = _vm.activaDislexia,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = null,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 && (_vm.activaDislexia = $$a.concat([$$v]))
+                    } else {
+                      $$i > -1 &&
+                        (_vm.activaDislexia = $$a
+                          .slice(0, $$i)
+                          .concat($$a.slice($$i + 1)))
+                    }
+                  } else {
+                    _vm.activaDislexia = $$c
+                  }
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
               {
-                name: "show",
-                rawName: "v-show",
-                value: !_vm.incidencia,
-                expression: "!incidencia"
-              }
-            ],
-            staticClass: "btn btn-danger col-12",
-            attrs: { id: "generarLlamada" },
-            on: {
-              click: function($event) {
-                return _vm.startIncidencia()
-              }
-            }
-          },
-          [
-            _c("i", { staticClass: "fas fa-phone-alt" }),
-            _vm._v("  Generar Llamada")
-          ]
-        ),
-        _vm._v(" "),
-        _c("nuevoincidente-component", {
+                staticClass: "custom-control-label",
+                attrs: { for: "dislexiaSwitch" }
+              },
+              [_vm._v("Dislexia")]
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
           directives: [
             {
               name: "show",
               rawName: "v-show",
-              value: _vm.incidencia,
-              expression: "incidencia"
+              value: _vm.currentTab == 1,
+              expression: "currentTab == 1"
             }
-          ],
-          attrs: { alertantNumber: _vm.pickedNumber, userid: _vm.userid }
-        })
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.currentTab == 3,
-            expression: "currentTab == 3"
-          }
-        ]
-      },
-      [_c("formacion-component")],
-      1
-    )
-  ])
+          ]
+        },
+        [
+          _c(
+            "button",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: !_vm.incidencia,
+                  expression: "!incidencia"
+                }
+              ],
+              staticClass: "btn btn-danger col-12",
+              attrs: { id: "generarLlamada" },
+              on: {
+                click: function($event) {
+                  return _vm.startIncidencia()
+                }
+              }
+            },
+            [
+              _c("i", { staticClass: "fas fa-phone-alt" }),
+              _vm._v("  Generar Llamada")
+            ]
+          ),
+          _vm._v(" "),
+          _c("nuevoincidente-component", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.incidencia,
+                expression: "incidencia"
+              }
+            ],
+            attrs: { alertantNumber: _vm.pickedNumber, userid: _vm.userid }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.currentTab == 2,
+              expression: "currentTab == 2"
+            }
+          ]
+        },
+        [_c("gestionarIncidente-component")],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.currentTab == 3,
+              expression: "currentTab == 3"
+            }
+          ]
+        },
+        [_c("formacion-component")],
+        1
+      )
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
@@ -48114,7 +48193,7 @@ var staticRenderFns = [
     return _c("a", { staticClass: "navbar-brand" }, [
       _c("img", {
         attrs: {
-          src: "/SGTA-Broggi/public/media/img/broggi2.png",
+          src: "/SGTA-Broggi/public/media/img/prototipoLogo.png",
           id: "cecosLogo",
           alt: "logoBroggi"
         }
