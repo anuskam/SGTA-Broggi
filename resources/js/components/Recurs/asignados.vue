@@ -2,9 +2,9 @@
   <main class="col-md-10 col-sm-12">
     <div class="card" id="infoCard">
       <div class="card-header" id="infoHeader">
-        <div>#12</div>
-        <div>Traumatisme</div>
-        <div>G-003</div>
+        <div>#{{ incidenciaID }}</div>
+        <div>{{ tipusIncidencia }}</div>
+        <div>Prioritat: {{ prioritat }}</div>
       </div>
       <div class="card-body p-3">
         <div id="map">
@@ -15,8 +15,7 @@
             <div class="infobox" id="descripcionBox">
               <div class="col-2 text-center boldInfo">Descripción:</div>
               <div id="descripcion" class="col-9">
-                Juan se ha caido de una escalera mientras rescataba al mishu de
-                la vecina de al lado...
+                {{ descripcio }}
               </div>
             </div>
             <div class="infobox" id="direccionBox">
@@ -39,14 +38,14 @@
       <div id="leftButtons" class="col-2">
         <div id="movilitzacio" class="button" @click="activarMovilitzacio()">
           <button><i class="fas fa-running"></i> Iniciar Movilització</button>
-          <input type="time" v-model="horaMovilitzacio" />
+          <input type="time" v-model="incidenciaRecursInsert.hora_mobilitzacio" />
         </div>
 
         <div id="assistencia" class="button" @click="activarAssistencia()" :class="{ visible: movilitzacio }">
           <button :disabled="!movilitzacio">
             <i class="fas fa-briefcase-medical"></i> Iniciar Assistència
           </button>
-          <input type="time" v-model="horaAssistencia" />
+          <input type="time" v-model="incidenciaRecursInsert.hora_assistencia" />
         </div>
       </div>
       <div id="checkTransport" class="col-1" @click="activarMostrarTransport()"  :class="{ visible: assistencia }">
@@ -71,7 +70,7 @@
             class="custom-select"
             id="direccioHospital"
 
-            v-model="hospitalAddress"
+            v-model="incidenciaRecursInsert.desti"
             >
             <option selected value="Selecciona...">
                 Selecciona...
@@ -89,26 +88,26 @@
               <button :disabled="!mostrarTransport" id="iniciarTransport" @click="activarTransport()">
                 <label for="iniciarTransport"><i class="fas fa-ambulance"></i> Iniciar Transport</label>
               </button>
-              <input type="time" v-model="horaTransport" />
+              <input type="time" v-model="incidenciaRecursInsert.hora_transport" />
             </div>
             <div class="botoTransport button">
               <button :disabled="!transport" id="arribadaHospital" @click="activarHospital()">
                   <label for="arribadaHospital"><i class="fas fa-hospital"></i> Arribada Hospital</label>
               </button>
-              <input type="time" v-model="horaHospital" />
+              <input type="time" v-model="incidenciaRecursInsert.hora_arribada_hospital" />
             </div>
             <div class="botoTransport button">
               <button :disabled="!hospital" @click="activarTransferencia()">
                 <label for="ininciarTransferencia"><i class="fas fa-user-friends"></i> Iniciar Transferència</label>
               </button>
-              <input type="time" v-model="horaTransferencia" />
+              <input type="time" v-model="incidenciaRecursInsert.hora_transferencia" />
             </div>
             <div class="botoTransport button">
-              <button :disabled="!transferencia" id="hospitalitzacio">
+              <button :disabled="!transferencia" id="hospitalitzacio" @click="hospitalitzacio()">
                   <label for="hospitalitzacio"><i class="fas fa-procedures"></i> Hospitalització</label>
               </button>
 
-              <button id="alta">
+              <button id="alta" @click="altaVoluntaria()">
                 <label for="alta"><i class="fas fa-notes-medical"></i> Alta Voluntària</label>
               </button>
             </div>
@@ -131,10 +130,19 @@
             </button> -->
           </div>
           <div class="modal-body">
-            <p>Complemento Dirección: Esquina con una oficina de correos y tres casas feas</p>
-            <p>Nombre del Alertante: Juan Palomo</p>
-            <p>Teléfono del Alertante: 686593421</p>
-            <p>CIP: CAME2934958293</p>
+            <p>Complemento Dirección: {{ adreca_complement }}</p>
+            <p>Nombre del Alertante: {{ nom_alertant }}</p>
+            <p>Teléfono del Alertante: {{ telefon_alertant }}</p>
+            <p>Afectados:</p>
+            <ul>
+                <li v-for="afectat in afectats" :key="afectat.id">
+                    <p>Nom: {{ afectat.nom }}</p>
+                    <p>Cognoms: {{ afectat.cognoms }}</p>
+                    <p>Sexe: <span v-if="afectat.sexes_id == 1">Home</span> <span v-else>Dona</span></p>
+                    <p>Edat: {{ afectat.edat }}</p>
+                    <p v-if="afectat.te_cip == 1">CIP: {{ afectat.cip }}</p>
+                </li>
+            </ul>
           </div>
           <div class="modal-footer">
             <button
@@ -157,6 +165,9 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 
 
 export default {
+    props: {
+        recursos_id: Number,
+    },
     data(){
         return{
             movilitzacio: false,
@@ -172,15 +183,194 @@ export default {
             horaTransferencia: null,
             mapboxKey: "pk.eyJ1IjoiYWx4bXJjZCIsImEiOiJja25ieXJqOGExMmdvMndtdWU1bXVsb3kwIn0.zN5ubwh81_aR_xFX1w0Aqg",
             map: null,
-            address: "Antoni Gaudí, 26, Reus",
+            address: "",
             hospitalAddress: null,
             hospitals: [],
             addresses: [],
             alertants: [],
             municipis:[],
+            incidenciesHasRecursos: [],
+            incidenciaHasRecursos: [],
+            afectatsDB: [],
+            afectats: [],
+            incidenciaID: null,
+            incidencia: null,
+            prioritat: null,
+            tipus_incidencies: [],
+            tipusIncidencia: null,
+            descripcio: null,
+            alertant: null,
+            adreca_complement: null,
+            nom_alertant: null,
+            telefon_alertant: null,
+            incidenciaRecursInsert: {
+                "afectats_id": null,
+                "desti": null,
+                "hora_activacio": null,
+                "hora_arribada_hospital": null,
+                "hora_assistencia": null,
+                "hora_finalitzacio": null,
+                "hora_mobilitzacio": null,
+                "hora_transferencia": null,
+                "hora_transport": null,
+                "incidencies_id": null,
+                "recursos_id": null,
+                "prioritat": null,
+            },
+            incidenciaRecursosInsert: [],
+            recurs: null,
         }
     },
     methods: {
+        altaVoluntaria(){
+            if(this.assistencia && !this.mostrarTransport){
+                this.updateFunction();
+            }
+        },
+        hospitalitzacio(){
+            if(this.transferencia){
+                this.updateFunction();
+            }
+        },
+        async updateFunction(){
+            let me = this;
+            this.incidenciaRecursInsert.incidencies_id = this.incidencia.id;
+            this.incidenciaRecursInsert.recursos_id = this.recursos_id;
+            this.incidenciaRecursInsert.hora_finalitzacio = new Date().toLocaleTimeString("en-GB", {
+                hour: "numeric",
+                minute: "numeric",
+                second: "numeric",
+            });
+            this.incidenciaHasRecursos.forEach((recurs) => {
+                me.incidenciaRecursInsert.hora_activacio = recurs.hora_activacio;
+                me.incidenciaRecursInsert.afectats_id = recurs.afectats_id;
+                me.incidenciaRecursInsert.prioritat = recurs.prioritat;
+                me.incidenciaRecursosInsert.push(me.incidenciaRecursInsert);
+            });
+            this.incidencia.incidencies_has_recursos = this.incidenciaRecursosInsert;
+            await this.updateIncidencia();
+            await this.selectRecurso();
+            this.recurs.actiu = true;
+            await this.updateRecurso();
+            location.reload();
+        },
+        selectRecurso(){
+            let me = this;
+            return axios.get('/SGTA-Broggi/public/api/recurs/'+me.recursos_id).then((response) => {
+                me.recurs = response.data;
+            }).catch( (error) => {
+                console.log(error.response.status);
+                console.log(error.response.data.error);
+            });
+        },
+        updateIncidencia(){
+            let me = this;
+            return axios.put('/SGTA-Broggi/public/api/incidencia/'+me.incidenciaID, me.incidencia).then((response) => {
+                console.log(response);
+            }).catch( (error) => {
+                console.log(error.response.status);
+                console.log(error.response.data.error);
+            });
+        },
+        updateRecurso(){
+            let me = this;
+            return axios.put('/SGTA-Broggi/public/api/recurs/'+me.recursos_id, me.recurs).then((response) => {
+                console.log(response);
+            }).catch( (error) => {
+                console.log(error.response.status);
+                console.log(error.response.data.error);
+            });
+        },
+        async getIncidenciaData(){
+            await this.selectIncidenciesHasRecursos();
+            await this.selectIncidenciaHasRecursos();
+            await this.selectAfectats();
+            await this.getAfectats();
+            await this.selectIncidencia();
+            await this.selectTipusIncidencia();
+            await this.getAlertant();
+            this.descripcio = this.incidencia.descripcio;
+            this.adreca_complement = this.incidencia.adreca_complement;
+            this.nom_alertant = this.alertant.nom;
+            this.telefon_alertant = this.alertant.telefon;
+            let me = this;
+            let municipi = this.municipis.find(obj => obj.id == me.incidencia.municipis_id);
+            this.address = this.incidencia.adreca + ", " + municipi.nom;
+            this.addAddress(this.address);
+            this.tipusIncidencia = this.getTipusIncidencia(this.incidencia.tipus_incidencies_id);
+            this.prioritat = this.incidencia.incidencies_has_recursos[0].prioritat;
+        },
+        getAlertant(){
+            let me = this;
+            return this.alertant = this.alertants.find(obj => obj.id == me.incidencia.alertants_id);
+        },
+        selectTipusIncidencia() {
+          let me = this;
+          return axios
+              .get("/SGTA-Broggi/public/api/tipusIncidencia")
+              .then((response) => {
+                me.tipus_incidencies = response.data;
+              }).catch((error) => {
+                console.log(error);
+              })
+        },
+        getTipusIncidencia(incidenciesID) {
+          let tipusIncidencia = this.tipus_incidencies.find(obj => obj.id == incidenciesID);
+          let tipusIncidencia_nom;
+          if (tipusIncidencia != null) {
+            tipusIncidencia_nom = tipusIncidencia.tipus;
+          }
+          else {
+            tipusIncidencia_nom = this.tipus_incidencies.find(obj => obj.id == 1).id;
+          }
+
+          return tipusIncidencia_nom;
+        },
+        selectIncidenciesHasRecursos(){
+            let me = this;
+            return axios
+            .get("/SGTA-Broggi/public/api/incidenciaHasRecursos")
+            .then((response) => {
+            me.incidenciesHasRecursos = response.data;
+            })
+            .catch((error) => {
+            console.log(error);
+            });
+        },
+        selectIncidenciaHasRecursos(){
+            let me = this;
+            this.incidenciaHasRecursos = this.incidenciesHasRecursos.filter(obj => obj.recursos_id == me.recursos_id);
+            this.incidenciaID = this.incidenciaHasRecursos[this.incidenciaHasRecursos.length-1].incidencies_id;
+            return true;
+        },
+        selectAfectats(){
+            let me = this;
+            return axios
+            .get("/SGTA-Broggi/public/api/afectat")
+            .then((response) => {
+            me.afectatsDB = response.data;
+            })
+            .catch((error) => {
+            console.log(error);
+            });
+        },
+        getAfectats(){
+            let me = this;
+            return this.incidenciaHasRecursos.forEach((afectat) =>{
+                me.afectats.push(me.afectatsDB.find(obj => (obj.id == afectat.afectats_id && obj.hora_finalitzacio == null)));
+            });
+        },
+        selectIncidencia(){
+            let me = this;
+            return axios
+            .get("/SGTA-Broggi/public/api/incidencia/"+me.incidenciaID)
+            .then((response) => {
+            me.incidencia = response.data;
+            })
+            .catch((error) => {
+            console.log(error);
+            });
+        },
         selectMunicipis() {
             let me = this;
             axios
@@ -282,7 +472,7 @@ export default {
         },
         activarMovilitzacio(){
             this.movilitzacio = true;
-            this.horaMovilitzacio = new Date().toLocaleTimeString("en-GB", {
+            this.incidenciaRecursInsert.hora_mobilitzacio = new Date().toLocaleTimeString("en-GB", {
             hour: "numeric",
             minute: "numeric",
             second: "numeric",
@@ -290,7 +480,7 @@ export default {
         },
         activarAssistencia(){
             this.assistencia = true;
-            this.horaAssistencia = new Date().toLocaleTimeString("en-GB", {
+            this.incidenciaRecursInsert.hora_assistencia = new Date().toLocaleTimeString("en-GB", {
             hour: "numeric",
             minute: "numeric",
             second: "numeric",
@@ -302,7 +492,7 @@ export default {
         },
         activarTransport(){
             this.transport = true;
-            this.horaTransport = new Date().toLocaleTimeString("en-GB", {
+            this.incidenciaRecursInsert.hora_transport = new Date().toLocaleTimeString("en-GB", {
             hour: "numeric",
             minute: "numeric",
             second: "numeric",
@@ -310,7 +500,7 @@ export default {
         },
         activarHospital(){
             this.hospital = true;
-            this.horaHospital = new Date().toLocaleTimeString("en-GB", {
+            this.incidenciaRecursInsert.hora_arribada_hospital = new Date().toLocaleTimeString("en-GB", {
             hour: "numeric",
             minute: "numeric",
             second: "numeric",
@@ -318,7 +508,7 @@ export default {
         },
         activarTransferencia(){
             this.transferencia = true;
-            this.horaTransferencia = new Date().toLocaleTimeString("en-GB", {
+            this.incidenciaRecursInsert.hora_transferencia = new Date().toLocaleTimeString("en-GB", {
             hour: "numeric",
             minute: "numeric",
             second: "numeric",
@@ -329,10 +519,10 @@ export default {
     mapboxgl.accessToken = this.mapboxKey;
     this.map = this.initMap("map");
     this.addAddress(this.address);
+    this.getIncidenciaData();
   },
   created(){
       this.selectMunicipis(), this.selectAlertants();
-
   },
   updated(){
       if(this.hospitalAddress != null){
@@ -507,5 +697,9 @@ button {
 }
 #alta{
     opacity: 1 !important;
+    visibility: visible !important;
+}
+#alta:hover{
+    cursor: pointer;
 }
 </style>
