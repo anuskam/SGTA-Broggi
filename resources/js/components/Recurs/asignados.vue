@@ -219,6 +219,8 @@ export default {
             },
             incidenciaRecursosInsert: [],
             recurs: null,
+            incidenciesHasAfectats: [],
+            afectatsID: [],
         }
     },
     methods: {
@@ -284,8 +286,10 @@ export default {
         async getIncidenciaData(){
             await this.selectIncidenciesHasRecursos();
             await this.selectIncidenciaHasRecursos();
+            await this.selectIncidenciesHasAfectats();
             await this.selectAfectats();
-            await this.getAfectats();
+            await this.getIncidenciaHasAfectats();
+            await this.getAfectat();
             await this.selectIncidencia();
             await this.selectTipusIncidencia();
             await this.getAlertant();
@@ -299,6 +303,21 @@ export default {
             this.addAddress(this.address);
             this.tipusIncidencia = this.getTipusIncidencia(this.incidencia.tipus_incidencies_id);
             this.prioritat = this.incidencia.incidencies_has_recursos[0].prioritat;
+        },
+        selectIncidenciesHasAfectats(){
+            let me = this;
+          return axios
+              .get("/SGTA-Broggi/public/api/incidenciaHasAfectats")
+              .then((response) => {
+                me.incidenciesHasAfectats = response.data;
+              }).catch((error) => {
+                console.log(error);
+              })
+        },
+        getIncidenciaHasAfectats(){
+            let me = this;
+            this.afectatsID = this.incidenciesHasAfectats.filter(obj => obj.incidencies_id == me.incidenciaID);
+            return null;
         },
         getAlertant(){
             let me = this;
@@ -354,11 +373,9 @@ export default {
             console.log(error);
             });
         },
-        getAfectats(){
+        getAfectat(){
             let me = this;
-            return this.incidenciaHasRecursos.forEach((afectat) =>{
-                me.afectats.push(me.afectatsDB.find(obj => (obj.id == afectat.afectats_id && obj.hora_finalitzacio == null)));
-            });
+            me.afectats.push(me.afectatsDB.find(obj => (obj.id == me.afectatsID[0].afectats_id)));
         },
         selectIncidencia(){
             let me = this;
