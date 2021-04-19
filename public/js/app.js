@@ -3461,9 +3461,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _this5.getAlertantData();
 
               case 12:
+                console.log(1);
                 return _context3.abrupt("return", null);
 
-              case 13:
+              case 14:
               case "end":
                 return _context3.stop();
             }
@@ -3474,16 +3475,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     evaluaErrores: function evaluaErrores() {
       var hasErrors = false;
 
-      if (this.alertanteConocido == false) {
-        if (this.municipi.id == null) {
-          hasErrors = true;
-          this.errors.push("Cal introduir el municipi de l'incident");
-        }
+      if (this.municipi.id == null) {
+        hasErrors = true;
+        this.errors.push("Cal introduir el municipi de l'incident");
       }
 
       if (this.activaRecurs == true && !this.afectatSelected.length > 0) {
         hasErrors = true;
         this.errors.push("Cal despatxar algun recurs o desactivar l'opcio d'assignar recurs");
+      }
+
+      if (this.activaRecurs == false && !this.afectats.length > 0) {
+        this.errors.push("Cal afegir algun afectat a l'incidencia");
       }
 
       if (this.incidencia.adreca == null) {
@@ -3494,6 +3497,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       if (this.incidencia.descripcio == null) {
         hasErrors = true;
         this.errors.push("Cal introduir la descripció de l'incident");
+      }
+
+      if (this.alertanteConocido == true && this.incidencia.nom_metge == null) {
+        hasErrors = true;
+        this.errors.push("Cal introduir el nom del metge alertant");
       }
 
       return hasErrors;
@@ -3514,72 +3522,94 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         "recursos": []
       };
     },
-    insertarAfectados: function insertarAfectados() {
-      var me = this;
-      return this.afectatSelected.forEach( /*#__PURE__*/function () {
-        var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(afectat) {
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
-            while (1) {
-              switch (_context4.prev = _context4.next) {
-                case 0:
-                  _context4.next = 2;
-                  return me.insertarAfectat(afectat);
+    insertarAfectados: function insertarAfectados(index) {
+      var _this6 = this;
 
-                case 2:
-                case "end":
-                  return _context4.stop();
-              }
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        var me;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                me = _this6; // this.afectatSelected.forEach(function(afectat){
+                //             me.insertarAfectat(afectat);
+                // });
+
+                return _context4.abrupt("return", me.insertarAfectat(_this6.afectatSelected[index]));
+
+              case 2:
+              case "end":
+                return _context4.stop();
             }
-          }, _callee4);
-        }));
-
-        return function (_x) {
-          return _ref.apply(this, arguments);
-        };
-      }());
+          }
+        }, _callee4);
+      }))();
     },
     // Control de Insert de la Incidencia
     evaluarIncidencia: function evaluarIncidencia() {
-      var _this6 = this;
+      var _this7 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
-        var me, afectatsInsert;
+        var me, index, afectatsInsert;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
-                _this6.errors = [];
+                _this7.errors = [];
 
-                if (_this6.evaluaErrores()) {
+                if (_this7.evaluaErrores()) {
+                  _context5.next = 35;
+                  break;
+                }
+
+                if (!(_this7.activaRecurs == true)) {
+                  _context5.next = 26;
+                  break;
+                }
+
+                if (!(_this7.afectatSelected.length > 0)) {
                   _context5.next = 24;
                   break;
                 }
 
-                if (!(_this6.activaRecurs == true)) {
-                  _context5.next = 17;
-                  break;
-                }
-
-                if (!(_this6.afectatSelected.length > 0)) {
-                  _context5.next = 15;
-                  break;
-                }
-
                 // Si realmente hay recursos asignados (NO CAL!)
-                me = _this6;
-                _context5.next = 7;
-                return _this6.insertarAfectados();
+                me = _this7;
+                index = 0;
 
-              case 7:
+              case 6:
+                if (!(index < _this7.afectatSelected.length)) {
+                  _context5.next = 12;
+                  break;
+                }
+
                 _context5.next = 9;
-                return _this6.evaluaInsertAlertantes();
+                return me.insertarAfectados(index);
 
               case 9:
-                _this6.evaluaInsertIncidencia();
+                ++index;
+                _context5.next = 6;
+                break;
 
+              case 12:
+                //   await this.insertarAfectados();
+                console.log("Se han insertado los afectados");
+                /* Insert de la incidencia con recursos */
+
+                _context5.next = 15;
+                return _this7.evaluaInsertAlertantes();
+
+              case 15:
+                console.log(2);
+
+                _this7.evaluaInsertIncidencia();
+
+                _context5.next = 19;
+                return _this7.insertAfectatsSinRecurso();
+
+              case 19:
                 afectatsInsert = [];
 
-                _this6.recursos.forEach(function (recurso, indexRecurso) {
+                _this7.recursos.forEach(function (recurso, indexRecurso) {
                   // Recopilando objetos de recursos con afectados en un array
                   recurso.afectats.forEach(function (afectat) {
                     var afectatInsert = {
@@ -3600,32 +3630,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   });
                 });
 
-                _this6.insertIncidencia.recursos = afectatsInsert;
+                _this7.insertIncidencia.recursos = afectatsInsert;
 
-                _this6.insertarIncidencia();
+                _this7.insertarIncidencia();
 
-                _this6.updateRecursos();
-
-              case 15:
-                _context5.next = 24;
-                break;
-
-              case 17:
-                _context5.next = 19;
-                return _this6.evaluaInsertAlertantes();
-
-              case 19:
-                _this6.evaluaInsertIncidencia();
-
-                _context5.next = 22;
-                return _this6.insertAfectatsSinRecurso();
-
-              case 22:
-                _this6.insertarIncidencia();
-
-                _this6.updateRecursos();
+                _this7.updateRecursos();
 
               case 24:
+                _context5.next = 35;
+                break;
+
+              case 26:
+                _context5.next = 28;
+                return _this7.evaluaInsertAlertantes();
+
+              case 28:
+                _this7.evaluaInsertIncidencia();
+
+                _context5.next = 31;
+                return _this7.insertAfectatsSinRecurso();
+
+              case 31:
+                console.log('afectados done');
+                console.log(_this7.insertIncidencia);
+
+                _this7.insertarIncidencia();
+
+                _this7.updateRecursos();
+
+              case 35:
               case "end":
                 return _context5.stop();
             }
@@ -3634,7 +3667,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     insertAfectatsSinRecurso: function insertAfectatsSinRecurso() {
-      var _this7 = this;
+      var _this8 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
         var me;
@@ -3642,12 +3675,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context6.prev = _context6.next) {
               case 0:
-                me = _this7;
-                _this7.insertIncidencia.afectats = [];
-                return _context6.abrupt("return", _this7.afectats.forEach(function (afectat) {
+                me = _this8;
+                _this8.insertIncidencia.afectats = [];
+                return _context6.abrupt("return", _this8.afectats.forEach(function (afectat) {
                   if (afectat.recurs_id == null) {
                     me.insertIncidencia.afectats.push(afectat);
                   }
+
+                  console.log("afectado x");
                 }));
 
               case 3:
@@ -3677,7 +3712,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     insertarAfectat: function insertarAfectat(afectat) {
-      var _this8 = this;
+      var _this9 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
         var me;
@@ -3685,7 +3720,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context7.prev = _context7.next) {
               case 0:
-                me = _this8;
+                me = _this9;
                 return _context7.abrupt("return", axios.post('/SGTA-Broggi/public/api/afectat', afectat).then(function (response) {
                   console.log(response);
                   me.recursosInsert.push(response.data);
@@ -3703,7 +3738,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     insertarAlertant: function insertarAlertant() {
-      var _this9 = this;
+      var _this10 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
         var me;
@@ -3711,7 +3746,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context8.prev = _context8.next) {
               case 0:
-                me = _this9;
+                me = _this10;
                 return _context8.abrupt("return", axios.post('/SGTA-Broggi/public/api/alertant', me.alertant).then(function (response) {
                   console.log(response);
                 })["catch"](function (error) {
@@ -3728,7 +3763,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     getAlertantData: function getAlertantData() {
-      var _this10 = this;
+      var _this11 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
         var me;
@@ -3736,8 +3771,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context9.prev = _context9.next) {
               case 0:
-                me = _this10;
-                return _context9.abrupt("return", _this10.alertants.forEach(function (alertant) {
+                me = _this11;
+                return _context9.abrupt("return", _this11.alertants.forEach(function (alertant) {
                   if (alertant.telefon == me.alertantNumber) {
                     // Se supone que el telefono es unico pero se puede confundir con un alertante registrado
                     me.alertantDB = alertant;
@@ -3834,11 +3869,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     },
     provinciesFiltered: function provinciesFiltered() {
-      var _this11 = this;
+      var _this12 = this;
 
       if (this.comarca.id > 0) {
         var provincia = this.provincies.find(function (o) {
-          return o.id == _this11.comarca.provincies_id;
+          return o.id == _this12.comarca.provincies_id;
         });
         this.provincia = provincia;
         var provinciesFiltered = [];
@@ -45064,7 +45099,7 @@ var render = function() {
                         staticClass: "col-2 col-form-label",
                         attrs: { for: "datosMedica" }
                       },
-                      [_vm._v("Datos médica")]
+                      [_vm._v("Datos personales")]
                     ),
                     _vm._v(" "),
                     _c(
