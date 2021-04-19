@@ -127,7 +127,7 @@
               <!-- NOMBRE MÉDICA -->
               <div class="form-group row">
                 <label for="datosMedica" class="col-2 col-form-label"
-                  >Datos médica</label
+                  >Datos personales</label
                 >
                 <label for="nombreMedica" class="col-1 col-form-label"
                   >Nombre</label
@@ -1258,19 +1258,22 @@ export default {
             await this.selectAlertants();
             await this.getAlertantData();
         }
+        console.log(1)
         return null;
     },
     evaluaErrores(){
       let hasErrors = false;
-      if(this.alertanteConocido == false){
         if(this.municipi.id == null){
-          hasErrors = true;
-          this.errors.push("Cal introduir el municipi de l'incident");
+            hasErrors = true;
+            this.errors.push("Cal introduir el municipi de l'incident");
         }
-      }
+
       if(this.activaRecurs == true && !this.afectatSelected.length > 0){
         hasErrors = true;
         this.errors.push("Cal despatxar algun recurs o desactivar l'opcio d'assignar recurs");
+      }
+      if(this.activaRecurs == false && !this.afectats.length > 0){
+          this.errors.push("Cal afegir algun afectat a l'incidencia");
       }
       if(this.incidencia.adreca == null){
         hasErrors = true;
@@ -1279,6 +1282,10 @@ export default {
       if(this.incidencia.descripcio == null){
         hasErrors = true;
         this.errors.push("Cal introduir la descripció de l'incident");
+      }
+      if(this.alertanteConocido == true && this.incidencia.nom_metge == null){
+          hasErrors = true;
+          this.errors.push("Cal introduir el nom del metge alertant");
       }
       return hasErrors;
     },
@@ -1298,11 +1305,12 @@ export default {
           "recursos": []
       };
     },
-    insertarAfectados(){
+    async insertarAfectados(index){
         let me = this;
-        return this.afectatSelected.forEach(async function(afectat){
-                     await me.insertarAfectat(afectat);
-        });
+        // this.afectatSelected.forEach(function(afectat){
+        //             me.insertarAfectat(afectat);
+        // });
+       return me.insertarAfectat(this.afectatSelected[index]);
     },
     // Control de Insert de la Incidencia
     async evaluarIncidencia(){
@@ -1312,23 +1320,18 @@ export default {
           if(this.activaRecurs == true){ // Si se ha activado asignacion de recursos
               if(this.afectatSelected.length > 0){ // Si realmente hay recursos asignados (NO CAL!)
                   let me = this;
-                  await this.insertarAfectados();
-                //   await this.selectAfectats();
-                //   console.log(this.afectatsDB);
-                //   this.recursos.forEach(function(recurs, indexRecurs){ // Asignando id de la bd a los afectados
-                //       recurs.afectats.forEach(function(afectat, indexAfectat){
-                //           let indexAfectatDB = me.afectatsDB.findIndex(obj => (obj.nom == afectat.nom && obj.cognoms == afectat.cognoms && obj.sexes_id == afectat.sexes_id && obj.edat == afectat.edat));
-                //           if(indexAfectatDB >= 0){
-                //               me.recursos[indexRecurs].afectats[indexAfectat].id = me.afectatsDB[indexAfectatDB].id;
-                //           }
-                //           else{
-                //               me.recursos[indexRecurs].afectats[indexAfectat].id = me.afectatsDB.length-(me.recursos[indexRecurs].afectats.length - indexAfectat);
-                //           }
-                //       });
-                // });
+                  for(let index = 0; index < this.afectatSelected.length; ++index){
+                      await me.insertarAfectados(index);
+                  }
+
+                //   await this.insertarAfectados();
+                  console.log("Se han insertado los afectados");
+
                 /* Insert de la incidencia con recursos */
                   await this.evaluaInsertAlertantes();
-                  this.evaluaInsertIncidencia()
+                  console.log(2);
+                  this.evaluaInsertIncidencia();
+                  await this.insertAfectatsSinRecurso();
                     let afectatsInsert = [];
                     this.recursos.forEach(function (recurso, indexRecurso){ // Recopilando objetos de recursos con afectados en un array
                         recurso.afectats.forEach(function (afectat){
@@ -1356,6 +1359,8 @@ export default {
               await this.evaluaInsertAlertantes();
               this.evaluaInsertIncidencia();
               await this.insertAfectatsSinRecurso();
+              console.log('afectados done');
+              console.log(this.insertIncidencia);
               this.insertarIncidencia();
               this.updateRecursos();
           }
@@ -1369,6 +1374,7 @@ export default {
             if(afectat.recurs_id == null){
                 me.insertIncidencia.afectats.push(afectat);
             }
+            console.log("afectado x");
         });
     },
     insertarIncidencia(){
