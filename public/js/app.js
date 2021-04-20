@@ -5293,6 +5293,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -5302,7 +5307,11 @@ __webpack_require__.r(__webpack_exports__);
         nom: '',
         cognoms: '',
         adreca: '',
-        municipis_id: null
+        municipis_id: null,
+        meta: {},
+        paginas: [],
+        pagina: 0,
+        currentPage: 0
       },
       municipis: [],
       insert: true,
@@ -5311,10 +5320,27 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    paginar: function paginar(pagina) {
+      var me = this;
+      axios.get('SGTA-Broggi/public/api/alertant' + '?page=' + pagina).then(function (response) {
+        me.alertants = response.data.data;
+        me.meta = response.data.meta;
+        me.currentPage = pagina;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
     selectAlertants: function selectAlertants() {
       var me = this;
       axios.get('/SGTA-Broggi/public/api/alertant').then(function (response) {
-        me.alertants = response.data;
+        me.alertants = response.data.data;
+        me.meta = response.data.meta;
+
+        for (var index = 0; index < me.meta.last_page; index++) {
+          me.paginas[index] = pagina + 1;
+        }
+
+        me.currentPage = 1;
       })["catch"](function (error) {
         console.log(error);
       });
@@ -5344,7 +5370,7 @@ __webpack_require__.r(__webpack_exports__);
     insertAlertant: function insertAlertant() {
       var me = this;
       axios.post('/SGTA-Broggi/public/api/alertant', me.alertant).then(function (response) {
-        console.log(repsonse);
+        console.log(response);
         me.selectAlertants();
         $('#alertantModal').modal('hide');
       })["catch"](function (error) {
@@ -5580,6 +5606,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -5629,7 +5660,7 @@ __webpack_require__.r(__webpack_exports__);
     insertRecurs: function insertRecurs() {
       var me = this;
       axios.post('/SGTA-Broggi/public/api/recurs', me.recurs).then(function (response) {
-        console.log(repsonse);
+        console.log(response);
         me.selectRecursos();
         $('#recursModal').modal('hide');
       })["catch"](function (error) {
@@ -5882,12 +5913,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       usuaris: [],
       usuari: {
         username: '',
+        contrasenya: '',
         email: '',
         nom: '',
         cognoms: '',
@@ -5933,7 +5973,7 @@ __webpack_require__.r(__webpack_exports__);
     insertUsuari: function insertUsuari() {
       var me = this;
       axios.post('/SGTA-Broggi/public/api/usuari', me.usuari).then(function (response) {
-        console.log(repsonse);
+        console.log(response);
         me.selectUsuaris();
         $('#usuariModal').modal('hide');
       })["catch"](function (error) {
@@ -48353,7 +48393,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "card mt-2 mb-1 ml-5 mr-5" }, [
       _c("h2", { staticClass: "card-header font-weight-bold" }, [
-        _vm._v("Alertants")
+        _vm._v("Alertantes")
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
@@ -48444,7 +48484,7 @@ var render = function() {
             _c("div", { staticClass: "modal-body" }, [
               _c("p", [
                 _vm._v(
-                  "Estàs segura d'eliminar l'alertant " +
+                  "¿Estás segura de eliminar el alertante " +
                     _vm._s(_vm.alertant.nom) +
                     "?"
                 )
@@ -48458,7 +48498,7 @@ var render = function() {
                   staticClass: "btn cerrarBtn",
                   attrs: { type: "button", "data-dismiss": "modal" }
                 },
-                [_vm._v("Tancar")]
+                [_vm._v("Cerrar")]
               ),
               _vm._v(" "),
               _c(
@@ -48497,7 +48537,7 @@ var render = function() {
                       staticClass: "col-sm-2 col-form-label",
                       attrs: { for: "telefon" }
                     },
-                    [_vm._v("Telèfon")]
+                    [_vm._v("Teléfono")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-sm-10" }, [
@@ -48537,7 +48577,7 @@ var render = function() {
                       staticClass: "col-sm-2 col-form-label",
                       attrs: { for: "nom" }
                     },
-                    [_vm._v("Nom")]
+                    [_vm._v("Nombre")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-sm-10" }, [
@@ -48572,7 +48612,7 @@ var render = function() {
                       staticClass: "col-sm-2 col-form-label",
                       attrs: { for: "cognoms" }
                     },
-                    [_vm._v("Cognoms")]
+                    [_vm._v("Apellidos")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-sm-10" }, [
@@ -48607,7 +48647,7 @@ var render = function() {
                       staticClass: "col-sm-2 col-form-label",
                       attrs: { for: "adreca" }
                     },
-                    [_vm._v("Adreça")]
+                    [_vm._v("Dirección")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-sm-10" }, [
@@ -48642,7 +48682,7 @@ var render = function() {
                       staticClass: "col-sm-2 col-form-label",
                       attrs: { for: "municipio" }
                     },
-                    [_vm._v("Municipi")]
+                    [_vm._v("Municipio")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-sm-10" }, [
@@ -48751,6 +48791,25 @@ var render = function() {
           ])
         ])
       ]
+    ),
+    _vm._v(" "),
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-primary btn-float-afegir",
+        on: {
+          click: function($event) {
+            return _vm.createAlertant()
+          }
+        }
+      },
+      [
+        _c("i", {
+          staticClass: "fas fa-plus-circle",
+          attrs: { "aria-hidden": "true" }
+        }),
+        _vm._v("\n    Nueva alertante\n  ")
+      ]
     )
   ])
 }
@@ -48762,18 +48821,18 @@ var staticRenderFns = [
     return _c("thead", [
       _c("tr", [
         _c("th", { staticClass: "sizeNom", attrs: { scope: "col" } }, [
-          _vm._v("Nom")
+          _vm._v("Nombre")
         ]),
         _vm._v(" "),
         _c("th", { staticClass: "sizeCognom", attrs: { scope: "col" } }, [
-          _vm._v("Cognoms")
+          _vm._v("Apellidos")
         ]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Telèfon")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Teléfono")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Adreça")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Dirección")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Municipi")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Municipio")]),
         _vm._v(" "),
         _c("th", { staticClass: "sizeBotones", attrs: { scope: "col" } })
       ])
@@ -48784,7 +48843,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-header" }, [
-      _c("div", { staticClass: "modal-title" }, [_vm._v("Eliminar Alertant")]),
+      _c("div", { staticClass: "modal-title" }, [_vm._v("Eliminar Alertante")]),
       _vm._v(" "),
       _c(
         "button",
@@ -48805,7 +48864,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-header" }, [
-      _c("div", { staticClass: "modal-title" }, [_vm._v("Alertant")]),
+      _c("div", { staticClass: "modal-title" }, [_vm._v("Alertante")]),
       _vm._v(" "),
       _c(
         "button",
@@ -48845,7 +48904,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("main", [
-    _vm.errorMessage != "v"
+    _vm.errorMessage != ""
       ? _c(
           "div",
           {
@@ -48946,7 +49005,7 @@ var render = function() {
                         staticClass: "fa fa-trash",
                         attrs: { "aria-hidden": "true" }
                       }),
-                      _vm._v("  Esborrar")
+                      _vm._v("  Eliminar")
                     ]
                   ),
                   _vm._v(" "),
@@ -48992,7 +49051,7 @@ var render = function() {
             _c("div", { staticClass: "modal-body" }, [
               _c("p", [
                 _vm._v(
-                  "Estàs segura d'eliminar el recurs " +
+                  "¿Estás segura de liminar el recurso " +
                     _vm._s(_vm.recurs.codi) +
                     "?"
                 )
@@ -49045,7 +49104,7 @@ var render = function() {
                       staticClass: "col-sm-2 col-form-label",
                       attrs: { for: "codi" }
                     },
-                    [_vm._v("Codi")]
+                    [_vm._v("Código")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-sm-10" }, [
@@ -49085,7 +49144,7 @@ var render = function() {
                       staticClass: "col-sm-2 col-form-label",
                       attrs: { for: "actiu" }
                     },
-                    [_vm._v("Actiu")]
+                    [_vm._v("Activo")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-sm-10" }, [
@@ -49161,7 +49220,7 @@ var render = function() {
                       staticClass: "col-sm-2 col-form-label",
                       attrs: { for: "tipusRecurs" }
                     },
-                    [_vm._v("Municipi")]
+                    [_vm._v("Municipio")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-sm-10" }, [
@@ -49251,7 +49310,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Afegir")]
+                    [_vm._v("Añadir")]
                   )
                 : _c(
                     "button",
@@ -49270,6 +49329,25 @@ var render = function() {
           ])
         ])
       ]
+    ),
+    _vm._v(" "),
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-primary btn-float-afegir",
+        on: {
+          click: function($event) {
+            return _vm.createRecurs()
+          }
+        }
+      },
+      [
+        _c("i", {
+          staticClass: "fas fa-plus-circle",
+          attrs: { "aria-hidden": "true" }
+        }),
+        _vm._v("\n    Nuevo recurso\n  ")
+      ]
     )
   ])
 }
@@ -49280,11 +49358,11 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Codi")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Código")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Actiu")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Activo")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipus de Recurs")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo de Recurso")]),
         _vm._v(" "),
         _c("th", { staticClass: "sizeBotones", attrs: { scope: "col" } })
       ])
@@ -49316,7 +49394,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-header" }, [
-      _c("div", { staticClass: "modal-title" }, [_vm._v("Recurs")]),
+      _c("div", { staticClass: "modal-title" }, [_vm._v("Recurso")]),
       _vm._v(" "),
       _c(
         "button",
@@ -49398,7 +49476,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "card mt-2 mb-1 ml-5 mr-5" }, [
       _c("h2", { staticClass: "card-header font-weight-bold" }, [
-        _vm._v("Usuàries")
+        _vm._v("Usuarias")
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
@@ -49443,7 +49521,7 @@ var render = function() {
                         staticClass: "fa fa-trash",
                         attrs: { "aria-hidden": "true" }
                       }),
-                      _vm._v("  Esborrar")
+                      _vm._v("  Eliminar")
                     ]
                   ),
                   _vm._v(" "),
@@ -49489,7 +49567,7 @@ var render = function() {
             _c("div", { staticClass: "modal-body" }, [
               _c("p", [
                 _vm._v(
-                  "Estàs segura d'eliminar la usuària " +
+                  "¿Estás segura de eliminar a la usuaria " +
                     _vm._s(_vm.usuari.username) +
                     "?"
                 )
@@ -49503,7 +49581,7 @@ var render = function() {
                   staticClass: "btn cerrarBtn",
                   attrs: { type: "button", "data-dismiss": "modal" }
                 },
-                [_vm._v("Tancar")]
+                [_vm._v("Cerrar")]
               ),
               _vm._v(" "),
               _c(
@@ -49542,7 +49620,7 @@ var render = function() {
                       staticClass: "col-sm-2 col-form-label",
                       attrs: { for: "username" }
                     },
-                    [_vm._v("Nom Usuària")]
+                    [_vm._v("Nombre Usuaria")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-sm-10" }, [
@@ -49569,6 +49647,50 @@ var render = function() {
                             return
                           }
                           _vm.$set(_vm.usuari, "username", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-sm-2 col-form-label",
+                      attrs: { for: "password" }
+                    },
+                    [_vm._v("Contraseña")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-10" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.usuari.contrasenya,
+                          expression: "usuari.contrasenya"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "password",
+                        name: "password",
+                        autofocus: ""
+                      },
+                      domProps: { value: _vm.usuari.contrasenya },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.usuari,
+                            "contrasenya",
+                            $event.target.value
+                          )
                         }
                       }
                     })
@@ -49617,7 +49739,7 @@ var render = function() {
                       staticClass: "col-sm-2 col-form-label",
                       attrs: { for: "nomUsuari" }
                     },
-                    [_vm._v("Nom")]
+                    [_vm._v("Nombre")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-sm-10" }, [
@@ -49656,7 +49778,7 @@ var render = function() {
                       staticClass: "col-sm-2 col-form-label",
                       attrs: { for: "cognomsUsuari" }
                     },
-                    [_vm._v("Cognoms")]
+                    [_vm._v("Apellidos")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-sm-10" }, [
@@ -49767,14 +49889,14 @@ var render = function() {
                   staticClass: "btn cerrarBtn",
                   attrs: { type: "button", "data-dismiss": "modal" }
                 },
-                [_vm._v("Tancar")]
+                [_vm._v("Cerrar")]
               ),
               _vm._v(" "),
               _vm.insert
                 ? _c(
                     "button",
                     {
-                      staticClass: "btn",
+                      staticClass: "btn editarUsuariBtn",
                       attrs: { type: "button" },
                       on: {
                         click: function($event) {
@@ -49782,7 +49904,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Afegir")]
+                    [_vm._v("Añadir")]
                   )
                 : _c(
                     "button",
@@ -49818,7 +49940,7 @@ var render = function() {
           staticClass: "fas fa-plus-circle",
           attrs: { "aria-hidden": "true" }
         }),
-        _vm._v("\n    Nueva alertante\n  ")
+        _vm._v("\n    Nueva usuaria\n  ")
       ]
     )
   ])
@@ -49830,13 +49952,13 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nom Usuària")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre Usuaria")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Email")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nom")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Cognoms")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Apellidos")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Rol")]),
         _vm._v(" "),
@@ -49849,7 +49971,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-header" }, [
-      _c("div", { staticClass: "modal-title" }, [_vm._v("Esborrar Usuària")]),
+      _c("div", { staticClass: "modal-title" }, [_vm._v("Eliminar Usuaria")]),
       _vm._v(" "),
       _c(
         "button",
@@ -49870,7 +49992,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-header" }, [
-      _c("div", { staticClass: "modal-title" }, [_vm._v("Usuària")]),
+      _c("div", { staticClass: "modal-title" }, [_vm._v("Usuaria")]),
       _vm._v(" "),
       _c(
         "button",
