@@ -162,6 +162,12 @@
     </div>
   </div>
 
+  <button class="btn btn-primary btn-float-afegir" @click="createUsuari()">
+    <i class="fas fa-plus-circle" aria-hidden="true"></i>
+    Nueva alertante
+  </button>
+
+
 </main>
 </template>
 
