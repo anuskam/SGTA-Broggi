@@ -4143,7 +4143,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         "prioritat": null
       },
       incidenciaRecursosInsert: [],
-      recurs: null
+      recurs: null,
+      incidenciesHasAfectats: [],
+      afectatsID: []
     };
   },
   methods: {
@@ -4251,25 +4253,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 4:
                 _context2.next = 6;
-                return _this2.selectAfectats();
+                return _this2.selectIncidenciesHasAfectats();
 
               case 6:
                 _context2.next = 8;
-                return _this2.getAfectats();
+                return _this2.selectAfectats();
 
               case 8:
                 _context2.next = 10;
-                return _this2.selectIncidencia();
+                return _this2.getIncidenciaHasAfectats();
 
               case 10:
                 _context2.next = 12;
-                return _this2.selectTipusIncidencia();
+                return _this2.getAfectat();
 
               case 12:
                 _context2.next = 14;
-                return _this2.getAlertant();
+                return _this2.selectIncidencia();
 
               case 14:
+                _context2.next = 16;
+                return _this2.selectTipusIncidencia();
+
+              case 16:
+                _context2.next = 18;
+                return _this2.getAlertant();
+
+              case 18:
                 _this2.descripcio = _this2.incidencia.descripcio;
                 _this2.adreca_complement = _this2.incidencia.adreca_complement;
                 _this2.nom_alertant = _this2.alertant.nom;
@@ -4285,13 +4295,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this2.tipusIncidencia = _this2.getTipusIncidencia(_this2.incidencia.tipus_incidencies_id);
                 _this2.prioritat = _this2.incidencia.incidencies_has_recursos[0].prioritat;
 
-              case 24:
+              case 28:
               case "end":
                 return _context2.stop();
             }
           }
         }, _callee2);
       }))();
+    },
+    selectIncidenciesHasAfectats: function selectIncidenciesHasAfectats() {
+      var me = this;
+      return axios.get("/SGTA-Broggi/public/api/incidenciaHasAfectats").then(function (response) {
+        me.incidenciesHasAfectats = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    getIncidenciaHasAfectats: function getIncidenciaHasAfectats() {
+      var me = this;
+      this.afectatsID = this.incidenciesHasAfectats.filter(function (obj) {
+        return obj.incidencies_id == me.incidenciaID;
+      });
+      return null;
     },
     getAlertant: function getAlertant() {
       var me = this;
@@ -4347,13 +4372,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         console.log(error);
       });
     },
-    getAfectats: function getAfectats() {
+    getAfectat: function getAfectat() {
       var me = this;
-      return this.incidenciaHasRecursos.forEach(function (afectat) {
-        me.afectats.push(me.afectatsDB.find(function (obj) {
-          return obj.id == afectat.afectats_id && obj.hora_finalitzacio == null;
-        }));
-      });
+      me.afectats.push(me.afectatsDB.find(function (obj) {
+        return obj.id == me.afectatsID[0].afectats_id;
+      }));
     },
     selectIncidencia: function selectIncidencia() {
       var me = this;
