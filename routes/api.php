@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\AfectatController;
 use App\Http\Controllers\Api\AlertantController;
 use App\Http\Controllers\Api\ComarcaController;
 use App\Http\Controllers\Api\IncidenciaController;
+use App\Http\Controllers\Api\IncidenciaHasAfectatsController;
 use App\Http\Controllers\Api\IncidenciaHasRecursosController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\MunicipiController;
@@ -48,3 +49,5 @@ Route::apiResource('tipusIncidencia', TipusIncidenciaController::class);
 Route::apiResource('tipusRecurs', TipusRecursController::class);
 Route::apiResource('usuari', UsuariController::class);
 Route::apiResource('incidenciaHasRecursos', IncidenciaHasRecursosController::class);
+Route::apiResource('incidenciaHasAfectats', IncidenciaHasAfectatsController::class);
+
