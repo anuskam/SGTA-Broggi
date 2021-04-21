@@ -10648,7 +10648,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#generarLlamada[data-v-bfb0cdda]{\n  font-family: 'Signika', sans-serif;\n  font-size: 35px;\n  margin-top: 33vh;\n  background-color: #E2211D !important;\n}\n\n\n/* MOVIMIENTO BARRA DEBAJO DE ELEMENTOS DE NAVBAR */\n.borderLeftRight[data-v-bfb0cdda] {\n  display: inline-block;\n  position: relative;\n  color: hsl(222, 25%, 14%);\n}\n.borderLeftRight[data-v-bfb0cdda]::after {\n  content: '';\n  position: absolute;\n  width: 100%;\n  transform: scaleX(0);\n  height: 2px;\n  bottom: 0;\n  left: 0;\n  background-color: black;\n  transform-origin: bottom right;\n  transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);\n}\n.borderLeftRight[data-v-bfb0cdda]:hover::after {\n  transform: scaleX(1);\n  transform-origin: bottom left;\n}\n/* FIN DE LO QUE HE COPIADO POR SI NO CONVENCE */\n.contenido[data-v-bfb0cdda] {\n  font-size: 15px;\n  font-family: 'Rubik', sans-serif;\n}\n.dislexia[data-v-bfb0cdda] {\n  margin-right: 90px;\n}\n.dislexiaFont[data-v-bfb0cdda]{\n    font-family: Arial, Helvetica, sans-serif !important;\n    letter-spacing: 2px !important;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#generarLlamada[data-v-bfb0cdda]{\n  font-family: 'Signika', sans-serif;\n  font-size: 35px;\n  margin-top: 33vh;\n  background-color: #E2211D !important;\n}\n\n\n/* MOVIMIENTO BARRA DEBAJO DE ELEMENTOS DE NAVBAR */\n.borderLeftRight[data-v-bfb0cdda] {\n  display: inline-block;\n  position: relative;\n  color: hsl(222, 25%, 14%);\n}\n.borderLeftRight[data-v-bfb0cdda]::after {\n  content: '';\n  position: absolute;\n  width: 100%;\n  transform: scaleX(0);\n  height: 2px;\n  bottom: 0;\n  left: 0;\n  background-color: black;\n  transform-origin: bottom right;\n  transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);\n}\n.borderLeftRight[data-v-bfb0cdda]:hover::after {\n  transform: scaleX(1);\n  transform-origin: bottom left;\n}\n/* FIN DE LO QUE HE COPIADO POR SI NO CONVENCE */\n.contenido[data-v-bfb0cdda] {\n  /* font-size: 1em; */\n  font-family: 'Rubik', sans-serif;\n}\n.dislexia[data-v-bfb0cdda] {\n  margin-right: 90px;\n}\n.dislexiaFont[data-v-bfb0cdda]{\n    font-family: Arial, Helvetica, sans-serif !important;\n    letter-spacing: 2px !important;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10696,7 +10696,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn {\n    font-size: 15px;\n}\n.btn-secondary:not(:disabled):not(.disabled).active,\n.btn-secondary:not(:disabled):not(.disabled):active,\n.show > .btn-secondary.dropdown-toggle {\n  background-color: #e3177d;\n  border-color: black;\n}\n.btn-secondary {\n  border-color: black;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.parentGrid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n.card-header {\n  background-color: #15acc4;\n  border: 1px solid black;\n  border-left: 0;\n  border-right: 0;\n  margin-top: -1px;\n}\n.modal-header{\n    background-color: #15acc4 !important;\n}\n.card {\n  border: 1px solid black !important;\n}\nbutton {\n  background-color: #e3177d !important;\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\n  color: black;\n  font-weight: bold;\n  background-color: #15acc4 !important;\n}\n.tabButton{\n    background-color: white !important;\n    border: 0 !important;\n}\n.selectedTab{\n    background-color: #e3177d !important;\n    border: 1px solid black !important;\n}\n.green{\n    background-color: green;\n    color: white;\n}\n.red{\n    background-color: red;\n    color: white;\n}\n#entregar{\n  border: 1px solid black;\n}\n#titulitosTabs {\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n.iconNavPrincipal{\n    color: black;\n}\n#titulito {\n    font-family: 'Signika', sans-serif;\n    font-size: 1.3em;\n}\n.hidden{\n    visibility: hidden;\n}\n#buscadorTelefono > input{\n    border: 1px solid black;\n}\n.arrowNav{\n    height: 8vh;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn {\r\n    font-size: 15px;\n}\n.btn-secondary:not(:disabled):not(.disabled).active,\r\n.btn-secondary:not(:disabled):not(.disabled):active,\r\n.show > .btn-secondary.dropdown-toggle {\r\n  background-color: #e3177d;\r\n  border-color: black;\n}\n.btn-secondary {\r\n  border-color: black;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\n}\n.parentGrid {\r\n  display: grid;\r\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-between;\n}\n.card-header {\r\n  background-color: #15acc4;\r\n  border: 1px solid black;\r\n  border-left: 0;\r\n  border-right: 0;\r\n  margin-top: -1px;\n}\n.modal-header{\r\n    background-color: #15acc4 !important;\n}\n.card {\r\n  border: 1px solid black !important;\n}\nbutton {\r\n  background-color: #e3177d !important;\r\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\r\n  color: black;\r\n  font-weight: bold;\r\n  background-color: #15acc4 !important;\n}\n.tabButton{\r\n    background-color: white !important;\r\n    border: 0 !important;\n}\n.selectedTab{\r\n    background-color: #e3177d !important;\r\n    border: 1px solid black !important;\n}\n.green{\r\n    background-color: green;\r\n    color: white;\n}\n.red{\r\n    background-color: red;\r\n    color: white;\n}\n#entregar{\r\n  border: 1px solid black;\n}\n#titulitosTabs {\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\n}\n.iconNavPrincipal{\r\n    color: black;\n}\n#titulito {\r\n    font-family: 'Signika', sans-serif;\r\n    font-size: 1.3em;\n}\n.hidden{\r\n    visibility: hidden;\n}\n#buscadorTelefono > input{\r\n    border: 1px solid black;\n}\n.arrowNav{\r\n    height: 8vh;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10720,7 +10720,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nmain[data-v-6504f867] {\n  margin-top: 1.4vh;\n  color: black;\n  font-family: 'Rubik', sans-serif;\n  font-size: 15px;\n}\n#infoCard[data-v-6504f867] {\n  height: 65vh;\n  color: black;\n}\n#botones[data-v-6504f867] {\n  height: 28vh;\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#infoHeader[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n  font-size: 1.2em;\n  font-weight: bold;\n  margin-right: -0.5px;\n  border-bottom: 1px solid black;\n  background-color: #15acc4;\n}\nbutton[data-v-6504f867] {\n  background-color: #e3177d;\n  font-size: 0.9em;\n  color: white;\n  border-radius: 4px;\n}\n.card[data-v-6504f867] {\n  border: 1px solid black;\n}\n#transportHeader[data-v-6504f867] {\n  background-color: #15acc4;\n  font-weight: bold;\n  padding: 6px 20px;\n  text-align: center;\n}\n#leftButtons[data-v-6504f867] {\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n}\n#assistencia[data-v-6504f867]{\n    opacity: .4;\n}\n#checkTransport[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: center;\n  align-items: center;\n  opacity: .4;\n  /* margin-left: -80px; */\n}\n#checkTransport button[data-v-6504f867] {\n  padding: 10px 4px;\n  height: 100%;\n}\n#transportButton[data-v-6504f867] {\n  background-color: #e3177d;\n}\n#transportButtons[data-v-6504f867] {\n  height: 100%;\n  opacity: .4;\n}\n.visible[data-v-6504f867]{\n    opacity: 1 !important;\n}\n#transportForm[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#botonsTransport[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  width: 100%;\n  justify-content: space-between;\n}\n.button[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  /* align-items: center; */\n}\n#direccioHospital[data-v-6504f867] {\n  width: 100%;\n}\n#map[data-v-6504f867] {\n  height: 65%;\n  background-color: black;\n}\n#info[data-v-6504f867] {\n  height: 20%;\n  margin-top: 4%;\n  display: flex;\n  flex-direction: row;\n  justify-content: space-around;\n  flex-wrap: nowrap;\n  /* font-weight: bold; */\n}\n.boldInfo[data-v-6504f867]{\n    font-weight: bold;\n}\n#infoFields[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n  padding-right: 0;\n}\n.infobox[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  text-align: justify;\n}\n.infobox > div[data-v-6504f867] {\n  background-color: #15acc4;\n  border: 1px solid black;\n}\n#descripcion[data-v-6504f867],\n#direccion[data-v-6504f867] {\n  background-color: white;\n}\n#masInfo[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  vertical-align: center;\n}\n#masInfo > button[data-v-6504f867] {\n  padding: 10px 20px;\n  margin-left: -50px;\n  color: black;\n}\n.modal-header[data-v-6504f867]{\n    font-weight: bold;\n    background-color: #15acc4;\n}\n#alta[data-v-6504f867]{\n    opacity: 1 !important;\n    visibility: visible !important;\n}\n#alta[data-v-6504f867]:hover{\n    cursor: pointer;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nmain[data-v-6504f867] {\n  margin-top: 1.4vh;\n  color: black;\n  font-family: 'Rubik', sans-serif;\n  font-size: 15px;\n}\n#infoCard[data-v-6504f867] {\n  height: 65vh;\n  color: black;\n}\n#botones[data-v-6504f867] {\n  height: 28vh;\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#infoHeader[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n  font-size: 1.2em;\n  font-weight: bold;\n  margin-right: -0.5px;\n  border-bottom: 1px solid black;\n  background-color: #15acc4;\n}\nbutton[data-v-6504f867] {\n  background-color: #e3177d;\n  font-size: 0.9em;\n  color: white;\n  border-radius: 4px;\n}\n.card[data-v-6504f867] {\n  border: 1px solid black;\n}\n#transportHeader[data-v-6504f867] {\n  background-color: #15acc4;\n  font-weight: bold;\n  padding: 6px 20px;\n  text-align: center;\n}\n#leftButtons[data-v-6504f867] {\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n}\n#assistencia[data-v-6504f867]{\n    opacity: .4;\n}\n#checkTransport[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: center;\n  align-items: center;\n  opacity: .4;\n  /* margin-left: -80px; */\n}\n#checkTransport button[data-v-6504f867] {\n  padding: 10px 4px;\n  height: 100%;\n}\n#transportButton[data-v-6504f867] {\n  background-color: #e3177d;\n}\n#transportButtons[data-v-6504f867] {\n  height: 100%;\n  opacity: .4;\n}\n.visible[data-v-6504f867]{\n    opacity: 1 !important;\n}\n#transportForm[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#botonsTransport[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  width: 100%;\n  justify-content: space-between;\n}\n.button[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  /* align-items: center; */\n}\n#direccioHospital[data-v-6504f867] {\n  width: 100%;\n}\n#map[data-v-6504f867] {\n  height: 65%;\n  background-color: black;\n}\n#info[data-v-6504f867] {\n  height: 20%;\n  margin-top: 4%;\n  display: flex;\n  flex-direction: row;\n  justify-content: space-around;\n  flex-wrap: nowrap;\n  /* font-weight: bold; */\n}\n.boldInfo[data-v-6504f867]{\n    font-weight: bold;\n}\n#infoFields[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n  padding-right: 0;\n}\n.infobox[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  text-align: justify;\n  /* font-size: 12px; */\n}\n.infobox > div[data-v-6504f867] {\n  background-color: #15acc4;\n  border: 1px solid black;\n  font-size: 13.5px;\n  padding: 0px 5px !important;\n}\n#descripcion[data-v-6504f867],\n#direccion[data-v-6504f867] {\n  background-color: white;\n}\n#masInfo[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  vertical-align: center;\n}\n#masInfo > button[data-v-6504f867] {\n  padding: 10px 20px;\n  margin-left: -50px;\n  color: white;\n}\n.modal-header[data-v-6504f867]{\n    font-weight: bold;\n    background-color: #15acc4;\n}\n#alta[data-v-6504f867]{\n    opacity: 1 !important;\n    visibility: visible !important;\n}\n#alta[data-v-6504f867]:hover{\n    cursor: pointer;\n}\n.indicadoresMasInfo[data-v-6504f867]{\n    font-weight: bold;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10792,7 +10792,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeNom {\r\n    width: 20vw;\n}\n.sizeCognom {\r\n    width: 20vw;\n}\n.sizeBotones {\r\n    width: 14vw;\n}\n.esborrarAlertantBtn {\r\n  background-color: #e3177d !important;\r\n  color: white !important;\n}\n.editarAlertantBtn {\r\n  background-color: #15acc4 !important;\r\n  color: black !important;\n}\n.editarAlertantBtn:hover {\r\n  color: black !important;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\n.cerrarBtn:hover {\r\n  color: white;\n}\n@font-face {\r\n  font-family: myFont;\r\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\nh2{\r\n  font-family: myFont;\r\n  font-size: 1.3em;\n}\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeNom {\n    width: 20vw;\n}\n.sizeCognom {\n    width: 20vw;\n}\n.sizeBotones {\n    width: 14vw;\n}\n.esborrarAlertantBtn {\n  background-color: #e3177d !important;\n  color: white !important;\n}\n.editarAlertantBtn {\n  background-color: #15acc4 !important;\n  color: black !important;\n}\n.editarAlertantBtn:hover {\n  color: black !important;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n.cerrarBtn:hover {\n  color: white;\n}\n@font-face {\n  font-family: myFont;\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\nh2{\n  font-family: myFont;\n  font-size: 1.3em;\n}\n\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10816,7 +10816,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeBotones {\r\n    width: 14vw;\n}\n.esborrarRecursBtn {\r\n  background-color: #e3177d !important;\r\n  color: white !important;\n}\n.editarRecursBtn {\r\n  background-color: #15acc4 !important;\r\n  color: black !important;\n}\n.editarRecursBtn:hover {\r\n  color: black !important;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\n.cerrarBtn:hover {\r\n  color: white;\n}\n@font-face {\r\n  font-family: myFont;\r\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\nh2{\r\n  font-family: myFont;\r\n  font-size: 1.3em;\n}\r\n\r\n/*NO SE BORRAN LOS MENSAJES Y AL CAMBIAR EL NOMBRE DE UN CÓDIGO, SE QUITA EL CHECKED*/\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeBotones {\n    width: 14vw;\n}\n.esborrarRecursBtn {\n  background-color: #e3177d !important;\n  color: white !important;\n}\n.editarRecursBtn {\n  background-color: #15acc4 !important;\n  color: black !important;\n}\n.editarRecursBtn:hover {\n  color: black !important;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n.cerrarBtn:hover {\n  color: white;\n}\n@font-face {\n  font-family: myFont;\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\n\n/* h2{\n  font-family: myFont;\n  font-size: 1.3em;\n} */\n\n/*NO SE BORRAN LOS MENSAJES Y AL CAMBIAR EL NOMBRE DE UN CÓDIGO, SE QUITA EL CHECKED*/\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10840,7 +10840,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeBotones {\r\n    width: 14vw;\n}\n.esborrarUsuariBtn {\r\n  background-color: #e3177d !important;\r\n  color: white !important;\n}\n.editarUsuariBtn {\r\n  background-color: #15acc4 !important;\r\n  color: black !important;\n}\n.editarUsuariBtn:hover {\r\n  color: black !important;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\n.cerrarBtn:hover {\r\n  color: white;\n}\n@font-face {\r\n  font-family: myFont;\r\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\nh2{\r\n  font-family: myFont;\r\n  font-size: 1.3em;\n}\r\n\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeBotones {\n    width: 14vw;\n}\n.esborrarUsuariBtn {\n  background-color: #e3177d !important;\n  color: white !important;\n}\n.editarUsuariBtn {\n  background-color: #15acc4 !important;\n  color: black !important;\n}\n.editarUsuariBtn:hover {\n  color: black !important;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n.cerrarBtn:hover {\n  color: white;\n}\n@font-face {\n  font-family: myFont;\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\n\n/* h2{\n  font-family: myFont;\n  font-size: 1.3em;\n} */\n\n\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -47367,7 +47367,7 @@ var render = function() {
           [
             _c("button", { attrs: { disabled: !_vm.movilitzacio } }, [
               _c("i", { staticClass: "fas fa-briefcase-medical" }),
-              _vm._v(" Iniciar Assistència\n        ")
+              _vm._v(" Iniciar Assistencia\n        ")
             ]),
             _vm._v(" "),
             _c("input", {
@@ -47424,7 +47424,7 @@ var render = function() {
           _c(
             "div",
             { staticClass: "card-header", attrs: { id: "transportHeader" } },
-            [_vm._v("Destí Hospitalari")]
+            [_vm._v("Destino Hospitalario")]
           ),
           _vm._v(" "),
           _c(
@@ -47682,42 +47682,70 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("p", [
-                  _vm._v(
-                    "Complemento Dirección: " + _vm._s(_vm.adreca_complement)
-                  )
+                  _c("span", { staticClass: "indicadoresMasInfo" }, [
+                    _vm._v("Complemento Dirección: ")
+                  ]),
+                  _vm._v(" " + _vm._s(_vm.adreca_complement))
                 ]),
                 _vm._v(" "),
                 _c("p", [
-                  _vm._v("Nombre del Alertante: " + _vm._s(_vm.nom_alertant))
+                  _c("span", { staticClass: "indicadoresMasInfo" }, [
+                    _vm._v("Nombre del Alertante: ")
+                  ]),
+                  _vm._v(" " + _vm._s(_vm.nom_alertant))
                 ]),
                 _vm._v(" "),
                 _c("p", [
-                  _vm._v(
-                    "Teléfono del Alertante: " + _vm._s(_vm.telefon_alertant)
-                  )
+                  _c("span", { staticClass: "indicadoresMasInfo" }, [
+                    _vm._v("Teléfono del Alertante: ")
+                  ]),
+                  _vm._v(" " + _vm._s(_vm.telefon_alertant))
                 ]),
                 _vm._v(" "),
-                _c("p", [_vm._v("Afectados:")]),
+                _vm._m(8),
                 _vm._v(" "),
                 _c(
                   "ul",
                   _vm._l(_vm.afectats, function(afectat) {
                     return _c("li", { key: afectat.id }, [
-                      _c("p", [_vm._v("Nom: " + _vm._s(afectat.nom))]),
-                      _vm._v(" "),
-                      _c("p", [_vm._v("Cognoms: " + _vm._s(afectat.cognoms))]),
+                      _c("p", [
+                        _c("span", { staticClass: "indicadoresMasInfo" }, [
+                          _vm._v("Nom: ")
+                        ]),
+                        _vm._v(" " + _vm._s(afectat.nom))
+                      ]),
                       _vm._v(" "),
                       _c("p", [
-                        _vm._v("Sexe: "),
+                        _c("span", { staticClass: "indicadoresMasInfo" }, [
+                          _vm._v("Cognoms: ")
+                        ]),
+                        _vm._v(" " + _vm._s(afectat.cognoms))
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _c("span", { staticClass: "indicadoresMasInfo" }, [
+                          _vm._v("Sexe: ")
+                        ]),
+                        _vm._v(" "),
                         afectat.sexes_id == 1
                           ? _c("span", [_vm._v("Home")])
                           : _c("span", [_vm._v("Dona")])
                       ]),
                       _vm._v(" "),
-                      _c("p", [_vm._v("Edat: " + _vm._s(afectat.edat))]),
+                      _c("p", [
+                        _c("span", { staticClass: "indicadoresMasInfo" }, [
+                          _vm._v("Edat: ")
+                        ]),
+                        _vm._v(" " + _vm._s(afectat.edat))
+                      ]),
                       _vm._v(" "),
                       afectat.te_cip == 1
-                        ? _c("p", [_vm._v("CIP: " + _vm._s(afectat.cip))])
+                        ? _c("p", [
+                            _c("span", { staticClass: "indicadoresMasInfo" }, [
+                              _vm._v("CIP")
+                            ]),
+                            _vm._v(" " + _vm._s(afectat.cip))
+                          ])
                         : _vm._e()
                     ])
                   }),
@@ -47725,7 +47753,7 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(8)
+              _vm._m(9)
             ])
           ]
         )
@@ -47740,7 +47768,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("button", [
       _c("i", { staticClass: "fas fa-running" }),
-      _vm._v(" Iniciar Movilització")
+      _vm._v(" Iniciar Movilitzación")
     ])
   },
   function() {
@@ -47755,7 +47783,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "iniciarTransport" } }, [
       _c("i", { staticClass: "fas fa-ambulance" }),
-      _vm._v(" Iniciar Transport")
+      _vm._v(" Iniciar Transporte")
     ])
   },
   function() {
@@ -47764,7 +47792,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "arribadaHospital" } }, [
       _c("i", { staticClass: "fas fa-hospital" }),
-      _vm._v(" Arribada Hospital")
+      _vm._v(" Llegada Hospital")
     ])
   },
   function() {
@@ -47773,7 +47801,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "ininciarTransferencia" } }, [
       _c("i", { staticClass: "fas fa-user-friends" }),
-      _vm._v(" Iniciar Transferència")
+      _vm._v(" Iniciar Transferencia")
     ])
   },
   function() {
@@ -47782,7 +47810,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "hospitalitzacio" } }, [
       _c("i", { staticClass: "fas fa-procedures" }),
-      _vm._v(" Hospitalització")
+      _vm._v(" Hospitalitzación")
     ])
   },
   function() {
@@ -47791,7 +47819,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "alta" } }, [
       _c("i", { staticClass: "fas fa-notes-medical" }),
-      _vm._v(" Alta Voluntària")
+      _vm._v(" Alta Voluntaria")
     ])
   },
   function() {
@@ -47800,6 +47828,14 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-header" }, [
       _c("div", { staticClass: "modal-title" }, [_vm._v("Más Información")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", [
+      _c("span", { staticClass: "indicadoresMasInfo" }, [_vm._v("Afectados: ")])
     ])
   },
   function() {
@@ -47887,15 +47923,15 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Data")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Fecha")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Municipi")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Municipio")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipus d'incident")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo de incidente")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipus d'alertant")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo de alertante")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Telèfon")])
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Teléfono")])
       ])
     ])
   }
@@ -47935,7 +47971,7 @@ var render = function() {
             }
           }
         },
-        [_c("p", [_vm._v("Assignats")])]
+        [_c("p", [_vm._v("Assignados")])]
       ),
       _vm._v(" "),
       _c(
@@ -47949,7 +47985,7 @@ var render = function() {
             }
           }
         },
-        [_c("p", [_vm._v("Tots")])]
+        [_c("p", [_vm._v("Todos")])]
       )
     ]),
     _vm._v(" "),
@@ -48033,23 +48069,25 @@ var render = function() {
             _vm._v(" "),
             _c("td", [
               _vm._v(
-                "\n          " + _vm._s(_vm.getMunicipi(index)) + "\n        "
+                "\r\n          " +
+                  _vm._s(_vm.getMunicipi(index)) +
+                  "\r\n        "
               )
             ]),
             _vm._v(" "),
             _c("td", [
               _vm._v(
-                "\n          " +
+                "\r\n          " +
                   _vm._s(_vm.getTipusIncidencia(index)) +
-                  "\n        "
+                  "\r\n        "
               )
             ]),
             _vm._v(" "),
             _c("td", [
               _vm._v(
-                "\n          " +
+                "\r\n          " +
                   _vm._s(_vm.getTipusAlertant(index)) +
-                  "\n        "
+                  "\r\n        "
               )
             ]),
             _vm._v(" "),
@@ -48141,7 +48179,7 @@ var render = function() {
                       }
                     },
                     [
-                      _vm._v("Usuàries "),
+                      _vm._v("Usuarias "),
                       _c("span", { staticClass: "sr-only" }, [
                         _vm._v("(current)")
                       ])
@@ -48167,7 +48205,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v(" Alertants")]
+                    [_vm._v(" Alertantes")]
                   )
                 ]
               ),
@@ -48366,7 +48404,7 @@ var render = function() {
               },
               [_vm._v("×")]
             ),
-            _vm._v("\r\n    " + _vm._s(_vm.errorMessage) + "\r\n  ")
+            _vm._v("\n    " + _vm._s(_vm.errorMessage) + "\n  ")
           ]
         )
       : _vm._e(),
@@ -48386,7 +48424,7 @@ var render = function() {
               },
               [_vm._v("×")]
             ),
-            _vm._v("\r\n    " + _vm._s(_vm.infoMessage) + "\r\n  ")
+            _vm._v("\n    " + _vm._s(_vm.infoMessage) + "\n  ")
           ]
         )
       : _vm._e(),
@@ -48414,9 +48452,9 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [
                   _vm._v(
-                    "\r\n                " +
+                    "\n                " +
                       _vm._s(_vm.getMunicipi(index)) +
-                      "\r\n              "
+                      "\n              "
                   )
                 ]),
                 _vm._v(" "),
@@ -48735,9 +48773,9 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\r\n                      " +
+                                "\n                      " +
                                   _vm._s(municipi.nom) +
-                                  "\r\n                    "
+                                  "\n                    "
                               )
                             ]
                           )
@@ -48808,7 +48846,7 @@ var render = function() {
           staticClass: "fas fa-plus-circle",
           attrs: { "aria-hidden": "true" }
         }),
-        _vm._v("\r\n    Nueva alertante\r\n  ")
+        _vm._v("\n    Nueva alertante\n  ")
       ]
     )
   ])
@@ -48919,7 +48957,7 @@ var render = function() {
               },
               [_vm._v("×")]
             ),
-            _vm._v("\r\n    " + _vm._s(_vm.errorMessage) + "\r\n  ")
+            _vm._v("\n    " + _vm._s(_vm.errorMessage) + "\n  ")
           ]
         )
       : _vm._e(),
@@ -48939,7 +48977,7 @@ var render = function() {
               },
               [_vm._v("×")]
             ),
-            _vm._v("\r\n    " + _vm._s(_vm.infoMessage) + "\r\n  ")
+            _vm._v("\n    " + _vm._s(_vm.infoMessage) + "\n  ")
           ]
         )
       : _vm._e(),
@@ -48981,9 +49019,9 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [
                   _vm._v(
-                    "\r\n                " +
+                    "\n                " +
                       _vm._s(_vm.getTipusRecurs(index)) +
-                      "\r\n              "
+                      "\n              "
                   )
                 ]),
                 _vm._v(" "),
@@ -49273,9 +49311,9 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\r\n                      " +
+                                "\n                      " +
                                   _vm._s(tipusRecurs.tipus) +
-                                  "\r\n                    "
+                                  "\n                    "
                               )
                             ]
                           )
@@ -49346,7 +49384,7 @@ var render = function() {
           staticClass: "fas fa-plus-circle",
           attrs: { "aria-hidden": "true" }
         }),
-        _vm._v("\r\n    Nuevo recurso\r\n  ")
+        _vm._v("\n    Nuevo recurso\n  ")
       ]
     )
   ])
@@ -49449,7 +49487,7 @@ var render = function() {
               },
               [_vm._v("×")]
             ),
-            _vm._v("\r\n    " + _vm._s(_vm.errorMessage) + "\r\n  ")
+            _vm._v("\n    " + _vm._s(_vm.errorMessage) + "\n  ")
           ]
         )
       : _vm._e(),
@@ -49469,7 +49507,7 @@ var render = function() {
               },
               [_vm._v("×")]
             ),
-            _vm._v("\r\n    " + _vm._s(_vm.infoMessage) + "\r\n  ")
+            _vm._v("\n    " + _vm._s(_vm.infoMessage) + "\n  ")
           ]
         )
       : _vm._e(),
@@ -49497,9 +49535,9 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [
                   _vm._v(
-                    "\r\n                " +
+                    "\n                " +
                       _vm._s(_vm.getRol(index)) +
-                      "\r\n              "
+                      "\n              "
                   )
                 ]),
                 _vm._v(" "),
@@ -49867,9 +49905,9 @@ var render = function() {
                             { key: rol.id, domProps: { value: rol.id } },
                             [
                               _vm._v(
-                                "\r\n                    " +
+                                "\n                    " +
                                   _vm._s(rol.nom) +
-                                  "\r\n                  "
+                                  "\n                  "
                               )
                             ]
                           )
@@ -49940,7 +49978,7 @@ var render = function() {
           staticClass: "fas fa-plus-circle",
           attrs: { "aria-hidden": "true" }
         }),
-        _vm._v("\r\n    Nueva usuaria\r\n  ")
+        _vm._v("\n    Nueva usuaria\n  ")
       ]
     )
   ])

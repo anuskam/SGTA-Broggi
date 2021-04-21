@@ -152,7 +152,7 @@ export default {
     /* FIN DE LO QUE HE COPIADO POR SI NO CONVENCE */
 
     .contenido {
-      font-size: 15px;
+      /* font-size: 1em; */
       font-family: 'Rubik', sans-serif;
     }
 
