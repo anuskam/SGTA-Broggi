@@ -3,11 +3,11 @@
   <table v-if="incidencies.length > 0" class="table mt-5">
     <thead>
       <tr>
-        <th scope="col">Data</th>
-        <th scope="col">Municipi</th>
-        <th scope="col">Tipus d'incident</th>
-        <th scope="col">Tipus d'alertant</th>
-        <th scope="col">Telèfon</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Municipio</th>
+        <th scope="col">Tipo de incidente</th>
+        <th scope="col">Tipo de alertante</th>
+        <th scope="col">Teléfono</th>
       </tr>
     </thead>
     <tbody>

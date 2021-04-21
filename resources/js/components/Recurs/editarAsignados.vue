@@ -23,6 +23,13 @@
           {{ getTipusAlertant(index) }}
         </td>
         <td>{{ incidencia.telefon_alertant }}</td>
+        <td>
+          <button type="submit" class="btn btn-sm float-right ml-2 esborrarRecursBtn" @click="confirmDeleteAsignat(incidencia)"><i class="fa fa-trash"
+            aria-hidden="true"></i>&nbsp;&nbsp;Eliminar</button>
+
+          <button type="submit" class="btn btn-sm float-right editarRecursBtn" @click="editIncidencia(incidencia)"><i class="fa fa-edit"
+            aria-hidden="true"></i>&nbsp;&nbsp;Editar</button>
+        </td>
       </tr>
     </tbody>
 </table>
@@ -30,6 +37,54 @@
 <div v-else class="alert mt-3 alertaSinRecursos" role="alert">
   Este recurso no tiene ninguna incidencia en su historial
 </div>
+
+  <!-- MODAL DE DELETE -->
+  <div class="modal" tabindex="-1" id="deleteModalAsignat">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header d-flex justify-content-center">
+          <div class="modal-title">Eliminar Incidencia Asignada</div>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>¿Estás segura de liminar la incidencia {{ incidencia.data }}?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn cerrarBtn" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn esborrarRecursBtn" @click="deleteAsignat()">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- MODAL DE INSERT/UPDATE  -->
+  <div class="modal" tabindex="-1" id="asignatModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header d-flex justify-content-center">
+          <div class="modal-title">Incidente Asignado</div>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <!-- Contenido para editar incidente asignado -->
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn cerrarBtn" data-dismiss="modal">Tancar</button>
+          <button type="button" class="btn editarRecursBtn" @click="updateIncidenteAsignado()">Modificar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
 
 </main>
 </template>
@@ -42,6 +97,10 @@
       data(){
         return{
           incidencies: [],
+          incidencia: {
+            data: '',
+
+          },
           municipis: [],
           alertants: [],
           tipusIncidencies: [],
@@ -173,6 +232,21 @@
           let tipusAlertant_nom = this.tipusAlertants[tipusAlertant_index].tipus;
           return tipusAlertant_nom;
 
+        },
+        deleteAsignat(){
+            // delete con todo el contenido
+        },
+        confirmDeleteAsignat(incidencia){
+          this.incidencia = incidencia;
+          $('#deleteModalAsignat').modal('show');
+        },
+        updateIncidenteAsignado(){
+            // modificar con todo el contenido
+        },
+        editIncidencia(incidencia){
+          this.insert = false;
+          this.incidencia = incidencia;
+          $('#asignatModal').modal('show');
         }
       },
       created(){

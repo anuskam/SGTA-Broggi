@@ -4599,6 +4599,61 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     recursos_id: Number
@@ -4606,6 +4661,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       incidencies: [],
+      incidencia: {
+        data: ''
+      },
       municipis: [],
       alertants: [],
       tipusIncidencies: [],
@@ -4762,6 +4820,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
       var tipusAlertant_nom = this.tipusAlertants[tipusAlertant_index].tipus;
       return tipusAlertant_nom;
+    },
+    deleteAsignat: function deleteAsignat() {// delete con todo el contenido
+    },
+    confirmDeleteAsignat: function confirmDeleteAsignat(incidencia) {
+      this.incidencia = incidencia;
+      $('#deleteModalAsignat').modal('show');
+    },
+    updateIncidenteAsignado: function updateIncidenteAsignado() {// modificar con todo el contenido
+    },
+    editIncidencia: function editIncidencia(incidencia) {
+      this.insert = false;
+      this.incidencia = incidencia;
+      $('#asignatModal').modal('show');
     }
   },
   created: function created() {
@@ -48061,7 +48132,50 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(incidencia.telefon_alertant))])
+                _c("td", [_vm._v(_vm._s(incidencia.telefon_alertant))]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "btn btn-sm float-right ml-2 esborrarRecursBtn",
+                      attrs: { type: "submit" },
+                      on: {
+                        click: function($event) {
+                          return _vm.confirmDeleteAsignat(incidencia)
+                        }
+                      }
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "fa fa-trash",
+                        attrs: { "aria-hidden": "true" }
+                      }),
+                      _vm._v("  Eliminar")
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-sm float-right editarRecursBtn",
+                      attrs: { type: "submit" },
+                      on: {
+                        click: function($event) {
+                          return _vm.editIncidencia(incidencia)
+                        }
+                      }
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "fa fa-edit",
+                        attrs: { "aria-hidden": "true" }
+                      }),
+                      _vm._v("  Editar")
+                    ]
+                  )
+                ])
               ])
             }),
             0
@@ -48078,7 +48192,96 @@ var render = function() {
               "\n  Este recurso no tiene ninguna incidencia en su historial\n"
             )
           ]
-        )
+        ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal",
+        attrs: { tabindex: "-1", id: "deleteModalAsignat" }
+      },
+      [
+        _c("div", { staticClass: "modal-dialog" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c("p", [
+                _vm._v(
+                  "¿Estás segura de liminar la incidencia " +
+                    _vm._s(_vm.incidencia.data) +
+                    "?"
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-footer" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn cerrarBtn",
+                  attrs: { type: "button", "data-dismiss": "modal" }
+                },
+                [_vm._v("Cerrar")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn esborrarRecursBtn",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.deleteAsignat()
+                    }
+                  }
+                },
+                [_vm._v("Eliminar")]
+              )
+            ])
+          ])
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "modal", attrs: { tabindex: "-1", id: "asignatModal" } },
+      [
+        _c("div", { staticClass: "modal-dialog modal-lg" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _vm._m(2),
+            _vm._v(" "),
+            _vm._m(3),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-footer" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn cerrarBtn",
+                  attrs: { type: "button", "data-dismiss": "modal" }
+                },
+                [_vm._v("Tancar")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn editarRecursBtn",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.updateIncidenteAsignado()
+                    }
+                  }
+                },
+                [_vm._v("Modificar")]
+              )
+            ])
+          ])
+        ])
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -48099,6 +48302,66 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Teléfono")])
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "modal-header d-flex justify-content-center" },
+      [
+        _c("div", { staticClass: "modal-title" }, [
+          _vm._v("Eliminar Incidencia Asignada")
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "close",
+            attrs: {
+              type: "button",
+              "data-dismiss": "modal",
+              "aria-label": "Close"
+            }
+          },
+          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "modal-header d-flex justify-content-center" },
+      [
+        _c("div", { staticClass: "modal-title" }, [
+          _vm._v("Incidente Asignado")
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "close",
+            attrs: {
+              type: "button",
+              "data-dismiss": "modal",
+              "aria-label": "Close"
+            }
+          },
+          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-body" }, [_c("form")])
   }
 ]
 render._withStripped = true
@@ -48280,15 +48543,15 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Data")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Fecha")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Municipi")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Municipio")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipus d'incident")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo de incidente")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipus d'alertant")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo de alertante")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Telèfon")])
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Teléfono")])
       ])
     ])
   }
