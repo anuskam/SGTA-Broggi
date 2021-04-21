@@ -6,6 +6,7 @@ use App\Models\Usuari;
 use App\Clases\Utilitat;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\UsuariResource;
 use Illuminate\Database\QueryException;
 
@@ -34,6 +35,7 @@ class UsuariController extends Controller
         $usuari = new Usuari();
 
         $usuari->username = $request->input('username');
+        $usuari->contrasenya = Hash::make($request->input('contrasenya'));
         $usuari->email = $request->input('email');
         $usuari->nom = $request->input('nom');
         $usuari->cognoms = $request->input('cognoms');

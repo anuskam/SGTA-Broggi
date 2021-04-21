@@ -1,6 +1,6 @@
 <template>
 <main>
-  <div class="alert alert-danger alert-dismissible fade show mt-2" v-if="errorMessage != 'v'">
+  <div class="alert alert-danger alert-dismissible fade show mt-2" v-if="errorMessage != ''">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
     {{ errorMessage }}
   </div>
@@ -50,9 +50,9 @@
       <table class="table mt-2">
           <thead>
             <tr>
-              <th scope="col">Codi</th>
-              <th scope="col">Actiu</th>
-              <th scope="col">Tipus de Recurs</th>
+              <th scope="col">Código</th>
+              <th scope="col">Activo</th>
+              <th scope="col">Tipo de Recurso</th>
               <th scope="col" class="sizeBotones"></th>
             </tr>
           </thead>
@@ -70,7 +70,7 @@
               </td>
               <td>
                 <button type="submit" class="btn btn-sm float-right ml-2 esborrarRecursBtn" @click="confirmDeleteRecurs(recurs)"><i class="fa fa-trash"
-                    aria-hidden="true"></i>&nbsp;&nbsp;Esborrar</button>
+                    aria-hidden="true"></i>&nbsp;&nbsp;Eliminar</button>
 
                 <button type="submit" class="btn btn-sm float-right editarRecursBtn"  @click="editRecurs(recurs)"><i class="fa fa-edit"
                     aria-hidden="true"></i>&nbsp;&nbsp;Editar</button>
@@ -92,7 +92,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <p>Estàs segura d'eliminar el recurs {{ recurs.codi }}?</p>
+          <p>¿Estás segura de liminar el recurso {{ recurs.codi }}?</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn cerrarBtn" data-dismiss="modal">Cerrar</button>
@@ -107,7 +107,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <div class="modal-title">Recurs</div>
+          <div class="modal-title">Recurso</div>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
           </button>
@@ -115,7 +115,7 @@
         <div class="modal-body">
           <form>
             <div class="form-group row">
-              <label for="codi" class="col-sm-2 col-form-label">Codi</label>
+              <label for="codi" class="col-sm-2 col-form-label">Código</label>
               <div class="col-sm-10">
                 <input type="text" class="form-control" id="codi" name="codi" autofocus
                   v-model="recurs.codi">
@@ -123,7 +123,7 @@
             </div>
 
             <div class="form-group row">
-              <label for="actiu" class="col-sm-2 col-form-label">Actiu</label>
+              <label for="actiu" class="col-sm-2 col-form-label">Activo</label>
               <div class="col-sm-10">
                 <div class="custom-control custom-checkbox">
                   <input type="checkbox" class="custom-control-input" id="actiu" name="actiu" v-model="recurs.actiu">
@@ -133,7 +133,7 @@
             </div>
 
             <div class="form-group row">
-              <label for="tipusRecurs" class="col-sm-2 col-form-label">Municipi</label>
+              <label for="tipusRecurs" class="col-sm-2 col-form-label">Municipio</label>
               <div class="col-sm-10">
                   <select class="custom-select" id="tipusRecurs" required v-model="recurs.tipus_recursos_id">
                     <option selected value="Selecciona...">Selecciona...</option>
@@ -148,12 +148,17 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn cerrarBtn" data-dismiss="modal">Tancar</button>
-          <button v-if="insert" type="button" class="btn" @click="insertRecurs()">Afegir</button>
+          <button v-if="insert" type="button" class="btn" @click="insertRecurs()">Añadir</button>
           <button v-else type="button" class="btn editarRecursBtn" @click="updateRecurs()">Modificar</button>
         </div>
       </div>
     </div>
   </div>
+
+  <button class="btn btn-primary btn-float-afegir" @click="createRecurs()">
+    <i class="fas fa-plus-circle" aria-hidden="true"></i>
+    Nuevo recurso
+  </button>
 
 </main>
 </template>
@@ -215,7 +220,7 @@
           axios
               .post('/SGTA-Broggi/public/api/recurs', me.recurs)
               .then(function(response) {
-                console.log(repsonse);
+                console.log(response);
                 me.selectRecursos();
                 $('#recursModal').modal('hide');
               }).catch(function(error) {

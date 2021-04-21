@@ -105,6 +105,8 @@ textarea{
     margin-bottom: 20px;
     cursor: pointer;
     border: 1px solid black;
+    /* background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgba(255,255,255,1) 8.5%, rgba(252,196,28,1) 8.5%, rgba(252,196,28,1) 100%); */
 }
 
 #navbarNav a{
@@ -115,9 +117,13 @@ textarea{
 #cecosLogo{
     height: 4vh;
     cursor: default;
-    background-color: white;
-    width: 100px;
-    height: 39.63px;
+    /* background-color: white;
+    border-radius: 3px;
+    border: 1px black solid; */
+    /* width: 100px;
+    height: 39.63px; */
+    width: 125px;
+    height: 49.54px;
 }
 
 .esborrarBtn {
@@ -144,4 +150,9 @@ textarea{
   color: white;
 }
 
+.btn-float-afegir {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+}
 

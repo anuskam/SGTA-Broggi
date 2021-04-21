@@ -43,15 +43,15 @@
 
 
   <div class="card mt-2 mb-1 ml-5 mr-5">
-    <h2 class="card-header font-weight-bold">Usuàries</h2>
+    <h2 class="card-header font-weight-bold">Usuarias</h2>
     <div class="card-body">
       <table class="table mt-2">
           <thead>
             <tr>
-              <th scope="col">Nom Usuària</th>
+              <th scope="col">Nombre Usuaria</th>
               <th scope="col">Email</th>
-              <th scope="col">Nom</th>
-              <th scope="col">Cognoms</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Apellidos</th>
               <th scope="col">Rol</th>
               <th scope="col" class="sizeBotones"></th>
             </tr>
@@ -67,7 +67,7 @@
               </td>
               <td>
                 <button type="submit" class="btn btn-sm float-right ml-2 esborrarUsuariBtn" @click="confirmDeleteUsuari(usuari)"><i class="fa fa-trash"
-                    aria-hidden="true"></i>&nbsp;&nbsp;Esborrar</button>
+                    aria-hidden="true"></i>&nbsp;&nbsp;Eliminar</button>
 
                 <button type="submit" class="btn btn-sm float-right editarUsuariBtn"  @click="editUsuari(usuari)"><i class="fa fa-edit"
                     aria-hidden="true"></i>&nbsp;&nbsp;Editar</button>
@@ -83,16 +83,16 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <div class="modal-title">Esborrar Usuària</div>
+          <div class="modal-title">Eliminar Usuaria</div>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <p>Estàs segura d'eliminar la usuària {{ usuari.username }}?</p>
+          <p>¿Estás segura de eliminar a la usuaria {{ usuari.username }}?</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn cerrarBtn" data-dismiss="modal">Tancar</button>
+          <button type="button" class="btn cerrarBtn" data-dismiss="modal">Cerrar</button>
           <button type="button" class="btn esborrarUsuariBtn" @click="deleteUsuari()">Eliminar</button>
         </div>
       </div>
@@ -104,7 +104,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <div class="modal-title">Usuària</div>
+          <div class="modal-title">Usuaria</div>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
           </button>
@@ -112,10 +112,18 @@
         <div class="modal-body">
           <form>
             <div class="form-group row">
-              <label for="username" class="col-sm-2 col-form-label">Nom Usuària</label>
+              <label for="username" class="col-sm-2 col-form-label">Nombre Usuaria</label>
               <div class="col-sm-10">
                 <input type="text" class="form-control" id="username" name="username" autofocus
                   v-model="usuari.username">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="password" class="col-sm-2 col-form-label">Contraseña</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="password" name="password" autofocus
+                  v-model="usuari.contrasenya">
               </div>
             </div>
 
@@ -127,14 +135,14 @@
             </div>
 
 			<div class="form-group row">
-              <label for="nomUsuari" class="col-sm-2 col-form-label">Nom</label>
+              <label for="nomUsuari" class="col-sm-2 col-form-label">Nombre</label>
                 <div class="col-sm-10">
                   <input type="text" class="form-control" id="nomUsuari" name="nomUsuari" v-model="usuari.nom">
                 </div>
             </div>
 
             <div class="form-group row">
-              <label for="cognomsUsuari" class="col-sm-2 col-form-label">Cognoms</label>
+              <label for="cognomsUsuari" class="col-sm-2 col-form-label">Apellidos</label>
                 <div class="col-sm-10">
                   <input type="text" class="form-control" id="cognomsUsuari" name="cognomsUsuari" v-model="usuari.cognoms">
                 </div>
@@ -154,8 +162,8 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn cerrarBtn" data-dismiss="modal">Tancar</button>
-          <button v-if="insert" type="button" class="btn" @click="insertUsuari()">Afegir</button>
+          <button type="button" class="btn cerrarBtn" data-dismiss="modal">Cerrar</button>
+          <button v-if="insert" type="button" class="btn editarUsuariBtn" @click="insertUsuari()">Añadir</button>
           <button v-else type="button" class="btn editarUsuariBtn" @click="updateUsuari()">Modificar</button>
         </div>
       </div>
@@ -164,7 +172,7 @@
 
   <button class="btn btn-primary btn-float-afegir" @click="createUsuari()">
     <i class="fas fa-plus-circle" aria-hidden="true"></i>
-    Nueva alertante
+    Nueva usuaria
   </button>
 
 
@@ -178,6 +186,7 @@
           usuaris: [],
           usuari: {
             username: '',
+            contrasenya: '',
             email: '',
             nom: '',
             cognoms: '',
@@ -230,7 +239,7 @@
           axios
               .post('/SGTA-Broggi/public/api/usuari', me.usuari)
               .then(function(response) {
-                console.log(repsonse);
+                console.log(response);
                 me.selectUsuaris();
                 $('#usuariModal').modal('hide');
               }).catch(function(error) {
