@@ -1,6 +1,6 @@
 <template>
 <main class="col-10">
-  <table class="table mt-5">
+  <table v-if="incidencies.length > 0" class="table mt-5">
     <thead>
       <tr>
         <th scope="col">Data</th>
@@ -26,6 +26,10 @@
       </tr>
     </tbody>
 </table>
+
+<div v-else class="alert mt-3 alertaSinRecursos" role="alert">
+  No hay ninguna incidencia asignada
+</div>
 
 </main>
 </template>
@@ -142,3 +146,12 @@
       }
     }
 </script>
+
+<style>
+.alertaSinRecursos{
+    font-family: 'Rubik', sans-serif;
+    font-size: 15px;
+    color: black;
+    background-color: rgb(21, 172, 196, .5);
+}
+</style>

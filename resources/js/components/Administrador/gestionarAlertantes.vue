@@ -82,7 +82,7 @@
   <div class="modal" tabindex="-1" id="deleteModalAlertant">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header d-flex justify-content-center">
           <div class="modal-title">Eliminar Alertante</div>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -103,7 +103,7 @@
   <div class="modal" tabindex="-1" id="alertantModal">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header d-flex justify-content-center">
           <div class="modal-title">Alertante</div>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
@@ -362,6 +362,10 @@
 h2{
   font-family: myFont;
   font-size: 1.3em;
+}
+.modal-header{
+    font-weight: bold;
+    background-color: #15acc4;
 }
 
 
