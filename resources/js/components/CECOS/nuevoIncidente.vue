@@ -1143,7 +1143,8 @@ export default {
 
     },
     afegirAfectat() {
-      if (this.afectat.sexes_id != null) {
+        this.errors = [];
+      if (this.afectat.sexes_id != null && this.afectat.nom != null && this.afectat.cognoms != null && this.afectat.edat != null) {
         if (this.afectat.cip != null) {
           this.afectat.te_cip = true;
         }
@@ -1151,10 +1152,11 @@ export default {
         this.recursAfectats.push(this.afectat);
         this.buidarAfectat();
       } else {
-        this.errors.push("Cal introduir el sexe de l'afectat!");
+        this.errors.push("Cal introduir el nom, cognoms, sexe i edat de l'afectat!");
       }
     },
     afegirRecurs() {
+        this.errors=  [];
       if (this.recurs.tipus_recursos_id > 0 && this.incidencies_has_recursos.prioritat > 0 && this.afectatSelect.edat != null) {
         let pos = this.recursos_select.findIndex(x => x.codi == this.recurs.codi);
         this.afectatSelect.recurs_id = this.recurs.id;
@@ -1164,7 +1166,7 @@ export default {
             "afectats": [],
         }
         recurs.afectats.push(this.afectatSelect);
-        let borrarAfectatIndex = this.recursAfectats.findIndex(obj => (obj.sexes_id == this.afectatSelect.sexes_id) && (obj.edat == this.afectatSelect.edat));
+        let borrarAfectatIndex = this.recursAfectats.findIndex(obj => (obj.sexes_id == this.afectatSelect.sexes_id) && (obj.edat == this.afectatSelect.edat) && (obj.nom == this.afectatSelect.nom) && (obj.cognoms == this.afectatSelect.cognoms));
         this.recursAfectats.splice(borrarAfectatIndex, 1);
         this.recursos.push(recurs);
         this.incidencies_has_recursos.recursos_id = this.recurs.id;
@@ -1179,7 +1181,7 @@ export default {
         this.incidencies_has_recursos_array.push(this.incidencies_has_recursos);
         this.buidarIncidenciaHasRecurs();
       } else {
-        this.errors.push("Cal escollir un recurs, almenys un afectat i una prioritat!");
+        this.errors.push("Cal escollir un recurs, un afectat i una prioritat!");
       }
     },
     buidarAfectat() {
