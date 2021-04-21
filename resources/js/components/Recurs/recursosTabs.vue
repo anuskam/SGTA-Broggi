@@ -2,10 +2,10 @@
   <main>
     <div id="navbar">
       <div id="asignats" @click="selectedTab = 'assignats'" :class="{ selected: !colorSelection }">
-        <p>Assignats</p>
+        <p>Assignados</p>
       </div>
       <div id="tots" @click="selectedTab = 'tots'" :class="{ selected: colorSelection }">
-        <p>Tots</p>
+        <p>Todos</p>
       </div>
     </div>
     <div v-show="selectedTab == 'assignats'" id="assignatsTab" class="recursTab">

@@ -337,10 +337,10 @@
   src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);
 }
 
-h2{
+/* h2{
   font-family: myFont;
   font-size: 1.3em;
-}
+} */
 
 
 

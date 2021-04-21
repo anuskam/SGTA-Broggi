@@ -8,10 +8,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item active borderLeftRight ml-2" id="nuevoIncidenteItem">
-                    <a class="nav-link" @click="selectTab(1)">Usuàries <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" @click="selectTab(1)">Usuarias <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item borderLeftRight ml-4" id="editarIncidenteItem">
-                    <a class="nav-link" @click="selectTab(2)"> Alertants</a>
+                    <a class="nav-link" @click="selectTab(2)"> Alertantes</a>
                 </li>
                 <li class="nav-item borderLeftRight ml-4" id="formacionItem">
                     <a class="nav-link" @click="selectTab(3)">Recursos</a>

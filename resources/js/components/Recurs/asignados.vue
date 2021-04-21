@@ -37,13 +37,13 @@
     <div id="botones" class="card mt-4 p-2">
       <div id="leftButtons" class="col-2">
         <div id="movilitzacio" class="button" @click="activarMovilitzacio()">
-          <button><i class="fas fa-running"></i> Iniciar Movilització</button>
+          <button><i class="fas fa-running"></i> Iniciar Movilitzación</button>
           <input type="time" v-model="incidenciaRecursInsert.hora_mobilitzacio" />
         </div>
 
         <div id="assistencia" class="button" @click="activarAssistencia()" :class="{ visible: movilitzacio }">
           <button :disabled="!movilitzacio">
-            <i class="fas fa-briefcase-medical"></i> Iniciar Assistència
+            <i class="fas fa-briefcase-medical"></i> Iniciar Assistencia
           </button>
           <input type="time" v-model="incidenciaRecursInsert.hora_assistencia" />
         </div>
@@ -56,7 +56,7 @@
         </button>
       </div>
       <div id="transportButtons" class="card col-9 p-0"  :class="{ visible: mostrarTransport }">
-        <div class="card-header" id="transportHeader">Destí Hospitalari</div>
+        <div class="card-header" id="transportHeader">Destino Hospitalario</div>
         <div class="card-body p-2 pl-4 pr-4" id="transportForm">
           <select
             :disabled="!mostrarTransport"
@@ -79,29 +79,29 @@
           <div id="botonsTransport">
             <div class="botoTransport button">
               <button :disabled="!mostrarTransport" id="iniciarTransport" @click="activarTransport()">
-                <label for="iniciarTransport"><i class="fas fa-ambulance"></i> Iniciar Transport</label>
+                <label for="iniciarTransport"><i class="fas fa-ambulance"></i> Iniciar Transporte</label>
               </button>
               <input type="time" v-model="incidenciaRecursInsert.hora_transport" />
             </div>
             <div class="botoTransport button">
               <button :disabled="!transport" id="arribadaHospital" @click="activarHospital()">
-                  <label for="arribadaHospital"><i class="fas fa-hospital"></i> Arribada Hospital</label>
+                  <label for="arribadaHospital"><i class="fas fa-hospital"></i> Llegada Hospital</label>
               </button>
               <input type="time" v-model="incidenciaRecursInsert.hora_arribada_hospital" />
             </div>
             <div class="botoTransport button">
               <button :disabled="!hospital" @click="activarTransferencia()">
-                <label for="ininciarTransferencia"><i class="fas fa-user-friends"></i> Iniciar Transferència</label>
+                <label for="ininciarTransferencia"><i class="fas fa-user-friends"></i> Iniciar Transferencia</label>
               </button>
               <input type="time" v-model="incidenciaRecursInsert.hora_transferencia" />
             </div>
             <div class="botoTransport button">
               <button :disabled="!transferencia" id="hospitalitzacio" @click="hospitalitzacio()">
-                  <label for="hospitalitzacio"><i class="fas fa-procedures"></i> Hospitalització</label>
+                  <label for="hospitalitzacio"><i class="fas fa-procedures"></i> Hospitalitzación</label>
               </button>
 
               <button id="alta" @click="altaVoluntaria()">
-                <label for="alta"><i class="fas fa-notes-medical"></i> Alta Voluntària</label>
+                <label for="alta"><i class="fas fa-notes-medical"></i> Alta Voluntaria</label>
               </button>
             </div>
           </div>
@@ -123,17 +123,17 @@
             </button> -->
           </div>
           <div class="modal-body">
-            <p>Complemento Dirección: {{ adreca_complement }}</p>
-            <p>Nombre del Alertante: {{ nom_alertant }}</p>
-            <p>Teléfono del Alertante: {{ telefon_alertant }}</p>
-            <p>Afectados:</p>
+            <p><span class="indicadoresMasInfo">Complemento Dirección: </span> {{ adreca_complement }}</p>
+            <p><span class="indicadoresMasInfo">Nombre del Alertante: </span> {{ nom_alertant }}</p>
+            <p><span class="indicadoresMasInfo">Teléfono del Alertante: </span> {{ telefon_alertant }}</p>
+            <p><span class="indicadoresMasInfo">Afectados: </span></p>
             <ul>
                 <li v-for="afectat in afectats" :key="afectat.id">
-                    <p>Nom: {{ afectat.nom }}</p>
-                    <p>Cognoms: {{ afectat.cognoms }}</p>
-                    <p>Sexe: <span v-if="afectat.sexes_id == 1">Home</span> <span v-else>Dona</span></p>
-                    <p>Edat: {{ afectat.edat }}</p>
-                    <p v-if="afectat.te_cip == 1">CIP: {{ afectat.cip }}</p>
+                    <p><span class="indicadoresMasInfo">Nom: </span> {{ afectat.nom }}</p>
+                    <p><span class="indicadoresMasInfo">Cognoms: </span> {{ afectat.cognoms }}</p>
+                    <p><span class="indicadoresMasInfo">Sexe: </span> <span v-if="afectat.sexes_id == 1">Home</span> <span v-else>Dona</span></p>
+                    <p><span class="indicadoresMasInfo">Edat: </span> {{ afectat.edat }}</p>
+                    <p v-if="afectat.te_cip == 1"><span class="indicadoresMasInfo">CIP</span> {{ afectat.cip }}</p>
                 </li>
             </ul>
           </div>
@@ -679,10 +679,13 @@ button {
   flex-direction: row;
   align-items: center;
   text-align: justify;
+  /* font-size: 12px; */
 }
 .infobox > div {
   background-color: #15acc4;
   border: 1px solid black;
+  font-size: 13.5px;
+  padding: 0px 5px !important;
 }
 
 #descripcion,
@@ -698,7 +701,7 @@ button {
 #masInfo > button {
   padding: 10px 20px;
   margin-left: -50px;
-  color: black;
+  color: white;
 }
 .modal-header{
     font-weight: bold;
@@ -710,5 +713,9 @@ button {
 }
 #alta:hover{
     cursor: pointer;
+}
+
+.indicadoresMasInfo{
+    font-weight: bold;
 }
 </style>
