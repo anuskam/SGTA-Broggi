@@ -34,7 +34,7 @@
         <gestionarIncidente-component></gestionarIncidente-component>
     </div>
 
-    <div v-show="currentTab == 3">
+    <div v-if="currentTab == 3">
       <formacion-component></formacion-component>
     </div>
 

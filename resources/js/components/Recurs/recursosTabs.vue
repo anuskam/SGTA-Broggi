@@ -9,8 +9,8 @@
       </div>
     </div>
     <div v-show="selectedTab == 'assignats'" id="assignatsTab" class="recursTab">
-        <asignados-component v-show="!actiu" :recursos_id = recursos_id></asignados-component>
-        <editarasignados-component v-show="actiu" :recursos_id = recursos_id></editarasignados-component>
+        <asignados-component v-if="!actiu" :recursos_id = recursos_id></asignados-component>
+        <editarasignados-component v-else :recursos_id = recursos_id></editarasignados-component>
     </div>
     <div v-show="selectedTab == 'tots'" id="totsTab" class="recursTab">
         <todos-component></todos-component>
