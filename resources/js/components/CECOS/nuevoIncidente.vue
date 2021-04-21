@@ -487,14 +487,15 @@
     <div v-show="currentTab == 3">
       <div class="card ml-5 mr-5 mt-3">
         <div class="card-header font-weight-bold" id="titulito">RESPUESTA
-            <div
+            <button
                 type="button"
                 id="entregar"
                 class="btn btn-success float-right"
+                :disabled="evaluando"
                 @click="evaluarIncidencia()"
             >
                 <i class="fa fa-check" aria-hidden="true"></i> INSERTAR INCIDENCIA
-         </div>
+         </button>
         </div>
         <div class="card-body ml-5">
           <form>
@@ -1039,6 +1040,7 @@ export default {
       alertantDB: null,
       afectatsDB: null,
       recursosInsert: [],
+      evaluando: false,
     };
   },
   methods: {
@@ -1314,6 +1316,7 @@ export default {
     },
     // Control de Insert de la Incidencia
     async evaluarIncidencia(){
+        this.evaluando = true;
         this.errors = [];
         if(!this.evaluaErrores()){
           /* Control insert afectats */
@@ -1364,7 +1367,10 @@ export default {
               this.insertarIncidencia();
               this.updateRecursos();
           }
-        //   location.reload();
+          location.reload();
+        }
+        else{
+            this.evaluando = false;
         }
     },
     async insertAfectatsSinRecurso(){
