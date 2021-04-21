@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="contenido">
     <div v-show="errors.length > 0" v-for="(error, index) in errors" :key="index" class="alert alert-danger alert-dismissable fade show" role="alert" style="color: black;">
         {{ error }}
         <button class="close" type="button" data-dismiss="alert" aria-label="Close">
@@ -490,12 +490,12 @@
             <button
                 type="button"
                 id="entregar"
-                class="btn btn-success float-right"
+                class="btn btn-success float-right insertarIncidencia"
                 :disabled="evaluando"
                 @click="evaluarIncidencia()"
             >
                 <i class="fa fa-check" aria-hidden="true"></i> INSERTAR INCIDENCIA
-         </button>
+            </button>
         </div>
         <div class="card-body ml-5">
           <form>
@@ -1537,6 +1537,10 @@ export default {
 
 <style>
 .btn {
+    font-size: 15px;
+}
+
+.contenido{
     font-size: 15px;
 }
 
