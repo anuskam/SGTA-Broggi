@@ -3317,7 +3317,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     afegirAfectat: function afegirAfectat() {
-      if (this.afectat.sexes_id != null) {
+      this.errors = [];
+
+      if (this.afectat.sexes_id != null && this.afectat.nom != null && this.afectat.cognoms != null && this.afectat.edat != null) {
         if (this.afectat.cip != null) {
           this.afectat.te_cip = true;
         }
@@ -3326,11 +3328,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.recursAfectats.push(this.afectat);
         this.buidarAfectat();
       } else {
-        this.errors.push("Cal introduir el sexe de l'afectat!");
+        this.errors.push("Cal introduir el nom, cognoms, sexe i edat de l'afectat!");
       }
     },
     afegirRecurs: function afegirRecurs() {
       var _this3 = this;
+
+      this.errors = [];
 
       if (this.recurs.tipus_recursos_id > 0 && this.incidencies_has_recursos.prioritat > 0 && this.afectatSelect.edat != null) {
         var pos = this.recursos_select.findIndex(function (x) {
@@ -3344,7 +3348,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         };
         recurs.afectats.push(this.afectatSelect);
         var borrarAfectatIndex = this.recursAfectats.findIndex(function (obj) {
-          return obj.sexes_id == _this3.afectatSelect.sexes_id && obj.edat == _this3.afectatSelect.edat;
+          return obj.sexes_id == _this3.afectatSelect.sexes_id && obj.edat == _this3.afectatSelect.edat && obj.nom == _this3.afectatSelect.nom && obj.cognoms == _this3.afectatSelect.cognoms;
         });
         this.recursAfectats.splice(borrarAfectatIndex, 1);
         this.recursos.push(recurs);
@@ -3360,7 +3364,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.incidencies_has_recursos_array.push(this.incidencies_has_recursos);
         this.buidarIncidenciaHasRecurs();
       } else {
-        this.errors.push("Cal escollir un recurs, almenys un afectat i una prioritat!");
+        this.errors.push("Cal escollir un recurs, un afectat i una prioritat!");
       }
     },
     buidarAfectat: function buidarAfectat() {
@@ -4091,13 +4095,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -4120,7 +4117,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       mapboxKey: "pk.eyJ1IjoiYWx4bXJjZCIsImEiOiJja25ieXJqOGExMmdvMndtdWU1bXVsb3kwIn0.zN5ubwh81_aR_xFX1w0Aqg",
       map: null,
       address: "",
-      hospitalAddress: null,
       hospitals: [],
       addresses: [],
       alertants: [],
@@ -4536,12 +4532,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.selectMunicipis(), this.selectAlertants();
   },
   updated: function updated() {
-    if (this.hospitalAddress != null) {
+    if (this.incidenciaRecursInsert.desti != null) {
       if (this.map.markers.length > 1) {
         this.map.markers[this.map.markers.length - 1].remove();
       }
 
-      this.addAddress(this.hospitalAddress);
+      this.addAddress(this.incidenciaRecursInsert.desti);
     }
   }
 });

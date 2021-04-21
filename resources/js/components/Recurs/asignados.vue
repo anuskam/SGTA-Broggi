@@ -58,13 +58,6 @@
       <div id="transportButtons" class="card col-9 p-0"  :class="{ visible: mostrarTransport }">
         <div class="card-header" id="transportHeader">Destí Hospitalari</div>
         <div class="card-body p-2 pl-4 pr-4" id="transportForm">
-          <!-- <input
-            :disabled="!mostrarTransport"
-            type="text"
-            placeholder="Introdueix direcció"
-            id="direccioHospital"
-            :v-model="hospitalAddress"
-          /> -->
           <select
             :disabled="!mostrarTransport"
             class="custom-select"
@@ -184,7 +177,6 @@ export default {
             mapboxKey: "pk.eyJ1IjoiYWx4bXJjZCIsImEiOiJja25ieXJqOGExMmdvMndtdWU1bXVsb3kwIn0.zN5ubwh81_aR_xFX1w0Aqg",
             map: null,
             address: "",
-            hospitalAddress: null,
             hospitals: [],
             addresses: [],
             alertants: [],
@@ -542,11 +534,11 @@ export default {
       this.selectMunicipis(), this.selectAlertants();
   },
   updated(){
-      if(this.hospitalAddress != null){
+      if(this.incidenciaRecursInsert.desti != null){
           if(this.map.markers.length > 1){
               this.map.markers[this.map.markers.length-1].remove();
           }
-          this.addAddress(this.hospitalAddress);
+          this.addAddress(this.incidenciaRecursInsert.desti);
       }
   }
 };
