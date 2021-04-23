@@ -35,7 +35,7 @@
       </div>
     </div>
     <div id="botones" class="card mt-4 p-2">
-      <div id="leftButtons" class="col-2">
+      <div class="leftButtons col-2">
         <div id="movilitzacio" class="button" @click="activarMovilitzacio()">
           <button><i class="fas fa-running"></i> Iniciar Movilitzación</button>
           <input type="time" v-model="incidenciaRecursInsert.hora_mobilitzacio" />
@@ -48,14 +48,21 @@
           <input type="time" v-model="incidenciaRecursInsert.hora_assistencia" />
         </div>
       </div>
-      <div id="checkTransport" class="col-1" @click="activarMostrarTransport()"  :class="{ visible: assistencia }">
-        <button :disabled="!assistencia">
-          <i class="fas fa-hospital-user"><p></p>
-            <!-- <input type="checkbox" name="" id="transportButton"/> -->
-            </i>
-        </button>
+      <div class="leftButtons col-2" >
+          <div :class="{ visible: assistencia }" class="button" @click="altaVoluntaria()" id="alta">
+            <button  :disabled="!assistencia">
+                <label for="alta"><i class="fas fa-notes-medical"></i> Alta Voluntaria</label>
+            </button>
+        </div>
+
+        <div id="checkTransport" @click="activarMostrarTransport()"  :class="{ visible: assistencia }">
+            <button :disabled="!assistencia">
+            <i class="fas fa-hospital-user"></i> Hospitalizacion
+            </button>
+        </div>
       </div>
-      <div id="transportButtons" class="card col-9 p-0"  :class="{ visible: mostrarTransport }">
+
+      <div id="transportButtons" class="card col-7 p-0"  :class="{ visible: mostrarTransport }">
         <div class="card-header" id="transportHeader">Destino Hospitalario</div>
         <div class="card-body p-2 pl-4 pr-4" id="transportForm">
           <select
@@ -77,31 +84,27 @@
             </option>
             </select>
           <div id="botonsTransport">
-            <div class="botoTransport button">
-              <button :disabled="!mostrarTransport" id="iniciarTransport" @click="activarTransport()">
+            <div class="botoTransport button" @click="activarTransport()" id="iniciarTransport" :class="{ visible: mostrarTransport }">
+              <button :disabled="!mostrarTransport" >
                 <label for="iniciarTransport"><i class="fas fa-ambulance"></i> Iniciar Transporte</label>
               </button>
               <input type="time" v-model="incidenciaRecursInsert.hora_transport" />
             </div>
-            <div class="botoTransport button">
-              <button :disabled="!transport" id="arribadaHospital" @click="activarHospital()">
+            <div class="botoTransport button" :class="{ visible: transport }" id="arribadaHospital" @click="activarHospital()">
+              <button :disabled="!transport">
                   <label for="arribadaHospital"><i class="fas fa-hospital"></i> Llegada Hospital</label>
               </button>
               <input type="time" v-model="incidenciaRecursInsert.hora_arribada_hospital" />
             </div>
-            <div class="botoTransport button">
-              <button :disabled="!hospital" @click="activarTransferencia()">
+            <div class="botoTransport button"  @click="activarTransferencia()" :class="{ visible: hospital }" id="iniciarTransferencia">
+              <button :disabled="!hospital">
                 <label for="ininciarTransferencia"><i class="fas fa-user-friends"></i> Iniciar Transferencia</label>
               </button>
               <input type="time" v-model="incidenciaRecursInsert.hora_transferencia" />
             </div>
-            <div class="botoTransport button">
-              <button :disabled="!transferencia" id="hospitalitzacio" @click="hospitalitzacio()">
-                  <label for="hospitalitzacio"><i class="fas fa-procedures"></i> Hospitalitzación</label>
-              </button>
-
-              <button id="alta" @click="altaVoluntaria()">
-                <label for="alta"><i class="fas fa-notes-medical"></i> Alta Voluntaria</label>
+            <div class="botoTransport button"  id="hospitalitzacio" @click="hospitalitzacio()" :class="{ visible: transferencia }">
+              <button :disabled="!transferencia">
+                  <label for="hospitalitzacio"><i class="fas fa-procedures"></i></label>
               </button>
             </div>
           </div>
@@ -583,7 +586,6 @@ button {
 
 }
 
-
 .card {
   border: 1px solid black;
 }
@@ -593,7 +595,7 @@ button {
   padding: 6px 20px;
   text-align: center;
 }
-#leftButtons {
+.leftButtons {
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -603,19 +605,6 @@ button {
 }
 #assistencia{
     opacity: .4;
-}
-#checkTransport {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-  opacity: .4;
-  /* margin-left: -80px; */
-}
-#checkTransport button {
-  padding: 10px 4px;
-  height: 100%;
 }
 #transportButton {
   background-color: #e3177d;
@@ -645,7 +634,6 @@ button {
   display: flex;
   flex-direction: column;
   /* align-items: center; */
-
 }
 #direccioHospital {
   width: 100%;
@@ -708,14 +696,26 @@ button {
     background-color: #15acc4;
 }
 #alta{
-    opacity: 1 !important;
-    visibility: visible !important;
-}
-#alta:hover{
-    cursor: pointer;
+    opacity: 0.4;
+    padding-top: 1vh;
 }
 
 .indicadoresMasInfo{
     font-weight: bold;
+}
+#checkTransport{
+    opacity: 0.4;
+}
+#iniciarTransport{
+    opacity: 0.4;
+}
+#arribadaHospital{
+    opacity: 0.4;
+}
+#iniciarTransferencia{
+    opacity: 0.4;
+}
+#hospitalitzacio{
+    opacity: 0.4;
 }
 </style>

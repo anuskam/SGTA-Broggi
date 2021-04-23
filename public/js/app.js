@@ -4095,6 +4095,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -10757,7 +10760,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nmain[data-v-6504f867] {\r\n  margin-top: 1.4vh;\r\n  color: black;\r\n  font-family: 'Rubik', sans-serif;\r\n  font-size: 15px;\n}\n#infoCard[data-v-6504f867] {\r\n  height: 65vh;\r\n  color: black;\n}\n#botones[data-v-6504f867] {\r\n  height: 28vh;\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-around;\r\n  align-items: center;\n}\n#infoHeader[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-between;\r\n  font-size: 1.2em;\r\n  font-weight: bold;\r\n  margin-right: -0.5px;\r\n  border-bottom: 1px solid black;\r\n  background-color: #15acc4;\n}\nbutton[data-v-6504f867] {\r\n  background-color: #e3177d;\r\n  font-size: 0.9em;\r\n  color: white;\r\n  border-radius: 4px;\n}\n.card[data-v-6504f867] {\r\n  border: 1px solid black;\n}\n#transportHeader[data-v-6504f867] {\r\n  background-color: #15acc4;\r\n  font-weight: bold;\r\n  padding: 6px 20px;\r\n  text-align: center;\n}\n#leftButtons[data-v-6504f867] {\r\n  height: 100%;\r\n  display: flex;\r\n  flex-direction: column;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-around;\n}\n#assistencia[data-v-6504f867]{\r\n    opacity: .4;\n}\n#checkTransport[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  flex-wrap: nowrap;\r\n  justify-content: center;\r\n  align-items: center;\r\n  opacity: .4;\r\n  /* margin-left: -80px; */\n}\n#checkTransport button[data-v-6504f867] {\r\n  padding: 10px 4px;\r\n  height: 100%;\n}\n#transportButton[data-v-6504f867] {\r\n  background-color: #e3177d;\n}\n#transportButtons[data-v-6504f867] {\r\n  height: 100%;\r\n  opacity: .4;\n}\n.visible[data-v-6504f867]{\r\n    opacity: 1 !important;\n}\n#transportForm[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: wrap;\r\n  justify-content: space-around;\r\n  align-items: center;\n}\n#botonsTransport[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  width: 100%;\r\n  justify-content: space-between;\n}\n.button[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  /* align-items: center; */\n}\n#direccioHospital[data-v-6504f867] {\r\n  width: 100%;\n}\n#map[data-v-6504f867] {\r\n  height: 65%;\r\n  background-color: black;\n}\n#info[data-v-6504f867] {\r\n  height: 20%;\r\n  margin-top: 4%;\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: space-around;\r\n  flex-wrap: nowrap;\r\n  /* font-weight: bold; */\n}\n.boldInfo[data-v-6504f867]{\r\n    font-weight: bold;\n}\n#infoFields[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: space-around;\r\n  padding-right: 0;\n}\n.infobox[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  align-items: center;\r\n  text-align: justify;\r\n  /* font-size: 12px; */\n}\n.infobox > div[data-v-6504f867] {\r\n  background-color: #15acc4;\r\n  border: 1px solid black;\r\n  font-size: 13.5px;\r\n  padding: 0px 5px !important;\n}\n#descripcion[data-v-6504f867],\r\n#direccion[data-v-6504f867] {\r\n  background-color: white;\n}\n#masInfo[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: center;\r\n  vertical-align: center;\n}\n#masInfo > button[data-v-6504f867] {\r\n  padding: 10px 20px;\r\n  margin-left: -50px;\r\n  color: white;\n}\n.modal-header[data-v-6504f867]{\r\n    font-weight: bold;\r\n    background-color: #15acc4;\n}\n#alta[data-v-6504f867]{\r\n    opacity: 1 !important;\r\n    visibility: visible !important;\n}\n#alta[data-v-6504f867]:hover{\r\n    cursor: pointer;\n}\n.indicadoresMasInfo[data-v-6504f867]{\r\n    font-weight: bold;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nmain[data-v-6504f867] {\n  margin-top: 1.4vh;\n  color: black;\n  font-family: 'Rubik', sans-serif;\n  font-size: 15px;\n}\n#infoCard[data-v-6504f867] {\n  height: 65vh;\n  color: black;\n}\n#botones[data-v-6504f867] {\n  height: 28vh;\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#infoHeader[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n  font-size: 1.2em;\n  font-weight: bold;\n  margin-right: -0.5px;\n  border-bottom: 1px solid black;\n  background-color: #15acc4;\n}\nbutton[data-v-6504f867] {\n  background-color: #e3177d;\n  font-size: 0.9em;\n  color: white;\n  border-radius: 4px;\n}\n.card[data-v-6504f867] {\n  border: 1px solid black;\n}\n#transportHeader[data-v-6504f867] {\n  background-color: #15acc4;\n  font-weight: bold;\n  padding: 6px 20px;\n  text-align: center;\n}\n.leftButtons[data-v-6504f867] {\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n}\n#assistencia[data-v-6504f867]{\n    opacity: .4;\n}\n#transportButton[data-v-6504f867] {\n  background-color: #e3177d;\n}\n#transportButtons[data-v-6504f867] {\n  height: 100%;\n  opacity: .4;\n}\n.visible[data-v-6504f867]{\n    opacity: 1 !important;\n}\n#transportForm[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#botonsTransport[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  width: 100%;\n  justify-content: space-between;\n}\n.button[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  /* align-items: center; */\n}\n#direccioHospital[data-v-6504f867] {\n  width: 100%;\n}\n#map[data-v-6504f867] {\n  height: 65%;\n  background-color: black;\n}\n#info[data-v-6504f867] {\n  height: 20%;\n  margin-top: 4%;\n  display: flex;\n  flex-direction: row;\n  justify-content: space-around;\n  flex-wrap: nowrap;\n  /* font-weight: bold; */\n}\n.boldInfo[data-v-6504f867]{\n    font-weight: bold;\n}\n#infoFields[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n  padding-right: 0;\n}\n.infobox[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  text-align: justify;\n  /* font-size: 12px; */\n}\n.infobox > div[data-v-6504f867] {\n  background-color: #15acc4;\n  border: 1px solid black;\n  font-size: 13.5px;\n  padding: 0px 5px !important;\n}\n#descripcion[data-v-6504f867],\n#direccion[data-v-6504f867] {\n  background-color: white;\n}\n#masInfo[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  vertical-align: center;\n}\n#masInfo > button[data-v-6504f867] {\n  padding: 10px 20px;\n  margin-left: -50px;\n  color: white;\n}\n.modal-header[data-v-6504f867]{\n    font-weight: bold;\n    background-color: #15acc4;\n}\n#alta[data-v-6504f867]{\n    opacity: 0.4;\n    padding-top: 1vh;\n}\n.indicadoresMasInfo[data-v-6504f867]{\n    font-weight: bold;\n}\n#checkTransport[data-v-6504f867]{\n    opacity: 0.4;\n}\n#iniciarTransport[data-v-6504f867]{\n    opacity: 0.4;\n}\n#arribadaHospital[data-v-6504f867]{\n    opacity: 0.4;\n}\n#iniciarTransferencia[data-v-6504f867]{\n    opacity: 0.4;\n}\n#hospitalitzacio[data-v-6504f867]{\n    opacity: 0.4;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -47347,7 +47350,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "card mt-4 p-2", attrs: { id: "botones" } }, [
-      _c("div", { staticClass: "col-2", attrs: { id: "leftButtons" } }, [
+      _c("div", { staticClass: "leftButtons col-2" }, [
         _c(
           "div",
           {
@@ -47435,25 +47438,46 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "col-1",
-          class: { visible: _vm.assistencia },
-          attrs: { id: "checkTransport" },
-          on: {
-            click: function($event) {
-              return _vm.activarMostrarTransport()
+      _c("div", { staticClass: "leftButtons col-2" }, [
+        _c(
+          "div",
+          {
+            staticClass: "button",
+            class: { visible: _vm.assistencia },
+            attrs: { id: "alta" },
+            on: {
+              click: function($event) {
+                return _vm.altaVoluntaria()
+              }
             }
-          }
-        },
-        [_c("button", { attrs: { disabled: !_vm.assistencia } }, [_vm._m(1)])]
-      ),
+          },
+          [_c("button", { attrs: { disabled: !_vm.assistencia } }, [_vm._m(1)])]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            class: { visible: _vm.assistencia },
+            attrs: { id: "checkTransport" },
+            on: {
+              click: function($event) {
+                return _vm.activarMostrarTransport()
+              }
+            }
+          },
+          [
+            _c("button", { attrs: { disabled: !_vm.assistencia } }, [
+              _c("i", { staticClass: "fas fa-hospital-user" }),
+              _vm._v(" Hospitalizacion\n          ")
+            ])
+          ]
+        )
+      ]),
       _vm._v(" "),
       _c(
         "div",
         {
-          staticClass: "card col-9 p-0",
+          staticClass: "card col-7 p-0",
           class: { visible: _vm.mostrarTransport },
           attrs: { id: "transportButtons" }
         },
@@ -47532,170 +47556,167 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("div", { attrs: { id: "botonsTransport" } }, [
-                _c("div", { staticClass: "botoTransport button" }, [
-                  _c(
-                    "button",
-                    {
-                      attrs: {
-                        disabled: !_vm.mostrarTransport,
-                        id: "iniciarTransport"
-                      },
-                      on: {
-                        click: function($event) {
-                          return _vm.activarTransport()
-                        }
-                      }
-                    },
-                    [_vm._m(2)]
-                  ),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.incidenciaRecursInsert.hora_transport,
-                        expression: "incidenciaRecursInsert.hora_transport"
-                      }
-                    ],
-                    attrs: { type: "time" },
-                    domProps: {
-                      value: _vm.incidenciaRecursInsert.hora_transport
-                    },
+                _c(
+                  "div",
+                  {
+                    staticClass: "botoTransport button",
+                    class: { visible: _vm.mostrarTransport },
+                    attrs: { id: "iniciarTransport" },
                     on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.incidenciaRecursInsert,
-                          "hora_transport",
-                          $event.target.value
-                        )
+                      click: function($event) {
+                        return _vm.activarTransport()
                       }
                     }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "botoTransport button" }, [
-                  _c(
-                    "button",
-                    {
-                      attrs: {
-                        disabled: !_vm.transport,
-                        id: "arribadaHospital"
+                  },
+                  [
+                    _c(
+                      "button",
+                      { attrs: { disabled: !_vm.mostrarTransport } },
+                      [_vm._m(2)]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.incidenciaRecursInsert.hora_transport,
+                          expression: "incidenciaRecursInsert.hora_transport"
+                        }
+                      ],
+                      attrs: { type: "time" },
+                      domProps: {
+                        value: _vm.incidenciaRecursInsert.hora_transport
                       },
                       on: {
-                        click: function($event) {
-                          return _vm.activarHospital()
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.incidenciaRecursInsert,
+                            "hora_transport",
+                            $event.target.value
+                          )
                         }
                       }
-                    },
-                    [_vm._m(3)]
-                  ),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value:
-                          _vm.incidenciaRecursInsert.hora_arribada_hospital,
-                        expression:
-                          "incidenciaRecursInsert.hora_arribada_hospital"
-                      }
-                    ],
-                    attrs: { type: "time" },
-                    domProps: {
-                      value: _vm.incidenciaRecursInsert.hora_arribada_hospital
-                    },
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "botoTransport button",
+                    class: { visible: _vm.transport },
+                    attrs: { id: "arribadaHospital" },
                     on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.incidenciaRecursInsert,
-                          "hora_arribada_hospital",
-                          $event.target.value
-                        )
+                      click: function($event) {
+                        return _vm.activarHospital()
                       }
                     }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "botoTransport button" }, [
-                  _c(
-                    "button",
-                    {
-                      attrs: { disabled: !_vm.hospital },
-                      on: {
-                        click: function($event) {
-                          return _vm.activarTransferencia()
+                  },
+                  [
+                    _c("button", { attrs: { disabled: !_vm.transport } }, [
+                      _vm._m(3)
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value:
+                            _vm.incidenciaRecursInsert.hora_arribada_hospital,
+                          expression:
+                            "incidenciaRecursInsert.hora_arribada_hospital"
                         }
-                      }
-                    },
-                    [_vm._m(4)]
-                  ),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.incidenciaRecursInsert.hora_transferencia,
-                        expression: "incidenciaRecursInsert.hora_transferencia"
-                      }
-                    ],
-                    attrs: { type: "time" },
-                    domProps: {
-                      value: _vm.incidenciaRecursInsert.hora_transferencia
-                    },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.incidenciaRecursInsert,
-                          "hora_transferencia",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "botoTransport button" }, [
-                  _c(
-                    "button",
-                    {
-                      attrs: {
-                        disabled: !_vm.transferencia,
-                        id: "hospitalitzacio"
+                      ],
+                      attrs: { type: "time" },
+                      domProps: {
+                        value: _vm.incidenciaRecursInsert.hora_arribada_hospital
                       },
                       on: {
-                        click: function($event) {
-                          return _vm.hospitalitzacio()
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.incidenciaRecursInsert,
+                            "hora_arribada_hospital",
+                            $event.target.value
+                          )
                         }
                       }
-                    },
-                    [_vm._m(5)]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      attrs: { id: "alta" },
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "botoTransport button",
+                    class: { visible: _vm.hospital },
+                    attrs: { id: "iniciarTransferencia" },
+                    on: {
+                      click: function($event) {
+                        return _vm.activarTransferencia()
+                      }
+                    }
+                  },
+                  [
+                    _c("button", { attrs: { disabled: !_vm.hospital } }, [
+                      _vm._m(4)
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.incidenciaRecursInsert.hora_transferencia,
+                          expression:
+                            "incidenciaRecursInsert.hora_transferencia"
+                        }
+                      ],
+                      attrs: { type: "time" },
+                      domProps: {
+                        value: _vm.incidenciaRecursInsert.hora_transferencia
+                      },
                       on: {
-                        click: function($event) {
-                          return _vm.altaVoluntaria()
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.incidenciaRecursInsert,
+                            "hora_transferencia",
+                            $event.target.value
+                          )
                         }
                       }
-                    },
-                    [_vm._m(6)]
-                  )
-                ])
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "botoTransport button",
+                    class: { visible: _vm.transferencia },
+                    attrs: { id: "hospitalitzacio" },
+                    on: {
+                      click: function($event) {
+                        return _vm.hospitalitzacio()
+                      }
+                    }
+                  },
+                  [
+                    _c("button", { attrs: { disabled: !_vm.transferencia } }, [
+                      _vm._m(5)
+                    ])
+                  ]
+                )
               ])
             ]
           )
@@ -47715,7 +47736,7 @@ var render = function() {
           { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(7),
+              _vm._m(6),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("p", [
@@ -47739,7 +47760,7 @@ var render = function() {
                   _vm._v(" " + _vm._s(_vm.telefon_alertant))
                 ]),
                 _vm._v(" "),
-                _vm._m(8),
+                _vm._m(7),
                 _vm._v(" "),
                 _c(
                   "ul",
@@ -47790,7 +47811,7 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(9)
+              _vm._m(8)
             ])
           ]
         )
@@ -47812,7 +47833,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("i", { staticClass: "fas fa-hospital-user" }, [_c("p")])
+    return _c("label", { attrs: { for: "alta" } }, [
+      _c("i", { staticClass: "fas fa-notes-medical" }),
+      _vm._v(" Alta Voluntaria")
+    ])
   },
   function() {
     var _vm = this
@@ -47846,17 +47870,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "hospitalitzacio" } }, [
-      _c("i", { staticClass: "fas fa-procedures" }),
-      _vm._v(" Hospitalitzación")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", { attrs: { for: "alta" } }, [
-      _c("i", { staticClass: "fas fa-notes-medical" }),
-      _vm._v(" Alta Voluntaria")
+      _c("i", { staticClass: "fas fa-procedures" })
     ])
   },
   function() {
