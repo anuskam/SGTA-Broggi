@@ -24,6 +24,13 @@ class AlertantController extends Controller
         return AlertantResource::collection($alertants);
     }
 
+    public function indexPaginated()
+    {
+        $alertants = Alertant::paginate(10);
+
+        return AlertantResource::collection($alertants);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

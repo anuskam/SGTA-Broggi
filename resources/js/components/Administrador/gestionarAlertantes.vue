@@ -40,7 +40,25 @@
     </div>
   </div>
 </div> -->
-
+    <nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item">
+      <button :disabled="currentPage <= 1" class="page-link" aria-label="Previous" @click="paginar(currentPage-1)">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+      </button>
+    </li>
+    <button v-for="(paginaActual, index) in paginas" :key="index" class="btn" @click="paginar(paginaActual)">{{ index+1 }}</button>
+    <!-- <button class="btn" @click="paginar(2)">2</button>
+    <button class="btn" @click="paginar(3)">3</button> -->
+    <li class="page-item">
+      <button :disabled="currentPage >= meta.last_page" class="page-link" aria-label="Next" @click="paginar(currentPage+1)">
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Next</span>
+      </button>
+    </li>
+  </ul>
+</nav>
 
   <div class="card mt-2 mb-1 ml-5 mr-5">
     <h2 class="card-header font-weight-bold">Alertantes</h2>
@@ -182,11 +200,15 @@
             cognoms: '',
             adreca: '',
             municipis_id: null,
-            meta: {},
-            paginas: [],
-            pagina: 0,
-            currentPage: 0
+            // meta: {},
+            // paginas: [],
+            // pagina: 0,
+            // currentPage: 0
           },
+          meta: {},
+          paginas: [],
+          pagina: 0,
+          currentPage: 0,
           municipis: [],
           insert: true,
           errorMessage: '',
@@ -197,35 +219,50 @@
         paginar(pagina){
           let me = this;
           axios
-              .get('SGTA-Broggi/public/api/alertant' + '?page=' + pagina)
+              .get('/SGTA-Broggi/public/alertantPaginated' + '?page=' + pagina)
               .then(response => {
                   me.alertants = response.data.data;
                   me.meta = response.data.meta;
                   me.currentPage = pagina;
-
               })
               .catch(error => {
                     console.log(error);
               })
         },
-        selectAlertants() {
-            let me = this;
-            axios
-                .get('/SGTA-Broggi/public/api/alertant')
-                .then(response => {
-                    me.alertants = response.data.data;
-                    me.meta = response.data.meta;
-
-                    for(let index = 0; index < me.meta.last_page; index++){
-                        me.paginas[index] = pagina + 1;
-                    }
-
-                    me.currentPage = 1;
-                })
-                .catch(error => {
+        paginarFirst(){
+          let me = this;
+          axios
+              .get('/SGTA-Broggi/public/alertantPaginated' + '?page=' + 1)
+              .then(response => {
+                  me.alertants = response.data.data;
+                  me.meta = response.data.meta;
+                  me.currentPage = 1;
+                  for(let index = 0; index < me.meta.last_page; index++){
+                        me.paginas[index] = index + 1;
+                  }
+              })
+              .catch(error => {
                     console.log(error);
-                })
+              })
         },
+        // selectAlertants() {
+        //     let me = this;
+        //     axios
+        //         .get('/SGTA-Broggi/public/api/alertant')
+        //         .then(response => {
+        //             me.alertants = response.data;
+        //             me.meta = response.data.meta;
+
+        //             for(let index = 0; index < me.meta.last_page; index++){
+        //                 me.paginas[index] = pagina + 1;
+        //             }
+
+        //             me.currentPage = 1;
+        //         })
+        //         .catch(error => {
+        //             console.log(error);
+        //         })
+        // },
         confirmDeleteAlertant(alertant) {
           this.alertant = alertant;
           $('#deleteModalAlertant').modal('show');
@@ -309,10 +346,10 @@
         },
       },
       created() {
-        this.selectAlertants(), this.selectMunicipis();
+        this.paginarFirst();
       },
       mounted() {
-        console.log('Component mounted.')
+        this.selectAlertants();
       }
     }
 </script>
