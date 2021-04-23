@@ -289,14 +289,9 @@
     width: 14vw;
 }
 
-.esborrarRecursBtn {
+.esborrarRecursBtn, .editarRecursBtn {
   background-color: #e3177d !important;
   color: white !important;
-}
-
-.editarRecursBtn {
-  background-color: #15acc4 !important;
-  color: black !important;
 }
 
 .editarRecursBtn:hover {

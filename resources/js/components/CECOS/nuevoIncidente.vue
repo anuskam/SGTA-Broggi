@@ -1152,7 +1152,7 @@ export default {
         this.recursAfectats.push(this.afectat);
         this.buidarAfectat();
       } else {
-        this.errors.push("Cal introduir el nom, cognoms, sexe i edat de l'afectat!");
+        this.errors.push("Hay que introducir nombre, apellidos, sexo y edad de la afectada");
       }
     },
     afegirRecurs() {
@@ -1181,7 +1181,7 @@ export default {
         this.incidencies_has_recursos_array.push(this.incidencies_has_recursos);
         this.buidarIncidenciaHasRecurs();
       } else {
-        this.errors.push("Cal escollir un recurs, un afectat i una prioritat!");
+        this.errors.push("Hay que elegir un recurso, una afectada y una prioridad");
       }
     },
     buidarAfectat() {
@@ -1269,27 +1269,27 @@ export default {
       let hasErrors = false;
         if(this.municipi.id == null){
             hasErrors = true;
-            this.errors.push("Cal introduir el municipi de l'incident");
+            this.errors.push("Hay que introducir el municipio del incidente");
         }
 
       if(this.activaRecurs == true && !this.afectatSelected.length > 0){
         hasErrors = true;
-        this.errors.push("Cal despatxar algun recurs o desactivar l'opcio d'assignar recurs");
+        this.errors.push("Hay que activar algún recurso o desactivar la opción de asignar recurso");
       }
       if(this.activaRecurs == false && !this.afectats.length > 0){
-          this.errors.push("Cal afegir algun afectat a l'incidencia");
+          this.errors.push("Hay que añadir una afectada a la incidencia");
       }
       if(this.incidencia.adreca == null){
         hasErrors = true;
-        this.errors.push("Cal introduir l'adreça de l'incident");
+        this.errors.push("Hay que introducir la dirección del incidente");
       }
       if(this.incidencia.descripcio == null){
         hasErrors = true;
-        this.errors.push("Cal introduir la descripció de l'incident");
+        this.errors.push("Hay que introducir la descripción del incidente");
       }
       if(this.alertanteConocido == true && this.incidencia.nom_metge == null){
           hasErrors = true;
-          this.errors.push("Cal introduir el nom del metge alertant");
+          this.errors.push("Hay que introducir el nombre de la médica alertante");
       }
       return hasErrors;
     },

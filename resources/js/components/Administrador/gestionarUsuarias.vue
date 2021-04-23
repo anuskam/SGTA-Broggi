@@ -308,15 +308,11 @@
     width: 14vw;
 }
 
-.esborrarUsuariBtn {
+.esborrarUsuariBtn, .editarUsuariBtn {
   background-color: #e3177d !important;
   color: white !important;
 }
 
-.editarUsuariBtn {
-  background-color: #15acc4 !important;
-  color: black !important;
-}
 
 .editarUsuariBtn:hover {
   color: black !important;

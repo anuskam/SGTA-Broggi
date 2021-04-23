@@ -1,5 +1,5 @@
 <template>
-<main class="col-10">
+<main class="col-11">
   <table v-if="incidencies.length > 0" class="table mt-5">
     <thead>
       <tr>
@@ -12,7 +12,7 @@
     </thead>
     <tbody>
       <tr v-for="(incidencia, index) in incidencies" :key="incidencia.id">
-        <td>{{ incidencia.data }}</td>
+        <td>{{ convertDateFormat(incidencia.data) }}</td>
         <td>
           {{ getMunicipi(index) }}
         </td>
@@ -149,6 +149,7 @@
             // this.incidenciaID = this.incidenciaHasRecursos[this.incidenciaHasRecursos.length-1].incidencies_id;
             return true;
         },
+
         // selectIncidencies() {
         //   let me = this;
         //   axios
@@ -247,6 +248,10 @@
           this.insert = false;
           this.incidencia = incidencia;
           $('#asignatModal').modal('show');
+        },
+        convertDateFormat(string) {
+        var info = string.split('-').reverse().join('-');
+        return info;
         }
       },
       created(){
