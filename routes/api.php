@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlertantController as ControllersAlertantController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AfectatController;
@@ -50,4 +51,5 @@ Route::apiResource('tipusRecurs', TipusRecursController::class);
 Route::apiResource('usuari', UsuariController::class);
 Route::apiResource('incidenciaHasRecursos', IncidenciaHasRecursosController::class);
 Route::apiResource('incidenciaHasAfectats', IncidenciaHasAfectatsController::class);
+// Route::get('alertantPaginated', [ControllersAlertantController::class, 'indexPaginated']);
 

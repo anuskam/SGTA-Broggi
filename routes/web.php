@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UsuariController;
+use App\Http\Controllers\Api\AlertantController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,8 @@ Route::post('store', [UsuariController::class, 'store']);
 Route::get('home', [UsuariController::class, 'index']);
 
 Route::get('/', [UsuariController::class, 'index']);
+
+Route::get('alertantPaginated', [AlertantController::class, 'indexPaginated']);
 
 Route::resource('login', LoginController::class);
 
