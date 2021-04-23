@@ -148,7 +148,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn cerrarBtn" data-dismiss="modal">Cerrar</button>
-          <button v-if="insert" type="button" class="btn editarAlertantBtn" @click="insertAlertant()">Añadir</button>
+          <button v-if="insert" type="button" class="btn afegirAlertantBtn" @click="insertAlertant()">Añadir</button>
           <button v-else type="button" class="btn editarAlertantBtn" @click="updateAlertant()">Modificar</button>
         </div>
       </div>
@@ -341,11 +341,15 @@
     width: 14vw;
 }
 
-.esborrarAlertantBtn, .editarAlertantBtn {
+.esborrarAlertantBtn, .afegirAlertantBtn {
   background-color: #e3177d !important;
   color: white !important;
 }
 
+.editarAlertantBtn {
+  background-color: #15acc4 !important;
+  color: black !important;
+}
 
 .editarAlertantBtn:hover {
   color: black !important;

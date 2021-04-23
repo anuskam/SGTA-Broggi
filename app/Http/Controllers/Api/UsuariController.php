@@ -107,7 +107,7 @@ class UsuariController extends Controller
     {
         try{
             $usuari->delete();
-            $response = \response()->json(['missatge' => 'Registre esborrat correctament'], 200);
+            $response = \response()->json(['missatge' => 'Registro eliminado correctamente'], 200);
         }
         catch(QueryException $ex){
             $mensaje = Utilitat::errorMessage($ex);
