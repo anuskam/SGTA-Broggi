@@ -1,5 +1,5 @@
 <template>
-<main class="col-10">
+<main class="col-11">
   <table v-if="incidencies.length > 0" class="table mt-5">
     <thead>
       <tr>
@@ -154,5 +154,6 @@
     font-size: 15px;
     color: black;
     background-color: rgb(21, 172, 196, .5);
+    width: 90%;
 }
 </style>
