@@ -10,55 +10,29 @@
     {{ infoMessage }}
   </div>
 
-  <!-- <div class="position: absolute; top: 0; right: auto;" style="z-index: 5; right: 0; bottom: 0;">
-  <div id="toastError" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="4000">
-    <div class="toast-header">
-      <strong class="mr-auto">Bootstrap</strong>
-      <small>11 mins ago</small>
-      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="toast-body">
-     {{ errorMessage }}
-    </div>
-  </div>
-</div>
 
+  <div aria-label="paginacion" class="paginacionNav">
+    <ul class="pagination">
+      <li class="page-item">
+        <button :disabled="currentPage <= 1" class="btn numeroPaginacion" aria-label="Previous" @click="paginar(currentPage-1)">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+        </button>
+      </li>
+      <button v-for="(paginaActual, index) in paginas" :key="index" class="btn numeroPaginacion" @click="paginar(paginaActual)">{{ index+1 }}</button>
+      <li class="page-item">
+        <button :disabled="currentPage >= meta.last_page" class="btn numeroPaginacion" aria-label="Next" @click="paginar(currentPage+1)">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+        </button>
+      </li>
+    </ul>
 
-<div class="position: absolute; top: 0; right: auto;" style="z-index: 5; right: 0; bottom: 0;">
-  <div id="toastInfo" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="4000">
-    <div class="toast-header">
-      <strong class="mr-auto">Bootstrap</strong>
-      <small>11 mins ago</small>
-      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="toast-body">
-     {{ infoMessage }}
-    </div>
+    <button class="btn btn-primary mr-5 nuevaAlertante" @click="createAlertant()">
+        <i class="fas fa-plus-circle" aria-hidden="true"></i>
+        Nueva alertante
+    </button>
   </div>
-</div> -->
-    <nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item">
-      <button :disabled="currentPage <= 1" class="page-link" aria-label="Previous" @click="paginar(currentPage-1)">
-        <span aria-hidden="true">&laquo;</span>
-        <span class="sr-only">Previous</span>
-      </button>
-    </li>
-    <button v-for="(paginaActual, index) in paginas" :key="index" class="btn" @click="paginar(paginaActual)">{{ index+1 }}</button>
-    <!-- <button class="btn" @click="paginar(2)">2</button>
-    <button class="btn" @click="paginar(3)">3</button> -->
-    <li class="page-item">
-      <button :disabled="currentPage >= meta.last_page" class="page-link" aria-label="Next" @click="paginar(currentPage+1)">
-        <span aria-hidden="true">&raquo;</span>
-        <span class="sr-only">Next</span>
-      </button>
-    </li>
-  </ul>
-</nav>
 
   <div class="card mt-2 mb-1 ml-5 mr-5">
     <h2 class="card-header font-weight-bold">Alertantes</h2>
@@ -100,7 +74,7 @@
   <div class="modal" tabindex="-1" id="deleteModalAlertant">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header d-flex justify-content-center">
           <div class="modal-title">Eliminar Alertante</div>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -121,7 +95,7 @@
   <div class="modal" tabindex="-1" id="alertantModal">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header d-flex justify-content-center">
           <div class="modal-title">Alertante</div>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
@@ -173,18 +147,18 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn cerrarBtn" data-dismiss="modal">Tancar</button>
-          <button v-if="insert" type="button" class="btn" @click="insertAlertant()">Afegir</button>
+          <button type="button" class="btn cerrarBtn" data-dismiss="modal">Cerrar</button>
+          <button v-if="insert" type="button" class="btn editarAlertantBtn" @click="insertAlertant()">Añadir</button>
           <button v-else type="button" class="btn editarAlertantBtn" @click="updateAlertant()">Modificar</button>
         </div>
       </div>
     </div>
   </div>
 
-  <button class="btn btn-primary btn-float-afegir" @click="createAlertant()">
+  <!-- <button class="btn btn-primary btn-float-afegir" @click="createAlertant()">
     <i class="fas fa-plus-circle" aria-hidden="true"></i>
     Nueva alertante
-  </button>
+  </button> -->
 
 </main>
 </template>
@@ -367,15 +341,11 @@
     width: 14vw;
 }
 
-.esborrarAlertantBtn {
+.esborrarAlertantBtn, .editarAlertantBtn {
   background-color: #e3177d !important;
   color: white !important;
 }
 
-.editarAlertantBtn {
-  background-color: #15acc4 !important;
-  color: black !important;
-}
 
 .editarAlertantBtn:hover {
   color: black !important;
@@ -400,8 +370,24 @@ h2{
   font-family: myFont;
   font-size: 1.3em;
 }
+.modal-header{
+    font-weight: bold;
+    background-color: #15acc4;
+}
 
+.pagination{
+    padding-left: 48px;
+}
 
+.numeroPaginacion {
+    color: white;
+}
+
+.nuevaAlertante{
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-bottom: 15px; /*cambiarlo a vh*/
+}
 
 </style>
 
