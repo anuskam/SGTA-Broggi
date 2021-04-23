@@ -269,5 +269,7 @@
     font-size: 15px;
     color: black;
     background-color: rgb(21, 172, 196, .5);
+    width: 90%;
 }
+
 </style>
