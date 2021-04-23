@@ -114,7 +114,7 @@
     <div class="modal" tabindex="-1" role="dialog" id="infoModal">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header d-flex justify-content-center">
             <div class="modal-title">Más Información</div>
             <!-- <button
               type="button"
@@ -143,7 +143,7 @@
           <div class="modal-footer">
             <button
               type="button"
-              class="btn btn-secondary"
+              class="btn btn-secondary cerrarBoton"
               data-dismiss="modal"
             >
               Cerrar
@@ -691,6 +691,7 @@ button {
   margin-left: -50px;
   color: white;
 }
+
 .modal-header{
     font-weight: bold;
     background-color: #15acc4;
@@ -717,5 +718,8 @@ button {
 }
 #hospitalitzacio{
     opacity: 0.4;
+}
+.cerrarBoton{
+    font-size: 15px;
 }
 </style>

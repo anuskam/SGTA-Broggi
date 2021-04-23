@@ -3328,7 +3328,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.recursAfectats.push(this.afectat);
         this.buidarAfectat();
       } else {
-        this.errors.push("Cal introduir el nom, cognoms, sexe i edat de l'afectat!");
+        this.errors.push("Hay que introducir nombre, apellidos, sexo y edad de la afectada");
       }
     },
     afegirRecurs: function afegirRecurs() {
@@ -3364,7 +3364,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.incidencies_has_recursos_array.push(this.incidencies_has_recursos);
         this.buidarIncidenciaHasRecurs();
       } else {
-        this.errors.push("Cal escollir un recurs, un afectat i una prioritat!");
+        this.errors.push("Hay que elegir un recurso, una afectada y una prioridad");
       }
     },
     buidarAfectat: function buidarAfectat() {
@@ -3483,31 +3483,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       if (this.municipi.id == null) {
         hasErrors = true;
-        this.errors.push("Cal introduir el municipi de l'incident");
+        this.errors.push("Hay que introducir el municipio del incidente");
       }
 
       if (this.activaRecurs == true && !this.afectatSelected.length > 0) {
         hasErrors = true;
-        this.errors.push("Cal despatxar algun recurs o desactivar l'opcio d'assignar recurs");
+        this.errors.push("Hay que activar algún recurso o desactivar la opción de asignar recurso");
       }
 
       if (this.activaRecurs == false && !this.afectats.length > 0) {
-        this.errors.push("Cal afegir algun afectat a l'incidencia");
+        this.errors.push("Hay que añadir una afectada a la incidencia");
       }
 
       if (this.incidencia.adreca == null) {
         hasErrors = true;
-        this.errors.push("Cal introduir l'adreça de l'incident");
+        this.errors.push("Hay que introducir la dirección del incidente");
       }
 
       if (this.incidencia.descripcio == null) {
         hasErrors = true;
-        this.errors.push("Cal introduir la descripció de l'incident");
+        this.errors.push("Hay que introducir la descripción del incidente");
       }
 
       if (this.alertanteConocido == true && this.incidencia.nom_metge == null) {
         hasErrors = true;
-        this.errors.push("Cal introduir el nom del metge alertant");
+        this.errors.push("Hay que introducir el nombre de la médica alertante");
       }
 
       return hasErrors;
@@ -4598,6 +4598,65 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     recursos_id: Number
@@ -4605,6 +4664,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       incidencies: [],
+      incidencia: {
+        data: ''
+      },
       municipis: [],
       alertants: [],
       tipusIncidencies: [],
@@ -4761,6 +4823,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
       var tipusAlertant_nom = this.tipusAlertants[tipusAlertant_index].tipus;
       return tipusAlertant_nom;
+    },
+    deleteAsignat: function deleteAsignat() {// delete con todo el contenido
+    },
+    confirmDeleteAsignat: function confirmDeleteAsignat(incidencia) {
+      this.incidencia = incidencia;
+      $('#deleteModalAsignat').modal('show');
+    },
+    updateIncidenteAsignado: function updateIncidenteAsignado() {// modificar con todo el contenido
+    },
+    editIncidencia: function editIncidencia(incidencia) {
+      this.insert = false;
+      this.incidencia = incidencia;
+      $('#asignatModal').modal('show');
+    },
+    convertDateFormat: function convertDateFormat(string) {
+      var info = string.split('-').reverse().join('-');
+      return info;
     }
   },
   created: function created() {
@@ -4852,6 +4931,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5158,32 +5242,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -10736,7 +10794,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn {\n    font-size: 15px;\n}\n.btn-secondary:not(:disabled):not(.disabled).active,\n.btn-secondary:not(:disabled):not(.disabled):active,\n.show > .btn-secondary.dropdown-toggle {\n  background-color: #e3177d;\n  border-color: black;\n}\n.btn-secondary {\n  border-color: black;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.parentGrid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n.card-header {\n  background-color: #15acc4;\n  border: 1px solid black;\n  border-left: 0;\n  border-right: 0;\n  margin-top: -1px;\n}\n.modal-header{\n    background-color: #15acc4 !important;\n}\n.card {\n  border: 1px solid black !important;\n}\nbutton {\n  background-color: #e3177d !important;\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\n  color: black;\n  font-weight: bold;\n  background-color: #15acc4 !important;\n}\n.tabButton{\n    background-color: white !important;\n    border: 0 !important;\n}\n.selectedTab{\n    background-color: #e3177d !important;\n    border: 1px solid black !important;\n}\n.green{\n    background-color: green;\n    color: white;\n}\n.red{\n    background-color: red;\n    color: white;\n}\n#entregar{\n  border: 1px solid black;\n}\n#titulitosTabs {\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n.iconNavPrincipal{\n    color: black;\n}\n#titulito {\n    font-family: 'Signika', sans-serif;\n    font-size: 1.3em;\n}\n.hidden{\n    visibility: hidden;\n}\n#buscadorTelefono > input{\n    border: 1px solid black;\n}\n.arrowNav{\n    height: 8vh;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn {\r\n    font-size: 15px;\n}\n.contenido{\r\n    font-size: 15px;\n}\n.btn-secondary:not(:disabled):not(.disabled).active,\r\n.btn-secondary:not(:disabled):not(.disabled):active,\r\n.show > .btn-secondary.dropdown-toggle {\r\n  background-color: #e3177d;\r\n  border-color: black;\n}\n.btn-secondary {\r\n  border-color: black;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\n}\n.parentGrid {\r\n  display: grid;\r\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-between;\n}\n.card-header {\r\n  background-color: #15acc4;\r\n  border: 1px solid black;\r\n  border-left: 0;\r\n  border-right: 0;\r\n  margin-top: -1px;\n}\n.modal-header{\r\n    background-color: #15acc4 !important;\n}\n.card {\r\n  border: 1px solid black !important;\n}\nbutton {\r\n  background-color: #e3177d !important;\r\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\r\n  color: black;\r\n  font-weight: bold;\r\n  background-color: #15acc4 !important;\n}\n.tabButton{\r\n    background-color: white !important;\r\n    border: 0 !important;\n}\n.selectedTab{\r\n    background-color: #e3177d !important;\r\n    border: 1px solid black !important;\n}\n.green{\r\n    background-color: green;\r\n    color: white;\n}\n.red{\r\n    background-color: red;\r\n    color: white;\n}\n#entregar{\r\n  border: 1px solid black;\n}\n#titulitosTabs {\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\n}\n.iconNavPrincipal{\r\n    color: black;\n}\n#titulito {\r\n    font-family: 'Signika', sans-serif;\r\n    font-size: 1.3em;\n}\n.hidden{\r\n    visibility: hidden;\n}\n#buscadorTelefono > input{\r\n    border: 1px solid black;\n}\n.arrowNav{\r\n    height: 8vh;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10747,6 +10805,16 @@ ___CSS_LOADER_EXPORT___.push([module.id, "\n.btn {\n    font-size: 15px;\n}\n.bt
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Recurs/asignados.vue?vue&type=style&index=0&id=6504f867&scoped=true&lang=css& ***!
   \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ (() => {
+
+throw new Error("Module build failed (from ./node_modules/postcss-loader/dist/cjs.js):\nSyntaxError\n\n(726:1) C:\\xampp\\htdocs\\SGTA-Broggi\\resources\\js\\components\\Recurs\\asignados.vue Unknown word\n\n \u001b[90m 724 | \u001b[39m\u001b[33m.cerrarBoton\u001b[39m\u001b[33m{\u001b[39m\n \u001b[90m 725 | \u001b[39m    font-size\u001b[33m:\u001b[39m 15px\u001b[33m;\u001b[39m\n\u001b[1m\u001b[31m>\u001b[39m\u001b[22m\u001b[90m 726 | \u001b[39m>>>>>>> 8152f878234a3ee0b98d4f3f18aa990c4491c737\n \u001b[90m     | \u001b[39m\u001b[1m\u001b[31m^\u001b[39m\u001b[22m\n \u001b[90m 727 | \u001b[39m\u001b[33m}\u001b[39m\n \u001b[90m 728 | \u001b[39m\n");
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Recurs/editarAsignados.vue?vue&type=style&index=0&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Recurs/editarAsignados.vue?vue&type=style&index=0&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -10760,7 +10828,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nmain[data-v-6504f867] {\n  margin-top: 1.4vh;\n  color: black;\n  font-family: 'Rubik', sans-serif;\n  font-size: 15px;\n}\n#infoCard[data-v-6504f867] {\n  height: 65vh;\n  color: black;\n}\n#botones[data-v-6504f867] {\n  height: 28vh;\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#infoHeader[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n  font-size: 1.2em;\n  font-weight: bold;\n  margin-right: -0.5px;\n  border-bottom: 1px solid black;\n  background-color: #15acc4;\n}\nbutton[data-v-6504f867] {\n  background-color: #e3177d;\n  font-size: 0.9em;\n  color: white;\n  border-radius: 4px;\n}\n.card[data-v-6504f867] {\n  border: 1px solid black;\n}\n#transportHeader[data-v-6504f867] {\n  background-color: #15acc4;\n  font-weight: bold;\n  padding: 6px 20px;\n  text-align: center;\n}\n.leftButtons[data-v-6504f867] {\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n}\n#assistencia[data-v-6504f867]{\n    opacity: .4;\n}\n#transportButton[data-v-6504f867] {\n  background-color: #e3177d;\n}\n#transportButtons[data-v-6504f867] {\n  height: 100%;\n  opacity: .4;\n}\n.visible[data-v-6504f867]{\n    opacity: 1 !important;\n}\n#transportForm[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#botonsTransport[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  width: 100%;\n  justify-content: space-between;\n}\n.button[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  /* align-items: center; */\n}\n#direccioHospital[data-v-6504f867] {\n  width: 100%;\n}\n#map[data-v-6504f867] {\n  height: 65%;\n  background-color: black;\n}\n#info[data-v-6504f867] {\n  height: 20%;\n  margin-top: 4%;\n  display: flex;\n  flex-direction: row;\n  justify-content: space-around;\n  flex-wrap: nowrap;\n  /* font-weight: bold; */\n}\n.boldInfo[data-v-6504f867]{\n    font-weight: bold;\n}\n#infoFields[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n  padding-right: 0;\n}\n.infobox[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  text-align: justify;\n  /* font-size: 12px; */\n}\n.infobox > div[data-v-6504f867] {\n  background-color: #15acc4;\n  border: 1px solid black;\n  font-size: 13.5px;\n  padding: 0px 5px !important;\n}\n#descripcion[data-v-6504f867],\n#direccion[data-v-6504f867] {\n  background-color: white;\n}\n#masInfo[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  vertical-align: center;\n}\n#masInfo > button[data-v-6504f867] {\n  padding: 10px 20px;\n  margin-left: -50px;\n  color: white;\n}\n.modal-header[data-v-6504f867]{\n    font-weight: bold;\n    background-color: #15acc4;\n}\n#alta[data-v-6504f867]{\n    opacity: 0.4;\n    padding-top: 1vh;\n}\n.indicadoresMasInfo[data-v-6504f867]{\n    font-weight: bold;\n}\n#checkTransport[data-v-6504f867]{\n    opacity: 0.4;\n}\n#iniciarTransport[data-v-6504f867]{\n    opacity: 0.4;\n}\n#arribadaHospital[data-v-6504f867]{\n    opacity: 0.4;\n}\n#iniciarTransferencia[data-v-6504f867]{\n    opacity: 0.4;\n}\n#hospitalitzacio[data-v-6504f867]{\n    opacity: 0.4;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.alertaSinRecursos{\r\n    font-family: 'Rubik', sans-serif;\r\n    font-size: 15px;\r\n    color: black;\r\n    background-color: rgb(21, 172, 196, .5);\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10785,6 +10853,30 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n#navbar[data-v-6f2f9854] {\n/* position: absolute; */\nfloat: left;\ndisplay: flex;\nflex-direction: column;\nflex-wrap: wrap;\nleft: 0;\ntop: 0;\nheight: 100vh;\nwidth: 11%;\nbackground-color: rgba(128, 128, 128, 0.503);\n}\n#asignats[data-v-6f2f9854], #tots[data-v-6f2f9854]{\n    height: 50vh;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    font-size: 1.2em;\n    font-weight: bolder;\n    /* background-color: rgba(128, 128, 128, 0.503); */\n    color: black;\n}\n#asignats[data-v-6f2f9854]:hover, #tots[data-v-6f2f9854]:hover{\n    background-color: #fcc41c;\n}\n#asignats[data-v-6f2f9854]{\n    border: 1px solid black;\n    border-bottom: 0.1px solid black;\n}\n#tots[data-v-6f2f9854]{\n    border: 1px solid black;\n    border-top: 0px solid black;\n}\n.selected[data-v-6f2f9854]{\n    background-color: #fcc41c;\n}\n.recursTab[data-v-6f2f9854]{\n    float: right;\n    height: 100vh;\n    width: 89%;\n    display: flex;\n    flex-direction: row;\n    justify-content: center;\n}\n\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Recurs/todos.vue?vue&type=style&index=0&lang=css&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Recurs/todos.vue?vue&type=style&index=0&lang=css& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.alertaSinRecursos{\r\n    font-family: 'Rubik', sans-serif;\r\n    font-size: 15px;\r\n    color: black;\r\n    background-color: rgb(21, 172, 196, .5);\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10832,7 +10924,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeNom {\n    width: 20vw;\n}\n.sizeCognom {\n    width: 20vw;\n}\n.sizeBotones {\n    width: 14vw;\n}\n.esborrarAlertantBtn {\n  background-color: #e3177d !important;\n  color: white !important;\n}\n.editarAlertantBtn {\n  background-color: #15acc4 !important;\n  color: black !important;\n}\n.editarAlertantBtn:hover {\n  color: black !important;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n.cerrarBtn:hover {\n  color: white;\n}\n@font-face {\n  font-family: myFont;\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\nh2{\n  font-family: myFont;\n  font-size: 1.3em;\n}\n\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeNom {\r\n    width: 20vw;\n}\n.sizeCognom {\r\n    width: 20vw;\n}\n.sizeBotones {\r\n    width: 14vw;\n}\n.esborrarAlertantBtn, .editarAlertantBtn {\r\n  background-color: #e3177d !important;\r\n  color: white !important;\n}\n.editarAlertantBtn:hover {\r\n  color: black !important;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\n.cerrarBtn:hover {\r\n  color: white;\n}\n@font-face {\r\n  font-family: myFont;\r\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\nh2{\r\n  font-family: myFont;\r\n  font-size: 1.3em;\n}\n.modal-header{\r\n    font-weight: bold;\r\n    background-color: #15acc4;\n}\n.pagination{\r\n    padding-left: 48px;\n}\n.numeroPaginacion {\r\n    color: white;\n}\n.nuevaAlertante{\r\n    padding-top: 0;\r\n    padding-bottom: 0;\r\n    margin-bottom: 15px; /*cambiarlo a vh*/\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10856,7 +10948,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeBotones {\r\n    width: 14vw;\n}\n.esborrarRecursBtn {\r\n  background-color: #e3177d !important;\r\n  color: white !important;\n}\n.editarRecursBtn {\r\n  background-color: #15acc4 !important;\r\n  color: black !important;\n}\n.editarRecursBtn:hover {\r\n  color: black !important;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\n.cerrarBtn:hover {\r\n  color: white;\n}\n@font-face {\r\n  font-family: myFont;\r\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\r\n\r\n/* h2{\r\n  font-family: myFont;\r\n  font-size: 1.3em;\r\n} */\r\n\r\n/*NO SE BORRAN LOS MENSAJES Y AL CAMBIAR EL NOMBRE DE UN CÓDIGO, SE QUITA EL CHECKED*/\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeBotones {\r\n    width: 14vw;\n}\n.esborrarRecursBtn, .editarRecursBtn {\r\n  background-color: #e3177d !important;\r\n  color: white !important;\n}\n.editarRecursBtn:hover {\r\n  color: black !important;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\n.cerrarBtn:hover {\r\n  color: white;\n}\n@font-face {\r\n  font-family: myFont;\r\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\r\n\r\n/* .modal-header{\r\n    font-weight: bold;\r\n    background-color: #15acc4;\r\n} */\r\n\r\n/* h2{\r\n  font-family: myFont;\r\n  font-size: 1.3em;\r\n} */\r\n\r\n/*NO SE BORRAN LOS MENSAJES Y AL CAMBIAR EL NOMBRE DE UN CÓDIGO, SE QUITA EL CHECKED*/\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10880,7 +10972,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeBotones {\r\n    width: 14vw;\n}\n.esborrarUsuariBtn {\r\n  background-color: #e3177d !important;\r\n  color: white !important;\n}\n.editarUsuariBtn {\r\n  background-color: #15acc4 !important;\r\n  color: black !important;\n}\n.editarUsuariBtn:hover {\r\n  color: black !important;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\n.cerrarBtn:hover {\r\n  color: white;\n}\n@font-face {\r\n  font-family: myFont;\r\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\r\n\r\n/* h2{\r\n  font-family: myFont;\r\n  font-size: 1.3em;\r\n} */\r\n\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeBotones {\r\n    width: 14vw;\n}\n.esborrarUsuariBtn, .editarUsuariBtn {\r\n  background-color: #e3177d !important;\r\n  color: white !important;\n}\n.editarUsuariBtn:hover {\r\n  color: black !important;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\n.cerrarBtn:hover {\r\n  color: white;\n}\n@font-face {\r\n  font-family: myFont;\r\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\r\n\r\n/* h2{\r\n  font-family: myFont;\r\n  font-size: 1.3em;\r\n} */\r\n\r\n/* .modal-header{\r\n    font-weight: bold;\r\n    background-color: #15acc4;\r\n} */\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -42880,6 +42972,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Recurs/editarAsignados.vue?vue&type=style&index=0&lang=css&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Recurs/editarAsignados.vue?vue&type=style&index=0&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_editarAsignados_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./editarAsignados.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Recurs/editarAsignados.vue?vue&type=style&index=0&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_editarAsignados_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_editarAsignados_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Recurs/recursosTabs.vue?vue&type=style&index=0&id=6f2f9854&scoped=true&lang=css&":
 /*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Recurs/recursosTabs.vue?vue&type=style&index=0&id=6f2f9854&scoped=true&lang=css& ***!
@@ -42907,6 +43029,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_recursosTabs_vue_vue_type_style_index_0_id_6f2f9854_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Recurs/todos.vue?vue&type=style&index=0&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Recurs/todos.vue?vue&type=style&index=0&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_todos_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./todos.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Recurs/todos.vue?vue&type=style&index=0&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_todos_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_todos_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
@@ -43520,15 +43672,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _editarAsignados_vue_vue_type_template_id_5fa438ec___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./editarAsignados.vue?vue&type=template&id=5fa438ec& */ "./resources/js/components/Recurs/editarAsignados.vue?vue&type=template&id=5fa438ec&");
 /* harmony import */ var _editarAsignados_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./editarAsignados.vue?vue&type=script&lang=js& */ "./resources/js/components/Recurs/editarAsignados.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _editarAsignados_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./editarAsignados.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/Recurs/editarAsignados.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
+;
 
 
 /* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
   _editarAsignados_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
   _editarAsignados_vue_vue_type_template_id_5fa438ec___WEBPACK_IMPORTED_MODULE_0__.render,
   _editarAsignados_vue_vue_type_template_id_5fa438ec___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
@@ -43600,15 +43754,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _todos_vue_vue_type_template_id_7cc6366f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todos.vue?vue&type=template&id=7cc6366f& */ "./resources/js/components/Recurs/todos.vue?vue&type=template&id=7cc6366f&");
 /* harmony import */ var _todos_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./todos.vue?vue&type=script&lang=js& */ "./resources/js/components/Recurs/todos.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _todos_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./todos.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/Recurs/todos.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
+;
 
 
 /* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
   _todos_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
   _todos_vue_vue_type_template_id_7cc6366f___WEBPACK_IMPORTED_MODULE_0__.render,
   _todos_vue_vue_type_template_id_7cc6366f___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
@@ -44073,6 +44229,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Recurs/editarAsignados.vue?vue&type=style&index=0&lang=css&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/Recurs/editarAsignados.vue?vue&type=style&index=0&lang=css& ***!
+  \*********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_editarAsignados_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./editarAsignados.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Recurs/editarAsignados.vue?vue&type=style&index=0&lang=css&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Recurs/recursosTabs.vue?vue&type=style&index=0&id=6f2f9854&scoped=true&lang=css&":
 /*!******************************************************************************************************************!*\
   !*** ./resources/js/components/Recurs/recursosTabs.vue?vue&type=style&index=0&id=6f2f9854&scoped=true&lang=css& ***!
@@ -44082,6 +44251,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_recursosTabs_vue_vue_type_style_index_0_id_6f2f9854_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./recursosTabs.vue?vue&type=style&index=0&id=6f2f9854&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Recurs/recursosTabs.vue?vue&type=style&index=0&id=6f2f9854&scoped=true&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Recurs/todos.vue?vue&type=style&index=0&lang=css&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/Recurs/todos.vue?vue&type=style&index=0&lang=css& ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_todos_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./todos.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Recurs/todos.vue?vue&type=style&index=0&lang=css&");
 
 
 /***/ }),
@@ -44805,6 +44987,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "contenido" },
     [
       _vm._l(_vm.errors, function(error, index) {
         return _c(
@@ -46241,7 +46424,8 @@ var render = function() {
                 _c(
                   "button",
                   {
-                    staticClass: "btn btn-success float-right",
+                    staticClass:
+                      "btn btn-success float-right insertarIncidencia",
                     attrs: {
                       type: "button",
                       id: "entregar",
@@ -46258,7 +46442,7 @@ var render = function() {
                       staticClass: "fa fa-check",
                       attrs: { "aria-hidden": "true" }
                     }),
-                    _vm._v(" INSERTAR INCIDENCIA\n       ")
+                    _vm._v(" INSERTAR INCIDENCIA\n          ")
                   ]
                 )
               ]
@@ -47877,9 +48061,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c("div", { staticClass: "modal-title" }, [_vm._v("Más Información")])
-    ])
+    return _c(
+      "div",
+      { staticClass: "modal-header d-flex justify-content-center" },
+      [_c("div", { staticClass: "modal-title" }, [_vm._v("Más Información")])]
+    )
   },
   function() {
     var _vm = this
@@ -47897,7 +48083,7 @@ var staticRenderFns = [
       _c(
         "button",
         {
-          staticClass: "btn btn-secondary",
+          staticClass: "btn btn-secondary cerrarBoton",
           attrs: { type: "button", "data-dismiss": "modal" }
         },
         [_vm._v("\n            Cerrar\n          ")]
@@ -47927,46 +48113,193 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("main", { staticClass: "col-10" }, [
-    _c("table", { staticClass: "table mt-5" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "tbody",
-        _vm._l(_vm.incidencies, function(incidencia, index) {
-          return _c("tr", { key: incidencia.id }, [
-            _c("td", [_vm._v(_vm._s(incidencia.data))]),
+  return _c("main", { staticClass: "col-11" }, [
+    _vm.incidencies.length > 0
+      ? _c("table", { staticClass: "table mt-5" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.incidencies, function(incidencia, index) {
+              return _c("tr", { key: incidencia.id }, [
+                _c("td", [
+                  _vm._v(_vm._s(_vm.convertDateFormat(incidencia.data)))
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(
+                    "\r\n          " +
+                      _vm._s(_vm.getMunicipi(index)) +
+                      "\r\n        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(
+                    "\r\n          " +
+                      _vm._s(_vm.getTipusIncidencia(index)) +
+                      "\r\n        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(
+                    "\r\n          " +
+                      _vm._s(_vm.getTipusAlertant(index)) +
+                      "\r\n        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(incidencia.telefon_alertant))]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "btn btn-sm float-right ml-2 esborrarRecursBtn",
+                      attrs: { type: "submit" },
+                      on: {
+                        click: function($event) {
+                          return _vm.confirmDeleteAsignat(incidencia)
+                        }
+                      }
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "fa fa-trash",
+                        attrs: { "aria-hidden": "true" }
+                      }),
+                      _vm._v("  Eliminar")
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-sm float-right editarRecursBtn",
+                      attrs: { type: "submit" },
+                      on: {
+                        click: function($event) {
+                          return _vm.editIncidencia(incidencia)
+                        }
+                      }
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "fa fa-edit",
+                        attrs: { "aria-hidden": "true" }
+                      }),
+                      _vm._v("  Editar")
+                    ]
+                  )
+                ])
+              ])
+            }),
+            0
+          )
+        ])
+      : _c(
+          "div",
+          {
+            staticClass: "alert mt-3 alertaSinRecursos",
+            attrs: { role: "alert" }
+          },
+          [
+            _vm._v(
+              "\r\n  Este recurso no tiene ninguna incidencia en su historial\r\n"
+            )
+          ]
+        ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal",
+        attrs: { tabindex: "-1", id: "deleteModalAsignat" }
+      },
+      [
+        _c("div", { staticClass: "modal-dialog" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _vm._m(1),
             _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                "\r\n          " +
-                  _vm._s(_vm.getMunicipi(index)) +
-                  "\r\n        "
-              )
+            _c("div", { staticClass: "modal-body" }, [
+              _c("p", [
+                _vm._v(
+                  "¿Estás segura de liminar la incidencia " +
+                    _vm._s(_vm.incidencia.data) +
+                    "?"
+                )
+              ])
             ]),
             _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                "\r\n          " +
-                  _vm._s(_vm.getTipusIncidencia(index)) +
-                  "\r\n        "
+            _c("div", { staticClass: "modal-footer" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn cerrarBtn",
+                  attrs: { type: "button", "data-dismiss": "modal" }
+                },
+                [_vm._v("Cerrar")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn esborrarRecursBtn",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.deleteAsignat()
+                    }
+                  }
+                },
+                [_vm._v("Eliminar")]
               )
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                "\r\n          " +
-                  _vm._s(_vm.getTipusAlertant(index)) +
-                  "\r\n        "
-              )
-            ]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(incidencia.telefon_alertant))])
+            ])
           ])
-        }),
-        0
-      )
-    ])
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "modal", attrs: { tabindex: "-1", id: "asignatModal" } },
+      [
+        _c("div", { staticClass: "modal-dialog modal-lg" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _vm._m(2),
+            _vm._v(" "),
+            _vm._m(3),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-footer" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn cerrarBtn",
+                  attrs: { type: "button", "data-dismiss": "modal" }
+                },
+                [_vm._v("Tancar")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn editarRecursBtn",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.updateIncidenteAsignado()
+                    }
+                  }
+                },
+                [_vm._v("Modificar")]
+              )
+            ])
+          ])
+        ])
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -47987,6 +48320,66 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Teléfono")])
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "modal-header d-flex justify-content-center" },
+      [
+        _c("div", { staticClass: "modal-title" }, [
+          _vm._v("Eliminar Incidencia Asignada")
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "close",
+            attrs: {
+              type: "button",
+              "data-dismiss": "modal",
+              "aria-label": "Close"
+            }
+          },
+          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "modal-header d-flex justify-content-center" },
+      [
+        _c("div", { staticClass: "modal-title" }, [
+          _vm._v("Incidente Asignado")
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "close",
+            attrs: {
+              type: "button",
+              "data-dismiss": "modal",
+              "aria-label": "Close"
+            }
+          },
+          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-body" }, [_c("form")])
   }
 ]
 render._withStripped = true
@@ -48024,7 +48417,7 @@ var render = function() {
             }
           }
         },
-        [_c("p", [_vm._v("Assignados")])]
+        [_c("p", [_vm._v("Asignados")])]
       ),
       _vm._v(" "),
       _c(
@@ -48111,43 +48504,54 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("main", { staticClass: "col-10" }, [
-    _c("table", { staticClass: "table mt-5" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "tbody",
-        _vm._l(_vm.incidencies, function(incidencia, index) {
-          return _c("tr", { key: incidencia.id }, [
-            _c("td", [_vm._v(_vm._s(incidencia.data))]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                "\n          " + _vm._s(_vm.getMunicipi(index)) + "\n        "
-              )
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                "\n          " +
-                  _vm._s(_vm.getTipusIncidencia(index)) +
-                  "\n        "
-              )
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                "\n          " +
-                  _vm._s(_vm.getTipusAlertant(index)) +
-                  "\n        "
-              )
-            ]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(incidencia.telefon_alertant))])
-          ])
-        }),
-        0
-      )
-    ])
+    _vm.incidencies.length > 0
+      ? _c("table", { staticClass: "table mt-5" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.incidencies, function(incidencia, index) {
+              return _c("tr", { key: incidencia.id }, [
+                _c("td", [_vm._v(_vm._s(incidencia.data))]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(
+                    "\r\n          " +
+                      _vm._s(_vm.getMunicipi(index)) +
+                      "\r\n        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(
+                    "\r\n          " +
+                      _vm._s(_vm.getTipusIncidencia(index)) +
+                      "\r\n        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(
+                    "\r\n          " +
+                      _vm._s(_vm.getTipusAlertant(index)) +
+                      "\r\n        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(incidencia.telefon_alertant))])
+              ])
+            }),
+            0
+          )
+        ])
+      : _c(
+          "div",
+          {
+            staticClass: "alert mt-3 alertaSinRecursos",
+            attrs: { role: "alert" }
+          },
+          [_vm._v("\r\n  No hay ninguna incidencia asignada\r\n")]
+        )
   ])
 }
 var staticRenderFns = [
@@ -48157,15 +48561,15 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Data")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Fecha")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Municipi")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Municipio")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipus d'incident")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo de incidente")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipus d'alertant")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo de alertante")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Telèfon")])
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Teléfono")])
       ])
     ])
   }
@@ -48455,7 +48859,7 @@ var render = function() {
               },
               [_vm._v("×")]
             ),
-            _vm._v("\n    " + _vm._s(_vm.errorMessage) + "\n  ")
+            _vm._v("\r\n    " + _vm._s(_vm.errorMessage) + "\r\n  ")
           ]
         )
       : _vm._e(),
@@ -48475,81 +48879,108 @@ var render = function() {
               },
               [_vm._v("×")]
             ),
-            _vm._v("\n    " + _vm._s(_vm.infoMessage) + "\n  ")
+            _vm._v("\r\n    " + _vm._s(_vm.infoMessage) + "\r\n  ")
           ]
         )
       : _vm._e(),
     _vm._v(" "),
-    _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
-      _c(
-        "ul",
-        { staticClass: "pagination" },
-        [
-          _c("li", { staticClass: "page-item" }, [
-            _c(
-              "button",
-              {
-                staticClass: "page-link",
-                attrs: {
-                  disabled: _vm.currentPage <= 1,
-                  "aria-label": "Previous"
+    _c(
+      "div",
+      { staticClass: "paginacionNav", attrs: { "aria-label": "paginacion" } },
+      [
+        _c(
+          "ul",
+          { staticClass: "pagination" },
+          [
+            _c("li", { staticClass: "page-item" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn numeroPaginacion",
+                  attrs: {
+                    disabled: _vm.currentPage <= 1,
+                    "aria-label": "Previous"
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.paginar(_vm.currentPage - 1)
+                    }
+                  }
                 },
-                on: {
-                  click: function($event) {
-                    return _vm.paginar(_vm.currentPage - 1)
+                [
+                  _c("span", { attrs: { "aria-hidden": "true" } }, [
+                    _vm._v("«")
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "sr-only" }, [_vm._v("Previous")])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _vm._l(_vm.paginas, function(paginaActual, index) {
+              return _c(
+                "button",
+                {
+                  key: index,
+                  staticClass: "btn numeroPaginacion",
+                  on: {
+                    click: function($event) {
+                      return _vm.paginar(paginaActual)
+                    }
                   }
-                }
-              },
-              [
-                _c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("«")]),
-                _vm._v(" "),
-                _c("span", { staticClass: "sr-only" }, [_vm._v("Previous")])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _vm._l(_vm.paginas, function(paginaActual, index) {
-            return _c(
-              "button",
-              {
-                key: index,
-                staticClass: "btn",
-                on: {
-                  click: function($event) {
-                    return _vm.paginar(paginaActual)
-                  }
-                }
-              },
-              [_vm._v(_vm._s(index + 1))]
-            )
-          }),
-          _vm._v(" "),
-          _c("li", { staticClass: "page-item" }, [
-            _c(
-              "button",
-              {
-                staticClass: "page-link",
-                attrs: {
-                  disabled: _vm.currentPage >= _vm.meta.last_page,
-                  "aria-label": "Next"
                 },
-                on: {
-                  click: function($event) {
-                    return _vm.paginar(_vm.currentPage + 1)
+                [_vm._v(_vm._s(index + 1))]
+              )
+            }),
+            _vm._v(" "),
+            _c("li", { staticClass: "page-item" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn numeroPaginacion",
+                  attrs: {
+                    disabled: _vm.currentPage >= _vm.meta.last_page,
+                    "aria-label": "Next"
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.paginar(_vm.currentPage + 1)
+                    }
                   }
-                }
-              },
-              [
-                _c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("»")]),
-                _vm._v(" "),
-                _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
-              ]
-            )
-          ])
-        ],
-        2
-      )
-    ]),
+                },
+                [
+                  _c("span", { attrs: { "aria-hidden": "true" } }, [
+                    _vm._v("»")
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
+                ]
+              )
+            ])
+          ],
+          2
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary mr-5 nuevaAlertante",
+            on: {
+              click: function($event) {
+                return _vm.createAlertant()
+              }
+            }
+          },
+          [
+            _c("i", {
+              staticClass: "fas fa-plus-circle",
+              attrs: { "aria-hidden": "true" }
+            }),
+            _vm._v("\r\n        Nueva alertante\r\n    ")
+          ]
+        )
+      ]
+    ),
     _vm._v(" "),
     _c("div", { staticClass: "card mt-2 mb-1 ml-5 mr-5" }, [
       _c("h2", { staticClass: "card-header font-weight-bold" }, [
@@ -48574,9 +49005,9 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [
                   _vm._v(
-                    "\n                " +
+                    "\r\n                " +
                       _vm._s(_vm.getMunicipi(index)) +
-                      "\n              "
+                      "\r\n              "
                   )
                 ]),
                 _vm._v(" "),
@@ -48895,9 +49326,9 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\n                      " +
+                                "\r\n                      " +
                                   _vm._s(municipi.nom) +
-                                  "\n                    "
+                                  "\r\n                    "
                               )
                             ]
                           )
@@ -48917,14 +49348,14 @@ var render = function() {
                   staticClass: "btn cerrarBtn",
                   attrs: { type: "button", "data-dismiss": "modal" }
                 },
-                [_vm._v("Tancar")]
+                [_vm._v("Cerrar")]
               ),
               _vm._v(" "),
               _vm.insert
                 ? _c(
                     "button",
                     {
-                      staticClass: "btn",
+                      staticClass: "btn editarAlertantBtn",
                       attrs: { type: "button" },
                       on: {
                         click: function($event) {
@@ -48932,7 +49363,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Afegir")]
+                    [_vm._v("Añadir")]
                   )
                 : _c(
                     "button",
@@ -48950,25 +49381,6 @@ var render = function() {
             ])
           ])
         ])
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn btn-primary btn-float-afegir",
-        on: {
-          click: function($event) {
-            return _vm.createAlertant()
-          }
-        }
-      },
-      [
-        _c("i", {
-          staticClass: "fas fa-plus-circle",
-          attrs: { "aria-hidden": "true" }
-        }),
-        _vm._v("\n    Nueva alertante\n  ")
       ]
     )
   ])
@@ -49002,43 +49414,53 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c("div", { staticClass: "modal-title" }, [_vm._v("Eliminar Alertante")]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
+    return _c(
+      "div",
+      { staticClass: "modal-header d-flex justify-content-center" },
+      [
+        _c("div", { staticClass: "modal-title" }, [
+          _vm._v("Eliminar Alertante")
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "close",
+            attrs: {
+              type: "button",
+              "data-dismiss": "modal",
+              "aria-label": "Close"
+            }
+          },
+          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+        )
+      ]
+    )
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c("div", { staticClass: "modal-title" }, [_vm._v("Alertante")]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
+    return _c(
+      "div",
+      { staticClass: "modal-header d-flex justify-content-center" },
+      [
+        _c("div", { staticClass: "modal-title" }, [_vm._v("Alertante")]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "close",
+            attrs: {
+              type: "button",
+              "data-dismiss": "modal",
+              "aria-label": "Close"
+            }
+          },
+          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+        )
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -49532,43 +49954,51 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c("div", { staticClass: "modal-title" }, [_vm._v("Eliminar Recurs")]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
+    return _c(
+      "div",
+      { staticClass: "modal-header d-flex justify-content-center" },
+      [
+        _c("div", { staticClass: "modal-title" }, [_vm._v("Eliminar Recurs")]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "close",
+            attrs: {
+              type: "button",
+              "data-dismiss": "modal",
+              "aria-label": "Close"
+            }
+          },
+          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+        )
+      ]
+    )
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c("div", { staticClass: "modal-title" }, [_vm._v("Recurso")]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
+    return _c(
+      "div",
+      { staticClass: "modal-header d-flex justify-content-center" },
+      [
+        _c("div", { staticClass: "modal-title" }, [_vm._v("Recurso")]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "close",
+            attrs: {
+              type: "button",
+              "data-dismiss": "modal",
+              "aria-label": "Close"
+            }
+          },
+          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+        )
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -50130,43 +50560,51 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c("div", { staticClass: "modal-title" }, [_vm._v("Eliminar Usuaria")]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
+    return _c(
+      "div",
+      { staticClass: "modal-header d-flex justify-content-center" },
+      [
+        _c("div", { staticClass: "modal-title" }, [_vm._v("Eliminar Usuaria")]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "close",
+            attrs: {
+              type: "button",
+              "data-dismiss": "modal",
+              "aria-label": "Close"
+            }
+          },
+          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+        )
+      ]
+    )
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c("div", { staticClass: "modal-title" }, [_vm._v("Usuaria")]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
+    return _c(
+      "div",
+      { staticClass: "modal-header d-flex justify-content-center" },
+      [
+        _c("div", { staticClass: "modal-title" }, [_vm._v("Usuaria")]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "close",
+            attrs: {
+              type: "button",
+              "data-dismiss": "modal",
+              "aria-label": "Close"
+            }
+          },
+          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+        )
+      ]
+    )
   }
 ]
 render._withStripped = true
