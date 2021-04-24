@@ -320,7 +320,8 @@
               })
         },
         getMunicipi(index) {
-          let municipi = this.municipis.find(obj => obj.id == this.alertantsDB[index].municipis_id);
+          let me = this;
+          let municipi = this.municipis.find(obj => obj.id == me.alertantsDB[index].municipis_id);
           let municipi_nom;
           if (municipi != null){
             municipi_nom = municipi.nom;
@@ -342,7 +343,8 @@
               })
         },
         getTipusAlertant(index){
-            let tipusAlertant = this.tipusAlertants.find(obj => obj.id == this.alertantsDB[index].tipus_alertant_id);
+            let me = this;
+            let tipusAlertant = this.tipusAlertants.find(obj => obj.id == me.alertantsDB[index].tipus_alertants_id);
             let tipusAlertant_nom;
             if (tipusAlertant != null){
                 tipusAlertant_nom = tipusAlertant.tipus;
@@ -355,7 +357,7 @@
         }
       },
       created() {
-       this.selectMunicipis(), this.selectAlertants();
+       this.selectMunicipis(), this.selectAlertants(), this.selectTipusAlertant();
       },
       mounted() {
         this.paginarFirst();
