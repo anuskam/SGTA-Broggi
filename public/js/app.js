@@ -5545,6 +5545,7 @@ __webpack_require__.r(__webpack_exports__);
         console.log(response);
         me.infoMessage = response.data.missatge;
         me.selectAlertants();
+        me.paginarFirst();
         $('#deleteModalAlertant').modal('hide');
       })["catch"](function (error) {
         me.errorMessage = error.response.data.error;
@@ -5587,6 +5588,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.put('/SGTA-Broggi/public/api/alertant/' + me.alertant.id, me.alertant).then(function (response) {
         console.log(response);
         me.selectAlertants();
+        me.paginarFirst();
         $('#alertantModal').modal('hide');
       })["catch"](function (error) {
         console.log(error.response.status);
@@ -6127,10 +6129,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       usuaris: [],
+      usuarisDB: [],
       usuari: {
         username: '',
         contrasenya: '',
@@ -6142,14 +6163,42 @@ __webpack_require__.r(__webpack_exports__);
       rols: [],
       insert: true,
       errorMessage: '',
-      infoMessage: ''
+      infoMessage: '',
+      meta: {},
+      paginas: [],
+      pagina: 0,
+      currentPage: 0
     };
   },
   methods: {
+    paginar: function paginar(pagina) {
+      var me = this;
+      axios.get('/SGTA-Broggi/public/usuariPaginated' + '?page=' + pagina).then(function (response) {
+        me.usuaris = response.data.data;
+        me.meta = response.data.meta;
+        me.currentPage = pagina;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    paginarFirst: function paginarFirst() {
+      var me = this;
+      axios.get('/SGTA-Broggi/public/usuariPaginated' + '?page=' + 1).then(function (response) {
+        me.usuaris = response.data.data;
+        me.meta = response.data.meta;
+        me.currentPage = 1;
+
+        for (var index = 0; index < me.meta.last_page; index++) {
+          me.paginas[index] = index + 1;
+        }
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
     selectUsuaris: function selectUsuaris() {
       var me = this;
       axios.get('/SGTA-Broggi/public/api/usuari').then(function (response) {
-        me.usuaris = response.data;
+        me.usuarisDB = response.data;
       })["catch"](function (error) {
         console.log(error);
       });
@@ -6166,6 +6215,7 @@ __webpack_require__.r(__webpack_exports__);
         console.log(response);
         me.infoMessage = response.data.missatge;
         me.selectUsuaris();
+        me.paginarFirst();
         $('#deleteModalUsuari').modal('hide');
       })["catch"](function (error) {
         me.errorMessage = error.response.data.error;
@@ -6188,6 +6238,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/SGTA-Broggi/public/api/usuari', me.usuari).then(function (response) {
         console.log(response);
         me.selectUsuaris();
+        me.paginarFirst();
         $('#usuariModal').modal('hide');
       })["catch"](function (error) {
         console.log(error.response.status);
@@ -6230,7 +6281,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       var rol = this.rols.find(function (obj) {
-        return obj.id == _this2.usuaris[index].rols_id;
+        return obj.id == _this2.usuarisDB[index].rols_id;
       });
       var rol_nom;
 
@@ -6249,7 +6300,7 @@ __webpack_require__.r(__webpack_exports__);
     this.selectUsuaris(), this.selectRols();
   },
   mounted: function mounted() {
-    console.log('Component mounted.');
+    this.paginarFirst();
   }
 });
 
@@ -11023,7 +11074,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeNom {\n    width: 20vw;\n}\n.sizeCognom {\n    width: 20vw;\n}\n.sizeBotones {\n    width: 14vw;\n}\n.esborrarAlertantBtn, .afegirAlertantBtn {\n  background-color: #e3177d !important;\n  color: white !important;\n}\n.editarAlertantBtn {\n  background-color: #15acc4 !important;\n  color: black !important;\n}\n.editarAlertantBtn:hover {\n  color: black !important;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n.cerrarBtn:hover {\n  color: white;\n}\n@font-face {\n  font-family: myFont;\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\nh2{\n  font-family: myFont;\n  font-size: 1.3em;\n}\n.modal-header{\n    font-weight: bold;\n    background-color: #15acc4;\n}\n.pagination{\n    padding-left: 48px;\n}\n.numeroPaginacion {\n    color: white;\n}\n.nuevaAlertante{\n    padding-top: 0;\n    padding-bottom: 0;\n    margin-bottom: 15px; /*cambiarlo a vh*/\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeNom {\n    width: 20vw;\n}\n.sizeCognom {\n    width: 20vw;\n}\n.sizeBotones {\n    width: 14vw;\n}\n.esborrarAlertantBtn, .afegirAlertantBtn {\n  background-color: #e3177d !important;\n  color: white !important;\n}\n.editarAlertantBtn {\n  background-color: #15acc4 !important;\n  color: black !important;\n}\n.editarAlertantBtn:hover {\n  color: black !important;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n.cerrarBtn:hover {\n  color: white;\n}\n@font-face {\n  font-family: myFont;\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\nh2{\n  font-family: myFont;\n  font-size: 1.3em;\n}\n.modal-header{\n  font-weight: bold;\n  background-color: #15acc4;\n}\n.pagination{\n  padding-left: 48px;\n}\n.numeroPaginacion {\n  color: white;\n}\n.nuevaAlertante{\n  padding-top: 0;\n  padding-bottom: 0;\n  margin-bottom: 15px; /*cambiarlo a vh*/\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11071,7 +11122,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeBotones {\n    width: 14vw;\n}\n.esborrarUsuariBtn, .afegirUsuariBtn {\n  background-color: #e3177d !important;\n  color: white !important;\n}\n.editarUsuariBtn {\n  background-color: #15acc4 !important;\n  color: black !important;\n}\n.editarUsuariBtn:hover {\n  color: black !important;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n.cerrarBtn:hover {\n  color: white;\n}\n@font-face {\n  font-family: myFont;\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\n\n/* h2{\n  font-family: myFont;\n  font-size: 1.3em;\n} */\n\n/* .modal-header{\n    font-weight: bold;\n    background-color: #15acc4;\n} */\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeBotones {\n    width: 14vw;\n}\n.esborrarUsuariBtn, .afegirUsuariBtn {\n  background-color: #e3177d !important;\n  color: white !important;\n}\n.editarUsuariBtn {\n  background-color: #15acc4 !important;\n  color: black !important;\n}\n.editarUsuariBtn:hover {\n  color: black !important;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n.cerrarBtn:hover {\n  color: white;\n}\n@font-face {\n  font-family: myFont;\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\n\n/* h2{\n  font-family: myFont;\n  font-size: 1.3em;\n} */\n\n/* .modal-header{\n    font-weight: bold;\n    background-color: #15acc4;\n} */\n.nuevaUsuaria{\n  padding-top: 0;\n  padding-bottom: 0;\n  margin-bottom: 15px; /*cambiarlo a vh*/\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -50469,6 +50520,104 @@ var render = function() {
         )
       : _vm._e(),
     _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "paginacionNav", attrs: { "aria-label": "paginacion" } },
+      [
+        _c(
+          "ul",
+          { staticClass: "pagination" },
+          [
+            _c("li", { staticClass: "page-item" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn numeroPaginacion",
+                  attrs: {
+                    disabled: _vm.currentPage <= 1,
+                    "aria-label": "Previous"
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.paginar(_vm.currentPage - 1)
+                    }
+                  }
+                },
+                [
+                  _c("span", { attrs: { "aria-hidden": "true" } }, [
+                    _vm._v("«")
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "sr-only" }, [_vm._v("Previous")])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _vm._l(_vm.paginas, function(paginaActual, index) {
+              return _c(
+                "button",
+                {
+                  key: index,
+                  staticClass: "btn numeroPaginacion",
+                  on: {
+                    click: function($event) {
+                      return _vm.paginar(paginaActual)
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(index + 1))]
+              )
+            }),
+            _vm._v(" "),
+            _c("li", { staticClass: "page-item" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn numeroPaginacion",
+                  attrs: {
+                    disabled: _vm.currentPage >= _vm.meta.last_page,
+                    "aria-label": "Next"
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.paginar(_vm.currentPage + 1)
+                    }
+                  }
+                },
+                [
+                  _c("span", { attrs: { "aria-hidden": "true" } }, [
+                    _vm._v("»")
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
+                ]
+              )
+            ])
+          ],
+          2
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary mr-5 nuevaUsuaria",
+            on: {
+              click: function($event) {
+                return _vm.createUsuari()
+              }
+            }
+          },
+          [
+            _c("i", {
+              staticClass: "fas fa-plus-circle",
+              attrs: { "aria-hidden": "true" }
+            }),
+            _vm._v("\n        Nueva usuaria\n    ")
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
     _c("div", { staticClass: "card mt-2 mb-1 ml-5 mr-5" }, [
       _c("h2", { staticClass: "card-header font-weight-bold" }, [
         _vm._v("Usuarias")
@@ -50917,25 +51066,6 @@ var render = function() {
             ])
           ])
         ])
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn btn-primary btn-float-afegir",
-        on: {
-          click: function($event) {
-            return _vm.createUsuari()
-          }
-        }
-      },
-      [
-        _c("i", {
-          staticClass: "fas fa-plus-circle",
-          attrs: { "aria-hidden": "true" }
-        }),
-        _vm._v("\n    Nueva usuaria\n  ")
       ]
     )
   ])

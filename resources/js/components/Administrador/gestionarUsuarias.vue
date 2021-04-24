@@ -10,6 +10,30 @@
     {{ infoMessage }}
   </div>
 
+
+  <div aria-label="paginacion" class="paginacionNav">
+    <ul class="pagination">
+      <li class="page-item">
+        <button :disabled="currentPage <= 1" class="btn numeroPaginacion" aria-label="Previous" @click="paginar(currentPage-1)">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+        </button>
+      </li>
+      <button v-for="(paginaActual, index) in paginas" :key="index" class="btn numeroPaginacion" @click="paginar(paginaActual)">{{ index+1 }}</button>
+      <li class="page-item">
+        <button :disabled="currentPage >= meta.last_page" class="btn numeroPaginacion" aria-label="Next" @click="paginar(currentPage+1)">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+        </button>
+      </li>
+    </ul>
+
+    <button class="btn btn-primary mr-5 nuevaUsuaria" @click="createUsuari()">
+        <i class="fas fa-plus-circle" aria-hidden="true"></i>
+        Nueva usuaria
+    </button>
+  </div>
+
   <div class="card mt-2 mb-1 ml-5 mr-5">
     <h2 class="card-header font-weight-bold">Usuarias</h2>
     <div class="card-body">
@@ -138,12 +162,6 @@
     </div>
   </div>
 
-  <button class="btn btn-primary btn-float-afegir" @click="createUsuari()">
-    <i class="fas fa-plus-circle" aria-hidden="true"></i>
-    Nueva usuaria
-  </button>
-
-
 </main>
 </template>
 
@@ -152,6 +170,7 @@
       data() {
         return {
           usuaris: [],
+          usuarisDB: [],
           usuari: {
             username: '',
             contrasenya: '',
@@ -164,15 +183,48 @@
           insert: true,
           errorMessage: '',
           infoMessage: '',
+          meta: {},
+          paginas: [],
+          pagina: 0,
+          currentPage: 0,
         }
       },
       methods: {
+        paginar(pagina){
+          let me = this;
+          axios
+              .get('/SGTA-Broggi/public/usuariPaginated' + '?page=' + pagina)
+              .then(response => {
+                  me.usuaris = response.data.data;
+                  me.meta = response.data.meta;
+                  me.currentPage = pagina;
+              })
+              .catch(error => {
+                    console.log(error);
+              })
+        },
+        paginarFirst(){
+          let me = this;
+          axios
+              .get('/SGTA-Broggi/public/usuariPaginated' + '?page=' + 1)
+              .then(response => {
+                  me.usuaris = response.data.data;
+                  me.meta = response.data.meta;
+                  me.currentPage = 1;
+                  for(let index = 0; index < me.meta.last_page; index++){
+                        me.paginas[index] = index + 1;
+                  }
+              })
+              .catch(error => {
+                    console.log(error);
+              })
+        },
         selectUsuaris() {
             let me = this;
             axios
                 .get('/SGTA-Broggi/public/api/usuari')
                 .then(response => {
-                    me.usuaris = response.data;
+                    me.usuarisDB = response.data;
                 })
                 .catch(error => {
                     console.log(error);
@@ -192,6 +244,7 @@
                 console.log(response);
                 me.infoMessage = response.data.missatge;
                 me.selectUsuaris();
+                me.paginarFirst();
                 $('#deleteModalUsuari').modal('hide');
               }).catch(function(error) {
                   me.errorMessage = error.response.data.error;
@@ -217,6 +270,7 @@
               .then(function(response) {
                 console.log(response);
                 me.selectUsuaris();
+                me.paginarFirst();
                 $('#usuariModal').modal('hide');
               }).catch(function(error) {
                 console.log(error.response.status);
@@ -257,7 +311,7 @@
               .finally(() => (this.loading = false));
         },
         getRol(index) {
-          let rol = this.rols.find(obj => obj.id == this.usuaris[index].rols_id);
+          let rol = this.rols.find(obj => obj.id == this.usuarisDB[index].rols_id);
           let rol_nom;
           if (rol != null){
             rol_nom = rol.nom;
@@ -274,7 +328,7 @@
         this.selectUsuaris(), this.selectRols();
       },
       mounted() {
-        console.log('Component mounted.')
+        this.paginarFirst();
       }
     }
 </script>
@@ -323,6 +377,11 @@
     background-color: #15acc4;
 } */
 
+.nuevaUsuaria{
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-bottom: 15px; /*cambiarlo a vh*/
+}
 
 </style>
 
