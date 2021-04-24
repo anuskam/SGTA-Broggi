@@ -35,7 +35,7 @@
       </div>
     </div>
     <div id="botones" class="card mt-4 p-2">
-      <div id="leftButtons" class="col-2">
+      <div class="leftButtons col-2">
         <div id="movilitzacio" class="button" @click="activarMovilitzacio()">
           <button><i class="fas fa-running"></i> Iniciar Movilitzación</button>
           <input type="time" v-model="incidenciaRecursInsert.hora_mobilitzacio" />
@@ -48,14 +48,21 @@
           <input type="time" v-model="incidenciaRecursInsert.hora_assistencia" />
         </div>
       </div>
-      <div id="checkTransport" class="col-1" @click="activarMostrarTransport()"  :class="{ visible: assistencia }">
-        <button :disabled="!assistencia">
-          <i class="fas fa-hospital-user"><p></p>
-            <!-- <input type="checkbox" name="" id="transportButton"/> -->
-            </i>
-        </button>
+      <div class="leftButtons col-2" >
+          <div :class="{ visible: assistencia, opaco: mostrarTransport }" class="button" @click="modalAltaHospi('alta')" id="alta">
+            <button  :disabled="!assistencia || mostrarTransport">
+                <i class="fas fa-notes-medical"></i> Alta Voluntaria
+            </button>
+        </div>
+
+        <div id="checkTransport" :class="{ visible: assistencia, opaco: mostrarTransport }" @click="modalAltaHospi('hospi')">
+            <button :disabled="!assistencia || mostrarTransport">
+            <i class="fas fa-hospital-user"></i> Hospitalizacion
+            </button>
+        </div>
       </div>
-      <div id="transportButtons" class="card col-9 p-0"  :class="{ visible: mostrarTransport }">
+
+      <div id="transportButtons" class="card col-7 p-0"  :class="{ visible: mostrarTransport }">
         <div class="card-header" id="transportHeader">Destino Hospitalario</div>
         <div class="card-body p-2 pl-4 pr-4" id="transportForm">
           <select
@@ -77,31 +84,27 @@
             </option>
             </select>
           <div id="botonsTransport">
-            <div class="botoTransport button">
-              <button :disabled="!mostrarTransport" id="iniciarTransport" @click="activarTransport()">
+            <div class="botoTransport button" @click="activarTransporte()" id="iniciarTransport" :class="{ visible: mostrarTransport }">
+              <button :disabled="!mostrarTransport" >
                 <label for="iniciarTransport"><i class="fas fa-ambulance"></i> Iniciar Transporte</label>
               </button>
               <input type="time" v-model="incidenciaRecursInsert.hora_transport" />
             </div>
-            <div class="botoTransport button">
-              <button :disabled="!transport" id="arribadaHospital" @click="activarHospital()">
+            <div class="botoTransport button" :class="{ visible: transport }" id="arribadaHospital" @click="activarHospital()">
+              <button :disabled="!transport">
                   <label for="arribadaHospital"><i class="fas fa-hospital"></i> Llegada Hospital</label>
               </button>
               <input type="time" v-model="incidenciaRecursInsert.hora_arribada_hospital" />
             </div>
-            <div class="botoTransport button">
-              <button :disabled="!hospital" @click="activarTransferencia()">
+            <div class="botoTransport button"  @click="activarTransferencia()" :class="{ visible: hospital }" id="iniciarTransferencia">
+              <button :disabled="!hospital">
                 <label for="ininciarTransferencia"><i class="fas fa-user-friends"></i> Iniciar Transferencia</label>
               </button>
               <input type="time" v-model="incidenciaRecursInsert.hora_transferencia" />
             </div>
-            <div class="botoTransport button">
-              <button :disabled="!transferencia" id="hospitalitzacio" @click="hospitalitzacio()">
-                  <label for="hospitalitzacio"><i class="fas fa-procedures"></i> Hospitalitzación</label>
-              </button>
-
-              <button id="alta" @click="altaVoluntaria()">
-                <label for="alta"><i class="fas fa-notes-medical"></i> Alta Voluntaria</label>
+            <div class="botoTransport button"  id="hospitalitzacio" @click="hospitalitzacio()" :class="{ visible: transferencia && incidenciaRecursInsert.desti != null}">
+              <button :disabled="!transferencia || incidenciaRecursInsert.desti == null">
+                  <i class="fas fa-check"></i>
               </button>
             </div>
           </div>
@@ -149,6 +152,31 @@
         </div>
       </div>
     </div>
+
+    <!-- Modal Alta o Hospitalización -->
+    <div class="modal" tabindex="-1" role="dialog" id="altaModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 v-if="activarTransport" class="modal-title">Activar Transporte Hospitalario</h5>
+                <h5 v-else class="modal-title">Firmar Acta Voluntaria</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p v-if="activarTransport">¿Seguro que quieres activar el transporte hospitalario? Una vez activado ya no se podrá realizar el alta voluntaria del afectado.</p>
+                <p v-else>¿Seguro que quieres realizar el alta voluntaria del afectado? Una vez activada ya no se podrá realizar la hospitalización.</p>
+            </div>
+            <div class="modal-footer">
+                <button v-if="activarTransport" type="button" class="btn btn-primary" @click="activarMostrarTransport()">Confirmar</button>
+                <button v-else type="button" class="btn btn-primary" @click="altaVoluntaria()">Confirmar</button>
+                <button v-if="activarTransport" type="button" class="btn btn-secondary" data-dismiss="modal" @click="activarTransport = true">Cerrar</button>
+                <button v-else type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+            </div>
+        </div>
+    </div>
   </main>
 </template>
 
@@ -166,6 +194,7 @@ export default {
             movilitzacio: false,
             assistencia: false,
             mostrarTransport: false,
+            activarTransport: false,
             transport: false,
             hospital: false,
             transferencia: false,
@@ -217,12 +246,19 @@ export default {
     },
     methods: {
         altaVoluntaria(){
+            $('#altaModal').modal('hide');
             if(this.assistencia && !this.mostrarTransport){
                 this.updateFunction();
             }
         },
+        modalAltaHospi(modo){
+            if(modo == 'hospi'){
+                this.activarTransport = true;
+            }
+            $('#altaModal').modal('show');
+        },
         hospitalitzacio(){
-            if(this.transferencia){
+            if(this.transferencia && this.incidenciaRecursInsert.desti != null){
                 this.updateFunction();
             }
         },
@@ -496,10 +532,11 @@ export default {
             });
         },
         activarMostrarTransport(){
+            $('#altaModal').modal('hide');
             this.mostrarTransport = true;
             this.getHospitalsAddresses();
         },
-        activarTransport(){
+        activarTransporte(){
             this.transport = true;
             this.incidenciaRecursInsert.hora_transport = new Date().toLocaleTimeString("en-GB", {
             hour: "numeric",
@@ -583,7 +620,6 @@ button {
 
 }
 
-
 .card {
   border: 1px solid black;
 }
@@ -593,7 +629,7 @@ button {
   padding: 6px 20px;
   text-align: center;
 }
-#leftButtons {
+.leftButtons {
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -603,19 +639,6 @@ button {
 }
 #assistencia{
     opacity: .4;
-}
-#checkTransport {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-  opacity: .4;
-  /* margin-left: -80px; */
-}
-#checkTransport button {
-  padding: 10px 4px;
-  height: 100%;
 }
 #transportButton {
   background-color: #e3177d;
@@ -645,7 +668,6 @@ button {
   display: flex;
   flex-direction: column;
   /* align-items: center; */
-
 }
 #direccioHospital {
   width: 100%;
@@ -709,18 +731,47 @@ button {
     background-color: #15acc4;
 }
 #alta{
-    opacity: 1 !important;
-    visibility: visible !important;
+    opacity: 0.4;
 }
-#alta:hover{
-    cursor: pointer;
+
+#alta > button{
+    padding: 5px 15px;
+    margin-bottom: 0px !important;
+    background-color: white !important;
+    color: #e3177d;
+    font-weight: bolder;
 }
 
 .indicadoresMasInfo{
     font-weight: bold;
 }
-
+#checkTransport{
+    opacity: 0.4;
+}
+#checkTransport > button{
+    padding: 5px 15px;
+}
+#iniciarTransport{
+    opacity: 0.4;
+}
+#arribadaHospital{
+    opacity: 0.4;
+}
+#iniciarTransferencia{
+    opacity: 0.4;
+}
+#hospitalitzacio{
+    opacity: 0.4;
+    margin-top: 1vh;
+}
+#hospitalitzacio > button{
+    padding: 10px 10px;
+    background-color: green !important;
+}
 .cerrarBoton{
     font-size: 15px;
+}
+.opaco{
+    opacity: 0.4 !important;
 }
 </style>
