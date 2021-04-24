@@ -224,11 +224,14 @@
                 console.log(response);
                 me.infoMessage = response.data.missatge;
                 me.selectRecursos();
+                me.paginarFirst();
+
                 $('#deleteModalRecurs').modal('hide');
               }).catch(function(error) {
                   me.errorMessage = error.response.data.error;
                   $('#deleteModalRecurs').modal('hide');
               })
+              //this.$forceUpdate();
         },
         createRecurs() {
           this.insert = true;
@@ -246,6 +249,7 @@
               .then(function(response) {
                 console.log(response);
                 me.selectRecursos();
+                me.paginarFirst();
                 $('#recursModal').modal('hide');
               }).catch(function(error) {
                 console.log(error.response.status);
