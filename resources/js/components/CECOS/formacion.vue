@@ -1,6 +1,6 @@
 <template>
 
-  <div id="contenedor" class="mt-5 pt-5 ml-5 pl-5">
+  <div id="contenedor" class="mt-5 pt-5 ml-4">
     <div class="todoFormacion">
         <div id="contenedorVideo">
             <video id="videoDesa" width="600" height="340" src="/SGTA-Broggi/public/media/video/desa.mp4" type="video/mp4"></video>
@@ -258,26 +258,24 @@ export default {
   }
 
   #pregunta{
-      font-weight: bold;
+    font-weight: bold;
   }
 
   .respuestas{
-      height: 10vh;
+    height: 10vh;
   }
 
   #cardRespuestas{
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: center;
-      align-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-content: center;
   }
 
-  #respuestasList{
-     display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: center;
-      align-content: center;
+  ul li{
+    display: flex !important;
+    align-items: center !important; /*Para tenerlos centraditos verticalmente*/
+    justify-content: center; /*Para tenerlos centraditos horizontalmente*/
   }
 </style>
