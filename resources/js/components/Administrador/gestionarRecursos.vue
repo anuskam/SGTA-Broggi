@@ -10,38 +10,28 @@
     {{ infoMessage }}
   </div>
 
-  <!-- <div class="position: absolute; top: 0; right: auto;" style="z-index: 5; right: 0; bottom: 0;">
-  <div id="toastError" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="4000">
-    <div class="toast-header">
-      <strong class="mr-auto">Bootstrap</strong>
-      <small>11 mins ago</small>
-      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="toast-body">
-     {{ errorMessage }}
-    </div>
+   <div aria-label="paginacion" class="paginacionNav">
+    <ul class="pagination">
+      <li class="page-item">
+        <button :disabled="currentPage <= 1" class="btn numeroPaginacion" aria-label="Previous" @click="paginar(currentPage-1)">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+        </button>
+      </li>
+      <button v-for="(paginaActual, index) in paginas" :key="index" class="btn numeroPaginacion" @click="paginar(paginaActual)">{{ index+1 }}</button>
+      <li class="page-item">
+        <button :disabled="currentPage >= meta.last_page" class="btn numeroPaginacion" aria-label="Next" @click="paginar(currentPage+1)">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+        </button>
+      </li>
+    </ul>
+
+    <button class="btn btn-primary mr-5 nuevoRecurso" @click="createRecurs()">
+        <i class="fas fa-plus-circle" aria-hidden="true"></i>
+        Nuevo recurso
+    </button>
   </div>
-</div>
-
-
-<div class="position: absolute; top: 0; right: auto;" style="z-index: 5; right: 0; bottom: 0;">
-  <div id="toastInfo" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="4000">
-    <div class="toast-header">
-      <strong class="mr-auto">Bootstrap</strong>
-      <small>11 mins ago</small>
-      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="toast-body">
-     {{ infoMessage }}
-    </div>
-  </div>
-</div> -->
-
-
 
 
   <div class="card mt-2 mb-1 ml-5 mr-5">
@@ -133,7 +123,7 @@
             </div>
 
             <div class="form-group row">
-              <label for="tipusRecurs" class="col-sm-2 col-form-label">Municipio</label>
+              <label for="tipusRecurs" class="col-sm-2 col-form-label">Tipo de recurso</label>
               <div class="col-sm-10">
                   <select class="custom-select" id="tipusRecurs" required v-model="recurs.tipus_recursos_id">
                     <option selected value="Selecciona...">Selecciona...</option>
@@ -148,17 +138,12 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn cerrarBtn" data-dismiss="modal">Tancar</button>
-          <button v-if="insert" type="button" class="btn" @click="insertRecurs()">Añadir</button>
+          <button v-if="insert" type="button" class="btn afegirRecursBtn" @click="insertRecurs()">Añadir</button>
           <button v-else type="button" class="btn editarRecursBtn" @click="updateRecurs()">Modificar</button>
         </div>
       </div>
     </div>
   </div>
-
-  <button class="btn btn-primary btn-float-afegir" @click="createRecurs()">
-    <i class="fas fa-plus-circle" aria-hidden="true"></i>
-    Nuevo recurso
-  </button>
 
 </main>
 </template>
@@ -168,6 +153,7 @@
       data() {
         return {
           recursos: [],
+          recursosDB: [],
           recurs: {
             codi: '',
             actiu: true,
@@ -177,15 +163,48 @@
           insert: true,
           errorMessage: '',
           infoMessage: '',
+          meta: {},
+          paginas: [],
+          pagina: 0,
+          currentPage: 0,
         }
       },
       methods: {
+        paginar(pagina){
+          let me = this;
+          axios
+              .get('/SGTA-Broggi/public/recursPaginated' + '?page=' + pagina)
+              .then(response => {
+                  me.recursos = response.data.data;
+                  me.meta = response.data.meta;
+                  me.currentPage = pagina;
+              })
+              .catch(error => {
+                    console.log(error);
+              })
+        },
+        paginarFirst(){
+          let me = this;
+          axios
+              .get('/SGTA-Broggi/public/recursPaginated' + '?page=' + 1)
+              .then(response => {
+                  me.recursos = response.data.data;
+                  me.meta = response.data.meta;
+                  me.currentPage = 1;
+                  for(let index = 0; index < me.meta.last_page; index++){
+                        me.paginas[index] = index + 1;
+                  }
+              })
+              .catch(error => {
+                    console.log(error);
+              })
+        },
         selectRecursos() {
             let me = this;
             axios
                 .get('/SGTA-Broggi/public/api/recurs')
                 .then(response => {
-                    me.recursos = response.data;
+                    me.recursosDB = response.data;
                 })
                 .catch(error => {
                     console.log(error);
@@ -213,6 +232,11 @@
         },
         createRecurs() {
           this.insert = true;
+          this.recurs= {
+            codi: '',
+            actiu: true,
+            tipus_recursos_id: ''
+          },
           $('#recursModal').modal('show');
         },
         insertRecurs() {
@@ -262,7 +286,7 @@
               .finally(() => (this.loading = false));
         },
         getTipusRecurs(index) {
-          let tipusRecurs = this.tipusRecursos.find(obj => obj.id == this.recursos[index].tipus_recursos_id);
+          let tipusRecurs = this.tipusRecursos.find(obj => obj.id == this.recursosDB[index].tipus_recursos_id);
           let tipusRecursos_tipus;
           if (tipusRecurs != null){
             tipusRecursos_tipus = tipusRecurs.tipus;
@@ -276,10 +300,9 @@
         },
       },
       created() {
-        this.selectRecursos(), this.selectTipusRecursos();
+        this.paginarFirst(), this.selectTipusRecursos(), this.selectRecursos();
       },
       mounted() {
-        console.log('Component mounted.')
       }
     }
 </script>
@@ -289,9 +312,14 @@
     width: 14vw;
 }
 
-.esborrarRecursBtn, .editarRecursBtn {
+.esborrarRecursBtn, .afegirRecursBtn {
   background-color: #e3177d !important;
   color: white !important;
+}
+
+.editarRecursBtn {
+  background-color: #15acc4 !important;
+  color: black !important;
 }
 
 .editarRecursBtn:hover {
@@ -312,6 +340,13 @@
   font-family: myFont;
   src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);
 }
+
+.nuevoRecurso{
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-bottom: 15px; /*cambiarlo a vh*/
+}
+
 
 /* .modal-header{
     font-weight: bold;

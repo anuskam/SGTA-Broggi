@@ -23,6 +23,13 @@ class RecursController extends Controller
         return RecursResource::collection($recursos);
     }
 
+    public function indexPaginated()
+    {
+        $recursos = Recurs::paginate(10);
+
+        return RecursResource::collection($recursos);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -97,7 +104,7 @@ class RecursController extends Controller
     {
         try{
             $recur->delete();
-            $response = \response()->json(['missatge' => 'Registre esborrat correctament'], 200);
+            $response = \response()->json(['missatge' => 'Registro eliminado correctamente'], 200);
         }
         catch(QueryException $ex){
             $mensaje = Utilitat::errorMessage($ex);

@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UsuariController;
 use App\Http\Controllers\Api\AlertantController;
+use App\Http\Controllers\Api\RecursController;
+use App\Http\Controllers\Api\UsuariControllerApi;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +24,10 @@ Route::get('home', [UsuariController::class, 'index']);
 
 Route::get('/', [UsuariController::class, 'index']);
 
+/*PAGINACIÓN*/
 Route::get('alertantPaginated', [AlertantController::class, 'indexPaginated']);
+Route::get('usuariPaginated', [UsuariControllerApi::class, 'indexPaginated']);
+Route::get('recursPaginated', [RecursController::class, 'indexPaginated']);
 
 Route::resource('login', LoginController::class);
 
