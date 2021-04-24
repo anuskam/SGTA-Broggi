@@ -23,6 +23,13 @@ class RecursController extends Controller
         return RecursResource::collection($recursos);
     }
 
+    public function indexPaginated()
+    {
+        $recursos = Recurs::paginate(10);
+
+        return RecursResource::collection($recursos);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

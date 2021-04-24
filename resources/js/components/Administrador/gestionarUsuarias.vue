@@ -200,6 +200,14 @@
         },
         createUsuari() {
           this.insert = true;
+          this.usuari= {
+            username: '',
+            contrasenya: '',
+            email: '',
+            nom: '',
+            cognoms: '',
+            rols_id: null
+          },
           $('#usuariModal').modal('show');
         },
         insertUsuari() {

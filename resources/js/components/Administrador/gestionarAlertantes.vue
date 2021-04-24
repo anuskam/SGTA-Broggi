@@ -45,6 +45,7 @@
               <th scope="col">Teléfono</th>
               <th scope="col">Dirección</th>
               <th scope="col">Municipio</th>
+              <th scope="col">Tipo Alertante</th>
               <th scope="col" class="sizeBotones"></th>
             </tr>
           </thead>
@@ -56,6 +57,9 @@
               <td>{{ alertant.adreca }}</td>
               <td>
                 {{ getMunicipi(index) }}
+              </td>
+              <td>
+                {{ getTipusAlertant(index) }}
               </td>
               <td>
                 <button type="submit" class="btn btn-sm float-right ml-2 esborrarAlertantBtn" @click="confirmDeleteAlertant(alertant)"><i class="fa fa-trash"
@@ -144,6 +148,20 @@
               </div>
             </div>
 
+            <div class="form-group row">
+              <label for="tipoAlertante" class="col-sm-2 col-form-label">Tipo Alertante</label>
+              <div class="col-sm-10">
+                  <select class="custom-select" id="tipoAlertante" required v-model="alertant.tipus_alertant_id">
+                    <option selected value="Selecciona...">Selecciona...</option>
+                    <option v-for="tipus in tipusAlertants" :key="tipus.id" :value="tipus.id">
+                      {{ tipus.tipus }}
+                    </option>
+                  </select>
+              </div>
+            </div>
+
+
+
           </form>
         </div>
         <div class="modal-footer">
@@ -155,11 +173,6 @@
     </div>
   </div>
 
-  <!-- <button class="btn btn-primary btn-float-afegir" @click="createAlertant()">
-    <i class="fas fa-plus-circle" aria-hidden="true"></i>
-    Nueva alertante
-  </button> -->
-
 </main>
 </template>
 
@@ -168,16 +181,15 @@
       data() {
         return {
           alertants: [],
+          alertantsDB: [],
+          tipusAlertants: [],
           alertant: {
             telefon: '',
             nom: '',
             cognoms: '',
             adreca: '',
             municipis_id: null,
-            // meta: {},
-            // paginas: [],
-            // pagina: 0,
-            // currentPage: 0
+            tipus_alertant_id: null
           },
           meta: {},
           paginas: [],
@@ -219,24 +231,17 @@
                     console.log(error);
               })
         },
-        // selectAlertants() {
-        //     let me = this;
-        //     axios
-        //         .get('/SGTA-Broggi/public/api/alertant')
-        //         .then(response => {
-        //             me.alertants = response.data;
-        //             me.meta = response.data.meta;
-
-        //             for(let index = 0; index < me.meta.last_page; index++){
-        //                 me.paginas[index] = pagina + 1;
-        //             }
-
-        //             me.currentPage = 1;
-        //         })
-        //         .catch(error => {
-        //             console.log(error);
-        //         })
-        // },
+        selectAlertants() {
+            let me = this;
+            axios
+                .get('/SGTA-Broggi/public/api/alertant')
+                .then(response => {
+                    me.alertantsDB = response.data;
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        },
         confirmDeleteAlertant(alertant) {
           this.alertant = alertant;
           $('#deleteModalAlertant').modal('show');
@@ -259,6 +264,14 @@
         },
         createAlertant() {
           this.insert = true;
+          this.alertant= {
+            telefon: '',
+            nom: '',
+            cognoms: '',
+            adreca: '',
+            municipis_id: null,
+            tipus_alertant_id: null
+          }
           $('#alertantModal').modal('show');
         },
         insertAlertant() {
@@ -307,7 +320,7 @@
               })
         },
         getMunicipi(index) {
-          let municipi = this.municipis.find(obj => obj.id == this.alertants[index].municipis_id);
+          let municipi = this.municipis.find(obj => obj.id == this.alertantsDB[index].municipis_id);
           let municipi_nom;
           if (municipi != null){
             municipi_nom = municipi.nom;
@@ -318,12 +331,34 @@
 
           return municipi_nom;
         },
+        selectTipusAlertant() {
+          let me = this;
+          axios
+              .get("/SGTA-Broggi/public/api/tipusAlertant")
+              .then((response) => {
+                me.tipusAlertants = response.data;
+              }).catch((error) => {
+                console.log(error);
+              })
+        },
+        getTipusAlertant(index){
+            let tipusAlertant = this.tipusAlertants.find(obj => obj.id == this.alertantsDB[index].tipus_alertant_id);
+            let tipusAlertant_nom;
+            if (tipusAlertant != null){
+                tipusAlertant_nom = tipusAlertant.tipus;
+            }
+            else{
+                tipusAlertant_nom = this.tipusAlertants.find(obj => obj.id == 1);
+            }
+
+            return tipusAlertant_nom;
+        }
       },
       created() {
-        this.paginarFirst();
+       this.selectMunicipis(), this.selectAlertants();
       },
       mounted() {
-        this.selectAlertants();
+        this.paginarFirst();
       }
     }
 </script>

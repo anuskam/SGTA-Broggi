@@ -18,7 +18,6 @@ class AlertantController extends Controller
      */
     public function index()
     {
-        /*$alertants = Alertant::paginate(10);*/
         $alertants = Alertant::all();
 
         return AlertantResource::collection($alertants);

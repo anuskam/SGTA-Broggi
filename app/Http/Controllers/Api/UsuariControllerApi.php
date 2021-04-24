@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\UsuariResource;
 use Illuminate\Database\QueryException;
 
-class UsuariController extends Controller
+class UsuariControllerApi extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,6 +20,13 @@ class UsuariController extends Controller
     public function index()
     {
         $usuaris = Usuari::all();
+
+        return UsuariResource::collection($usuaris);
+    }
+
+    public function indexPaginated()
+    {
+        $usuaris = Usuari::paginate(10);
 
         return UsuariResource::collection($usuaris);
     }
