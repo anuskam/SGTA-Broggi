@@ -5603,10 +5603,9 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     getMunicipi: function getMunicipi(index) {
-      var _this = this;
-
+      var me = this;
       var municipi = this.municipis.find(function (obj) {
-        return obj.id == _this.alertantsDB[index].municipis_id;
+        return obj.id == me.alertantsDB[index].municipis_id;
       });
       var municipi_nom;
 
@@ -5629,10 +5628,9 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     getTipusAlertant: function getTipusAlertant(index) {
-      var _this2 = this;
-
+      var me = this;
       var tipusAlertant = this.tipusAlertants.find(function (obj) {
-        return obj.id == _this2.alertantsDB[index].tipus_alertant_id;
+        return obj.id == me.alertantsDB[index].tipus_alertants_id;
       });
       var tipusAlertant_nom;
 
@@ -5648,7 +5646,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    this.selectMunicipis(), this.selectAlertants();
+    this.selectMunicipis(), this.selectAlertants(), this.selectTipusAlertant();
   },
   mounted: function mounted() {
     this.paginarFirst();
@@ -5883,11 +5881,12 @@ __webpack_require__.r(__webpack_exports__);
         console.log(response);
         me.infoMessage = response.data.missatge;
         me.selectRecursos();
+        me.paginarFirst();
         $('#deleteModalRecurs').modal('hide');
       })["catch"](function (error) {
         me.errorMessage = error.response.data.error;
         $('#deleteModalRecurs').modal('hide');
-      });
+      }); //this.$forceUpdate();
     },
     createRecurs: function createRecurs() {
       this.insert = true;
@@ -5902,6 +5901,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/SGTA-Broggi/public/api/recurs', me.recurs).then(function (response) {
         console.log(response);
         me.selectRecursos();
+        me.paginarFirst();
         $('#recursModal').modal('hide');
       })["catch"](function (error) {
         console.log(error.response.status);
