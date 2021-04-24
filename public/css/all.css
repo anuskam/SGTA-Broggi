@@ -87,7 +87,7 @@ textarea{
 #logout{
     float: right;
     position: absolute;
-    top: 15px;
+    top: 20px;
     right: 10px;
     z-index: 100;
     font-family: 'Rubik', sans-serif;
