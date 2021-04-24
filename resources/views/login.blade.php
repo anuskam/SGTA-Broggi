@@ -19,14 +19,25 @@
                 <form action="{{ action([App\Http\Controllers\LoginController::class, 'store']) }}" method="POST">
                     @csrf
                     <div class="form-group">
+                        @if($errors->any())
+                            <div class="alert alert-danger" role="alert">
+                                {{$errors->first()}}
+                            </div>
+                        @endif
                         <!-- User -->
                         <div class="form-group row mt-2 ml-1">
                             <div class="col-1 ml-1 mr-2 pt-1">
                                 <i class="fas fa-user fa-lg login-icon"></i>
                             </div>
                             <div class="col-9 ml-1 mr-1">
-                                <input class="form-control form-control-sm login-credentials" type="text" id="username" name="username"
+                                @if(old('username'))
+                                    <input class="form-control form-control-sm login-credentials" type="text" id="username" name="username"
+                                    placeholder="Usuario" autofocus value="{{ old('username') }}">
+
+                                @else
+                                    <input class="form-control form-control-sm login-credentials" type="text" id="username" name="username"
                                     placeholder="Usuario" autofocus>
+                                @endif
                             </div>
                         </div>
                         <!-- Password -->
@@ -35,8 +46,13 @@
                                 <i class="fas fa-key fa-lg login-icon"></i>
                             </div>
                             <div class="col-9 ml-1 mr-1">
-                                <input class="form-control form-control-sm login-credentials" type="password" id="password" name="password"
-                                placeholder="Contraseña" autofocus required>
+                                @if (old('password'))
+                                    <input class="form-control form-control-sm login-credentials" type="password" id="password" name="password"
+                                    placeholder="Contraseña" autofocus required value="{{ old('password') }}">
+                                @else
+                                    <input class="form-control form-control-sm login-credentials" type="password" id="password" name="password"
+                                    placeholder="Contraseña" autofocus required>
+                                @endif
                             </div>
                         </div>
                         <!-- Boto d'Entrar -->
