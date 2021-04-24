@@ -1,6 +1,6 @@
 <template>
 
-  <div id="contenedor" class="mt-5">
+  <div id="contenedor" class="mt-5 pt-5 ml-5 pl-5">
     <div class="todoFormacion">
         <div id="contenedorVideo">
             <video id="videoDesa" width="600" height="340" src="/SGTA-Broggi/public/media/video/desa.mp4" type="video/mp4"></video>
@@ -21,7 +21,21 @@
     <div class="test col-5 ml-5">
         <div id="questions" v-for="(question, index) in questions" :key="question.id" v-show="activa">
           <div v-show="index === currentQuestion">
-            <p>{{ question.question }}</p>
+              <!-- inicio card -->
+            <div class="card" id="cardRespuestas">
+            <div class="card-header pb-0">
+                <p id="pregunta">{{ question.question }}</p>
+            </div>
+            <ul class="list-group list-group-flush" id="respuestasList">
+                <li v-for="(option, index) in question.options" :key="index" class="list-group-item respuestas">
+                <button class="btn btn-secondary" @click="evaluarRespuesta(index)"
+                :class="{correcta : correcta[index], incorrecta: incorrecta[index]}" :id="index" :disabled="!enableButtons">{{ option }}</button>
+                <br>
+              </li>
+            </ul>
+            </div>
+            <!-- Final card -->
+            <!-- <p class="pb-3" id="pregunta">{{ question.question }}</p>
             <ul>
               <li v-for="(option, index) in question.options" :key="index">
                 <button class="btn btn-secondary col-7 mb-2" @click="evaluarRespuesta(index)"
@@ -29,7 +43,7 @@
                 <br>
               </li>
             </ul>
-            <br>
+            <br> -->
           </div>
         </div>
     </div>
@@ -241,5 +255,29 @@ export default {
     top: 0;
     height: 16px;
     background: rgba(0,0,150,.2);
+  }
+
+  #pregunta{
+      font-weight: bold;
+  }
+
+  .respuestas{
+      height: 10vh;
+  }
+
+  #cardRespuestas{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      align-content: center;
+  }
+
+  #respuestasList{
+     display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      align-content: center;
   }
 </style>
