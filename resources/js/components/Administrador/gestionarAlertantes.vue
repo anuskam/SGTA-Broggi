@@ -256,6 +256,7 @@
                 console.log(response);
                 me.infoMessage = response.data.missatge;
                 me.selectAlertants();
+                me.paginarFirst();
                 $('#deleteModalAlertant').modal('hide');
               }).catch(function(error) {
                   me.errorMessage = error.response.data.error;
@@ -302,6 +303,7 @@
               .then(function(response) {
                 console.log(response);
                 me.selectAlertants();
+                me.paginarFirst();
                 $('#alertantModal').modal('hide');
               }).catch(function(error) {
                 console.log(error.response.status);
@@ -412,22 +414,22 @@ h2{
   font-size: 1.3em;
 }
 .modal-header{
-    font-weight: bold;
-    background-color: #15acc4;
+  font-weight: bold;
+  background-color: #15acc4;
 }
 
 .pagination{
-    padding-left: 48px;
+  padding-left: 48px;
 }
 
 .numeroPaginacion {
-    color: white;
+  color: white;
 }
 
 .nuevaAlertante{
-    padding-top: 0;
-    padding-bottom: 0;
-    margin-bottom: 15px; /*cambiarlo a vh*/
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-bottom: 15px; /*cambiarlo a vh*/
 }
 
 </style>
