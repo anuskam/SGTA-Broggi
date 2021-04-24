@@ -5443,20 +5443,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       alertants: [],
+      alertantsDB: [],
+      tipusAlertants: [],
       alertant: {
         telefon: '',
         nom: '',
         cognoms: '',
         adreca: '',
-        municipis_id: null // meta: {},
-        // paginas: [],
-        // pagina: 0,
-        // currentPage: 0
-
+        municipis_id: null,
+        tipus_alertant_id: null
       },
       meta: {},
       paginas: [],
@@ -5493,22 +5505,14 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     },
-    // selectAlertants() {
-    //     let me = this;
-    //     axios
-    //         .get('/SGTA-Broggi/public/api/alertant')
-    //         .then(response => {
-    //             me.alertants = response.data;
-    //             me.meta = response.data.meta;
-    //             for(let index = 0; index < me.meta.last_page; index++){
-    //                 me.paginas[index] = pagina + 1;
-    //             }
-    //             me.currentPage = 1;
-    //         })
-    //         .catch(error => {
-    //             console.log(error);
-    //         })
-    // },
+    selectAlertants: function selectAlertants() {
+      var me = this;
+      axios.get('/SGTA-Broggi/public/api/alertant').then(function (response) {
+        me.alertantsDB = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
     confirmDeleteAlertant: function confirmDeleteAlertant(alertant) {
       this.alertant = alertant;
       $('#deleteModalAlertant').modal('show');
@@ -5529,6 +5533,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     createAlertant: function createAlertant() {
       this.insert = true;
+      this.alertant = {
+        telefon: '',
+        nom: '',
+        cognoms: '',
+        adreca: '',
+        municipis_id: null,
+        tipus_alertant_id: null
+      };
       $('#alertantModal').modal('show');
     },
     insertAlertant: function insertAlertant() {
@@ -5574,7 +5586,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var municipi = this.municipis.find(function (obj) {
-        return obj.id == _this.alertants[index].municipis_id;
+        return obj.id == _this.alertantsDB[index].municipis_id;
       });
       var municipi_nom;
 
@@ -5587,13 +5599,39 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return municipi_nom;
+    },
+    selectTipusAlertant: function selectTipusAlertant() {
+      var me = this;
+      axios.get("/SGTA-Broggi/public/api/tipusAlertant").then(function (response) {
+        me.tipusAlertants = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    getTipusAlertant: function getTipusAlertant(index) {
+      var _this2 = this;
+
+      var tipusAlertant = this.tipusAlertants.find(function (obj) {
+        return obj.id == _this2.alertantsDB[index].tipus_alertant_id;
+      });
+      var tipusAlertant_nom;
+
+      if (tipusAlertant != null) {
+        tipusAlertant_nom = tipusAlertant.tipus;
+      } else {
+        tipusAlertant_nom = this.tipusAlertants.find(function (obj) {
+          return obj.id == 1;
+        });
+      }
+
+      return tipusAlertant_nom;
     }
   },
   created: function created() {
-    this.paginarFirst();
+    this.selectMunicipis(), this.selectAlertants();
   },
   mounted: function mounted() {
-    this.selectAlertants();
+    this.paginarFirst();
   }
 });
 
@@ -5760,25 +5798,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       recursos: [],
+      recursosDB: [],
       recurs: {
         codi: '',
         actiu: true,
@@ -5787,14 +5811,42 @@ __webpack_require__.r(__webpack_exports__);
       tipusRecursos: [],
       insert: true,
       errorMessage: '',
-      infoMessage: ''
+      infoMessage: '',
+      meta: {},
+      paginas: [],
+      pagina: 0,
+      currentPage: 0
     };
   },
   methods: {
+    paginar: function paginar(pagina) {
+      var me = this;
+      axios.get('/SGTA-Broggi/public/recursPaginated' + '?page=' + pagina).then(function (response) {
+        me.recursos = response.data.data;
+        me.meta = response.data.meta;
+        me.currentPage = pagina;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    paginarFirst: function paginarFirst() {
+      var me = this;
+      axios.get('/SGTA-Broggi/public/recursPaginated' + '?page=' + 1).then(function (response) {
+        me.recursos = response.data.data;
+        me.meta = response.data.meta;
+        me.currentPage = 1;
+
+        for (var index = 0; index < me.meta.last_page; index++) {
+          me.paginas[index] = index + 1;
+        }
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
     selectRecursos: function selectRecursos() {
       var me = this;
       axios.get('/SGTA-Broggi/public/api/recurs').then(function (response) {
-        me.recursos = response.data;
+        me.recursosDB = response.data;
       })["catch"](function (error) {
         console.log(error);
       });
@@ -5819,7 +5871,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     createRecurs: function createRecurs() {
       this.insert = true;
-      $('#recursModal').modal('show');
+      this.recurs = {
+        codi: '',
+        actiu: true,
+        tipus_recursos_id: ''
+      }, $('#recursModal').modal('show');
     },
     insertRecurs: function insertRecurs() {
       var me = this;
@@ -5868,7 +5924,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       var tipusRecurs = this.tipusRecursos.find(function (obj) {
-        return obj.id == _this2.recursos[index].tipus_recursos_id;
+        return obj.id == _this2.recursosDB[index].tipus_recursos_id;
       });
       var tipusRecursos_tipus;
 
@@ -5884,11 +5940,9 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    this.selectRecursos(), this.selectTipusRecursos();
+    this.paginarFirst(), this.selectTipusRecursos(), this.selectRecursos();
   },
-  mounted: function mounted() {
-    console.log('Component mounted.');
-  }
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -5904,38 +5958,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -6132,7 +6154,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     createUsuari: function createUsuari() {
       this.insert = true;
-      $('#usuariModal').modal('show');
+      this.usuari = {
+        username: '',
+        contrasenya: '',
+        email: '',
+        nom: '',
+        cognoms: '',
+        rols_id: null
+      }, $('#usuariModal').modal('show');
     },
     insertUsuari: function insertUsuari() {
       var me = this;
@@ -10974,7 +11003,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
+<<<<<<< HEAD
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeNom {\n    width: 20vw;\n}\n.sizeCognom {\n    width: 20vw;\n}\n.sizeBotones {\n    width: 14vw;\n}\n.esborrarAlertantBtn, .afegirAlertantBtn {\n  background-color: #e3177d !important;\n  color: white !important;\n}\n.editarAlertantBtn {\n  background-color: #15acc4 !important;\n  color: black !important;\n}\n.editarAlertantBtn:hover {\n  color: black !important;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n.cerrarBtn:hover {\n  color: white;\n}\n@font-face {\n  font-family: myFont;\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\nh2{\n  font-family: myFont;\n  font-size: 1.3em;\n}\n.modal-header{\n    font-weight: bold;\n    background-color: #15acc4;\n}\n.pagination{\n    padding-left: 48px;\n}\n.numeroPaginacion {\n    color: white;\n}\n.nuevaAlertante{\n    padding-top: 0;\n    padding-bottom: 0;\n    margin-bottom: 15px; /*cambiarlo a vh*/\n}\n\n", ""]);
+=======
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeNom {\r\n    width: 20vw;\n}\n.sizeCognom {\r\n    width: 20vw;\n}\n.sizeBotones {\r\n    width: 14vw;\n}\n.esborrarAlertantBtn, .editarAlertantBtn {\r\n  background-color: #e3177d !important;\r\n  color: white !important;\n}\n.editarAlertantBtn:hover {\r\n  color: black !important;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\n.cerrarBtn:hover {\r\n  color: white;\n}\n@font-face {\r\n  font-family: myFont;\r\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\nh2{\r\n  font-family: myFont;\r\n  font-size: 1.3em;\n}\n.modal-header{\r\n    font-weight: bold;\r\n    background-color: #15acc4;\n}\n.pagination{\r\n    padding-left: 48px;\n}\n.numeroPaginacion {\r\n    color: white;\n}\n.nuevaAlertante{\r\n    padding-top: 0;\r\n    padding-bottom: 0;\r\n    margin-bottom: 15px; /*cambiarlo a vh*/\n}\r\n\r\n", ""]);
+>>>>>>> c2df1167f45ef31433fb173a94d2ae66b1080eca
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10998,7 +11031,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
+<<<<<<< HEAD
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeBotones {\n    width: 14vw;\n}\n.esborrarRecursBtn, .afegirRecursBtn {\n  background-color: #e3177d !important;\n  color: white !important;\n}\n.editarRecursBtn {\n  background-color: #15acc4 !important;\n  color: black !important;\n}\n.editarRecursBtn:hover {\n  color: black !important;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n.cerrarBtn:hover {\n  color: white;\n}\n@font-face {\n  font-family: myFont;\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\n.nuevoRecurso{\n  padding-top: 0;\n  padding-bottom: 0;\n  margin-bottom: 15px; /*cambiarlo a vh*/\n}\n\n\n/* .modal-header{\n    font-weight: bold;\n    background-color: #15acc4;\n} */\n\n/* h2{\n  font-family: myFont;\n  font-size: 1.3em;\n} */\n\n/*NO SE BORRAN LOS MENSAJES Y AL CAMBIAR EL NOMBRE DE UN CÓDIGO, SE QUITA EL CHECKED*/\n", ""]);
+=======
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeBotones {\r\n    width: 14vw;\n}\n.esborrarRecursBtn, .editarRecursBtn {\r\n  background-color: #e3177d !important;\r\n  color: white !important;\n}\n.editarRecursBtn:hover {\r\n  color: black !important;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\n.cerrarBtn:hover {\r\n  color: white;\n}\n@font-face {\r\n  font-family: myFont;\r\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\r\n\r\n/* .modal-header{\r\n    font-weight: bold;\r\n    background-color: #15acc4;\r\n} */\r\n\r\n/* h2{\r\n  font-family: myFont;\r\n  font-size: 1.3em;\r\n} */\r\n\r\n/*NO SE BORRAN LOS MENSAJES Y AL CAMBIAR EL NOMBRE DE UN CÓDIGO, SE QUITA EL CHECKED*/\r\n", ""]);
+>>>>>>> c2df1167f45ef31433fb173a94d2ae66b1080eca
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11022,7 +11059,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
+<<<<<<< HEAD
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeBotones {\n    width: 14vw;\n}\n.esborrarUsuariBtn, .afegirUsuariBtn {\n  background-color: #e3177d !important;\n  color: white !important;\n}\n.editarUsuariBtn {\n  background-color: #15acc4 !important;\n  color: black !important;\n}\n.editarUsuariBtn:hover {\n  color: black !important;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n.cerrarBtn:hover {\n  color: white;\n}\n@font-face {\n  font-family: myFont;\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\n\n/* h2{\n  font-family: myFont;\n  font-size: 1.3em;\n} */\n\n/* .modal-header{\n    font-weight: bold;\n    background-color: #15acc4;\n} */\n\n\n", ""]);
+=======
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeBotones {\r\n    width: 14vw;\n}\n.esborrarUsuariBtn, .editarUsuariBtn {\r\n  background-color: #e3177d !important;\r\n  color: white !important;\n}\n.editarUsuariBtn:hover {\r\n  color: black !important;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\n.cerrarBtn:hover {\r\n  color: white;\n}\n@font-face {\r\n  font-family: myFont;\r\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\r\n\r\n/* h2{\r\n  font-family: myFont;\r\n  font-size: 1.3em;\r\n} */\r\n\r\n/* .modal-header{\r\n    font-weight: bold;\r\n    background-color: #15acc4;\r\n} */\r\n\r\n\r\n", ""]);
+>>>>>>> c2df1167f45ef31433fb173a94d2ae66b1080eca
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -49183,6 +49224,14 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("td", [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(_vm.getTipusAlertant(index)) +
+                      "\n              "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", [
                   _c(
                     "button",
                     {
@@ -49508,6 +49557,76 @@ var render = function() {
                       2
                     )
                   ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-sm-2 col-form-label",
+                      attrs: { for: "tipoAlertante" }
+                    },
+                    [_vm._v("Tipo Alertante")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-10" }, [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.alertant.tipus_alertant_id,
+                            expression: "alertant.tipus_alertant_id"
+                          }
+                        ],
+                        staticClass: "custom-select",
+                        attrs: { id: "tipoAlertante", required: "" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.alertant,
+                              "tipus_alertant_id",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "option",
+                          { attrs: { selected: "", value: "Selecciona..." } },
+                          [_vm._v("Selecciona...")]
+                        ),
+                        _vm._v(" "),
+                        _vm._l(_vm.tipusAlertants, function(tipus) {
+                          return _c(
+                            "option",
+                            { key: tipus.id, domProps: { value: tipus.id } },
+                            [
+                              _vm._v(
+                                "\n                      " +
+                                  _vm._s(tipus.tipus) +
+                                  "\n                    "
+                              )
+                            ]
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  ])
                 ])
               ])
             ]),
@@ -49526,7 +49645,7 @@ var render = function() {
                 ? _c(
                     "button",
                     {
-                      staticClass: "btn editarAlertantBtn",
+                      staticClass: "btn afegirAlertantBtn",
                       attrs: { type: "button" },
                       on: {
                         click: function($event) {
@@ -49576,6 +49695,8 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Dirección")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Municipio")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo Alertante")]),
         _vm._v(" "),
         _c("th", { staticClass: "sizeBotones", attrs: { scope: "col" } })
       ])
@@ -49696,6 +49817,104 @@ var render = function() {
           ]
         )
       : _vm._e(),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "paginacionNav", attrs: { "aria-label": "paginacion" } },
+      [
+        _c(
+          "ul",
+          { staticClass: "pagination" },
+          [
+            _c("li", { staticClass: "page-item" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn numeroPaginacion",
+                  attrs: {
+                    disabled: _vm.currentPage <= 1,
+                    "aria-label": "Previous"
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.paginar(_vm.currentPage - 1)
+                    }
+                  }
+                },
+                [
+                  _c("span", { attrs: { "aria-hidden": "true" } }, [
+                    _vm._v("«")
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "sr-only" }, [_vm._v("Previous")])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _vm._l(_vm.paginas, function(paginaActual, index) {
+              return _c(
+                "button",
+                {
+                  key: index,
+                  staticClass: "btn numeroPaginacion",
+                  on: {
+                    click: function($event) {
+                      return _vm.paginar(paginaActual)
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(index + 1))]
+              )
+            }),
+            _vm._v(" "),
+            _c("li", { staticClass: "page-item" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn numeroPaginacion",
+                  attrs: {
+                    disabled: _vm.currentPage >= _vm.meta.last_page,
+                    "aria-label": "Next"
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.paginar(_vm.currentPage + 1)
+                    }
+                  }
+                },
+                [
+                  _c("span", { attrs: { "aria-hidden": "true" } }, [
+                    _vm._v("»")
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
+                ]
+              )
+            ])
+          ],
+          2
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary mr-5 nuevoRecurso",
+            on: {
+              click: function($event) {
+                return _vm.createRecurs()
+              }
+            }
+          },
+          [
+            _c("i", {
+              staticClass: "fas fa-plus-circle",
+              attrs: { "aria-hidden": "true" }
+            }),
+            _vm._v("\n        Nuevo recurso\n    ")
+          ]
+        )
+      ]
+    ),
     _vm._v(" "),
     _c("div", { staticClass: "card mt-2 mb-1 ml-5 mr-5" }, [
       _c("h2", { staticClass: "card-header font-weight-bold" }, [
@@ -49973,7 +50192,7 @@ var render = function() {
                       staticClass: "col-sm-2 col-form-label",
                       attrs: { for: "tipusRecurs" }
                     },
-                    [_vm._v("Municipio")]
+                    [_vm._v("Tipo de recurso")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-sm-10" }, [
@@ -50055,7 +50274,7 @@ var render = function() {
                 ? _c(
                     "button",
                     {
-                      staticClass: "btn",
+                      staticClass: "btn afegirRecursBtn",
                       attrs: { type: "button" },
                       on: {
                         click: function($event) {
@@ -50082,6 +50301,8 @@ var render = function() {
           ])
         ])
       ]
+<<<<<<< HEAD
+=======
     ),
     _vm._v(" "),
     _c(
@@ -50101,6 +50322,7 @@ var render = function() {
         }),
         _vm._v("\r\n    Nuevo recurso\r\n  ")
       ]
+>>>>>>> c2df1167f45ef31433fb173a94d2ae66b1080eca
     )
   ])
 }
@@ -50657,7 +50879,7 @@ var render = function() {
                 ? _c(
                     "button",
                     {
-                      staticClass: "btn editarUsuariBtn",
+                      staticClass: "btn afegirUsuariBtn",
                       attrs: { type: "button" },
                       on: {
                         click: function($event) {

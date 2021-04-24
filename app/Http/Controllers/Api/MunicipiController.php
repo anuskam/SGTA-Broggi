@@ -95,7 +95,7 @@ class MunicipiController extends Controller
     {
         try{
             $municipi->delete();
-            $response = \response()->json(['missatge' => 'Registre esborrat correctament'], 200);
+            $response = \response()->json(['missatge' => 'Registro eliminado correctamentet'], 200);
         }
         catch(QueryException $ex){
             $mensaje = Utilitat::errorMessage($ex);

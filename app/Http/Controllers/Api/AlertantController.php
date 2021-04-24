@@ -18,7 +18,6 @@ class AlertantController extends Controller
      */
     public function index()
     {
-        /*$alertants = Alertant::paginate(10);*/
         $alertants = Alertant::all();
 
         return AlertantResource::collection($alertants);
@@ -113,7 +112,7 @@ class AlertantController extends Controller
     {
         try{
             $alertant->delete();
-            $response = \response()->json(['missatge' => 'Registre esborrat correctament'], 200);
+            $response = \response()->json(['missatge' => 'Registro eliminado correctamente'], 200);
         }
         catch(QueryException $ex){
             $mensaje = Utilitat::errorMessage($ex);

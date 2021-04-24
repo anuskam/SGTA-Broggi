@@ -18,7 +18,7 @@ use App\Http\Controllers\Api\SexeController;
 use App\Http\Controllers\Api\TipusAlertantController;
 use App\Http\Controllers\Api\TipusIncidenciaController;
 use App\Http\Controllers\Api\TipusRecursController;
-use App\Http\Controllers\Api\UsuariController;
+use App\Http\Controllers\Api\UsuariControllerApi;
 use App\Http\Controllers\ProvinciaController as ControllersProvinciaController;
 
 /*
@@ -48,7 +48,7 @@ Route::apiResource('sexe', SexeController::class);
 Route::apiResource('tipusAlertant', TipusAlertantController::class);
 Route::apiResource('tipusIncidencia', TipusIncidenciaController::class);
 Route::apiResource('tipusRecurs', TipusRecursController::class);
-Route::apiResource('usuari', UsuariController::class);
+Route::apiResource('usuari', UsuariControllerApi::class);
 Route::apiResource('incidenciaHasRecursos', IncidenciaHasRecursosController::class);
 Route::apiResource('incidenciaHasAfectats', IncidenciaHasAfectatsController::class);
 // Route::get('alertantPaginated', [ControllersAlertantController::class, 'indexPaginated']);
