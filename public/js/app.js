@@ -2023,6 +2023,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['question', 'index'],
   data: function data() {
@@ -4860,7 +4874,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var tipusAlertant_nom = this.tipusAlertants[tipusAlertant_index].tipus;
       return tipusAlertant_nom;
     },
-    deleteAsignat: function deleteAsignat() {// delete con todo el contenido
+    deleteAsignat: function deleteAsignat() {
+      var me = this;
+      axios.get("/SGTA-Broggi/public/deleteIHR/" + me.incidenciaHasRecursos[0].incidencies_id + "/" + me.incidenciaHasRecursos[0].recursos_id).then(function (response) {
+        console.log(response.data);
+      })["catch"](function (error) {
+        console.log(error);
+      });
     },
     confirmDeleteAsignat: function confirmDeleteAsignat(incidencia) {
       this.incidencia = incidencia;
@@ -10835,7 +10855,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nul li {\n  list-style: none;\n}\n#contenedor {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: center;\n}\n#questions {\n  color: black;\n}\n.correcta {\n  background-color: green !important;\n}\n.incorrecta {\n  background-color: red !important;\n}\n#contador {\n  float: right;\n  position: absolute;\n  background-color: green !important;\n  top: 90px;\n  right: 20px;\n}\n.todoFormacion {\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: center;\n}\n.controlVideo {\n  display: flex;\n  flex-direction: row;\n}\n#reproducir {\n  width: 110px;\n  height: 35px;\n  color: black;\n  padding: 0;\n}\n#barra {\n  position: relative;\n  float: left;\n  width: 485px;\n  height: 17px;\n  border: 1px solid #CCCCCC;\n  background: #EEEEEE;\n  margin-top: 17px;\n  margin-left: 5px;\n}\n#progreso {\n  position: absolute;\n  width: 0px;\n  top: 0;\n  height: 16px;\n  background: rgba(0,0,150,.2);\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nul li {\n  list-style: none;\n}\n#contenedor {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: center;\n}\n#questions {\n  color: black;\n}\n.correcta {\n  background-color: green !important;\n}\n.incorrecta {\n  background-color: red !important;\n}\n#contador {\n  float: right;\n  position: absolute;\n  background-color: green !important;\n  top: 90px;\n  right: 20px;\n}\n.todoFormacion {\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: center;\n}\n.controlVideo {\n  display: flex;\n  flex-direction: row;\n}\n#reproducir {\n  width: 110px;\n  height: 35px;\n  color: black;\n  padding: 0;\n}\n#barra {\n  position: relative;\n  float: left;\n  width: 485px;\n  height: 17px;\n  border: 1px solid #CCCCCC;\n  background: #EEEEEE;\n  margin-top: 17px;\n  margin-left: 5px;\n}\n#progreso {\n  position: absolute;\n  width: 0px;\n  top: 0;\n  height: 16px;\n  background: rgba(0,0,150,.2);\n}\n#pregunta{\n    font-weight: bold;\n}\n.respuestas{\n    height: 10vh;\n}\n#cardRespuestas{\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    text-align: center;\n    align-content: center;\n}\n#respuestasList{\n   display: flex;\n    flex-direction: column;\n    justify-content: center;\n    text-align: center;\n    align-content: center;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11003,11 +11023,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-<<<<<<< HEAD
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeNom {\n    width: 20vw;\n}\n.sizeCognom {\n    width: 20vw;\n}\n.sizeBotones {\n    width: 14vw;\n}\n.esborrarAlertantBtn, .afegirAlertantBtn {\n  background-color: #e3177d !important;\n  color: white !important;\n}\n.editarAlertantBtn {\n  background-color: #15acc4 !important;\n  color: black !important;\n}\n.editarAlertantBtn:hover {\n  color: black !important;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n.cerrarBtn:hover {\n  color: white;\n}\n@font-face {\n  font-family: myFont;\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\nh2{\n  font-family: myFont;\n  font-size: 1.3em;\n}\n.modal-header{\n    font-weight: bold;\n    background-color: #15acc4;\n}\n.pagination{\n    padding-left: 48px;\n}\n.numeroPaginacion {\n    color: white;\n}\n.nuevaAlertante{\n    padding-top: 0;\n    padding-bottom: 0;\n    margin-bottom: 15px; /*cambiarlo a vh*/\n}\n\n", ""]);
-=======
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeNom {\r\n    width: 20vw;\n}\n.sizeCognom {\r\n    width: 20vw;\n}\n.sizeBotones {\r\n    width: 14vw;\n}\n.esborrarAlertantBtn, .editarAlertantBtn {\r\n  background-color: #e3177d !important;\r\n  color: white !important;\n}\n.editarAlertantBtn:hover {\r\n  color: black !important;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\n.cerrarBtn:hover {\r\n  color: white;\n}\n@font-face {\r\n  font-family: myFont;\r\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\nh2{\r\n  font-family: myFont;\r\n  font-size: 1.3em;\n}\n.modal-header{\r\n    font-weight: bold;\r\n    background-color: #15acc4;\n}\n.pagination{\r\n    padding-left: 48px;\n}\n.numeroPaginacion {\r\n    color: white;\n}\n.nuevaAlertante{\r\n    padding-top: 0;\r\n    padding-bottom: 0;\r\n    margin-bottom: 15px; /*cambiarlo a vh*/\n}\r\n\r\n", ""]);
->>>>>>> c2df1167f45ef31433fb173a94d2ae66b1080eca
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeNom {\r\n    width: 20vw;\n}\n.sizeCognom {\r\n    width: 20vw;\n}\n.sizeBotones {\r\n    width: 14vw;\n}\n.esborrarAlertantBtn, .afegirAlertantBtn {\r\n  background-color: #e3177d !important;\r\n  color: white !important;\n}\n.editarAlertantBtn {\r\n  background-color: #15acc4 !important;\r\n  color: black !important;\n}\n.editarAlertantBtn:hover {\r\n  color: black !important;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\n.cerrarBtn:hover {\r\n  color: white;\n}\n@font-face {\r\n  font-family: myFont;\r\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\nh2{\r\n  font-family: myFont;\r\n  font-size: 1.3em;\n}\n.modal-header{\r\n    font-weight: bold;\r\n    background-color: #15acc4;\n}\n.pagination{\r\n    padding-left: 48px;\n}\n.numeroPaginacion {\r\n    color: white;\n}\n.nuevaAlertante{\r\n    padding-top: 0;\r\n    padding-bottom: 0;\r\n    margin-bottom: 15px; /*cambiarlo a vh*/\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11031,11 +11047,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-<<<<<<< HEAD
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeBotones {\n    width: 14vw;\n}\n.esborrarRecursBtn, .afegirRecursBtn {\n  background-color: #e3177d !important;\n  color: white !important;\n}\n.editarRecursBtn {\n  background-color: #15acc4 !important;\n  color: black !important;\n}\n.editarRecursBtn:hover {\n  color: black !important;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n.cerrarBtn:hover {\n  color: white;\n}\n@font-face {\n  font-family: myFont;\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\n.nuevoRecurso{\n  padding-top: 0;\n  padding-bottom: 0;\n  margin-bottom: 15px; /*cambiarlo a vh*/\n}\n\n\n/* .modal-header{\n    font-weight: bold;\n    background-color: #15acc4;\n} */\n\n/* h2{\n  font-family: myFont;\n  font-size: 1.3em;\n} */\n\n/*NO SE BORRAN LOS MENSAJES Y AL CAMBIAR EL NOMBRE DE UN CÓDIGO, SE QUITA EL CHECKED*/\n", ""]);
-=======
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeBotones {\r\n    width: 14vw;\n}\n.esborrarRecursBtn, .editarRecursBtn {\r\n  background-color: #e3177d !important;\r\n  color: white !important;\n}\n.editarRecursBtn:hover {\r\n  color: black !important;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\n.cerrarBtn:hover {\r\n  color: white;\n}\n@font-face {\r\n  font-family: myFont;\r\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\r\n\r\n/* .modal-header{\r\n    font-weight: bold;\r\n    background-color: #15acc4;\r\n} */\r\n\r\n/* h2{\r\n  font-family: myFont;\r\n  font-size: 1.3em;\r\n} */\r\n\r\n/*NO SE BORRAN LOS MENSAJES Y AL CAMBIAR EL NOMBRE DE UN CÓDIGO, SE QUITA EL CHECKED*/\r\n", ""]);
->>>>>>> c2df1167f45ef31433fb173a94d2ae66b1080eca
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeBotones {\r\n    width: 14vw;\n}\n.esborrarRecursBtn, .afegirRecursBtn {\r\n  background-color: #e3177d !important;\r\n  color: white !important;\n}\n.editarRecursBtn {\r\n  background-color: #15acc4 !important;\r\n  color: black !important;\n}\n.editarRecursBtn:hover {\r\n  color: black !important;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\n.cerrarBtn:hover {\r\n  color: white;\n}\n@font-face {\r\n  font-family: myFont;\r\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\n.nuevoRecurso{\r\n  padding-top: 0;\r\n  padding-bottom: 0;\r\n  margin-bottom: 15px; /*cambiarlo a vh*/\n}\r\n\r\n\r\n/* .modal-header{\r\n    font-weight: bold;\r\n    background-color: #15acc4;\r\n} */\r\n\r\n/* h2{\r\n  font-family: myFont;\r\n  font-size: 1.3em;\r\n} */\r\n\r\n/*NO SE BORRAN LOS MENSAJES Y AL CAMBIAR EL NOMBRE DE UN CÓDIGO, SE QUITA EL CHECKED*/\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11059,11 +11071,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-<<<<<<< HEAD
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeBotones {\n    width: 14vw;\n}\n.esborrarUsuariBtn, .afegirUsuariBtn {\n  background-color: #e3177d !important;\n  color: white !important;\n}\n.editarUsuariBtn {\n  background-color: #15acc4 !important;\n  color: black !important;\n}\n.editarUsuariBtn:hover {\n  color: black !important;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n.cerrarBtn:hover {\n  color: white;\n}\n@font-face {\n  font-family: myFont;\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\n\n/* h2{\n  font-family: myFont;\n  font-size: 1.3em;\n} */\n\n/* .modal-header{\n    font-weight: bold;\n    background-color: #15acc4;\n} */\n\n\n", ""]);
-=======
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeBotones {\r\n    width: 14vw;\n}\n.esborrarUsuariBtn, .editarUsuariBtn {\r\n  background-color: #e3177d !important;\r\n  color: white !important;\n}\n.editarUsuariBtn:hover {\r\n  color: black !important;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\n.cerrarBtn:hover {\r\n  color: white;\n}\n@font-face {\r\n  font-family: myFont;\r\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\r\n\r\n/* h2{\r\n  font-family: myFont;\r\n  font-size: 1.3em;\r\n} */\r\n\r\n/* .modal-header{\r\n    font-weight: bold;\r\n    background-color: #15acc4;\r\n} */\r\n\r\n\r\n", ""]);
->>>>>>> c2df1167f45ef31433fb173a94d2ae66b1080eca
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeBotones {\r\n    width: 14vw;\n}\n.esborrarUsuariBtn, .afegirUsuariBtn {\r\n  background-color: #e3177d !important;\r\n  color: white !important;\n}\n.editarUsuariBtn {\r\n  background-color: #15acc4 !important;\r\n  color: black !important;\n}\n.editarUsuariBtn:hover {\r\n  color: black !important;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\n.cerrarBtn:hover {\r\n  color: white;\n}\n@font-face {\r\n  font-family: myFont;\r\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\r\n\r\n/* h2{\r\n  font-family: myFont;\r\n  font-size: 1.3em;\r\n} */\r\n\r\n/* .modal-header{\r\n    font-weight: bold;\r\n    background-color: #15acc4;\r\n} */\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -44911,122 +44919,148 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "mt-5", attrs: { id: "contenedor" } }, [
-    _c("div", { staticClass: "todoFormacion" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c("div", { staticClass: "controlVideo" }, [
-        _c("div", { staticClass: "buttonPlay" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn mt-2",
-              attrs: { id: "reproducir", disabled: _vm.disablePlay },
-              on: {
-                click: function($event) {
-                  return _vm.play()
-                }
-              }
-            },
-            [
-              _c("i", {
-                staticClass: "fas fa-play",
-                attrs: { "aria-hidden": "true" }
-              }),
-              _vm._v(" Reproducir")
-            ]
-          )
-        ]),
+  return _c(
+    "div",
+    { staticClass: "mt-5 pt-5 ml-5 pl-5", attrs: { id: "contenedor" } },
+    [
+      _c("div", { staticClass: "todoFormacion" }, [
+        _vm._m(0),
         _vm._v(" "),
-        _vm._m(1),
-        _vm._v(" "),
-        _c("div", { staticStyle: { clear: "both" } })
-      ])
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "test col-5 ml-5" },
-      _vm._l(_vm.questions, function(question, index) {
-        return _c(
-          "div",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.activa,
-                expression: "activa"
-              }
-            ],
-            key: question.id,
-            attrs: { id: "questions" }
-          },
-          [
+        _c("div", { staticClass: "controlVideo" }, [
+          _c("div", { staticClass: "buttonPlay" }, [
             _c(
-              "div",
+              "button",
               {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: index === _vm.currentQuestion,
-                    expression: "index === currentQuestion"
+                staticClass: "btn mt-2",
+                attrs: { id: "reproducir", disabled: _vm.disablePlay },
+                on: {
+                  click: function($event) {
+                    return _vm.play()
                   }
-                ]
+                }
               },
               [
-                _c("p", [_vm._v(_vm._s(question.question))]),
-                _vm._v(" "),
-                _c(
-                  "ul",
-                  _vm._l(question.options, function(option, index) {
-                    return _c("li", { key: index }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-secondary col-7 mb-2",
-                          class: {
-                            correcta: _vm.correcta[index],
-                            incorrecta: _vm.incorrecta[index]
-                          },
-                          attrs: { id: index, disabled: !_vm.enableButtons },
-                          on: {
-                            click: function($event) {
-                              return _vm.evaluarRespuesta(index)
-                            }
-                          }
-                        },
-                        [_vm._v(_vm._s(option))]
-                      ),
-                      _vm._v(" "),
-                      _c("br")
-                    ])
-                  }),
-                  0
-                ),
-                _vm._v(" "),
-                _c("br")
+                _c("i", {
+                  staticClass: "fas fa-play",
+                  attrs: { "aria-hidden": "true" }
+                }),
+                _vm._v(" Reproducir")
               ]
             )
-          ]
-        )
-      }),
-      0
-    ),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn btn-success",
-        attrs: { id: "contador", disabled: "" }
-      },
-      [
-        _c("i", { staticClass: "fas fa-check" }),
-        _vm._v(" " + _vm._s(_vm.aciertos) + " de 5\n  ")
-      ]
-    )
-  ])
+          ]),
+          _vm._v(" "),
+          _vm._m(1),
+          _vm._v(" "),
+          _c("div", { staticStyle: { clear: "both" } })
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "test col-5 ml-5" },
+        _vm._l(_vm.questions, function(question, index) {
+          return _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.activa,
+                  expression: "activa"
+                }
+              ],
+              key: question.id,
+              attrs: { id: "questions" }
+            },
+            [
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: index === _vm.currentQuestion,
+                      expression: "index === currentQuestion"
+                    }
+                  ]
+                },
+                [
+                  _c(
+                    "div",
+                    { staticClass: "card", attrs: { id: "cardRespuestas" } },
+                    [
+                      _c("div", { staticClass: "card-header pb-0" }, [
+                        _c("p", { attrs: { id: "pregunta" } }, [
+                          _vm._v(_vm._s(question.question))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "ul",
+                        {
+                          staticClass: "list-group list-group-flush",
+                          attrs: { id: "respuestasList" }
+                        },
+                        _vm._l(question.options, function(option, index) {
+                          return _c(
+                            "li",
+                            {
+                              key: index,
+                              staticClass: "list-group-item respuestas"
+                            },
+                            [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-secondary",
+                                  class: {
+                                    correcta: _vm.correcta[index],
+                                    incorrecta: _vm.incorrecta[index]
+                                  },
+                                  attrs: {
+                                    id: index,
+                                    disabled: !_vm.enableButtons
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.evaluarRespuesta(index)
+                                    }
+                                  }
+                                },
+                                [_vm._v(_vm._s(option))]
+                              ),
+                              _vm._v(" "),
+                              _c("br")
+                            ]
+                          )
+                        }),
+                        0
+                      )
+                    ]
+                  )
+                ]
+              )
+            ]
+          )
+        }),
+        0
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-success",
+          attrs: { id: "contador", disabled: "" }
+        },
+        [
+          _c("i", { staticClass: "fas fa-check" }),
+          _vm._v(" " + _vm._s(_vm.aciertos) + " de 5\n  ")
+        ]
+      )
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
@@ -49225,9 +49259,9 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [
                   _vm._v(
-                    "\n                " +
+                    "\r\n                " +
                       _vm._s(_vm.getTipusAlertant(index)) +
-                      "\n              "
+                      "\r\n              "
                   )
                 ]),
                 _vm._v(" "),
@@ -49616,9 +49650,9 @@ var render = function() {
                             { key: tipus.id, domProps: { value: tipus.id } },
                             [
                               _vm._v(
-                                "\n                      " +
+                                "\r\n                      " +
                                   _vm._s(tipus.tipus) +
-                                  "\n                    "
+                                  "\r\n                    "
                               )
                             ]
                           )
@@ -49910,7 +49944,7 @@ var render = function() {
               staticClass: "fas fa-plus-circle",
               attrs: { "aria-hidden": "true" }
             }),
-            _vm._v("\n        Nuevo recurso\n    ")
+            _vm._v("\r\n        Nuevo recurso\r\n    ")
           ]
         )
       ]
@@ -50301,28 +50335,6 @@ var render = function() {
           ])
         ])
       ]
-<<<<<<< HEAD
-=======
-    ),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn btn-primary btn-float-afegir",
-        on: {
-          click: function($event) {
-            return _vm.createRecurs()
-          }
-        }
-      },
-      [
-        _c("i", {
-          staticClass: "fas fa-plus-circle",
-          attrs: { "aria-hidden": "true" }
-        }),
-        _vm._v("\r\n    Nuevo recurso\r\n  ")
-      ]
->>>>>>> c2df1167f45ef31433fb173a94d2ae66b1080eca
     )
   ])
 }

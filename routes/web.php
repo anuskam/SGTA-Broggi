@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UsuariController;
 use App\Http\Controllers\Api\AlertantController;
+use App\Http\Controllers\Api\IncidenciaHasRecursosController;
 use App\Http\Controllers\Api\RecursController;
 use App\Http\Controllers\Api\UsuariControllerApi;
 
@@ -23,6 +24,9 @@ Route::post('store', [UsuariController::class, 'store']);
 Route::get('home', [UsuariController::class, 'index']);
 
 Route::get('/', [UsuariController::class, 'index']);
+
+/* Delete IHR */
+Route::get('deleteIHR/{incidencies_id}/{recursos_id}', [IncidenciaHasRecursosController::class, 'deleteIHR']);
 
 /*PAGINACIÓN*/
 Route::get('alertantPaginated', [AlertantController::class, 'indexPaginated']);

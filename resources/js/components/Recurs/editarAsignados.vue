@@ -235,7 +235,14 @@
 
         },
         deleteAsignat(){
-            // delete con todo el contenido
+            let me = this;
+          axios
+              .get("/SGTA-Broggi/public/deleteIHR/"+me.incidenciaHasRecursos[0].incidencies_id+"/"+me.incidenciaHasRecursos[0].recursos_id)
+              .then((response) => {
+                console.log(response.data);
+              }).catch((error) => {
+                console.log(error);
+              })
         },
         confirmDeleteAsignat(incidencia){
           this.incidencia = incidencia;

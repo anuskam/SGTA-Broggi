@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\IncidenciaHasRecursos;
-use App\Http\Controllers\Controller;
-use App\Http\Resources\IncidenciaHasRecursosResource;
+use App\Clases\Utilitat;
+use App\Models\Incidencia;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\IncidenciaHasRecursos;
+use Illuminate\Database\QueryException;
+use App\Http\Resources\IncidenciaHasRecursosResource;
 
 class IncidenciaHasRecursosController extends Controller
 {
@@ -62,8 +65,34 @@ class IncidenciaHasRecursosController extends Controller
      * @param  \App\Models\IncidenciaHasRecursos  $incidenciaHasRecursos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(IncidenciaHasRecursos $incidenciaHasRecurso)
+    public function destroy(Incidencia $incidencium)
     {
-        //
+        try{
+            $incidencium->incidenciaHasRecursos()->delete();
+
+            $response = \response()->json(['missatge' => 'Registro eliminado correctamente'], 200);
+        }
+        catch(QueryException $ex){
+            $mensaje = Utilitat::errorMessage($ex);
+            $response = \response()->json(['error' => $mensaje], 400);
+        }
+
+        return $response;
+    }
+
+    public function deleteIHR($incidencia_id, $recurs_id){
+        $ihr = IncidenciaHasRecursos::where('incidencies_id', '=', $incidencia_id)->where('recursos_id', '=', $recurs_id)->get();
+        if(!empty($ihr)){
+            try{
+                $ihr->delete();
+                $response = \response()->json(['missatge' => 'Registro eliminado correctamente'], 200);
+            }
+            catch(QueryException $ex){
+                $mensaje = Utilitat::errorMessage($ex);
+                $response = \response()->json(['error' => $mensaje], 400);
+            }
+        }
+
+        return $response;
     }
 }
