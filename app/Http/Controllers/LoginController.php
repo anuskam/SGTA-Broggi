@@ -53,11 +53,11 @@ class LoginController extends Controller
                     Auth::login($usuari);
                     $response = redirect('home');
                 } else {
-                    $response = redirect('login');
+                    $response = redirect('login')->withInput()->withErrors(['La contraseña es incorrecta']);
                     // Control Error contraseña incorrecta (try catches con clase Utilitat)!
                 }
             } else {
-                $response = redirect('login');
+                $response = redirect('login')->withInput()->withErrors(['El usuario no existe']);
                 // Control Error no Existe usuario
             }
         }
