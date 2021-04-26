@@ -19,7 +19,9 @@ use App\Http\Controllers\Api\TipusAlertantController;
 use App\Http\Controllers\Api\TipusIncidenciaController;
 use App\Http\Controllers\Api\TipusRecursController;
 use App\Http\Controllers\Api\UsuariControllerApi;
+use App\Http\Controllers\Api\PreguntaController;
 use App\Http\Controllers\ProvinciaController as ControllersProvinciaController;
+use App\Http\Controllers\Api\RespostaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,5 +53,8 @@ Route::apiResource('tipusRecurs', TipusRecursController::class);
 Route::apiResource('usuari', UsuariControllerApi::class);
 Route::apiResource('incidenciaHasRecursos', IncidenciaHasRecursosController::class);
 Route::apiResource('incidenciaHasAfectats', IncidenciaHasAfectatsController::class);
+Route::apiResource('pregunta', PreguntaController::class);
+Route::apiResource('resposta', RespostaController::class);
+
 // Route::get('alertantPaginated', [ControllersAlertantController::class, 'indexPaginated']);
 

@@ -137,7 +137,9 @@ export default {
       }
       else {
         video.play();
-        this.disablePlay = false;
+        if(this.currentQuestion < 4){
+          this.disablePlay = false;
+        }
         reproducir.innerHTML = `<i class="fas fa-pause" aria-hidden="true"></i> Pausa`;
         this.bucle = setInterval(this.estado, 500);
       }
@@ -273,7 +275,7 @@ export default {
     align-content: center;
   }
 
-  ul li{
+  #respuestasList li{
     display: flex !important;
     align-items: center !important; /*Para tenerlos centraditos verticalmente*/
     justify-content: center; /*Para tenerlos centraditos horizontalmente*/
