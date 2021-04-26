@@ -10,6 +10,21 @@
     {{ infoMessage }}
   </div>
 
+  <div class="search-wrapper">
+    <input type="text" v-model="search" placeholder="Search title.."/>
+        <label>Buscar</label>
+  </div>
+
+  <!-- <div class="wrapper">
+    <div class="card" v-for="post in filteredList" :key="post">
+      <a v-bind:href="post.link" target="_blank">
+        <img v-bind:src="post.img"/>
+        <small>posted by: {{ post.author }}</small>
+        {{ post.title }}
+      </a>
+    </div>
+  </div> -->
+
 
   <div aria-label="paginacion" class="paginacionNav">
     <ul class="pagination">
@@ -36,7 +51,9 @@
 
   <div class="card mt-2 mb-1 ml-5 mr-5">
     <h2 class="card-header font-weight-bold">Usuarias</h2>
-    <div class="card-body">
+    <!--Por si no hay resultados-->
+    <div v-if="filteredList.length == 0" class="p-3">No hay resultados con estos parámetros</div>
+    <div v-else class="card-body">
       <table class="table mt-2">
           <thead>
             <tr>
@@ -49,7 +66,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(usuari, index) in usuaris" :key="usuari.id">
+            <tr v-for="(usuari, index) in filteredList" :key="usuari.id">
               <td>{{ usuari.username }}</td>
               <td>{{ usuari.email }}</td>
               <td>{{ usuari.nom }}</td>
@@ -187,6 +204,7 @@
           paginas: [],
           pagina: 0,
           currentPage: 0,
+          search: '',
         }
       },
       methods: {
@@ -323,6 +341,13 @@
 
           return rol_nom;
         },
+      },
+      computed: {
+        filteredList() {
+          return this.usuaris.filter(usuari => {
+            return usuari.username.toLowerCase().includes(this.search.toLowerCase()) || usuari.cognoms.toLowerCase().includes(this.search.toLowerCase()) || usuari.rols_id == (this.search)
+          })
+        }
       },
       created() {
         this.selectUsuaris(), this.selectRols();

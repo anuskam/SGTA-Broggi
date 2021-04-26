@@ -3074,11 +3074,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     alertantNumber: Number,
@@ -6147,6 +6142,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -6167,7 +6179,8 @@ __webpack_require__.r(__webpack_exports__);
       meta: {},
       paginas: [],
       pagina: 0,
-      currentPage: 0
+      currentPage: 0,
+      search: ''
     };
   },
   methods: {
@@ -6294,6 +6307,15 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return rol_nom;
+    }
+  },
+  computed: {
+    filteredList: function filteredList() {
+      var _this3 = this;
+
+      return this.usuaris.filter(function (usuari) {
+        return usuari.username.toLowerCase().includes(_this3.search.toLowerCase()) || usuari.cognoms.toLowerCase().includes(_this3.search.toLowerCase()) || usuari.rols_id == _this3.search;
+      });
     }
   },
   created: function created() {
@@ -11074,7 +11096,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeNom {\n    width: 20vw;\n}\n.sizeCognom {\n    width: 20vw;\n}\n.sizeBotones {\n    width: 14vw;\n}\n.esborrarAlertantBtn, .afegirAlertantBtn {\n  background-color: #e3177d !important;\n  color: white !important;\n}\n.editarAlertantBtn {\n  background-color: #15acc4 !important;\n  color: black !important;\n}\n.editarAlertantBtn:hover {\n  color: black !important;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n.cerrarBtn:hover {\n  color: white;\n}\n@font-face {\n  font-family: myFont;\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\nh2{\n  font-family: myFont;\n  font-size: 1.3em;\n}\n.modal-header{\n  font-weight: bold;\n  background-color: #15acc4;\n}\n.pagination{\n  padding-left: 48px;\n}\n.numeroPaginacion {\n  color: white;\n}\n.nuevaAlertante{\n  padding-top: 0;\n  padding-bottom: 0;\n  margin-bottom: 15px; /*cambiarlo a vh*/\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeNom {\n    width: 20vw;\n}\n.sizeCognom {\n    width: 15vw;\n}\n.sizeBotones {\n    width: 14vw;\n}\n.esborrarAlertantBtn, .afegirAlertantBtn {\n  background-color: #e3177d !important;\n  color: white !important;\n}\n.editarAlertantBtn {\n  background-color: #15acc4 !important;\n  color: black !important;\n}\n.editarAlertantBtn:hover {\n  color: black !important;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n.cerrarBtn:hover {\n  color: white;\n}\n@font-face {\n  font-family: myFont;\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\nh2{\n  font-family: myFont;\n  font-size: 1.3em;\n}\n.modal-header{\n  font-weight: bold;\n  background-color: #15acc4;\n}\n.pagination{\n  padding-left: 48px;\n}\n.numeroPaginacion {\n  color: white;\n}\n.nuevaAlertante{\n  padding-top: 0;\n  padding-bottom: 0;\n  margin-bottom: 15px; /*cambiarlo a vh*/\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -44941,7 +44963,7 @@ var staticRenderFns = [
           "data-target": "#navbarNav",
           "aria-controls": "navbarNav",
           "aria-expanded": "false",
-          "aria-label": "Toggle navigation"
+          "aria-label": "Barra de navegación"
         }
       },
       [_c("span", { staticClass: "navbar-toggler-icon" })]
@@ -45214,6 +45236,7 @@ var render = function() {
             {
               staticClass: "btn btn-sm mr-3 tabButton",
               class: { selectedTab: _vm.tabs.a },
+              attrs: { "aria-label": "Alertante" },
               on: {
                 click: function($event) {
                   return _vm.selectTab(1)
@@ -45234,6 +45257,7 @@ var render = function() {
             {
               staticClass: "btn btn-sm mr-3 ml-3 tabButton",
               class: { selectedTab: _vm.tabs.b },
+              attrs: { "aria-label": "Afectada" },
               on: {
                 click: function($event) {
                   return _vm.selectTab(2)
@@ -45254,6 +45278,7 @@ var render = function() {
             {
               staticClass: "btn btn-sm ml-3 tabButton",
               class: { selectedTab: _vm.tabs.c },
+              attrs: { "aria-label": "Respuesta" },
               on: {
                 click: function($event) {
                   return _vm.selectTab(3)
@@ -46079,7 +46104,7 @@ var render = function() {
                     _c(
                       "label",
                       {
-                        staticClass: "col-1 mt-1 ml-4",
+                        staticClass: "col-1 col-form-label mt-1 ml-4",
                         attrs: { for: "edadAfectada" }
                       },
                       [_vm._v("Edad")]
@@ -47297,7 +47322,7 @@ var staticRenderFns = [
         attrs: {
           type: "button",
           "data-dismiss": "alert",
-          "aria-label": "Close"
+          "aria-label": "Cerrar"
         }
       },
       [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
@@ -47546,7 +47571,7 @@ var staticRenderFns = [
           attrs: {
             type: "button",
             "data-dismiss": "modal",
-            "aria-label": "Close"
+            "aria-label": "Cerrar"
           }
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
@@ -47582,7 +47607,7 @@ var staticRenderFns = [
           attrs: {
             type: "button",
             "data-dismiss": "modal",
-            "aria-label": "Close"
+            "aria-label": "Cerrar"
           }
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
@@ -50520,6 +50545,31 @@ var render = function() {
         )
       : _vm._e(),
     _vm._v(" "),
+    _c("div", { staticClass: "search-wrapper" }, [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.search,
+            expression: "search"
+          }
+        ],
+        attrs: { type: "text", placeholder: "Search title.." },
+        domProps: { value: _vm.search },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.search = $event.target.value
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c("label", [_vm._v("Buscar")])
+    ]),
+    _vm._v(" "),
     _c(
       "div",
       { staticClass: "paginacionNav", attrs: { "aria-label": "paginacion" } },
@@ -50623,78 +50673,82 @@ var render = function() {
         _vm._v("Usuarias")
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "card-body" }, [
-        _c("table", { staticClass: "table mt-2" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "tbody",
-            _vm._l(_vm.usuaris, function(usuari, index) {
-              return _c("tr", { key: usuari.id }, [
-                _c("td", [_vm._v(_vm._s(usuari.username))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(usuari.email))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(usuari.nom))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(usuari.cognoms))]),
-                _vm._v(" "),
-                _c("td", [
-                  _vm._v(
-                    "\n                " +
-                      _vm._s(_vm.getRol(index)) +
-                      "\n              "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("td", [
-                  _c(
-                    "button",
-                    {
-                      staticClass:
-                        "btn btn-sm float-right ml-2 esborrarUsuariBtn",
-                      attrs: { type: "submit" },
-                      on: {
-                        click: function($event) {
-                          return _vm.confirmDeleteUsuari(usuari)
-                        }
-                      }
-                    },
-                    [
-                      _c("i", {
-                        staticClass: "fa fa-trash",
-                        attrs: { "aria-hidden": "true" }
-                      }),
-                      _vm._v("  Eliminar")
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-sm float-right editarUsuariBtn",
-                      attrs: { type: "submit" },
-                      on: {
-                        click: function($event) {
-                          return _vm.editUsuari(usuari)
-                        }
-                      }
-                    },
-                    [
-                      _c("i", {
-                        staticClass: "fa fa-edit",
-                        attrs: { "aria-hidden": "true" }
-                      }),
-                      _vm._v("  Editar")
-                    ]
-                  )
-                ])
-              ])
-            }),
-            0
-          )
-        ])
-      ])
+      _vm.filteredList.length == 0
+        ? _c("div", { staticClass: "p-3" }, [
+            _vm._v("No hay resultados con estos parámetros")
+          ])
+        : _c("div", { staticClass: "card-body" }, [
+            _c("table", { staticClass: "table mt-2" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.filteredList, function(usuari, index) {
+                  return _c("tr", { key: usuari.id }, [
+                    _c("td", [_vm._v(_vm._s(usuari.username))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(usuari.email))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(usuari.nom))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(usuari.cognoms))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(_vm.getRol(index)) +
+                          "\n              "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "btn btn-sm float-right ml-2 esborrarUsuariBtn",
+                          attrs: { type: "submit" },
+                          on: {
+                            click: function($event) {
+                              return _vm.confirmDeleteUsuari(usuari)
+                            }
+                          }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fa fa-trash",
+                            attrs: { "aria-hidden": "true" }
+                          }),
+                          _vm._v("  Eliminar")
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-sm float-right editarUsuariBtn",
+                          attrs: { type: "submit" },
+                          on: {
+                            click: function($event) {
+                              return _vm.editUsuari(usuari)
+                            }
+                          }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fa fa-edit",
+                            attrs: { "aria-hidden": "true" }
+                          }),
+                          _vm._v("  Editar")
+                        ]
+                      )
+                    ])
+                  ])
+                }),
+                0
+              )
+            ])
+          ])
     ]),
     _vm._v(" "),
     _c(
