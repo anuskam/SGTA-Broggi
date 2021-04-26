@@ -58,7 +58,9 @@
               </div>
 
         <div class="card ml-5 mr-5">
-          <div class="card-header font-weight-bold" id="titulito">DATOS ALERTANTE</div>
+          <div class="card-header font-weight-bold" id="titulito">DATOS ALERTANTE
+              <button class="float-right" @click="showHelpBox(1)"><i class="far fa-file-alt"></i></button>
+          </div>
           <div class="card-body ml-5">
             <form>
 
@@ -247,7 +249,9 @@
     <div v-show="currentTab == 2">
       <div class="container-fluid mt-5">
         <div class="card ml-5 mr-5">
-          <div class="card-header font-weight-bold" id="titulito">DATOS AFECTADA</div>
+          <div class="card-header font-weight-bold" id="titulito">DATOS AFECTADA
+              <button class="float-right" @click="showHelpBox(2)"><i class="far fa-file-alt"></i></button>
+          </div>
           <div class="card-body ml-5">
             <form>
               <!-- NOMBRE AFECTADA -->
@@ -356,7 +360,9 @@
         </div>
 
         <div class="card ml-5 mr-5 mt-3">
-          <div class="card-header font-weight-bold" id="titulito">DATOS INCIDENTE</div>
+          <div class="card-header font-weight-bold" id="titulito">DATOS INCIDENTE
+              <button class="float-right" @click="showHelpBox(3)"><i class="far fa-file-alt"></i></button>
+          </div>
           <div class="card-body ml-5">
             <form>
               <!-- FECHA -->
@@ -482,6 +488,7 @@
     <div v-show="currentTab == 3">
       <div class="card ml-5 mr-5 mt-3">
         <div class="card-header font-weight-bold" id="titulito">RESPUESTA
+            <button class="float-right ml-4" @click="showHelpBox(4)"><i class="far fa-file-alt"></i></button>
             <button
                 type="button"
                 id="entregar"
@@ -895,6 +902,33 @@
         </div>
       </div>
     </div>
+
+    <!-- Modal HelpBox -->
+    <div class="modal" tabindex="-1" role="dialog" id="helpbox">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">HelpBox</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="preguntesModal">
+        <div v-for="(pregunta, index) in preguntes" :key="index" class="card" id="preguntaModal">
+            <div class="card-header">
+                {{ pregunta.pregunta }}
+            </div>
+            <ul class="list-group list-group-flush">
+                <li v-for="(resposta, index) in pregunta.respostes" :key="index" class="list-group-item">{{ resposta.resposta }}</li>
+            </ul>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
   </div>
 </template>
 
@@ -1036,9 +1070,75 @@ export default {
       afectatsDB: null,
       recursosInsert: [],
       evaluando: false,
+      preguntesDB : [],
+      respostesDB: [],
+      preguntes: [],
+      pregunta: {
+          pregunta: null,
+          respostes: []
+      },
     };
   },
   methods: {
+    showHelpBox(number){
+        let me = this;
+        this.preguntes = [];
+        switch(number){
+            case 1:
+                this.preguntesDB.forEach(function(pregunta){
+                    if(pregunta.id > 0 && pregunta.id < 4){
+                        me.pregunta.pregunta = pregunta.pregunta;
+                        me.pregunta.respostes = me.respostesDB.filter((resposta => resposta.preguntes_id == pregunta.id));
+                        me.preguntes.push(me.pregunta);
+                        me.pregunta = {
+                            pregunta: null,
+                            respostes: []
+                        };
+                    }
+                })
+                break;
+            case 2:
+                this.preguntesDB.forEach(function(pregunta){
+                    if(pregunta.id > 3 && pregunta.id < 8){
+                        me.pregunta.pregunta = pregunta.pregunta;
+                        me.pregunta.respostes = me.respostesDB.filter((resposta => resposta.preguntes_id == pregunta.id));
+                        me.preguntes.push(me.pregunta);
+                        me.pregunta = {
+                            pregunta: null,
+                            respostes: []
+                        };
+                    }
+                })
+                break;
+            case 3:
+                this.preguntesDB.forEach(function(pregunta){
+                    if(pregunta.id == 8){
+                        me.pregunta.pregunta = pregunta.pregunta;
+                        me.pregunta.respostes = me.respostesDB.filter((resposta => resposta.preguntes_id == pregunta.id));
+                        me.preguntes.push(me.pregunta);
+                        me.pregunta = {
+                            pregunta: null,
+                            respostes: []
+                        };
+                    }
+                })
+                break;
+            case 4:
+                this.preguntesDB.forEach(function(pregunta){
+                    if(pregunta.id > 8){
+                        me.pregunta.pregunta = pregunta.pregunta;
+                        me.pregunta.respostes = me.respostesDB.filter((resposta => resposta.preguntes_id == pregunta.id));
+                        me.preguntes.push(me.pregunta);
+                        me.pregunta = {
+                            pregunta: null,
+                            respostes: []
+                        };
+                    }
+                })
+                break;
+        }
+        $('#helpbox').modal('show');
+    },
     selectTab(selectedTab) {
       this.currentTab = selectedTab;
       switch(selectedTab){
@@ -1068,6 +1168,28 @@ export default {
       ++this.currentTab;
       this.selectTab(this.currentTab);
 
+    },
+    selectPreguntes() {
+      let me = this;
+      axios
+        .get("/SGTA-Broggi/public/api/pregunta")
+        .then((response) => {
+          me.preguntesDB = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    selectRespostes() {
+      let me = this;
+      axios
+        .get("/SGTA-Broggi/public/api/resposta")
+        .then((response) => {
+          me.respostesDB = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
     selectProvincies() {
       let me = this;
@@ -1524,7 +1646,7 @@ export default {
     }
   },
   created() {
-    this.selectAlertants(),this.selectProvincies(), this.selectComarques(), this.selectMunicipis(), this.selectRecursos();
+    this.selectAlertants(),this.selectProvincies(), this.selectComarques(), this.selectMunicipis(), this.selectRecursos(), this.selectPreguntes(), this.selectRespostes();
   },
 };
 </script>
@@ -1644,4 +1766,24 @@ button {
     height: 8vh;
 }
 
+#preguntesModal{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+#preguntaModal{
+    width: 50vw;
+    margin-bottom: 2vw;
+    margin-top: 2vw;
+}
+
+#preguntaModal > .card-header{
+    font-weight: bold;
+}
+
+.modal-title{
+    font-weight: bold !important;
+}
 </style>

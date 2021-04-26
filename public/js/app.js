@@ -2111,7 +2111,11 @@ __webpack_require__.r(__webpack_exports__);
         reproducir.innerHTML = "<i class=\"fas fa-play\" aria-hidden=\"true\"></i> Reproducir";
       } else {
         video.play();
-        this.disablePlay = false;
+
+        if (this.currentQuestion < 4) {
+          this.disablePlay = false;
+        }
+
         reproducir.innerHTML = "<i class=\"fas fa-pause\" aria-hidden=\"true\"></i> Pausa";
         this.bucle = setInterval(this.estado, 500);
       }
@@ -2174,6 +2178,40 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3209,10 +3247,89 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       alertantDB: null,
       afectatsDB: null,
       recursosInsert: [],
-      evaluando: false
+      evaluando: false,
+      preguntesDB: [],
+      respostesDB: [],
+      preguntes: [],
+      pregunta: {
+        pregunta: null,
+        respostes: []
+      }
     };
   },
   methods: {
+    showHelpBox: function showHelpBox(number) {
+      var me = this;
+      this.preguntes = [];
+
+      switch (number) {
+        case 1:
+          this.preguntesDB.forEach(function (pregunta) {
+            if (pregunta.id > 0 && pregunta.id < 4) {
+              me.pregunta.pregunta = pregunta.pregunta;
+              me.pregunta.respostes = me.respostesDB.filter(function (resposta) {
+                return resposta.preguntes_id == pregunta.id;
+              });
+              me.preguntes.push(me.pregunta);
+              me.pregunta = {
+                pregunta: null,
+                respostes: []
+              };
+            }
+          });
+          break;
+
+        case 2:
+          this.preguntesDB.forEach(function (pregunta) {
+            if (pregunta.id > 3 && pregunta.id < 8) {
+              me.pregunta.pregunta = pregunta.pregunta;
+              me.pregunta.respostes = me.respostesDB.filter(function (resposta) {
+                return resposta.preguntes_id == pregunta.id;
+              });
+              me.preguntes.push(me.pregunta);
+              me.pregunta = {
+                pregunta: null,
+                respostes: []
+              };
+            }
+          });
+          break;
+
+        case 3:
+          this.preguntesDB.forEach(function (pregunta) {
+            if (pregunta.id == 8) {
+              me.pregunta.pregunta = pregunta.pregunta;
+              me.pregunta.respostes = me.respostesDB.filter(function (resposta) {
+                return resposta.preguntes_id == pregunta.id;
+              });
+              me.preguntes.push(me.pregunta);
+              me.pregunta = {
+                pregunta: null,
+                respostes: []
+              };
+            }
+          });
+          break;
+
+        case 4:
+          this.preguntesDB.forEach(function (pregunta) {
+            if (pregunta.id > 8) {
+              me.pregunta.pregunta = pregunta.pregunta;
+              me.pregunta.respostes = me.respostesDB.filter(function (resposta) {
+                return resposta.preguntes_id == pregunta.id;
+              });
+              me.preguntes.push(me.pregunta);
+              me.pregunta = {
+                pregunta: null,
+                respostes: []
+              };
+            }
+          });
+          break;
+      }
+
+      $('#helpbox').modal('show');
+    },
     selectTab: function selectTab(selectedTab) {
       this.currentTab = selectedTab;
 
@@ -3244,6 +3361,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     next: function next() {
       ++this.currentTab;
       this.selectTab(this.currentTab);
+    },
+    selectPreguntes: function selectPreguntes() {
+      var me = this;
+      axios.get("/SGTA-Broggi/public/api/pregunta").then(function (response) {
+        me.preguntesDB = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    selectRespostes: function selectRespostes() {
+      var me = this;
+      axios.get("/SGTA-Broggi/public/api/resposta").then(function (response) {
+        me.respostesDB = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
     },
     selectProvincies: function selectProvincies() {
       var me = this;
@@ -3922,7 +4055,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   created: function created() {
-    this.selectAlertants(), this.selectProvincies(), this.selectComarques(), this.selectMunicipis(), this.selectRecursos();
+    this.selectAlertants(), this.selectProvincies(), this.selectComarques(), this.selectMunicipis(), this.selectRecursos(), this.selectPreguntes(), this.selectRespostes();
   }
 });
 
@@ -10928,7 +11061,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nul li {\n  list-style: none;\n}\n#contenedor {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: center;\n}\n#questions {\n  color: black;\n}\n.correcta {\n  background-color: green !important;\n}\n.incorrecta {\n  background-color: red !important;\n}\n#contador {\n  float: right;\n  position: absolute;\n  background-color: green !important;\n  top: 90px;\n  right: 20px;\n}\n.todoFormacion {\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: center;\n}\n.controlVideo {\n  display: flex;\n  flex-direction: row;\n}\n#reproducir {\n  width: 110px;\n  height: 35px;\n  color: black;\n  padding: 0;\n}\n#barra {\n  position: relative;\n  float: left;\n  width: 485px;\n  height: 17px;\n  border: 1px solid #CCCCCC;\n  background: #EEEEEE;\n  margin-top: 17px;\n  margin-left: 5px;\n}\n#progreso {\n  position: absolute;\n  width: 0px;\n  top: 0;\n  height: 16px;\n  background: rgba(0,0,150,.2);\n}\n#pregunta{\n  font-weight: bold;\n}\n.respuestas{\n  height: 10vh;\n}\n#cardRespuestas{\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  text-align: center;\n  align-content: center;\n}\nul li{\n  display: flex !important;\n  align-items: center !important; /*Para tenerlos centraditos verticalmente*/\n  justify-content: center; /*Para tenerlos centraditos horizontalmente*/\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nul li {\n  list-style: none;\n}\n#contenedor {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: center;\n}\n#questions {\n  color: black;\n}\n.correcta {\n  background-color: green !important;\n}\n.incorrecta {\n  background-color: red !important;\n}\n#contador {\n  float: right;\n  position: absolute;\n  background-color: green !important;\n  top: 90px;\n  right: 20px;\n}\n.todoFormacion {\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: center;\n}\n.controlVideo {\n  display: flex;\n  flex-direction: row;\n}\n#reproducir {\n  width: 110px;\n  height: 35px;\n  color: black;\n  padding: 0;\n}\n#barra {\n  position: relative;\n  float: left;\n  width: 485px;\n  height: 17px;\n  border: 1px solid #CCCCCC;\n  background: #EEEEEE;\n  margin-top: 17px;\n  margin-left: 5px;\n}\n#progreso {\n  position: absolute;\n  width: 0px;\n  top: 0;\n  height: 16px;\n  background: rgba(0,0,150,.2);\n}\n#pregunta{\n  font-weight: bold;\n}\n.respuestas{\n  height: 10vh;\n}\n#cardRespuestas{\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  text-align: center;\n  align-content: center;\n}\n#respuestasList li{\n  display: flex !important;\n  align-items: center !important; /*Para tenerlos centraditos verticalmente*/\n  justify-content: center; /*Para tenerlos centraditos horizontalmente*/\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10952,7 +11085,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn {\n    font-size: 15px;\n}\n.contenido{\n    font-size: 15px;\n}\n.btn-secondary:not(:disabled):not(.disabled).active,\n.btn-secondary:not(:disabled):not(.disabled):active,\n.show > .btn-secondary.dropdown-toggle {\n  background-color: #e3177d;\n  border-color: black;\n}\n.btn-secondary {\n  border-color: black;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.parentGrid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n.card-header {\n  background-color: #15acc4;\n  border: 1px solid black;\n  border-left: 0;\n  border-right: 0;\n  margin-top: -1px;\n}\n.modal-header{\n    background-color: #15acc4 !important;\n}\n.card {\n  border: 1px solid black !important;\n}\nbutton {\n  background-color: #e3177d !important;\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\n  color: black;\n  font-weight: bold;\n  background-color: #15acc4 !important;\n}\n.tabButton{\n    background-color: white !important;\n    border: 0 !important;\n}\n.selectedTab{\n    background-color: #e3177d !important;\n    border: 1px solid black !important;\n}\n.green{\n    background-color: green;\n    color: white;\n}\n.red{\n    background-color: red;\n    color: white;\n}\n#entregar{\n  border: 1px solid black;\n}\n#titulitosTabs {\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n.iconNavPrincipal{\n    color: black;\n}\n#titulito {\n    font-family: 'Signika', sans-serif;\n    font-size: 1.3em;\n}\n.hidden{\n    visibility: hidden;\n}\n#buscadorTelefono > input{\n    border: 1px solid black;\n}\n.arrowNav{\n    height: 8vh;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn {\r\n    font-size: 15px;\n}\n.contenido{\r\n    font-size: 15px;\n}\n.btn-secondary:not(:disabled):not(.disabled).active,\r\n.btn-secondary:not(:disabled):not(.disabled):active,\r\n.show > .btn-secondary.dropdown-toggle {\r\n  background-color: #e3177d;\r\n  border-color: black;\n}\n.btn-secondary {\r\n  border-color: black;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\n}\n.parentGrid {\r\n  display: grid;\r\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-between;\n}\n.card-header {\r\n  background-color: #15acc4;\r\n  border: 1px solid black;\r\n  border-left: 0;\r\n  border-right: 0;\r\n  margin-top: -1px;\n}\n.modal-header{\r\n    background-color: #15acc4 !important;\n}\n.card {\r\n  border: 1px solid black !important;\n}\nbutton {\r\n  background-color: #e3177d !important;\r\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\r\n  color: black;\r\n  font-weight: bold;\r\n  background-color: #15acc4 !important;\n}\n.tabButton{\r\n    background-color: white !important;\r\n    border: 0 !important;\n}\n.selectedTab{\r\n    background-color: #e3177d !important;\r\n    border: 1px solid black !important;\n}\n.green{\r\n    background-color: green;\r\n    color: white;\n}\n.red{\r\n    background-color: red;\r\n    color: white;\n}\n#entregar{\r\n  border: 1px solid black;\n}\n#titulitosTabs {\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\n}\n.iconNavPrincipal{\r\n    color: black;\n}\n#titulito {\r\n    font-family: 'Signika', sans-serif;\r\n    font-size: 1.3em;\n}\n.hidden{\r\n    visibility: hidden;\n}\n#buscadorTelefono > input{\r\n    border: 1px solid black;\n}\n.arrowNav{\r\n    height: 8vh;\n}\n#preguntesModal{\r\n    display: flex;\r\n    flex-direction: row;\r\n    flex-wrap: wrap;\r\n    justify-content: space-around;\n}\n#preguntaModal{\r\n    width: 50vw;\r\n    margin-bottom: 2vw;\r\n    margin-top: 2vw;\n}\n#preguntaModal > .card-header{\r\n    font-weight: bold;\n}\n.modal-title{\r\n    font-weight: bold !important;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -45204,7 +45337,7 @@ var render = function() {
             staticStyle: { color: "black" },
             attrs: { role: "alert" }
           },
-          [_vm._v("\n      " + _vm._s(error) + "\n      "), _vm._m(0, true)]
+          [_vm._v("\n        " + _vm._s(error) + "\n        "), _vm._m(0, true)]
         )
       }),
       _vm._v(" "),
@@ -45251,7 +45384,7 @@ var render = function() {
               })
             ]
           ),
-          _vm._v("\n      |\n      "),
+          _vm._v("\n        |\n        "),
           _c(
             "button",
             {
@@ -45272,7 +45405,7 @@ var render = function() {
               })
             ]
           ),
-          _vm._v("\n      |\n      "),
+          _vm._v("\n        |\n        "),
           _c(
             "button",
             {
@@ -45356,7 +45489,7 @@ var render = function() {
                     },
                     [
                       _c("i", { staticClass: "fa fa-search " }),
-                      _vm._v("  Buscar\n                ")
+                      _vm._v("  Buscar\n                  ")
                     ]
                   )
                 ])
@@ -45370,7 +45503,21 @@ var render = function() {
                   staticClass: "card-header font-weight-bold",
                   attrs: { id: "titulito" }
                 },
-                [_vm._v("DATOS ALERTANTE")]
+                [
+                  _vm._v("DATOS ALERTANTE\n              "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "float-right",
+                      on: {
+                        click: function($event) {
+                          return _vm.showHelpBox(1)
+                        }
+                      }
+                    },
+                    [_c("i", { staticClass: "far fa-file-alt" })]
+                  )
+                ]
               ),
               _vm._v(" "),
               _c("div", { staticClass: "card-body ml-5" }, [
@@ -45425,7 +45572,7 @@ var render = function() {
                             }
                           }),
                           _vm._v(
-                            "\n                  Centro Sanitario\n                "
+                            "\n                    Centro Sanitario\n                  "
                           )
                         ]),
                         _vm._v(" "),
@@ -45462,7 +45609,7 @@ var render = function() {
                             }
                           }),
                           _vm._v(
-                            "\n                  Afectada\n                "
+                            "\n                    Afectada\n                  "
                           )
                         ]),
                         _vm._v(" "),
@@ -45499,7 +45646,7 @@ var render = function() {
                             }
                           }),
                           _vm._v(
-                            "\n                  Entorno Afectada\n                "
+                            "\n                    Entorno Afectada\n                  "
                           )
                         ]),
                         _vm._v(" "),
@@ -45535,7 +45682,9 @@ var render = function() {
                               }
                             }
                           }),
-                          _vm._v("\n                  VIP\n                ")
+                          _vm._v(
+                            "\n                    VIP\n                  "
+                          )
                         ]),
                         _vm._v(" "),
                         _c("label", { staticClass: "btn btn-secondary" }, [
@@ -45571,7 +45720,7 @@ var render = function() {
                             }
                           }),
                           _vm._v(
-                            "\n                  Accidental\n                "
+                            "\n                    Accidental\n                  "
                           )
                         ])
                       ]
@@ -45681,7 +45830,7 @@ var render = function() {
                             { attrs: { selected: "", value: "Selecciona..." } },
                             [
                               _vm._v(
-                                "\n                    Selecciona...\n                  "
+                                "\n                      Selecciona...\n                    "
                               )
                             ]
                           ),
@@ -45695,9 +45844,9 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                    " +
+                                  "\n                      " +
                                     _vm._s(municipi.nom) +
-                                    "\n                  "
+                                    "\n                    "
                                 )
                               ]
                             )
@@ -45749,7 +45898,7 @@ var render = function() {
                             { attrs: { selected: "", value: "Selecciona..." } },
                             [
                               _vm._v(
-                                "\n                    Selecciona...\n                  "
+                                "\n                      Selecciona...\n                    "
                               )
                             ]
                           ),
@@ -45760,9 +45909,9 @@ var render = function() {
                               { key: comarca.id, domProps: { value: comarca } },
                               [
                                 _vm._v(
-                                  "\n                    " +
+                                  "\n                      " +
                                     _vm._s(comarca.nom) +
-                                    "\n                  "
+                                    "\n                    "
                                 )
                               ]
                             )
@@ -45817,7 +45966,7 @@ var render = function() {
                             { attrs: { selected: "", value: "Selecciona..." } },
                             [
                               _vm._v(
-                                "\n                    Selecciona...\n                  "
+                                "\n                      Selecciona...\n                    "
                               )
                             ]
                           ),
@@ -45831,9 +45980,9 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                    " +
+                                  "\n                      " +
                                     _vm._s(provincia.nom) +
-                                    "\n                  "
+                                    "\n                    "
                                 )
                               ]
                             )
@@ -45949,7 +46098,21 @@ var render = function() {
                   staticClass: "card-header font-weight-bold",
                   attrs: { id: "titulito" }
                 },
-                [_vm._v("DATOS AFECTADA")]
+                [
+                  _vm._v("DATOS AFECTADA\n              "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "float-right",
+                      on: {
+                        click: function($event) {
+                          return _vm.showHelpBox(2)
+                        }
+                      }
+                    },
+                    [_c("i", { staticClass: "far fa-file-alt" })]
+                  )
+                ]
               ),
               _vm._v(" "),
               _c("div", { staticClass: "card-body ml-5" }, [
@@ -46068,7 +46231,9 @@ var render = function() {
                               }
                             }
                           }),
-                          _vm._v("\n                  Mujer\n                ")
+                          _vm._v(
+                            "\n                    Mujer\n                  "
+                          )
                         ]),
                         _vm._v(" "),
                         _c("label", { staticClass: "btn btn-secondary" }, [
@@ -46096,7 +46261,9 @@ var render = function() {
                               }
                             }
                           }),
-                          _vm._v("\n                  Hombre\n                ")
+                          _vm._v(
+                            "\n                    Hombre\n                  "
+                          )
                         ])
                       ]
                     ),
@@ -46191,9 +46358,9 @@ var render = function() {
                             attrs: { "aria-hidden": "true" }
                           }),
                           _vm._v(
-                            " AFECTADAS\n                  (" +
+                            " AFECTADAS\n                    (" +
                               _vm._s(_vm.afectadasCount) +
-                              ")\n                "
+                              ")\n                  "
                           )
                         ]
                       ),
@@ -46215,7 +46382,7 @@ var render = function() {
                             attrs: { "aria-hidden": "true" }
                           }),
                           _vm._v(
-                            "\n                  AÑADIR AFECTADA\n                "
+                            "\n                    AÑADIR AFECTADA\n                  "
                           )
                         ]
                       )
@@ -46232,7 +46399,21 @@ var render = function() {
                   staticClass: "card-header font-weight-bold",
                   attrs: { id: "titulito" }
                 },
-                [_vm._v("DATOS INCIDENTE")]
+                [
+                  _vm._v("DATOS INCIDENTE\n              "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "float-right",
+                      on: {
+                        click: function($event) {
+                          return _vm.showHelpBox(3)
+                        }
+                      }
+                    },
+                    [_c("i", { staticClass: "far fa-file-alt" })]
+                  )
+                ]
               ),
               _vm._v(" "),
               _c("div", { staticClass: "card-body ml-5" }, [
@@ -46363,7 +46544,7 @@ var render = function() {
                             }
                           }),
                           _vm._v(
-                            "\n                  Accidente\n                "
+                            "\n                    Accidente\n                  "
                           )
                         ]),
                         _vm._v(" "),
@@ -46400,7 +46581,7 @@ var render = function() {
                             }
                           }),
                           _vm._v(
-                            "\n                  Traumatismo\n                "
+                            "\n                    Traumatismo\n                  "
                           )
                         ]),
                         _vm._v(" "),
@@ -46437,7 +46618,7 @@ var render = function() {
                             }
                           }),
                           _vm._v(
-                            "\n                  Enfermedad en lugar público\n                "
+                            "\n                    Enfermedad en lugar público\n                  "
                           )
                         ]),
                         _vm._v(" "),
@@ -46474,7 +46655,7 @@ var render = function() {
                             }
                           }),
                           _vm._v(
-                            "\n                  Enfermedad domiciliaria\n                "
+                            "\n                    Enfermedad domiciliaria\n                  "
                           )
                         ]),
                         _vm._v(" "),
@@ -46511,7 +46692,7 @@ var render = function() {
                             }
                           }),
                           _vm._v(
-                            "\n                  Consulta médica\n                "
+                            "\n                    Consulta médica\n                  "
                           )
                         ]),
                         _vm._v(" "),
@@ -46548,7 +46729,7 @@ var render = function() {
                             }
                           }),
                           _vm._v(
-                            "\n                  Transporte sanitario\n                "
+                            "\n                    Transporte sanitario\n                  "
                           )
                         ])
                       ]
@@ -46621,7 +46802,20 @@ var render = function() {
                 attrs: { id: "titulito" }
               },
               [
-                _vm._v("RESPUESTA\n          "),
+                _vm._v("RESPUESTA\n            "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "float-right ml-4",
+                    on: {
+                      click: function($event) {
+                        return _vm.showHelpBox(4)
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "far fa-file-alt" })]
+                ),
+                _vm._v(" "),
                 _c(
                   "button",
                   {
@@ -46643,7 +46837,7 @@ var render = function() {
                       staticClass: "fa fa-check",
                       attrs: { "aria-hidden": "true" }
                     }),
-                    _vm._v(" INSERTAR INCIDENCIA\n          ")
+                    _vm._v(" INSERTAR INCIDENCIA\n            ")
                   ]
                 )
               ]
@@ -46737,9 +46931,9 @@ var render = function() {
                             attrs: { "aria-hidden": "true" }
                           }),
                           _vm._v(
-                            " RECURSOS\n                  (" +
+                            " RECURSOS\n                    (" +
                               _vm._s(_vm.recursosCount) +
-                              ")\n                "
+                              ")\n                  "
                           )
                         ]
                       ),
@@ -46761,7 +46955,7 @@ var render = function() {
                             attrs: { "aria-hidden": "true" }
                           }),
                           _vm._v(
-                            " AÑADIR\n                RECURSO\n              "
+                            " AÑADIR\n                  RECURSO\n                "
                           )
                         ]
                       )
@@ -46831,7 +47025,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                      Selecciona...\n                  "
+                                    "\n                        Selecciona...\n                    "
                                   )
                                 ]
                               ),
@@ -46847,9 +47041,9 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                      " +
+                                      "\n                        " +
                                         _vm._s(recurs.codi) +
-                                        "\n                  "
+                                        "\n                    "
                                     )
                                   ]
                                 )
@@ -46910,7 +47104,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                      Selecciona...\n                  "
+                                    "\n                        Selecciona...\n                    "
                                   )
                                 ]
                               ),
@@ -46924,19 +47118,19 @@ var render = function() {
                                   { key: index, domProps: { value: afectat } },
                                   [
                                     _vm._v(
-                                      "\n                      " +
+                                      "\n                        " +
                                         _vm._s(afectat.nom) +
                                         " " +
                                         _vm._s(afectat.cognoms) +
-                                        ",\n                      "
+                                        ",\n                        "
                                     ),
                                     afectat.sexes_id == 1
                                       ? _c("span", [_vm._v(" Hombre")])
                                       : _c("span", [_vm._v(" Mujer")]),
                                     _vm._v(
-                                      "\n                       (" +
+                                      "\n                         (" +
                                         _vm._s(afectat.edat) +
-                                        ")\n                  "
+                                        ")\n                    "
                                     )
                                   ]
                                 )
@@ -46999,7 +47193,9 @@ var render = function() {
                                 }
                               }
                             }),
-                            _vm._v("\n                  1\n                ")
+                            _vm._v(
+                              "\n                    1\n                  "
+                            )
                           ]),
                           _vm._v(" "),
                           _c("label", { staticClass: "btn btn-secondary" }, [
@@ -47036,7 +47232,9 @@ var render = function() {
                                 }
                               }
                             }),
-                            _vm._v("\n                  2\n                ")
+                            _vm._v(
+                              "\n                    2\n                  "
+                            )
                           ]),
                           _vm._v(" "),
                           _c("label", { staticClass: "btn btn-secondary" }, [
@@ -47073,7 +47271,9 @@ var render = function() {
                                 }
                               }
                             }),
-                            _vm._v("\n                  3\n                ")
+                            _vm._v(
+                              "\n                    3\n                  "
+                            )
                           ]),
                           _vm._v(" "),
                           _c("label", { staticClass: "btn btn-secondary" }, [
@@ -47110,7 +47310,9 @@ var render = function() {
                                 }
                               }
                             }),
-                            _vm._v("\n                  4\n                ")
+                            _vm._v(
+                              "\n                    4\n                  "
+                            )
                           ])
                         ]
                       )
@@ -47150,15 +47352,15 @@ var render = function() {
                             _vm._s(afectada.nom) +
                               " " +
                               _vm._s(afectada.cognoms) +
-                              ",\n                  "
+                              ",\n                    "
                           ),
                           afectada.sexes_id == 1
                             ? _c("span", [_vm._v(" Hombre")])
                             : _c("span", [_vm._v(" Mujer")]),
                           _vm._v(
-                            "\n                   (" +
+                            "\n                     (" +
                               _vm._s(afectada.edat) +
-                              ")\n                  "
+                              ")\n                    "
                           ),
                           _c(
                             "button",
@@ -47221,7 +47423,7 @@ var render = function() {
                             [
                               _vm._v(
                                 _vm._s(recursProba.recurs.codi) +
-                                  ",\n                  "
+                                  ",\n                    "
                               ),
                               recursProba.recurs.tipus_recursos_id == 1
                                 ? _c("span", [
@@ -47239,13 +47441,13 @@ var render = function() {
                                     _vm._v(" Helicopter Medicalitzat, ")
                                   ]),
                               _vm._v(
-                                "\n                  Prioritat " +
+                                "\n                    Prioritat " +
                                   _vm._s(
                                     _vm.incidencies_has_recursos_array[
                                       recurs_index
                                     ].prioritat
                                   ) +
-                                  "\n                  "
+                                  "\n                    "
                               ),
                               _vm._v(" "),
                               recursProba.afectats.length > 0
@@ -47257,19 +47459,19 @@ var render = function() {
                                     ) {
                                       return _c("li", { key: index }, [
                                         _vm._v(
-                                          "\n                          " +
+                                          "\n                            " +
                                             _vm._s(afectat.nom) +
                                             " " +
                                             _vm._s(afectat.cognoms) +
-                                            ",\n                          "
+                                            ",\n                            "
                                         ),
                                         afectat.sexes_id == 1
                                           ? _c("span", [_vm._v(" Hombre")])
                                           : _c("span", [_vm._v(" Mujer")]),
                                         _vm._v(
-                                          "\n                          (" +
+                                          "\n                            (" +
                                             _vm._s(afectat.edat) +
-                                            ")\n                      "
+                                            ")\n                        "
                                         )
                                       ])
                                     }),
@@ -47301,6 +47503,71 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _vm._m(6)
+              ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal",
+          attrs: { tabindex: "-1", role: "dialog", id: "helpbox" }
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "modal-dialog modal-lg",
+              attrs: { role: "document" }
+            },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(7),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "modal-body",
+                    attrs: { id: "preguntesModal" }
+                  },
+                  _vm._l(_vm.preguntes, function(pregunta, index) {
+                    return _c(
+                      "div",
+                      {
+                        key: index,
+                        staticClass: "card",
+                        attrs: { id: "preguntaModal" }
+                      },
+                      [
+                        _c("div", { staticClass: "card-header" }, [
+                          _vm._v(
+                            "\n                " +
+                              _vm._s(pregunta.pregunta) +
+                              "\n            "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "ul",
+                          { staticClass: "list-group list-group-flush" },
+                          _vm._l(pregunta.respostes, function(resposta, index) {
+                            return _c(
+                              "li",
+                              { key: index, staticClass: "list-group-item" },
+                              [_vm._v(_vm._s(resposta.resposta))]
+                            )
+                          }),
+                          0
+                        )
+                      ]
+                    )
+                  }),
+                  0
+                ),
+                _vm._v(" "),
+                _vm._m(8)
               ])
             ]
           )
@@ -47375,7 +47642,7 @@ var staticRenderFns = [
               { staticClass: "form-check-label", attrs: { for: "consejo2" } },
               [
                 _vm._v(
-                  "Puede pedir ayuda a algún peatón, persona que le\n                    acompañe..."
+                  "Puede pedir ayuda a algún peatón, persona que le\n                      acompañe..."
                 )
               ]
             )
@@ -47418,7 +47685,7 @@ var staticRenderFns = [
               { staticClass: "form-check-label", attrs: { for: "consejo5" } },
               [
                 _vm._v(
-                  "Acercarse al coche y desconectar las llaves de\n                    contacto"
+                  "Acercarse al coche y desconectar las llaves de\n                      contacto"
                 )
               ]
             )
@@ -47487,7 +47754,7 @@ var staticRenderFns = [
               { staticClass: "form-check-label", attrs: { for: "consejo10" } },
               [
                 _vm._v(
-                  "Poner a la persona en posición lateral de seguridad\n                    (PLS)"
+                  "Poner a la persona en posición lateral de seguridad\n                      (PLS)"
                 )
               ]
             )
@@ -47504,7 +47771,7 @@ var staticRenderFns = [
               { staticClass: "form-check-label", attrs: { for: "consejo11" } },
               [
                 _vm._v(
-                  "Si sangra, comprimir la herida con la mano,\n                    ropa..."
+                  "Si sangra, comprimir la herida con la mano,\n                      ropa..."
                 )
               ]
             )
@@ -47589,7 +47856,7 @@ var staticRenderFns = [
           staticClass: "btn btn-secondary",
           attrs: { type: "button", "data-dismiss": "modal" }
         },
-        [_vm._v("\n            Cerrar\n          ")]
+        [_vm._v("\n              Cerrar\n            ")]
       )
     ])
   },
@@ -47625,7 +47892,43 @@ var staticRenderFns = [
           staticClass: "btn btn-secondary",
           attrs: { type: "button", "data-dismiss": "modal" }
         },
-        [_vm._v("\n            Cerrar\n          ")]
+        [_vm._v("\n              Cerrar\n            ")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("HelpBox")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Cerrar")]
       )
     ])
   }

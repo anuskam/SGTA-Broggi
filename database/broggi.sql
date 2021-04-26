@@ -347,9 +347,8 @@ DROP TABLE IF EXISTS `broggi`.`preguntes` ;
 
 CREATE TABLE IF NOT EXISTS `broggi`.`preguntes` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `pregunta` VARCHAR(60) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `pregunta_UNIQUE` (`pregunta` ASC))
+  `pregunta` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
@@ -359,7 +358,7 @@ DROP TABLE IF EXISTS `broggi`.`respostes` ;
 
 CREATE TABLE IF NOT EXISTS `broggi`.`respostes` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `resposta` VARCHAR(60) NOT NULL,
+  `resposta` VARCHAR(100) NOT NULL,
   `preguntes_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_respostes_preguntes1_idx` (`preguntes_id` ASC),
@@ -1578,5 +1577,80 @@ USE `broggi`;
 INSERT INTO `usuaris` VALUES (NULL, 'cecos', '$2y$12$qRswuhbVkXbOHC53k8K7BOwNfK3nsHABcFADoyl3dVajM5iBdcGIm', 'cecos@cecos', 'cecos', 'cecos', 2, NULL);
 INSERT INTO `usuaris` VALUES (NULL, 'admin', '$2y$12$YaJjNgg/0413mPPXwAXvz..LJAF4KeNhcS8/LGZFtWdFag7fPMe7y', 'admin@admin', 'admin', 'admin', 1, NULL);
 INSERT INTO `usuaris` VALUES (NULL, 'recurs', '$2y$12$4scYk..mFzX2oDUAvqMnt.WriqmX32QHzLfCH0Vm94Jd5vJ9WhHIO', 'recurs@recurs', 'recurs', 'recurs', 3, 1);
+
+COMMIT;
+
+-- -----------------------------------------------------
+-- Data for table `broggi`.`preguntes`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `broggi`;
+
+INSERT INTO `preguntes` VALUES (NULL, 'What is your name?');
+INSERT INTO `preguntes` VALUES (NULL, 'How do you know the victim/s?');
+INSERT INTO `preguntes` VALUES (NULL, 'What is your location (any relevant information you can provide)?');
+INSERT INTO `preguntes` VALUES (NULL, "What is the victim's name and/or last name?");
+INSERT INTO `preguntes` VALUES (NULL, "What is the victim's gender?");
+INSERT INTO `preguntes` VALUES (NULL, "What is the victim's age");
+INSERT INTO `preguntes` VALUES (NULL, "Can you provide the victim's CIP code");
+INSERT INTO `preguntes` VALUES (NULL, "What has happened?");
+INSERT INTO `preguntes` VALUES (NULL, "Do you have first aid notions?");
+INSERT INTO `preguntes` VALUES (NULL, "Can you perform CPR to the victim/s?");
+INSERT INTO `preguntes` VALUES (NULL, "What should I do?");
+INSERT INTO `preguntes` VALUES (NULL, 'How long will you take?');
+
+COMMIT;
+
+-- -----------------------------------------------------
+-- Data for table `broggi`.`respostes`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `broggi`;
+
+INSERT INTO `respostes` VALUES (NULL, 'My name is (name)', 1);
+INSERT INTO `respostes` VALUES (NULL, "I don’t know them", 2);
+INSERT INTO `respostes` VALUES (NULL, "I’m the victim", 2);
+INSERT INTO `respostes` VALUES (NULL, "We’re family / friends", 2);
+INSERT INTO `respostes` VALUES (NULL, "I’m at (street address)", 3);
+INSERT INTO `respostes` VALUES (NULL, "I’m in (town)", 3);
+INSERT INTO `respostes` VALUES (NULL, "I’m not sure", 3);
+INSERT INTO `respostes` VALUES (NULL, "I can see ...", 3);
+INSERT INTO `respostes` VALUES (NULL, "Their name is (name)", 4);
+INSERT INTO `respostes` VALUES (NULL, "I don’t know", 4);
+INSERT INTO `respostes` VALUES (NULL, "I’m not sure", 4);
+INSERT INTO `respostes` VALUES (NULL, "They’re a man", 5);
+INSERT INTO `respostes` VALUES (NULL, "They’re a woman", 5);
+INSERT INTO `respostes` VALUES (NULL, "I’m not sure", 5);
+INSERT INTO `respostes` VALUES (NULL, "I don’t know", 5);
+INSERT INTO `respostes` VALUES (NULL, "They’re (age) (years old)", 6);
+INSERT INTO `respostes` VALUES (NULL, "I don’t know", 6);
+INSERT INTO `respostes` VALUES (NULL, "They look around (age)", 6);
+INSERT INTO `respostes` VALUES (NULL, "I’m not sure", 6);
+INSERT INTO `respostes` VALUES (NULL, "Yes, it’s (CIP code)", 7);
+INSERT INTO `respostes` VALUES (NULL, "No / I can’t", 7);
+INSERT INTO `respostes` VALUES (NULL, "They don’t have one", 7);
+INSERT INTO `respostes` VALUES (NULL, "They are ill / not feeling well", 8);
+INSERT INTO `respostes` VALUES (NULL, "They fell", 8);
+INSERT INTO `respostes` VALUES (NULL, "They had an accident", 8);
+INSERT INTO `respostes` VALUES (NULL, "I don’t know", 8);
+INSERT INTO `respostes` VALUES (NULL, "I’m not sure", 8);
+INSERT INTO `respostes` VALUES (NULL, 'Yes', 9);
+INSERT INTO `respostes` VALUES (NULL, 'No', 9);
+INSERT INTO `respostes` VALUES (NULL, 'Yes', 10);
+INSERT INTO `respostes` VALUES (NULL, 'No', 10);
+INSERT INTO `respostes` VALUES (NULL, "Signal the accident area", 11);
+INSERT INTO `respostes` VALUES (NULL, "Get to the car and remove the key from ignition", 11);
+INSERT INTO `respostes` VALUES (NULL, "Do not move the victim/s", 11);
+INSERT INTO `respostes` VALUES (NULL, "Do not give food or drinks to the victim/s", 11);
+INSERT INTO `respostes` VALUES (NULL, "Keep pressure on the wound with hands/clothes", 11);
+INSERT INTO `respostes` VALUES (NULL, "Place the victim in a comfortable position", 11);
+INSERT INTO `respostes` VALUES (NULL, "Ask for help to a pedestrian or people around you", 11);
+INSERT INTO `respostes` VALUES (NULL, "Loosen their clothes", 11);
+INSERT INTO `respostes` VALUES (NULL, "Keep the phone on speaker", 11);
+INSERT INTO `respostes` VALUES (NULL, "Do not leave the victim/s alone", 11);
+INSERT INTO `respostes` VALUES (NULL, "Place the victim in Lateral Safety Position", 11);
+INSERT INTO `respostes` VALUES (NULL, "Other advice", 11);
+INSERT INTO `respostes` VALUES (NULL, "The medics are (X) minutes out", 12);
+INSERT INTO `respostes` VALUES (NULL, "Keep calm, the medics are already on their way there", 12);
 
 COMMIT;
