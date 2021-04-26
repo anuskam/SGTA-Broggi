@@ -4,7 +4,7 @@
       <div class="card-header" id="infoHeader">
         <div>#{{ incidenciaID }}</div>
         <div>{{ tipusIncidencia }}</div>
-        <div>Prioritat: {{ prioritat }}</div>
+        <div>Prioridad: {{ prioritat }}</div>
       </div>
       <div class="card-body p-3">
         <div id="map">
@@ -143,7 +143,7 @@
           <div class="modal-footer">
             <button
               type="button"
-              class="btn btn-secondary cerrarBoton"
+              class="btn btn-secondary cerrarBtn"
               data-dismiss="modal"
             >
               Cerrar
@@ -158,9 +158,9 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 v-if="activarTransport" class="modal-title">Activar Transporte Hospitalario</h5>
+                <p v-if="activarTransport" class="modal-title">Activar Transporte Hospitalario</p>
                 <h5 v-else class="modal-title">Firmar Acta Voluntaria</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -169,10 +169,10 @@
                 <p v-else>¿Seguro que quieres realizar el alta voluntaria del afectado? Una vez activada ya no se podrá realizar la hospitalización.</p>
             </div>
             <div class="modal-footer">
-                <button v-if="activarTransport" type="button" class="btn btn-primary" @click="activarMostrarTransport()">Confirmar</button>
-                <button v-else type="button" class="btn btn-primary" @click="altaVoluntaria()">Confirmar</button>
-                <button v-if="activarTransport" type="button" class="btn btn-secondary" data-dismiss="modal" @click="activarTransport = true">Cerrar</button>
-                <button v-else type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button v-if="activarTransport" type="button" class="btn confirmarBtn" @click="activarMostrarTransport()">Confirmar</button>
+                <button v-else type="button" class="btn confirmarBtn" @click="altaVoluntaria()">Confirmar</button>
+                <button v-if="activarTransport" type="button" class="btn cerrarBtn" data-dismiss="modal" @click="activarTransport = true">Cerrar</button>
+                <button v-else type="button" class="btn cerrarBtn" data-dismiss="modal">Cerrar</button>
             </div>
             </div>
         </div>
@@ -768,10 +768,21 @@ button {
     padding: 10px 10px;
     background-color: green !important;
 }
-.cerrarBoton{
+/* .cerrarBoton{
     font-size: 15px;
-}
+} */
 .opaco{
-    opacity: 0.4 !important;
+  opacity: 0.4 !important;
 }
+
+.cerrarBtn {
+  background-color: #6c757d !important;
+  color: white;
+  font-size: 15px;
+}
+
+.confirmarBtn{
+  font-size: 15px;
+}
+
 </style>
