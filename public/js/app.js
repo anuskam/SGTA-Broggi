@@ -5007,13 +5007,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var tipusAlertant_nom = this.tipusAlertants[tipusAlertant_index].tipus;
       return tipusAlertant_nom;
     },
+    // deleteAsignat(){
+    //     let me = this;
+    //   axios
+    //       .delete("/SGTA-Broggi/public/api/deleteIHR/"+me.incidenciaHasRecursos[0].incidencies_id+"/"+me.incidenciaHasRecursos[0].recursos_id)
+    //       .then((response) => {
+    //         console.log(response.data);
+    //       }).catch((error) => {
+    //         console.log(error);
+    //       })
+    // },
     deleteAsignat: function deleteAsignat() {
       var me = this;
-      axios.get("/SGTA-Broggi/public/deleteIHR/" + me.incidenciaHasRecursos[0].incidencies_id + "/" + me.incidenciaHasRecursos[0].recursos_id).then(function (response) {
+      axios["delete"]("/SGTA-Broggi/public/api/incidenciaHasRecursos/" + me.incidenciaHasRecursos[0].incidencies_id + "/" + me.incidenciaHasRecursos[0].recursos_id).then(function (response) {
         console.log(response.data);
       })["catch"](function (error) {
         console.log(error);
       });
+      $('#deleteModalAsignat').modal('hide');
     },
     confirmDeleteAsignat: function confirmDeleteAsignat(incidencia) {
       this.incidencia = incidencia;

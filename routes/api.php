@@ -51,10 +51,21 @@ Route::apiResource('tipusAlertant', TipusAlertantController::class);
 Route::apiResource('tipusIncidencia', TipusIncidenciaController::class);
 Route::apiResource('tipusRecurs', TipusRecursController::class);
 Route::apiResource('usuari', UsuariControllerApi::class);
-Route::apiResource('incidenciaHasRecursos', IncidenciaHasRecursosController::class);
+// Route::apiResource('incidenciaHasRecursos', IncidenciaHasRecursosController::class);
 Route::apiResource('incidenciaHasAfectats', IncidenciaHasAfectatsController::class);
 Route::apiResource('pregunta', PreguntaController::class);
 Route::apiResource('resposta', RespostaController::class);
+
+Route::get('incidenciaHasRecursos', [IncidenciaHasRecursosController::class, 'index']);
+Route::get('incidenciaHasRecursos/{incidencies_id}/{recursos_id}', [IncidenciaHasRecursosController::class, 'show']);
+Route::post('incidenciaHasRecursos', [IncidenciaHasRecursosController::class, 'store']);
+Route::put('incidenciaHasRecursos/{incidencies_id}/{recursos_id}', [IncidenciaHasRecursosController::class, 'update']);
+Route::delete('incidenciaHasRecursos/{incidencies_id}/{recursos_id}', [IncidenciaHasRecursosController::class, 'destroy']);
+
+
+
+/* Delete IHR */
+// Route::delete('deleteIHR/{incidencies_id}/{recursos_id}', [IncidenciaHasRecursosController::class, 'deleteIHR']);
 
 // Route::get('alertantPaginated', [ControllersAlertantController::class, 'indexPaginated']);
 
