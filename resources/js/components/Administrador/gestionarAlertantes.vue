@@ -373,7 +373,7 @@
 }
 
 .sizeCognom {
-    width: 20vw;
+    width: 15vw;
 }
 
 .sizeBotones {
