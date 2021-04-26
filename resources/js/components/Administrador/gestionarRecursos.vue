@@ -33,10 +33,17 @@
     </button>
   </div>
 
+  <div class="filtrar ml-5">
+    <input type="text" v-model="search"/>
+        <i class="fas fa-filter"></i><label>Filtrar</label>
+  </div>
+
 
   <div class="card mt-2 mb-1 ml-5 mr-5">
     <h2 class="card-header font-weight-bold">Recursos</h2>
-    <div class="card-body">
+    <!--Por si no hay resultados-->
+    <div v-if="filteredList.length == 0" class="p-3">No hay resultados con estos parámetros</div>
+    <div v-else class="card-body">
       <table class="table mt-2">
           <thead>
             <tr>
@@ -47,7 +54,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(recurs, index) in recursos" :key="recurs.id">
+            <tr v-for="(recurs, index) in filteredList" :key="recurs.id">
               <td>{{ recurs.codi }}</td>
               <td>
                 <div class="custom-control custom-checkbox">
@@ -167,6 +174,7 @@
           paginas: [],
           pagina: 0,
           currentPage: 0,
+          search: ''
         }
       },
       methods: {
@@ -302,6 +310,13 @@
 
           return tipusRecursos_tipus;
         },
+      },
+      computed: {
+        filteredList() {
+          return this.recursosDB.filter(recurs => {
+            return recurs.codi.toLowerCase().includes(this.search.toLowerCase())
+          })
+        }
       },
       created() {
         this.paginarFirst(), this.selectTipusRecursos(), this.selectRecursos();

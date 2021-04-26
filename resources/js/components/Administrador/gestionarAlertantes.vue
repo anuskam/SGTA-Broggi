@@ -34,9 +34,16 @@
     </button>
   </div>
 
+  <div class="filtrar ml-5">
+    <input type="text" v-model="search"/>
+        <i class="fas fa-filter"></i><label>Filtrar</label>
+  </div>
+
   <div class="card mt-2 mb-1 ml-5 mr-5">
     <h2 class="card-header font-weight-bold">Alertantes</h2>
-    <div class="card-body">
+    <!--Por si no hay resultados-->
+    <div v-if="filteredList.length == 0" class="p-3">No hay resultados con estos parámetros</div>
+    <div v-else class="card-body">
       <table class="table mt-2">
           <thead>
             <tr>
@@ -44,13 +51,13 @@
               <th scope="col" class="sizeCognom">Apellidos</th>
               <th scope="col">Teléfono</th>
               <th scope="col">Dirección</th>
-              <th scope="col">Municipio</th>
+              <th scope="col" class="sizeMunicipi">Municipio</th>
               <th scope="col">Tipo Alertante</th>
               <th scope="col" class="sizeBotones"></th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(alertant, index) in alertants" :key="alertant.id">
+            <tr v-for="(alertant, index) in filteredList" :key="alertant.id">
               <td>{{ alertant.nom }}</td>
               <td>{{ alertant.cognom }}</td>
               <td>{{ alertant.telefon }}</td>
@@ -199,6 +206,7 @@
           insert: true,
           errorMessage: '',
           infoMessage: '',
+          search: ''
         }
       },
       methods: {
@@ -358,6 +366,13 @@
             return tipusAlertant_nom;
         }
       },
+      computed: {
+        filteredList() {
+          return this.alertantsDB.filter(alertant => {
+            return alertant.nom.toLowerCase().includes(this.search.toLowerCase()) || alertant.municipis_id == (this.search)
+          })
+        }
+      },
       created() {
        this.selectMunicipis(), this.selectAlertants(), this.selectTipusAlertant();
       },
@@ -373,7 +388,11 @@
 }
 
 .sizeCognom {
-    width: 15vw;
+    width: 13vw;
+}
+
+.sizeMunicipi{
+    width: 13vh;
 }
 
 .sizeBotones {

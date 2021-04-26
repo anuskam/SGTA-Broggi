@@ -31,7 +31,7 @@
     </div>
 
     <div v-show="currentTab == 2">
-        <gestionarIncidente-component></gestionarIncidente-component>
+        <!-- <gestionarIncidente-component></gestionarIncidente-component> -->
     </div>
 
     <div v-if="currentTab == 3">

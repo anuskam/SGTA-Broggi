@@ -10,35 +10,19 @@
     {{ infoMessage }}
   </div>
 
-  <div class="search-wrapper">
-    <input type="text" v-model="search" placeholder="Search title.."/>
-        <label>Buscar</label>
-  </div>
-
-  <!-- <div class="wrapper">
-    <div class="card" v-for="post in filteredList" :key="post">
-      <a v-bind:href="post.link" target="_blank">
-        <img v-bind:src="post.img"/>
-        <small>posted by: {{ post.author }}</small>
-        {{ post.title }}
-      </a>
-    </div>
-  </div> -->
-
-
   <div aria-label="paginacion" class="paginacionNav">
     <ul class="pagination">
       <li class="page-item">
         <button :disabled="currentPage <= 1" class="btn numeroPaginacion" aria-label="Previous" @click="paginar(currentPage-1)">
             <span aria-hidden="true">&laquo;</span>
-            <span class="sr-only">Previous</span>
+            <span class="sr-only">Previa</span>
         </button>
       </li>
       <button v-for="(paginaActual, index) in paginas" :key="index" class="btn numeroPaginacion" @click="paginar(paginaActual)">{{ index+1 }}</button>
       <li class="page-item">
         <button :disabled="currentPage >= meta.last_page" class="btn numeroPaginacion" aria-label="Next" @click="paginar(currentPage+1)">
             <span aria-hidden="true">&raquo;</span>
-            <span class="sr-only">Next</span>
+            <span class="sr-only">Siguiente</span>
         </button>
       </li>
     </ul>
@@ -47,6 +31,11 @@
         <i class="fas fa-plus-circle" aria-hidden="true"></i>
         Nueva usuaria
     </button>
+  </div>
+
+  <div class="filtrar ml-5">
+    <input type="text" v-model="search"/>
+        <i class="fas fa-filter"></i><label>Filtrar</label>
   </div>
 
   <div class="card mt-2 mb-1 ml-5 mr-5">
@@ -344,8 +333,8 @@
       },
       computed: {
         filteredList() {
-          return this.usuaris.filter(usuari => {
-            return usuari.username.toLowerCase().includes(this.search.toLowerCase()) || usuari.cognoms.toLowerCase().includes(this.search.toLowerCase()) || usuari.rols_id == (this.search)
+          return this.usuarisDB.filter(usuari => {
+            return usuari.username.toLowerCase().includes(this.search.toLowerCase()) || usuari.cognoms.toLowerCase().includes(this.search.toLowerCase())
           })
         }
       },
