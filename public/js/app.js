@@ -11071,7 +11071,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#generarLlamada[data-v-bfb0cdda]{\n  font-family: 'Signika', sans-serif;\n  font-size: 35px;\n  margin-top: 33vh;\n  background-color: #E2211D !important;\n}\n\n\n/* MOVIMIENTO BARRA DEBAJO DE ELEMENTOS DE NAVBAR */\n.borderLeftRight[data-v-bfb0cdda] {\n  display: inline-block;\n  position: relative;\n  color: hsl(222, 25%, 14%);\n}\n.borderLeftRight[data-v-bfb0cdda]::after {\n  content: '';\n  position: absolute;\n  width: 100%;\n  transform: scaleX(0);\n  height: 2px;\n  bottom: 0;\n  left: 0;\n  background-color: black;\n  transform-origin: bottom right;\n  transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);\n}\n.borderLeftRight[data-v-bfb0cdda]:hover::after {\n  transform: scaleX(1);\n  transform-origin: bottom left;\n}\n/* FIN DE LO QUE HE COPIADO POR SI NO CONVENCE */\n.contenido[data-v-bfb0cdda] {\n  /* font-size: 1em; */\n  font-family: 'Rubik', sans-serif;\n}\n.dislexia[data-v-bfb0cdda] {\n  margin-right: 90px;\n}\n.dislexiaFont[data-v-bfb0cdda]{\n    font-family: Arial, Helvetica, sans-serif !important;\n    letter-spacing: 2px !important;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#generarLlamada[data-v-bfb0cdda]{\n  font-family: 'Signika', sans-serif;\n  font-size: 35px;\n  margin-top: 33vh;\n  background-color: #E2211D !important;\n}\n\n\n/* MOVIMIENTO BARRA DEBAJO DE ELEMENTOS DE NAVBAR */\n.borderLeftRight[data-v-bfb0cdda] {\n  display: inline-block;\n  position: relative;\n  color: hsl(222, 25%, 14%);\n}\n.borderLeftRight[data-v-bfb0cdda]::after {\n  content: '';\n  position: absolute;\n  width: 100%;\n  transform: scaleX(0);\n  height: 2px;\n  bottom: 0;\n  left: 0;\n  background-color: black;\n  transform-origin: bottom right;\n  transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);\n}\n.borderLeftRight[data-v-bfb0cdda]:hover::after {\n  transform: scaleX(1);\n  transform-origin: bottom left;\n}\n/* FIN DE LO QUE HE COPIADO POR SI NO CONVENCE */\n.contenido[data-v-bfb0cdda] {\n  /* font-size: 1em; */\n  font-family: 'Rubik', sans-serif;\n}\n.dislexia[data-v-bfb0cdda] {\n  margin-right: 8vw;\n}\n.dislexiaFont[data-v-bfb0cdda]{\n    font-family: Arial, Helvetica, sans-serif !important;\n    letter-spacing: 2px !important;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11095,7 +11095,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nul li {\n  list-style: none;\n}\n#contenedor {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: center;\n}\n#questions {\n  color: black;\n}\n.correcta {\n  background-color: green !important;\n}\n.incorrecta {\n  background-color: red !important;\n}\n#contador {\n  float: right;\n  position: absolute;\n  background-color: green !important;\n  top: 90px;\n  right: 20px;\n}\n.todoFormacion {\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: center;\n}\n.controlVideo {\n  display: flex;\n  flex-direction: row;\n}\n#reproducir {\n  width: 110px;\n  height: 35px;\n  color: black;\n  padding: 0;\n}\n#barra {\n  position: relative;\n  float: left;\n  width: 485px;\n  height: 17px;\n  border: 1px solid #CCCCCC;\n  background: #EEEEEE;\n  margin-top: 17px;\n  margin-left: 5px;\n}\n#progreso {\n  position: absolute;\n  width: 0px;\n  top: 0;\n  height: 16px;\n  background: rgba(0,0,150,.2);\n}\n#pregunta{\n  font-weight: bold;\n}\n.respuestas{\n  height: 10vh;\n}\n#cardRespuestas{\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  text-align: center;\n  align-content: center;\n}\n#respuestasList li{\n  display: flex !important;\n  align-items: center !important; /*Para tenerlos centraditos verticalmente*/\n  justify-content: center; /*Para tenerlos centraditos horizontalmente*/\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nul li {\n  list-style: none;\n}\n#contenedor {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: center;\n}\n#questions {\n  color: black;\n}\n.correcta {\n  background-color: green !important;\n}\n.incorrecta {\n  background-color: red !important;\n}\n#contador {\n  float: right;\n  position: absolute;\n  background-color: green !important;\n  top: 20vh;\n  right: 2vw;\n}\n.todoFormacion {\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: center;\n}\n.controlVideo {\n  display: flex;\n  flex-direction: row;\n}\n#reproducir {\n  width: 110px;\n  height: 35px;\n  color: black;\n  padding: 0;\n}\n#barra {\n  position: relative;\n  float: left;\n  width: 485px;\n  height: 17px;\n  border: 1px solid #CCCCCC;\n  background: #EEEEEE;\n  margin-top: 17px;\n  margin-left: 5px;\n}\n#progreso {\n  position: absolute;\n  width: 0px;\n  top: 0;\n  height: 16px;\n  background: rgba(0,0,150,.2);\n}\n#pregunta{\n  font-weight: bold;\n}\n.respuestas{\n  height: 10vh;\n}\n#cardRespuestas{\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  text-align: center;\n  align-content: center;\n}\n#respuestasList li{\n  display: flex !important;\n  align-items: center !important; /*Para tenerlos centraditos verticalmente*/\n  justify-content: center; /*Para tenerlos centraditos horizontalmente*/\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11119,7 +11119,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn {\r\n    font-size: 15px;\n}\n.contenido{\r\n    font-size: 15px;\n}\n.btn-secondary:not(:disabled):not(.disabled).active,\r\n.btn-secondary:not(:disabled):not(.disabled):active,\r\n.show > .btn-secondary.dropdown-toggle {\r\n  background-color: #e3177d;\r\n  border-color: black;\n}\n.btn-secondary {\r\n  border-color: black;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\n}\n.parentGrid {\r\n  display: grid;\r\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-between;\n}\n.card-header {\r\n  background-color: #15acc4;\r\n  border: 1px solid black;\r\n  border-left: 0;\r\n  border-right: 0;\r\n  margin-top: -1px;\n}\n.modal-header{\r\n    background-color: #15acc4 !important;\n}\n.card {\r\n  border: 1px solid black !important;\n}\nbutton {\r\n  background-color: #e3177d !important;\r\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\r\n  color: black;\r\n  font-weight: bold;\r\n  background-color: #15acc4 !important;\n}\n.tabButton{\r\n    background-color: white !important;\r\n    border: 0 !important;\n}\n.selectedTab{\r\n    background-color: #e3177d !important;\r\n    border: 1px solid black !important;\n}\n.green{\r\n    background-color: green;\r\n    color: white;\n}\n.red{\r\n    background-color: red;\r\n    color: white;\n}\n#entregar{\r\n  border: 1px solid black;\n}\n#titulitosTabs {\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\n}\n.iconNavPrincipal{\r\n    color: black;\n}\n#titulito {\r\n    font-family: 'Signika', sans-serif;\r\n    font-size: 1.3em;\n}\n.hidden{\r\n    visibility: hidden;\n}\n#buscadorTelefono > input{\r\n    border: 1px solid black;\n}\n.arrowNav{\r\n    height: 8vh;\n}\n#preguntesModal{\r\n    display: flex;\r\n    flex-direction: row;\r\n    flex-wrap: wrap;\r\n    justify-content: space-around;\n}\n#preguntaModal{\r\n    width: 50vw;\r\n    margin-bottom: 2vw;\r\n    margin-top: 2vw;\n}\n#preguntaModal > .card-header{\r\n    font-weight: bold;\n}\n.modal-title{\r\n    font-weight: bold !important;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn {\n    font-size: 15px;\n}\n.contenido{\n    font-size: 15px;\n}\n.btn-secondary:not(:disabled):not(.disabled).active,\n.btn-secondary:not(:disabled):not(.disabled):active,\n.show > .btn-secondary.dropdown-toggle {\n  background-color: #e3177d;\n  border-color: black;\n}\n.btn-secondary {\n  border-color: black;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.parentGrid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n.card-header {\n  background-color: #15acc4;\n  border: 1px solid black;\n  border-left: 0;\n  border-right: 0;\n  margin-top: -1px;\n}\n.modal-header{\n    background-color: #15acc4 !important;\n}\n.card {\n  border: 1px solid black !important;\n}\nbutton {\n  background-color: #e3177d !important;\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\n  color: black;\n  font-weight: bold;\n  background-color: #15acc4 !important;\n}\n.tabButton{\n    background-color: white !important;\n    border: 0 !important;\n}\n.selectedTab{\n    background-color: #e3177d !important;\n    border: 1px solid black !important;\n}\n.green{\n    background-color: green;\n    color: white;\n}\n.red{\n    background-color: red;\n    color: white;\n}\n#entregar{\n  border: 1px solid black;\n}\n#titulitosTabs {\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n.iconNavPrincipal{\n    color: black;\n}\n#titulito {\n    font-family: 'Signika', sans-serif;\n    font-size: 1.3em;\n}\n.hidden{\n    visibility: hidden;\n}\n#buscadorTelefono > input{\n    border: 1px solid black;\n}\n.arrowNav{\n    height: 8vh;\n}\n#preguntesModal{\n    display: flex;\n    flex-direction: row;\n    flex-wrap: wrap;\n    justify-content: space-around;\n}\n#preguntaModal{\n    width: 50vw;\n    margin-bottom: 2vw;\n    margin-top: 2vw;\n}\n#preguntaModal > .card-header{\n    font-weight: bold;\n}\n.modal-title{\n    font-weight: bold !important;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -45463,7 +45463,7 @@ var render = function() {
           "button",
           {
             staticClass:
-              "btn btn-sm mr-3 float-right mr-3 iconNavPrincipal arrowNav",
+              "btn btn-sm mr-3 float-right mr-4 iconNavPrincipal arrowNav",
             class: { hidden: _vm.tabs.c },
             attrs: { disabled: _vm.currentTab == 3 },
             on: {
@@ -46119,7 +46119,7 @@ var render = function() {
           ]
         },
         [
-          _c("div", { staticClass: "container-fluid mt-5" }, [
+          _c("div", { staticClass: "container-fluid mt-5 mb-3" }, [
             _c("div", { staticClass: "card ml-5 mr-5" }, [
               _c(
                 "div",
@@ -46823,7 +46823,7 @@ var render = function() {
           ]
         },
         [
-          _c("div", { staticClass: "card ml-5 mr-5 mt-3" }, [
+          _c("div", { staticClass: "card ml-5 mr-5 mt-3 mb-3" }, [
             _c(
               "div",
               {
@@ -47882,7 +47882,7 @@ var staticRenderFns = [
       _c(
         "button",
         {
-          staticClass: "btn btn-secondary",
+          staticClass: "btn cerrarBtn",
           attrs: { type: "button", "data-dismiss": "modal" }
         },
         [_vm._v("\n              Cerrar\n            ")]
@@ -47918,7 +47918,7 @@ var staticRenderFns = [
       _c(
         "button",
         {
-          staticClass: "btn btn-secondary",
+          staticClass: "btn cerrarBtn",
           attrs: { type: "button", "data-dismiss": "modal" }
         },
         [_vm._v("\n              Cerrar\n            ")]
@@ -47954,7 +47954,7 @@ var staticRenderFns = [
       _c(
         "button",
         {
-          staticClass: "btn btn-secondary",
+          staticClass: "btn cerrarBtn",
           attrs: { type: "button", "data-dismiss": "modal" }
         },
         [_vm._v("Cerrar")]
@@ -49424,7 +49424,7 @@ var staticRenderFns = [
           "data-target": "#navbarNav",
           "aria-controls": "navbarNav",
           "aria-expanded": "false",
-          "aria-label": "Toggle navigation"
+          "aria-label": "Menú de navegación"
         }
       },
       [_c("span", { staticClass: "navbar-toggler-icon" })]
