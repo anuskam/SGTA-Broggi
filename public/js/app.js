@@ -5142,6 +5142,56 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     recursos_id: Number
@@ -5149,15 +5199,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       incidencies: [],
-      incidencia: {
-        data: ''
+      incidencia: {},
+      recursEditar: {
+        hora_mobilitzacio: '',
+        hora_assistencia: '',
+        hora_transport: '',
+        hora_arribada_hospital: '',
+        hora_transferencia: '',
+        hora_finalitzacio: '',
+        desti: ''
       },
       municipis: [],
       alertants: [],
       tipusIncidencies: [],
       tipusAlertants: [],
       incidenciesHasRecursos: [],
-      incidenciaHasRecursos: []
+      incidenciaHasRecursos: [],
+      addresses: []
     };
   },
   methods: {
@@ -5296,278 +5354,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     selectAlertant: function selectAlertant() {
-      var me = this;
-      axios.get("/SGTA-Broggi/public/api/alertant").then(function (response) {
-        me.alertants = response.data;
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    getTipusAlertant: function getTipusAlertant(index) {
-      var alertant_id = this.incidencies[index].alertants_id;
-      var indexAlertant = this.alertants.findIndex(function (obj) {
-        return obj.id == alertant_id;
-      });
-      var alertantTipus = this.alertants[indexAlertant].tipus_alertants_id;
-      var tipusAlertant_index = this.tipusAlertants.findIndex(function (obj) {
-        return obj.id == alertantTipus;
-      });
-      var tipusAlertant_nom = this.tipusAlertants[tipusAlertant_index].tipus;
-      return tipusAlertant_nom;
-    },
-    deleteAsignat: function deleteAsignat() {
-      var me = this;
-      axios["delete"]("/SGTA-Broggi/public/api/incidenciaHasRecursos/" + me.incidenciaHasRecursos[0].incidencies_id + "/" + me.incidenciaHasRecursos[0].recursos_id).then(function (response) {
-        console.log(response.data);
-      })["catch"](function (error) {
-        console.log(error);
-      });
-      $('#deleteModalAsignat').modal('hide');
-      this.getIncidenciaData();
-      this.$forceUpdate();
-      location.reload();
-    },
-    confirmDeleteAsignat: function confirmDeleteAsignat(incidencia) {
-      this.incidencia = incidencia;
-      $('#deleteModalAsignat').modal('show');
-    },
-    updateIncidenteAsignado: function updateIncidenteAsignado() {},
-    editIncidencia: function editIncidencia(incidencia) {
-      this.insert = false;
-      this.incidencia = incidencia;
-      $('#asignatModal').modal('show');
-    },
-    convertDateFormat: function convertDateFormat(string) {
-      var info = string.split('-').reverse().join('-');
-      return info;
-    }
-  },
-  created: function created() {
-    this.selectMunicipis(), this.selectAlertant(), this.selectTipusAlertant(), this.selectTipusIncidencia(), this.getIncidenciaData();
-  },
-  mounted: function mounted() {}
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Recurs/recursosTabs.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Recurs/recursosTabs.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: {
-    recursos_id: Number
-  },
-  data: function data() {
-    return {
-      incidencies: [],
-      incidencia: {},
-      recursEditar: {
-        hora_mobilitzacio: '',
-        hora_assistencia: '',
-        hora_transport: '',
-        hora_arribada_hospital: '',
-        hora_transferencia: '',
-        hora_finalitzacio: '',
-        desti: ''
-      },
-      municipis: [],
-      alertants: [],
-      tipusIncidencies: [],
-      tipusAlertants: [],
-      incidenciesHasRecursos: [],
-      incidenciaHasRecursos: [],
-      addresses: []
-    };
-  },
-  methods: {
-    getIncidenciaData: function getIncidenciaData() {
-      var _this = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return _this.selectIncidenciesHasRecursos();
-
-              case 2:
-                _context.next = 4;
-                return _this.selectIncidenciaHasRecursos();
-
-              case 4:
-                _context.next = 6;
-                return _this.getIncidenciesRecursos();
-
-              case 6:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
-    },
-    getIncidenciesRecursos: function getIncidenciesRecursos() {
-      var me = this;
-      return this.incidenciaHasRecursos.forEach(function (incidencia) {
-        me.selectIncidencia(incidencia.incidencies_id);
-      });
-    },
-    selectIncidencia: function selectIncidencia(id) {
-      var me = this;
-      axios.get('/SGTA-Broggi/public/api/incidencia/' + id).then(function (response) {
-        me.incidencies.push(response.data);
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    selectIncidenciesHasRecursos: function selectIncidenciesHasRecursos() {
-      var me = this;
-      return axios.get("/SGTA-Broggi/public/api/incidenciaHasRecursos").then(function (response) {
-        me.incidenciesHasRecursos = response.data;
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    selectIncidenciaHasRecursos: function selectIncidenciaHasRecursos() {
-      var me = this;
-      this.incidenciaHasRecursos = this.incidenciesHasRecursos.filter(function (obj) {
-        return obj.recursos_id == me.recursos_id;
-      }); // this.incidenciaID = this.incidenciaHasRecursos[this.incidenciaHasRecursos.length-1].incidencies_id;
-
-      return true;
-    },
-    // selectIncidencies() {
-    //   let me = this;
-    //   axios
-    //       .get('/SGTA-Broggi/public/api/incidencia')
-    //       .then(response => {
-    //         me.incidencies = response.data;
-    //       })
-    //       .catch(error => {
-    //         console.log(error);
-    //       })
-    // },
-    selectMunicipis: function selectMunicipis() {
-      var me = this;
-      axios.get("/SGTA-Broggi/public/api/municipi").then(function (response) {
-        me.municipis = response.data;
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    getMunicipi: function getMunicipi(index) {
-      var _this2 = this;
-
-      var municipi = this.municipis.find(function (obj) {
-        return obj.id == _this2.incidencies[index].municipis_id;
-      });
-      var municipi_nom;
-
-      if (municipi != null) {
-        municipi_nom = municipi.nom;
-      } else {
-        municipi_nom = this.municipis.find(function (obj) {
-          return obj.id == 1;
-        });
-      }
-
-      return municipi_nom;
-    },
-    selectTipusIncidencia: function selectTipusIncidencia() {
-      var me = this;
-      axios.get("/SGTA-Broggi/public/api/tipusIncidencia").then(function (response) {
-        me.tipusIncidencies = response.data;
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    getTipusIncidencia: function getTipusIncidencia(index) {
-      var _this3 = this;
-
-      var tipusIncidencia = this.tipusIncidencies.find(function (obj) {
-        return obj.id == _this3.incidencies[index].tipus_incidencies_id;
-      });
-      var tipusIncidencia_nom;
-
-      if (tipusIncidencia != null) {
-        tipusIncidencia_nom = tipusIncidencia.tipus;
-      } else {
-        tipusIncidencia_nom = this.incidencies.find(function (obj) {
-          return obj.id == 1;
-        });
-      }
-
-      return tipusIncidencia_nom;
-    },
-    selectTipusAlertant: function selectTipusAlertant() {
-      var me = this;
-      axios.get("/SGTA-Broggi/public/api/tipusAlertant").then(function (response) {
-        me.tipusAlertants = response.data;
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    selectAlertant: function selectAlertant() {
-      var _this4 = this;
+      var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
         var me;
@@ -5575,7 +5362,7 @@ __webpack_require__.r(__webpack_exports__);
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                me = _this4;
+                me = _this5;
                 return _context2.abrupt("return", axios.get("/SGTA-Broggi/public/api/alertant").then(function (response) {
                   me.alertants = response.data;
                 })["catch"](function (error) {
@@ -5616,11 +5403,15 @@ __webpack_require__.r(__webpack_exports__);
     },
     deleteAsignat: function deleteAsignat() {
       var me = this;
-      axios.get("/SGTA-Broggi/public/deleteIHR/" + me.incidenciaHasRecursos[0].incidencies_id + "/" + me.incidenciaHasRecursos[0].recursos_id).then(function (response) {
+      axios["delete"]("/SGTA-Broggi/public/api/incidenciaHasRecursos/" + me.incidenciaHasRecursos[0].incidencies_id + "/" + me.incidenciaHasRecursos[0].recursos_id).then(function (response) {
         console.log(response.data);
       })["catch"](function (error) {
         console.log(error);
       });
+      $('#deleteModalAsignat').modal('hide');
+      this.getIncidenciaData();
+      this.$forceUpdate();
+      location.reload();
     },
     confirmDeleteAsignat: function confirmDeleteAsignat(incidencia) {
       this.incidencia = incidencia;
@@ -5636,7 +5427,7 @@ __webpack_require__.r(__webpack_exports__);
     updateIncidenteAsignado: function updateIncidenteAsignado() {// modificar con todo el contenido
     },
     editIncidencia: function editIncidencia(incidencia) {
-      var _this5 = this;
+      var _this6 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
@@ -5644,7 +5435,7 @@ __webpack_require__.r(__webpack_exports__);
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.next = 2;
-                return _this5.getHospitalsAddresses();
+                return _this6.getHospitalsAddresses();
 
               case 2:
                 //   this.recursEditar = {
@@ -5656,14 +5447,14 @@ __webpack_require__.r(__webpack_exports__);
                 //     hora_finalitzacio: '',
                 //     desti:''
                 //   };
-                _this5.recursEditar = {};
+                _this6.recursEditar = {};
 
-                _this5.buscarIncidenciaEnArray(incidencia);
+                _this6.buscarIncidenciaEnArray(incidencia);
 
-                _this5.insert = false;
-                _this5.incidencia = incidencia;
+                _this6.insert = false;
+                _this6.incidencia = incidencia;
 
-                _this5.$forceUpdate();
+                _this6.$forceUpdate();
 
                 $('#asignatModal').modal('show');
 
@@ -11784,7 +11575,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn {\r\n    font-size: 15px;\n}\n.contenido{\r\n    font-size: 15px;\n}\n.btn-secondary:not(:disabled):not(.disabled).active,\r\n.btn-secondary:not(:disabled):not(.disabled):active,\r\n.show > .btn-secondary.dropdown-toggle {\r\n  background-color: #e3177d;\r\n  border-color: black;\n}\n.btn-secondary {\r\n  border-color: black;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\n}\n.parentGrid {\r\n  display: grid;\r\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-between;\n}\n.card-header {\r\n  background-color: #15acc4;\r\n  border: 1px solid black;\r\n  border-left: 0;\r\n  border-right: 0;\r\n  margin-top: -1px;\n}\n.modal-header{\r\n    background-color: #15acc4 !important;\n}\n.card {\r\n  border: 1px solid black !important;\n}\nbutton {\r\n  background-color: #e3177d !important;\r\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\r\n  color: black;\r\n  font-weight: bold;\r\n  background-color: #15acc4 !important;\n}\n.tabButton{\r\n    background-color: white !important;\r\n    border: 0 !important;\n}\n.selectedTab{\r\n    background-color: #e3177d !important;\r\n    border: 1px solid black !important;\n}\n.green{\r\n    background-color: green;\r\n    color: white;\n}\n.red{\r\n    background-color: red;\r\n    color: white;\n}\n#entregar{\r\n  border: 1px solid black;\n}\n#titulitosTabs {\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\n}\n.iconNavPrincipal{\r\n    color: black;\n}\n#titulito {\r\n    font-family: 'Signika', sans-serif;\r\n    font-size: 1.3em;\n}\n.hidden{\r\n    visibility: hidden;\n}\n#buscadorTelefono > input{\r\n    border: 1px solid black;\n}\n.arrowNav{\r\n    height: 8vh;\n}\n#preguntesModal{\r\n    display: flex;\r\n    flex-direction: row;\r\n    flex-wrap: wrap;\r\n    justify-content: space-around;\n}\n#preguntaModal{\r\n    width: 50vw;\r\n    margin-bottom: 2vw;\r\n    margin-top: 2vw;\n}\n#preguntaModal > .card-header{\r\n    font-weight: bold;\n}\n.modal-title{\r\n    font-weight: bold !important;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn {\n    font-size: 15px;\n}\n.contenido{\n    font-size: 15px;\n}\n.btn-secondary:not(:disabled):not(.disabled).active,\n.btn-secondary:not(:disabled):not(.disabled):active,\n.show > .btn-secondary.dropdown-toggle {\n  background-color: #e3177d;\n  border-color: black;\n}\n.btn-secondary {\n  border-color: black;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.parentGrid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n.card-header {\n  background-color: #15acc4;\n  border: 1px solid black;\n  border-left: 0;\n  border-right: 0;\n  margin-top: -1px;\n}\n.modal-header{\n    background-color: #15acc4 !important;\n}\n.card {\n  border: 1px solid black !important;\n}\nbutton {\n  background-color: #e3177d !important;\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\n  color: black;\n  font-weight: bold;\n  background-color: #15acc4 !important;\n}\n.tabButton{\n    background-color: white !important;\n    border: 0 !important;\n}\n.selectedTab{\n    background-color: #e3177d !important;\n    border: 1px solid black !important;\n}\n.green{\n    background-color: green;\n    color: white;\n}\n.red{\n    background-color: red;\n    color: white;\n}\n#entregar{\n  border: 1px solid black;\n}\n#titulitosTabs {\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n.iconNavPrincipal{\n    color: black;\n}\n#titulito {\n    font-family: 'Signika', sans-serif;\n    font-size: 1.3em;\n}\n.hidden{\n    visibility: hidden;\n}\n#buscadorTelefono > input{\n    border: 1px solid black;\n}\n.arrowNav{\n    height: 8vh;\n}\n#preguntesModal{\n    display: flex;\n    flex-direction: row;\n    flex-wrap: wrap;\n    justify-content: space-around;\n}\n#preguntaModal{\n    width: 50vw;\n    margin-bottom: 2vw;\n    margin-top: 2vw;\n}\n#preguntaModal > .card-header{\n    font-weight: bold;\n}\n.modal-title{\n    font-weight: bold !important;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11808,7 +11599,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nmain[data-v-6504f867] {\r\n  margin-top: 1.4vh;\r\n  color: black;\r\n  font-family: 'Rubik', sans-serif;\r\n  font-size: 15px;\n}\n#infoCard[data-v-6504f867] {\r\n  height: 65vh;\r\n  color: black;\n}\n#botones[data-v-6504f867] {\r\n  height: 28vh;\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-around;\r\n  align-items: center;\n}\n#infoHeader[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-between;\r\n  font-size: 1.2em;\r\n  font-weight: bold;\r\n  margin-right: -0.5px;\r\n  border-bottom: 1px solid black;\r\n  background-color: #15acc4;\n}\nbutton[data-v-6504f867] {\r\n  background-color: #e3177d;\r\n  font-size: 0.9em;\r\n  color: white;\r\n  border-radius: 4px;\n}\n.card[data-v-6504f867] {\r\n  border: 1px solid black;\n}\n#transportHeader[data-v-6504f867] {\r\n  background-color: #15acc4;\r\n  font-weight: bold;\r\n  padding: 6px 20px;\r\n  text-align: center;\n}\n.leftButtons[data-v-6504f867] {\r\n  height: 100%;\r\n  display: flex;\r\n  flex-direction: column;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-around;\n}\n#assistencia[data-v-6504f867]{\r\n    opacity: .4;\n}\n#transportButton[data-v-6504f867] {\r\n  background-color: #e3177d;\n}\n#transportButtons[data-v-6504f867] {\r\n  height: 100%;\r\n  opacity: .4;\n}\n.visible[data-v-6504f867]{\r\n    opacity: 1 !important;\n}\n#transportForm[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: wrap;\r\n  justify-content: space-around;\r\n  align-items: center;\n}\n#botonsTransport[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  width: 100%;\r\n  justify-content: space-between;\n}\n.button[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  /* align-items: center; */\n}\n#direccioHospital[data-v-6504f867] {\r\n  width: 100%;\n}\n#map[data-v-6504f867] {\r\n  height: 65%;\r\n  background-color: black;\n}\n#info[data-v-6504f867] {\r\n  height: 20%;\r\n  margin-top: 4%;\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: space-around;\r\n  flex-wrap: nowrap;\r\n  /* font-weight: bold; */\n}\n.boldInfo[data-v-6504f867]{\r\n    font-weight: bold;\n}\n#infoFields[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: space-around;\r\n  padding-right: 0;\n}\n.infobox[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  align-items: center;\r\n  text-align: justify;\r\n  /* font-size: 12px; */\n}\n.infobox > div[data-v-6504f867] {\r\n  background-color: #15acc4;\r\n  border: 1px solid black;\r\n  font-size: 13.5px;\r\n  padding: 0px 5px !important;\n}\n#descripcion[data-v-6504f867],\r\n#direccion[data-v-6504f867] {\r\n  background-color: white;\n}\n#masInfo[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: center;\r\n  vertical-align: center;\n}\n#masInfo > button[data-v-6504f867] {\r\n  padding: 10px 20px;\r\n  margin-left: -50px;\r\n  color: white;\n}\n.modal-header[data-v-6504f867]{\r\n    font-weight: bold;\r\n    background-color: #15acc4;\n}\n#alta[data-v-6504f867]{\r\n    opacity: 0.4;\n}\n#alta > button[data-v-6504f867]{\r\n    padding: 5px 15px;\r\n    margin-bottom: 0px !important;\r\n    background-color: white !important;\r\n    color: #e3177d;\r\n    font-weight: bolder;\n}\n.indicadoresMasInfo[data-v-6504f867]{\r\n    font-weight: bold;\n}\n#checkTransport[data-v-6504f867]{\r\n    opacity: 0.4;\n}\n#checkTransport > button[data-v-6504f867]{\r\n    padding: 5px 15px;\n}\n#iniciarTransport[data-v-6504f867]{\r\n    opacity: 0.4;\n}\n#arribadaHospital[data-v-6504f867]{\r\n    opacity: 0.4;\n}\n#iniciarTransferencia[data-v-6504f867]{\r\n    opacity: 0.4;\n}\n#hospitalitzacio[data-v-6504f867]{\r\n    opacity: 0.4;\r\n    margin-top: 1vh;\n}\n#hospitalitzacio > button[data-v-6504f867]{\r\n    padding: 10px 10px;\r\n    background-color: green !important;\n}\r\n/* .cerrarBoton{\r\n    font-size: 15px;\r\n} */\n.opaco[data-v-6504f867]{\r\n  opacity: 0.4 !important;\n}\n.cerrarBtn[data-v-6504f867] {\r\n  background-color: #6c757d !important;\r\n  color: white;\r\n  font-size: 15px;\n}\n.confirmarBtn[data-v-6504f867]{\r\n  font-size: 15px;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nmain[data-v-6504f867] {\n  margin-top: 1.4vh;\n  color: black;\n  font-family: 'Rubik', sans-serif;\n  font-size: 15px;\n}\n#infoCard[data-v-6504f867] {\n  height: 65vh;\n  color: black;\n}\n#botones[data-v-6504f867] {\n  height: 28vh;\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#infoHeader[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n  font-size: 1.2em;\n  font-weight: bold;\n  margin-right: -0.5px;\n  border-bottom: 1px solid black;\n  background-color: #15acc4;\n}\nbutton[data-v-6504f867] {\n  background-color: #e3177d;\n  font-size: 0.9em;\n  color: white;\n  border-radius: 4px;\n}\n.card[data-v-6504f867] {\n  border: 1px solid black;\n}\n#transportHeader[data-v-6504f867] {\n  background-color: #15acc4;\n  font-weight: bold;\n  padding: 6px 20px;\n  text-align: center;\n}\n.leftButtons[data-v-6504f867] {\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n}\n#assistencia[data-v-6504f867]{\n    opacity: .4;\n}\n#transportButton[data-v-6504f867] {\n  background-color: #e3177d;\n}\n#transportButtons[data-v-6504f867] {\n  height: 100%;\n  opacity: .4;\n}\n.visible[data-v-6504f867]{\n    opacity: 1 !important;\n}\n#transportForm[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#botonsTransport[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  width: 100%;\n  justify-content: space-between;\n}\n.button[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  /* align-items: center; */\n}\n#direccioHospital[data-v-6504f867] {\n  width: 100%;\n}\n#map[data-v-6504f867] {\n  height: 65%;\n  background-color: black;\n}\n#info[data-v-6504f867] {\n  height: 20%;\n  margin-top: 4%;\n  display: flex;\n  flex-direction: row;\n  justify-content: space-around;\n  flex-wrap: nowrap;\n  /* font-weight: bold; */\n}\n.boldInfo[data-v-6504f867]{\n    font-weight: bold;\n}\n#infoFields[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n  padding-right: 0;\n}\n.infobox[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  text-align: justify;\n  /* font-size: 12px; */\n}\n.infobox > div[data-v-6504f867] {\n  background-color: #15acc4;\n  border: 1px solid black;\n  font-size: 13.5px;\n  padding: 0px 5px !important;\n}\n#descripcion[data-v-6504f867],\n#direccion[data-v-6504f867] {\n  background-color: white;\n}\n#masInfo[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  vertical-align: center;\n}\n#masInfo > button[data-v-6504f867] {\n  padding: 10px 20px;\n  margin-left: -50px;\n  color: white;\n}\n.modal-header[data-v-6504f867]{\n    font-weight: bold;\n    background-color: #15acc4;\n}\n#alta[data-v-6504f867]{\n    opacity: 0.4;\n}\n#alta > button[data-v-6504f867]{\n    padding: 5px 15px;\n    margin-bottom: 0px !important;\n    background-color: white !important;\n    color: #e3177d;\n    font-weight: bolder;\n}\n.indicadoresMasInfo[data-v-6504f867]{\n    font-weight: bold;\n}\n#checkTransport[data-v-6504f867]{\n    opacity: 0.4;\n}\n#checkTransport > button[data-v-6504f867]{\n    padding: 5px 15px;\n}\n#iniciarTransport[data-v-6504f867]{\n    opacity: 0.4;\n}\n#arribadaHospital[data-v-6504f867]{\n    opacity: 0.4;\n}\n#iniciarTransferencia[data-v-6504f867]{\n    opacity: 0.4;\n}\n#hospitalitzacio[data-v-6504f867]{\n    opacity: 0.4;\n    margin-top: 1vh;\n}\n#hospitalitzacio > button[data-v-6504f867]{\n    padding: 10px 10px;\n    background-color: green !important;\n}\n/* .cerrarBoton{\n    font-size: 15px;\n} */\n.opaco[data-v-6504f867]{\n  opacity: 0.4 !important;\n}\n.cerrarBtn[data-v-6504f867] {\n  background-color: #6c757d !important;\n  color: white;\n  font-size: 15px;\n}\n.confirmarBtn[data-v-6504f867]{\n  font-size: 15px;\n}\n.confirmarBtn[data-v-6504f867]:hover{\n  color: white;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11832,11 +11623,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-<<<<<<< HEAD
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.alertaSinRecursos{\n    font-family: 'Rubik', sans-serif;\n    font-size: 15px;\n    color: black;\n    background-color: rgb(21, 172, 196, .5);\n    width: 90%;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n.modalEdicionRecursos{\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: space-around;\n}\n\n", ""]);
-=======
-___CSS_LOADER_EXPORT___.push([module.id, "\n.alertaSinRecursos{\r\n    font-family: 'Rubik', sans-serif;\r\n    font-size: 15px;\r\n    color: black;\r\n    background-color: rgb(21, 172, 196, .5);\r\n    width: 90%;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\r\n\r\n", ""]);
->>>>>>> adbad560ba2e3cfa6ddb3e245b614a514e5eab52
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11884,7 +11671,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.alertaSinRecursos{\n    font-family: 'Rubik', sans-serif;\n    font-size: 15px;\n    color: black;\n    background-color: rgb(21, 172, 196, .5);\n    width: 90%;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.alertaSinRecursos{\r\n    font-family: 'Rubik', sans-serif;\r\n    font-size: 15px;\r\n    color: black;\r\n    background-color: rgb(21, 172, 196, .5);\r\n    width: 90%;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11932,7 +11719,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeNom {\r\n    width: 20vw;\n}\n.sizeCognom {\r\n    width: 13vw;\n}\n.sizeMunicipi{\r\n    width: 13vh;\n}\n.sizeBotones {\r\n    width: 14vw;\n}\n.esborrarAlertantBtn, .afegirAlertantBtn {\r\n  background-color: #e3177d !important;\r\n  color: white !important;\n}\n.editarAlertantBtn {\r\n  background-color: #15acc4 !important;\r\n  color: black !important;\n}\n.editarAlertantBtn:hover {\r\n  color: black !important;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\n.cerrarBtn:hover {\r\n  color: white;\n}\n@font-face {\r\n  font-family: myFont;\r\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\nh2{\r\n  font-family: myFont;\r\n  font-size: 1.3em;\n}\n.modal-header{\r\n  font-weight: bold;\r\n  background-color: #15acc4;\n}\n.pagination{\r\n  padding-left: 48px;\n}\n.numeroPaginacion {\r\n  color: white;\n}\n.nuevaAlertante{\r\n  padding-top: 0;\r\n  padding-bottom: 0;\r\n  margin-bottom: 15px; /*cambiarlo a vh*/\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeNom {\n    width: 20vw;\n}\n.sizeCognom {\n    width: 13vw;\n}\n.sizeMunicipi{\n    width: 13vh;\n}\n.sizeBotones {\n    width: 14vw;\n}\n.esborrarAlertantBtn, .afegirAlertantBtn {\n  background-color: #e3177d !important;\n  color: white !important;\n}\n.editarAlertantBtn {\n  background-color: #15acc4 !important;\n  color: black !important;\n}\n.editarAlertantBtn:hover {\n  color: black !important;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n.cerrarBtn:hover {\n  color: white;\n}\n@font-face {\n  font-family: myFont;\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\nh2{\n  font-family: myFont;\n  font-size: 1.3em;\n}\n.modal-header{\n  font-weight: bold;\n  background-color: #15acc4;\n}\n.pagination{\n  padding-left: 48px;\n}\n.numeroPaginacion {\n  color: white;\n}\n.nuevaAlertante{\n  padding-top: 0;\n  padding-bottom: 0;\n  margin-bottom: 15px; /*cambiarlo a vh*/\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11956,7 +11743,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeBotones {\r\n    width: 14vw;\n}\n.esborrarRecursBtn, .afegirRecursBtn {\r\n  background-color: #e3177d !important;\r\n  color: white !important;\n}\n.editarRecursBtn {\r\n  background-color: #15acc4 !important;\r\n  color: black !important;\n}\n.editarRecursBtn:hover {\r\n  color: black !important;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\n.cerrarBtn:hover {\r\n  color: white;\n}\n@font-face {\r\n  font-family: myFont;\r\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\n.nuevoRecurso{\r\n  padding-top: 0;\r\n  padding-bottom: 0;\r\n  margin-bottom: 15px; /*cambiarlo a vh*/\n}\r\n\r\n\r\n/* .modal-header{\r\n    font-weight: bold;\r\n    background-color: #15acc4;\r\n} */\r\n\r\n/* h2{\r\n  font-family: myFont;\r\n  font-size: 1.3em;\r\n} */\r\n\r\n/*NO SE BORRAN LOS MENSAJES Y AL CAMBIAR EL NOMBRE DE UN CÓDIGO, SE QUITA EL CHECKED*/\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeBotones {\n    width: 14vw;\n}\n.esborrarRecursBtn, .afegirRecursBtn {\n  background-color: #e3177d !important;\n  color: white !important;\n}\n.editarRecursBtn {\n  background-color: #15acc4 !important;\n  color: black !important;\n}\n.editarRecursBtn:hover {\n  color: black !important;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n.cerrarBtn:hover {\n  color: white;\n}\n@font-face {\n  font-family: myFont;\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\n.nuevoRecurso{\n  padding-top: 0;\n  padding-bottom: 0;\n  margin-bottom: 15px; /*cambiarlo a vh*/\n}\n\n\n/* .modal-header{\n    font-weight: bold;\n    background-color: #15acc4;\n} */\n\n/* h2{\n  font-family: myFont;\n  font-size: 1.3em;\n} */\n\n/*NO SE BORRAN LOS MENSAJES Y AL CAMBIAR EL NOMBRE DE UN CÓDIGO, SE QUITA EL CHECKED*/\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11980,7 +11767,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeBotones {\r\n    width: 14vw;\n}\n.esborrarUsuariBtn, .afegirUsuariBtn {\r\n  background-color: #e3177d !important;\r\n  color: white !important;\n}\n.editarUsuariBtn {\r\n  background-color: #15acc4 !important;\r\n  color: black !important;\n}\n.editarUsuariBtn:hover {\r\n  color: black !important;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\n.cerrarBtn:hover {\r\n  color: white;\n}\n@font-face {\r\n  font-family: myFont;\r\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\r\n\r\n/* h2{\r\n  font-family: myFont;\r\n  font-size: 1.3em;\r\n} */\r\n\r\n/* .modal-header{\r\n    font-weight: bold;\r\n    background-color: #15acc4;\r\n} */\n.nuevaUsuaria{\r\n  padding-top: 0;\r\n  padding-bottom: 0;\r\n  margin-bottom: 15px; /*cambiarlo a vh*/\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeBotones {\n    width: 14vw;\n}\n.esborrarUsuariBtn, .afegirUsuariBtn {\n  background-color: #e3177d !important;\n  color: white !important;\n}\n.editarUsuariBtn {\n  background-color: #15acc4 !important;\n  color: black !important;\n}\n.editarUsuariBtn:hover {\n  color: black !important;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n.cerrarBtn:hover {\n  color: white;\n}\n@font-face {\n  font-family: myFont;\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\n\n/* h2{\n  font-family: myFont;\n  font-size: 1.3em;\n} */\n\n/* .modal-header{\n    font-weight: bold;\n    background-color: #15acc4;\n} */\n.nuevaUsuaria{\n  padding-top: 0;\n  padding-bottom: 0;\n  margin-bottom: 15px; /*cambiarlo a vh*/\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -49826,25 +49613,25 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [
                   _vm._v(
-                    "\r\n          " +
+                    "\n          " +
                       _vm._s(_vm.getMunicipi(index)) +
-                      "\r\n        "
+                      "\n        "
                   )
                 ]),
                 _vm._v(" "),
                 _c("td", [
                   _vm._v(
-                    "\r\n          " +
+                    "\n          " +
                       _vm._s(_vm.getTipusIncidencia(index)) +
-                      "\r\n        "
+                      "\n        "
                   )
                 ]),
                 _vm._v(" "),
                 _c("td", [
                   _vm._v(
-                    "\r\n          " +
+                    "\n          " +
                       _vm._s(_vm.getTipusAlertant(index)) +
-                      "\r\n        "
+                      "\n        "
                   )
                 ]),
                 _vm._v(" "),
@@ -49905,7 +49692,7 @@ var render = function() {
           },
           [
             _vm._v(
-              "\r\n  Este recurso no tiene ninguna incidencia en su historial\r\n"
+              "\n  Este recurso no tiene ninguna incidencia en su historial\n"
             )
           ]
         ),
@@ -50517,25 +50304,25 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [
                   _vm._v(
-                    "\n          " +
+                    "\r\n          " +
                       _vm._s(_vm.getMunicipi(index)) +
-                      "\n        "
+                      "\r\n        "
                   )
                 ]),
                 _vm._v(" "),
                 _c("td", [
                   _vm._v(
-                    "\n          " +
+                    "\r\n          " +
                       _vm._s(_vm.getTipusIncidencia(index)) +
-                      "\n        "
+                      "\r\n        "
                   )
                 ]),
                 _vm._v(" "),
                 _c("td", [
                   _vm._v(
-                    "\n          " +
+                    "\r\n          " +
                       _vm._s(_vm.getTipusAlertant(index)) +
-                      "\n        "
+                      "\r\n        "
                   )
                 ]),
                 _vm._v(" "),
@@ -50551,7 +50338,7 @@ var render = function() {
             staticClass: "alert mt-3 alertaSinRecursos",
             attrs: { role: "alert" }
           },
-          [_vm._v("\n  No hay ninguna incidencia asignada\n")]
+          [_vm._v("\r\n  No hay ninguna incidencia asignada\r\n")]
         )
   ])
 }
@@ -50860,7 +50647,7 @@ var render = function() {
               },
               [_vm._v("×")]
             ),
-            _vm._v("\r\n    " + _vm._s(_vm.errorMessage) + "\r\n  ")
+            _vm._v("\n    " + _vm._s(_vm.errorMessage) + "\n  ")
           ]
         )
       : _vm._e(),
@@ -50880,7 +50667,7 @@ var render = function() {
               },
               [_vm._v("×")]
             ),
-            _vm._v("\r\n    " + _vm._s(_vm.infoMessage) + "\r\n  ")
+            _vm._v("\n    " + _vm._s(_vm.infoMessage) + "\n  ")
           ]
         )
       : _vm._e(),
@@ -50977,7 +50764,7 @@ var render = function() {
               staticClass: "fas fa-plus-circle",
               attrs: { "aria-hidden": "true" }
             }),
-            _vm._v("\r\n        Nueva alertante\r\n    ")
+            _vm._v("\n        Nueva alertante\n    ")
           ]
         )
       ]
@@ -51036,17 +50823,17 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", [
                       _vm._v(
-                        "\r\n                " +
+                        "\n                " +
                           _vm._s(_vm.getMunicipi(index)) +
-                          "\r\n              "
+                          "\n              "
                       )
                     ]),
                     _vm._v(" "),
                     _c("td", [
                       _vm._v(
-                        "\r\n                " +
+                        "\n                " +
                           _vm._s(_vm.getTipusAlertant(index)) +
-                          "\r\n              "
+                          "\n              "
                       )
                     ]),
                     _vm._v(" "),
@@ -51366,9 +51153,9 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\r\n                      " +
+                                "\n                      " +
                                   _vm._s(municipi.nom) +
-                                  "\r\n                    "
+                                  "\n                    "
                               )
                             ]
                           )
@@ -51436,9 +51223,9 @@ var render = function() {
                             { key: tipus.id, domProps: { value: tipus.id } },
                             [
                               _vm._v(
-                                "\r\n                      " +
+                                "\n                      " +
                                   _vm._s(tipus.tipus) +
-                                  "\r\n                    "
+                                  "\n                    "
                               )
                             ]
                           )
@@ -51615,7 +51402,7 @@ var render = function() {
               },
               [_vm._v("×")]
             ),
-            _vm._v("\r\n    " + _vm._s(_vm.errorMessage) + "\r\n  ")
+            _vm._v("\n    " + _vm._s(_vm.errorMessage) + "\n  ")
           ]
         )
       : _vm._e(),
@@ -51635,7 +51422,7 @@ var render = function() {
               },
               [_vm._v("×")]
             ),
-            _vm._v("\r\n    " + _vm._s(_vm.infoMessage) + "\r\n  ")
+            _vm._v("\n    " + _vm._s(_vm.infoMessage) + "\n  ")
           ]
         )
       : _vm._e(),
@@ -51732,7 +51519,7 @@ var render = function() {
               staticClass: "fas fa-plus-circle",
               attrs: { "aria-hidden": "true" }
             }),
-            _vm._v("\r\n        Nuevo recurso\r\n    ")
+            _vm._v("\n        Nuevo recurso\n    ")
           ]
         )
       ]
@@ -51809,9 +51596,9 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", [
                       _vm._v(
-                        "\r\n                " +
+                        "\n                " +
                           _vm._s(_vm.getTipusRecurs(index)) +
-                          "\r\n              "
+                          "\n              "
                       )
                     ]),
                     _vm._v(" "),
@@ -52101,9 +51888,9 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\r\n                      " +
+                                "\n                      " +
                                   _vm._s(tipusRecurs.tipus) +
-                                  "\r\n                    "
+                                  "\n                    "
                               )
                             ]
                           )
@@ -52266,7 +52053,7 @@ var render = function() {
               },
               [_vm._v("×")]
             ),
-            _vm._v("\r\n    " + _vm._s(_vm.errorMessage) + "\r\n  ")
+            _vm._v("\n    " + _vm._s(_vm.errorMessage) + "\n  ")
           ]
         )
       : _vm._e(),
@@ -52286,7 +52073,7 @@ var render = function() {
               },
               [_vm._v("×")]
             ),
-            _vm._v("\r\n    " + _vm._s(_vm.infoMessage) + "\r\n  ")
+            _vm._v("\n    " + _vm._s(_vm.infoMessage) + "\n  ")
           ]
         )
       : _vm._e(),
@@ -52383,7 +52170,7 @@ var render = function() {
               staticClass: "fas fa-plus-circle",
               attrs: { "aria-hidden": "true" }
             }),
-            _vm._v("\r\n        Nueva usuaria\r\n    ")
+            _vm._v("\n        Nueva usuaria\n    ")
           ]
         )
       ]
@@ -52442,9 +52229,9 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", [
                       _vm._v(
-                        "\r\n                " +
+                        "\n                " +
                           _vm._s(_vm.getRol(index)) +
-                          "\r\n              "
+                          "\n              "
                       )
                     ]),
                     _vm._v(" "),
@@ -52812,9 +52599,9 @@ var render = function() {
                             { key: rol.id, domProps: { value: rol.id } },
                             [
                               _vm._v(
-                                "\r\n                    " +
+                                "\n                    " +
                                   _vm._s(rol.nom) +
-                                  "\r\n                  "
+                                  "\n                  "
                               )
                             ]
                           )
