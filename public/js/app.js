@@ -4887,9 +4887,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     getIncidenciesRecursos: function getIncidenciesRecursos() {
+      var _this2 = this;
+
       var me = this;
       return this.incidenciaHasRecursos.forEach(function (incidencia) {
         me.selectIncidencia(incidencia.incidencies_id);
+
+        _this2.$forceUpdate();
       });
     },
     selectIncidencia: function selectIncidencia(id) {
@@ -4910,9 +4914,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     selectIncidenciaHasRecursos: function selectIncidenciaHasRecursos() {
       var me = this;
+      this.incidenciaHasRecursos = [];
       this.incidenciaHasRecursos = this.incidenciesHasRecursos.filter(function (obj) {
         return obj.recursos_id == me.recursos_id;
-      }); // this.incidenciaID = this.incidenciaHasRecursos[this.incidenciaHasRecursos.length-1].incidencies_id;
+      });
+      this.$forceUpdate(); // this.incidenciaID = this.incidenciaHasRecursos[this.incidenciaHasRecursos.length-1].incidencies_id;
 
       return true;
     },
@@ -4936,10 +4942,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     getMunicipi: function getMunicipi(index) {
-      var _this2 = this;
+      var _this3 = this;
 
       var municipi = this.municipis.find(function (obj) {
-        return obj.id == _this2.incidencies[index].municipis_id;
+        return obj.id == _this3.incidencies[index].municipis_id;
       });
       var municipi_nom;
 
@@ -4962,10 +4968,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     getTipusIncidencia: function getTipusIncidencia(index) {
-      var _this3 = this;
+      var _this4 = this;
 
       var tipusIncidencia = this.tipusIncidencies.find(function (obj) {
-        return obj.id == _this3.incidencies[index].tipus_incidencies_id;
+        return obj.id == _this4.incidencies[index].tipus_incidencies_id;
       });
       var tipusIncidencia_nom;
 
@@ -5007,16 +5013,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var tipusAlertant_nom = this.tipusAlertants[tipusAlertant_index].tipus;
       return tipusAlertant_nom;
     },
-    // deleteAsignat(){
-    //     let me = this;
-    //   axios
-    //       .delete("/SGTA-Broggi/public/api/deleteIHR/"+me.incidenciaHasRecursos[0].incidencies_id+"/"+me.incidenciaHasRecursos[0].recursos_id)
-    //       .then((response) => {
-    //         console.log(response.data);
-    //       }).catch((error) => {
-    //         console.log(error);
-    //       })
-    // },
     deleteAsignat: function deleteAsignat() {
       var me = this;
       axios["delete"]("/SGTA-Broggi/public/api/incidenciaHasRecursos/" + me.incidenciaHasRecursos[0].incidencies_id + "/" + me.incidenciaHasRecursos[0].recursos_id).then(function (response) {
@@ -5025,13 +5021,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         console.log(error);
       });
       $('#deleteModalAsignat').modal('hide');
+      this.getIncidenciaData();
+      this.$forceUpdate();
+      location.reload();
     },
     confirmDeleteAsignat: function confirmDeleteAsignat(incidencia) {
       this.incidencia = incidencia;
       $('#deleteModalAsignat').modal('show');
     },
-    updateIncidenteAsignado: function updateIncidenteAsignado() {// modificar con todo el contenido
-    },
+    updateIncidenteAsignado: function updateIncidenteAsignado() {},
     editIncidencia: function editIncidencia(incidencia) {
       this.insert = false;
       this.incidencia = incidencia;
