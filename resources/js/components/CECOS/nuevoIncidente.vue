@@ -38,7 +38,7 @@
       <button
         :disabled="currentTab == 3"
         @click="next()"
-        class="btn btn-sm mr-3 float-right mr-3 iconNavPrincipal arrowNav"
+        class="btn btn-sm mr-3 float-right mr-4 iconNavPrincipal arrowNav"
         :class="{ hidden: tabs.c }"
       >
         <i class="fas fa-arrow-right fa-2x"></i>
@@ -247,7 +247,7 @@
     </div>
 
     <div v-show="currentTab == 2">
-      <div class="container-fluid mt-5">
+      <div class="container-fluid mt-5 mb-3">
         <div class="card ml-5 mr-5">
           <div class="card-header font-weight-bold" id="titulito">DATOS AFECTADA
               <button class="float-right" @click="showHelpBox(2)"><i class="far fa-file-alt"></i></button>
@@ -486,7 +486,7 @@
     </div>
 
     <div v-show="currentTab == 3">
-      <div class="card ml-5 mr-5 mt-3">
+      <div class="card ml-5 mr-5 mt-3 mb-3">
         <div class="card-header font-weight-bold" id="titulito">RESPUESTA
             <button class="float-right ml-4" @click="showHelpBox(4)"><i class="far fa-file-alt"></i></button>
             <button
@@ -844,7 +844,7 @@
           <div class="modal-footer">
             <button
               type="button"
-              class="btn btn-secondary"
+              class="btn cerrarBtn"
               data-dismiss="modal"
             >
               Cerrar
@@ -893,7 +893,7 @@
           <div class="modal-footer">
             <button
               type="button"
-              class="btn btn-secondary"
+              class="btn cerrarBtn"
               data-dismiss="modal"
             >
               Cerrar
@@ -924,7 +924,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn cerrarBtn" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>
@@ -1785,5 +1785,10 @@ button {
 
 .modal-title{
     font-weight: bold !important;
+}
+
+.cerrarBtn {
+  background-color: #6c757d !important;
+  color: white;
 }
 </style>

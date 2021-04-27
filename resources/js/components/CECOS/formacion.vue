@@ -216,8 +216,8 @@ export default {
     float: right;
     position: absolute;
     background-color: green !important;
-    top: 90px;
-    right: 20px;
+    top: 20vh;
+    right: 2vw;
   }
 
   .todoFormacion {

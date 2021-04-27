@@ -157,7 +157,7 @@ export default {
     }
 
     .dislexia {
-      margin-right: 90px;
+      margin-right: 8vw;
     }
 
     .dislexiaFont{
