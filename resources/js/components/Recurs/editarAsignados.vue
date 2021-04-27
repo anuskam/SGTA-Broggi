@@ -331,7 +331,13 @@
           console.log(this.recursEditar);
         },
         updateIncidenteAsignado(){
-            // modificar con todo el contenido
+            let me = this;
+            return axios.put('/SGTA-Broggi/public/api/incidenciaHasRecursos/'+me.incidencia.id+'/'+me.recursos_id, me.recursEditar).then((response) => {
+                console.log(response);
+            }).catch( (error) => {
+                console.log(error.response.status);
+                console.log(error.response.data.error);
+            });
         },
         async editIncidencia(incidencia){
             await this.getHospitalsAddresses();
