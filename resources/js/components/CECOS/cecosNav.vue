@@ -2,7 +2,7 @@
   <div class="contenido" :class="{ dislexiaFont: activaDislexia }">
       <nav class="navbar navbar-expand-lg navbar-light" id="cecosNav">
         <a class="navbar-brand"><img src="/SGTA-Broggi/public/media/img/prototipoLogo.png" id="cecosLogo" alt="logoBroggi"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Barra de navegación">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -31,7 +31,7 @@
     </div>
 
     <div v-show="currentTab == 2">
-        <gestionarIncidente-component></gestionarIncidente-component>
+        <!-- <gestionarIncidente-component></gestionarIncidente-component> -->
     </div>
 
     <div v-if="currentTab == 3">
@@ -157,7 +157,7 @@ export default {
     }
 
     .dislexia {
-      margin-right: 90px;
+      margin-right: 8vw;
     }
 
     .dislexiaFont{

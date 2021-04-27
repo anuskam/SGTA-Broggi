@@ -2,7 +2,7 @@
   <div class="contenido">
     <div v-show="errors.length > 0" v-for="(error, index) in errors" :key="index" class="alert alert-danger alert-dismissable fade show" role="alert" style="color: black;">
         {{ error }}
-        <button class="close" type="button" data-dismiss="alert" aria-label="Close">
+        <button class="close" type="button" data-dismiss="alert" aria-label="Cerrar">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
@@ -17,15 +17,15 @@
       </button>
 
       <div>
-        <button @click="selectTab(1)" class="btn btn-sm mr-3 tabButton" :class="{ selectedTab: tabs.a }">
+        <button @click="selectTab(1)" class="btn btn-sm mr-3 tabButton" :class="{ selectedTab: tabs.a }" aria-label="Alertante">
           <i class="fas fa-phone-alt fa-2x mr-2 ml-2 iconNavPrincipal" aria-hidden="true"></i>
         </button>
         |
-        <button @click="selectTab(2)" class="btn btn-sm mr-3 ml-3 tabButton" :class="{ selectedTab: tabs.b }">
+        <button @click="selectTab(2)" class="btn btn-sm mr-3 ml-3 tabButton" :class="{ selectedTab: tabs.b }" aria-label="Afectada">
           <i class="fas fa-user-injured fa-2x mr-2 ml-2 iconNavPrincipal" aria-hidden="true"></i>
         </button>
         |
-        <button @click="selectTab(3)" class="btn btn-sm ml-3 tabButton"  :class="{ selectedTab: tabs.c }">
+        <button @click="selectTab(3)" class="btn btn-sm ml-3 tabButton"  :class="{ selectedTab: tabs.c }" aria-label="Respuesta">
           <i class="fas fa-ambulance fa-2x mr-2 ml-2 iconNavPrincipal" aria-hidden="true"></i>
         </button>
         <div id="titulitosTabs">
@@ -38,7 +38,7 @@
       <button
         :disabled="currentTab == 3"
         @click="next()"
-        class="btn btn-sm mr-3 float-right mr-3 iconNavPrincipal arrowNav"
+        class="btn btn-sm mr-3 float-right mr-4 iconNavPrincipal arrowNav"
         :class="{ hidden: tabs.c }"
       >
         <i class="fas fa-arrow-right fa-2x"></i>
@@ -224,11 +224,6 @@
                     v-model="incidencia.adreca"
                   />
                 </div>
-
-                <!-- <label for="numeroDireccion" class="col-2 mt-2">Número</label>
-                <div class="col-2">
-                  <input type="number" class="form-control" min="1" />
-                </div> -->
               </div>
 
               <!-- COMPLEMENTO DIRECCIÓN -->
@@ -252,7 +247,7 @@
     </div>
 
     <div v-show="currentTab == 2">
-      <div class="container-fluid mt-5">
+      <div class="container-fluid mt-5 mb-3">
         <div class="card ml-5 mr-5">
           <div class="card-header font-weight-bold" id="titulito">DATOS AFECTADA
               <button class="float-right" @click="showHelpBox(2)"><i class="far fa-file-alt"></i></button>
@@ -316,7 +311,7 @@
                   </label>
                 </div>
 
-                <label for="edadAfectada" class="col-1 mt-1 ml-4">Edad</label>
+                <label for="edadAfectada" class="col-1 col-form-label mt-1 ml-4">Edad</label>
                 <div class="col-2">
                   <input
                     type="number"
@@ -491,7 +486,7 @@
     </div>
 
     <div v-show="currentTab == 3">
-      <div class="card ml-5 mr-5 mt-3">
+      <div class="card ml-5 mr-5 mt-3 mb-3">
         <div class="card-header font-weight-bold" id="titulito">RESPUESTA
             <button class="float-right ml-4" @click="showHelpBox(4)"><i class="far fa-file-alt"></i></button>
             <button
@@ -831,7 +826,7 @@
               type="button"
               class="close"
               data-dismiss="modal"
-              aria-label="Close"
+              aria-label="Cerrar"
             >
               <span aria-hidden="true">&times;</span>
             </button>
@@ -849,7 +844,7 @@
           <div class="modal-footer">
             <button
               type="button"
-              class="btn btn-secondary"
+              class="btn cerrarBtn"
               data-dismiss="modal"
             >
               Cerrar
@@ -869,7 +864,7 @@
               type="button"
               class="close"
               data-dismiss="modal"
-              aria-label="Close"
+              aria-label="Cerrar"
             >
               <span aria-hidden="true">&times;</span>
             </button>
@@ -898,7 +893,7 @@
           <div class="modal-footer">
             <button
               type="button"
-              class="btn btn-secondary"
+              class="btn cerrarBtn"
               data-dismiss="modal"
             >
               Cerrar
@@ -929,7 +924,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn cerrarBtn" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>
@@ -1790,5 +1785,10 @@ button {
 
 .modal-title{
     font-weight: bold !important;
+}
+
+.cerrarBtn {
+  background-color: #6c757d !important;
+  color: white;
 }
 </style>

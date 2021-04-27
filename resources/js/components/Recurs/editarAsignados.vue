@@ -76,7 +76,7 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn cerrarBtn" data-dismiss="modal">Tancar</button>
+          <button type="button" class="btn cerrarBtn" data-dismiss="modal">Cerrar</button>
           <button type="button" class="btn editarRecursBtn" @click="updateIncidenteAsignado()">Modificar</button>
         </div>
       </div>
@@ -285,6 +285,11 @@
     color: black;
     background-color: rgb(21, 172, 196, .5);
     width: 90%;
+}
+
+.cerrarBtn {
+  background-color: #6c757d !important;
+  color: white;
 }
 
 </style>

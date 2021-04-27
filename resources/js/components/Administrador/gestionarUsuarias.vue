@@ -10,20 +10,19 @@
     {{ infoMessage }}
   </div>
 
-
   <div aria-label="paginacion" class="paginacionNav">
     <ul class="pagination">
       <li class="page-item">
         <button :disabled="currentPage <= 1" class="btn numeroPaginacion" aria-label="Previous" @click="paginar(currentPage-1)">
             <span aria-hidden="true">&laquo;</span>
-            <span class="sr-only">Previous</span>
+            <span class="sr-only">Previa</span>
         </button>
       </li>
       <button v-for="(paginaActual, index) in paginas" :key="index" class="btn numeroPaginacion" @click="paginar(paginaActual)">{{ index+1 }}</button>
       <li class="page-item">
         <button :disabled="currentPage >= meta.last_page" class="btn numeroPaginacion" aria-label="Next" @click="paginar(currentPage+1)">
             <span aria-hidden="true">&raquo;</span>
-            <span class="sr-only">Next</span>
+            <span class="sr-only">Siguiente</span>
         </button>
       </li>
     </ul>
@@ -34,9 +33,16 @@
     </button>
   </div>
 
+  <div class="filtrar ml-5">
+    <input type="text" v-model="search"/>
+        <i class="fas fa-filter"></i><label>Filtrar</label>
+  </div>
+
   <div class="card mt-2 mb-1 ml-5 mr-5">
     <h2 class="card-header font-weight-bold">Usuarias</h2>
-    <div class="card-body">
+    <!--Por si no hay resultados-->
+    <div v-if="filteredList.length == 0" class="p-3">No hay resultados con estos parámetros</div>
+    <div v-else class="card-body">
       <table class="table mt-2">
           <thead>
             <tr>
@@ -49,7 +55,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(usuari, index) in usuaris" :key="usuari.id">
+            <tr v-for="(usuari, index) in filteredList" :key="usuari.id">
               <td>{{ usuari.username }}</td>
               <td>{{ usuari.email }}</td>
               <td>{{ usuari.nom }}</td>
@@ -187,6 +193,7 @@
           paginas: [],
           pagina: 0,
           currentPage: 0,
+          search: '',
         }
       },
       methods: {
@@ -323,6 +330,13 @@
 
           return rol_nom;
         },
+      },
+      computed: {
+        filteredList() {
+          return this.usuarisDB.filter(usuari => {
+            return usuari.username.toLowerCase().includes(this.search.toLowerCase()) || usuari.cognoms.toLowerCase().includes(this.search.toLowerCase())
+          })
+        }
       },
       created() {
         this.selectUsuaris(), this.selectRols();

@@ -3112,11 +3112,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     alertantNumber: Number,
@@ -5618,6 +5613,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -5639,7 +5641,8 @@ __webpack_require__.r(__webpack_exports__);
       municipis: [],
       insert: true,
       errorMessage: '',
-      infoMessage: ''
+      infoMessage: '',
+      search: ''
     };
   },
   methods: {
@@ -5787,6 +5790,15 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return tipusAlertant_nom;
+    }
+  },
+  computed: {
+    filteredList: function filteredList() {
+      var _this = this;
+
+      return this.alertantsDB.filter(function (alertant) {
+        return alertant.nom.toLowerCase().includes(_this.search.toLowerCase()) || alertant.municipis_id == _this.search;
+      });
     }
   },
   created: function created() {
@@ -5960,6 +5972,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -5977,7 +5996,8 @@ __webpack_require__.r(__webpack_exports__);
       meta: {},
       paginas: [],
       pagina: 0,
-      currentPage: 0
+      currentPage: 0,
+      search: ''
     };
   },
   methods: {
@@ -6101,6 +6121,15 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return tipusRecursos_tipus;
+    }
+  },
+  computed: {
+    filteredList: function filteredList() {
+      var _this3 = this;
+
+      return this.recursosDB.filter(function (recurs) {
+        return recurs.codi.toLowerCase().includes(_this3.search.toLowerCase());
+      });
     }
   },
   created: function created() {
@@ -6289,6 +6318,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -6309,7 +6344,8 @@ __webpack_require__.r(__webpack_exports__);
       meta: {},
       paginas: [],
       pagina: 0,
-      currentPage: 0
+      currentPage: 0,
+      search: ''
     };
   },
   methods: {
@@ -6436,6 +6472,15 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return rol_nom;
+    }
+  },
+  computed: {
+    filteredList: function filteredList() {
+      var _this3 = this;
+
+      return this.usuarisDB.filter(function (usuari) {
+        return usuari.username.toLowerCase().includes(_this3.search.toLowerCase()) || usuari.cognoms.toLowerCase().includes(_this3.search.toLowerCase());
+      });
     }
   },
   created: function created() {
@@ -11024,7 +11069,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#generarLlamada[data-v-bfb0cdda]{\n  font-family: 'Signika', sans-serif;\n  font-size: 35px;\n  margin-top: 33vh;\n  background-color: #E2211D !important;\n}\n\n\n/* MOVIMIENTO BARRA DEBAJO DE ELEMENTOS DE NAVBAR */\n.borderLeftRight[data-v-bfb0cdda] {\n  display: inline-block;\n  position: relative;\n  color: hsl(222, 25%, 14%);\n}\n.borderLeftRight[data-v-bfb0cdda]::after {\n  content: '';\n  position: absolute;\n  width: 100%;\n  transform: scaleX(0);\n  height: 2px;\n  bottom: 0;\n  left: 0;\n  background-color: black;\n  transform-origin: bottom right;\n  transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);\n}\n.borderLeftRight[data-v-bfb0cdda]:hover::after {\n  transform: scaleX(1);\n  transform-origin: bottom left;\n}\n/* FIN DE LO QUE HE COPIADO POR SI NO CONVENCE */\n.contenido[data-v-bfb0cdda] {\n  /* font-size: 1em; */\n  font-family: 'Rubik', sans-serif;\n}\n.dislexia[data-v-bfb0cdda] {\n  margin-right: 90px;\n}\n.dislexiaFont[data-v-bfb0cdda]{\n    font-family: Arial, Helvetica, sans-serif !important;\n    letter-spacing: 2px !important;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#generarLlamada[data-v-bfb0cdda]{\n  font-family: 'Signika', sans-serif;\n  font-size: 35px;\n  margin-top: 33vh;\n  background-color: #E2211D !important;\n}\n\n\n/* MOVIMIENTO BARRA DEBAJO DE ELEMENTOS DE NAVBAR */\n.borderLeftRight[data-v-bfb0cdda] {\n  display: inline-block;\n  position: relative;\n  color: hsl(222, 25%, 14%);\n}\n.borderLeftRight[data-v-bfb0cdda]::after {\n  content: '';\n  position: absolute;\n  width: 100%;\n  transform: scaleX(0);\n  height: 2px;\n  bottom: 0;\n  left: 0;\n  background-color: black;\n  transform-origin: bottom right;\n  transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);\n}\n.borderLeftRight[data-v-bfb0cdda]:hover::after {\n  transform: scaleX(1);\n  transform-origin: bottom left;\n}\n/* FIN DE LO QUE HE COPIADO POR SI NO CONVENCE */\n.contenido[data-v-bfb0cdda] {\n  /* font-size: 1em; */\n  font-family: 'Rubik', sans-serif;\n}\n.dislexia[data-v-bfb0cdda] {\n  margin-right: 8vw;\n}\n.dislexiaFont[data-v-bfb0cdda]{\n    font-family: Arial, Helvetica, sans-serif !important;\n    letter-spacing: 2px !important;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11048,7 +11093,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nul li {\n  list-style: none;\n}\n#contenedor {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: center;\n}\n#questions {\n  color: black;\n}\n.correcta {\n  background-color: green !important;\n}\n.incorrecta {\n  background-color: red !important;\n}\n#contador {\n  float: right;\n  position: absolute;\n  background-color: green !important;\n  top: 90px;\n  right: 20px;\n}\n.todoFormacion {\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: center;\n}\n.controlVideo {\n  display: flex;\n  flex-direction: row;\n}\n#reproducir {\n  width: 110px;\n  height: 35px;\n  color: black;\n  padding: 0;\n}\n#barra {\n  position: relative;\n  float: left;\n  width: 485px;\n  height: 17px;\n  border: 1px solid #CCCCCC;\n  background: #EEEEEE;\n  margin-top: 17px;\n  margin-left: 5px;\n}\n#progreso {\n  position: absolute;\n  width: 0px;\n  top: 0;\n  height: 16px;\n  background: rgba(0,0,150,.2);\n}\n#pregunta{\n  font-weight: bold;\n}\n.respuestas{\n  height: 10vh;\n}\n#cardRespuestas{\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  text-align: center;\n  align-content: center;\n}\n#respuestasList li{\n  display: flex !important;\n  align-items: center !important; /*Para tenerlos centraditos verticalmente*/\n  justify-content: center; /*Para tenerlos centraditos horizontalmente*/\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nul li {\n  list-style: none;\n}\n#contenedor {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: center;\n}\n#questions {\n  color: black;\n}\n.correcta {\n  background-color: green !important;\n}\n.incorrecta {\n  background-color: red !important;\n}\n#contador {\n  float: right;\n  position: absolute;\n  background-color: green !important;\n  top: 20vh;\n  right: 2vw;\n}\n.todoFormacion {\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: center;\n}\n.controlVideo {\n  display: flex;\n  flex-direction: row;\n}\n#reproducir {\n  width: 110px;\n  height: 35px;\n  color: black;\n  padding: 0;\n}\n#barra {\n  position: relative;\n  float: left;\n  width: 485px;\n  height: 17px;\n  border: 1px solid #CCCCCC;\n  background: #EEEEEE;\n  margin-top: 17px;\n  margin-left: 5px;\n}\n#progreso {\n  position: absolute;\n  width: 0px;\n  top: 0;\n  height: 16px;\n  background: rgba(0,0,150,.2);\n}\n#pregunta{\n  font-weight: bold;\n}\n.respuestas{\n  height: 10vh;\n}\n#cardRespuestas{\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  text-align: center;\n  align-content: center;\n}\n#respuestasList li{\n  display: flex !important;\n  align-items: center !important; /*Para tenerlos centraditos verticalmente*/\n  justify-content: center; /*Para tenerlos centraditos horizontalmente*/\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11072,7 +11117,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn {\n    font-size: 15px;\n}\n.contenido{\n    font-size: 15px;\n}\n.btn-secondary:not(:disabled):not(.disabled).active,\n.btn-secondary:not(:disabled):not(.disabled):active,\n.show > .btn-secondary.dropdown-toggle {\n  background-color: #e3177d;\n  border-color: black;\n}\n.btn-secondary {\n  border-color: black;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.parentGrid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n.card-header {\n  background-color: #15acc4;\n  border: 1px solid black;\n  border-left: 0;\n  border-right: 0;\n  margin-top: -1px;\n}\n.modal-header{\n    background-color: #15acc4 !important;\n}\n.card {\n  border: 1px solid black !important;\n}\nbutton {\n  background-color: #e3177d !important;\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\n  color: black;\n  font-weight: bold;\n  background-color: #15acc4 !important;\n}\n.tabButton{\n    background-color: white !important;\n    border: 0 !important;\n}\n.selectedTab{\n    background-color: #e3177d !important;\n    border: 1px solid black !important;\n}\n.green{\n    background-color: green;\n    color: white;\n}\n.red{\n    background-color: red;\n    color: white;\n}\n#entregar{\n  border: 1px solid black;\n}\n#titulitosTabs {\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n.iconNavPrincipal{\n    color: black;\n}\n#titulito {\n    font-family: 'Signika', sans-serif;\n    font-size: 1.3em;\n}\n.hidden{\n    visibility: hidden;\n}\n#buscadorTelefono > input{\n    border: 1px solid black;\n}\n.arrowNav{\n    height: 8vh;\n}\n#preguntesModal{\n    display: flex;\n    flex-direction: row;\n    flex-wrap: wrap;\n    justify-content: space-around;\n}\n#preguntaModal{\n    width: 50vw;\n    margin-bottom: 2vw;\n    margin-top: 2vw;\n}\n#preguntaModal > .card-header{\n    font-weight: bold;\n}\n.modal-title{\n    font-weight: bold !important;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn {\n    font-size: 15px;\n}\n.contenido{\n    font-size: 15px;\n}\n.btn-secondary:not(:disabled):not(.disabled).active,\n.btn-secondary:not(:disabled):not(.disabled):active,\n.show > .btn-secondary.dropdown-toggle {\n  background-color: #e3177d;\n  border-color: black;\n}\n.btn-secondary {\n  border-color: black;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.parentGrid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n.card-header {\n  background-color: #15acc4;\n  border: 1px solid black;\n  border-left: 0;\n  border-right: 0;\n  margin-top: -1px;\n}\n.modal-header{\n    background-color: #15acc4 !important;\n}\n.card {\n  border: 1px solid black !important;\n}\nbutton {\n  background-color: #e3177d !important;\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\n  color: black;\n  font-weight: bold;\n  background-color: #15acc4 !important;\n}\n.tabButton{\n    background-color: white !important;\n    border: 0 !important;\n}\n.selectedTab{\n    background-color: #e3177d !important;\n    border: 1px solid black !important;\n}\n.green{\n    background-color: green;\n    color: white;\n}\n.red{\n    background-color: red;\n    color: white;\n}\n#entregar{\n  border: 1px solid black;\n}\n#titulitosTabs {\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n.iconNavPrincipal{\n    color: black;\n}\n#titulito {\n    font-family: 'Signika', sans-serif;\n    font-size: 1.3em;\n}\n.hidden{\n    visibility: hidden;\n}\n#buscadorTelefono > input{\n    border: 1px solid black;\n}\n.arrowNav{\n    height: 8vh;\n}\n#preguntesModal{\n    display: flex;\n    flex-direction: row;\n    flex-wrap: wrap;\n    justify-content: space-around;\n}\n#preguntaModal{\n    width: 50vw;\n    margin-bottom: 2vw;\n    margin-top: 2vw;\n}\n#preguntaModal > .card-header{\n    font-weight: bold;\n}\n.modal-title{\n    font-weight: bold !important;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11096,7 +11141,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nmain[data-v-6504f867] {\n  margin-top: 1.4vh;\n  color: black;\n  font-family: 'Rubik', sans-serif;\n  font-size: 15px;\n}\n#infoCard[data-v-6504f867] {\n  height: 65vh;\n  color: black;\n}\n#botones[data-v-6504f867] {\n  height: 28vh;\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#infoHeader[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n  font-size: 1.2em;\n  font-weight: bold;\n  margin-right: -0.5px;\n  border-bottom: 1px solid black;\n  background-color: #15acc4;\n}\nbutton[data-v-6504f867] {\n  background-color: #e3177d;\n  font-size: 0.9em;\n  color: white;\n  border-radius: 4px;\n}\n.card[data-v-6504f867] {\n  border: 1px solid black;\n}\n#transportHeader[data-v-6504f867] {\n  background-color: #15acc4;\n  font-weight: bold;\n  padding: 6px 20px;\n  text-align: center;\n}\n.leftButtons[data-v-6504f867] {\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n}\n#assistencia[data-v-6504f867]{\n    opacity: .4;\n}\n#transportButton[data-v-6504f867] {\n  background-color: #e3177d;\n}\n#transportButtons[data-v-6504f867] {\n  height: 100%;\n  opacity: .4;\n}\n.visible[data-v-6504f867]{\n    opacity: 1 !important;\n}\n#transportForm[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#botonsTransport[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  width: 100%;\n  justify-content: space-between;\n}\n.button[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  /* align-items: center; */\n}\n#direccioHospital[data-v-6504f867] {\n  width: 100%;\n}\n#map[data-v-6504f867] {\n  height: 65%;\n  background-color: black;\n}\n#info[data-v-6504f867] {\n  height: 20%;\n  margin-top: 4%;\n  display: flex;\n  flex-direction: row;\n  justify-content: space-around;\n  flex-wrap: nowrap;\n  /* font-weight: bold; */\n}\n.boldInfo[data-v-6504f867]{\n    font-weight: bold;\n}\n#infoFields[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n  padding-right: 0;\n}\n.infobox[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  text-align: justify;\n  /* font-size: 12px; */\n}\n.infobox > div[data-v-6504f867] {\n  background-color: #15acc4;\n  border: 1px solid black;\n  font-size: 13.5px;\n  padding: 0px 5px !important;\n}\n#descripcion[data-v-6504f867],\n#direccion[data-v-6504f867] {\n  background-color: white;\n}\n#masInfo[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  vertical-align: center;\n}\n#masInfo > button[data-v-6504f867] {\n  padding: 10px 20px;\n  margin-left: -50px;\n  color: white;\n}\n.modal-header[data-v-6504f867]{\n    font-weight: bold;\n    background-color: #15acc4;\n}\n#alta[data-v-6504f867]{\n    opacity: 0.4;\n}\n#alta > button[data-v-6504f867]{\n    padding: 5px 15px;\n    margin-bottom: 0px !important;\n    background-color: white !important;\n    color: #e3177d;\n    font-weight: bolder;\n}\n.indicadoresMasInfo[data-v-6504f867]{\n    font-weight: bold;\n}\n#checkTransport[data-v-6504f867]{\n    opacity: 0.4;\n}\n#checkTransport > button[data-v-6504f867]{\n    padding: 5px 15px;\n}\n#iniciarTransport[data-v-6504f867]{\n    opacity: 0.4;\n}\n#arribadaHospital[data-v-6504f867]{\n    opacity: 0.4;\n}\n#iniciarTransferencia[data-v-6504f867]{\n    opacity: 0.4;\n}\n#hospitalitzacio[data-v-6504f867]{\n    opacity: 0.4;\n    margin-top: 1vh;\n}\n#hospitalitzacio > button[data-v-6504f867]{\n    padding: 10px 10px;\n    background-color: green !important;\n}\n.cerrarBoton[data-v-6504f867]{\n    font-size: 15px;\n}\n.opaco[data-v-6504f867]{\n    opacity: 0.4 !important;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nmain[data-v-6504f867] {\n  margin-top: 1.4vh;\n  color: black;\n  font-family: 'Rubik', sans-serif;\n  font-size: 15px;\n}\n#infoCard[data-v-6504f867] {\n  height: 65vh;\n  color: black;\n}\n#botones[data-v-6504f867] {\n  height: 28vh;\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#infoHeader[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n  font-size: 1.2em;\n  font-weight: bold;\n  margin-right: -0.5px;\n  border-bottom: 1px solid black;\n  background-color: #15acc4;\n}\nbutton[data-v-6504f867] {\n  background-color: #e3177d;\n  font-size: 0.9em;\n  color: white;\n  border-radius: 4px;\n}\n.card[data-v-6504f867] {\n  border: 1px solid black;\n}\n#transportHeader[data-v-6504f867] {\n  background-color: #15acc4;\n  font-weight: bold;\n  padding: 6px 20px;\n  text-align: center;\n}\n.leftButtons[data-v-6504f867] {\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n}\n#assistencia[data-v-6504f867]{\n    opacity: .4;\n}\n#transportButton[data-v-6504f867] {\n  background-color: #e3177d;\n}\n#transportButtons[data-v-6504f867] {\n  height: 100%;\n  opacity: .4;\n}\n.visible[data-v-6504f867]{\n    opacity: 1 !important;\n}\n#transportForm[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#botonsTransport[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  width: 100%;\n  justify-content: space-between;\n}\n.button[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  /* align-items: center; */\n}\n#direccioHospital[data-v-6504f867] {\n  width: 100%;\n}\n#map[data-v-6504f867] {\n  height: 65%;\n  background-color: black;\n}\n#info[data-v-6504f867] {\n  height: 20%;\n  margin-top: 4%;\n  display: flex;\n  flex-direction: row;\n  justify-content: space-around;\n  flex-wrap: nowrap;\n  /* font-weight: bold; */\n}\n.boldInfo[data-v-6504f867]{\n    font-weight: bold;\n}\n#infoFields[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n  padding-right: 0;\n}\n.infobox[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  text-align: justify;\n  /* font-size: 12px; */\n}\n.infobox > div[data-v-6504f867] {\n  background-color: #15acc4;\n  border: 1px solid black;\n  font-size: 13.5px;\n  padding: 0px 5px !important;\n}\n#descripcion[data-v-6504f867],\n#direccion[data-v-6504f867] {\n  background-color: white;\n}\n#masInfo[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  vertical-align: center;\n}\n#masInfo > button[data-v-6504f867] {\n  padding: 10px 20px;\n  margin-left: -50px;\n  color: white;\n}\n.modal-header[data-v-6504f867]{\n    font-weight: bold;\n    background-color: #15acc4;\n}\n#alta[data-v-6504f867]{\n    opacity: 0.4;\n}\n#alta > button[data-v-6504f867]{\n    padding: 5px 15px;\n    margin-bottom: 0px !important;\n    background-color: white !important;\n    color: #e3177d;\n    font-weight: bolder;\n}\n.indicadoresMasInfo[data-v-6504f867]{\n    font-weight: bold;\n}\n#checkTransport[data-v-6504f867]{\n    opacity: 0.4;\n}\n#checkTransport > button[data-v-6504f867]{\n    padding: 5px 15px;\n}\n#iniciarTransport[data-v-6504f867]{\n    opacity: 0.4;\n}\n#arribadaHospital[data-v-6504f867]{\n    opacity: 0.4;\n}\n#iniciarTransferencia[data-v-6504f867]{\n    opacity: 0.4;\n}\n#hospitalitzacio[data-v-6504f867]{\n    opacity: 0.4;\n    margin-top: 1vh;\n}\n#hospitalitzacio > button[data-v-6504f867]{\n    padding: 10px 10px;\n    background-color: green !important;\n}\n/* .cerrarBoton{\n    font-size: 15px;\n} */\n.opaco[data-v-6504f867]{\n  opacity: 0.4 !important;\n}\n.cerrarBtn[data-v-6504f867] {\n  background-color: #6c757d !important;\n  color: white;\n  font-size: 15px;\n}\n.confirmarBtn[data-v-6504f867]{\n  font-size: 15px;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11120,7 +11165,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.alertaSinRecursos{\n    font-family: 'Rubik', sans-serif;\n    font-size: 15px;\n    color: black;\n    background-color: rgb(21, 172, 196, .5);\n    width: 90%;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.alertaSinRecursos{\n    font-family: 'Rubik', sans-serif;\n    font-size: 15px;\n    color: black;\n    background-color: rgb(21, 172, 196, .5);\n    width: 90%;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11168,7 +11213,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.alertaSinRecursos{\n    font-family: 'Rubik', sans-serif;\n    font-size: 15px;\n    color: black;\n    background-color: rgb(21, 172, 196, .5);\n    width: 90%;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.alertaSinRecursos{\r\n    font-family: 'Rubik', sans-serif;\r\n    font-size: 15px;\r\n    color: black;\r\n    background-color: rgb(21, 172, 196, .5);\r\n    width: 90%;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11216,7 +11261,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeNom {\r\n    width: 20vw;\n}\n.sizeCognom {\r\n    width: 20vw;\n}\n.sizeBotones {\r\n    width: 14vw;\n}\n.esborrarAlertantBtn, .afegirAlertantBtn {\r\n  background-color: #e3177d !important;\r\n  color: white !important;\n}\n.editarAlertantBtn {\r\n  background-color: #15acc4 !important;\r\n  color: black !important;\n}\n.editarAlertantBtn:hover {\r\n  color: black !important;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\n.cerrarBtn:hover {\r\n  color: white;\n}\n@font-face {\r\n  font-family: myFont;\r\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\nh2{\r\n  font-family: myFont;\r\n  font-size: 1.3em;\n}\n.modal-header{\r\n  font-weight: bold;\r\n  background-color: #15acc4;\n}\n.pagination{\r\n  padding-left: 48px;\n}\n.numeroPaginacion {\r\n  color: white;\n}\n.nuevaAlertante{\r\n  padding-top: 0;\r\n  padding-bottom: 0;\r\n  margin-bottom: 15px; /*cambiarlo a vh*/\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeNom {\n    width: 20vw;\n}\n.sizeCognom {\n    width: 13vw;\n}\n.sizeMunicipi{\n    width: 13vh;\n}\n.sizeBotones {\n    width: 14vw;\n}\n.esborrarAlertantBtn, .afegirAlertantBtn {\n  background-color: #e3177d !important;\n  color: white !important;\n}\n.editarAlertantBtn {\n  background-color: #15acc4 !important;\n  color: black !important;\n}\n.editarAlertantBtn:hover {\n  color: black !important;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n.cerrarBtn:hover {\n  color: white;\n}\n@font-face {\n  font-family: myFont;\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\nh2{\n  font-family: myFont;\n  font-size: 1.3em;\n}\n.modal-header{\n  font-weight: bold;\n  background-color: #15acc4;\n}\n.pagination{\n  padding-left: 48px;\n}\n.numeroPaginacion {\n  color: white;\n}\n.nuevaAlertante{\n  padding-top: 0;\n  padding-bottom: 0;\n  margin-bottom: 15px; /*cambiarlo a vh*/\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11240,7 +11285,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeBotones {\r\n    width: 14vw;\n}\n.esborrarRecursBtn, .afegirRecursBtn {\r\n  background-color: #e3177d !important;\r\n  color: white !important;\n}\n.editarRecursBtn {\r\n  background-color: #15acc4 !important;\r\n  color: black !important;\n}\n.editarRecursBtn:hover {\r\n  color: black !important;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\n.cerrarBtn:hover {\r\n  color: white;\n}\n@font-face {\r\n  font-family: myFont;\r\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\n.nuevoRecurso{\r\n  padding-top: 0;\r\n  padding-bottom: 0;\r\n  margin-bottom: 15px; /*cambiarlo a vh*/\n}\r\n\r\n\r\n/* .modal-header{\r\n    font-weight: bold;\r\n    background-color: #15acc4;\r\n} */\r\n\r\n/* h2{\r\n  font-family: myFont;\r\n  font-size: 1.3em;\r\n} */\r\n\r\n/*NO SE BORRAN LOS MENSAJES Y AL CAMBIAR EL NOMBRE DE UN CÓDIGO, SE QUITA EL CHECKED*/\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeBotones {\n    width: 14vw;\n}\n.esborrarRecursBtn, .afegirRecursBtn {\n  background-color: #e3177d !important;\n  color: white !important;\n}\n.editarRecursBtn {\n  background-color: #15acc4 !important;\n  color: black !important;\n}\n.editarRecursBtn:hover {\n  color: black !important;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n.cerrarBtn:hover {\n  color: white;\n}\n@font-face {\n  font-family: myFont;\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\n.nuevoRecurso{\n  padding-top: 0;\n  padding-bottom: 0;\n  margin-bottom: 15px; /*cambiarlo a vh*/\n}\n\n\n/* .modal-header{\n    font-weight: bold;\n    background-color: #15acc4;\n} */\n\n/* h2{\n  font-family: myFont;\n  font-size: 1.3em;\n} */\n\n/*NO SE BORRAN LOS MENSAJES Y AL CAMBIAR EL NOMBRE DE UN CÓDIGO, SE QUITA EL CHECKED*/\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11264,7 +11309,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeBotones {\r\n    width: 14vw;\n}\n.esborrarUsuariBtn, .afegirUsuariBtn {\r\n  background-color: #e3177d !important;\r\n  color: white !important;\n}\n.editarUsuariBtn {\r\n  background-color: #15acc4 !important;\r\n  color: black !important;\n}\n.editarUsuariBtn:hover {\r\n  color: black !important;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\n.cerrarBtn:hover {\r\n  color: white;\n}\n@font-face {\r\n  font-family: myFont;\r\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\r\n\r\n/* h2{\r\n  font-family: myFont;\r\n  font-size: 1.3em;\r\n} */\r\n\r\n/* .modal-header{\r\n    font-weight: bold;\r\n    background-color: #15acc4;\r\n} */\n.nuevaUsuaria{\r\n  padding-top: 0;\r\n  padding-bottom: 0;\r\n  margin-bottom: 15px; /*cambiarlo a vh*/\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sizeBotones {\n    width: 14vw;\n}\n.esborrarUsuariBtn, .afegirUsuariBtn {\n  background-color: #e3177d !important;\n  color: white !important;\n}\n.editarUsuariBtn {\n  background-color: #15acc4 !important;\n  color: black !important;\n}\n.editarUsuariBtn:hover {\n  color: black !important;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n.cerrarBtn:hover {\n  color: white;\n}\n@font-face {\n  font-family: myFont;\n  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);\n}\n\n/* h2{\n  font-family: myFont;\n  font-size: 1.3em;\n} */\n\n/* .modal-header{\n    font-weight: bold;\n    background-color: #15acc4;\n} */\n.nuevaUsuaria{\n  padding-top: 0;\n  padding-bottom: 0;\n  margin-bottom: 15px; /*cambiarlo a vh*/\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -45034,21 +45079,16 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c(
-        "div",
-        {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.currentTab == 2,
-              expression: "currentTab == 2"
-            }
-          ]
-        },
-        [_c("gestionarIncidente-component")],
-        1
-      ),
+      _c("div", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.currentTab == 2,
+            expression: "currentTab == 2"
+          }
+        ]
+      }),
       _vm._v(" "),
       _vm.currentTab == 3 ? _c("div", [_c("formacion-component")], 1) : _vm._e()
     ]
@@ -45083,7 +45123,7 @@ var staticRenderFns = [
           "data-target": "#navbarNav",
           "aria-controls": "navbarNav",
           "aria-expanded": "false",
-          "aria-label": "Toggle navigation"
+          "aria-label": "Barra de navegación"
         }
       },
       [_c("span", { staticClass: "navbar-toggler-icon" })]
@@ -45356,6 +45396,7 @@ var render = function() {
             {
               staticClass: "btn btn-sm mr-3 tabButton",
               class: { selectedTab: _vm.tabs.a },
+              attrs: { "aria-label": "Alertante" },
               on: {
                 click: function($event) {
                   return _vm.selectTab(1)
@@ -45376,6 +45417,7 @@ var render = function() {
             {
               staticClass: "btn btn-sm mr-3 ml-3 tabButton",
               class: { selectedTab: _vm.tabs.b },
+              attrs: { "aria-label": "Afectada" },
               on: {
                 click: function($event) {
                   return _vm.selectTab(2)
@@ -45396,6 +45438,7 @@ var render = function() {
             {
               staticClass: "btn btn-sm ml-3 tabButton",
               class: { selectedTab: _vm.tabs.c },
+              attrs: { "aria-label": "Respuesta" },
               on: {
                 click: function($event) {
                   return _vm.selectTab(3)
@@ -45418,7 +45461,7 @@ var render = function() {
           "button",
           {
             staticClass:
-              "btn btn-sm mr-3 float-right mr-3 iconNavPrincipal arrowNav",
+              "btn btn-sm mr-3 float-right mr-4 iconNavPrincipal arrowNav",
             class: { hidden: _vm.tabs.c },
             attrs: { disabled: _vm.currentTab == 3 },
             on: {
@@ -46074,7 +46117,7 @@ var render = function() {
           ]
         },
         [
-          _c("div", { staticClass: "container-fluid mt-5" }, [
+          _c("div", { staticClass: "container-fluid mt-5 mb-3" }, [
             _c("div", { staticClass: "card ml-5 mr-5" }, [
               _c(
                 "div",
@@ -46255,7 +46298,7 @@ var render = function() {
                     _c(
                       "label",
                       {
-                        staticClass: "col-1 mt-1 ml-4",
+                        staticClass: "col-1 col-form-label mt-1 ml-4",
                         attrs: { for: "edadAfectada" }
                       },
                       [_vm._v("Edad")]
@@ -46778,7 +46821,7 @@ var render = function() {
           ]
         },
         [
-          _c("div", { staticClass: "card ml-5 mr-5 mt-3" }, [
+          _c("div", { staticClass: "card ml-5 mr-5 mt-3 mb-3" }, [
             _c(
               "div",
               {
@@ -47573,7 +47616,7 @@ var staticRenderFns = [
         attrs: {
           type: "button",
           "data-dismiss": "alert",
-          "aria-label": "Close"
+          "aria-label": "Cerrar"
         }
       },
       [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
@@ -47822,7 +47865,7 @@ var staticRenderFns = [
           attrs: {
             type: "button",
             "data-dismiss": "modal",
-            "aria-label": "Close"
+            "aria-label": "Cerrar"
           }
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
@@ -47837,7 +47880,7 @@ var staticRenderFns = [
       _c(
         "button",
         {
-          staticClass: "btn btn-secondary",
+          staticClass: "btn cerrarBtn",
           attrs: { type: "button", "data-dismiss": "modal" }
         },
         [_vm._v("\n              Cerrar\n            ")]
@@ -47858,7 +47901,7 @@ var staticRenderFns = [
           attrs: {
             type: "button",
             "data-dismiss": "modal",
-            "aria-label": "Close"
+            "aria-label": "Cerrar"
           }
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
@@ -47873,7 +47916,7 @@ var staticRenderFns = [
       _c(
         "button",
         {
-          staticClass: "btn btn-secondary",
+          staticClass: "btn cerrarBtn",
           attrs: { type: "button", "data-dismiss": "modal" }
         },
         [_vm._v("\n              Cerrar\n            ")]
@@ -47909,7 +47952,7 @@ var staticRenderFns = [
       _c(
         "button",
         {
-          staticClass: "btn btn-secondary",
+          staticClass: "btn cerrarBtn",
           attrs: { type: "button", "data-dismiss": "modal" }
         },
         [_vm._v("Cerrar")]
@@ -47946,7 +47989,7 @@ var render = function() {
         _vm._v(" "),
         _c("div", [_vm._v(_vm._s(_vm.tipusIncidencia))]),
         _vm._v(" "),
-        _c("div", [_vm._v("Prioritat: " + _vm._s(_vm.prioritat))])
+        _c("div", [_vm._v("Prioridad: " + _vm._s(_vm.prioritat))])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "card-body p-3" }, [
@@ -48529,7 +48572,7 @@ var render = function() {
             _c("div", { staticClass: "modal-content" }, [
               _c("div", { staticClass: "modal-header" }, [
                 _vm.activarTransport
-                  ? _c("h5", { staticClass: "modal-title" }, [
+                  ? _c("p", { staticClass: "modal-title" }, [
                       _vm._v("Activar Transporte Hospitalario")
                     ])
                   : _c("h5", { staticClass: "modal-title" }, [
@@ -48558,7 +48601,7 @@ var render = function() {
                   ? _c(
                       "button",
                       {
-                        staticClass: "btn btn-primary",
+                        staticClass: "btn confirmarBtn",
                         attrs: { type: "button" },
                         on: {
                           click: function($event) {
@@ -48571,7 +48614,7 @@ var render = function() {
                   : _c(
                       "button",
                       {
-                        staticClass: "btn btn-primary",
+                        staticClass: "btn confirmarBtn",
                         attrs: { type: "button" },
                         on: {
                           click: function($event) {
@@ -48586,7 +48629,7 @@ var render = function() {
                   ? _c(
                       "button",
                       {
-                        staticClass: "btn btn-secondary",
+                        staticClass: "btn cerrarBtn",
                         attrs: { type: "button", "data-dismiss": "modal" },
                         on: {
                           click: function($event) {
@@ -48599,7 +48642,7 @@ var render = function() {
                   : _c(
                       "button",
                       {
-                        staticClass: "btn btn-secondary",
+                        staticClass: "btn cerrarBtn",
                         attrs: { type: "button", "data-dismiss": "modal" }
                       },
                       [_vm._v("Cerrar")]
@@ -48675,7 +48718,7 @@ var staticRenderFns = [
       _c(
         "button",
         {
-          staticClass: "btn btn-secondary cerrarBoton",
+          staticClass: "btn btn-secondary cerrarBtn",
           attrs: { type: "button", "data-dismiss": "modal" }
         },
         [_vm._v("\n            Cerrar\n          ")]
@@ -48693,7 +48736,7 @@ var staticRenderFns = [
         attrs: {
           type: "button",
           "data-dismiss": "modal",
-          "aria-label": "Close"
+          "aria-label": "Cerrar"
         }
       },
       [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
@@ -48888,7 +48931,7 @@ var render = function() {
                   staticClass: "btn cerrarBtn",
                   attrs: { type: "button", "data-dismiss": "modal" }
                 },
-                [_vm._v("Tancar")]
+                [_vm._v("Cerrar")]
               ),
               _vm._v(" "),
               _c(
@@ -49125,25 +49168,25 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [
                   _vm._v(
-                    "\n          " +
+                    "\r\n          " +
                       _vm._s(_vm.getMunicipi(index)) +
-                      "\n        "
+                      "\r\n        "
                   )
                 ]),
                 _vm._v(" "),
                 _c("td", [
                   _vm._v(
-                    "\n          " +
+                    "\r\n          " +
                       _vm._s(_vm.getTipusIncidencia(index)) +
-                      "\n        "
+                      "\r\n        "
                   )
                 ]),
                 _vm._v(" "),
                 _c("td", [
                   _vm._v(
-                    "\n          " +
+                    "\r\n          " +
                       _vm._s(_vm.getTipusAlertant(index)) +
-                      "\n        "
+                      "\r\n        "
                   )
                 ]),
                 _vm._v(" "),
@@ -49159,7 +49202,7 @@ var render = function() {
             staticClass: "alert mt-3 alertaSinRecursos",
             attrs: { role: "alert" }
           },
-          [_vm._v("\n  No hay ninguna incidencia asignada\n")]
+          [_vm._v("\r\n  No hay ninguna incidencia asignada\r\n")]
         )
   ])
 }
@@ -49379,7 +49422,7 @@ var staticRenderFns = [
           "data-target": "#navbarNav",
           "aria-controls": "navbarNav",
           "aria-expanded": "false",
-          "aria-label": "Toggle navigation"
+          "aria-label": "Menú de navegación"
         }
       },
       [_c("span", { staticClass: "navbar-toggler-icon" })]
@@ -49468,7 +49511,7 @@ var render = function() {
               },
               [_vm._v("×")]
             ),
-            _vm._v("\r\n    " + _vm._s(_vm.errorMessage) + "\r\n  ")
+            _vm._v("\n    " + _vm._s(_vm.errorMessage) + "\n  ")
           ]
         )
       : _vm._e(),
@@ -49488,7 +49531,7 @@ var render = function() {
               },
               [_vm._v("×")]
             ),
-            _vm._v("\r\n    " + _vm._s(_vm.infoMessage) + "\r\n  ")
+            _vm._v("\n    " + _vm._s(_vm.infoMessage) + "\n  ")
           ]
         )
       : _vm._e(),
@@ -49585,97 +49628,128 @@ var render = function() {
               staticClass: "fas fa-plus-circle",
               attrs: { "aria-hidden": "true" }
             }),
-            _vm._v("\r\n        Nueva alertante\r\n    ")
+            _vm._v("\n        Nueva alertante\n    ")
           ]
         )
       ]
     ),
+    _vm._v(" "),
+    _c("div", { staticClass: "filtrar ml-5" }, [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.search,
+            expression: "search"
+          }
+        ],
+        attrs: { type: "text" },
+        domProps: { value: _vm.search },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.search = $event.target.value
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-filter" }),
+      _c("label", [_vm._v("Filtrar")])
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "card mt-2 mb-1 ml-5 mr-5" }, [
       _c("h2", { staticClass: "card-header font-weight-bold" }, [
         _vm._v("Alertantes")
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "card-body" }, [
-        _c("table", { staticClass: "table mt-2" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "tbody",
-            _vm._l(_vm.alertants, function(alertant, index) {
-              return _c("tr", { key: alertant.id }, [
-                _c("td", [_vm._v(_vm._s(alertant.nom))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(alertant.cognom))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(alertant.telefon))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(alertant.adreca))]),
-                _vm._v(" "),
-                _c("td", [
-                  _vm._v(
-                    "\r\n                " +
-                      _vm._s(_vm.getMunicipi(index)) +
-                      "\r\n              "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("td", [
-                  _vm._v(
-                    "\r\n                " +
-                      _vm._s(_vm.getTipusAlertant(index)) +
-                      "\r\n              "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("td", [
-                  _c(
-                    "button",
-                    {
-                      staticClass:
-                        "btn btn-sm float-right ml-2 esborrarAlertantBtn",
-                      attrs: { type: "submit" },
-                      on: {
-                        click: function($event) {
-                          return _vm.confirmDeleteAlertant(alertant)
-                        }
-                      }
-                    },
-                    [
-                      _c("i", {
-                        staticClass: "fa fa-trash",
-                        attrs: { "aria-hidden": "true" }
-                      }),
-                      _vm._v("  Eliminar")
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-sm float-right editarAlertantBtn",
-                      attrs: { type: "submit" },
-                      on: {
-                        click: function($event) {
-                          return _vm.editAlertant(alertant)
-                        }
-                      }
-                    },
-                    [
-                      _c("i", {
-                        staticClass: "fa fa-edit",
-                        attrs: { "aria-hidden": "true" }
-                      }),
-                      _vm._v("  Editar")
-                    ]
-                  )
-                ])
-              ])
-            }),
-            0
-          )
-        ])
-      ])
+      _vm.filteredList.length == 0
+        ? _c("div", { staticClass: "p-3" }, [
+            _vm._v("No hay resultados con estos parámetros")
+          ])
+        : _c("div", { staticClass: "card-body" }, [
+            _c("table", { staticClass: "table mt-2" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.filteredList, function(alertant, index) {
+                  return _c("tr", { key: alertant.id }, [
+                    _c("td", [_vm._v(_vm._s(alertant.nom))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(alertant.cognom))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(alertant.telefon))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(alertant.adreca))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(_vm.getMunicipi(index)) +
+                          "\n              "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(_vm.getTipusAlertant(index)) +
+                          "\n              "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "btn btn-sm float-right ml-2 esborrarAlertantBtn",
+                          attrs: { type: "submit" },
+                          on: {
+                            click: function($event) {
+                              return _vm.confirmDeleteAlertant(alertant)
+                            }
+                          }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fa fa-trash",
+                            attrs: { "aria-hidden": "true" }
+                          }),
+                          _vm._v("  Eliminar")
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "btn btn-sm float-right editarAlertantBtn",
+                          attrs: { type: "submit" },
+                          on: {
+                            click: function($event) {
+                              return _vm.editAlertant(alertant)
+                            }
+                          }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fa fa-edit",
+                            attrs: { "aria-hidden": "true" }
+                          }),
+                          _vm._v("  Editar")
+                        ]
+                      )
+                    ])
+                  ])
+                }),
+                0
+              )
+            ])
+          ])
     ]),
     _vm._v(" "),
     _c(
@@ -49943,9 +50017,9 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\r\n                      " +
+                                "\n                      " +
                                   _vm._s(municipi.nom) +
-                                  "\r\n                    "
+                                  "\n                    "
                               )
                             ]
                           )
@@ -50013,9 +50087,9 @@ var render = function() {
                             { key: tipus.id, domProps: { value: tipus.id } },
                             [
                               _vm._v(
-                                "\r\n                      " +
+                                "\n                      " +
                                   _vm._s(tipus.tipus) +
-                                  "\r\n                    "
+                                  "\n                    "
                               )
                             ]
                           )
@@ -50091,7 +50165,9 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Dirección")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Municipio")]),
+        _c("th", { staticClass: "sizeMunicipi", attrs: { scope: "col" } }, [
+          _vm._v("Municipio")
+        ]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo Alertante")]),
         _vm._v(" "),
@@ -50190,7 +50266,7 @@ var render = function() {
               },
               [_vm._v("×")]
             ),
-            _vm._v("\r\n    " + _vm._s(_vm.errorMessage) + "\r\n  ")
+            _vm._v("\n    " + _vm._s(_vm.errorMessage) + "\n  ")
           ]
         )
       : _vm._e(),
@@ -50210,7 +50286,7 @@ var render = function() {
               },
               [_vm._v("×")]
             ),
-            _vm._v("\r\n    " + _vm._s(_vm.infoMessage) + "\r\n  ")
+            _vm._v("\n    " + _vm._s(_vm.infoMessage) + "\n  ")
           ]
         )
       : _vm._e(),
@@ -50307,103 +50383,137 @@ var render = function() {
               staticClass: "fas fa-plus-circle",
               attrs: { "aria-hidden": "true" }
             }),
-            _vm._v("\r\n        Nuevo recurso\r\n    ")
+            _vm._v("\n        Nuevo recurso\n    ")
           ]
         )
       ]
     ),
+    _vm._v(" "),
+    _c("div", { staticClass: "filtrar ml-5" }, [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.search,
+            expression: "search"
+          }
+        ],
+        attrs: { type: "text" },
+        domProps: { value: _vm.search },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.search = $event.target.value
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-filter" }),
+      _c("label", [_vm._v("Filtrar")])
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "card mt-2 mb-1 ml-5 mr-5" }, [
       _c("h2", { staticClass: "card-header font-weight-bold" }, [
         _vm._v("Recursos")
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "card-body" }, [
-        _c("table", { staticClass: "table mt-2" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "tbody",
-            _vm._l(_vm.recursos, function(recurs, index) {
-              return _c("tr", { key: recurs.id }, [
-                _c("td", [_vm._v(_vm._s(recurs.codi))]),
-                _vm._v(" "),
-                _c("td", [
-                  _c("div", { staticClass: "custom-control custom-checkbox" }, [
-                    _c("input", {
-                      staticClass: "custom-control-input",
-                      attrs: {
-                        type: "checkbox",
-                        name: "actius[]",
-                        value: "actiu",
-                        disabled: ""
-                      },
-                      domProps: { checked: recurs.actiu }
-                    }),
+      _vm.filteredList.length == 0
+        ? _c("div", { staticClass: "p-3" }, [
+            _vm._v("No hay resultados con estos parámetros")
+          ])
+        : _c("div", { staticClass: "card-body" }, [
+            _c("table", { staticClass: "table mt-2" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.filteredList, function(recurs, index) {
+                  return _c("tr", { key: recurs.id }, [
+                    _c("td", [_vm._v(_vm._s(recurs.codi))]),
                     _vm._v(" "),
-                    _c("label", {
-                      staticClass: "custom-control-label",
-                      attrs: { for: "actiu" }
-                    })
+                    _c("td", [
+                      _c(
+                        "div",
+                        { staticClass: "custom-control custom-checkbox" },
+                        [
+                          _c("input", {
+                            staticClass: "custom-control-input",
+                            attrs: {
+                              type: "checkbox",
+                              name: "actius[]",
+                              value: "actiu",
+                              disabled: ""
+                            },
+                            domProps: { checked: recurs.actiu }
+                          }),
+                          _vm._v(" "),
+                          _c("label", {
+                            staticClass: "custom-control-label",
+                            attrs: { for: "actiu" }
+                          })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(_vm.getTipusRecurs(index)) +
+                          "\n              "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "btn btn-sm float-right ml-2 esborrarRecursBtn",
+                          attrs: { type: "submit" },
+                          on: {
+                            click: function($event) {
+                              return _vm.confirmDeleteRecurs(recurs)
+                            }
+                          }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fa fa-trash",
+                            attrs: { "aria-hidden": "true" }
+                          }),
+                          _vm._v("  Eliminar")
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-sm float-right editarRecursBtn",
+                          attrs: { type: "submit" },
+                          on: {
+                            click: function($event) {
+                              return _vm.editRecurs(recurs)
+                            }
+                          }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fa fa-edit",
+                            attrs: { "aria-hidden": "true" }
+                          }),
+                          _vm._v("  Editar")
+                        ]
+                      )
+                    ])
                   ])
-                ]),
-                _vm._v(" "),
-                _c("td", [
-                  _vm._v(
-                    "\r\n                " +
-                      _vm._s(_vm.getTipusRecurs(index)) +
-                      "\r\n              "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("td", [
-                  _c(
-                    "button",
-                    {
-                      staticClass:
-                        "btn btn-sm float-right ml-2 esborrarRecursBtn",
-                      attrs: { type: "submit" },
-                      on: {
-                        click: function($event) {
-                          return _vm.confirmDeleteRecurs(recurs)
-                        }
-                      }
-                    },
-                    [
-                      _c("i", {
-                        staticClass: "fa fa-trash",
-                        attrs: { "aria-hidden": "true" }
-                      }),
-                      _vm._v("  Eliminar")
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-sm float-right editarRecursBtn",
-                      attrs: { type: "submit" },
-                      on: {
-                        click: function($event) {
-                          return _vm.editRecurs(recurs)
-                        }
-                      }
-                    },
-                    [
-                      _c("i", {
-                        staticClass: "fa fa-edit",
-                        attrs: { "aria-hidden": "true" }
-                      }),
-                      _vm._v("  Editar")
-                    ]
-                  )
-                ])
-              ])
-            }),
-            0
-          )
-        ])
-      ])
+                }),
+                0
+              )
+            ])
+          ])
     ]),
     _vm._v(" "),
     _c(
@@ -50642,9 +50752,9 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\r\n                      " +
+                                "\n                      " +
                                   _vm._s(tipusRecurs.tipus) +
-                                  "\r\n                    "
+                                  "\n                    "
                               )
                             ]
                           )
@@ -50807,7 +50917,7 @@ var render = function() {
               },
               [_vm._v("×")]
             ),
-            _vm._v("\r\n    " + _vm._s(_vm.errorMessage) + "\r\n  ")
+            _vm._v("\n    " + _vm._s(_vm.errorMessage) + "\n  ")
           ]
         )
       : _vm._e(),
@@ -50827,7 +50937,7 @@ var render = function() {
               },
               [_vm._v("×")]
             ),
-            _vm._v("\r\n    " + _vm._s(_vm.infoMessage) + "\r\n  ")
+            _vm._v("\n    " + _vm._s(_vm.infoMessage) + "\n  ")
           ]
         )
       : _vm._e(),
@@ -50860,7 +50970,7 @@ var render = function() {
                     _vm._v("«")
                   ]),
                   _vm._v(" "),
-                  _c("span", { staticClass: "sr-only" }, [_vm._v("Previous")])
+                  _c("span", { staticClass: "sr-only" }, [_vm._v("Previa")])
                 ]
               )
             ]),
@@ -50901,7 +51011,7 @@ var render = function() {
                     _vm._v("»")
                   ]),
                   _vm._v(" "),
-                  _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
+                  _c("span", { staticClass: "sr-only" }, [_vm._v("Siguiente")])
                 ]
               )
             ])
@@ -50924,89 +51034,119 @@ var render = function() {
               staticClass: "fas fa-plus-circle",
               attrs: { "aria-hidden": "true" }
             }),
-            _vm._v("\r\n        Nueva usuaria\r\n    ")
+            _vm._v("\n        Nueva usuaria\n    ")
           ]
         )
       ]
     ),
+    _vm._v(" "),
+    _c("div", { staticClass: "filtrar ml-5" }, [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.search,
+            expression: "search"
+          }
+        ],
+        attrs: { type: "text" },
+        domProps: { value: _vm.search },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.search = $event.target.value
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-filter" }),
+      _c("label", [_vm._v("Filtrar")])
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "card mt-2 mb-1 ml-5 mr-5" }, [
       _c("h2", { staticClass: "card-header font-weight-bold" }, [
         _vm._v("Usuarias")
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "card-body" }, [
-        _c("table", { staticClass: "table mt-2" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "tbody",
-            _vm._l(_vm.usuaris, function(usuari, index) {
-              return _c("tr", { key: usuari.id }, [
-                _c("td", [_vm._v(_vm._s(usuari.username))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(usuari.email))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(usuari.nom))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(usuari.cognoms))]),
-                _vm._v(" "),
-                _c("td", [
-                  _vm._v(
-                    "\r\n                " +
-                      _vm._s(_vm.getRol(index)) +
-                      "\r\n              "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("td", [
-                  _c(
-                    "button",
-                    {
-                      staticClass:
-                        "btn btn-sm float-right ml-2 esborrarUsuariBtn",
-                      attrs: { type: "submit" },
-                      on: {
-                        click: function($event) {
-                          return _vm.confirmDeleteUsuari(usuari)
-                        }
-                      }
-                    },
-                    [
-                      _c("i", {
-                        staticClass: "fa fa-trash",
-                        attrs: { "aria-hidden": "true" }
-                      }),
-                      _vm._v("  Eliminar")
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-sm float-right editarUsuariBtn",
-                      attrs: { type: "submit" },
-                      on: {
-                        click: function($event) {
-                          return _vm.editUsuari(usuari)
-                        }
-                      }
-                    },
-                    [
-                      _c("i", {
-                        staticClass: "fa fa-edit",
-                        attrs: { "aria-hidden": "true" }
-                      }),
-                      _vm._v("  Editar")
-                    ]
-                  )
-                ])
-              ])
-            }),
-            0
-          )
-        ])
-      ])
+      _vm.filteredList.length == 0
+        ? _c("div", { staticClass: "p-3" }, [
+            _vm._v("No hay resultados con estos parámetros")
+          ])
+        : _c("div", { staticClass: "card-body" }, [
+            _c("table", { staticClass: "table mt-2" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.filteredList, function(usuari, index) {
+                  return _c("tr", { key: usuari.id }, [
+                    _c("td", [_vm._v(_vm._s(usuari.username))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(usuari.email))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(usuari.nom))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(usuari.cognoms))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(_vm.getRol(index)) +
+                          "\n              "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "btn btn-sm float-right ml-2 esborrarUsuariBtn",
+                          attrs: { type: "submit" },
+                          on: {
+                            click: function($event) {
+                              return _vm.confirmDeleteUsuari(usuari)
+                            }
+                          }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fa fa-trash",
+                            attrs: { "aria-hidden": "true" }
+                          }),
+                          _vm._v("  Eliminar")
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-sm float-right editarUsuariBtn",
+                          attrs: { type: "submit" },
+                          on: {
+                            click: function($event) {
+                              return _vm.editUsuari(usuari)
+                            }
+                          }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fa fa-edit",
+                            attrs: { "aria-hidden": "true" }
+                          }),
+                          _vm._v("  Editar")
+                        ]
+                      )
+                    ])
+                  ])
+                }),
+                0
+              )
+            ])
+          ])
     ]),
     _vm._v(" "),
     _c(
@@ -51323,9 +51463,9 @@ var render = function() {
                             { key: rol.id, domProps: { value: rol.id } },
                             [
                               _vm._v(
-                                "\r\n                    " +
+                                "\n                    " +
                                   _vm._s(rol.nom) +
-                                  "\r\n                  "
+                                  "\n                  "
                               )
                             ]
                           )
