@@ -71,7 +71,57 @@
         </div>
         <div class="modal-body">
           <form>
-            <!-- Contenido para editar incidente asignado -->
+            <div class="modalEdicionRecursos">
+              <div class="form-group row col-12">
+                <label for="fechaIncidente" class="col-sm-3 col-form-label">Hora movilización</label>
+                <div class="col-sm-3">
+                    <input class="form-control" type="time" id="fechaIncidente" v-model="recursEditar.hora_mobilitzacio"/>
+                </div>
+
+                <label for="fechaIncidente" class="col-sm-3 col-form-label">Hora asistencia</label>
+                <div class="col-sm-3">
+                    <input class="form-control" type="time" id="fechaIncidente" v-model="recursEditar.hora_assistencia"/>
+                </div>
+              </div>
+
+
+              <div class="form-group row col-12">
+                <label for="fechaIncidente" class="col-sm-3 col-form-label">Hora transporte</label>
+                <div class="col-sm-3">
+                    <input class="form-control" type="time" id="fechaIncidente" v-model="recursEditar.hora_transport"/>
+                </div>
+
+                <label for="fechaIncidente" class="col-sm-3 col-form-label">Hora llegada hospital</label>
+                <div class="col-sm-3">
+                    <input class="form-control" type="time" id="fechaIncidente" v-model="recursEditar.hora_arribada_hospital"/>
+                </div>
+              </div>
+
+
+              <div class="form-group row col-12">
+                <label for="fechaIncidente" class="col-sm-3 col-form-label">Hora transferencia</label>
+                <div class="col-sm-3">
+                    <input class="form-control" type="time" id="fechaIncidente" v-model="recursEditar.hora_transferencia"/>
+                </div>
+
+                <label for="fechaIncidente" class="col-sm-3 col-form-label">Hora finalización</label>
+                <div class="col-sm-3">
+                    <input class="form-control" type="time" id="fechaIncidente" v-model="recursEditar.hora_finalitzacio"/>
+                </div>
+              </div>
+
+              <div class="form-group row col-12">
+                <label for="destinoHospitalario" class="col-sm-3 col.form-label">Destino Hospitalario</label>
+                <div class="col-sm-9">
+                  <select class="custom-select" id="destinoHospitalario" required v-model="recursEditar.desti">
+                    <option selected value="Selecciona...">Selecciona...</option>
+                    <option v-for="(address, index) in addresses" :key="index" :value="address.adreca">
+                      {{ address.nom }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
 
           </form>
         </div>
@@ -97,9 +147,15 @@
       data(){
         return{
           incidencies: [],
-          incidencia: {
-            data: '',
-
+          incidencia: {},
+          recursEditar: {
+            hora_mobilitzacio: '',
+            hora_assistencia: '',
+            hora_transport: '',
+            hora_arribada_hospital: '',
+            hora_transferencia: '',
+            hora_finalitzacio: '',
+            desti: ''
           },
           municipis: [],
           alertants: [],
@@ -107,6 +163,7 @@
           tipusAlertants: [],
           incidenciesHasRecursos: [],
           incidenciaHasRecursos: [],
+          addresses: [],
         }
       },
       methods:{
@@ -219,15 +276,27 @@
                 console.log(error);
               })
         },
-        selectAlertant() {
+        async selectAlertant() {
           let me = this;
-          axios
+          return axios
               .get("/SGTA-Broggi/public/api/alertant")
               .then((response) => {
                 me.alertants = response.data;
               }).catch((error) => {
                 console.log(error);
               })
+        },
+        getHospitalsAddresses(){
+            let me = this;
+            return this.alertants.forEach(function (alertant){
+                if(alertant.tipus_alertants_id == 1){
+                    let adreca = {
+                        adreca: alertant.adreca,
+                        nom: alertant.nom,
+                    };
+                    me.addresses.push(adreca);
+                }
+            });
         },
         getTipusAlertant(index) {
           let alertant_id = this.incidencies[index].alertants_id;
@@ -256,12 +325,30 @@
           this.incidencia = incidencia;
           $('#deleteModalAsignat').modal('show');
         },
-        updateIncidenteAsignado(){
-
+        buscarIncidenciaEnArray(incidencia){
+          let me = this;
+          this.recursEditar = incidencia.incidencies_has_recursos.find(obj => obj.recursos_id == me.recursos_id);
+          console.log(this.recursEditar);
         },
-        editIncidencia(incidencia){
+        updateIncidenteAsignado(){
+            // modificar con todo el contenido
+        },
+        async editIncidencia(incidencia){
+            await this.getHospitalsAddresses();
+        //   this.recursEditar = {
+        //     hora_mobilitzacio: '',
+        //     hora_assistencia: '',
+        //     hora_transport: '',
+        //     hora_arribada_hospital: '',
+        //     hora_transferencia: '',
+        //     hora_finalitzacio: '',
+        //     desti:''
+        //   };
+        this.recursEditar = {};
+          this.buscarIncidenciaEnArray(incidencia);
           this.insert = false;
           this.incidencia = incidencia;
+          this.$forceUpdate();
           $('#asignatModal').modal('show');
         },
         convertDateFormat(string) {
@@ -273,7 +360,6 @@
         this.selectMunicipis(), this.selectAlertant(), this.selectTipusAlertant(), this.selectTipusIncidencia(), this.getIncidenciaData();
       },
       mounted() {
-
       }
     }
 </script>
@@ -290,6 +376,14 @@
 .cerrarBtn {
   background-color: #6c757d !important;
   color: white;
+}
+
+.modalEdicionRecursos{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
 }
 
 </style>

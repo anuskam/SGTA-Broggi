@@ -63,8 +63,6 @@
           </div>
           <div class="card-body ml-5">
             <form>
-
-
               <div class="form-group row">
                 <label for="tipoAlertante" class="col-2 mt-1"
                   >Tipo Alertante</label

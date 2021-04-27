@@ -785,4 +785,8 @@ button {
   font-size: 15px;
 }
 
+.confirmarBtn:hover{
+  color: white;
+}
+
 </style>
