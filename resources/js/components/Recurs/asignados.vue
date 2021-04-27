@@ -297,7 +297,7 @@ export default {
         },
         updateIncidencia(){
             let me = this;
-            return axios.put('/SGTA-Broggi/public/api/incidenciaHasRecursos/'+me.incidenciaID+'/'+me.recursos_id, me.incidencia).then((response) => {
+            return axios.put('/SGTA-Broggi/public/api/incidenciaHasRecursos/'+me.incidenciaID+'/'+me.recursos_id, me.incidenciaRecursosInsert[0]).then((response) => {
                 console.log(response);
             }).catch( (error) => {
                 console.log(error.response.status);

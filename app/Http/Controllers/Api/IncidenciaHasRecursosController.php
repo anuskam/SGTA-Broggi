@@ -59,13 +59,13 @@ class IncidenciaHasRecursosController extends Controller
     {
         $ihr = IncidenciaHasRecursos::where('incidencies_id', '=', $incidencia_id)->where('recursos_id', '=', $recurs_id)->first();
         try{
-            $ihr->desti = $request->input('incidencies_has_recursos.0.desti');
-            $ihr->hora_mobilitzacio = $request->input('incidencies_has_recursos.0.hora_mobilitzacio');
-            $ihr->hora_arribada_hospital = $request->input('incidencies_has_recursos.0.hora_arribada_hospital');
-            $ihr->hora_assistencia = $request->input('incidencies_has_recursos.0.hora_assistencia');
-            $ihr->hora_finalitzacio = $request->input('incidencies_has_recursos.0.hora_finalitzacio');
-            $ihr->hora_transferencia = $request->input('incidencies_has_recursos.0.hora_transferencia');
-            $ihr->hora_transport = $request->input('incidencies_has_recursos.0.hora_transport');
+            $ihr->desti = $request->input('desti');
+            $ihr->hora_mobilitzacio = $request->input('hora_mobilitzacio');
+            $ihr->hora_arribada_hospital = $request->input('hora_arribada_hospital');
+            $ihr->hora_assistencia = $request->input('hora_assistencia');
+            $ihr->hora_finalitzacio = $request->input('hora_finalitzacio');
+            $ihr->hora_transferencia = $request->input('hora_transferencia');
+            $ihr->hora_transport = $request->input('hora_transport');
 
             $ihr->save();
             $response = (new IncidenciaHasRecursosResource($ihr))->response()->setStatusCode(201);
