@@ -330,8 +330,19 @@
           this.recursEditar = incidencia.incidencies_has_recursos.find(obj => obj.recursos_id == me.recursos_id);
           console.log(this.recursEditar);
         },
-        updateIncidenteAsignado(){
-            // modificar con todo el contenido
+        updateIncidente(){
+            let me = this;
+            return axios.put('/SGTA-Broggi/public/api/incidenciaHasRecursos/'+me.incidencia.id+'/'+me.recursos_id, me.recursEditar).then((response) => {
+                console.log(response);
+            }).catch( (error) => {
+                console.log(error.response.status);
+                console.log(error.response.data.error);
+            });
+        },
+        async updateIncidenteAsignado(){
+            await this.updateIncidente();
+            $('#asignatModal').modal('hide');
+            location.reload();
         },
         async editIncidencia(incidencia){
             await this.getHospitalsAddresses();

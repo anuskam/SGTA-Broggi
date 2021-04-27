@@ -4630,7 +4630,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       incidenciaRecursosInsert: [],
       recurs: null,
       incidenciesHasAfectats: [],
-      afectatsID: []
+      afectatsID: [],
+      disableSubmit: false
     };
   },
   methods: {
@@ -4651,6 +4652,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     hospitalitzacio: function hospitalitzacio() {
       if (this.transferencia && this.incidenciaRecursInsert.desti != null) {
         this.updateFunction();
+        this.disableSubmit = true;
       }
     },
     updateFunction: function updateFunction() {
@@ -4713,7 +4715,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     updateIncidencia: function updateIncidencia() {
       var me = this;
-      return axios.put('/SGTA-Broggi/public/api/incidencia/' + me.incidenciaID, me.incidencia).then(function (response) {
+      return axios.put('/SGTA-Broggi/public/api/incidenciaHasRecursos/' + me.incidenciaID + '/' + me.recursos_id, me.incidenciaRecursosInsert[0]).then(function (response) {
         console.log(response);
       })["catch"](function (error) {
         console.log(error.response.status);
@@ -4898,7 +4900,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     getHospitalsAddresses: function getHospitalsAddresses() {
       var me = this;
-      this.alertants.forEach(function (alertant, index) {
+      this.alertants.forEach(function (alertant) {
         if (alertant.tipus_alertants_id == 1) {
           var municipi = me.municipis.find(function (obj) {
             return obj.id == alertant.municipis_id;
@@ -5424,9 +5426,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
       console.log(this.recursEditar);
     },
-    updateIncidenteAsignado: function updateIncidenteAsignado() {// modificar con todo el contenido
+    updateIncidente: function updateIncidente() {
+      var me = this;
+      return axios.put('/SGTA-Broggi/public/api/incidenciaHasRecursos/' + me.incidencia.id + '/' + me.recursos_id, me.recursEditar).then(function (response) {
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error.response.status);
+        console.log(error.response.data.error);
+      });
     },
+<<<<<<< HEAD
     editIncidencia: function editIncidencia(incidencia) {
+=======
+    updateIncidenteAsignado: function updateIncidenteAsignado() {
+>>>>>>> 697bc7c982e72bee444decc0b25a32b45d5149a4
       var _this6 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
@@ -5435,7 +5448,34 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.next = 2;
+<<<<<<< HEAD
                 return _this6.getHospitalsAddresses();
+=======
+                return _this6.updateIncidente();
+
+              case 2:
+                $('#asignatModal').modal('hide');
+                location.reload();
+
+              case 4:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    editIncidencia: function editIncidencia(incidencia) {
+      var _this7 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.next = 2;
+                return _this7.getHospitalsAddresses();
+>>>>>>> 697bc7c982e72bee444decc0b25a32b45d5149a4
 
               case 2:
                 //   this.recursEditar = {
@@ -5447,6 +5487,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 //     hora_finalitzacio: '',
                 //     desti:''
                 //   };
+<<<<<<< HEAD
                 _this6.recursEditar = {};
 
                 _this6.buscarIncidenciaEnArray(incidencia);
@@ -5455,15 +5496,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this6.incidencia = incidencia;
 
                 _this6.$forceUpdate();
+=======
+                _this7.recursEditar = {};
+
+                _this7.buscarIncidenciaEnArray(incidencia);
+
+                _this7.insert = false;
+                _this7.incidencia = incidencia;
+
+                _this7.$forceUpdate();
+>>>>>>> 697bc7c982e72bee444decc0b25a32b45d5149a4
 
                 $('#asignatModal').modal('show');
 
               case 8:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3);
+        }, _callee4);
       }))();
     },
     convertDateFormat: function convertDateFormat(string) {
@@ -5560,6 +5611,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -5617,11 +5676,17 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     selectIncidencies: function selectIncidencies() {
       var me = this;
-      axios.get('/SGTA-Broggi/public/api/incidencia').then(function (response) {
+      return axios.get('/SGTA-Broggi/public/api/incidencia').then(function (response) {
         me.incidencies = response.data;
       })["catch"](function (error) {
         console.log(error);
       });
+    },
+    filterIncidencies: function filterIncidencies() {
+      this.incidencies = this.incidencies.filter(function (obj) {
+        return obj.incidencies_has_recursos.length > 0;
+      });
+      this.$forceUpdate();
     },
     selectMunicipis: function selectMunicipis() {
       var me = this;
@@ -5705,7 +5770,34 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    this.selectIncidencies(), this.selectMunicipis(), this.selectAlertant(), this.selectTipusAlertant(), this.selectTipusIncidencia();
+    var _this3 = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _this3.selectIncidencies();
+
+            case 2:
+              _this3.filterIncidencies();
+
+              _this3.selectMunicipis();
+
+              _this3.selectAlertant();
+
+              _this3.selectTipusAlertant();
+
+              _this3.selectTipusIncidencia();
+
+            case 7:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
   },
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -11551,7 +11643,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.alertaSinRecursos{\n    font-family: 'Rubik', sans-serif;\n    font-size: 15px;\n    color: black;\n    background-color: rgb(21, 172, 196, .5);\n    width: 90%;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.alertaSinRecursos{\r\n    font-family: 'Rubik', sans-serif;\r\n    font-size: 15px;\r\n    color: black;\r\n    background-color: rgb(21, 172, 196, .5);\r\n    width: 90%;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -45904,25 +45996,25 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [
                   _vm._v(
-                    "\n          " +
+                    "\r\n          " +
                       _vm._s(_vm.getMunicipi(index)) +
-                      "\n        "
+                      "\r\n        "
                   )
                 ]),
                 _vm._v(" "),
                 _c("td", [
                   _vm._v(
-                    "\n          " +
+                    "\r\n          " +
                       _vm._s(_vm.getTipusIncidencia(index)) +
-                      "\n        "
+                      "\r\n        "
                   )
                 ]),
                 _vm._v(" "),
                 _c("td", [
                   _vm._v(
-                    "\n          " +
+                    "\r\n          " +
                       _vm._s(_vm.getTipusAlertant(index)) +
-                      "\n        "
+                      "\r\n        "
                   )
                 ]),
                 _vm._v(" "),
@@ -45981,7 +46073,7 @@ var render = function() {
             staticClass: "alert mt-3 alertaSinRecursos",
             attrs: { role: "alert" }
           },
-          [_vm._v("\n  No hay ninguna\n")]
+          [_vm._v("\r\n  No hay ninguna\r\n")]
         ),
     _vm._v(" "),
     _c(
@@ -49267,7 +49359,8 @@ var render = function() {
                     class: {
                       visible:
                         _vm.transferencia &&
-                        _vm.incidenciaRecursInsert.desti != null
+                        _vm.incidenciaRecursInsert.desti != null &&
+                        !_vm.disableSubmit
                     },
                     attrs: { id: "hospitalitzacio" },
                     on: {
@@ -49283,7 +49376,8 @@ var render = function() {
                         attrs: {
                           disabled:
                             !_vm.transferencia ||
-                            _vm.incidenciaRecursInsert.desti == null
+                            _vm.incidenciaRecursInsert.desti == null ||
+                            _vm.disableSubmit
                         }
                       },
                       [_c("i", { staticClass: "fas fa-check" })]
@@ -49540,7 +49634,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("p", [
-      _c("span", { staticClass: "indicadoresMasInfo" }, [_vm._v("Afectados: ")])
+      _c("span", { staticClass: "indicadoresMasInfo" }, [
+        _vm._v("Afectado/a: ")
+      ])
     ])
   },
   function() {
