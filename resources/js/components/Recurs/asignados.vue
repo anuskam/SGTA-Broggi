@@ -284,7 +284,7 @@ export default {
             await this.selectRecurso();
             this.recurs.actiu = true;
             await this.updateRecurso();
-            // location.reload();
+            location.reload();
         },
         selectRecurso(){
             let me = this;

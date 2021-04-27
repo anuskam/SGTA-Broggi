@@ -56,7 +56,7 @@
       methods:{
         selectIncidencies() {
           let me = this;
-          axios
+         return axios
               .get('/SGTA-Broggi/public/api/incidencia')
               .then(response => {
                 me.incidencies = response.data;
@@ -64,6 +64,10 @@
               .catch(error => {
                 console.log(error);
               })
+        },
+        filterIncidencies(){
+            this.incidencies = this.incidencies.filter(obj => obj.incidencies_has_recursos.length > 0);
+            this.$forceUpdate();
         },
         selectMunicipis() {
           let me = this;
@@ -139,8 +143,8 @@
 
         }
       },
-      created(){
-        this.selectIncidencies(), this.selectMunicipis(), this.selectAlertant(), this.selectTipusAlertant(), this.selectTipusIncidencia();
+      async created(){
+        await this.selectIncidencies(), this.filterIncidencies(), this.selectMunicipis(), this.selectAlertant(), this.selectTipusAlertant(), this.selectTipusIncidencia();
       },
       mounted() {
           console.log('Component mounted.')
