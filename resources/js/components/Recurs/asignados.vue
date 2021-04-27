@@ -37,7 +37,7 @@
     <div id="botones" class="card mt-4 p-2">
       <div class="leftButtons col-2">
         <div id="movilitzacio" class="button" @click="activarMovilitzacio()">
-          <button><i class="fas fa-running"></i> Iniciar Movilitzación</button>
+          <button class="mobilizacion"><i class="fas fa-running"></i> Iniciar Movilitzación</button>
           <input type="time" v-model="incidenciaRecursInsert.hora_mobilitzacio" />
         </div>
 
@@ -789,6 +789,14 @@ button {
 
 .confirmarBtn:hover{
   color: white;
+}
+
+#alta > button, #checkTransport > button {
+  padding: 5px 5px;
+}
+
+button.mobilizacion{
+  padding: 5px 2px;
 }
 
 </style>

@@ -16,14 +16,14 @@
       <li class="page-item">
         <button :disabled="currentPage <= 1" class="btn numeroPaginacion" aria-label="Previous" @click="paginar(currentPage-1)">
             <span aria-hidden="true">&laquo;</span>
-            <span class="sr-only">Previous</span>
+            <span class="sr-only">Anterior</span>
         </button>
       </li>
       <button v-for="(paginaActual, index) in paginas" :key="index" class="btn numeroPaginacion" @click="paginar(paginaActual)">{{ index+1 }}</button>
       <li class="page-item">
         <button :disabled="currentPage >= meta.last_page" class="btn numeroPaginacion" aria-label="Next" @click="paginar(currentPage+1)">
             <span aria-hidden="true">&raquo;</span>
-            <span class="sr-only">Next</span>
+            <span class="sr-only">Siguiente</span>
         </button>
       </li>
     </ul>
@@ -34,16 +34,17 @@
     </button>
   </div>
 
-  <div class="filtrar ml-5">
+  <!-- <div class="filtrar ml-5">
     <input type="text" v-model="search"/>
         <i class="fas fa-filter"></i><label>Filtrar</label>
-  </div>
+  </div> -->
 
   <div class="card mt-2 mb-1 ml-5 mr-5">
     <h2 class="card-header font-weight-bold">Alertantes</h2>
     <!--Por si no hay resultados-->
-    <div v-if="filteredList.length == 0" class="p-3">No hay resultados con estos parámetros</div>
-    <div v-else class="card-body">
+    <!-- <div v-if="filteredList.length == 0" class="p-3">No hay resultados con estos parámetros</div> -->
+    <!-- <div v-else class="card-body"> -->
+    <div class="card-body">
       <table class="table mt-2">
           <thead>
             <tr>
@@ -57,7 +58,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(alertant, index) in filteredList" :key="alertant.id">
+            <!-- <tr v-for="(alertant, index) in filteredList" :key="alertant.id"> -->
+            <tr v-for="(alertant, index) in alertants" :key="alertant.id">
               <td>{{ alertant.nom }}</td>
               <td>{{ alertant.cognom }}</td>
               <td>{{ alertant.telefon }}</td>
