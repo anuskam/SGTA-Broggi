@@ -176,7 +176,9 @@
             let me = this;
             return this.incidenciaHasRecursos.forEach((incidencia) => {
                 me.selectIncidencia(incidencia.incidencies_id);
+                this.$forceUpdate();
             });
+
         },
         selectIncidencia(id){
              let me = this;
@@ -194,7 +196,7 @@
             return axios
             .get("/SGTA-Broggi/public/api/incidenciaHasRecursos")
             .then((response) => {
-            me.incidenciesHasRecursos = response.data;
+                me.incidenciesHasRecursos = response.data;
             })
             .catch((error) => {
             console.log(error);
@@ -202,7 +204,9 @@
         },
         selectIncidenciaHasRecursos(){
             let me = this;
+            this.incidenciaHasRecursos = [];
             this.incidenciaHasRecursos = this.incidenciesHasRecursos.filter(obj => obj.recursos_id == me.recursos_id);
+            this.$forceUpdate();
             // this.incidenciaID = this.incidenciaHasRecursos[this.incidenciaHasRecursos.length-1].incidencies_id;
             return true;
         },
@@ -306,12 +310,16 @@
         deleteAsignat(){
             let me = this;
           axios
-              .get("/SGTA-Broggi/public/deleteIHR/"+me.incidenciaHasRecursos[0].incidencies_id+"/"+me.incidenciaHasRecursos[0].recursos_id)
+              .delete("/SGTA-Broggi/public/api/incidenciaHasRecursos/"+me.incidenciaHasRecursos[0].incidencies_id+"/"+me.incidenciaHasRecursos[0].recursos_id)
               .then((response) => {
                 console.log(response.data);
               }).catch((error) => {
                 console.log(error);
-              })
+              });
+             $('#deleteModalAsignat').modal('hide');
+             this.getIncidenciaData();
+             this.$forceUpdate();
+             location.reload();
         },
         confirmDeleteAsignat(incidencia){
           this.incidencia = incidencia;
@@ -323,7 +331,6 @@
           console.log(this.recursEditar);
         },
         updateIncidenteAsignado(){
-
             // modificar con todo el contenido
         },
         async editIncidencia(incidencia){

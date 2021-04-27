@@ -26,7 +26,7 @@ Route::get('home', [UsuariController::class, 'index']);
 Route::get('/', [UsuariController::class, 'index']);
 
 /* Delete IHR */
-Route::get('deleteIHR/{incidencies_id}/{recursos_id}', [IncidenciaHasRecursosController::class, 'deleteIHR']);
+// Route::delete('deleteIHR/{incidencies_id}/{recursos_id}', [IncidenciaHasRecursosController::class, 'deleteIHR']);
 
 /*PAGINACIÓN*/
 Route::get('alertantPaginated', [AlertantController::class, 'indexPaginated']);
