@@ -102,8 +102,8 @@
               </button>
               <input type="time" v-model="incidenciaRecursInsert.hora_transferencia" />
             </div>
-            <div class="botoTransport button"  id="hospitalitzacio" @click="hospitalitzacio()" :class="{ visible: transferencia && incidenciaRecursInsert.desti != null}">
-              <button :disabled="!transferencia || incidenciaRecursInsert.desti == null">
+            <div class="botoTransport button"  id="hospitalitzacio" @click="hospitalitzacio()" :class="{ visible: transferencia && incidenciaRecursInsert.desti != null && !disableSubmit}">
+              <button :disabled="!transferencia || incidenciaRecursInsert.desti == null || disableSubmit">
                   <i class="fas fa-check"></i>
               </button>
             </div>
@@ -129,7 +129,7 @@
             <p><span class="indicadoresMasInfo">Complemento Dirección: </span> {{ adreca_complement }}</p>
             <p><span class="indicadoresMasInfo">Nombre del Alertante: </span> {{ nom_alertant }}</p>
             <p><span class="indicadoresMasInfo">Teléfono del Alertante: </span> {{ telefon_alertant }}</p>
-            <p><span class="indicadoresMasInfo">Afectados: </span></p>
+            <p><span class="indicadoresMasInfo">Afectado/a: </span></p>
             <ul>
                 <li v-for="afectat in afectats" :key="afectat.id">
                     <p><span class="indicadoresMasInfo">Nom: </span> {{ afectat.nom }}</p>
@@ -242,6 +242,7 @@ export default {
             recurs: null,
             incidenciesHasAfectats: [],
             afectatsID: [],
+            disableSubmit: false,
         }
     },
     methods: {
@@ -260,6 +261,7 @@ export default {
         hospitalitzacio(){
             if(this.transferencia && this.incidenciaRecursInsert.desti != null){
                 this.updateFunction();
+                this.disableSubmit = true;
             }
         },
         async updateFunction(){
@@ -282,7 +284,7 @@ export default {
             await this.selectRecurso();
             this.recurs.actiu = true;
             await this.updateRecurso();
-            location.reload();
+            // location.reload();
         },
         selectRecurso(){
             let me = this;
@@ -295,7 +297,7 @@ export default {
         },
         updateIncidencia(){
             let me = this;
-            return axios.put('/SGTA-Broggi/public/api/incidencia/'+me.incidenciaID, me.incidencia).then((response) => {
+            return axios.put('/SGTA-Broggi/public/api/incidenciaHasRecursos/'+me.incidenciaID+'/'+me.recursos_id, me.incidencia).then((response) => {
                 console.log(response);
             }).catch( (error) => {
                 console.log(error.response.status);
@@ -440,7 +442,7 @@ export default {
         },
         getHospitalsAddresses(){
             let me = this;
-            this.alertants.forEach(function (alertant, index){
+            this.alertants.forEach(function (alertant){
                 if(alertant.tipus_alertants_id == 1){
                     let municipi = me.municipis.find(obj => obj.id == alertant.municipis_id);
                     let nomMunicipi = municipi.nom;

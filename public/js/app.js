@@ -4323,7 +4323,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       incidenciaRecursosInsert: [],
       recurs: null,
       incidenciesHasAfectats: [],
-      afectatsID: []
+      afectatsID: [],
+      disableSubmit: false
     };
   },
   methods: {
@@ -4344,6 +4345,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     hospitalitzacio: function hospitalitzacio() {
       if (this.transferencia && this.incidenciaRecursInsert.desti != null) {
         this.updateFunction();
+        this.disableSubmit = true;
       }
     },
     updateFunction: function updateFunction() {
@@ -4385,9 +4387,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _this.updateRecurso();
 
               case 13:
-                location.reload();
-
-              case 14:
               case "end":
                 return _context.stop();
             }
@@ -4406,7 +4405,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     updateIncidencia: function updateIncidencia() {
       var me = this;
-      return axios.put('/SGTA-Broggi/public/api/incidencia/' + me.incidenciaID, me.incidencia).then(function (response) {
+      return axios.put('/SGTA-Broggi/public/api/incidenciaHasRecursos/' + me.incidenciaID + '/' + me.recursos_id, me.incidencia).then(function (response) {
         console.log(response);
       })["catch"](function (error) {
         console.log(error.response.status);
@@ -4591,7 +4590,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     getHospitalsAddresses: function getHospitalsAddresses() {
       var me = this;
-      this.alertants.forEach(function (alertant, index) {
+      this.alertants.forEach(function (alertant) {
         if (alertant.tipus_alertants_id == 1) {
           var municipi = me.municipis.find(function (obj) {
             return obj.id == alertant.municipis_id;
@@ -11141,7 +11140,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nmain[data-v-6504f867] {\r\n  margin-top: 1.4vh;\r\n  color: black;\r\n  font-family: 'Rubik', sans-serif;\r\n  font-size: 15px;\n}\n#infoCard[data-v-6504f867] {\r\n  height: 65vh;\r\n  color: black;\n}\n#botones[data-v-6504f867] {\r\n  height: 28vh;\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-around;\r\n  align-items: center;\n}\n#infoHeader[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-between;\r\n  font-size: 1.2em;\r\n  font-weight: bold;\r\n  margin-right: -0.5px;\r\n  border-bottom: 1px solid black;\r\n  background-color: #15acc4;\n}\nbutton[data-v-6504f867] {\r\n  background-color: #e3177d;\r\n  font-size: 0.9em;\r\n  color: white;\r\n  border-radius: 4px;\n}\n.card[data-v-6504f867] {\r\n  border: 1px solid black;\n}\n#transportHeader[data-v-6504f867] {\r\n  background-color: #15acc4;\r\n  font-weight: bold;\r\n  padding: 6px 20px;\r\n  text-align: center;\n}\n.leftButtons[data-v-6504f867] {\r\n  height: 100%;\r\n  display: flex;\r\n  flex-direction: column;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-around;\n}\n#assistencia[data-v-6504f867]{\r\n    opacity: .4;\n}\n#transportButton[data-v-6504f867] {\r\n  background-color: #e3177d;\n}\n#transportButtons[data-v-6504f867] {\r\n  height: 100%;\r\n  opacity: .4;\n}\n.visible[data-v-6504f867]{\r\n    opacity: 1 !important;\n}\n#transportForm[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: wrap;\r\n  justify-content: space-around;\r\n  align-items: center;\n}\n#botonsTransport[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  width: 100%;\r\n  justify-content: space-between;\n}\n.button[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  /* align-items: center; */\n}\n#direccioHospital[data-v-6504f867] {\r\n  width: 100%;\n}\n#map[data-v-6504f867] {\r\n  height: 65%;\r\n  background-color: black;\n}\n#info[data-v-6504f867] {\r\n  height: 20%;\r\n  margin-top: 4%;\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: space-around;\r\n  flex-wrap: nowrap;\r\n  /* font-weight: bold; */\n}\n.boldInfo[data-v-6504f867]{\r\n    font-weight: bold;\n}\n#infoFields[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: space-around;\r\n  padding-right: 0;\n}\n.infobox[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  align-items: center;\r\n  text-align: justify;\r\n  /* font-size: 12px; */\n}\n.infobox > div[data-v-6504f867] {\r\n  background-color: #15acc4;\r\n  border: 1px solid black;\r\n  font-size: 13.5px;\r\n  padding: 0px 5px !important;\n}\n#descripcion[data-v-6504f867],\r\n#direccion[data-v-6504f867] {\r\n  background-color: white;\n}\n#masInfo[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: center;\r\n  vertical-align: center;\n}\n#masInfo > button[data-v-6504f867] {\r\n  padding: 10px 20px;\r\n  margin-left: -50px;\r\n  color: white;\n}\n.modal-header[data-v-6504f867]{\r\n    font-weight: bold;\r\n    background-color: #15acc4;\n}\n#alta[data-v-6504f867]{\r\n    opacity: 0.4;\n}\n#alta > button[data-v-6504f867]{\r\n    padding: 5px 15px;\r\n    margin-bottom: 0px !important;\r\n    background-color: white !important;\r\n    color: #e3177d;\r\n    font-weight: bolder;\n}\n.indicadoresMasInfo[data-v-6504f867]{\r\n    font-weight: bold;\n}\n#checkTransport[data-v-6504f867]{\r\n    opacity: 0.4;\n}\n#checkTransport > button[data-v-6504f867]{\r\n    padding: 5px 15px;\n}\n#iniciarTransport[data-v-6504f867]{\r\n    opacity: 0.4;\n}\n#arribadaHospital[data-v-6504f867]{\r\n    opacity: 0.4;\n}\n#iniciarTransferencia[data-v-6504f867]{\r\n    opacity: 0.4;\n}\n#hospitalitzacio[data-v-6504f867]{\r\n    opacity: 0.4;\r\n    margin-top: 1vh;\n}\n#hospitalitzacio > button[data-v-6504f867]{\r\n    padding: 10px 10px;\r\n    background-color: green !important;\n}\r\n/* .cerrarBoton{\r\n    font-size: 15px;\r\n} */\n.opaco[data-v-6504f867]{\r\n  opacity: 0.4 !important;\n}\n.cerrarBtn[data-v-6504f867] {\r\n  background-color: #6c757d !important;\r\n  color: white;\r\n  font-size: 15px;\n}\n.confirmarBtn[data-v-6504f867]{\r\n  font-size: 15px;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nmain[data-v-6504f867] {\n  margin-top: 1.4vh;\n  color: black;\n  font-family: 'Rubik', sans-serif;\n  font-size: 15px;\n}\n#infoCard[data-v-6504f867] {\n  height: 65vh;\n  color: black;\n}\n#botones[data-v-6504f867] {\n  height: 28vh;\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#infoHeader[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n  font-size: 1.2em;\n  font-weight: bold;\n  margin-right: -0.5px;\n  border-bottom: 1px solid black;\n  background-color: #15acc4;\n}\nbutton[data-v-6504f867] {\n  background-color: #e3177d;\n  font-size: 0.9em;\n  color: white;\n  border-radius: 4px;\n}\n.card[data-v-6504f867] {\n  border: 1px solid black;\n}\n#transportHeader[data-v-6504f867] {\n  background-color: #15acc4;\n  font-weight: bold;\n  padding: 6px 20px;\n  text-align: center;\n}\n.leftButtons[data-v-6504f867] {\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n}\n#assistencia[data-v-6504f867]{\n    opacity: .4;\n}\n#transportButton[data-v-6504f867] {\n  background-color: #e3177d;\n}\n#transportButtons[data-v-6504f867] {\n  height: 100%;\n  opacity: .4;\n}\n.visible[data-v-6504f867]{\n    opacity: 1 !important;\n}\n#transportForm[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#botonsTransport[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  width: 100%;\n  justify-content: space-between;\n}\n.button[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  /* align-items: center; */\n}\n#direccioHospital[data-v-6504f867] {\n  width: 100%;\n}\n#map[data-v-6504f867] {\n  height: 65%;\n  background-color: black;\n}\n#info[data-v-6504f867] {\n  height: 20%;\n  margin-top: 4%;\n  display: flex;\n  flex-direction: row;\n  justify-content: space-around;\n  flex-wrap: nowrap;\n  /* font-weight: bold; */\n}\n.boldInfo[data-v-6504f867]{\n    font-weight: bold;\n}\n#infoFields[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n  padding-right: 0;\n}\n.infobox[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  text-align: justify;\n  /* font-size: 12px; */\n}\n.infobox > div[data-v-6504f867] {\n  background-color: #15acc4;\n  border: 1px solid black;\n  font-size: 13.5px;\n  padding: 0px 5px !important;\n}\n#descripcion[data-v-6504f867],\n#direccion[data-v-6504f867] {\n  background-color: white;\n}\n#masInfo[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  vertical-align: center;\n}\n#masInfo > button[data-v-6504f867] {\n  padding: 10px 20px;\n  margin-left: -50px;\n  color: white;\n}\n.modal-header[data-v-6504f867]{\n    font-weight: bold;\n    background-color: #15acc4;\n}\n#alta[data-v-6504f867]{\n    opacity: 0.4;\n}\n#alta > button[data-v-6504f867]{\n    padding: 5px 15px;\n    margin-bottom: 0px !important;\n    background-color: white !important;\n    color: #e3177d;\n    font-weight: bolder;\n}\n.indicadoresMasInfo[data-v-6504f867]{\n    font-weight: bold;\n}\n#checkTransport[data-v-6504f867]{\n    opacity: 0.4;\n}\n#checkTransport > button[data-v-6504f867]{\n    padding: 5px 15px;\n}\n#iniciarTransport[data-v-6504f867]{\n    opacity: 0.4;\n}\n#arribadaHospital[data-v-6504f867]{\n    opacity: 0.4;\n}\n#iniciarTransferencia[data-v-6504f867]{\n    opacity: 0.4;\n}\n#hospitalitzacio[data-v-6504f867]{\n    opacity: 0.4;\n    margin-top: 1vh;\n}\n#hospitalitzacio > button[data-v-6504f867]{\n    padding: 10px 10px;\n    background-color: green !important;\n}\n/* .cerrarBoton{\n    font-size: 15px;\n} */\n.opaco[data-v-6504f867]{\n  opacity: 0.4 !important;\n}\n.cerrarBtn[data-v-6504f867] {\n  background-color: #6c757d !important;\n  color: white;\n  font-size: 15px;\n}\n.confirmarBtn[data-v-6504f867]{\n  font-size: 15px;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -48434,7 +48433,8 @@ var render = function() {
                     class: {
                       visible:
                         _vm.transferencia &&
-                        _vm.incidenciaRecursInsert.desti != null
+                        _vm.incidenciaRecursInsert.desti != null &&
+                        !_vm.disableSubmit
                     },
                     attrs: { id: "hospitalitzacio" },
                     on: {
@@ -48450,7 +48450,8 @@ var render = function() {
                         attrs: {
                           disabled:
                             !_vm.transferencia ||
-                            _vm.incidenciaRecursInsert.desti == null
+                            _vm.incidenciaRecursInsert.desti == null ||
+                            _vm.disableSubmit
                         }
                       },
                       [_c("i", { staticClass: "fas fa-check" })]
@@ -48707,7 +48708,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("p", [
-      _c("span", { staticClass: "indicadoresMasInfo" }, [_vm._v("Afectados: ")])
+      _c("span", { staticClass: "indicadoresMasInfo" }, [
+        _vm._v("Afectado/a: ")
+      ])
     ])
   },
   function() {
