@@ -189,7 +189,12 @@ class IncidenciaController extends Controller
     public function destroy(Incidencia $incidencium)
     {
         try{
-            $incidencium->afectats()->delete();
+            $ihas = $incidencium->incidencies_has_afectats()->all();
+            foreach($ihas as $iha){
+                $afectat = Afectat::where('id', '=', $iha->afectats_id)->first();
+                $afectat->delete();
+                $iha->delete();
+            }
             $incidencium->incidencies_has_recursos()->delete();
             $incidencium->delete();
 

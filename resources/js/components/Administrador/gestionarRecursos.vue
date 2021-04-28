@@ -82,8 +82,8 @@
   <div class="modal" tabindex="-1" id="deleteModalRecurs">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header d-flex justify-content-center">
-          <div class="modal-title">Eliminar Recurs</div>
+        <div class="modal-header">
+          <div class="modal-title deleteModal">Eliminar Recurs</div>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -103,7 +103,7 @@
   <div class="modal" tabindex="-1" id="recursModal">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="modal-header d-flex justify-content-center">
+        <div class="modal-header">
           <div class="modal-title">Recurso</div>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>

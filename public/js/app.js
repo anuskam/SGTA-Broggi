@@ -2170,16 +2170,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-//
-//
 //
 //
 //
@@ -2270,190 +2260,61 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: {
-    recursos_id: Number
-  },
   data: function data() {
     return {
       incidencies: [],
       incidencia: {
-        data: ''
-      },
-      municipis: [],
-      alertants: [],
-      tipusIncidencies: [],
-      tipusAlertants: [],
-      incidenciesHasRecursos: [],
-      incidenciaHasRecursos: []
+        data: '',
+        hota: '',
+        telefon_alertant: '',
+        adreca: '',
+        adreca_complement: '',
+        descripcio: ''
+      }
     };
   },
   methods: {
-    getIncidenciaData: function getIncidenciaData() {
-      var _this = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return _this.selectIncidenciesHasRecursos();
-
-              case 2:
-                _context.next = 4;
-                return _this.selectIncidenciaHasRecursos();
-
-              case 4:
-                _context.next = 6;
-                return _this.getIncidenciesRecursos();
-
-              case 6:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
-    },
-    getIncidenciesRecursos: function getIncidenciesRecursos() {
+    selectIncidencies: function selectIncidencies() {
       var me = this;
-      return this.incidenciaHasRecursos.forEach(function (incidencia) {
-        me.selectIncidencia(incidencia.incidencies_id);
-      });
-    },
-    selectIncidencia: function selectIncidencia(id) {
-      var me = this;
-      axios.get('/SGTA-Broggi/public/api/incidencia/' + id).then(function (response) {
-        me.incidencies.push(response.data);
+      axios.get('/SGTA-Broggi/public/api/incidencia').then(function (response) {
+        me.incidencies = response.data;
       })["catch"](function (error) {
         console.log(error);
       });
     },
-    selectIncidenciesHasRecursos: function selectIncidenciesHasRecursos() {
-      var me = this;
-      return axios.get("/SGTA-Broggi/public/api/incidenciaHasRecursos").then(function (response) {
-        me.incidenciesHasRecursos = response.data;
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    selectIncidenciaHasRecursos: function selectIncidenciaHasRecursos() {
-      var me = this;
-      this.incidenciaHasRecursos = this.incidenciesHasRecursos.filter(function (obj) {
-        return obj.recursos_id == me.recursos_id;
-      }); // this.incidenciaID = this.incidenciaHasRecursos[this.incidenciaHasRecursos.length-1].incidencies_id;
-
-      return true;
-    },
-    // selectIncidencies() {
-    //   let me = this;
-    //   axios
-    //       .get('/SGTA-Broggi/public/api/incidencia')
-    //       .then(response => {
-    //         me.incidencies = response.data;
-    //       })
-    //       .catch(error => {
-    //         console.log(error);
-    //       })
+    // selectIncidencia(id){
+    //    let me = this;
+    //    axios
+    //     .get('/SGTA-Broggi/public/api/incidencia/'+ id)
+    //     .then(response => {
+    //       me.incidencies.push(response.data);
+    //     })
+    //     .catch(error => {
+    //       console.log(error);
+    //     });
     // },
-    selectMunicipis: function selectMunicipis() {
-      var me = this;
-      axios.get("/SGTA-Broggi/public/api/municipi").then(function (response) {
-        me.municipis = response.data;
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    getMunicipi: function getMunicipi(index) {
-      var _this2 = this;
-
-      var municipi = this.municipis.find(function (obj) {
-        return obj.id == _this2.incidencies[index].municipis_id;
-      });
-      var municipi_nom;
-
-      if (municipi != null) {
-        municipi_nom = municipi.nom;
-      } else {
-        municipi_nom = this.municipis.find(function (obj) {
-          return obj.id == 1;
-        });
-      }
-
-      return municipi_nom;
-    },
-    selectTipusIncidencia: function selectTipusIncidencia() {
-      var me = this;
-      axios.get("/SGTA-Broggi/public/api/tipusIncidencia").then(function (response) {
-        me.tipusIncidencies = response.data;
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    getTipusIncidencia: function getTipusIncidencia(index) {
-      var _this3 = this;
-
-      var tipusIncidencia = this.tipusIncidencies.find(function (obj) {
-        return obj.id == _this3.incidencies[index].tipus_incidencies_id;
-      });
-      var tipusIncidencia_nom;
-
-      if (tipusIncidencia != null) {
-        tipusIncidencia_nom = tipusIncidencia.tipus;
-      } else {
-        tipusIncidencia_nom = this.incidencies.find(function (obj) {
-          return obj.id == 1;
-        });
-      }
-
-      return tipusIncidencia_nom;
-    },
-    selectTipusAlertant: function selectTipusAlertant() {
-      var me = this;
-      axios.get("/SGTA-Broggi/public/api/tipusAlertant").then(function (response) {
-        me.tipusAlertants = response.data;
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    selectAlertant: function selectAlertant() {
-      var me = this;
-      axios.get("/SGTA-Broggi/public/api/alertant").then(function (response) {
-        me.alertants = response.data;
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    getTipusAlertant: function getTipusAlertant(index) {
-      var alertant_id = this.incidencies[index].alertants_id;
-      var indexAlertant = this.alertants.findIndex(function (obj) {
-        return obj.id == alertant_id;
-      });
-      var alertantTipus = this.alertants[indexAlertant].tipus_alertants_id;
-      var tipusAlertant_index = this.tipusAlertants.findIndex(function (obj) {
-        return obj.id == alertantTipus;
-      });
-      var tipusAlertant_nom = this.tipusAlertants[tipusAlertant_index].tipus;
-      return tipusAlertant_nom;
-    },
-    deleteAsignat: function deleteAsignat() {
-      var me = this;
-      axios.get("/SGTA-Broggi/public/deleteIHR/" + me.incidenciaHasRecursos[0].incidencies_id + "/" + me.incidenciaHasRecursos[0].recursos_id).then(function (response) {
-        console.log(response.data);
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    confirmDeleteAsignat: function confirmDeleteAsignat(incidencia) {
+    confirmDeleteIncidencia: function confirmDeleteIncidencia(incidencia) {
       this.incidencia = incidencia;
-      $('#deleteModalAsignat').modal('show');
+      $('#deleteModalIncidencia').modal('show');
+    },
+    deleteIncidencia: function deleteIncidencia() {
+      var me = this;
+      axios["delete"]('/SGTA-Broggi/public/api/incidencia/' + me.incidencia.id).then(function (response) {
+        console.log(response);
+        me.infoMessage = response.data.missatge;
+        me.selectIncidencies();
+        $('#deleteModalIncidencia').modal('hide');
+      })["catch"](function (error) {
+        me.errorMessage = error.response.data.error;
+        $('#deleteModalIncidencia').modal('hide');
+      });
     },
     updateIncidenteAsignado: function updateIncidenteAsignado() {// modificar con todo el contenido
     },
     editIncidencia: function editIncidencia(incidencia) {
       this.insert = false;
       this.incidencia = incidencia;
-      $('#asignatModal').modal('show');
+      $('#incidenciaModal').modal('show');
     },
     convertDateFormat: function convertDateFormat(string) {
       var info = string.split('-').reverse().join('-');
@@ -2461,7 +2322,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   created: function created() {
-    this.selectMunicipis(), this.selectAlertant(), this.selectTipusAlertant(), this.selectTipusIncidencia(), this.getIncidenciaData();
+    this.selectIncidencies();
   },
   mounted: function mounted() {}
 });
@@ -11650,7 +11511,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn {\n    font-size: 15px;\n}\n.contenido{\n    font-size: 15px;\n}\n.btn-secondary:not(:disabled):not(.disabled).active,\n.btn-secondary:not(:disabled):not(.disabled):active,\n.show > .btn-secondary.dropdown-toggle {\n  background-color: #e3177d;\n  border-color: black;\n}\n.btn-secondary {\n  border-color: black;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.parentGrid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n.card-header {\n  background-color: #15acc4;\n  border: 1px solid black;\n  border-left: 0;\n  border-right: 0;\n  margin-top: -1px;\n}\n.modal-header{\n    background-color: #15acc4 !important;\n}\n.card {\n  border: 1px solid black !important;\n}\nbutton {\n  background-color: #e3177d !important;\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\n  color: black;\n  font-weight: bold;\n  background-color: #15acc4 !important;\n}\n.tabButton{\n    background-color: white !important;\n    border: 0 !important;\n}\n.selectedTab{\n    background-color: #e3177d !important;\n    border: 1px solid black !important;\n}\n.green{\n    background-color: green;\n    color: white;\n}\n.red{\n    background-color: red;\n    color: white;\n}\n#entregar{\n  border: 1px solid black;\n}\n#titulitosTabs {\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n.iconNavPrincipal{\n    color: black;\n}\n#titulito {\n    font-family: 'Signika', sans-serif;\n    font-size: 1.3em;\n}\n.hidden{\n    visibility: hidden;\n}\n#buscadorTelefono > input{\n    border: 1px solid black;\n}\n.arrowNav{\n    height: 8vh;\n}\n#preguntesModal{\n    display: flex;\n    flex-direction: row;\n    flex-wrap: wrap;\n    justify-content: space-around;\n}\n#preguntaModal{\n    width: 50vw;\n    margin-bottom: 2vw;\n    margin-top: 2vw;\n}\n#preguntaModal > .card-header{\n    font-weight: bold;\n}\n.modal-title{\n    font-weight: bold !important;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn {\r\n    font-size: 15px;\n}\n.contenido{\r\n    font-size: 15px;\n}\n.btn-secondary:not(:disabled):not(.disabled).active,\r\n.btn-secondary:not(:disabled):not(.disabled):active,\r\n.show > .btn-secondary.dropdown-toggle {\r\n  background-color: #e3177d;\r\n  border-color: black;\n}\n.btn-secondary {\r\n  border-color: black;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\n}\n.parentGrid {\r\n  display: grid;\r\n  grid-template-columns: 1fr 1fr;\n}\n#tabButtons {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-between;\n}\n.card-header {\r\n  background-color: #15acc4;\r\n  border: 1px solid black;\r\n  border-left: 0;\r\n  border-right: 0;\r\n  margin-top: -1px;\n}\n.modal-header{\r\n    background-color: #15acc4 !important;\n}\n.card {\r\n  border: 1px solid black !important;\n}\nbutton {\r\n  background-color: #e3177d !important;\r\n  border: 1px solid black !important;\n}\n#afectadasList, #recursosList {\r\n  color: black;\r\n  font-weight: bold;\r\n  background-color: #15acc4 !important;\n}\n.tabButton{\r\n    background-color: white !important;\r\n    border: 0 !important;\n}\n.selectedTab{\r\n    background-color: #e3177d !important;\r\n    border: 1px solid black !important;\n}\n.green{\r\n    background-color: green;\r\n    color: white;\n}\n.red{\r\n    background-color: red;\r\n    color: white;\n}\n#entregar{\r\n  border: 1px solid black;\n}\n#titulitosTabs {\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\n}\n.iconNavPrincipal{\r\n    color: black;\n}\n#titulito {\r\n    font-family: 'Signika', sans-serif;\r\n    font-size: 1.3em;\n}\n.hidden{\r\n    visibility: hidden;\n}\n#buscadorTelefono > input{\r\n    border: 1px solid black;\n}\n.arrowNav{\r\n    height: 8vh;\n}\n#preguntesModal{\r\n    display: flex;\r\n    flex-direction: row;\r\n    flex-wrap: wrap;\r\n    justify-content: space-around;\n}\n#preguntaModal{\r\n    width: 50vw;\r\n    margin-bottom: 2vw;\r\n    margin-top: 2vw;\n}\n#preguntaModal > .card-header{\r\n    font-weight: bold;\n}\n.modal-title{\r\n    font-weight: bold !important;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11674,7 +11535,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nmain[data-v-6504f867] {\n  margin-top: 1.4vh;\n  color: black;\n  font-family: 'Rubik', sans-serif;\n  font-size: 15px;\n}\n#infoCard[data-v-6504f867] {\n  height: 65vh;\n  color: black;\n}\n#botones[data-v-6504f867] {\n  height: 28vh;\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#infoHeader[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n  font-size: 1.2em;\n  font-weight: bold;\n  margin-right: -0.5px;\n  border-bottom: 1px solid black;\n  background-color: #15acc4;\n}\nbutton[data-v-6504f867] {\n  background-color: #e3177d;\n  font-size: 0.9em;\n  color: white;\n  border-radius: 4px;\n}\n.card[data-v-6504f867] {\n  border: 1px solid black;\n}\n#transportHeader[data-v-6504f867] {\n  background-color: #15acc4;\n  font-weight: bold;\n  padding: 6px 20px;\n  text-align: center;\n}\n.leftButtons[data-v-6504f867] {\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: space-around;\n}\n#assistencia[data-v-6504f867]{\n    opacity: .4;\n}\n#transportButton[data-v-6504f867] {\n  background-color: #e3177d;\n}\n#transportButtons[data-v-6504f867] {\n  height: 100%;\n  opacity: .4;\n}\n.visible[data-v-6504f867]{\n    opacity: 1 !important;\n}\n#transportForm[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: space-around;\n  align-items: center;\n}\n#botonsTransport[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  width: 100%;\n  justify-content: space-between;\n}\n.button[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  /* align-items: center; */\n}\n#direccioHospital[data-v-6504f867] {\n  width: 100%;\n}\n#map[data-v-6504f867] {\n  height: 65%;\n  background-color: black;\n}\n#info[data-v-6504f867] {\n  height: 20%;\n  margin-top: 4%;\n  display: flex;\n  flex-direction: row;\n  justify-content: space-around;\n  flex-wrap: nowrap;\n  /* font-weight: bold; */\n}\n.boldInfo[data-v-6504f867]{\n    font-weight: bold;\n}\n#infoFields[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n  padding-right: 0;\n}\n.infobox[data-v-6504f867] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  text-align: justify;\n  /* font-size: 12px; */\n}\n.infobox > div[data-v-6504f867] {\n  background-color: #15acc4;\n  border: 1px solid black;\n  font-size: 13.5px;\n  padding: 0px 5px !important;\n}\n#descripcion[data-v-6504f867],\n#direccion[data-v-6504f867] {\n  background-color: white;\n}\n#masInfo[data-v-6504f867] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  vertical-align: center;\n}\n#masInfo > button[data-v-6504f867] {\n  padding: 10px 20px;\n  margin-left: -50px;\n  color: white;\n}\n.modal-header[data-v-6504f867]{\n    font-weight: bold;\n    background-color: #15acc4;\n}\n#alta[data-v-6504f867]{\n    opacity: 0.4;\n}\n#alta > button[data-v-6504f867]{\n    padding: 5px 15px;\n    margin-bottom: 0px !important;\n    background-color: white !important;\n    color: #e3177d;\n    font-weight: bolder;\n}\n.indicadoresMasInfo[data-v-6504f867]{\n    font-weight: bold;\n}\n#checkTransport[data-v-6504f867]{\n    opacity: 0.4;\n}\n#checkTransport > button[data-v-6504f867]{\n    padding: 5px 15px;\n}\n#iniciarTransport[data-v-6504f867]{\n    opacity: 0.4;\n}\n#arribadaHospital[data-v-6504f867]{\n    opacity: 0.4;\n}\n#iniciarTransferencia[data-v-6504f867]{\n    opacity: 0.4;\n}\n#hospitalitzacio[data-v-6504f867]{\n    opacity: 0.4;\n    margin-top: 1vh;\n}\n#hospitalitzacio > button[data-v-6504f867]{\n    padding: 10px 10px;\n    background-color: green !important;\n}\n/* .cerrarBoton{\n    font-size: 15px;\n} */\n.opaco[data-v-6504f867]{\n  opacity: 0.4 !important;\n}\n.cerrarBtn[data-v-6504f867] {\n  background-color: #6c757d !important;\n  color: white;\n  font-size: 15px;\n}\n.confirmarBtn[data-v-6504f867]{\n  font-size: 15px;\n}\n.confirmarBtn[data-v-6504f867]:hover{\n  color: white;\n}\n#alta > button[data-v-6504f867], #checkTransport > button[data-v-6504f867] {\n  padding: 5px 5px;\n}\nbutton.mobilizacion[data-v-6504f867]{\n  padding: 5px 2px;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nmain[data-v-6504f867] {\r\n  margin-top: 1.4vh;\r\n  color: black;\r\n  font-family: 'Rubik', sans-serif;\r\n  font-size: 15px;\n}\n#infoCard[data-v-6504f867] {\r\n  height: 65vh;\r\n  color: black;\n}\n#botones[data-v-6504f867] {\r\n  height: 28vh;\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-around;\r\n  align-items: center;\n}\n#infoHeader[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-between;\r\n  font-size: 1.2em;\r\n  font-weight: bold;\r\n  margin-right: -0.5px;\r\n  border-bottom: 1px solid black;\r\n  background-color: #15acc4;\n}\nbutton[data-v-6504f867] {\r\n  background-color: #e3177d;\r\n  font-size: 0.9em;\r\n  color: white;\r\n  border-radius: 4px;\n}\n.card[data-v-6504f867] {\r\n  border: 1px solid black;\n}\n#transportHeader[data-v-6504f867] {\r\n  background-color: #15acc4;\r\n  font-weight: bold;\r\n  padding: 6px 20px;\r\n  text-align: center;\n}\n.leftButtons[data-v-6504f867] {\r\n  height: 100%;\r\n  display: flex;\r\n  flex-direction: column;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-around;\n}\n#assistencia[data-v-6504f867]{\r\n    opacity: .4;\n}\n#transportButton[data-v-6504f867] {\r\n  background-color: #e3177d;\n}\n#transportButtons[data-v-6504f867] {\r\n  height: 100%;\r\n  opacity: .4;\n}\n.visible[data-v-6504f867]{\r\n    opacity: 1 !important;\n}\n#transportForm[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: wrap;\r\n  justify-content: space-around;\r\n  align-items: center;\n}\n#botonsTransport[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  width: 100%;\r\n  justify-content: space-between;\n}\n.button[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  /* align-items: center; */\n}\n#direccioHospital[data-v-6504f867] {\r\n  width: 100%;\n}\n#map[data-v-6504f867] {\r\n  height: 65%;\r\n  background-color: black;\n}\n#info[data-v-6504f867] {\r\n  height: 20%;\r\n  margin-top: 4%;\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: space-around;\r\n  flex-wrap: nowrap;\r\n  /* font-weight: bold; */\n}\n.boldInfo[data-v-6504f867]{\r\n    font-weight: bold;\n}\n#infoFields[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: space-around;\r\n  padding-right: 0;\n}\n.infobox[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  align-items: center;\r\n  text-align: justify;\r\n  /* font-size: 12px; */\n}\n.infobox > div[data-v-6504f867] {\r\n  background-color: #15acc4;\r\n  border: 1px solid black;\r\n  font-size: 13.5px;\r\n  padding: 0px 5px !important;\n}\n#descripcion[data-v-6504f867],\r\n#direccion[data-v-6504f867] {\r\n  background-color: white;\n}\n#masInfo[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: center;\r\n  vertical-align: center;\n}\n#masInfo > button[data-v-6504f867] {\r\n  padding: 10px 20px;\r\n  margin-left: -50px;\r\n  color: white;\n}\n.modal-header[data-v-6504f867]{\r\n    font-weight: bold;\r\n    background-color: #15acc4;\n}\n#alta[data-v-6504f867]{\r\n    opacity: 0.4;\n}\n#alta > button[data-v-6504f867]{\r\n    padding: 5px 15px;\r\n    margin-bottom: 0px !important;\r\n    background-color: white !important;\r\n    color: #e3177d;\r\n    font-weight: bolder;\n}\n.indicadoresMasInfo[data-v-6504f867]{\r\n    font-weight: bold;\n}\n#checkTransport[data-v-6504f867]{\r\n    opacity: 0.4;\n}\n#checkTransport > button[data-v-6504f867]{\r\n    padding: 5px 15px;\n}\n#iniciarTransport[data-v-6504f867]{\r\n    opacity: 0.4;\n}\n#arribadaHospital[data-v-6504f867]{\r\n    opacity: 0.4;\n}\n#iniciarTransferencia[data-v-6504f867]{\r\n    opacity: 0.4;\n}\n#hospitalitzacio[data-v-6504f867]{\r\n    opacity: 0.4;\r\n    margin-top: 1vh;\n}\n#hospitalitzacio > button[data-v-6504f867]{\r\n    padding: 10px 10px;\r\n    background-color: green !important;\n}\r\n/* .cerrarBoton{\r\n    font-size: 15px;\r\n} */\n.opaco[data-v-6504f867]{\r\n  opacity: 0.4 !important;\n}\n.cerrarBtn[data-v-6504f867] {\r\n  background-color: #6c757d !important;\r\n  color: white;\r\n  font-size: 15px;\n}\n.confirmarBtn[data-v-6504f867]{\r\n  font-size: 15px;\n}\n.confirmarBtn[data-v-6504f867]:hover{\r\n  color: white;\n}\n#alta > button[data-v-6504f867], #checkTransport > button[data-v-6504f867] {\r\n  padding: 5px 5px;\n}\nbutton.mobilizacion[data-v-6504f867]{\r\n  padding: 5px 2px;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11698,7 +11559,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.alertaSinRecursos{\r\n    font-family: 'Rubik', sans-serif;\r\n    font-size: 15px;\r\n    color: black;\r\n    background-color: rgb(21, 172, 196, .5);\r\n    width: 90%;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\n.modalEdicionRecursos{\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: wrap;\r\n  justify-content: space-around;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.alertaSinRecursos{\n    font-family: 'Rubik', sans-serif;\n    font-size: 15px;\n    color: black;\n    background-color: rgb(21, 172, 196, .5);\n    width: 90%;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n.modalEdicionRecursos{\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: space-around;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11746,7 +11607,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.alertaSinRecursos{\r\n    font-family: 'Rubik', sans-serif;\r\n    font-size: 15px;\r\n    color: black;\r\n    background-color: rgb(21, 172, 196, .5);\r\n    width: 90%;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.alertaSinRecursos{\n    font-family: 'Rubik', sans-serif;\n    font-size: 15px;\n    color: black;\n    background-color: rgb(21, 172, 196, .5);\n    width: 90%;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -45965,120 +45826,94 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("main", { staticClass: "col-11" }, [
-    _vm.incidencies.length > 0
-      ? _c("table", { staticClass: "table mt-5" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "tbody",
-            _vm._l(_vm.incidencies, function(incidencia, index) {
-              return _c("tr", { key: incidencia.id }, [
-                _c("td", [
-                  _vm._v(_vm._s(_vm.convertDateFormat(incidencia.data)))
-                ]),
-                _vm._v(" "),
-                _c("td", [
-                  _vm._v(
-                    "\n          " +
-                      _vm._s(_vm.getMunicipi(index)) +
-                      "\n        "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("td", [
-                  _vm._v(
-                    "\n          " +
-                      _vm._s(_vm.getTipusIncidencia(index)) +
-                      "\n        "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("td", [
-                  _vm._v(
-                    "\n          " +
-                      _vm._s(_vm.getTipusAlertant(index)) +
-                      "\n        "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(incidencia.telefon_alertant))]),
-                _vm._v(" "),
-                _c("td", [
-                  _c(
-                    "button",
-                    {
-                      staticClass:
-                        "btn btn-sm float-right ml-2 esborrarRecursBtn",
-                      attrs: { type: "submit" },
-                      on: {
-                        click: function($event) {
-                          return _vm.confirmDeleteAsignat(incidencia)
-                        }
-                      }
-                    },
-                    [
-                      _c("i", {
-                        staticClass: "fa fa-trash",
-                        attrs: { "aria-hidden": "true" }
-                      }),
-                      _vm._v("  Eliminar")
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-sm float-right editarRecursBtn",
-                      attrs: { type: "submit" },
-                      on: {
-                        click: function($event) {
-                          return _vm.editIncidencia(incidencia)
-                        }
-                      }
-                    },
-                    [
-                      _c("i", {
-                        staticClass: "fa fa-edit",
-                        attrs: { "aria-hidden": "true" }
-                      }),
-                      _vm._v("  Editar")
-                    ]
-                  )
-                ])
-              ])
-            }),
-            0
-          )
-        ])
-      : _c(
-          "div",
-          {
-            staticClass: "alert mt-3 alertaSinRecursos",
-            attrs: { role: "alert" }
-          },
-          [_vm._v("\n  No hay ninguna\n")]
-        ),
+    _c("table", { staticClass: "table mt-5" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        _vm._l(_vm.incidencies, function(incidencia) {
+          return _c("tr", { key: incidencia.id }, [
+            _c("td", [_vm._v(_vm._s(_vm.convertDateFormat(incidencia.data)))]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v("\n          " + _vm._s(incidencia.hora) + "\n        ")
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "\n          " +
+                  _vm._s(incidencia.telefon_alertant) +
+                  "\n        "
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v("\n          " + _vm._s(incidencia.adreca) + "\n        ")
+            ]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(incidencia.adreca_complement))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(incidencia.descripcio))]),
+            _vm._v(" "),
+            _c("td", [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-sm float-right ml-2 esborrarRecursBtn",
+                  attrs: { type: "submit" },
+                  on: {
+                    click: function($event) {
+                      return _vm.confirmDeleteIncidencia(incidencia)
+                    }
+                  }
+                },
+                [
+                  _c("i", {
+                    staticClass: "fa fa-trash",
+                    attrs: { "aria-hidden": "true" }
+                  }),
+                  _vm._v("  Eliminar")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-sm float-right editarRecursBtn",
+                  attrs: { type: "submit" },
+                  on: {
+                    click: function($event) {
+                      return _vm.editIncidencia(incidencia)
+                    }
+                  }
+                },
+                [
+                  _c("i", {
+                    staticClass: "fa fa-edit",
+                    attrs: { "aria-hidden": "true" }
+                  }),
+                  _vm._v("  Editar")
+                ]
+              )
+            ])
+          ])
+        }),
+        0
+      )
+    ]),
     _vm._v(" "),
     _c(
       "div",
       {
         staticClass: "modal",
-        attrs: { tabindex: "-1", id: "deleteModalAsignat" }
+        attrs: { tabindex: "-1", id: "deleteModalIncidencia" }
       },
       [
         _c("div", { staticClass: "modal-dialog" }, [
           _c("div", { staticClass: "modal-content" }, [
             _vm._m(1),
             _vm._v(" "),
-            _c("div", { staticClass: "modal-body" }, [
-              _c("p", [
-                _vm._v(
-                  "¿Estás segura de liminar la incidencia " +
-                    _vm._s(_vm.incidencia.data) +
-                    "?"
-                )
-              ])
-            ]),
+            _vm._m(2),
             _vm._v(" "),
             _c("div", { staticClass: "modal-footer" }, [
               _c(
@@ -46097,7 +45932,7 @@ var render = function() {
                   attrs: { type: "button" },
                   on: {
                     click: function($event) {
-                      return _vm.deleteAsignat()
+                      return _vm.deleteIncidencia()
                     }
                   }
                 },
@@ -46111,13 +45946,16 @@ var render = function() {
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "modal", attrs: { tabindex: "-1", id: "asignatModal" } },
+      {
+        staticClass: "modal",
+        attrs: { tabindex: "-1", id: "incidenciaModal" }
+      },
       [
         _c("div", { staticClass: "modal-dialog modal-lg" }, [
           _c("div", { staticClass: "modal-content" }, [
-            _vm._m(2),
-            _vm._v(" "),
             _vm._m(3),
+            _vm._v(" "),
+            _vm._m(4),
             _vm._v(" "),
             _c("div", { staticClass: "modal-footer" }, [
               _c(
@@ -46136,7 +45974,7 @@ var render = function() {
                   attrs: { type: "button" },
                   on: {
                     click: function($event) {
-                      return _vm.updateIncidenteAsignado()
+                      return _vm.updateIncidente()
                     }
                   }
                 },
@@ -46158,13 +45996,17 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Fecha")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Municipio")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Hora")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo de incidente")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Teléfono Alertante")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo de alertante")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Dirección")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Teléfono")])
+        _c("th", { attrs: { scope: "col" } }, [
+          _vm._v("Complemento dirección")
+        ]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Descripción")])
       ])
     ])
   },
@@ -46172,55 +46014,53 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "modal-header d-flex justify-content-center" },
-      [
-        _c("div", { staticClass: "modal-title" }, [
-          _vm._v("Eliminar Incidencia Asignada")
-        ]),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "close",
-            attrs: {
-              type: "button",
-              "data-dismiss": "modal",
-              "aria-label": "Close"
-            }
-          },
-          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-        )
-      ]
-    )
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("div", { staticClass: "modal-title" }, [
+        _vm._v("Eliminar Incidencia")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Cerrar"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "modal-header d-flex justify-content-center" },
-      [
-        _c("div", { staticClass: "modal-title" }, [
-          _vm._v("Incidente Asignado")
-        ]),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "close",
-            attrs: {
-              type: "button",
-              "data-dismiss": "modal",
-              "aria-label": "Close"
-            }
-          },
-          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-        )
-      ]
-    )
+    return _c("div", { staticClass: "modal-body" }, [
+      _c("p", [_vm._v("¿Estás segura de liminar la incidencia?")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("div", { staticClass: "modal-title" }, [_vm._v("Incidente Asignado")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Cerrar"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
   },
   function() {
     var _vm = this
@@ -49692,25 +49532,25 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [
                   _vm._v(
-                    "\r\n          " +
+                    "\n          " +
                       _vm._s(_vm.getMunicipi(index)) +
-                      "\r\n        "
+                      "\n        "
                   )
                 ]),
                 _vm._v(" "),
                 _c("td", [
                   _vm._v(
-                    "\r\n          " +
+                    "\n          " +
                       _vm._s(_vm.getTipusIncidencia(index)) +
-                      "\r\n        "
+                      "\n        "
                   )
                 ]),
                 _vm._v(" "),
                 _c("td", [
                   _vm._v(
-                    "\r\n          " +
+                    "\n          " +
                       _vm._s(_vm.getTipusAlertant(index)) +
-                      "\r\n        "
+                      "\n        "
                   )
                 ]),
                 _vm._v(" "),
@@ -49771,7 +49611,7 @@ var render = function() {
           },
           [
             _vm._v(
-              "\r\n  Este recurso no tiene ninguna incidencia en su historial\r\n"
+              "\n  Este recurso no tiene ninguna incidencia en su historial\n"
             )
           ]
         ),
@@ -50129,9 +49969,9 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\r\n                      " +
+                                  "\n                      " +
                                     _vm._s(address.nom) +
-                                    "\r\n                    "
+                                    "\n                    "
                                 )
                               ]
                             )
@@ -50383,25 +50223,25 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [
                   _vm._v(
-                    "\r\n          " +
+                    "\n          " +
                       _vm._s(_vm.getMunicipi(index)) +
-                      "\r\n        "
+                      "\n        "
                   )
                 ]),
                 _vm._v(" "),
                 _c("td", [
                   _vm._v(
-                    "\r\n          " +
+                    "\n          " +
                       _vm._s(_vm.getTipusIncidencia(index)) +
-                      "\r\n        "
+                      "\n        "
                   )
                 ]),
                 _vm._v(" "),
                 _c("td", [
                   _vm._v(
-                    "\r\n          " +
+                    "\n          " +
                       _vm._s(_vm.getTipusAlertant(index)) +
-                      "\r\n        "
+                      "\n        "
                   )
                 ]),
                 _vm._v(" "),
@@ -50417,7 +50257,7 @@ var render = function() {
             staticClass: "alert mt-3 alertaSinRecursos",
             attrs: { role: "alert" }
           },
-          [_vm._v("\r\n  No hay ninguna incidencia asignada\r\n")]
+          [_vm._v("\n  No hay ninguna incidencia asignada\n")]
         )
   ])
 }
@@ -51363,53 +51203,45 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "modal-header d-flex justify-content-center" },
-      [
-        _c("div", { staticClass: "modal-title" }, [
-          _vm._v("Eliminar Alertante")
-        ]),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "close",
-            attrs: {
-              type: "button",
-              "data-dismiss": "modal",
-              "aria-label": "Close"
-            }
-          },
-          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-        )
-      ]
-    )
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("div", { staticClass: "modal-title deleteModal" }, [
+        _vm._v("Eliminar Alertante")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "modal-header d-flex justify-content-center" },
-      [
-        _c("div", { staticClass: "modal-title" }, [_vm._v("Alertante")]),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "close",
-            attrs: {
-              type: "button",
-              "data-dismiss": "modal",
-              "aria-label": "Close"
-            }
-          },
-          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-        )
-      ]
-    )
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("div", { staticClass: "modal-title" }, [_vm._v("Alertante")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -52016,51 +51848,45 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "modal-header d-flex justify-content-center" },
-      [
-        _c("div", { staticClass: "modal-title" }, [_vm._v("Eliminar Recurs")]),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "close",
-            attrs: {
-              type: "button",
-              "data-dismiss": "modal",
-              "aria-label": "Close"
-            }
-          },
-          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-        )
-      ]
-    )
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("div", { staticClass: "modal-title deleteModal" }, [
+        _vm._v("Eliminar Recurs")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "modal-header d-flex justify-content-center" },
-      [
-        _c("div", { staticClass: "modal-title" }, [_vm._v("Recurso")]),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "close",
-            attrs: {
-              type: "button",
-              "data-dismiss": "modal",
-              "aria-label": "Close"
-            }
-          },
-          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-        )
-      ]
-    )
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("div", { staticClass: "modal-title" }, [_vm._v("Recurso")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -52731,51 +52557,45 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "modal-header d-flex justify-content-center" },
-      [
-        _c("div", { staticClass: "modal-title" }, [_vm._v("Eliminar Usuaria")]),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "close",
-            attrs: {
-              type: "button",
-              "data-dismiss": "modal",
-              "aria-label": "Close"
-            }
-          },
-          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-        )
-      ]
-    )
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("div", { staticClass: "modal-title deleteModal" }, [
+        _vm._v("Eliminar Usuaria")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Cerrar"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "modal-header d-flex justify-content-center" },
-      [
-        _c("div", { staticClass: "modal-title" }, [_vm._v("Usuaria")]),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "close",
-            attrs: {
-              type: "button",
-              "data-dismiss": "modal",
-              "aria-label": "Close"
-            }
-          },
-          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-        )
-      ]
-    )
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("div", { staticClass: "modal-title" }, [_vm._v("Usuaria")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
   }
 ]
 render._withStripped = true
