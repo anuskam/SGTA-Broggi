@@ -81,8 +81,8 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <div class="modal-title">Eliminar Usuaria</div>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <div class="modal-title deleteModal">Eliminar Usuaria</div>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>

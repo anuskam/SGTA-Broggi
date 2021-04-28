@@ -151,3 +151,11 @@ textarea{
     justify-content: space-between;
 
 }
+
+.modal-title{
+    margin-left: 45% !important;
+}
+
+.deleteModal{
+    margin-left: 35% !important;
+}
