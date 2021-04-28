@@ -8,7 +8,8 @@
 
         <div class="controlVideo">
             <div class="buttonPlay">
-                <button class="btn mt-2" id="reproducir" @click="play()" :disabled = disablePlay><i class="fas fa-play" aria-hidden="true"></i> Reproducir</button>
+                <button v-show="!replay" class="btn mt-2" id="reproducir" @click="play()" :disabled = disablePlay><i class="fas fa-play" aria-hidden="true"></i> Reproducir</button>
+                <button v-show="replay" class="btn mt-2" @click="replayvideo()"><i class="fas fa-redo-alt" aria-hidden="true"></i> Replay</button>
             </div>
 
             <div id="barra">
@@ -108,6 +109,7 @@ export default {
       maximo: 0,
       bucle: 0,
       disablePlay: false,
+      replay: false,
     };
   },
   methods: {
@@ -159,6 +161,9 @@ export default {
         this.activa = true;
       }
     },
+    replayvideo(){
+        location.reload();
+    },
     estado() {
       let maximo = 485;
       let video = document.querySelector("#videoDesa");
@@ -182,7 +187,11 @@ export default {
   mounted() {
     console.log("Component mounted.");
     let video = document.querySelector("#videoDesa");
+    let me = this;
     video.addEventListener("timeupdate", this.controlTiempo);
+    video.addEventListener("ended", (event) =>{
+        me.replay = true;
+    });
 
   },
 };
@@ -216,7 +225,7 @@ export default {
     float: right;
     position: absolute;
     background-color: green !important;
-    top: 20vh;
+    top: 15vh;
     right: 2vw;
   }
 
