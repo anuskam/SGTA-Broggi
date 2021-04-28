@@ -35,7 +35,7 @@
 </table>
 
 <div v-else class="alert mt-3 alertaSinRecursos" role="alert">
-  No hay ninguna
+  No hay ninguna incidencia registrada
 </div>
 
   <!-- MODAL DE DELETE -->

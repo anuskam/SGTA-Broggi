@@ -41,11 +41,11 @@
           <input type="time" v-model="incidenciaRecursInsert.hora_mobilitzacio" />
         </div>
 
-        <div id="assistencia" class="button" @click="activarAssistencia()" :class="{ visible: movilitzacio }">
-          <button :disabled="!movilitzacio">
+        <div id="assistencia" class="button" disabled :class="{ visible: movilitzacio }">
+          <button :disabled="!movilitzacio" class="pb-1 pt-1" @click="activarAssistencia()">
             <i class="fas fa-briefcase-medical"></i> Iniciar Assistencia
           </button>
-          <input type="time" v-model="incidenciaRecursInsert.hora_assistencia" />
+          <input type="time" v-model="incidenciaRecursInsert.hora_assistencia" :disabled="!movilitzacio" />
         </div>
       </div>
       <div class="leftButtons col-2" >
@@ -84,26 +84,26 @@
             </option>
             </select>
           <div id="botonsTransport">
-            <div class="botoTransport button" @click="activarTransporte()" id="iniciarTransport" :class="{ visible: mostrarTransport }">
-              <button :disabled="!mostrarTransport" >
+            <div class="botoTransport button" disabled id="iniciarTransport" :class="{ visible: mostrarTransport }">
+              <button :disabled="!mostrarTransport" @click="activarTransporte()">
                 <label for="iniciarTransport"><i class="fas fa-ambulance"></i> Iniciar Transporte</label>
               </button>
-              <input type="time" v-model="incidenciaRecursInsert.hora_transport" />
+              <input type="time" v-model="incidenciaRecursInsert.hora_transport" :disabled="!mostrarTransport"/>
             </div>
-            <div class="botoTransport button" :class="{ visible: transport }" id="arribadaHospital" @click="activarHospital()">
-              <button :disabled="!transport">
+            <div class="botoTransport button" disabled :class="{ visible: transport }" id="arribadaHospital">
+              <button :disabled="!transport"  @click="activarHospital()">
                   <label for="arribadaHospital"><i class="fas fa-hospital"></i> Llegada Hospital</label>
               </button>
-              <input type="time" v-model="incidenciaRecursInsert.hora_arribada_hospital" />
+              <input type="time" v-model="incidenciaRecursInsert.hora_arribada_hospital" :disabled="!transport"/>
             </div>
-            <div class="botoTransport button"  @click="activarTransferencia()" :class="{ visible: hospital }" id="iniciarTransferencia">
-              <button :disabled="!hospital">
+            <div class="botoTransport button" disabled :class="{ visible: hospital }" id="iniciarTransferencia">
+              <button :disabled="!hospital"  @click="activarTransferencia()">
                 <label for="ininciarTransferencia"><i class="fas fa-user-friends"></i> Iniciar Transferencia</label>
               </button>
-              <input type="time" v-model="incidenciaRecursInsert.hora_transferencia" />
+              <input type="time" v-model="incidenciaRecursInsert.hora_transferencia" :disabled="!hospital"/>
             </div>
-            <div class="botoTransport button"  id="hospitalitzacio" @click="hospitalitzacio()" :class="{ visible: transferencia && incidenciaRecursInsert.desti != null && !disableSubmit}">
-              <button :disabled="!transferencia || incidenciaRecursInsert.desti == null || disableSubmit">
+            <div class="botoTransport button ml-1" disabled  id="hospitalitzacio" :class="{ visible: transferencia && incidenciaRecursInsert.desti != null && !disableSubmit}">
+              <button :disabled="!transferencia || incidenciaRecursInsert.desti == null || disableSubmit" @click="hospitalitzacio()">
                   <i class="fas fa-check"></i>
               </button>
             </div>
@@ -115,7 +115,7 @@
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header d-flex justify-content-center">
-            <div class="modal-title">Más Información</div>
+            <div class="modal-title titulosModalRecursos">Más Información</div>
             <!-- <button
               type="button"
               class="close"
@@ -158,21 +158,22 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <p v-if="activarTransport" class="modal-title">Activar Transporte Hospitalario</p>
-                <h5 v-else class="modal-title">Firmar Acta Voluntaria</h5>
+                <p v-if="activarTransport" class="modal-title titulosModalRecursos">Activar Transporte Hospitalario</p>
+                <p v-else class="modal-title titulosModalRecursos">Firmar Acta Voluntaria</p>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p v-if="activarTransport">¿Seguro que quieres activar el transporte hospitalario? Una vez activado ya no se podrá realizar el alta voluntaria del afectado.</p>
-                <p v-else>¿Seguro que quieres realizar el alta voluntaria del afectado? Una vez activada ya no se podrá realizar la hospitalización.</p>
+                <p v-if="activarTransport">¿Segura que quieres activar el transporte hospitalario? Una vez activado ya no se podrá realizar el alta voluntaria de la afectada.</p>
+                <p v-else>¿Segura que quieres realizar el alta voluntaria de la afectada? Una vez activada ya no se podrá realizar la hospitalización.</p>
             </div>
             <div class="modal-footer">
-                <button v-if="activarTransport" type="button" class="btn confirmarBtn" @click="activarMostrarTransport()">Confirmar</button>
-                <button v-else type="button" class="btn confirmarBtn" @click="altaVoluntaria()">Confirmar</button>
                 <button v-if="activarTransport" type="button" class="btn cerrarBtn" data-dismiss="modal" @click="activarTransport = true">Cerrar</button>
                 <button v-else type="button" class="btn cerrarBtn" data-dismiss="modal">Cerrar</button>
+                <button v-if="activarTransport" type="button" class="btn confirmarBtn" @click="activarMostrarTransport()">Confirmar</button>
+                <button v-else type="button" class="btn confirmarBtn" @click="altaVoluntaria()">Confirmar</button>
+
             </div>
             </div>
         </div>
@@ -255,6 +256,9 @@ export default {
         modalAltaHospi(modo){
             if(modo == 'hospi'){
                 this.activarTransport = true;
+            }
+            else{
+                this.activarTransport = false;
             }
             $('#altaModal').modal('show');
         },
@@ -797,6 +801,10 @@ button {
 
 button.mobilizacion{
   padding: 5px 2px;
+}
+
+.titulosModalRecursos{
+  font-size: 17px;
 }
 
 </style>

@@ -290,8 +290,10 @@
             let me = this;
             return this.alertants.forEach(function (alertant){
                 if(alertant.tipus_alertants_id == 1){
+                    let municipi = me.municipis.find(obj => obj.id == alertant.municipis_id);
+                    let nomMunicipi = municipi.nom;
                     let adreca = {
-                        adreca: alertant.adreca,
+                        adreca: alertant.adreca+ ", "+nomMunicipi,
                         nom: alertant.nom,
                     };
                     me.addresses.push(adreca);
@@ -329,6 +331,7 @@
           let me = this;
           this.recursEditar = incidencia.incidencies_has_recursos.find(obj => obj.recursos_id == me.recursos_id);
           console.log(this.recursEditar);
+          return true;
         },
         updateIncidente(){
             let me = this;
@@ -356,10 +359,10 @@
         //     desti:''
         //   };
         this.recursEditar = {};
-          this.buscarIncidenciaEnArray(incidencia);
+          await this.buscarIncidenciaEnArray(incidencia);
           this.insert = false;
           this.incidencia = incidencia;
-          this.$forceUpdate();
+        //   this.$forceUpdate();
           $('#asignatModal').modal('show');
         },
         convertDateFormat(string) {
