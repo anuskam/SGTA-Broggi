@@ -2037,6 +2037,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['question', 'index'],
   data: function data() {
@@ -2081,7 +2082,8 @@ __webpack_require__.r(__webpack_exports__);
       aciertos: 0,
       maximo: 0,
       bucle: 0,
-      disablePlay: false
+      disablePlay: false,
+      replay: false
     };
   },
   methods: {
@@ -2133,6 +2135,9 @@ __webpack_require__.r(__webpack_exports__);
         this.activa = true;
       }
     },
+    replayvideo: function replayvideo() {
+      location.reload();
+    },
     estado: function estado() {
       var maximo = 485;
       var video = document.querySelector("#videoDesa");
@@ -2153,7 +2158,11 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     console.log("Component mounted.");
     var video = document.querySelector("#videoDesa");
+    var me = this;
     video.addEventListener("timeupdate", this.controlTiempo);
+    video.addEventListener("ended", function (event) {
+      me.replay = true;
+    });
   }
 });
 
@@ -11470,7 +11479,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nul li {\n  list-style: none;\n}\n#contenedor {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: center;\n}\n#questions {\n  color: black;\n}\n.correcta {\n  background-color: green !important;\n}\n.incorrecta {\n  background-color: red !important;\n}\n#contador {\n  float: right;\n  position: absolute;\n  background-color: green !important;\n  top: 20vh;\n  right: 2vw;\n}\n.todoFormacion {\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: center;\n}\n.controlVideo {\n  display: flex;\n  flex-direction: row;\n}\n#reproducir {\n  width: 110px;\n  height: 35px;\n  color: black;\n  padding: 0;\n}\n#barra {\n  position: relative;\n  float: left;\n  width: 485px;\n  height: 17px;\n  border: 1px solid #CCCCCC;\n  background: #EEEEEE;\n  margin-top: 17px;\n  margin-left: 5px;\n}\n#progreso {\n  position: absolute;\n  width: 0px;\n  top: 0;\n  height: 16px;\n  background: rgba(0,0,150,.2);\n}\n#pregunta{\n  font-weight: bold;\n}\n.respuestas{\n  height: 10vh;\n}\n#cardRespuestas{\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  text-align: center;\n  align-content: center;\n}\n#respuestasList li{\n  display: flex !important;\n  align-items: center !important; /*Para tenerlos centraditos verticalmente*/\n  justify-content: center; /*Para tenerlos centraditos horizontalmente*/\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nul li {\n  list-style: none;\n}\n#contenedor {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: center;\n}\n#questions {\n  color: black;\n}\n.correcta {\n  background-color: green !important;\n}\n.incorrecta {\n  background-color: red !important;\n}\n#contador {\n  float: right;\n  position: absolute;\n  background-color: green !important;\n  top: 15vh;\n  right: 2vw;\n}\n.todoFormacion {\n  display: flex;\n  flex-direction: column;\n  flex-wrap: nowrap;\n  justify-content: center;\n}\n.controlVideo {\n  display: flex;\n  flex-direction: row;\n}\n#reproducir {\n  width: 110px;\n  height: 35px;\n  color: black;\n  padding: 0;\n}\n#barra {\n  position: relative;\n  float: left;\n  width: 485px;\n  height: 17px;\n  border: 1px solid #CCCCCC;\n  background: #EEEEEE;\n  margin-top: 17px;\n  margin-left: 5px;\n}\n#progreso {\n  position: absolute;\n  width: 0px;\n  top: 0;\n  height: 16px;\n  background: rgba(0,0,150,.2);\n}\n#pregunta{\n  font-weight: bold;\n}\n.respuestas{\n  height: 10vh;\n}\n#cardRespuestas{\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  text-align: center;\n  align-content: center;\n}\n#respuestasList li{\n  display: flex !important;\n  align-items: center !important; /*Para tenerlos centraditos verticalmente*/\n  justify-content: center; /*Para tenerlos centraditos horizontalmente*/\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -45653,6 +45662,14 @@ var render = function() {
             _c(
               "button",
               {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: !_vm.replay,
+                    expression: "!replay"
+                  }
+                ],
                 staticClass: "btn mt-2",
                 attrs: { id: "reproducir", disabled: _vm.disablePlay },
                 on: {
@@ -45667,6 +45684,33 @@ var render = function() {
                   attrs: { "aria-hidden": "true" }
                 }),
                 _vm._v(" Reproducir")
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.replay,
+                    expression: "replay"
+                  }
+                ],
+                staticClass: "btn mt-2",
+                on: {
+                  click: function($event) {
+                    return _vm.replayvideo()
+                  }
+                }
+              },
+              [
+                _c("i", {
+                  staticClass: "fas fa-redo-alt",
+                  attrs: { "aria-hidden": "true" }
+                }),
+                _vm._v(" Replay")
               ]
             )
           ]),
