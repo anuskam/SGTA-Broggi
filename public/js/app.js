@@ -4433,6 +4433,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -4506,6 +4507,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     modalAltaHospi: function modalAltaHospi(modo) {
       if (modo == 'hospi') {
         this.activarTransport = true;
+      } else {
+        this.activarTransport = false;
       }
 
       $('#altaModal').modal('show');
@@ -5244,8 +5247,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var me = this;
       return this.alertants.forEach(function (alertant) {
         if (alertant.tipus_alertants_id == 1) {
+          var municipi = me.municipis.find(function (obj) {
+            return obj.id == alertant.municipis_id;
+          });
+          var nomMunicipi = municipi.nom;
           var adreca = {
-            adreca: alertant.adreca,
+            adreca: alertant.adreca + ", " + nomMunicipi,
             nom: alertant.nom
           };
           me.addresses.push(adreca);
@@ -5286,6 +5293,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         return obj.recursos_id == me.recursos_id;
       });
       console.log(this.recursEditar);
+      return true;
     },
     updateIncidente: function updateIncidente() {
       var me = this;
@@ -5341,13 +5349,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 //     desti:''
                 //   };
                 _this7.recursEditar = {};
+                _context4.next = 5;
+                return _this7.buscarIncidenciaEnArray(incidencia);
 
-                _this7.buscarIncidenciaEnArray(incidencia);
-
+              case 5:
                 _this7.insert = false;
-                _this7.incidencia = incidencia;
-
-                _this7.$forceUpdate();
+                _this7.incidencia = incidencia; //   this.$forceUpdate();
 
                 $('#asignatModal').modal('show');
 
@@ -11535,7 +11542,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nmain[data-v-6504f867] {\r\n  margin-top: 1.4vh;\r\n  color: black;\r\n  font-family: 'Rubik', sans-serif;\r\n  font-size: 15px;\n}\n#infoCard[data-v-6504f867] {\r\n  height: 65vh;\r\n  color: black;\n}\n#botones[data-v-6504f867] {\r\n  height: 28vh;\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-around;\r\n  align-items: center;\n}\n#infoHeader[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-between;\r\n  font-size: 1.2em;\r\n  font-weight: bold;\r\n  margin-right: -0.5px;\r\n  border-bottom: 1px solid black;\r\n  background-color: #15acc4;\n}\nbutton[data-v-6504f867] {\r\n  background-color: #e3177d;\r\n  font-size: 0.9em;\r\n  color: white;\r\n  border-radius: 4px;\n}\n.card[data-v-6504f867] {\r\n  border: 1px solid black;\n}\n#transportHeader[data-v-6504f867] {\r\n  background-color: #15acc4;\r\n  font-weight: bold;\r\n  padding: 6px 20px;\r\n  text-align: center;\n}\n.leftButtons[data-v-6504f867] {\r\n  height: 100%;\r\n  display: flex;\r\n  flex-direction: column;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-around;\n}\n#assistencia[data-v-6504f867]{\r\n    opacity: .4;\n}\n#transportButton[data-v-6504f867] {\r\n  background-color: #e3177d;\n}\n#transportButtons[data-v-6504f867] {\r\n  height: 100%;\r\n  opacity: .4;\n}\n.visible[data-v-6504f867]{\r\n    opacity: 1 !important;\n}\n#transportForm[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: wrap;\r\n  justify-content: space-around;\r\n  align-items: center;\n}\n#botonsTransport[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  width: 100%;\r\n  justify-content: space-between;\n}\n.button[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  /* align-items: center; */\n}\n#direccioHospital[data-v-6504f867] {\r\n  width: 100%;\n}\n#map[data-v-6504f867] {\r\n  height: 65%;\r\n  background-color: black;\n}\n#info[data-v-6504f867] {\r\n  height: 20%;\r\n  margin-top: 4%;\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: space-around;\r\n  flex-wrap: nowrap;\r\n  /* font-weight: bold; */\n}\n.boldInfo[data-v-6504f867]{\r\n    font-weight: bold;\n}\n#infoFields[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: space-around;\r\n  padding-right: 0;\n}\n.infobox[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  align-items: center;\r\n  text-align: justify;\r\n  /* font-size: 12px; */\n}\n.infobox > div[data-v-6504f867] {\r\n  background-color: #15acc4;\r\n  border: 1px solid black;\r\n  font-size: 13.5px;\r\n  padding: 0px 5px !important;\n}\n#descripcion[data-v-6504f867],\r\n#direccion[data-v-6504f867] {\r\n  background-color: white;\n}\n#masInfo[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: center;\r\n  vertical-align: center;\n}\n#masInfo > button[data-v-6504f867] {\r\n  padding: 10px 20px;\r\n  margin-left: -50px;\r\n  color: white;\n}\n.modal-header[data-v-6504f867]{\r\n    font-weight: bold;\r\n    background-color: #15acc4;\n}\n#alta[data-v-6504f867]{\r\n    opacity: 0.4;\n}\n#alta > button[data-v-6504f867]{\r\n    padding: 5px 15px;\r\n    margin-bottom: 0px !important;\r\n    background-color: white !important;\r\n    color: #e3177d;\r\n    font-weight: bolder;\n}\n.indicadoresMasInfo[data-v-6504f867]{\r\n    font-weight: bold;\n}\n#checkTransport[data-v-6504f867]{\r\n    opacity: 0.4;\n}\n#checkTransport > button[data-v-6504f867]{\r\n    padding: 5px 15px;\n}\n#iniciarTransport[data-v-6504f867]{\r\n    opacity: 0.4;\n}\n#arribadaHospital[data-v-6504f867]{\r\n    opacity: 0.4;\n}\n#iniciarTransferencia[data-v-6504f867]{\r\n    opacity: 0.4;\n}\n#hospitalitzacio[data-v-6504f867]{\r\n    opacity: 0.4;\r\n    margin-top: 1vh;\n}\n#hospitalitzacio > button[data-v-6504f867]{\r\n    padding: 10px 10px;\r\n    background-color: green !important;\n}\r\n/* .cerrarBoton{\r\n    font-size: 15px;\r\n} */\n.opaco[data-v-6504f867]{\r\n  opacity: 0.4 !important;\n}\n.cerrarBtn[data-v-6504f867] {\r\n  background-color: #6c757d !important;\r\n  color: white;\r\n  font-size: 15px;\n}\n.confirmarBtn[data-v-6504f867]{\r\n  font-size: 15px;\n}\n.confirmarBtn[data-v-6504f867]:hover{\r\n  color: white;\n}\n#alta > button[data-v-6504f867], #checkTransport > button[data-v-6504f867] {\r\n  padding: 5px 5px;\n}\nbutton.mobilizacion[data-v-6504f867]{\r\n  padding: 5px 2px;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nmain[data-v-6504f867] {\r\n  margin-top: 1.4vh;\r\n  color: black;\r\n  font-family: 'Rubik', sans-serif;\r\n  font-size: 15px;\n}\n#infoCard[data-v-6504f867] {\r\n  height: 65vh;\r\n  color: black;\n}\n#botones[data-v-6504f867] {\r\n  height: 28vh;\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-around;\r\n  align-items: center;\n}\n#infoHeader[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-between;\r\n  font-size: 1.2em;\r\n  font-weight: bold;\r\n  margin-right: -0.5px;\r\n  border-bottom: 1px solid black;\r\n  background-color: #15acc4;\n}\nbutton[data-v-6504f867] {\r\n  background-color: #e3177d;\r\n  font-size: 0.9em;\r\n  color: white;\r\n  border-radius: 4px;\n}\n.card[data-v-6504f867] {\r\n  border: 1px solid black;\n}\n#transportHeader[data-v-6504f867] {\r\n  background-color: #15acc4;\r\n  font-weight: bold;\r\n  padding: 6px 20px;\r\n  text-align: center;\n}\n.leftButtons[data-v-6504f867] {\r\n  height: 100%;\r\n  display: flex;\r\n  flex-direction: column;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-around;\n}\n#assistencia[data-v-6504f867]{\r\n    opacity: .4;\n}\n#transportButton[data-v-6504f867] {\r\n  background-color: #e3177d;\n}\n#transportButtons[data-v-6504f867] {\r\n  height: 100%;\r\n  opacity: .4;\n}\n.visible[data-v-6504f867]{\r\n    opacity: 1 !important;\n}\n#transportForm[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: wrap;\r\n  justify-content: space-around;\r\n  align-items: center;\n}\n#botonsTransport[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: nowrap;\r\n  width: 100%;\r\n  justify-content: space-between;\n}\n.button[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  /* align-items: center; */\n}\n#direccioHospital[data-v-6504f867] {\r\n  width: 100%;\n}\n#map[data-v-6504f867] {\r\n  height: 65%;\r\n  background-color: black;\n}\n#info[data-v-6504f867] {\r\n  height: 20%;\r\n  margin-top: 4%;\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: space-around;\r\n  flex-wrap: nowrap;\r\n  /* font-weight: bold; */\n}\n.boldInfo[data-v-6504f867]{\r\n    font-weight: bold;\n}\n#infoFields[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: space-around;\r\n  padding-right: 0;\n}\n.infobox[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  align-items: center;\r\n  text-align: justify;\r\n  /* font-size: 12px; */\n}\n.infobox > div[data-v-6504f867] {\r\n  background-color: #15acc4;\r\n  border: 1px solid black;\r\n  font-size: 13.5px;\r\n  padding: 0px 5px !important;\n}\n#descripcion[data-v-6504f867],\r\n#direccion[data-v-6504f867] {\r\n  background-color: white;\n}\n#masInfo[data-v-6504f867] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: center;\r\n  vertical-align: center;\n}\n#masInfo > button[data-v-6504f867] {\r\n  padding: 10px 20px;\r\n  margin-left: -50px;\r\n  color: white;\n}\n.modal-header[data-v-6504f867]{\r\n    font-weight: bold;\r\n    background-color: #15acc4;\n}\n#alta[data-v-6504f867]{\r\n    opacity: 0.4;\n}\n#alta > button[data-v-6504f867]{\r\n    padding: 5px 15px;\r\n    margin-bottom: 0px !important;\r\n    background-color: white !important;\r\n    color: #e3177d;\r\n    font-weight: bolder;\n}\n.indicadoresMasInfo[data-v-6504f867]{\r\n    font-weight: bold;\n}\n#checkTransport[data-v-6504f867]{\r\n    opacity: 0.4;\n}\n#checkTransport > button[data-v-6504f867]{\r\n    padding: 5px 15px;\n}\n#iniciarTransport[data-v-6504f867]{\r\n    opacity: 0.4;\n}\n#arribadaHospital[data-v-6504f867]{\r\n    opacity: 0.4;\n}\n#iniciarTransferencia[data-v-6504f867]{\r\n    opacity: 0.4;\n}\n#hospitalitzacio[data-v-6504f867]{\r\n    opacity: 0.4;\r\n    margin-top: 1vh;\n}\n#hospitalitzacio > button[data-v-6504f867]{\r\n    padding: 10px 10px;\r\n    background-color: green !important;\n}\r\n/* .cerrarBoton{\r\n    font-size: 15px;\r\n} */\n.opaco[data-v-6504f867]{\r\n  opacity: 0.4 !important;\n}\n.cerrarBtn[data-v-6504f867] {\r\n  background-color: #6c757d !important;\r\n  color: white;\r\n  font-size: 15px;\n}\n.confirmarBtn[data-v-6504f867]{\r\n  font-size: 15px;\n}\n.confirmarBtn[data-v-6504f867]:hover{\r\n  color: white;\n}\n#alta > button[data-v-6504f867], #checkTransport > button[data-v-6504f867] {\r\n  padding: 5px 5px;\n}\nbutton.mobilizacion[data-v-6504f867]{\r\n  padding: 5px 2px;\n}\n.titulosModalRecursos[data-v-6504f867]{\r\n  font-size: 17px;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11559,7 +11566,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.alertaSinRecursos{\n    font-family: 'Rubik', sans-serif;\n    font-size: 15px;\n    color: black;\n    background-color: rgb(21, 172, 196, .5);\n    width: 90%;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n.modalEdicionRecursos{\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: space-around;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.alertaSinRecursos{\r\n    font-family: 'Rubik', sans-serif;\r\n    font-size: 15px;\r\n    color: black;\r\n    background-color: rgb(21, 172, 196, .5);\r\n    width: 90%;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\n.modalEdicionRecursos{\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: wrap;\r\n  justify-content: space-around;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -48860,18 +48867,25 @@ var render = function() {
           {
             staticClass: "button",
             class: { visible: _vm.movilitzacio },
-            attrs: { id: "assistencia" },
-            on: {
-              click: function($event) {
-                return _vm.activarAssistencia()
-              }
-            }
+            attrs: { id: "assistencia", disabled: "" }
           },
           [
-            _c("button", { attrs: { disabled: !_vm.movilitzacio } }, [
-              _c("i", { staticClass: "fas fa-briefcase-medical" }),
-              _vm._v(" Iniciar Assistencia\n        ")
-            ]),
+            _c(
+              "button",
+              {
+                staticClass: "pb-1 pt-1",
+                attrs: { disabled: !_vm.movilitzacio },
+                on: {
+                  click: function($event) {
+                    return _vm.activarAssistencia()
+                  }
+                }
+              },
+              [
+                _c("i", { staticClass: "fas fa-briefcase-medical" }),
+                _vm._v(" Iniciar Assistencia\n        ")
+              ]
+            ),
             _vm._v(" "),
             _c("input", {
               directives: [
@@ -48882,7 +48896,7 @@ var render = function() {
                   expression: "incidenciaRecursInsert.hora_assistencia"
                 }
               ],
-              attrs: { type: "time" },
+              attrs: { type: "time", disabled: !_vm.movilitzacio },
               domProps: { value: _vm.incidenciaRecursInsert.hora_assistencia },
               on: {
                 input: function($event) {
@@ -49037,17 +49051,19 @@ var render = function() {
                   {
                     staticClass: "botoTransport button",
                     class: { visible: _vm.mostrarTransport },
-                    attrs: { id: "iniciarTransport" },
-                    on: {
-                      click: function($event) {
-                        return _vm.activarTransporte()
-                      }
-                    }
+                    attrs: { disabled: "", id: "iniciarTransport" }
                   },
                   [
                     _c(
                       "button",
-                      { attrs: { disabled: !_vm.mostrarTransport } },
+                      {
+                        attrs: { disabled: !_vm.mostrarTransport },
+                        on: {
+                          click: function($event) {
+                            return _vm.activarTransporte()
+                          }
+                        }
+                      },
                       [_vm._m(1)]
                     ),
                     _vm._v(" "),
@@ -49060,7 +49076,7 @@ var render = function() {
                           expression: "incidenciaRecursInsert.hora_transport"
                         }
                       ],
-                      attrs: { type: "time" },
+                      attrs: { type: "time", disabled: !_vm.mostrarTransport },
                       domProps: {
                         value: _vm.incidenciaRecursInsert.hora_transport
                       },
@@ -49085,17 +49101,21 @@ var render = function() {
                   {
                     staticClass: "botoTransport button",
                     class: { visible: _vm.transport },
-                    attrs: { id: "arribadaHospital" },
-                    on: {
-                      click: function($event) {
-                        return _vm.activarHospital()
-                      }
-                    }
+                    attrs: { disabled: "", id: "arribadaHospital" }
                   },
                   [
-                    _c("button", { attrs: { disabled: !_vm.transport } }, [
-                      _vm._m(2)
-                    ]),
+                    _c(
+                      "button",
+                      {
+                        attrs: { disabled: !_vm.transport },
+                        on: {
+                          click: function($event) {
+                            return _vm.activarHospital()
+                          }
+                        }
+                      },
+                      [_vm._m(2)]
+                    ),
                     _vm._v(" "),
                     _c("input", {
                       directives: [
@@ -49108,7 +49128,7 @@ var render = function() {
                             "incidenciaRecursInsert.hora_arribada_hospital"
                         }
                       ],
-                      attrs: { type: "time" },
+                      attrs: { type: "time", disabled: !_vm.transport },
                       domProps: {
                         value: _vm.incidenciaRecursInsert.hora_arribada_hospital
                       },
@@ -49133,17 +49153,21 @@ var render = function() {
                   {
                     staticClass: "botoTransport button",
                     class: { visible: _vm.hospital },
-                    attrs: { id: "iniciarTransferencia" },
-                    on: {
-                      click: function($event) {
-                        return _vm.activarTransferencia()
-                      }
-                    }
+                    attrs: { disabled: "", id: "iniciarTransferencia" }
                   },
                   [
-                    _c("button", { attrs: { disabled: !_vm.hospital } }, [
-                      _vm._m(3)
-                    ]),
+                    _c(
+                      "button",
+                      {
+                        attrs: { disabled: !_vm.hospital },
+                        on: {
+                          click: function($event) {
+                            return _vm.activarTransferencia()
+                          }
+                        }
+                      },
+                      [_vm._m(3)]
+                    ),
                     _vm._v(" "),
                     _c("input", {
                       directives: [
@@ -49155,7 +49179,7 @@ var render = function() {
                             "incidenciaRecursInsert.hora_transferencia"
                         }
                       ],
-                      attrs: { type: "time" },
+                      attrs: { type: "time", disabled: !_vm.hospital },
                       domProps: {
                         value: _vm.incidenciaRecursInsert.hora_transferencia
                       },
@@ -49178,19 +49202,14 @@ var render = function() {
                 _c(
                   "div",
                   {
-                    staticClass: "botoTransport button",
+                    staticClass: "botoTransport button ml-1",
                     class: {
                       visible:
                         _vm.transferencia &&
                         _vm.incidenciaRecursInsert.desti != null &&
                         !_vm.disableSubmit
                     },
-                    attrs: { id: "hospitalitzacio" },
-                    on: {
-                      click: function($event) {
-                        return _vm.hospitalitzacio()
-                      }
-                    }
+                    attrs: { disabled: "", id: "hospitalitzacio" }
                   },
                   [
                     _c(
@@ -49201,6 +49220,11 @@ var render = function() {
                             !_vm.transferencia ||
                             _vm.incidenciaRecursInsert.desti == null ||
                             _vm.disableSubmit
+                        },
+                        on: {
+                          click: function($event) {
+                            return _vm.hospitalitzacio()
+                          }
                         }
                       },
                       [_c("i", { staticClass: "fas fa-check" })]
@@ -49322,12 +49346,16 @@ var render = function() {
             _c("div", { staticClass: "modal-content" }, [
               _c("div", { staticClass: "modal-header" }, [
                 _vm.activarTransport
-                  ? _c("p", { staticClass: "modal-title" }, [
-                      _vm._v("Activar Transporte Hospitalario")
-                    ])
-                  : _c("h5", { staticClass: "modal-title" }, [
-                      _vm._v("Firmar Acta Voluntaria")
-                    ]),
+                  ? _c(
+                      "p",
+                      { staticClass: "modal-title titulosModalRecursos" },
+                      [_vm._v("Activar Transporte Hospitalario")]
+                    )
+                  : _c(
+                      "p",
+                      { staticClass: "modal-title titulosModalRecursos" },
+                      [_vm._v("Firmar Acta Voluntaria")]
+                    ),
                 _vm._v(" "),
                 _vm._m(7)
               ]),
@@ -49336,17 +49364,40 @@ var render = function() {
                 _vm.activarTransport
                   ? _c("p", [
                       _vm._v(
-                        "¿Seguro que quieres activar el transporte hospitalario? Una vez activado ya no se podrá realizar el alta voluntaria del afectado."
+                        "¿Segura que quieres activar el transporte hospitalario? Una vez activado ya no se podrá realizar el alta voluntaria de la afectada."
                       )
                     ])
                   : _c("p", [
                       _vm._v(
-                        "¿Seguro que quieres realizar el alta voluntaria del afectado? Una vez activada ya no se podrá realizar la hospitalización."
+                        "¿Segura que quieres realizar el alta voluntaria de la afectada? Una vez activada ya no se podrá realizar la hospitalización."
                       )
                     ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" }, [
+                _vm.activarTransport
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn cerrarBtn",
+                        attrs: { type: "button", "data-dismiss": "modal" },
+                        on: {
+                          click: function($event) {
+                            _vm.activarTransport = true
+                          }
+                        }
+                      },
+                      [_vm._v("Cerrar")]
+                    )
+                  : _c(
+                      "button",
+                      {
+                        staticClass: "btn cerrarBtn",
+                        attrs: { type: "button", "data-dismiss": "modal" }
+                      },
+                      [_vm._v("Cerrar")]
+                    ),
+                _vm._v(" "),
                 _vm.activarTransport
                   ? _c(
                       "button",
@@ -49373,29 +49424,6 @@ var render = function() {
                         }
                       },
                       [_vm._v("Confirmar")]
-                    ),
-                _vm._v(" "),
-                _vm.activarTransport
-                  ? _c(
-                      "button",
-                      {
-                        staticClass: "btn cerrarBtn",
-                        attrs: { type: "button", "data-dismiss": "modal" },
-                        on: {
-                          click: function($event) {
-                            _vm.activarTransport = true
-                          }
-                        }
-                      },
-                      [_vm._v("Cerrar")]
-                    )
-                  : _c(
-                      "button",
-                      {
-                        staticClass: "btn cerrarBtn",
-                        attrs: { type: "button", "data-dismiss": "modal" }
-                      },
-                      [_vm._v("Cerrar")]
                     )
               ])
             ])
@@ -49449,7 +49477,11 @@ var staticRenderFns = [
     return _c(
       "div",
       { staticClass: "modal-header d-flex justify-content-center" },
-      [_c("div", { staticClass: "modal-title" }, [_vm._v("Más Información")])]
+      [
+        _c("div", { staticClass: "modal-title titulosModalRecursos" }, [
+          _vm._v("Más Información")
+        ])
+      ]
     )
   },
   function() {
@@ -49532,25 +49564,25 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [
                   _vm._v(
-                    "\n          " +
+                    "\r\n          " +
                       _vm._s(_vm.getMunicipi(index)) +
-                      "\n        "
+                      "\r\n        "
                   )
                 ]),
                 _vm._v(" "),
                 _c("td", [
                   _vm._v(
-                    "\n          " +
+                    "\r\n          " +
                       _vm._s(_vm.getTipusIncidencia(index)) +
-                      "\n        "
+                      "\r\n        "
                   )
                 ]),
                 _vm._v(" "),
                 _c("td", [
                   _vm._v(
-                    "\n          " +
+                    "\r\n          " +
                       _vm._s(_vm.getTipusAlertant(index)) +
-                      "\n        "
+                      "\r\n        "
                   )
                 ]),
                 _vm._v(" "),
@@ -49611,7 +49643,7 @@ var render = function() {
           },
           [
             _vm._v(
-              "\n  Este recurso no tiene ninguna incidencia en su historial\n"
+              "\r\n  Este recurso no tiene ninguna incidencia en su historial\r\n"
             )
           ]
         ),
@@ -49969,9 +50001,9 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                      " +
+                                  "\r\n                      " +
                                     _vm._s(address.nom) +
-                                    "\n                    "
+                                    "\r\n                    "
                                 )
                               ]
                             )
