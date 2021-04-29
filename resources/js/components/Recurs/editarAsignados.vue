@@ -73,45 +73,45 @@
           <form>
             <div class="modalEdicionRecursos">
               <div class="form-group row col-12">
-                <label for="fechaIncidente" class="col-sm-3 col-form-label">Hora movilización</label>
+                <label for="hora_mobilitzacio" class="col-sm-3 col-form-label">Hora movilización</label>
                 <div class="col-sm-3">
-                    <input class="form-control" type="time" id="fechaIncidente" v-model="recursEditar.hora_mobilitzacio"/>
+                    <input class="form-control" type="time" id="hora_mobilitzacio" v-model="recursEditar.hora_mobilitzacio"/>
                 </div>
 
-                <label for="fechaIncidente" class="col-sm-3 col-form-label">Hora asistencia</label>
+                <label for="hora_assistencia" class="col-sm-3 col-form-label">Hora asistencia</label>
                 <div class="col-sm-3">
-                    <input class="form-control" type="time" id="fechaIncidente" v-model="recursEditar.hora_assistencia"/>
-                </div>
-              </div>
-
-
-              <div class="form-group row col-12">
-                <label for="fechaIncidente" class="col-sm-3 col-form-label">Hora transporte</label>
-                <div class="col-sm-3">
-                    <input class="form-control" type="time" id="fechaIncidente" v-model="recursEditar.hora_transport"/>
-                </div>
-
-                <label for="fechaIncidente" class="col-sm-3 col-form-label">Hora llegada hospital</label>
-                <div class="col-sm-3">
-                    <input class="form-control" type="time" id="fechaIncidente" v-model="recursEditar.hora_arribada_hospital"/>
+                    <input class="form-control" type="time" id="hora_assistencia" v-model="recursEditar.hora_assistencia"/>
                 </div>
               </div>
 
 
               <div class="form-group row col-12">
-                <label for="fechaIncidente" class="col-sm-3 col-form-label">Hora transferencia</label>
+                <label for="hora_transport" class="col-sm-3 col-form-label">Hora transporte</label>
                 <div class="col-sm-3">
-                    <input class="form-control" type="time" id="fechaIncidente" v-model="recursEditar.hora_transferencia"/>
+                    <input class="form-control" type="time" id="hora_transport" v-model="recursEditar.hora_transport"/>
                 </div>
 
-                <label for="fechaIncidente" class="col-sm-3 col-form-label">Hora finalización</label>
+                <label for="hora_arribada" class="col-sm-3 col-form-label">Hora llegada hospital</label>
                 <div class="col-sm-3">
-                    <input class="form-control" type="time" id="fechaIncidente" v-model="recursEditar.hora_finalitzacio"/>
+                    <input class="form-control" type="time" id="hora_arribada" v-model="recursEditar.hora_arribada_hospital"/>
+                </div>
+              </div>
+
+
+              <div class="form-group row col-12">
+                <label for="hora_transferencia" class="col-sm-3 col-form-label">Hora transferencia</label>
+                <div class="col-sm-3">
+                    <input class="form-control" type="time" id="hora_transferencia" v-model="recursEditar.hora_transferencia"/>
+                </div>
+
+                <label for="hora_finalitzacio" class="col-sm-3 col-form-label">Hora finalización</label>
+                <div class="col-sm-3">
+                    <input class="form-control" type="time" id="hora_finalitzacio" v-model="recursEditar.hora_finalitzacio"/>
                 </div>
               </div>
 
               <div class="form-group row col-12">
-                <label for="destinoHospitalario" class="col-sm-3 col.form-label">Destino Hospitalario</label>
+                <label for="destinoHospitalario" class="col-sm-3 col-form-label">Destino Hospitalario</label>
                 <div class="col-sm-9">
                   <select class="custom-select" id="destinoHospitalario" required v-model="recursEditar.desti">
                     <option selected value="Selecciona...">Selecciona...</option>

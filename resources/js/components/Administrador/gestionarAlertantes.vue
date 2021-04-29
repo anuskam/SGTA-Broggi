@@ -366,6 +366,16 @@
 
             return tipusAlertant_nom;
         },
+        getMunicipiName(id){
+          let municipi = this.municipis.find(obj => obj.id == id);
+          return municipi.nom;
+        },
+        getTipusAlertantName(id){
+
+          let tipusAlertant = this.tipusAlertants.find.bind(this,obj => obj.id == id);
+
+          return tipusAlertant.tipus;
+        },
         cerrarInfoAlert(){
           this.infoMessage = '';
         },
@@ -374,9 +384,16 @@
         }
       },
       computed: {
-        filteredList() {
+        filteredList: function() {
           return this.alertantsDB.filter(alertant => {
-            return alertant.nom.toLowerCase().includes(this.search.toLowerCase()) || alertant.municipis_id == (this.search)
+              let municipi = this.getMunicipiName(alertant.municipis_id);
+              let tipusAlertant = this.getTipusAlertantName(alertant.tipus_alertant_id);
+            return alertant.nom.toLowerCase().includes(this.search.toLowerCase())
+            || alertant.cognoms.toLowerCase().includes(this.search.toLowerCase())
+            || alertant.telefon == (this.search)
+            || alertant.adreca.toLowerCase().includes(this.search.toLocaleLowerCase())
+            || municipi.toLowerCase().includes(this.search.toLowerCase())
+            || tipusAlertant.toLowerCase().includes(this.search.toLowerCase())
           })
         }
       },

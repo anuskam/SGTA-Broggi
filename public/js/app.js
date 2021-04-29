@@ -6303,6 +6303,18 @@ __webpack_require__.r(__webpack_exports__);
 
       return tipusAlertant_nom;
     },
+    getMunicipiName: function getMunicipiName(id) {
+      var municipi = this.municipis.find(function (obj) {
+        return obj.id == id;
+      });
+      return municipi.nom;
+    },
+    getTipusAlertantName: function getTipusAlertantName(id) {
+      var tipusAlertant = this.tipusAlertants.find.bind(this, function (obj) {
+        return obj.id == id;
+      });
+      return tipusAlertant.tipus;
+    },
     cerrarInfoAlert: function cerrarInfoAlert() {
       this.infoMessage = '';
     },
@@ -6315,7 +6327,11 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       return this.alertantsDB.filter(function (alertant) {
-        return alertant.nom.toLowerCase().includes(_this.search.toLowerCase()) || alertant.municipis_id == _this.search;
+        var municipi = _this.getMunicipiName(alertant.municipis_id);
+
+        var tipusAlertant = _this.getTipusAlertantName(alertant.tipus_alertant_id);
+
+        return alertant.nom.toLowerCase().includes(_this.search.toLowerCase()) || alertant.cognoms.toLowerCase().includes(_this.search.toLowerCase()) || alertant.telefon == _this.search || alertant.adreca.toLowerCase().includes(_this.search.toLocaleLowerCase()) || municipi.toLowerCase().includes(_this.search.toLowerCase()) || tipusAlertant.toLowerCase().includes(_this.search.toLowerCase());
       });
     }
   },
@@ -6495,6 +6511,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -6503,7 +6520,7 @@ __webpack_require__.r(__webpack_exports__);
       recurs: {
         codi: '',
         actiu: true,
-        tipus_recursos_id: ''
+        tipus_recursos_id: null
       },
       tipusRecursos: [],
       insert: true,
@@ -6640,6 +6657,12 @@ __webpack_require__.r(__webpack_exports__);
 
       return tipusRecursos_tipus;
     },
+    getTipusRecursName: function getTipusRecursName(id) {
+      var tipusRecursNom = this.tipusRecursos.find(function (obj) {
+        return obj.id == id;
+      });
+      return tipusRecursNom.tipus;
+    },
     cerrarInfoAlert: function cerrarInfoAlert() {
       this.infoMessage = '';
     },
@@ -6651,8 +6674,10 @@ __webpack_require__.r(__webpack_exports__);
     filteredList: function filteredList() {
       var _this3 = this;
 
-      return this.recursos.filter(function (recurs) {
-        return recurs.codi.toLowerCase().includes(_this3.search.toLowerCase());
+      return this.recursosDB.filter(function (recurs) {
+        var tipusRecursNom = _this3.getTipusRecursName(recurs.tipus_recursos_id);
+
+        return recurs.codi.toLowerCase().includes(_this3.search.toLowerCase()) || tipusRecursNom.toLowerCase().includes(_this3.search.toLocaleLowerCase());
       });
     }
   },
@@ -11730,7 +11755,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.alertaSinRecursos{\r\n    font-family: 'Rubik', sans-serif;\r\n    font-size: 15px;\r\n    color: black;\r\n    background-color: rgb(21, 172, 196, .5);\r\n    width: 90%;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\n.modalEdicionRecursos{\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: wrap;\r\n  justify-content: space-around;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.alertaSinRecursos{\n    font-family: 'Rubik', sans-serif;\n    font-size: 15px;\n    color: black;\n    background-color: rgb(21, 172, 196, .5);\n    width: 90%;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n.modalEdicionRecursos{\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  justify-content: space-around;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -50215,25 +50240,25 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [
                   _vm._v(
-                    "\r\n          " +
+                    "\n          " +
                       _vm._s(_vm.getMunicipi(index)) +
-                      "\r\n        "
+                      "\n        "
                   )
                 ]),
                 _vm._v(" "),
                 _c("td", [
                   _vm._v(
-                    "\r\n          " +
+                    "\n          " +
                       _vm._s(_vm.getTipusIncidencia(index)) +
-                      "\r\n        "
+                      "\n        "
                   )
                 ]),
                 _vm._v(" "),
                 _c("td", [
                   _vm._v(
-                    "\r\n          " +
+                    "\n          " +
                       _vm._s(_vm.getTipusAlertant(index)) +
-                      "\r\n        "
+                      "\n        "
                   )
                 ]),
                 _vm._v(" "),
@@ -50294,7 +50319,7 @@ var render = function() {
           },
           [
             _vm._v(
-              "\r\n  Este recurso no tiene ninguna incidencia en su historial\r\n"
+              "\n  Este recurso no tiene ninguna incidencia en su historial\n"
             )
           ]
         ),
@@ -50365,7 +50390,7 @@ var render = function() {
                       "label",
                       {
                         staticClass: "col-sm-3 col-form-label",
-                        attrs: { for: "fechaIncidente" }
+                        attrs: { for: "hora_mobilitzacio" }
                       },
                       [_vm._v("Hora movilización")]
                     ),
@@ -50381,7 +50406,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        attrs: { type: "time", id: "fechaIncidente" },
+                        attrs: { type: "time", id: "hora_mobilitzacio" },
                         domProps: { value: _vm.recursEditar.hora_mobilitzacio },
                         on: {
                           input: function($event) {
@@ -50402,7 +50427,7 @@ var render = function() {
                       "label",
                       {
                         staticClass: "col-sm-3 col-form-label",
-                        attrs: { for: "fechaIncidente" }
+                        attrs: { for: "hora_assistencia" }
                       },
                       [_vm._v("Hora asistencia")]
                     ),
@@ -50418,7 +50443,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        attrs: { type: "time", id: "fechaIncidente" },
+                        attrs: { type: "time", id: "hora_assistencia" },
                         domProps: { value: _vm.recursEditar.hora_assistencia },
                         on: {
                           input: function($event) {
@@ -50441,7 +50466,7 @@ var render = function() {
                       "label",
                       {
                         staticClass: "col-sm-3 col-form-label",
-                        attrs: { for: "fechaIncidente" }
+                        attrs: { for: "hora_transport" }
                       },
                       [_vm._v("Hora transporte")]
                     ),
@@ -50457,7 +50482,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        attrs: { type: "time", id: "fechaIncidente" },
+                        attrs: { type: "time", id: "hora_transport" },
                         domProps: { value: _vm.recursEditar.hora_transport },
                         on: {
                           input: function($event) {
@@ -50478,7 +50503,7 @@ var render = function() {
                       "label",
                       {
                         staticClass: "col-sm-3 col-form-label",
-                        attrs: { for: "fechaIncidente" }
+                        attrs: { for: "hora_arribada" }
                       },
                       [_vm._v("Hora llegada hospital")]
                     ),
@@ -50494,7 +50519,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        attrs: { type: "time", id: "fechaIncidente" },
+                        attrs: { type: "time", id: "hora_arribada" },
                         domProps: {
                           value: _vm.recursEditar.hora_arribada_hospital
                         },
@@ -50519,7 +50544,7 @@ var render = function() {
                       "label",
                       {
                         staticClass: "col-sm-3 col-form-label",
-                        attrs: { for: "fechaIncidente" }
+                        attrs: { for: "hora_transferencia" }
                       },
                       [_vm._v("Hora transferencia")]
                     ),
@@ -50535,7 +50560,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        attrs: { type: "time", id: "fechaIncidente" },
+                        attrs: { type: "time", id: "hora_transferencia" },
                         domProps: {
                           value: _vm.recursEditar.hora_transferencia
                         },
@@ -50558,7 +50583,7 @@ var render = function() {
                       "label",
                       {
                         staticClass: "col-sm-3 col-form-label",
-                        attrs: { for: "fechaIncidente" }
+                        attrs: { for: "hora_finalitzacio" }
                       },
                       [_vm._v("Hora finalización")]
                     ),
@@ -50574,7 +50599,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        attrs: { type: "time", id: "fechaIncidente" },
+                        attrs: { type: "time", id: "hora_finalitzacio" },
                         domProps: { value: _vm.recursEditar.hora_finalitzacio },
                         on: {
                           input: function($event) {
@@ -50596,7 +50621,7 @@ var render = function() {
                     _c(
                       "label",
                       {
-                        staticClass: "col-sm-3 col.form-label",
+                        staticClass: "col-sm-3 col-form-label",
                         attrs: { for: "destinoHospitalario" }
                       },
                       [_vm._v("Destino Hospitalario")]
@@ -50652,9 +50677,9 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\r\n                      " +
+                                  "\n                      " +
                                     _vm._s(address.nom) +
-                                    "\r\n                    "
+                                    "\n                    "
                                 )
                               ]
                             )
@@ -52402,7 +52427,7 @@ var render = function() {
                   staticClass: "btn cerrarBtn",
                   attrs: { type: "button", "data-dismiss": "modal" }
                 },
-                [_vm._v("Tancar")]
+                [_vm._v("Cerrar")]
               ),
               _vm._v(" "),
               _vm.insert
