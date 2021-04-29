@@ -1,5 +1,9 @@
 <template>
 <main class="col-11">
+    <div class="alert alert-danger fade show mt-2" v-show="errorMessage != ''">
+        <button type="button" class="close" @click="cerrarErrorsAlert()">&times;</button>
+        {{ errorMessage }}
+    </div>
   <table class="table mt-5">
     <thead>
       <tr>
@@ -51,7 +55,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn cerrarBtn" data-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn esborrarRecursBtn" @click="deleteIncidencia()">Eliminar</button>
+          <button type="button" class="btn esborrarRecursBtn" @click="checkDeleteIncidencia()">Eliminar</button>
         </div>
       </div>
     </div>
@@ -70,7 +74,80 @@
         <div class="modal-body">
           <form>
             <!-- Contenido para editar incidente asignado -->
+            <div class="modalEdicionRecursos">
+              <div class="form-group row col-12">
+                <label for="fechaIncidente" class="col-sm-3 col-form-label">Fecha</label>
+                <div class="col-sm-3">
+                    <input class="form-control" type="date" id="fechaIncidente" v-model="incidenciaEditar.data"/>
+                </div>
 
+                <label for="horaIncidente" class="col-sm-3 col-form-label">Hora</label>
+                <div class="col-sm-3">
+                    <input class="form-control" type="time" id="horaIncidente" v-model="incidenciaEditar.hora"/>
+                </div>
+              </div>
+
+
+              <div class="form-group row col-12">
+                <label for="telAlertant" class="col-sm-3 col-form-label">Teléfono Alertante</label>
+                <div class="col-sm-3">
+                    <input class="form-control" type="number" id="telAlertant" v-model="incidenciaEditar.telefon_alertant"/>
+                </div>
+              </div>
+
+              <div class="form-group row col-12">
+                <label for="direccion" class="col-sm-3 col-form-label">Dirección</label>
+                <div class="col-sm-3">
+                    <input class="form-control" type="text" id="direccion" v-model="incidenciaEditar.adreca"/>
+                </div>
+              </div>
+
+              <div class="form-group row col-12">
+                <label for="complemento" class="col-sm-3 col-form-label">Complemento Dirección</label>
+                <div class="col-sm-3">
+                    <input class="form-control" type="text" id="complemento" v-model="incidenciaEditar.adreca_complement"/>
+                </div>
+              </div>
+
+              <div class="form-group row col-12">
+                <label for="descripcion" class="col-sm-3 col-form-label">Descripción</label>
+                <div class="col-sm-3">
+                    <input class="form-control" type="text" id="descripcion" v-model="incidenciaEditar.descripcio"/>
+                </div>
+              </div>
+
+              <div class="form-group row col-12">
+                <label for="nomMetge" class="col-sm-3 col-form-label">Nombre Alertante</label>
+                <div class="col-sm-3">
+                    <input class="form-control" type="text" id="nomMetge" v-model="incidenciaEditar.nom_metge"/>
+                </div>
+              </div>
+
+              <div class="form-group row col-12">
+                <label for="tipusIncidencia" class="col-sm-3 col.form-label">Tipo de Incidencia</label>
+                <div class="col-sm-9">
+                  <select class="custom-select" id="tipusIncidencia" required v-model="incidenciaEditar.tipus_incidencies_id">
+                    <option selected value="Selecciona...">Selecciona...</option>
+                    <option v-for="tipus in tipusIncidencies" :key="tipus.id" :value="tipus.id">
+                      {{ tipus.tipus }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group row col-12">
+                <label for="municipi" class="col-sm-3 col.form-label">Municipio</label>
+                <div class="col-sm-9">
+                  <select class="custom-select" id="municipi" required v-model="incidenciaEditar.municipis_id">
+                    <option selected value="Selecciona...">Selecciona...</option>
+                    <option v-for="municipi in municipis" :key="municipi.id" :value="municipi.id">
+                      {{ municipi.nom }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
           </form>
         </div>
         <div class="modal-footer">
@@ -100,6 +177,10 @@
             adreca_complement: '',
             descripcio: '',
           },
+          errorMessage: '',
+          tipusIncidencies: [],
+          incidenciaEditar: {},
+          municipis: [],
         }
       },
       methods:{
@@ -129,6 +210,22 @@
           this.incidencia = incidencia;
           $('#deleteModalIncidencia').modal('show');
         },
+        checkDeleteIncidencia(){
+            this.errorMessage = '';
+            let viable = true;
+            this.incidencia.incidencies_has_recursos.forEach(function(ihr){
+                if(ihr.recurs.actiu == false){
+                    viable = false;
+                }
+            });
+            if(viable){
+                this.deleteIncidencia();
+            }
+            else{
+                this.errorMessage = 'No es posible eliminar la incidencia ya que aún tiene recursos despachados';
+                $('#deleteModalIncidencia').modal('hide');
+            }
+        },
         deleteIncidencia(){
           let me = this;
           axios
@@ -143,21 +240,52 @@
                 $('#deleteModalIncidencia').modal('hide');
             })
         },
-        updateIncidenteAsignado(){
-          // modificar con todo el contenido
+        updateIncidente(){
+            let me = this;
+            return axios.put('/SGTA-Broggi/public/api/incidencia/'+me.incidenciaEditar.id, me.incidenciaEditar).then((response) => {
+                console.log(response);
+            }).catch( (error) => {
+                console.log(error.response.status);
+                console.log(error.response.data.error);
+            }).finally(()=>{
+             $('#incidenciaModal').modal('hide');
+            });
         },
         editIncidencia(incidencia){
-          this.insert = false;
           this.incidencia = incidencia;
+          this.incidenciaEditar = incidencia;
           $('#incidenciaModal').modal('show');
         },
         convertDateFormat(string) {
         var info = string.split('-').reverse().join('-');
         return info;
-        }
+        },
+        cerrarErrorsAlert(){
+            this.errorMessage = '';
+        },
+        selectTipusIncidencia() {
+          let me = this;
+          return axios
+              .get("/SGTA-Broggi/public/api/tipusIncidencia")
+              .then((response) => {
+                me.tipusIncidencies = response.data;
+              }).catch((error) => {
+                console.log(error);
+              })
+        },
+        selectMunicipis() {
+          let me = this;
+          axios
+              .get("/SGTA-Broggi/public/api/municipi")
+              .then((response) => {
+                me.municipis = response.data;
+              }).catch((error) => {
+                console.log(error);
+              })
+        },
       },
       created(){
-        this.selectIncidencies();
+        this.selectIncidencies(), this.selectTipusIncidencia(), this.selectMunicipis();
       },
       mounted() {
 

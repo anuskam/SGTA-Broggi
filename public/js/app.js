@@ -2268,6 +2268,83 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2279,7 +2356,11 @@ __webpack_require__.r(__webpack_exports__);
         adreca: '',
         adreca_complement: '',
         descripcio: ''
-      }
+      },
+      errorMessage: '',
+      tipusIncidencies: [],
+      incidenciaEditar: {},
+      municipis: []
     };
   },
   methods: {
@@ -2306,6 +2387,22 @@ __webpack_require__.r(__webpack_exports__);
       this.incidencia = incidencia;
       $('#deleteModalIncidencia').modal('show');
     },
+    checkDeleteIncidencia: function checkDeleteIncidencia() {
+      this.errorMessage = '';
+      var viable = true;
+      this.incidencia.incidencies_has_recursos.forEach(function (ihr) {
+        if (ihr.recurs.actiu == false) {
+          viable = false;
+        }
+      });
+
+      if (viable) {
+        this.deleteIncidencia();
+      } else {
+        this.errorMessage = 'No es posible eliminar la incidencia ya que aún tiene recursos despachados';
+        $('#deleteModalIncidencia').modal('hide');
+      }
+    },
     deleteIncidencia: function deleteIncidencia() {
       var me = this;
       axios["delete"]('/SGTA-Broggi/public/api/incidencia/' + me.incidencia.id).then(function (response) {
@@ -2318,20 +2415,48 @@ __webpack_require__.r(__webpack_exports__);
         $('#deleteModalIncidencia').modal('hide');
       });
     },
-    updateIncidenteAsignado: function updateIncidenteAsignado() {// modificar con todo el contenido
+    updateIncidente: function updateIncidente() {
+      var me = this;
+      return axios.put('/SGTA-Broggi/public/api/incidencia/' + me.incidenciaEditar.id, me.incidenciaEditar).then(function (response) {
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error.response.status);
+        console.log(error.response.data.error);
+      })["finally"](function () {
+        $('#incidenciaModal').modal('hide');
+      });
     },
     editIncidencia: function editIncidencia(incidencia) {
-      this.insert = false;
       this.incidencia = incidencia;
+      this.incidenciaEditar = incidencia;
       $('#incidenciaModal').modal('show');
     },
     convertDateFormat: function convertDateFormat(string) {
       var info = string.split('-').reverse().join('-');
       return info;
+    },
+    cerrarErrorsAlert: function cerrarErrorsAlert() {
+      this.errorMessage = '';
+    },
+    selectTipusIncidencia: function selectTipusIncidencia() {
+      var me = this;
+      return axios.get("/SGTA-Broggi/public/api/tipusIncidencia").then(function (response) {
+        me.tipusIncidencies = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    selectMunicipis: function selectMunicipis() {
+      var me = this;
+      axios.get("/SGTA-Broggi/public/api/municipi").then(function (response) {
+        me.municipis = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
     }
   },
   created: function created() {
-    this.selectIncidencies();
+    this.selectIncidencies(), this.selectTipusIncidencia(), this.selectMunicipis();
   },
   mounted: function mounted() {}
 });
@@ -45885,6 +46010,37 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("main", { staticClass: "col-11" }, [
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.errorMessage != "",
+            expression: "errorMessage != ''"
+          }
+        ],
+        staticClass: "alert alert-danger fade show mt-2"
+      },
+      [
+        _c(
+          "button",
+          {
+            staticClass: "close",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                return _vm.cerrarErrorsAlert()
+              }
+            }
+          },
+          [_vm._v("×")]
+        ),
+        _vm._v("\n        " + _vm._s(_vm.errorMessage) + "\n    ")
+      ]
+    ),
+    _vm._v(" "),
     _c("table", { staticClass: "table mt-5" }, [
       _vm._m(0),
       _vm._v(" "),
@@ -45991,7 +46147,7 @@ var render = function() {
                   attrs: { type: "button" },
                   on: {
                     click: function($event) {
-                      return _vm.deleteIncidencia()
+                      return _vm.checkDeleteIncidencia()
                     }
                   }
                 },
@@ -46014,7 +46170,430 @@ var render = function() {
           _c("div", { staticClass: "modal-content" }, [
             _vm._m(3),
             _vm._v(" "),
-            _vm._m(4),
+            _c("div", { staticClass: "modal-body" }, [
+              _c("form", [
+                _c("div", { staticClass: "modalEdicionRecursos" }, [
+                  _c("div", { staticClass: "form-group row col-12" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-3 col-form-label",
+                        attrs: { for: "fechaIncidente" }
+                      },
+                      [_vm._v("Fecha")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-3" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.incidenciaEditar.data,
+                            expression: "incidenciaEditar.data"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "date", id: "fechaIncidente" },
+                        domProps: { value: _vm.incidenciaEditar.data },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.incidenciaEditar,
+                              "data",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-3 col-form-label",
+                        attrs: { for: "horaIncidente" }
+                      },
+                      [_vm._v("Hora")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-3" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.incidenciaEditar.hora,
+                            expression: "incidenciaEditar.hora"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "time", id: "horaIncidente" },
+                        domProps: { value: _vm.incidenciaEditar.hora },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.incidenciaEditar,
+                              "hora",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row col-12" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-3 col-form-label",
+                        attrs: { for: "telAlertant" }
+                      },
+                      [_vm._v("Teléfono Alertante")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-3" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.incidenciaEditar.telefon_alertant,
+                            expression: "incidenciaEditar.telefon_alertant"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "number", id: "telAlertant" },
+                        domProps: {
+                          value: _vm.incidenciaEditar.telefon_alertant
+                        },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.incidenciaEditar,
+                              "telefon_alertant",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row col-12" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-3 col-form-label",
+                        attrs: { for: "direccion" }
+                      },
+                      [_vm._v("Dirección")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-3" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.incidenciaEditar.adreca,
+                            expression: "incidenciaEditar.adreca"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "direccion" },
+                        domProps: { value: _vm.incidenciaEditar.adreca },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.incidenciaEditar,
+                              "adreca",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row col-12" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-3 col-form-label",
+                        attrs: { for: "complemento" }
+                      },
+                      [_vm._v("Complemento Dirección")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-3" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.incidenciaEditar.adreca_complement,
+                            expression: "incidenciaEditar.adreca_complement"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "complemento" },
+                        domProps: {
+                          value: _vm.incidenciaEditar.adreca_complement
+                        },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.incidenciaEditar,
+                              "adreca_complement",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row col-12" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-3 col-form-label",
+                        attrs: { for: "descripcion" }
+                      },
+                      [_vm._v("Descripción")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-3" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.incidenciaEditar.descripcio,
+                            expression: "incidenciaEditar.descripcio"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "descripcion" },
+                        domProps: { value: _vm.incidenciaEditar.descripcio },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.incidenciaEditar,
+                              "descripcio",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row col-12" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-3 col-form-label",
+                        attrs: { for: "nomMetge" }
+                      },
+                      [_vm._v("Nombre Alertante")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-3" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.incidenciaEditar.nom_metge,
+                            expression: "incidenciaEditar.nom_metge"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "nomMetge" },
+                        domProps: { value: _vm.incidenciaEditar.nom_metge },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.incidenciaEditar,
+                              "nom_metge",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row col-12" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-3 col.form-label",
+                        attrs: { for: "tipusIncidencia" }
+                      },
+                      [_vm._v("Tipo de Incidencia")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-9" }, [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.incidenciaEditar.tipus_incidencies_id,
+                              expression:
+                                "incidenciaEditar.tipus_incidencies_id"
+                            }
+                          ],
+                          staticClass: "custom-select",
+                          attrs: { id: "tipusIncidencia", required: "" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.incidenciaEditar,
+                                "tipus_incidencies_id",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "option",
+                            { attrs: { selected: "", value: "Selecciona..." } },
+                            [_vm._v("Selecciona...")]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.tipusIncidencies, function(tipus) {
+                            return _c(
+                              "option",
+                              { key: tipus.id, domProps: { value: tipus.id } },
+                              [
+                                _vm._v(
+                                  "\n                      " +
+                                    _vm._s(tipus.tipus) +
+                                    "\n                    "
+                                )
+                              ]
+                            )
+                          })
+                        ],
+                        2
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row col-12" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-3 col.form-label",
+                        attrs: { for: "municipi" }
+                      },
+                      [_vm._v("Municipio")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-9" }, [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.incidenciaEditar.municipis_id,
+                              expression: "incidenciaEditar.municipis_id"
+                            }
+                          ],
+                          staticClass: "custom-select",
+                          attrs: { id: "municipi", required: "" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.incidenciaEditar,
+                                "municipis_id",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "option",
+                            { attrs: { selected: "", value: "Selecciona..." } },
+                            [_vm._v("Selecciona...")]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.municipis, function(municipi) {
+                            return _c(
+                              "option",
+                              {
+                                key: municipi.id,
+                                domProps: { value: municipi.id }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                      " +
+                                    _vm._s(municipi.nom) +
+                                    "\n                    "
+                                )
+                              ]
+                            )
+                          })
+                        ],
+                        2
+                      )
+                    ])
+                  ])
+                ])
+              ])
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "modal-footer" }, [
               _c(
@@ -46120,12 +46699,6 @@ var staticRenderFns = [
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       )
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-body" }, [_c("form")])
   }
 ]
 render._withStripped = true

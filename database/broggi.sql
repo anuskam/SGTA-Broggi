@@ -291,7 +291,7 @@ CREATE TABLE IF NOT EXISTS `broggi`.`incidencies_has_afectats` (
   CONSTRAINT `fk_incidencies_has_afectats_incidencies`
     FOREIGN KEY (`incidencies_id`)
     REFERENCES `broggi`.`incidencies` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_incidencies_has_afectats_afectats1`
     FOREIGN KEY (`afectats_id`)
@@ -325,7 +325,7 @@ CREATE TABLE IF NOT EXISTS `broggi`.`incidencies_has_recursos` (
   CONSTRAINT `fk_incidencies_has_recursos_incidencies1`
     FOREIGN KEY (`incidencies_id`)
     REFERENCES `broggi`.`incidencies` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_incidencies_has_recursos_recursos1`
     FOREIGN KEY (`recursos_id`)
