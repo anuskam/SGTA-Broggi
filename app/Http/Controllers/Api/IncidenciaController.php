@@ -139,34 +139,34 @@ class IncidenciaController extends Controller
         $incidencium->municipis_id = $request->input('municipis_id');
         $incidencium->usuaris_id = $request->input('usuaris_id');
 
-        $recursos = $request->input('incidencies_has_recursos');
+        // $recursos = $request->input('incidencies_has_recursos');
 
 
         try{
             $incidencium->save();
 
-            $incidencium->incidencies_has_recursos()->delete();
+            // $incidencium->incidencies_has_recursos()->delete();
 
-            foreach($recursos as $recurs){ // Incidencias con recurso asignado
-                $ihr = new IncidenciaHasRecursos();
-                $ihr->recursos_id = $recurs['recursos_id'];
-                $ihr->afectats_id = $recurs['afectats_id'];
-                $ihr->desti = $recurs['desti'];
-                $ihr->hora_mobilitzacio = $recurs['hora_mobilitzacio'];
-                $ihr->hora_arribada_hospital = $recurs['hora_arribada_hospital'];
-                $ihr->hora_assistencia = $recurs['hora_assistencia'];
-                $ihr->hora_finalitzacio = $recurs['hora_finalitzacio'];
-                $ihr->hora_transferencia = $recurs['hora_transferencia'];
-                $ihr->hora_transport = $recurs['hora_transport'];
-                $ihr->prioritat = $recurs['prioritat'];
-                $ihr->hora_activacio = $recurs['hora_activacio'];
+            // foreach($recursos as $recurs){ // Incidencias con recurso asignado
+            //     $ihr = new IncidenciaHasRecursos();
+            //     $ihr->recursos_id = $recurs['recursos_id'];
+            //     $ihr->afectats_id = $recurs['afectats_id'];
+            //     $ihr->desti = $recurs['desti'];
+            //     $ihr->hora_mobilitzacio = $recurs['hora_mobilitzacio'];
+            //     $ihr->hora_arribada_hospital = $recurs['hora_arribada_hospital'];
+            //     $ihr->hora_assistencia = $recurs['hora_assistencia'];
+            //     $ihr->hora_finalitzacio = $recurs['hora_finalitzacio'];
+            //     $ihr->hora_transferencia = $recurs['hora_transferencia'];
+            //     $ihr->hora_transport = $recurs['hora_transport'];
+            //     $ihr->prioritat = $recurs['prioritat'];
+            //     $ihr->hora_activacio = $recurs['hora_activacio'];
 
-                $incidencium->incidencies_has_recursos()->save($ihr);
+            //     $incidencium->incidencies_has_recursos()->save($ihr);
 
                 // $iha = new IncidenciaHasAfectats();
                 // $iha->afectats_id = $recurs['afectats_id']; // afectats id = 5,6 enlloc de 6,7
                 // $incidencium->incidencies_has_afectats()->save($iha);
-            }
+            //}
             DB::commit();
             $incidencium->refresh();
             $response = (new IncidenciaResource($incidencium))->response()->setStatusCode(201);
@@ -188,19 +188,32 @@ class IncidenciaController extends Controller
      */
     public function destroy(Incidencia $incidencium)
     {
+        DB::beginTransaction();
         try{
-            $ihas = $incidencium->incidencies_has_afectats()->all();
+            // $ihas = $incidencium->incidencies_has_afectats()->get();
+            // foreach($ihas as $iha){
+            //     // $afectat = Afectat::where('id', '=', $iha->afectats_id)->first();
+            //     // IncidenciaHasAfectats::destroy($iha->incidencies_id, $iha->afectats_id);
+            //     $iha->delete();
+            //     $incidenium->incidencies_has_recursos()->where('afectats_id', '=', $iha->)
+            //     // $afectat->delete();
+            // }
+            // $incidencium->incidencies_has_recursos()->delete();
+
+
+            $ihas = $incidencium->incidencies_has_afectats()->get();
+            $incidencium->delete();
             foreach($ihas as $iha){
                 $afectat = Afectat::where('id', '=', $iha->afectats_id)->first();
                 $afectat->delete();
-                $iha->delete();
             }
-            $incidencium->incidencies_has_recursos()->delete();
-            $incidencium->delete();
+
+            DB::commit();
 
             $response = \response()->json(['missatge' => 'Registro eliminado correctamente'], 200);
         }
         catch(QueryException $ex){
+            DB::rollBack();
             $mensaje = Utilitat::errorMessage($ex);
             $response = \response()->json(['error' => $mensaje], 400);
         }
