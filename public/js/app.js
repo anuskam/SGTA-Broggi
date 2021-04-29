@@ -6005,7 +6005,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -6494,7 +6493,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       var tipusRecurs = this.tipusRecursos.find(function (obj) {
-        return obj.id == _this2.recursosDB[index].tipus_recursos_id;
+        return obj.id == _this2.filteredList[index].tipus_recursos_id;
       });
       var tipusRecursos_tipus;
 
@@ -6513,7 +6512,7 @@ __webpack_require__.r(__webpack_exports__);
     filteredList: function filteredList() {
       var _this3 = this;
 
-      return this.recursosDB.filter(function (recurs) {
+      return this.recursos.filter(function (recurs) {
         return recurs.codi.toLowerCase().includes(_this3.search.toLowerCase());
       });
     }
@@ -6537,6 +6536,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
 //
 //
 //
@@ -6845,7 +6845,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       var rol = this.rols.find(function (obj) {
-        return obj.id == _this2.usuarisDB[index].rols_id;
+        return obj.id == _this2.filteredList[index].rols_id;
       });
       var rol_nom;
 
@@ -6858,6 +6858,12 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return rol_nom;
+    },
+    getRolName: function getRolName(id) {
+      var rol = this.rols.find(function (obj) {
+        return obj.id == id;
+      });
+      return rol.nom;
     }
   },
   computed: {
@@ -6865,7 +6871,9 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       return this.usuarisDB.filter(function (usuari) {
-        return usuari.username.toLowerCase().includes(_this3.search.toLowerCase()) || usuari.cognoms.toLowerCase().includes(_this3.search.toLowerCase());
+        var rol = _this3.getRolName(usuari.rols_id);
+
+        return usuari.username.toLowerCase().includes(_this3.search.toLowerCase()) || usuari.cognoms.toLowerCase().includes(_this3.search.toLowerCase()) || usuari.nom.toLowerCase().includes(_this3.search.toLowerCase()) || usuari.email.toLowerCase().includes(_this3.search.toLowerCase()) || rol.toLowerCase().includes(_this3.search.toLowerCase());
       });
     }
   },
@@ -50671,83 +50679,36 @@ var render = function() {
       "div",
       { staticClass: "paginacionNav", attrs: { "aria-label": "paginacion" } },
       [
-        _c(
-          "ul",
-          { staticClass: "pagination" },
-          [
-            _c("li", { staticClass: "page-item" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn numeroPaginacion",
-                  attrs: {
-                    disabled: _vm.currentPage <= 1,
-                    "aria-label": "Previous"
-                  },
-                  on: {
-                    click: function($event) {
-                      return _vm.paginar(_vm.currentPage - 1)
-                    }
-                  }
-                },
-                [
-                  _c("span", { attrs: { "aria-hidden": "true" } }, [
-                    _vm._v("«")
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "sr-only" }, [_vm._v("Anterior")])
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _vm._l(_vm.paginas, function(paginaActual, index) {
-              return _c(
-                "button",
-                {
-                  key: index,
-                  staticClass: "btn numeroPaginacion",
-                  on: {
-                    click: function($event) {
-                      return _vm.paginar(paginaActual)
-                    }
-                  }
-                },
-                [_vm._v(_vm._s(index + 1))]
-              )
-            }),
-            _vm._v(" "),
-            _c("li", { staticClass: "page-item" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn numeroPaginacion",
-                  attrs: {
-                    disabled: _vm.currentPage >= _vm.meta.last_page,
-                    "aria-label": "Next"
-                  },
-                  on: {
-                    click: function($event) {
-                      return _vm.paginar(_vm.currentPage + 1)
-                    }
-                  }
-                },
-                [
-                  _c("span", { attrs: { "aria-hidden": "true" } }, [
-                    _vm._v("»")
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "sr-only" }, [_vm._v("Siguiente")])
-                ]
-              )
-            ])
-          ],
-          2
-        ),
+        _c("div", { staticClass: "filtrar ml-5 pt-2" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.search,
+                expression: "search"
+              }
+            ],
+            attrs: { type: "text" },
+            domProps: { value: _vm.search },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.search = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("i", { staticClass: "fas fa-filter" }),
+          _c("label", [_vm._v("Filtrar")])
+        ]),
         _vm._v(" "),
         _c(
           "button",
           {
-            staticClass: "btn btn-primary mr-5 nuevaAlertante",
+            staticClass: "btn btn-primary mr-5 nuevaAlertante pt-2 pb-2",
             on: {
               click: function($event) {
                 return _vm.createAlertant()
@@ -50770,86 +50731,91 @@ var render = function() {
         _vm._v("Alertantes")
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "card-body" }, [
-        _c("table", { staticClass: "table mt-2" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "tbody",
-            _vm._l(_vm.alertants, function(alertant, index) {
-              return _c("tr", { key: alertant.id }, [
-                _c("td", [_vm._v(_vm._s(alertant.nom))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(alertant.cognom))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(alertant.telefon))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(alertant.adreca))]),
-                _vm._v(" "),
-                _c("td", [
-                  _vm._v(
-                    "\n                " +
-                      _vm._s(_vm.getMunicipi(index)) +
-                      "\n              "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("td", [
-                  _vm._v(
-                    "\n                " +
-                      _vm._s(_vm.getTipusAlertant(index)) +
-                      "\n              "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("td", [
-                  _c(
-                    "button",
-                    {
-                      staticClass:
-                        "btn btn-sm float-right ml-2 esborrarAlertantBtn",
-                      attrs: { type: "submit" },
-                      on: {
-                        click: function($event) {
-                          return _vm.confirmDeleteAlertant(alertant)
-                        }
-                      }
-                    },
-                    [
-                      _c("i", {
-                        staticClass: "fa fa-trash",
-                        attrs: { "aria-hidden": "true" }
-                      }),
-                      _vm._v("  Eliminar")
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-sm float-right editarAlertantBtn",
-                      attrs: { type: "submit" },
-                      on: {
-                        click: function($event) {
-                          return _vm.editAlertant(alertant)
-                        }
-                      }
-                    },
-                    [
-                      _c("i", {
-                        staticClass: "fa fa-edit",
-                        attrs: { "aria-hidden": "true" }
-                      }),
-                      _vm._v("  Editar")
-                    ]
-                  )
-                ])
-              ])
-            }),
-            0
-          )
-        ])
-      ])
+      _vm.filteredList.length == 0
+        ? _c("div", { staticClass: "p-3" }, [
+            _vm._v("No hay resultados con estos parámetros")
+          ])
+        : _c("div", { staticClass: "card-body" }, [
+            _c("table", { staticClass: "table mt-2" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.filteredList, function(alertant, index) {
+                  return _c("tr", { key: alertant.id }, [
+                    _c("td", [_vm._v(_vm._s(alertant.nom))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(alertant.cognom))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(alertant.telefon))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(alertant.adreca))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(_vm.getMunicipi(index)) +
+                          "\n              "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(_vm.getTipusAlertant(index)) +
+                          "\n              "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "btn btn-sm float-right ml-2 esborrarAlertantBtn",
+                          attrs: { type: "submit" },
+                          on: {
+                            click: function($event) {
+                              return _vm.confirmDeleteAlertant(alertant)
+                            }
+                          }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fa fa-trash",
+                            attrs: { "aria-hidden": "true" }
+                          }),
+                          _vm._v("  Eliminar")
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "btn btn-sm float-right editarAlertantBtn",
+                          attrs: { type: "submit" },
+                          on: {
+                            click: function($event) {
+                              return _vm.editAlertant(alertant)
+                            }
+                          }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fa fa-edit",
+                            attrs: { "aria-hidden": "true" }
+                          }),
+                          _vm._v("  Editar")
+                        ]
+                      )
+                    ])
+                  ])
+                }),
+                0
+              )
+            ])
+          ])
     ]),
     _vm._v(" "),
     _c(
@@ -51387,83 +51353,36 @@ var render = function() {
       "div",
       { staticClass: "paginacionNav", attrs: { "aria-label": "paginacion" } },
       [
-        _c(
-          "ul",
-          { staticClass: "pagination" },
-          [
-            _c("li", { staticClass: "page-item" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn numeroPaginacion",
-                  attrs: {
-                    disabled: _vm.currentPage <= 1,
-                    "aria-label": "Previous"
-                  },
-                  on: {
-                    click: function($event) {
-                      return _vm.paginar(_vm.currentPage - 1)
-                    }
-                  }
-                },
-                [
-                  _c("span", { attrs: { "aria-hidden": "true" } }, [
-                    _vm._v("«")
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "sr-only" }, [_vm._v("Previous")])
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _vm._l(_vm.paginas, function(paginaActual, index) {
-              return _c(
-                "button",
-                {
-                  key: index,
-                  staticClass: "btn numeroPaginacion",
-                  on: {
-                    click: function($event) {
-                      return _vm.paginar(paginaActual)
-                    }
-                  }
-                },
-                [_vm._v(_vm._s(index + 1))]
-              )
-            }),
-            _vm._v(" "),
-            _c("li", { staticClass: "page-item" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn numeroPaginacion",
-                  attrs: {
-                    disabled: _vm.currentPage >= _vm.meta.last_page,
-                    "aria-label": "Next"
-                  },
-                  on: {
-                    click: function($event) {
-                      return _vm.paginar(_vm.currentPage + 1)
-                    }
-                  }
-                },
-                [
-                  _c("span", { attrs: { "aria-hidden": "true" } }, [
-                    _vm._v("»")
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
-                ]
-              )
-            ])
-          ],
-          2
-        ),
+        _c("div", { staticClass: "filtrar ml-5 pt-2" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.search,
+                expression: "search"
+              }
+            ],
+            attrs: { type: "text" },
+            domProps: { value: _vm.search },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.search = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("i", { staticClass: "fas fa-filter" }),
+          _c("label", [_vm._v("Filtrar")])
+        ]),
         _vm._v(" "),
         _c(
           "button",
           {
-            staticClass: "btn btn-primary mr-5 nuevoRecurso",
+            staticClass: "btn btn-primary mr-5 pt-2 pb-2 nuevoRecurso",
             on: {
               click: function($event) {
                 return _vm.createRecurs()
@@ -51480,32 +51399,6 @@ var render = function() {
         )
       ]
     ),
-    _vm._v(" "),
-    _c("div", { staticClass: "filtrar ml-5" }, [
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.search,
-            expression: "search"
-          }
-        ],
-        attrs: { type: "text" },
-        domProps: { value: _vm.search },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.search = $event.target.value
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("i", { staticClass: "fas fa-filter" }),
-      _c("label", [_vm._v("Filtrar")])
-    ]),
     _vm._v(" "),
     _c("div", { staticClass: "card mt-2 mb-1 ml-5 mr-5" }, [
       _c("h2", { staticClass: "card-header font-weight-bold" }, [
@@ -52032,83 +51925,36 @@ var render = function() {
       "div",
       { staticClass: "paginacionNav", attrs: { "aria-label": "paginacion" } },
       [
-        _c(
-          "ul",
-          { staticClass: "pagination" },
-          [
-            _c("li", { staticClass: "page-item" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn numeroPaginacion",
-                  attrs: {
-                    disabled: _vm.currentPage <= 1,
-                    "aria-label": "Previous"
-                  },
-                  on: {
-                    click: function($event) {
-                      return _vm.paginar(_vm.currentPage - 1)
-                    }
-                  }
-                },
-                [
-                  _c("span", { attrs: { "aria-hidden": "true" } }, [
-                    _vm._v("«")
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "sr-only" }, [_vm._v("Previa")])
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _vm._l(_vm.paginas, function(paginaActual, index) {
-              return _c(
-                "button",
-                {
-                  key: index,
-                  staticClass: "btn numeroPaginacion",
-                  on: {
-                    click: function($event) {
-                      return _vm.paginar(paginaActual)
-                    }
-                  }
-                },
-                [_vm._v(_vm._s(index + 1))]
-              )
-            }),
-            _vm._v(" "),
-            _c("li", { staticClass: "page-item" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn numeroPaginacion",
-                  attrs: {
-                    disabled: _vm.currentPage >= _vm.meta.last_page,
-                    "aria-label": "Next"
-                  },
-                  on: {
-                    click: function($event) {
-                      return _vm.paginar(_vm.currentPage + 1)
-                    }
-                  }
-                },
-                [
-                  _c("span", { attrs: { "aria-hidden": "true" } }, [
-                    _vm._v("»")
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "sr-only" }, [_vm._v("Siguiente")])
-                ]
-              )
-            ])
-          ],
-          2
-        ),
+        _c("div", { staticClass: "filtrar ml-5 pt-2" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.search,
+                expression: "search"
+              }
+            ],
+            attrs: { type: "text" },
+            domProps: { value: _vm.search },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.search = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("i", { staticClass: "fas fa-filter" }),
+          _c("label", [_vm._v("Filtrar")])
+        ]),
         _vm._v(" "),
         _c(
           "button",
           {
-            staticClass: "btn btn-primary mr-5 nuevaUsuaria",
+            staticClass: "btn btn-primary mr-5 nuevaUsuaria pt-2 pb-2",
             on: {
               click: function($event) {
                 return _vm.createUsuari()
@@ -52125,32 +51971,6 @@ var render = function() {
         )
       ]
     ),
-    _vm._v(" "),
-    _c("div", { staticClass: "filtrar ml-5" }, [
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.search,
-            expression: "search"
-          }
-        ],
-        attrs: { type: "text" },
-        domProps: { value: _vm.search },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.search = $event.target.value
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("i", { staticClass: "fas fa-filter" }),
-      _c("label", [_vm._v("Filtrar")])
-    ]),
     _vm._v(" "),
     _c("div", { staticClass: "card mt-2 mb-1 ml-5 mr-5" }, [
       _c("h2", { staticClass: "card-header font-weight-bold" }, [
