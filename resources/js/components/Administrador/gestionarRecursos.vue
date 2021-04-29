@@ -30,6 +30,7 @@
         <input type="text" v-model="search"/>
             <i class="fas fa-filter"></i><label>Filtrar</label>
     </div>
+
     <button class="btn btn-primary mr-5 pt-2 pb-2 nuevoRecurso" @click="createRecurs()">
         <i class="fas fa-plus-circle" aria-hidden="true"></i>
         Nuevo recurso
@@ -142,7 +143,7 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn cerrarBtn" data-dismiss="modal">Tancar</button>
+          <button type="button" class="btn cerrarBtn" data-dismiss="modal">Cerrar</button>
           <button v-if="insert" type="button" class="btn afegirRecursBtn" @click="insertRecurs()">Añadir</button>
           <button v-else type="button" class="btn editarRecursBtn" @click="updateRecurs()">Modificar</button>
         </div>
@@ -162,7 +163,7 @@
           recurs: {
             codi: '',
             actiu: true,
-            tipus_recursos_id: ''
+            tipus_recursos_id: null
           },
           tipusRecursos: [],
           insert: true,
@@ -172,7 +173,7 @@
           paginas: [],
           pagina: 0,
           currentPage: 0,
-          search: ''
+          search: '',
         }
       },
       methods: {
@@ -310,6 +311,10 @@
 
           return tipusRecursos_tipus;
         },
+        getTipusRecursName(id){
+          let tipusRecursNom = this.tipusRecursos.find(obj => obj.id == id);
+          return tipusRecursNom.tipus;
+        },
         cerrarInfoAlert(){
           this.infoMessage = '';
         },
@@ -319,8 +324,10 @@
       },
       computed: {
         filteredList: function() {
-          return this.recursos.filter(recurs => {
+          return this.recursosDB.filter(recurs => {
+              let tipusRecursNom = this.getTipusRecursName(recurs.tipus_recursos_id);
             return recurs.codi.toLowerCase().includes(this.search.toLowerCase())
+            || tipusRecursNom.toLowerCase().includes(this.search.toLocaleLowerCase())
           })
         }
       },
