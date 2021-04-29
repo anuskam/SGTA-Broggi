@@ -12,7 +12,7 @@
 
 
   <div aria-label="paginacion" class="paginacionNav">
-    <ul class="pagination">
+    <!-- <ul class="pagination">
       <li class="page-item">
         <button :disabled="currentPage <= 1" class="btn numeroPaginacion" aria-label="Previous" @click="paginar(currentPage-1)">
             <span aria-hidden="true">&laquo;</span>
@@ -26,25 +26,25 @@
             <span class="sr-only">Siguiente</span>
         </button>
       </li>
-    </ul>
+    </ul> -->
+    <div class="filtrar ml-5 pt-2">
+        <input type="text" v-model="search"/>
+            <i class="fas fa-filter"></i><label>Filtrar</label>
+    </div>
 
-    <button class="btn btn-primary mr-5 nuevaAlertante" @click="createAlertant()">
+    <button class="btn btn-primary mr-5 nuevaAlertante pt-2 pb-2" @click="createAlertant()">
         <i class="fas fa-plus-circle" aria-hidden="true"></i>
         Nueva alertante
     </button>
   </div>
 
-  <!-- <div class="filtrar ml-5">
-    <input type="text" v-model="search"/>
-        <i class="fas fa-filter"></i><label>Filtrar</label>
-  </div> -->
+
 
   <div class="card mt-2 mb-1 ml-5 mr-5">
     <h2 class="card-header font-weight-bold">Alertantes</h2>
     <!--Por si no hay resultados-->
-    <!-- <div v-if="filteredList.length == 0" class="p-3">No hay resultados con estos parámetros</div> -->
-    <!-- <div v-else class="card-body"> -->
-    <div class="card-body">
+    <div v-if="filteredList.length == 0" class="p-3">No hay resultados con estos parámetros</div>
+    <div v-else class="card-body">
       <table class="table mt-2">
           <thead>
             <tr>
@@ -58,8 +58,7 @@
             </tr>
           </thead>
           <tbody>
-            <!-- <tr v-for="(alertant, index) in filteredList" :key="alertant.id"> -->
-            <tr v-for="(alertant, index) in alertants" :key="alertant.id">
+            <tr v-for="(alertant, index) in filteredList" :key="alertant.id">
               <td>{{ alertant.nom }}</td>
               <td>{{ alertant.cognom }}</td>
               <td>{{ alertant.telefon }}</td>

@@ -11,7 +11,7 @@
   </div>
 
   <div aria-label="paginacion" class="paginacionNav">
-    <ul class="pagination">
+    <!-- <ul class="pagination">
       <li class="page-item">
         <button :disabled="currentPage <= 1" class="btn numeroPaginacion" aria-label="Previous" @click="paginar(currentPage-1)">
             <span aria-hidden="true">&laquo;</span>
@@ -25,18 +25,19 @@
             <span class="sr-only">Siguiente</span>
         </button>
       </li>
-    </ul>
+    </ul> -->
+     <div class="filtrar ml-5 pt-2">
+        <input type="text" v-model="search"/>
+            <i class="fas fa-filter"></i><label>Filtrar</label>
+    </div>
 
-    <button class="btn btn-primary mr-5 nuevaUsuaria" @click="createUsuari()">
+    <button class="btn btn-primary mr-5 nuevaUsuaria pt-2 pb-2" @click="createUsuari()">
         <i class="fas fa-plus-circle" aria-hidden="true"></i>
         Nueva usuaria
     </button>
   </div>
 
-  <div class="filtrar ml-5">
-    <input type="text" v-model="search"/>
-        <i class="fas fa-filter"></i><label>Filtrar</label>
-  </div>
+
 
   <div class="card mt-2 mb-1 ml-5 mr-5">
     <h2 class="card-header font-weight-bold">Usuarias</h2>
@@ -318,7 +319,7 @@
               .finally(() => (this.loading = false));
         },
         getRol(index) {
-          let rol = this.rols.find(obj => obj.id == this.usuarisDB[index].rols_id);
+          let rol = this.rols.find(obj => obj.id == this.filteredList[index].rols_id);
           let rol_nom;
           if (rol != null){
             rol_nom = rol.nom;
@@ -330,11 +331,20 @@
 
           return rol_nom;
         },
+        getRolName(id){
+            let rol = this.rols.find(obj => obj.id == id);
+            return rol.nom;
+        },
       },
       computed: {
-        filteredList() {
+        filteredList: function () {
           return this.usuarisDB.filter(usuari => {
-            return usuari.username.toLowerCase().includes(this.search.toLowerCase()) || usuari.cognoms.toLowerCase().includes(this.search.toLowerCase())
+              let rol = this.getRolName(usuari.rols_id);
+            return usuari.username.toLowerCase().includes(this.search.toLowerCase())
+            || usuari.cognoms.toLowerCase().includes(this.search.toLowerCase())
+            || usuari.nom.toLowerCase().includes(this.search.toLowerCase())
+            || usuari.email.toLowerCase().includes(this.search.toLowerCase())
+            || rol.toLowerCase().includes(this.search.toLowerCase())
           })
         }
       },
