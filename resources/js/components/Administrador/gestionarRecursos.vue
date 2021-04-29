@@ -1,12 +1,12 @@
 <template>
 <main>
-  <div class="alert alert-danger alert-dismissible fade show mt-2" v-if="errorMessage != ''">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <div v-show="errorMessage!= ''" class="alert alert-danger fade show mt-2">
+    <button type="button" class="close" @click="cerrarErrorAlert()">&times;</button>
     {{ errorMessage }}
   </div>
 
-  <div class="alert alert-success alert-dismissible fade show mt-2" v-if="infoMessage != ''">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <div v-show="infoMessage != ''" class="alert alert-success fade show mt-2">
+    <button type="button" class="close" @click="cerrarInfoAlert()">&times;</button>
     {{ infoMessage }}
   </div>
 
@@ -35,8 +35,6 @@
         Nuevo recurso
     </button>
   </div>
-
-
 
 
   <div class="card mt-2 mb-1 ml-5 mr-5">
@@ -259,6 +257,7 @@
                 me.selectRecursos();
                 me.paginarFirst();
                 $('#recursModal').modal('hide');
+                me.infoMessage = 'Registro insertado correctamente';
               }).catch(function(error) {
                 console.log(error.response.status);
                 console.log(error.response.data);
@@ -280,6 +279,7 @@
                 console.log(response);
                 me.selectRecursos();
                 $('#recursModal').modal('hide');
+                me.infoMessage = 'Registro modificado correctamente';
               }).catch(function(error) {
                 console.log(error.response.status);
                 console.log(error.response.data);
@@ -310,6 +310,12 @@
 
           return tipusRecursos_tipus;
         },
+        cerrarInfoAlert(){
+          this.infoMessage = '';
+        },
+        cerrarErrorAlert() {
+          this.errorMessage = '';
+        }
       },
       computed: {
         filteredList: function() {

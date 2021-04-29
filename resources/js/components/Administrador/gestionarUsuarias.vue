@@ -1,12 +1,12 @@
 <template>
 <main>
-  <div class="alert alert-danger alert-dismissible fade show mt-2" v-if="errorMessage != ''">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <div v-show="errorMessage!= ''" class="alert alert-danger fade show mt-2">
+    <button type="button" class="close" @click="cerrarErrorAlert()">&times;</button>
     {{ errorMessage }}
   </div>
 
-  <div class="alert alert-success alert-dismissible fade show mt-2" v-if="infoMessage != ''">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <div v-show="infoMessage != ''" class="alert alert-success fade show mt-2">
+    <button type="button" class="close" @click="cerrarInfoAlert()">&times;</button>
     {{ infoMessage }}
   </div>
 
@@ -280,6 +280,7 @@
                 me.selectUsuaris();
                 me.paginarFirst();
                 $('#usuariModal').modal('hide');
+                me.infoMessage = 'Registro insertado correctamente'
               }).catch(function(error) {
                 console.log(error.response.status);
                 console.log(error.response.data);
@@ -300,6 +301,7 @@
               .then(function(response) {
                 console.log(response);
                 me.selectUsuaris();
+                me.infoMessage = 'Registro modificado correctamente';
                 $('#usuariModal').modal('hide');
               }).catch(function(error) {
                 console.log(error.response.status);
@@ -332,9 +334,15 @@
           return rol_nom;
         },
         getRolName(id){
-            let rol = this.rols.find(obj => obj.id == id);
-            return rol.nom;
+          let rol = this.rols.find(obj => obj.id == id);
+          return rol.nom;
         },
+        cerrarInfoAlert(){
+          this.infoMessage = '';
+        },
+        cerrarErrorAlert() {
+          this.errorMessage = '';
+        }
       },
       computed: {
         filteredList: function () {
