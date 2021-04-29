@@ -114,7 +114,7 @@
     <div class="modal" tabindex="-1" role="dialog" id="infoModal">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-          <div class="modal-header d-flex justify-content-center">
+          <div class="modal-header">
             <div class="modal-title titulosModalRecursos">Más Información</div>
             <!-- <button
               type="button"
@@ -806,5 +806,14 @@ button.mobilizacion{
 .titulosModalRecursos{
   font-size: 17px;
 }
+
+.modal-title{
+    margin-left: 0 !important;
+}
+
+/* .modal-header{
+    display: flex !important;
+    justify-content: center !important;
+} */
 
 </style>

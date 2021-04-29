@@ -43,13 +43,13 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header d-flex justify-content-center">
-          <div class="modal-title">Eliminar Incidencia Asignada</div>
+          <div class="modal-title deleteModal">Eliminar Incidencia Asignada</div>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <p>¿Estás segura de liminar la incidencia {{ incidencia.data }}?</p>
+          <p>¿Estás segura de eliminar la incidencia {{ incidencia.data }}?</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn cerrarBtn" data-dismiss="modal">Cerrar</button>
@@ -64,7 +64,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header d-flex justify-content-center">
-          <div class="modal-title">Incidente Asignado</div>
+          <div class="modal-title deleteModal">Incidente Asignado</div>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
           </button>

@@ -11,7 +11,7 @@
   </div>
 
    <div aria-label="paginacion" class="paginacionNav">
-    <ul class="pagination">
+    <!-- <ul class="pagination">
       <li class="page-item">
         <button :disabled="currentPage <= 1" class="btn numeroPaginacion" aria-label="Previous" @click="paginar(currentPage-1)">
             <span aria-hidden="true">&laquo;</span>
@@ -25,18 +25,18 @@
             <span class="sr-only">Next</span>
         </button>
       </li>
-    </ul>
-
-    <button class="btn btn-primary mr-5 nuevoRecurso" @click="createRecurs()">
+    </ul> -->
+    <div class="filtrar ml-5 pt-2">
+        <input type="text" v-model="search"/>
+            <i class="fas fa-filter"></i><label>Filtrar</label>
+    </div>
+    <button class="btn btn-primary mr-5 pt-2 pb-2 nuevoRecurso" @click="createRecurs()">
         <i class="fas fa-plus-circle" aria-hidden="true"></i>
         Nuevo recurso
     </button>
   </div>
 
-  <div class="filtrar ml-5">
-    <input type="text" v-model="search"/>
-        <i class="fas fa-filter"></i><label>Filtrar</label>
-  </div>
+
 
 
   <div class="card mt-2 mb-1 ml-5 mr-5">
@@ -298,7 +298,7 @@
               .finally(() => (this.loading = false));
         },
         getTipusRecurs(index) {
-          let tipusRecurs = this.tipusRecursos.find(obj => obj.id == this.recursosDB[index].tipus_recursos_id);
+          let tipusRecurs = this.tipusRecursos.find(obj => obj.id == this.filteredList[index].tipus_recursos_id);
           let tipusRecursos_tipus;
           if (tipusRecurs != null){
             tipusRecursos_tipus = tipusRecurs.tipus;
@@ -312,8 +312,8 @@
         },
       },
       computed: {
-        filteredList() {
-          return this.recursosDB.filter(recurs => {
+        filteredList: function() {
+          return this.recursos.filter(recurs => {
             return recurs.codi.toLowerCase().includes(this.search.toLowerCase())
           })
         }

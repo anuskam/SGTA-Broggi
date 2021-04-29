@@ -819,7 +819,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Lista de Afectadas</h5>
+            <h5 class="modal-title deleteModal">Lista de Afectadas</h5>
             <button
               type="button"
               class="close"
@@ -857,7 +857,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Lista de Recursos</h5>
+            <h5 class="modal-title deleteModal">Lista de Recursos</h5>
             <button
               type="button"
               class="close"
