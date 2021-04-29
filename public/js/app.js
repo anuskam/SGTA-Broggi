@@ -6100,6 +6100,7 @@ __webpack_require__.r(__webpack_exports__);
         console.log(response);
         me.selectAlertants();
         $('#alertantModal').modal('hide');
+        me.infoMessage = 'Registro insertado correctamente';
       })["catch"](function (error) {
         console.log(error.response.status);
         console.log(error.response.data);
@@ -6120,6 +6121,7 @@ __webpack_require__.r(__webpack_exports__);
         me.selectAlertants();
         me.paginarFirst();
         $('#alertantModal').modal('hide');
+        me.infoMessage = 'Registro modificado correctamente';
       })["catch"](function (error) {
         console.log(error.response.status);
         console.log(error.response.data);
@@ -6456,6 +6458,7 @@ __webpack_require__.r(__webpack_exports__);
         me.selectRecursos();
         me.paginarFirst();
         $('#recursModal').modal('hide');
+        me.infoMessage = 'Registro insertado correctamente';
       })["catch"](function (error) {
         console.log(error.response.status);
         console.log(error.response.data);
@@ -6475,6 +6478,7 @@ __webpack_require__.r(__webpack_exports__);
         console.log(response);
         me.selectRecursos();
         $('#recursModal').modal('hide');
+        me.infoMessage = 'Registro modificado correctamente';
       })["catch"](function (error) {
         console.log(error.response.status);
         console.log(error.response.data);
