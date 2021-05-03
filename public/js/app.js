@@ -6303,18 +6303,14 @@ __webpack_require__.r(__webpack_exports__);
 
       return tipusAlertant_nom;
     },
-    getMunicipiName: function getMunicipiName(id) {
-      var municipi = this.municipis.find(function (obj) {
-        return obj.id == id;
-      });
-      return municipi.nom;
-    },
-    getTipusAlertantName: function getTipusAlertantName(id) {
-      var tipusAlertant = this.tipusAlertants.find.bind(this, function (obj) {
-        return obj.id == id;
-      });
-      return tipusAlertant.tipus;
-    },
+    // getMunicipiName(id){
+    //   let municipi = this.municipis.find(obj => obj.id == id);
+    //   return municipi.nom;
+    // },
+    // getTipusAlertantName(id){
+    //   let tipusAlertant = this.tipusAlertants.find.bind(this,obj => obj.id == id);
+    //   return tipusAlertant.tipus;
+    // },
     cerrarInfoAlert: function cerrarInfoAlert() {
       this.infoMessage = '';
     },
@@ -6327,11 +6323,10 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       return this.alertantsDB.filter(function (alertant) {
-        var municipi = _this.getMunicipiName(alertant.municipis_id);
-
-        var tipusAlertant = _this.getTipusAlertantName(alertant.tipus_alertant_id);
-
-        return alertant.nom.toLowerCase().includes(_this.search.toLowerCase()) || alertant.cognoms.toLowerCase().includes(_this.search.toLowerCase()) || alertant.telefon == _this.search || alertant.adreca.toLowerCase().includes(_this.search.toLocaleLowerCase()) || municipi.toLowerCase().includes(_this.search.toLowerCase()) || tipusAlertant.toLowerCase().includes(_this.search.toLowerCase());
+        //   let municipi = this.getMunicipiName(alertant.municipis_id);
+        //   let tipusAlertant = await this.getTipusAlertantName(alertant.tipus_alertant_id);
+        return alertant.nom.toLowerCase().includes(_this.search.toLowerCase()) || alertant.cognoms.toLowerCase().includes(_this.search.toLowerCase()) || alertant.telefon.toString().includes(_this.search) || alertant.adreca.toLowerCase().includes(_this.search.toLocaleLowerCase()); // || municipi.toLowerCase().includes(this.search.toLowerCase())
+        // || tipusAlertant.toLowerCase().includes(this.search.toLowerCase())
       });
     }
   },
@@ -46084,7 +46079,7 @@ var render = function() {
           },
           [_vm._v("×")]
         ),
-        _vm._v("\n        " + _vm._s(_vm.errorMessage) + "\n    ")
+        _vm._v("\r\n        " + _vm._s(_vm.errorMessage) + "\r\n    ")
       ]
     ),
     _vm._v(" "),
@@ -46557,9 +46552,9 @@ var render = function() {
                               { key: tipus.id, domProps: { value: tipus.id } },
                               [
                                 _vm._v(
-                                  "\n                      " +
+                                  "\r\n                      " +
                                     _vm._s(tipus.tipus) +
-                                    "\n                    "
+                                    "\r\n                    "
                                 )
                               ]
                             )
@@ -46630,9 +46625,9 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                      " +
+                                  "\r\n                      " +
                                     _vm._s(municipi.nom) +
-                                    "\n                    "
+                                    "\r\n                    "
                                 )
                               ]
                             )
