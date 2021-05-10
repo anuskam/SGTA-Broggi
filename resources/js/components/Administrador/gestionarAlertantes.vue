@@ -389,9 +389,9 @@
             //   let municipi = this.getMunicipiName(alertant.municipis_id);
             //   let tipusAlertant = await this.getTipusAlertantName(alertant.tipus_alertant_id);
             return alertant.nom.toLowerCase().includes(this.search.toLowerCase())
-            || alertant.cognoms.toLowerCase().includes(this.search.toLowerCase())
+            // || alertant.cognoms.toLowerCase().includes(this.search.toLowerCase())
             || (alertant.telefon).toString().includes(this.search)
-            || alertant.adreca.toLowerCase().includes(this.search.toLocaleLowerCase())
+            || alertant.adreca.toLowerCase().includes(this.search.toLowerCase())
             // || municipi.toLowerCase().includes(this.search.toLowerCase())
             // || tipusAlertant.toLowerCase().includes(this.search.toLowerCase())
           })
