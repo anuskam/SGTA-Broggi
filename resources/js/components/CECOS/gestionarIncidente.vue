@@ -4,7 +4,7 @@
         <button type="button" class="close" @click="cerrarErrorsAlert()">&times;</button>
         {{ errorMessage }}
     </div>
-  <table class="table mt-5">
+  <table class="table mt-5 ml-5 pl-2">
     <thead>
       <tr>
         <th scope="col">Fecha</th>

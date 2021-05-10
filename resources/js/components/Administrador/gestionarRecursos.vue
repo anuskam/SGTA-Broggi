@@ -311,10 +311,10 @@
 
           return tipusRecursos_tipus;
         },
-        getTipusRecursName(id){
-          let tipusRecursNom = this.tipusRecursos.find(obj => obj.id == id);
-          return tipusRecursNom.tipus;
-        },
+        // getTipusRecursName(id){
+        //   let tipusRecursNom = this.tipusRecursos.find(obj => obj.id == id);
+        //   return tipusRecursNom.tipus;
+        // },
         cerrarInfoAlert(){
           this.infoMessage = '';
         },
@@ -325,9 +325,9 @@
       computed: {
         filteredList: function() {
           return this.recursosDB.filter(recurs => {
-              let tipusRecursNom = this.getTipusRecursName(recurs.tipus_recursos_id);
+            //   let tipusRecursNom = this.getTipusRecursName(recurs.tipus_recursos_id);
             return recurs.codi.toLowerCase().includes(this.search.toLowerCase())
-            || tipusRecursNom.toLowerCase().includes(this.search.toLocaleLowerCase())
+            // || tipusRecursNom.toLowerCase().includes(this.search.toLocaleLowerCase())
           })
         }
       },

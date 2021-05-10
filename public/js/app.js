@@ -6652,12 +6652,10 @@ __webpack_require__.r(__webpack_exports__);
 
       return tipusRecursos_tipus;
     },
-    getTipusRecursName: function getTipusRecursName(id) {
-      var tipusRecursNom = this.tipusRecursos.find(function (obj) {
-        return obj.id == id;
-      });
-      return tipusRecursNom.tipus;
-    },
+    // getTipusRecursName(id){
+    //   let tipusRecursNom = this.tipusRecursos.find(obj => obj.id == id);
+    //   return tipusRecursNom.tipus;
+    // },
     cerrarInfoAlert: function cerrarInfoAlert() {
       this.infoMessage = '';
     },
@@ -6670,9 +6668,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       return this.recursosDB.filter(function (recurs) {
-        var tipusRecursNom = _this3.getTipusRecursName(recurs.tipus_recursos_id);
-
-        return recurs.codi.toLowerCase().includes(_this3.search.toLowerCase()) || tipusRecursNom.toLowerCase().includes(_this3.search.toLocaleLowerCase());
+        //   let tipusRecursNom = this.getTipusRecursName(recurs.tipus_recursos_id);
+        return recurs.codi.toLowerCase().includes(_this3.search.toLowerCase()); // || tipusRecursNom.toLowerCase().includes(this.search.toLocaleLowerCase())
       });
     }
   },
@@ -7020,12 +7017,10 @@ __webpack_require__.r(__webpack_exports__);
 
       return rol_nom;
     },
-    getRolName: function getRolName(id) {
-      var rol = this.rols.find(function (obj) {
-        return obj.id == id;
-      });
-      return rol.nom;
-    },
+    // getRolName(id){
+    //   let rol = this.rols.find(obj => obj.id == id);
+    //   return rol.nom;
+    // },
     cerrarInfoAlert: function cerrarInfoAlert() {
       this.infoMessage = '';
     },
@@ -7038,9 +7033,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       return this.usuarisDB.filter(function (usuari) {
-        var rol = _this3.getRolName(usuari.rols_id);
-
-        return usuari.username.toLowerCase().includes(_this3.search.toLowerCase()) || usuari.cognoms.toLowerCase().includes(_this3.search.toLowerCase()) || usuari.nom.toLowerCase().includes(_this3.search.toLowerCase()) || usuari.email.toLowerCase().includes(_this3.search.toLowerCase()) || rol.toLowerCase().includes(_this3.search.toLowerCase());
+        //   let rol = this.getRolName(usuari.rols_id);
+        return usuari.username.toLowerCase().includes(_this3.search.toLowerCase()) || usuari.cognoms.toLowerCase().includes(_this3.search.toLowerCase()) || usuari.nom.toLowerCase().includes(_this3.search.toLowerCase()) || usuari.email.toLowerCase().includes(_this3.search.toLowerCase()); // || rol.toLowerCase().includes(this.search.toLowerCase())
       });
     }
   },
@@ -11678,7 +11672,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.alertaSinRecursos{\r\n    font-family: 'Rubik', sans-serif;\r\n    font-size: 15px;\r\n    color: black;\r\n    background-color: rgb(21, 172, 196, .5);\r\n    width: 90%;\n}\n.cerrarBtn {\r\n  background-color: #6c757d !important;\r\n  color: white;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.alertaSinRecursos{\n    font-family: 'Rubik', sans-serif;\n    font-size: 15px;\n    color: black;\n    background-color: rgb(21, 172, 196, .5);\n    width: 90%;\n}\n.cerrarBtn {\n  background-color: #6c757d !important;\n  color: white;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -46079,11 +46073,11 @@ var render = function() {
           },
           [_vm._v("×")]
         ),
-        _vm._v("\r\n        " + _vm._s(_vm.errorMessage) + "\r\n    ")
+        _vm._v("\n        " + _vm._s(_vm.errorMessage) + "\n    ")
       ]
     ),
     _vm._v(" "),
-    _c("table", { staticClass: "table mt-5" }, [
+    _c("table", { staticClass: "table mt-5 ml-5 pl-2" }, [
       _vm._m(0),
       _vm._v(" "),
       _c(
@@ -46093,23 +46087,19 @@ var render = function() {
             _c("td", [_vm._v(_vm._s(_vm.convertDateFormat(incidencia.data)))]),
             _vm._v(" "),
             _c("td", [
-              _vm._v(
-                "\r\n          " + _vm._s(incidencia.hora) + "\r\n        "
-              )
+              _vm._v("\n          " + _vm._s(incidencia.hora) + "\n        ")
             ]),
             _vm._v(" "),
             _c("td", [
               _vm._v(
-                "\r\n          " +
+                "\n          " +
                   _vm._s(incidencia.telefon_alertant) +
-                  "\r\n        "
+                  "\n        "
               )
             ]),
             _vm._v(" "),
             _c("td", [
-              _vm._v(
-                "\r\n          " + _vm._s(incidencia.adreca) + "\r\n        "
-              )
+              _vm._v("\n          " + _vm._s(incidencia.adreca) + "\n        ")
             ]),
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(incidencia.adreca_complement))]),
@@ -46552,9 +46542,9 @@ var render = function() {
                               { key: tipus.id, domProps: { value: tipus.id } },
                               [
                                 _vm._v(
-                                  "\r\n                      " +
+                                  "\n                      " +
                                     _vm._s(tipus.tipus) +
-                                    "\r\n                    "
+                                    "\n                    "
                                 )
                               ]
                             )
@@ -46625,9 +46615,9 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\r\n                      " +
+                                  "\n                      " +
                                     _vm._s(municipi.nom) +
-                                    "\r\n                    "
+                                    "\n                    "
                                 )
                               ]
                             )

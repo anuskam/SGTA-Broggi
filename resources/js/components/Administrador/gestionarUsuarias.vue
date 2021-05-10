@@ -333,10 +333,10 @@
 
           return rol_nom;
         },
-        getRolName(id){
-          let rol = this.rols.find(obj => obj.id == id);
-          return rol.nom;
-        },
+        // getRolName(id){
+        //   let rol = this.rols.find(obj => obj.id == id);
+        //   return rol.nom;
+        // },
         cerrarInfoAlert(){
           this.infoMessage = '';
         },
@@ -347,12 +347,12 @@
       computed: {
         filteredList: function () {
           return this.usuarisDB.filter(usuari => {
-              let rol = this.getRolName(usuari.rols_id);
+            //   let rol = this.getRolName(usuari.rols_id);
             return usuari.username.toLowerCase().includes(this.search.toLowerCase())
             || usuari.cognoms.toLowerCase().includes(this.search.toLowerCase())
             || usuari.nom.toLowerCase().includes(this.search.toLowerCase())
             || usuari.email.toLowerCase().includes(this.search.toLowerCase())
-            || rol.toLowerCase().includes(this.search.toLowerCase())
+            // || rol.toLowerCase().includes(this.search.toLowerCase())
           })
         }
       },
