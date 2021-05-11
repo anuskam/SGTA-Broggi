@@ -1,13 +1,11 @@
 <?php
 
-use App\Http\Controllers\AlertantController as ControllersAlertantController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AfectatController;
 use App\Http\Controllers\Api\AlertantController;
 use App\Http\Controllers\Api\ComarcaController;
 use App\Http\Controllers\Api\IncidenciaController;
-use App\Http\Controllers\Api\IncidenciaHasAfectatsController;
 use App\Http\Controllers\Api\IncidenciaHasRecursosController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\MunicipiController;
@@ -18,10 +16,7 @@ use App\Http\Controllers\Api\SexeController;
 use App\Http\Controllers\Api\TipusAlertantController;
 use App\Http\Controllers\Api\TipusIncidenciaController;
 use App\Http\Controllers\Api\TipusRecursController;
-use App\Http\Controllers\Api\UsuariControllerApi;
-use App\Http\Controllers\Api\PreguntaController;
-use App\Http\Controllers\ProvinciaController as ControllersProvinciaController;
-use App\Http\Controllers\Api\RespostaController;
+use App\Http\Controllers\Api\UsuariController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,33 +34,36 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('afectat', AfectatController::class);
+Route::post('afectat/update/{afectat}', [AfectatController::class, 'update']);
+Route::post('afectat/delete/{afectat}', [AfectatController::class, 'destroy']);
+
 Route::apiResource('alertant', AlertantController::class);
+Route::post('alertant/update/{alertant}', [AlertantController::class, 'update']);
+Route::post('alertant/delete/{alertant}', [AlertantController::class, 'destroy']);
+
 Route::apiResource('comarca', ComarcaController::class);
+
 Route::apiResource('incidencia', IncidenciaController::class);
+Route::post('incidencia/update/{incidencium}', [IncidenciaController::class, 'update']);
+Route::post('incidencia/delete/{incidencium}', [IncidenciaController::class, 'destroy']);
+
 Route::apiResource('municipi', MunicipiController::class);
 Route::apiResource('provincia', ProvinciaController::class);
+
 Route::apiResource('recurs', RecursController::class);
+Route::post('recurs/update/{recur}', [RecursController::class, 'update']);
+Route::post('recurs/delete/{recur}', [RecursController::class, 'destroy']);
+
 Route::apiResource('rol', RolController::class);
 Route::apiResource('sexe', SexeController::class);
 Route::apiResource('tipusAlertant', TipusAlertantController::class);
 Route::apiResource('tipusIncidencia', TipusIncidenciaController::class);
 Route::apiResource('tipusRecurs', TipusRecursController::class);
-Route::apiResource('usuari', UsuariControllerApi::class);
-// Route::apiResource('incidenciaHasRecursos', IncidenciaHasRecursosController::class);
-Route::apiResource('incidenciaHasAfectats', IncidenciaHasAfectatsController::class);
-Route::apiResource('pregunta', PreguntaController::class);
-Route::apiResource('resposta', RespostaController::class);
 
-Route::get('incidenciaHasRecursos', [IncidenciaHasRecursosController::class, 'index']);
-Route::get('incidenciaHasRecursos/{incidencies_id}/{recursos_id}', [IncidenciaHasRecursosController::class, 'show']);
-Route::post('incidenciaHasRecursos', [IncidenciaHasRecursosController::class, 'store']);
-Route::put('incidenciaHasRecursos/{incidencies_id}/{recursos_id}', [IncidenciaHasRecursosController::class, 'update']);
-Route::delete('incidenciaHasRecursos/{incidencies_id}/{recursos_id}', [IncidenciaHasRecursosController::class, 'destroy']);
+Route::apiResource('usuari', UsuariController::class);
+Route::post('usuari/update/{usuari}', [UsuariController::class, 'update']);
+Route::post('usuari/delete/{usuari}', [UsuariController::class, 'destroy']);
 
-
-
-/* Delete IHR */
-// Route::delete('deleteIHR/{incidencies_id}/{recursos_id}', [IncidenciaHasRecursosController::class, 'deleteIHR']);
-
-// Route::get('alertantPaginated', [ControllersAlertantController::class, 'indexPaginated']);
-
+Route::apiResource('incidenciaHasRecursos', IncidenciaHasRecursosController::class);
+Route::post('incidenciaHasRecursos/update/{incidenciaHasRecurso}', [IncidenciaHasRecursosController::class, 'update']);
+Route::post('incidenciaHasRecursos/delete/{incidenciaHasRecurso}', [IncidenciaHasRecursosController::class, 'destroy']);
