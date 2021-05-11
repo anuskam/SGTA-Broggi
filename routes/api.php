@@ -16,7 +16,7 @@ use App\Http\Controllers\Api\SexeController;
 use App\Http\Controllers\Api\TipusAlertantController;
 use App\Http\Controllers\Api\TipusIncidenciaController;
 use App\Http\Controllers\Api\TipusRecursController;
-use App\Http\Controllers\Api\UsuariController;
+use App\Http\Controllers\Api\UsuariControllerApi;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,9 +60,9 @@ Route::apiResource('tipusAlertant', TipusAlertantController::class);
 Route::apiResource('tipusIncidencia', TipusIncidenciaController::class);
 Route::apiResource('tipusRecurs', TipusRecursController::class);
 
-Route::apiResource('usuari', UsuariController::class);
-Route::post('usuari/update/{usuari}', [UsuariController::class, 'update']);
-Route::post('usuari/delete/{usuari}', [UsuariController::class, 'destroy']);
+Route::apiResource('usuari', UsuariControllerApi::class);
+Route::post('usuari/update/{usuari}', [UsuariControllerApi::class, 'update']);
+Route::post('usuari/delete/{usuari}', [UsuariControllerApi::class, 'destroy']);
 
 Route::apiResource('incidenciaHasRecursos', IncidenciaHasRecursosController::class);
 Route::post('incidenciaHasRecursos/update/{incidenciaHasRecurso}', [IncidenciaHasRecursosController::class, 'update']);
