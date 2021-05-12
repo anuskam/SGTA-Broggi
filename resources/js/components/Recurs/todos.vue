@@ -146,9 +146,7 @@
       async created(){
         await this.selectIncidencies(), this.filterIncidencies(), this.selectMunicipis(), this.selectAlertant(), this.selectTipusAlertant(), this.selectTipusIncidencia();
       },
-      mounted() {
-          console.log('Component mounted.')
-      }
+
     }
 </script>
 

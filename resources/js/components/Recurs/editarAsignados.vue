@@ -330,12 +330,11 @@
         buscarIncidenciaEnArray(incidencia){
           let me = this;
           this.recursEditar = incidencia.incidencies_has_recursos.find(obj => obj.recursos_id == me.recursos_id);
-          console.log(this.recursEditar);
           return true;
         },
         updateIncidente(){
             let me = this;
-            return axios.put('/daw2a02/SGTA-Broggi/public/api/incidenciaHasRecursos/'+me.incidencia.id+'/'+me.recursos_id, me.recursEditar).then((response) => {
+            return axios.post('/daw2a02/SGTA-Broggi/public/api/incidenciaHasRecursos/update/'+me.incidencia.id+'/'+me.recursos_id, me.recursEditar).then((response) => {
                 console.log(response);
             }).catch( (error) => {
                 console.log(error.response.status);

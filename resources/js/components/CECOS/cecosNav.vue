@@ -60,7 +60,6 @@ export default {
   methods: {
     selectTab(selectedTab) {
       this.currentTab = selectedTab;
-      console.log(this.userid);
     },
     startIncidencia(){
         this.incidencia = true;

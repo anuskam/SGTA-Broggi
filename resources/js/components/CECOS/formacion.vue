@@ -117,12 +117,9 @@ export default {
         this.enableButtons = false;
         let correcta = this.questions[this.currentQuestion].correctAnswer;
       if(correcta == index){
-        console.log("acierto");
         ++this.aciertos;
       }
-      else{
-        console.log("fallo");
-      }
+
         this.correcta[correcta] = true;
         this.incorrecta = [true, true, true, true];
         this.incorrecta[correcta] = false;
@@ -185,7 +182,6 @@ export default {
 
   },
   mounted() {
-    console.log("Component mounted.");
     let video = document.querySelector("#videoDesa");
     let me = this;
     video.addEventListener("timeupdate", this.controlTiempo);
