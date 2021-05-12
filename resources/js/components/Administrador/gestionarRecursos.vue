@@ -180,7 +180,7 @@
         paginar(pagina){
           let me = this;
           axios
-              .get('/SGTA-Broggi/public/recursPaginated' + '?page=' + pagina)
+              .get('/daw2a02/SGTA-Broggi/public/recursPaginated' + '?page=' + pagina)
               .then(response => {
                   me.recursos = response.data.data;
                   me.meta = response.data.meta;
@@ -193,7 +193,7 @@
         paginarFirst(){
           let me = this;
           axios
-              .get('/SGTA-Broggi/public/recursPaginated' + '?page=' + 1)
+              .get('/daw2a02/SGTA-Broggi/public/recursPaginated' + '?page=' + 1)
               .then(response => {
                   me.recursos = response.data.data;
                   me.meta = response.data.meta;
@@ -209,7 +209,7 @@
         selectRecursos() {
             let me = this;
             axios
-                .get('/SGTA-Broggi/public/api/recurs')
+                .get('/daw2a02/SGTA-Broggi/public/api/recurs')
                 .then(response => {
                     me.recursosDB = response.data;
                 })
@@ -226,7 +226,7 @@
         //   $('#toastError').toast('show')
           let me = this;
           axios
-              .delete('/SGTA-Broggi/public/api/recurs/' + me.recurs.id)
+              .post('/daw2a02/SGTA-Broggi/public/api/recurs/delete/' + me.recurs.id)
               .then(function(response) {
                 console.log(response);
                 me.infoMessage = response.data.missatge;
@@ -252,7 +252,7 @@
         insertRecurs() {
           let me = this;
           axios
-              .post('/SGTA-Broggi/public/api/recurs', me.recurs)
+              .post('/daw2a02/SGTA-Broggi/public/api/recurs', me.recurs)
               .then(function(response) {
                 console.log(response);
                 me.selectRecursos();
@@ -275,7 +275,7 @@
         //   $('#toastError').toast('show')
           let me = this;
           axios
-              .put('/SGTA-Broggi/public/api/recurs/' + me.recurs.id, me.recurs)
+              .post('/daw2a02/SGTA-Broggi/public/api/recurs/update/' + me.recurs.id, me.recurs)
               .then(function(response) {
                 console.log(response);
                 me.selectRecursos();
@@ -290,7 +290,7 @@
         selectTipusRecursos() {
           let me = this;
           axios
-              .get("/SGTA-Broggi/public/api/tipusRecurs")
+              .get("/daw2a02/SGTA-Broggi/public/api/tipusRecurs")
               .then((response) => {
                 me.tipusRecursos = response.data;
               }).catch((error) => {
@@ -370,7 +370,7 @@
 
 @font-face {
   font-family: myFont;
-  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);
+  src: url(/daw2a02/SGTA-Broggi/public/fonts/Signika-Regular.ttf);
 }
 
 .nuevoRecurso{

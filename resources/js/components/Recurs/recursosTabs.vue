@@ -36,7 +36,7 @@ export default {
         selectRecurs(){
             let me = this;
             axios
-            .get("/SGTA-Broggi/public/api/recurs/"+this.recursos_id)
+            .get("/daw2a02/SGTA-Broggi/public/api/recurs/"+this.recursos_id)
             .then((response) => {
             me.recurs = response.data;
             })

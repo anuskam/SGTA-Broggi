@@ -201,7 +201,7 @@
         paginar(pagina){
           let me = this;
           axios
-              .get('/SGTA-Broggi/public/usuariPaginated' + '?page=' + pagina)
+              .get('/daw2a02/SGTA-Broggi/public/usuariPaginated' + '?page=' + pagina)
               .then(response => {
                   me.usuaris = response.data.data;
                   me.meta = response.data.meta;
@@ -214,7 +214,7 @@
         paginarFirst(){
           let me = this;
           axios
-              .get('/SGTA-Broggi/public/usuariPaginated' + '?page=' + 1)
+              .get('/daw2a02/SGTA-Broggi/public/usuariPaginated' + '?page=' + 1)
               .then(response => {
                   me.usuaris = response.data.data;
                   me.meta = response.data.meta;
@@ -230,7 +230,7 @@
         selectUsuaris() {
             let me = this;
             axios
-                .get('/SGTA-Broggi/public/api/usuari')
+                .get('/daw2a02/SGTA-Broggi/public/api/usuari')
                 .then(response => {
                     me.usuarisDB = response.data;
                 })
@@ -247,7 +247,7 @@
         //   $('#toastError').toast('show')
           let me = this;
           axios
-              .delete('/SGTA-Broggi/public/api/usuari/' + me.usuari.id)
+              .post('/daw2a02/SGTA-Broggi/public/api/usuari/delete/' + me.usuari.id)
               .then(function(response) {
                 console.log(response);
                 me.infoMessage = response.data.missatge;
@@ -274,7 +274,7 @@
         insertUsuari() {
           let me = this;
           axios
-              .post('/SGTA-Broggi/public/api/usuari', me.usuari)
+              .post('/daw2a02/SGTA-Broggi/public/api/usuari', me.usuari)
               .then(function(response) {
                 console.log(response);
                 me.selectUsuaris();
@@ -297,7 +297,7 @@
         //   $('#toastError').toast('show')
           let me = this;
           axios
-              .put('/SGTA-Broggi/public/api/usuari/' + me.usuari.id, me.usuari)
+              .post('/daw2a02/SGTA-Broggi/public/api/usuari/update/' + me.usuari.id, me.usuari)
               .then(function(response) {
                 console.log(response);
                 me.selectUsuaris();
@@ -312,7 +312,7 @@
         selectRols() {
           let me = this;
           axios
-              .get("/SGTA-Broggi/public/api/rol")
+              .get("/daw2a02/SGTA-Broggi/public/api/rol")
               .then((response) => {
                 me.rols = response.data;
               }).catch((error) => {
@@ -396,7 +396,7 @@
 
 @font-face {
   font-family: myFont;
-  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);
+  src: url(/daw2a02/SGTA-Broggi/public/fonts/Signika-Regular.ttf);
 }
 
 /* h2{

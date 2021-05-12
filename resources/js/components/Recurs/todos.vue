@@ -57,7 +57,7 @@
         selectIncidencies() {
           let me = this;
          return axios
-              .get('/SGTA-Broggi/public/api/incidencia')
+              .get('/daw2a02/SGTA-Broggi/public/api/incidencia')
               .then(response => {
                 me.incidencies = response.data;
               })
@@ -72,7 +72,7 @@
         selectMunicipis() {
           let me = this;
           axios
-              .get("/SGTA-Broggi/public/api/municipi")
+              .get("/daw2a02/SGTA-Broggi/public/api/municipi")
               .then((response) => {
                 me.municipis = response.data;
               }).catch((error) => {
@@ -94,7 +94,7 @@
         selectTipusIncidencia() {
           let me = this;
           axios
-              .get("/SGTA-Broggi/public/api/tipusIncidencia")
+              .get("/daw2a02/SGTA-Broggi/public/api/tipusIncidencia")
               .then((response) => {
                 me.tipusIncidencies = response.data;
               }).catch((error) => {
@@ -116,7 +116,7 @@
         selectTipusAlertant() {
           let me = this;
           axios
-              .get("/SGTA-Broggi/public/api/tipusAlertant")
+              .get("/daw2a02/SGTA-Broggi/public/api/tipusAlertant")
               .then((response) => {
                 me.tipusAlertants = response.data;
               }).catch((error) => {
@@ -126,7 +126,7 @@
         selectAlertant() {
           let me = this;
           axios
-              .get("/SGTA-Broggi/public/api/alertant")
+              .get("/daw2a02/SGTA-Broggi/public/api/alertant")
               .then((response) => {
                 me.alertants = response.data;
               }).catch((error) => {

@@ -1,7 +1,7 @@
 <template>
   <div class="contenido" :class="{ dislexiaFont: activaDislexia }">
       <nav class="navbar navbar-expand-lg navbar-light" id="cecosNav">
-        <a class="navbar-brand"><img src="/SGTA-Broggi/public/media/img/prototipoLogo.png" id="cecosLogo" alt="logoBroggi"></a>
+        <a class="navbar-brand"><img src="/daw2a02/SGTA-Broggi/public/media/img/prototipoLogo.png" id="cecosLogo" alt="logoBroggi"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Barra de navegación">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -68,7 +68,7 @@ export default {
     getAlertants(){
         let me = this;
         axios
-        .get("/SGTA-Broggi/public/api/alertant")
+        .get("/daw2a02/SGTA-Broggi/public/api/alertant")
         .then((response) => {
           me.alertants = response.data;
         })

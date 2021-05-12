@@ -183,7 +183,7 @@
         selectIncidencia(id){
              let me = this;
              axios
-              .get('/SGTA-Broggi/public/api/incidencia/'+id)
+              .get('/daw2a02/SGTA-Broggi/public/api/incidencia/'+id)
               .then(response => {
                 me.incidencies.push(response.data);
               })
@@ -194,7 +194,7 @@
         selectIncidenciesHasRecursos(){
             let me = this;
             return axios
-            .get("/SGTA-Broggi/public/api/incidenciaHasRecursos")
+            .get("/daw2a02/SGTA-Broggi/public/api/incidenciaHasRecursos")
             .then((response) => {
                 me.incidenciesHasRecursos = response.data;
             })
@@ -225,7 +225,7 @@
         selectMunicipis() {
           let me = this;
           axios
-              .get("/SGTA-Broggi/public/api/municipi")
+              .get("/daw2a02/SGTA-Broggi/public/api/municipi")
               .then((response) => {
                 me.municipis = response.data;
               }).catch((error) => {
@@ -247,7 +247,7 @@
         selectTipusIncidencia() {
           let me = this;
           axios
-              .get("/SGTA-Broggi/public/api/tipusIncidencia")
+              .get("/daw2a02/SGTA-Broggi/public/api/tipusIncidencia")
               .then((response) => {
                 me.tipusIncidencies = response.data;
               }).catch((error) => {
@@ -269,7 +269,7 @@
         selectTipusAlertant() {
           let me = this;
           axios
-              .get("/SGTA-Broggi/public/api/tipusAlertant")
+              .get("/daw2a02/SGTA-Broggi/public/api/tipusAlertant")
               .then((response) => {
                 me.tipusAlertants = response.data;
               }).catch((error) => {
@@ -279,7 +279,7 @@
         async selectAlertant() {
           let me = this;
           return axios
-              .get("/SGTA-Broggi/public/api/alertant")
+              .get("/daw2a02/SGTA-Broggi/public/api/alertant")
               .then((response) => {
                 me.alertants = response.data;
               }).catch((error) => {
@@ -312,7 +312,7 @@
         deleteAsignat(){
             let me = this;
           axios
-              .delete("/SGTA-Broggi/public/api/incidenciaHasRecursos/"+me.incidenciaHasRecursos[0].incidencies_id+"/"+me.incidenciaHasRecursos[0].recursos_id)
+              .post("/daw2a02/SGTA-Broggi/public/api/incidenciaHasRecursos/delete/"+me.incidenciaHasRecursos[0].incidencies_id+"/"+me.incidenciaHasRecursos[0].recursos_id)
               .then((response) => {
                 console.log(response.data);
               }).catch((error) => {
@@ -335,7 +335,7 @@
         },
         updateIncidente(){
             let me = this;
-            return axios.put('/SGTA-Broggi/public/api/incidenciaHasRecursos/'+me.incidencia.id+'/'+me.recursos_id, me.recursEditar).then((response) => {
+            return axios.put('/daw2a02/SGTA-Broggi/public/api/incidenciaHasRecursos/'+me.incidencia.id+'/'+me.recursos_id, me.recursEditar).then((response) => {
                 console.log(response);
             }).catch( (error) => {
                 console.log(error.response.status);

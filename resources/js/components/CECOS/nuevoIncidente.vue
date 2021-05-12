@@ -1170,7 +1170,7 @@ export default {
     selectPreguntes() {
       let me = this;
       axios
-        .get("/SGTA-Broggi/public/api/pregunta")
+        .get("/daw2a02/SGTA-Broggi/public/api/pregunta")
         .then((response) => {
           me.preguntesDB = response.data;
         })
@@ -1181,7 +1181,7 @@ export default {
     selectRespostes() {
       let me = this;
       axios
-        .get("/SGTA-Broggi/public/api/resposta")
+        .get("/daw2a02/SGTA-Broggi/public/api/resposta")
         .then((response) => {
           me.respostesDB = response.data;
         })
@@ -1192,7 +1192,7 @@ export default {
     selectProvincies() {
       let me = this;
       axios
-        .get("/SGTA-Broggi/public/api/provincia")
+        .get("/daw2a02/SGTA-Broggi/public/api/provincia")
         .then((response) => {
           me.provincies = response.data;
         })
@@ -1203,7 +1203,7 @@ export default {
     selectComarques() {
       let me = this;
       axios
-        .get("/SGTA-Broggi/public/api/comarca")
+        .get("/daw2a02/SGTA-Broggi/public/api/comarca")
         .then((response) => {
           me.comarques = response.data;
         })
@@ -1214,7 +1214,7 @@ export default {
     selectMunicipis() {
       let me = this;
       axios
-        .get("/SGTA-Broggi/public/api/municipi")
+        .get("/daw2a02/SGTA-Broggi/public/api/municipi")
         .then((response) => {
           me.municipis = response.data;
         })
@@ -1225,7 +1225,7 @@ export default {
     selectRecursos(){
         let me = this;
       axios
-        .get("/SGTA-Broggi/public/api/recurs")
+        .get("/daw2a02/SGTA-Broggi/public/api/recurs")
         .then((response) => {
           me.recursos_select = response.data;
         })
@@ -1236,7 +1236,7 @@ export default {
     async selectAlertants(){
         let me = this;
         return axios
-        .get("/SGTA-Broggi/public/api/alertant")
+        .get("/daw2a02/SGTA-Broggi/public/api/alertant")
         .then((response) => {
           me.alertants = response.data;
         })
@@ -1248,7 +1248,7 @@ export default {
     async selectAfectats(){
         let me = this;
         return axios
-        .get("/SGTA-Broggi/public/api/afectat")
+        .get("/daw2a02/SGTA-Broggi/public/api/afectat")
         .then((response) => {
           me.afectatsDB = response.data;
         })
@@ -1502,7 +1502,7 @@ export default {
     },
     insertarIncidencia(){
       let me = this;
-      axios.post('/SGTA-Broggi/public/api/incidencia', me.insertIncidencia).then((response) => {
+      axios.post('/daw2a02/SGTA-Broggi/public/api/incidencia', me.insertIncidencia).then((response) => {
           console.log(response);
       }).catch( (error) => {
           console.log(error.response.status);
@@ -1511,7 +1511,7 @@ export default {
     },
     insertarIncidenciesHasAfectats(afectat){
       let me = this;
-      axios.post('/SGTA-Broggi/public/api/incidencia_has_recursos', afectat).then((response) => {
+      axios.post('/daw2a02/SGTA-Broggi/public/api/incidencia_has_recursos', afectat).then((response) => {
           console.log(response);
       }).catch( (error) => {
           console.log(error.response.status);
@@ -1520,7 +1520,7 @@ export default {
     },
     async insertarAfectat(afectat){
       let me = this;
-      return axios.post('/SGTA-Broggi/public/api/afectat', afectat).then((response) => {
+      return axios.post('/daw2a02/SGTA-Broggi/public/api/afectat', afectat).then((response) => {
           console.log(response);
           me.recursosInsert.push(response.data);
       }).catch( (error) => {
@@ -1530,7 +1530,7 @@ export default {
     },
     async insertarAlertant(){
       let me = this;
-      return axios.post('/SGTA-Broggi/public/api/alertant', me.alertant).then((response) => {
+      return axios.post('/daw2a02/SGTA-Broggi/public/api/alertant', me.alertant).then((response) => {
           console.log(response);
       }).catch( (error) => {
           console.log(error.response.status);
@@ -1557,7 +1557,7 @@ export default {
         let me = this;
         this.recursos.forEach(function (recurs){
             let recursToUpdate = recurs.recurs;
-            axios.put('/SGTA-Broggi/public/api/recurs/'+recursToUpdate.id, recursToUpdate).then((response) => {
+            axios.post('/daw2a02/SGTA-Broggi/public/api/recurs/update/'+recursToUpdate.id, recursToUpdate).then((response) => {
                 console.log(response);
             }).catch( (error) => {
                 console.log(error.response.status);

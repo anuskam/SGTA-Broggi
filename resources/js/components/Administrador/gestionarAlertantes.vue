@@ -212,7 +212,7 @@
         paginar(pagina){
           let me = this;
           axios
-              .get('/SGTA-Broggi/public/alertantPaginated' + '?page=' + pagina)
+              .get('/daw2a02/SGTA-Broggi/public/alertantPaginated' + '?page=' + pagina)
               .then(response => {
                   me.alertants = response.data.data;
                   me.meta = response.data.meta;
@@ -225,7 +225,7 @@
         paginarFirst(){
           let me = this;
           axios
-              .get('/SGTA-Broggi/public/alertantPaginated' + '?page=' + 1)
+              .get('/daw2a02/SGTA-Broggi/public/alertantPaginated' + '?page=' + 1)
               .then(response => {
                   me.alertants = response.data.data;
                   me.meta = response.data.meta;
@@ -241,7 +241,7 @@
         selectAlertants() {
             let me = this;
             axios
-                .get('/SGTA-Broggi/public/api/alertant')
+                .get('/daw2a02/SGTA-Broggi/public/api/alertant')
                 .then(response => {
                     me.alertantsDB = response.data;
                 })
@@ -258,7 +258,7 @@
         //   $('#toastError').toast('show')
           let me = this;
           axios
-              .delete('/SGTA-Broggi/public/api/alertant/' + me.alertant.id)
+              .post('/daw2a02/SGTA-Broggi/public/api/alertant/delete/' + me.alertant.id)
               .then(function(response) {
                 console.log(response);
                 me.infoMessage = response.data.missatge;
@@ -285,7 +285,7 @@
         insertAlertant() {
           let me = this;
           axios
-              .post('/SGTA-Broggi/public/api/alertant', me.alertant)
+              .post('/daw2a02/SGTA-Broggi/public/api/alertant/', me.alertant)
               .then(function(response) {
                 console.log(response);
                 me.selectAlertants();
@@ -307,7 +307,7 @@
         //   $('#toastError').toast('show')
           let me = this;
           axios
-              .put('/SGTA-Broggi/public/api/alertant/' + me.alertant.id, me.alertant)
+              .post('/daw2a02/SGTA-Broggi/public/api/alertant/update/' + me.alertant.id, me.alertant)
               .then(function(response) {
                 console.log(response);
                 me.selectAlertants();
@@ -323,7 +323,7 @@
         selectMunicipis() {
           let me = this;
           axios
-              .get("/SGTA-Broggi/public/api/municipi")
+              .get("/daw2a02/SGTA-Broggi/public/api/municipi")
               .then((response) => {
                 me.municipis = response.data;
               }).catch((error) => {
@@ -346,7 +346,7 @@
         selectTipusAlertant() {
           let me = this;
           axios
-              .get("/SGTA-Broggi/public/api/tipusAlertant")
+              .get("/daw2a02/SGTA-Broggi/public/api/tipusAlertant")
               .then((response) => {
                 me.tipusAlertants = response.data;
               }).catch((error) => {
@@ -449,7 +449,7 @@
 
 @font-face {
   font-family: myFont;
-  src: url(/SGTA-Broggi/public/fonts/Signika-Regular.ttf);
+  src: url(/daw2a02/SGTA-Broggi/public/fonts/Signika-Regular.ttf);
 }
 
 h2{
