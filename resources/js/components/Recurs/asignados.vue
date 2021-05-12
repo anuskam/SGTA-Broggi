@@ -466,7 +466,6 @@ export default {
             zoom: 7, // starting zoom
             });
             map.markers = [];
-            console.log("Map initialized");
             return map;
         },
         addAddress(address){
@@ -475,13 +474,13 @@ export default {
         drawMarkFromAddress(address){
             let url = this.createURLApiCall(address);
             let me = this;
-            console.log(url);
+
             axios
             .get(url)
             .then(response => {
                 let coordinates = response.data.features[0].center;
                 me.addMark(coordinates[0], coordinates[1]);
-                console.log(coordinates);
+
                 me.map.flyTo({
                     center: [
                         coordinates[0],

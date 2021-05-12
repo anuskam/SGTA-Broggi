@@ -242,7 +242,7 @@
         },
         updateIncidente(){
             let me = this;
-            return axios.put('/daw2a02/SGTA-Broggi/public/api/incidencia/'+me.incidenciaEditar.id, me.incidenciaEditar).then((response) => {
+            return axios.post('/daw2a02/SGTA-Broggi/public/api/incidencia/update/'+me.incidenciaEditar.id, me.incidenciaEditar).then((response) => {
                 console.log(response);
             }).catch( (error) => {
                 console.log(error.response.status);

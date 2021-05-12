@@ -1160,7 +1160,6 @@ export default {
     prev() {
       --this.currentTab;
       this.selectTab(this.currentTab);
-      console.log(this.userid);
     },
     next() {
       ++this.currentTab;
@@ -1377,7 +1376,7 @@ export default {
             await this.selectAlertants();
             await this.getAlertantData();
         }
-        console.log(1)
+
         return null;
     },
     evaluaErrores(){
@@ -1445,11 +1444,10 @@ export default {
                   }
 
                 //   await this.insertarAfectados();
-                  console.log("Se han insertado los afectados");
 
                 /* Insert de la incidencia con recursos */
                   await this.evaluaInsertAlertantes();
-                  console.log(2);
+
                   this.evaluaInsertIncidencia();
                   await this.insertAfectatsSinRecurso();
                     let afectatsInsert = [];
@@ -1479,8 +1477,7 @@ export default {
               await this.evaluaInsertAlertantes();
               this.evaluaInsertIncidencia();
               await this.insertAfectatsSinRecurso();
-              console.log('afectados done');
-              console.log(this.insertIncidencia);
+
               this.insertarIncidencia();
               this.updateRecursos();
           }
@@ -1497,7 +1494,7 @@ export default {
             if(afectat.recurs_id == null){
                 me.insertIncidencia.afectats.push(afectat);
             }
-            console.log("afectado x");
+
         });
     },
     insertarIncidencia(){
