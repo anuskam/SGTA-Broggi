@@ -187,7 +187,7 @@
         selectIncidencies() {
         let me = this;
         axios
-            .get('/SGTA-Broggi/public/api/incidencia')
+            .get('/daw2a02/SGTA-Broggi/public/api/incidencia')
             .then(response => {
               me.incidencies = response.data;
             })
@@ -229,7 +229,7 @@
         deleteIncidencia(){
           let me = this;
           axios
-            .delete('/SGTA-Broggi/public/api/incidencia/' + me.incidencia.id)
+            .post('/daw2a02/SGTA-Broggi/public/api/incidencia/delete/' + me.incidencia.id)
             .then(function(response) {
                 console.log(response);
                 me.infoMessage = response.data.missatge;
@@ -242,7 +242,7 @@
         },
         updateIncidente(){
             let me = this;
-            return axios.put('/SGTA-Broggi/public/api/incidencia/'+me.incidenciaEditar.id, me.incidenciaEditar).then((response) => {
+            return axios.put('/daw2a02/SGTA-Broggi/public/api/incidencia/'+me.incidenciaEditar.id, me.incidenciaEditar).then((response) => {
                 console.log(response);
             }).catch( (error) => {
                 console.log(error.response.status);
@@ -266,7 +266,7 @@
         selectTipusIncidencia() {
           let me = this;
           return axios
-              .get("/SGTA-Broggi/public/api/tipusIncidencia")
+              .get("/daw2a02/SGTA-Broggi/public/api/tipusIncidencia")
               .then((response) => {
                 me.tipusIncidencies = response.data;
               }).catch((error) => {
@@ -276,7 +276,7 @@
         selectMunicipis() {
           let me = this;
           axios
-              .get("/SGTA-Broggi/public/api/municipi")
+              .get("/daw2a02/SGTA-Broggi/public/api/municipi")
               .then((response) => {
                 me.municipis = response.data;
               }).catch((error) => {

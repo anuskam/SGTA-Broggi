@@ -3,7 +3,7 @@
   <div id="contenedor" class="mt-5 pt-5 ml-4">
     <div class="todoFormacion">
         <div id="contenedorVideo">
-            <video id="videoDesa" width="600" height="340" src="/SGTA-Broggi/public/media/video/desa.mp4" type="video/mp4"></video>
+            <video id="videoDesa" width="600" height="340" src="/daw2a02/SGTA-Broggi/public/media/video/desa.mp4" type="video/mp4"></video>
         </div>
 
         <div class="controlVideo">
